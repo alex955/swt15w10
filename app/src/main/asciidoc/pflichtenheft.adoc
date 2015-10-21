@@ -53,13 +53,13 @@ Die typischen Anwendungsfälle (Anlegen, Ändern, Löschen) können zu einem ein
 === Muss-Kriterien
 Was das zu erstellende Programm auf alle Fälle leisten muss.
 
-Registrierung
+==== Registrierung
 - Registrierung eines Benutzeraccounts mit E-Mail Bestätigung
 - Unterscheidung zwischen Helfender und Flüchtling
 - Kennwort vergessen Funktion
 - Captcha für Botdetection bei Registrierung
 
-Benutzung
+==== Benutzung
 - Anmeldung
 - Text angepasst an die, bei der Registration ausgewählte, Sprache
 - Unterscheidung zwischen Hilfsgüter und Aktivitäten
@@ -71,7 +71,7 @@ Benutzung
 - Anzeigen automatisch löschen nach optionalen Verfallsdatum
 - Einstellungen zum Benutzerkonto um ggf. Adresse zu aktualisieren
 
-Güter und Aktivitäten
+==== Chat
 - Einordnung in die Kategorie
 - Einstellen eines Fotos
 - Anbieter und Ort wird angezeigt
