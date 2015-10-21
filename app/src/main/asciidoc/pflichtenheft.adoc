@@ -1,4 +1,4 @@
-= Pflichtenheft
+﻿= Pflichtenheft
 
 == Projektname
 
@@ -53,8 +53,51 @@ Die typischen Anwendungsfälle (Anlegen, Ändern, Löschen) können zu einem ein
 === Muss-Kriterien
 Was das zu erstellende Programm auf alle Fälle leisten muss.
 
+Registrierung
+- Registrierung eines Benutzeraccounts mit E-Mail Bestätigung
+- Unterscheidung zwischen Helfender und Flüchtling
+- Kennwort vergessen Funktion
+- Captcha für Botdetection bei Registrierung
+
+Benutzung
+- Anmeldung
+- Text angepasst an die, bei der Registration ausgewählte, Sprache
+- Unterscheidung zwischen Hilfsgüter und Aktivitäten
+- Unterteilung der Güter in Kategorien
+- Suchfeld um nach Güter/Aktivitäten zu suchen
+- Möglichkeit um "suche im Umkreis von .. km" auszuwählen
+- Helfender kann Hilfsgüter und Aktivitäten inserieren und sie wieder entfernen
+- Admin kann generell Inserate entfernen
+- Anzeigen automatisch löschen nach optionalen Verfallsdatum
+- Einstellungen zum Benutzerkonto um ggf. Adresse zu aktualisieren
+
+Güter und Aktivitäten
+- Einordnung in die Kategorie
+- Einstellen eines Fotos
+- Anbieter und Ort wird angezeigt
+- Einstellungsdatum
+- vorgegebene Attributliste / Tags zu Größe etc.
+- Freitext Beschreibung                                                     (in deutsch eher sinnlos)
+- Titel der Anzeige                                                         (Google Übersetzer ?)
+- Möglichkeit zur Kontaktaufnahme durch Chat
+
+Chat
+- Textbaustein basierend für eine einfache, korrekte Übersetzung
+- Eingabe wird in die Sprache des Gegenübers übersetzt
+- Freitext Eingabe mit Möglichkeit der Übersetzung durch GoogleTranslate
+- Anzeige des vorherigen Gesprächsverlaufs
+
+
 === Kann-Kriterien
 Anforderungen die das Programm leisten können soll, aber für den korrekten Betrieb entbehrlich sind.
+
+- Melden von Nutzern, Anzeigen
+- Sortieren der Güter/Aktivitäten nach Datum
+- ändern der Präferenz Sprache
+- Fotos im Chat versenden
+- Erstellen von Aktivitäten durch Flüchtlinge
+- Inserieren von Gütern durch Flüchtlinge (Fahrrad gesucht)
+
 
 == GUI Prototyp
 
