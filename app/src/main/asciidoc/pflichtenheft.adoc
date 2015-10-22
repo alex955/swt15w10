@@ -2,11 +2,11 @@
 
 == Projektname
 
-__Version:__    *1.0*
+__Version:__    *1.2*
 
 __Status:__     *In Arbeit*
 
-__Stand:__      *Bearbeitungsdatum*
+__Stand:__      *2*
 
 == Zusammenfassung
 Eine kurze Beschreibung des Dokuments. Wenige Absätze.
@@ -38,8 +38,24 @@ Akteure sind die Benutzer des Software-Systems oder Nachbarsysteme, welche darau
 // See http://asciidoctor.org/docs/user-manual/#tables
 [options="header"]
 |===
-|Name |Beschreibung |
-|…    |…            |
+|Anwendungsfall |Akteure | Beschreibung | Modul |
+| initiale Registrierung | nicht angemeldeter Besucher des Systems + Administrator| ein nicht registrierter Nutzer hat die Möglichkeit, sich unter Angabe von Name, Adresse, Mailadresse, bevorzugter Sprache (mehrere auswähl- und rank-bar) zu registrieren um danach das System nutzen zu können. Die Nutzung ist erst nach dem Bestätigen einer vom System automatisch generierten Mail möglich. Ferner muss ein Captcha richtig eingegeben werden, um den Prozess abschließen zu können. | User Management |
+| Rolle bei Registrierung | registrierender Benutzer | man kann sich entweder als Helfender oder Flüchtling registrieren |User Management |
+| Login | registrierter Benutzer, Administrator| es existiert ein Login-Panel, bei dem man sich unter Angabe von Nutzername oder Mailadresse und Passwort einloggen kann |User Management |
+| Passwort Retrieval | registrierter Benutzer, Administrator| sollte man seinen Nutzernamen/registrierte Mailadresse noch kennen jedoch das Passwort vergessen haben, gibt es die Möglichkeit sich einen Link zusenden zu lassen, der nach Klicken eines darin enthaltenen Links ein neues Passwort generiert und zuschickt |User Management |
+| Änderung persönlicher Daten | registrierter Benutzer | nach einloggen gibt es die Möglichkeit, die angegebene Adresse, Sprachen, Mailadresse oder Passwort ändern zu können |User Management |
+|- |- | - | - |
+| Sprachänderung | registrierender/registrierter Benutzer | nach selektieren der am meisten bevorzugten Sprache bei der Registrierung bzw. nach dem Login ändert sich der Anzeigetext des Systems  | Language Management |
+|- |- | - | - |
+|Auswahl und Suche Goods/Activities | eingeloggter Nutzer | nach einloggen hat man die Möglichkeit entweder durch Klick auf einen "Goods" oder "Activities"-Button die jeweiligen Kategorien durchsuchen zu können. Nach dem Klicken erscheint eine Suchmaske.  | Article Management |
+|Auswahl Goods | eingeloggter Nutzer | in der Anzeige der Goods-Kategorie ist die Suchmaske erweitert mit einer Option, sich Angebote  in einem bestimmten Ort oder im Umkreis von x Kilometern (x auswählbar) anzeigen zu lassen. Ferner lassen sich verschiedene Kategorien anklicken, um die Suche auf diese zu beschränken.| Modul |
+|Anzeige eines Artikels (Good oder Activity)| eingeloggter Benutzer | inserierte Artikel werden mit optionalem Photo, Ort und PLZ des Anbieters, Einstellungsdatum, einer Liste aus Attributen (z.B. Größe, Farbe,..), einer Freitextbeschreibung des Anbieters sowie einem Button zur Kontaktaufnahme angezeigt  | Article Management |
+|Löschen eines Artikels | Inserierender, Admin | Inserierende eines Artikels haben die Möglichkeit, den inserierten Artikel zu löschen. Dies wird durch einen Button gewährleistet, der im Artikel zu sehen ist. Admins können jeden beliebigen Artikel löschen | Article Management, User Management |
+|Verfall von Artikeln | Inserierender | Artikel haben optionale Verfallsdaten, nach deren Ablauf der Artikel automatisch aus dem System gelöscht wird | Article Management |
+|Kontaktaufnahme bei Artikeldarstellung | registrierter Benutzer | jeder Darstellung eines Artikels hat einen Button, durch den Kontakt zum Inserierenden aufgenommen werden kann. Nach Klick öffnet sich eine Maske, mit deren Hilfe bausteinhaft ein Kontaktgesuch zusammengebaut werden kann | Article Management |
+|- |- | - | - |
+|Formularmaske für Kontaktaufnahme | registrierter Benutzer, Inserierender | in der Kontaktaufname kann eine Nachricht an den Inserierenden durch zusammenfügen von Textbausteinen erzeugt werden. Dabei werden mehrere Elemente aus verschiedenen Kategorien (z.B. Begrüßung, Termin zur Abholung [mit popup zur Selektion des Termins]) ausgewählt. Ferner gibt es ein Freitext-Feld, bei dem automatisch durch z.B. Google Translator von dem geschriebenen Text des Kontaktaufnehmenden in die Sprache des Inserierenden übersetzt wird. | Communication Management |
+|Anzeige der Nachrichtenhistorie | registrierter Benutzer, Inserierender | bisher ausgetauschte Nachrichten zwischen zwei bestimmten registrierten Mitgliedern können in einer Art Chat History angezeigt werden. | Communication Management |
 |===
 
 === Anwendungsfallbeschreibungen
