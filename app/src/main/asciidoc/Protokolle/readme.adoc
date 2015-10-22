@@ -1,0 +1,4 @@
+* Protokolle von offiziellen Treffen sind mit "o" markiert
+* Protokolle von unoffiziellen Treffen sind mit "u" markiert
+
+* Dateiname: XProt_YYMMDD.adoc
