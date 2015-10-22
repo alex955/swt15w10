@@ -49,7 +49,9 @@ Einleitung für fachfremde Personen
 image:Context.jpg[
 "Kontextmodell",width=128,
 link="Context.jpg"]
+
 === Top-level architecture
+
 image:TLA.jpg[
 "Top Level Architektur",width=128,
 link="TLA.jpg"]
@@ -60,6 +62,7 @@ link="TLA.jpg"]
 image:usecase.png[
 "Anwendungsfalldiagramm",width=128,
 link="usecase.png"]
+
 === Akteure
 
 Akteure sind die Benutzer des Software-Systems oder Nachbarsysteme, welche darauf zugreifen. Dokumentieren Sie die Akteure in einer Tabelle. Diese Tabelle gibt einen Überblick über die Akteure und beschreibt sie kurz. Die Tabelle hat also mindestens zwei Spalten (Akteur Name und Kommentar).
