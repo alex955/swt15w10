@@ -59,9 +59,9 @@ link="TLA.jpg"]
 == Anwendungsfälle
 
 === Überblick Anwendungsfalldiagramm
-image:usecase.png[
+image:usecase.jpg[
 "Anwendungsfalldiagramm",width=128,
-link="usecase.png"]
+link="usecase.jpg"]
 
 === Akteure
 
@@ -128,7 +128,7 @@ Was das zu erstellende Programm auf alle Fälle leisten muss.
 - Einstellungsdatum
 - vorgegebene Attributliste / Tags zu Größe etc.
 - Freitext Beschreibung
-- Titel der Anzeige                                                    
+- Titel der Anzeige
 - Möglichkeit zur Kontaktaufnahme durch Chat
 
 Chat
