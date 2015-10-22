@@ -9,12 +9,35 @@ __Status:__     *In Arbeit*
 __Stand:__      *2*
 
 == Zusammenfassung
-Eine kurze Beschreibung des Dokuments. Wenige Absätze.
+//Eine kurze Beschreibung des Dokuments. Wenige Absätze.
+// Warum müssen wir das machen? Das Inhaltsverzeichnis ist doch die Zusammenfassung des Dokuments??!?!?
+In diesem Dokument wird alles über die OOA in einer Datei zusammengefasst. Dies beinhaltet sowohl Kurzbeschreibungen aller Features, als auch alle Analysediagramme die für das Projekt notwenig sind, die Aufgabenstellung, Anwendungs- und Akzeptanzfälle.
+Desweiteren gehört der GUI-Prototyp noch dazu.
 
 == Inhaltsverzeichnis
+* <<Aufgabenstellung und Zielsetzung>>
+* <<Fachlicher Überblick>>
+* <<Systemgrenze und Top-Level-Architektur>>
+** <<Kontextdiagramm>>
+** <<Top-level architecture>>
+* <<Anwendungsfälle>>
+** <<Überblick Anwendungsfalldiagramm>>
+** <<Anwendungsfallbeschreibungen>>
+* <<Anforderungen>>
+** <<Muss-Kriterien>>
+** <<Kann-Kriterien>>
+* <<GUI Prototyp>>
+** <<Überblick: Dialoglandkarte>>
+** <<Dialogbeschreibung>>
+* <<Datenmodell>>
+** <<Überblick: Klassendiagramm>>
+** <<Klassen und Enumerationen>>
+* <<Akzeptanztestfälle>>
+* <<Offene Punkte>>
+
 
 == Aufgabenstellung und Zielsetzung
-Text aus Aufgabenstellung kopieren und ggfs. präzisieren.
+Im Rahmen der aktuellen Flüchtlingssituation kann man sich Gedanken machen, wie man diesen vielen Menschen helfen könnte, welche mit rein gar nichts außer den Sachen am eigenen Leibe bei uns ankommen. Wir leben in einer Überflussgesellschaft und ein jeder hat viele Sachen und Dinge, die leicht zu entbehren sind, da diese schon seit Ewigkeiten im Keller oder Boden stehen, welche jedoch den Menschen hier ein menschenwürdiges Leben ermöglichen würden - angefangen von Anzieh- und Spielsachen für Kinder bis hin zu alten Fahrrädern zur Fortbewegung etc. Natürlich gibt es bereits viele Hilfsorganisationen, welche Hilfsgüter/Sachspenden sammeln und anschließend verteilen, die man hierfür in Anspruch nehmen kann, allerdings wollen auch viele Menschen einfach direkt selbst helfen, entweder einfach nur in dem man die Hilfsgüter bereitstellt/anbietet oder aber vielleicht auch durch Freizeitangebote um Integrationsmöglichkeiten zu schaffen. Hierbei scheitert es jedoch oft an den Fremdsprachenkenntnisse der Beteiligten und an einer geeigneten Plattform, um überhaupt erst in Kontakt treten zu können. Was uns daher vorschwebt ist eine Art eBay-Kleinanzeigen Portal allerdings multi-lingual - ein Art Welcome- Refugee - Portal, wo Menschen mittels einer Textbaustein-dialog-prinzip und mit Unterstützung von Google Translate in der eigenen Landsprache mit Menschen jeglicher Nationen einfach und unkompliziert in Kontakt treten können, damit so einfach Dinge schnell und unkompliziert direkt ohne Umwege über Sammellager von DRK etc. den Weg zu Bedürftigen finden können. Die Plattform soll aber nicht nur ausschließlich dem Austausch von Gegenständen dienen, sondern auch die Möglichkeit bieten, Angebote zur schnellen Integration der Flüchtlingen bei uns anzubieten z.B. durch das Annoncieren von Deutschkursen etc.
 
 == Fachlicher Überblick
 Einleitung für fachfremde Personen
