@@ -93,8 +93,8 @@ Was das zu erstellende Programm auf alle Fälle leisten muss.
 - Anbieter und Ort wird angezeigt
 - Einstellungsdatum
 - vorgegebene Attributliste / Tags zu Größe etc.
-- Freitext Beschreibung                                                     (in deutsch eher sinnlos)
-- Titel der Anzeige                                                         (Google Übersetzer ?)
+- Freitext Beschreibung
+- Titel der Anzeige                                                    
 - Möglichkeit zur Kontaktaufnahme durch Chat
 
 Chat
