@@ -101,53 +101,104 @@ Die typischen Anwendungsfälle (Anlegen, Ändern, Löschen) können zu einem ein
 == Anforderungen
 
 === Muss-Kriterien
-Was das zu erstellende Programm auf alle Fälle leisten muss.
+==== Nutzermanagement
 
-==== Registrierung
-- Registrierung eines Benutzeraccounts mit E-Mail Bestätigung
-- Unterscheidung zwischen Helfender und Flüchtling
-- Kennwort vergessen Funktion
-- Captcha für Botdetection bei Registrierung
+* Erstellen
+** Vorname, Name
+** E-Mail
+** Derzeitige Unterkunft =
+*** Flüchtling Stadtteil/Plz
+*** Helfender Adresse
 
-==== Benutzung
-- Anmeldung
-- Text angepasst an die, bei der Registration ausgewählte, Sprache
-- Unterscheidung zwischen Hilfsgüter und Aktivitäten
-- Unterteilung der Güter in Kategorien
-- Suchfeld um nach Güter/Aktivitäten zu suchen
-- Möglichkeit um "suche im Umkreis von .. km" auszuwählen
-- Helfender kann Hilfsgüter und Aktivitäten inserieren und sie wieder entfernen
-- Admin kann generell Inserate entfernen
-- Anzeigen automatisch löschen nach optionalen Verfallsdatum
-- Einstellungen zum Benutzerkonto um ggf. Adresse zu aktualisieren
+** Herkunft
+** Sprache (Mehrfachauswahl + Präferenz/Ranking)
+** ReCaptcha2 für Botdetection
 
-==== Chat
-- Einordnung in die Kategorie
-- Einstellen eines Fotos
-- Anbieter und Ort wird angezeigt
-- Einstellungsdatum
-- vorgegebene Attributliste / Tags zu Größe etc.
-- Freitext Beschreibung
-- Titel der Anzeige
-- Möglichkeit zur Kontaktaufnahme durch Chat
+* Löschen
+* Modifizieren
+** User sich selbst
+** Admin alle
 
-Chat
-- Textbaustein basierend für eine einfache, korrekte Übersetzung
-- Eingabe wird in die Sprache des Gegenübers übersetzt
-- Freitext Eingabe mit Möglichkeit der Übersetzung durch GoogleTranslate
-- Anzeige des vorherigen Gesprächsverlaufs
+* Rollen
+** Mindestens User und Admin
 
+==== Kategorien
+
+* Einteilung / Tagging der Güter & Activities
+* Vordefinierte Liste an Kategorien
+
+==== Item Management (Goods & Services)
+
+User mit Zugriff auf eigene + Admin auf alle
+
+* Erstellen
+* Löschen
+* Bearbeiten
+
+==== Dialoge
+
+* Tracking von Dialog Fortschritt
+* Dialogbausteine
+* Priorisierung (Antworten auf zuletzt gewählte Bausteine zuerst)
+* Dynamische Verknüpfungen der Bausteine (Mit verschiedenen entry points je nach Kontext)
+* Modifikation via JSON upload (nicht zwingend notwendig, wenn per GUI implementiert, könnte aber für die GUI das backend sein)
+
+==== Struktur
+
+* Goods/Activities
+** Übersicht
+** Suche
+*** Umkreis von [in km]
+** Anzeige
+*** Kategorien
+*** Foto hochladen (nicht Pflicht)
+*** Attributliste / Tags zu Größe etc.
+**** Logisch geordnet: z.B Größen (S, XS, XXL oder “für Kinder geeignet”), Farben (grün etc.), Mengen etc.
+**** Vorgegeben (drop-down oder auto-complete-select) mit passenden Übersetzungen.
+*** Freitextbeschreibung
+*** Anbieter, PLZ, Ort, Erstellungsdatum sichtbar
+* Mehrsprachiges Interface
 
 === Kann-Kriterien
-Anforderungen die das Programm leisten können soll, aber für den korrekten Betrieb entbehrlich sind.
 
-- Melden von Nutzern, Anzeigen
-- Sortieren der Güter/Aktivitäten nach Datum
-- ändern der Präferenz Sprache
-- Fotos im Chat versenden
-- Erstellen von Aktivitäten durch Flüchtlinge
-- Inserieren von Gütern durch Flüchtlinge (Fahrrad gesucht)
+==== Kategorien
 
+* Erstellen neuer Kategorien
+* Löschen
+* Bearbeiten
+
+==== Dialog Management
+
+* Neue Satzfragmente erstellen (GUI)
+* Satzfragmente bearbeiten (GUI)
+* Vorschläge und Zusammenhänge modifizieren (GUI)
+
+==== Dialog
+
+* Preference based sorting
+* Tagging und Kategorisierung
+* Chatsystem
+
+==== Struktur
+* Activities
+** Auflösung/Schließen von Activity nach Datum
+** Periodische Wiederholung
+* Editierbare Übersetzung des Interfaces
+* "Suche folgenden Gegenstand" (Gegenteil des Angebot Inserierens)
+* Melden von Nutzern, Anzeigen
+* Erstellen von Aktivitäten durch Flüchtlinge
+* Inserieren von Gütern durch Flüchtlinge (Fahrrad gesucht)
+
+==== Security
+
+* Feedback zu Nutzern
+** Report-System (für unerwünschtes Verhalten)
+*** Vulgarität
+*** Weiterverkauf für Geld
+** Bewertungs-System
+*** Hat der Käufer/Verkäufer gemacht was er versprochen hat?
+* Aktivitäten Statistik
+* Wegwerf E-Mail Addressen Blacklisten
 
 == GUI Prototyp
 
