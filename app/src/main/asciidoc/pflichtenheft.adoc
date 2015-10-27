@@ -65,7 +65,22 @@ link="usecase.jpg"]
 
 === Akteure
 
-Akteure sind die Benutzer des Software-Systems oder Nachbarsysteme, welche darauf zugreifen. Dokumentieren Sie die Akteure in einer Tabelle. Diese Tabelle gibt einen Überblick über die Akteure und beschreibt sie kurz. Die Tabelle hat also mindestens zwei Spalten (Akteur Name und Kommentar).
+//Akteure sind die Benutzer des Software-Systems oder Nachbarsysteme, welche darauf zugreifen. Dokumentieren Sie die Akteure in einer Tabelle. Diese Tabelle gibt einen Überblick über die Akteure und beschreibt sie kurz. Die Tabelle hat also mindestens zwei Spalten (Akteur Name und Kommentar).
+|===
+|Akteur|Beschreibung
+|NewUser|Neuer Besucher der Website. Er kann sich registrieren.
+|LoggedInRefugee|Eingeloggter Flüchtling. Kann seine Einstellungen ändern, oder ein Produkt suchen
+|LoggedInVolunteer|Eingeloggter Freiwilliger. Kann seine Einstellungen ändern, Angebote erstellen und seine Angebote löschen.
+|Administrator|Der Administrator hat Zugrif auf die Nutzerverwaltung und die Angebotsverwaltung.
+|===
+
+
+
+=== Anwendungsfallbeschreibungen
+//Dieser Unterabschnitt beschreibt die Anwendungsfälle. In dieser Beschreibung müssen noch nicht alle Sonderfälle und Varianten berücksichtigt werden. Schwerpunkt ist es, die wichtigsten Anwendungsfälle des Systems zu finden. Wichtig sind solche Anwendungsfälle, die für den Auftraggeber, den Nutzer den größten Nutzen bringen.
+//Für komplexere Anwendungsfälle ein UML-Sequenzdiagramm ergänzen.
+//Einfache Anwendungsfälle mit einem Absatz beschreiben.
+Die typischen Anwendungsfälle (Anlegen, Ändern, Löschen) können zu einem einzigen zusammengefasst werden.
 
 // See http://asciidoctor.org/docs/user-manual/#tables
 [options="header"]
@@ -91,12 +106,6 @@ Akteure sind die Benutzer des Software-Systems oder Nachbarsysteme, welche darau
 |Formularmaske für Kontaktaufnahme | registrierter Benutzer, Inserierender | in der Kontaktaufname kann eine Nachricht an den Inserierenden durch zusammenfügen von Textbausteinen erzeugt werden. Dabei werden mehrere Elemente aus verschiedenen Kategorien (z.B. Begrüßung, Termin zur Abholung [mit popup zur Selektion des Termins]) ausgewählt. Ferner gibt es ein Freitext-Feld, bei dem automatisch durch z.B. Google Translator von dem geschriebenen Text des Kontaktaufnehmenden in die Sprache des Inserierenden übersetzt wird. | Communication Management |
 |Anzeige der Nachrichtenhistorie | registrierter Benutzer, Inserierender | bisher ausgetauschte Nachrichten zwischen zwei bestimmten registrierten Mitgliedern können in einer Art Chat History angezeigt werden. | Communication Management |
 |===
-
-=== Anwendungsfallbeschreibungen
-Dieser Unterabschnitt beschreibt die Anwendungsfälle. In dieser Beschreibung müssen noch nicht alle Sonderfälle und Varianten berücksichtigt werden. Schwerpunkt ist es, die wichtigsten Anwendungsfälle des Systems zu finden. Wichtig sind solche Anwendungsfälle, die für den Auftraggeber, den Nutzer den größten Nutzen bringen.
-Für komplexere Anwendungsfälle ein UML-Sequenzdiagramm ergänzen.
-Einfache Anwendungsfälle mit einem Absatz beschreiben.
-Die typischen Anwendungsfälle (Anlegen, Ändern, Löschen) können zu einem einzigen zusammengefasst werden.
 
 == Anforderungen
 
