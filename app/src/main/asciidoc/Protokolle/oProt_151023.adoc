@@ -1,0 +1,40 @@
+= Protokoll Gruppe 10
+__Treffen am 23.10.2015__
+
+__Schriftführer:__ Lukas Klose
+
+__Nächstes Treffen:__ 30.10.2015
+
+__Teilnehmer:__ J. Adam, A. Martin, A. Huber, V. Herz, L. Klose, A. Shulga
+
+== Bemerkungen
+//Verwarnungen, besondere Vorfälle, Organisatorisches
+Alexander Herzog ist im Urlaub und deswegen entschuldigt.
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe |Status |Bemerkung
+|n.v.    |Aufgabenverteilung OAA      |Erledigt      |Arbeiten zum Ersten Milestone sind am Laufen.
+|===
+
+
+== Aktueller Stand
+//Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den Dokumenten.
+Die Aufgaben für die Fertigstellung des ersten Milestones sind verteilt. 
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#4, #8, #9, #10, #11, #12, #13, #14     |GUI Prototyp     |Benutzeroberfläche erstellen |A.Shulga, L. Klose |n.v.
+|#17|Akzeptanztestfälle|s. Pflichtenheft|V. Herz, A. Huber|n.v.
+|n.v.|Anwendungsfall- und Klassendiagramm|s. Pflichtenheft|V.Herz, A. Huber|n.v.
+|#6|Spring-Prototyp|n.v.|Gruppe 10|n.v.
+|===
