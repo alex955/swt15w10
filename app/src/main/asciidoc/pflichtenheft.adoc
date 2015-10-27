@@ -227,6 +227,26 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 [options="header"]
 |===
 |Klasse/Enumeration |Beschreibung |
+|User                 | Generalisiertester Nutzer des Systems - keine Kenntnis über Account oder ob der User eingeloggt ist |
+|RegisteredUser                  | Abstraktion von Usern, die im System registriert sind. Kapselt alle Grundgemeinsamkeiten wie Stammdaten, Kontaktmöglichkeiten, Sprachen etc. Basisfunktionalitäten des Systems sind für die erbenden Nutzergruppen verfügbar. Angebotene Artikel werden dem jeweiligen Nutzer zugewiesen.|
+|Volunteer                  | Spezialisierung von RegisteredUser - jemand, der sich als Helfender im System registriert hat            |
+|Refugee                  |Spezialisierung von RegisteredUser - jemand, der sich als Flüchtling im System registriert hat            |
+|Admin                  | Administrator  mit Sonderberechtigungen zur Verwaltung des Systems          |
+|-                  |-           |
+|Language                  | Repräsentation einer Sprache, soll bestimmen in welcher Sprache das System angezeigt wird. Jeder nutzer hat eine Haupt- und keine oder mehrere Zweitsprachen.          |
+|-                  |-           |
+|Article                  | Abstraktion von angebotenen Artikeln, kapselt Grunddaten aller Artikel wie z.B. ID, Name, Ort, Angebotsdauer,... . Besitzt verschiedene Tags/Keywords nach denen gesucht werden kann.       |
+|Good            | Repräsentiert "Güter", also physischer Waren die von Volunteers und/oder Refugees angeboten werden können. Besitzt verschiedene Attribute, die als ArticleBlock repräsentiert sind.          |
+|Activity                 | Repräsentiert "Aktivitäten" die im System angeboten werden können.          |
+|Category                 | Dient der Kategorisierung von Goods. Eine Kategorie kann wiederrum in mehrere Subkategorien unterteilt werden.          |
+|-                  |-           |
+|Message                  | Nachrichten, die im System zwischen Nutzern geschrieben wurden, z.B. Kontaktaufnahmen über Artikelmasken. Sind immer zwei RegisteredUsern zugewiesen und bestehen aus mehreren Textblöcken.           |
+|-                  |-           |
+|TextBlock                  | Abstrakte Repräsentation eines Textbausteins, enthält immer eine ID, Inhalt, eine Sprache sowie eine Übersetzung in eben diese Sprache.           |
+|SearchTag                  | Keyword, nach dem Artikeldatenbank durchsucht werden kann.           |
+|PortalBlock                  | Repräsentation eines GUI-Elements, das in bestimmter Sprache dargestellt werden soll.           |
+|ArticleBlock                  | Repräsentation von Textbausteinen, die in Nachrichtendialogen der Kontaktaufnahme dienen sollen.           |
+
 |…                  |…            |
 |===
 
