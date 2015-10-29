@@ -5,93 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Refugee</title>
     <link rel="stylesheet" href="css/foundation.css" />
-      
-    <!--custom stylesheet -->
-    <link rel="stylesheet" href="css/app.css">
-      
+       
     <script src="js/vendor/modernizr.js"></script>
   </head>
 
 <body>
     
-<!-- Lukas´ Topbar-->
-<div class="row">
-<div class="large-12 columns">
-<nav class="top-bar" data-topbar>
-            <div class="large-2 columns">
-                <a href=suchergebnisse.html> <img src="img/logo.png" ></a>
-            </div>
-            <div class="large-2 medium-6 small-12 columns">
-                <input type="text" placeholder="Suche">
-            </div>
-            <div class="large-2 medium-6 small-12 columns">
-                <section class="top-bar-section">
-                    <ul class=right>
-                        <li class="has-dropdown">
-                            <a href="#">Kategorie</a>
-                                        <ul class="dropdown">
-                                        <li>
-                                        <a href="#">Weed</a>
-                                        </li>
-                                        <li>
-                                        <a href="#">LSD</a>
-                                        </li>
-                                        <li>
-                                        <a href="#">Ecstasy</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                        <a href="#">See all →</a>
-                                        </li>
-                                        </ul>
-                        </li>
-                    </ul>
-                </section>
+<nav class="top-bar" data-topbar role="navigation">
+  <ul class="title-area">
+    <li class="name">
+       <h1><a href="#">Regee</a></h1>
+    </li>
+       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
 
-
-            </div>
-
-            <div class="large-2 medium-6 small-12 columns">
-                <input type="text" placeholder="PLZ">
-            </div>
-            <div class="large-4 medium-6 small-12 columns">
-
-
-             <section class="top-bar-section"> 
-
-
-        <ul class="right">
-
-        <li class="divider"></li>
-
-
-        </li>
-        <li>
-        <a href="#">Neue Anzeige erstellen</a>
-        </li>
-        <li class="divider"></li>
-        <li class="has-dropdown">
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li class="active"><a href="#">Angebot einstellen</a></li>
+      <li class="has-dropdown">
         <a href="#">Account</a>
         <ul class="dropdown">
-        <li>
-        <a href="./Einstellungen.html">Einstellungen</a>
-
-
-        </li>
-        <li class="divider"></li>
-        <li>
-        <a href="#">Ausloggen</a>
-        </li>
+          <li><a href="#">Ausloggen</a></li>
+          <li><a href="Einstellungen.html">Einstellungen</a></li>
         </ul>
-        </li>
+      </li>
+    </ul>
+      
+      
+    <!-- Left Nav Section -->
+    <ul class="left">
+  <li class="has-form">
+  <div class="row collapse">
+      <input type="text" placeholder="">
+      <li class="active has-dropdown">
+        <a href="#">Kategorie</a>
+        <ul class="dropdown">
+          <li><a href="#">Spielzeug</a></li>
+          <li><a href="#">Möbel</a></li>
         </ul>
-        </section>       
-
-            </div>    
-        </nav>
-</div>
-</div>
-<!-- Lukas´ Topbar ENDE-->
+      </li>
+  </div>
+  </li>
+  <li class="has-form">
+  <div class="row collapse">
+      <input type="text" placeholder="">
+        <li class="active has-dropdown">
+        <a href="#">PLZ</a>
+        <ul class="dropdown">
+          <li><a href="#">20KM</a></li>
+          <li><a href="#">30KM</a></li>
+        </ul>
+      </li>
+  </div>
+  </li>
+    </ul>
+  </section>
+</nav>       
+    
+     
+<script src="js/vendor/jquery.js"></script>
+<script src="js/foundation.min.js"></script>
+<script src="js/foundation/foundation.topbar.js"></script>
+    
+    
+    <script>
+    $(document).foundation();
+  </script>
 
      
          
