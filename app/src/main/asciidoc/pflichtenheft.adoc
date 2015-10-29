@@ -1,4 +1,4 @@
-= Pflichtenheft
+﻿= Pflichtenheft
 
 == Projektname
 
@@ -212,15 +212,49 @@ User mit Zugriff auf eigene + Admin auf alle
 == GUI Prototyp
 
 === Überblick: Dialoglandkarte
-Erstellen Sie ein Übersichtsdiagramm, das das Zusammenspiel Ihrer Masken zur Laufzeit darstellt. Also mit welchen Aktionen zwischen den Masken navigiert wird. Die nachfolgende Abbildung zeigt eine an die Pinnwand gezeichnete Dialoglandkarte. Ihre Karte sollte zusätzlich die Buttons/Funktionen darstellen, mit deren Hilfe Sie zwischen den Masken navigieren.
+//Erstellen Sie ein Übersichtsdiagramm, das das Zusammenspiel Ihrer Masken zur Laufzeit darstellt. Also mit welchen Aktionen zwischen den Masken navigiert wird. Die nachfolgende Abbildung zeigt eine an die Pinnwand gezeichnete Dialoglandkarte. Ihre Karte sollte zusätzlich die Buttons/Funktionen darstellen, mit deren Hilfe Sie zwischen den Masken navigieren.
+
+image:Registrierung.png[
+"Registrierung",width=800,
+link="Registrierung.png"]
+
+image:Suchergebnisse.png[
+"Suchergebnisse",width=800,
+link="Suchergebnisse.png"]
+
+image:Einstellungen.png[
+"Einstellungen",width=800,
+link="Einstellungen.png"]
+
+image:Artikelseite.png[
+"Artikelseite",width=800,
+link="Artikelseite.png"]
 
 === Dialogbeschreibung
-Für jeden Dialog:
+==== Topbar
+** Auf jeder Seite sichtbar
+** Klick auf das Logo führt zur Startseite
+** Kategorie und PLZ sind Dropdown Menüs
+** In den Textfeldern kann man Artikel und PLZ eingeben und durch Enter bestätigen
+** Angebot einstellen leitet weiter zu einer entsprechenden Seite
+** Account ist ein Dropdown Menü mit den Buttons Ausloggen und Einstellungen
 
-1. Kurze textuelle Dialogbeschreibung eingefügt: Was soll der jeweilige Dialog? Was kann man damit tun? Überblick?
-2. Maskenentwürfe (Screenshot, Mockup)
-3. Maskenelemente (Ein/Ausgabefelder, Aktionen wie Buttons, Listen, …)
-4. Evtl. Maskendetails, spezielle Widgets
+==== Einstellungen 
+** Durch das Betätigen der Buttons in den einzelnen Panels bleibt man auf der Einstellungen Seite
+
+==== Suchergebnisse
+** Klick auf ein Thumbnail leitet weiter zu der Artikelseite
+
+==== Registrierung
+** Flüchtling/Helfender Buttongruppe wechselt die Farbe je nach was man anklickt
+** Bestätigung Button führt zu einer Registrierung-erfolgt-Seite
+
+//Für jeden Dialog:
+
+//1. Kurze textuelle Dialogbeschreibung eingefügt: Was soll der jeweilige Dialog? Was kann man damit tun? Überblick?
+//2. Maskenentwürfe (Screenshot, Mockup)
+//3. Maskenelemente (Ein/Ausgabefelder, Aktionen wie Buttons, Listen, …)
+//4. Evtl. Maskendetails, spezielle Widgets
 
 == Datenmodell
 
