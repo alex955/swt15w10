@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Getting Started: Serving Web Content</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<p>
+	<h1>Kategorien:</h1>
+	<table border="1">
+		<tr>
+			<td><b>Name</b></td>
+			<td><b>ID</b></td>
+			<td></td>
+		</tr>
+		<form action="#" th:action="@{/categories/delete}" th:object="${deleteID}"
+		method="post">
+		<tr th:each="category : ${categories}">
+			<td th:text="${category.name}">platzhalter</td>
+			<td th:text="${category.id}">platzhalter</td>
+			<td>
+				 <input type="submit" value="Löschen (noch ohne Funktion)" />
+			</td>
+		</tr>
+		</form>
+	</table>
+
+
+	</p>
+		<a href="/categories">noch eine Kategorie hinzufügen</a>
+	<p>
+
+	</p>
+</body>
+</html>
