@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +27,7 @@ public class CategoryController {
 
 	}
 
-	@RequestMapping(value = "/categories", method = RequestMethod.GET)
+	@RequestMapping(value = "/categories")
     public String firstView(Model model) {
         model.addAttribute("categories", categories.findAll());
         model.addAttribute("newCategory", new Category());
@@ -40,11 +41,12 @@ public class CategoryController {
         return "categories2";
     }
     
-    @RequestMapping(value="/categories/delete", method=RequestMethod.POST)
-    public String deleteView(@ModelAttribute Category category, Model model) {
-    	System.out.println("DELETE: ");
-        model.addAttribute("categories", categories.findAll());
-        return "blank";
-    }
+	 //delete user
+	@RequestMapping(value = "/categories/delete/{id}", method = RequestMethod.GET)
+	public String deleteUser(@PathVariable Long id) {
+		System.out.println("delete user with id " + id);
+		categories.delete(id);
+		return "redirect:/categories";
+	}
 
 }

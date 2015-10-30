@@ -13,16 +13,13 @@
 			<td><b>ID</b></td>
 			<td></td>
 		</tr>
-		<form action="#" th:action="@{/categories/delete}" th:object="${deleteID}"
-		method="post">
 		<tr th:each="category : ${categories}">
 			<td th:text="${category.name}">platzhalter</td>
 			<td th:text="${category.id}">platzhalter</td>
 			<td>
-				 <input type="submit" value="Löschen (noch ohne Funktion)" />
+				  <a th:href="@{/categories/delete/{id}(id=${category.id})}"><span>Delete</span></a>
 			</td>
 		</tr>
-		</form>
 	</table>
 
 
