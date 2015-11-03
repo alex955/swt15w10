@@ -1,0 +1,45 @@
+= Protokoll Gruppe 10
+__Treffen am 30.10.2015__
+
+__Schriftführer:__ Lukas Klose
+
+__Nächstes Treffen:__ 06.11.2015
+
+__Teilnehmer:__ J. Adam, V. Herz, A. Huber, L. Klose, A. Martin, A. Shulga
+
+== Bemerkungen
+//Verwarnungen, besondere Vorfälle, Organisatorisches
+-
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe |Status |Bemerkung
+|#4    |GUI Prototyp       |Erledigt      |-
+|#17| Akzeptanztestfälle|Erledigt|-
+|n.v.|Anwendungsfall- und Klassendiagramm | Erledigt | -
+|#6 | Spring Prototyp| in Arbeit | Bis zum nächsten Treffen fertigzustellen 
+|===
+
+
+== Aktueller Stand
+//Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den
+Dokumenten.
+Alles für das Pflichtenheft ist erledigt. Aufgabe für nächste Woche ist das Fertigstellen der SPring-Prototypen.
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|n.v.     |Spring-Prototyp      | Kategorien verwalten           | A. Martin               |in Arbeit
+|n.v.     |Spring-Prototyp      | E-Mail Verwaltung           |L. Klose                |in Arbeit
+|n.v.     |Spring-Prototyp      | Artikel mit Bildern           |A. Shulga                |in Arbeit
+|n.v.     |Spring-Prototyp      | Account erstellen           | V. Herz               |in Arbeit
+|n.v.     |Spring-Prototyp      | Artikel suchen           | A. Herzog               |in Arbeit
+|===
