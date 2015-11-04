@@ -6,7 +6,7 @@
 </head>
 <body>
 	<p>
-	<h1>Root-Kategorien:</h1>
+	<h1>Subkategorien von "<span th:text="${category.name}">kat</span>" (ID: <span th:text="${category.id}">name</span>)</h1>
 	<table border="1">
 		<tr>
 			<td><b>Name</b></td>
@@ -14,7 +14,7 @@
 			<td></td>
 			<td>Inspect</td>
 		</tr>
-		<tr th:each="category : ${categories}">
+		<tr th:each="category : ${subcategories}">
 			<td th:text="${category.name}">platzhalter</td>
 			<td th:text="${category.id}">platzhalter</td>
 			<td>
@@ -25,38 +25,30 @@
 			</td>
 		</tr>
 	</table>
+
+
 	</p>
 
 	<p>
-	<h1>Root-Kategorie hinzufügen:</h1>
+	<h1>Subkategorie zur Kategorie "<span th:text="${category.name}">kat</span>" hinzufügen:</h1>
 
-	<form action="#" th:action="@{/categories}" th:object="${newCategory}"
+	<form action="#" th:action="@{/inspectcategory/add/{id}(id=${category.id})}" th:object="${newCategory}"
 		method="post">
 		<p>
-			Name der neuen Kategorie: <input type="text" th:field="*{name}"/>
+			Name der neuen Kategorie: <input type="text" th:field="*{name}" />
 		</p>
 		<p>
 			<input type="submit" value="Submit" /> <input type="reset"
 				value="Reset" />
 		</p>
 	</form>
-	</p>
+	</p> 
 	
 	
+	
+		
 	<p>
-	<h1>Statistik</h1>
-		<table border="1">
-			<tr>
-				<td>Anzahl Root-Kategorien</td>
-				<td>Anzahl Sub-Kategorien</td>
-			</tr>
-			<tr>
-				<td><span th:text="${rootCount}">#</span></td>
-				<td><span th:text="${subCount}">#</span></td>
-			</tr>
-		</table>
+	<h1><a href="/categories">Zurück zur Wurzelansicht der Kategorien</a></h1>
 	</p>
-	
-
 </body>
 </html>
