@@ -71,7 +71,19 @@ public class CategoryController {
 	public String deleteCategory(@PathVariable Long id) {
 		System.out.println("delete category with id " + id);
 		categories.delete(id);
+		deleteSubcategories(id);
 		return "redirect:/categories";
+	}
+	
+	public void deleteSubcategories(long id){
+		for(Category s : categories.findAll()){
+			if(s.getPredecessor() == id){
+				long idToDelete = s.getId();
+				System.out.println("delete subcategory with id " + idToDelete);
+				categories.delete(idToDelete);
+				deleteSubcategories(idToDelete);
+			}
+		}
 	}
 	
 	@RequestMapping(value = "/inspectcategory/{id}")
