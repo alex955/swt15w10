@@ -3,6 +3,18 @@
 <head>
 <title>Getting Started: Serving Web Content</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script>
+
+	function required() {
+		var empt = document.forms["form1"]["name"].value;
+		if (empt == "" || empt == null) {
+			alert("Name der Kategorie darf nicht leer sein");
+			return false;
+		} else {
+			return true;
+		}
+	}
+</script>
 </head>
 <body>
 	<p>
@@ -11,17 +23,21 @@
 		<tr>
 			<td><b>Name</b></td>
 			<td><b>ID</b></td>
+			<td><b>Subkategorien eine Ebene unter Root</b></td>
 			<td></td>
-			<td>Inspect</td>
+			<td><b>Inspect</b></td>
 		</tr>
 		<tr th:each="category : ${categories}">
-			<td th:text="${category.name}">platzhalter</td>
-			<td th:text="${category.id}">platzhalter</td>
+			<td th:text="${category.cat.name}">platzhalter</td>
+			<td th:text="${category.cat.id}">platzhalter</td>
 			<td>
-				  <a th:href="@{/categories/delete/{id}(id=${category.id})}"><span>delete</span></a>
+				<p th:each="subcategory : ${category.subcats}"><a th:href="@{/inspectcategory/{id}(id=${subcategory.id})}"><span th:text="${subcategory.name}">Subkategorien anschauen</span></a></p>
+			</td>
+			<td>
+				  <a th:href="@{/categories/delete/{id}(id=${category.cat.id})}"><span>Kategorie löschen</span></a>
 			</td>
 						<td>
-				  <a th:href="@{/inspectcategory/{id}(id=${category.id})}"><span>inspect</span></a>
+				  <a th:href="@{/inspectcategory/{id}(id=${category.cat.id})}"><span>Subkategorien anschauen</span></a>
 			</td>
 		</tr>
 	</table>
@@ -31,9 +47,9 @@
 	<h1>Root-Kategorie hinzufügen:</h1>
 
 	<form action="#" th:action="@{/categories}" th:object="${newCategory}"
-		method="post">
+		method="post" name="form1" onsubmit="return required()">
 		<p>
-			Name der neuen Kategorie: <input type="text" th:field="*{name}"/>
+			Name der neuen Kategorie: <input type="text" th:field="*{name}" />
 		</p>
 		<p>
 			<input type="submit" value="Submit" /> <input type="reset"
@@ -47,10 +63,12 @@
 	<h1>Statistik</h1>
 		<table border="1">
 			<tr>
-				<td>Anzahl Root-Kategorien</td>
-				<td>Anzahl Sub-Kategorien</td>
+				<td>Summe aller Kategorien</td>
+				<td>davon Root-Kategorien</td>
+				<td>davon Sub-Kategorien</td>
 			</tr>
 			<tr>
+				<td><span th:text="${totalCount}">#</span></td>
 				<td><span th:text="${rootCount}">#</span></td>
 				<td><span th:text="${subCount}">#</span></td>
 			</tr>

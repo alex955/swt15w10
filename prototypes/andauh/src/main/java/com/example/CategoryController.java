@@ -33,7 +33,7 @@ public class CategoryController {
 	@RequestMapping(value = "/categories")
     public String firstView(Model model) {
 		
-		LinkedList<Category> testList = new LinkedList<Category>();
+		LinkedList<CategoryFirstTierObject> testList = new LinkedList<CategoryFirstTierObject>();
 		Iterable<Category> testSet = categories.findAll();
 		
         int rootCount = 0;
@@ -41,7 +41,17 @@ public class CategoryController {
 		
 		for(Category s : testSet){
 			if(s.getRoot()) {
-				testList.add(s);
+				LinkedList<Category> subcats = new LinkedList<Category>();
+				
+				//check subcats
+				for(Category t : testSet){
+					if(t.getPredecessor() == s.getId()){
+						subcats.add(t);
+					}
+				}
+				
+				CategoryFirstTierObject toAdd = new CategoryFirstTierObject(s, subcats);
+				testList.add(toAdd);
 				rootCount++;
 			}
 			else{
@@ -49,10 +59,13 @@ public class CategoryController {
 			}
 		}
 		
+		int totalCount = rootCount + subCount;
+		
         model.addAttribute("categories", testList);
         model.addAttribute("newCategory", new Category());
         model.addAttribute("rootCount", rootCount);
         model.addAttribute("subCount", subCount);
+        model.addAttribute("totalCount", totalCount);
 
         return "categories";
     }
