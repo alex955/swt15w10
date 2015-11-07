@@ -1,80 +1,17 @@
-<!doctype html>
-<html class="no-js" lang="en">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <title>Refugee</title>
-    <link rel="stylesheet" href="css/foundation.css" />
-    <script src="js/vendor/modernizr.js"></script>
+    <link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />   
+    <link rel="stylesheet" th:href="@{/resources/css/style_button.css}" /> 
+    <script th:src="@{/resources/js/vendor/modernizr.js}"></script>
   </head>
 
 <body>
-    
-<nav class="top-bar" data-topbar role="navigation">
-  <ul class="title-area">
-    <li class="name">
-       <h1><a href="#">Regee</a></h1>
-    </li>
-       <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-  </ul>
 
-  <section class="top-bar-section">
-    <!-- Right Nav Section -->
-    <ul class="right">
-      <li class="active"><a href="#">Angebot einstellen</a></li>
-      <li class="has-dropdown">
-        <a href="#">Account</a>
-        <ul class="dropdown">
-          <li><a href="#">Ausloggen</a></li>
-          <li><a href="">Einstellungen</a></li>
-        </ul>
-      </li>
-    </ul>
-      
-      
-    <!-- Left Nav Section -->
-    <ul class="left">
-  <li class="has-form">
-  <div class="row collapse">
-      <input type="text" placeholder="">
-      <li class="active has-dropdown">
-        <a href="#">Kategorie</a>
-        <ul class="dropdown">
-          <li><a href="#">Spielzeug</a></li>
-          <li><a href="#">Möbel</a></li>
-        </ul>
-      </li>
-  </div>
-  </li>
-  <li class="has-form">
-  <div class="row collapse">
-      <input type="text" placeholder="">
-        <li class="active has-dropdown">
-        <a href="#">PLZ</a>
-        <ul class="dropdown">
-          <li><a href="#">20KM</a></li>
-          <li><a href="#">30KM</a></li>
-        </ul>
-      </li>
-  </div>
-  </li>
-    </ul>
-  </section>
-</nav>       
-    
-     
-<script src="js/vendor/jquery.js"></script>
-<script src="js/foundation.min.js"></script>
-<script src="js/foundation/foundation.topbar.js"></script>
-    
-    
-    <script>
-    $(document).foundation();
-  </script>
-     
-         
-    
+<nav th:include="topbar :: topbar"> </nav>    
+                  
 <div class="row"><hr/>
 <div class="large-8 medium-9 small-12 columns">
     <h5>Registrieren</h5>
@@ -95,7 +32,7 @@
             Name
           </div>
           <div class="large-7 small-9 columns">
-            <input type="text">
+            <input type="text"/>
           </div>
         </div>
       </div>
@@ -105,7 +42,7 @@
             Vorname
           </div>
           <div class="large-7 small-9 columns">
-            <input type="text">
+            <input type="text"/>
           </div>
         </div>
       </div>
@@ -115,7 +52,7 @@
             E-Mail
           </div>
           <div class="large-7 small-9 columns">
-            <input type="text">
+            <input type="text"/>
           </div>
         </div>
       </div>
@@ -125,7 +62,7 @@
             Passwort
           </div>
           <div class="large-7 small-9 columns">
-            <input type="text">
+            <input type="text"/>
           </div>
         </div>
       </div>
@@ -135,7 +72,7 @@
             Passwort wiederholen
           </div>
           <div class="large-7 small-9 columns">
-            <input type="text">
+            <input type="text"/>
           </div>
         </div>
       </div>
@@ -145,7 +82,7 @@
             Stadt
           </div>
           <div class="large-7 small-9 columns">
-            <input type="text">
+            <input type="text"/>
           </div>
         </div>
       </div>
@@ -155,7 +92,7 @@
             PLZ
           </div>
           <div class="large-7 small-9 columns">
-            <input type="text">
+            <input type="text"/>
           </div>
         </div>
       </div>
@@ -165,7 +102,7 @@
             Straße, Hausnummer
           </div>
           <div class="large-7 small-9 columns">
-            <input type="text">
+            <input type="text"/>
           </div>
         </div>
       </div>
@@ -175,7 +112,7 @@
             Sprache 1
           </div>
           <div class="large-7 small-9 columns">
-            <input type="text">
+            <input type="text"/>
           </div>
         </div>
       </div>
@@ -185,7 +122,7 @@
             Sprache 2
           </div>
           <div class="large-7 small-9 columns">
-            <input type="text">
+            <input type="text"/>
           </div>
         </div>
       </div>
@@ -195,7 +132,7 @@
             Sprache 3
           </div>
           <div class="large-7 small-9 columns">
-            <input type="text">
+            <input type="text"/>
           </div>
         </div>
       </div>
