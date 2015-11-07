@@ -1,0 +1,79 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>Refugee</title>
+<link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
+</head>
+
+<body>
+
+	<nav th:include="topbar :: topbar"></nav>
+
+	<div class="row">
+		<div class="large-12 columns">
+			<p>&nbsp;</p>
+			<h4 class="subheader">Angebot einstellen</h4>
+			<div class="panel">
+				<div class="row">
+					<div class="small-12 columns">
+						<div class="small-12 large-4 columns">
+							<p>Kategorie*: Hab noch keine gute Idee wie man die Kategorie einstellt. Falls jemand Bock hat, Hilfe ist erwuenscht.</p>
+						</div>
+						<hr />
+						<div class="small-12 large-4 columns">
+							<p>Titel der Anzeige*</p>
+						</div>
+						<div class="small-12 large-8 columns">
+							<input type="text" placeholder="" />
+						</div>
+						<div class="small-12 large-4 columns">
+							<p>Beschreibung*</p>
+						</div>
+						<div class="small-12 large-8 columns">
+							<textarea rows="4"></textarea>
+						</div>
+						<div class="small-12 large-4 columns">
+							<p>Bilder</p>
+						</div>
+						<div class="small-12 large-8 columns">
+							<a><input type="file" /></a>
+						</div>
+						<hr />
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						<div class="small-12 large-4 columns">
+							<p>PLZ*</p>
+						</div>
+						<div class="small-3 large-2 columns">
+							<input type="text" placeholder="PLZ" />
+						</div>
+						<div class="small-9 large-6 columns">
+							<input type="text" placeholder="zugehoerige Stadt automatisch" />
+						</div>
+
+						<div class="small-12 large-4 columns">
+							<p>Straße/Nr.</p>
+						</div>
+						<div class="small-12 large-8 columns">
+							<input type="text" placeholder="" />
+						</div>
+						<hr />
+						<div class="small-12 columns">
+							<div class="button">Angebot einstellen</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+	<footer th:include="footer :: footer"></footer>
+
+</body>
+</html>

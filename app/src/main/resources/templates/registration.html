@@ -1,164 +1,121 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <title>Refugee</title>
-    <link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />   
-    <link rel="stylesheet" th:href="@{/resources/css/style_button.css}" /> 
-    <script th:src="@{/resources/js/vendor/modernizr.js}"></script>
-  </head>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>Refugee</title>
+<link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
+</head>
 
 <body>
 
-<nav th:include="topbar :: topbar"> </nav>    
-                  
-<div class="row"><hr/>
-<div class="large-8 medium-9 small-12 columns">
-    <h5>Registrieren</h5>
-  <div class="panel">
-      <div>
-        <ul class="button-group">
-          <li>
-            <a class="button">Flüchtling</a>
-          </li>
-          <li>
-            <a href="#" class="button">Helfender</a>
-          </li>
-        </ul>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            Name
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text"/>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            Vorname
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text"/>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            E-Mail
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text"/>
-          </div>
-        </div>
-      </div>
-     <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            Passwort
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text"/>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            Passwort wiederholen
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text"/>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            Stadt
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text"/>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            PLZ
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text"/>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            Straße, Hausnummer
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text"/>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            Sprache 1
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text"/>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            Sprache 2
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text"/>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            Sprache 3
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text"/>
-          </div>
-        </div>
-      </div>
-      <a class="button"> Bestätigen </a> 
-  </div>
-</div>
-</div>
-    
-    
-<footer class="row">
-<div class="large-12 columns"><hr/>
-  <div class="row">
+	<nav th:include="topbar :: topbar"></nav>
 
-    <div class="small-6 columns">
-      <p>© Gruppe 10 SWT</p>
-    </div>
+	<div class="row">
+		<p>&nbsp;</p>
+		<div class="large-8 medium-9 small-12 columns">
+			<h4 class="subheader">Registrieren</h4>
+			<div class="panel">
+				<div>
+					<ul class="button-group">
+						<li><a class="button">Flüchtling</a></li>
+						<li><a href="#" class="button">Helfender</a></li>
+					</ul>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						<div class="large-5 small-3 columns">Name</div>
+						<div class="large-7 small-9 columns">
+							<input type="text" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						<div class="large-5 small-3 columns">Vorname</div>
+						<div class="large-7 small-9 columns">
+							<input type="text" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						<div class="large-5 small-3 columns">E-Mail</div>
+						<div class="large-7 small-9 columns">
+							<input type="text" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						<div class="large-5 small-3 columns">Passwort</div>
+						<div class="large-7 small-9 columns">
+							<input type="text" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						<div class="large-5 small-3 columns">Passwort wiederholen</div>
+						<div class="large-7 small-9 columns">
+							<input type="text" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						<div class="large-5 small-3 columns">Stadt</div>
+						<div class="large-7 small-9 columns">
+							<input type="text" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						<div class="large-5 small-3 columns">PLZ</div>
+						<div class="large-7 small-9 columns">
+							<input type="text" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						<div class="large-5 small-3 columns">Straße, Hausnummer</div>
+						<div class="large-7 small-9 columns">
+							<input type="text" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						<div class="large-5 small-3 columns">Sprache 1</div>
+						<div class="large-7 small-9 columns">
+							<input type="text" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						<div class="large-5 small-3 columns">Sprache 2</div>
+						<div class="large-7 small-9 columns">
+							<input type="text" />
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						<div class="large-5 small-3 columns">Sprache 3</div>
+						<div class="large-7 small-9 columns">
+							<input type="text" />
+						</div>
+					</div>
+				</div>
+				<a class="button"> Bestätigen </a>
+			</div>
+		</div>
+	</div>
 
-    <div class="small-6 columns">
-      <ul class="inline-list right">
-        <li><a href="#">Impressum</a></li>
-      </ul>
-    </div>
+	<footer th:include="footer :: footer"></footer>
 
-  </div>
-</div>
-</footer>
-             
 </body>
 </html>

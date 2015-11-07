@@ -41,4 +41,9 @@ public class WelcomeController {
 		return "registration";
 	}
 	
+	@RequestMapping("/NewArticle")
+	public String newArticle(){
+		return "newArticle";
+	}
+	
 }
