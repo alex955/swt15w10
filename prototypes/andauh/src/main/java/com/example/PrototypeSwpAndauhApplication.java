@@ -16,11 +16,18 @@ public class PrototypeSwpAndauhApplication {
     
     @PostConstruct
     void initialize(){
-    	System.out.println("wird initialize aufgerufen");
-    	categories.save(new Category("Möbel"));
-    	categories.save(new Category("Bücher"));
-    	categories.save(new Category("Weapons of math instruction"));
-    	categories.save(new Category("nochmal Möbel"));
-    	categories.save(new Category("nochmal nochmal Möbel"));
+    	System.out.println("wird initialize aufgerufen");;
+    	categories.save(new Category("Möbel", -1));
+    	categories.save(new Category("Badmöbel", 1));
+    	categories.save(new Category("Küchenmöbel", 1));
+    	categories.save(new Category("Bücher", -1));
+    	categories.save(new Category("gute Bücher", 4));
+    	categories.save(new Category("schlechte Bücher", 4));
+    	categories.save(new Category("Blablub", 4));
+    	categories.save(new Category("Weapons of math instruction", -1));
+    	categories.save(new Category("Gruppenterrorie", 8));
+    	categories.save(new Category("Sisisnus und Cosisisnus", 8));
+    	categories.save(new Category("nochmal Möbel", -1));
+    	categories.save(new Category("nochmal nochmal Möbel", -1));
     }
 }

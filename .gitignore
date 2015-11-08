@@ -16,3 +16,5 @@ hs_err_pid*
 
 # output directory
 target/
+*.prefs
+prototypes/andauh/.settings/org.eclipse.wst.common.project.facet.core.xml

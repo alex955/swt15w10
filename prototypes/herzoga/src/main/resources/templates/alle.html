@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Alle Artikel sind hier gelistet</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<p>
+	<h1>Artikel:</h1>
+	<table border="1">
+		<tr>
+			<td><b>Name</b></td>
+			<td><b>ID</b></td>
+			<td></td>
+		</tr>
+		<tr th:each="article: ${anzeigen}">
+			<td th:text="${article.name}">platz</td>
+			<td th:text="${article.description}">platz</td>
+			<td th:text="${article.id}">platz</td>
+			<td th:text="${article.locationZIP}">platz</td>
+			<td > <img src= th:text="${article.locationZIP}"> Hier Bild von th:text="${article.name}" </td>
+			<td>
+				  <a th:href="@{/articles/delete/{id}(id=${article.id})}"><span>Delete</span></a>
+			</td>
+		</tr>
+	</table>
+
+
+	</p>
+
+	<p>
+	<h1>Kategorie hinzufügen:</h1>
+
+	<form action="#" th:action="@{/anzeigen}" th:object="${newArticle}"
+		method="post">
+		<p>
+			Name der neuen Kategorie: <input type="text" th:field="*{name}" />
+		</p>
+		<p>
+			<input type="submit" value="Submit" /> <input type="reset"
+				value="Reset" />
+		</p>
+	</form>
+	</p>
+</body>
+</html>
