@@ -22,7 +22,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class WelcomeController {
 
 	@RequestMapping("/")
-	public String index() {
-		return "welcome";
+	public String frontPage() {
+		return "frontPage";
 	}
+	
+	@RequestMapping("/UserSettings")
+	public String userSettings(){
+		return "userSettings";
+	}
+	
+	@RequestMapping("/Article")
+	public String article(){
+		return "article";
+	}
+	
+	@RequestMapping("/registration")
+	public String registration(){
+		return "registration";
+	}
+	
+	@RequestMapping("/NewArticle")
+	public String newArticle(){
+		return "newArticle";
+	}
+	
 }

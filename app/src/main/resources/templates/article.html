@@ -1,0 +1,91 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>Refugee</title>
+<link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
+</head>
+
+<body>
+
+	<nav th:include="topbar :: topbar"></nav>
+
+	<div class="row">
+		<div class="large-12 columns">
+			<p>&nbsp;</p>
+			<h4 class="subheader">Name des Artikels</h4>
+			<div class="panel">
+				<div class="row">
+					<div class="small-12 columns">
+						<div class="small-12 large-9 columns">
+							<img src="http://placehold.it/800x600&amp;text=Artikel" />
+						</div>
+						<div class="small-3 columns">
+							<a class="th" href="img/space.jpg"> <img
+								src="http://placehold.it/800x600&amp;text=Artikel" />
+							</a>
+						</div>
+						<div class="small-3 columns">
+							<a class="th" href="img/space.jpg"> <img
+								src="http://placehold.it/800x600&amp;text=Artikel" />
+							</a>
+						</div>
+						<div class="small-3 columns">
+							<a class="th" href="img/space.jpg"> <img
+								src="http://placehold.it/800x600&amp;text=Artikel" />
+							</a>
+						</div>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<div class="row">
+							<div class="small-12 columns">
+								<h5 class="subheader">Details</h5>
+								<hr></hr>
+								<div class="small-6 large-3 columns">
+									<p>Ort:</p>
+									<p>Erstellungsdatum:</p>
+									<p>Anbieter:</p>
+								</div>
+								<div class="small-6 large-9 columns">
+									<p>Dresden 01309</p>
+									<p>07.11.2015</p>
+									<p>Max Muster</p>
+								</div>
+								<p>&nbsp;</p>
+								<h5 class="subheader">Beschreibung</h5>
+								<hr></hr>
+								Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
+								diam nonumy eirmod tempor invidunt ut labore et dolore magna
+								aliquyam erat, sed diam voluptua. At vero eos et accusam et
+								justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+								takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum
+								dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+								eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+								sed diam voluptua. At vero eos et accusam et justo duo dolores
+								et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus
+								est Lorem ipsum dolor sit amet.
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel">
+				<label> Nachricht schreiben</label>
+				<hr></hr>
+				<div class="row">
+					<div class="small-12 columns">
+						<textarea rows="4"></textarea>
+						<div class="button">Nachricht senden</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<footer th:include="footer :: footer"></footer>
+
+</body>
+</html>
