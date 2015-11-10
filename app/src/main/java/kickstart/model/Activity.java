@@ -36,10 +36,14 @@ public class Activity extends Anzeige{
 	}
 
 
-	public Activity(String name, String description, String location, DateTime anfang,DateTime ende) {
+	public Activity(String name, String description, DateTime anfang,DateTime ende,String street,int PLZ, String location, String number,DateTime einstelldatum) {
 		super(name, description, location);
 		
 		this.anfang=anfang;
+		this.einstelldatum=new DateTime(einstelldatum);
+		this.street=street;
+		this.number=number;
+		this.PLZ=PLZ;
 		
 		
 		if (this.anfang.isBefore(ende)==true) {

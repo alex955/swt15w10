@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.joda.time.DateTime;
+
 
 @Entity
 public abstract class Anzeige {
@@ -12,6 +14,61 @@ public abstract class Anzeige {
 	protected String name;
 	protected String description;
 	protected String location;
+	protected DateTime einstelldatum;
+	protected String street;
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public DateTime getEinstelldatum() {
+		return einstelldatum;
+	}
+
+
+	public void setEinstelldatum(DateTime einstelldatum) {
+		this.einstelldatum = einstelldatum;
+	}
+
+
+	public String getStreet() {
+		return street;
+	}
+
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+
+	public String getNumber() {
+		return number;
+	}
+
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+
+	public int getPLZ() {
+		return PLZ;
+	}
+
+
+	public void setPLZ(int pLZ) {
+		PLZ = pLZ;
+	}
+
+
+	protected String number;
+	protected int PLZ;
+	 
 	
 	@SuppressWarnings("unused")
 	protected Anzeige(){
@@ -22,8 +79,6 @@ public abstract class Anzeige {
 		this.name=name;
 		this.description=description;
 		this.location=location;
-		
-		
 	}
 	
 	
@@ -58,5 +113,6 @@ public abstract class Anzeige {
 		this.location = location;
 	}
 	
+
 
 }

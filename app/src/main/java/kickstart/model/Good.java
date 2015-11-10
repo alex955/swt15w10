@@ -2,15 +2,21 @@ package kickstart.model;
 
 import javax.persistence.Entity;
 
+import org.joda.time.DateTime;
+
 @Entity
 public class Good extends Anzeige{
 	
 	private String photo;
 	
 
-	public Good(String name, String description, String location,String photo) {
+	public Good(String name, String description,String photo,String street,int PLZ, String location, String number,DateTime einstelldatum) {
 		super(name, description, location);
 		this.photo=photo;
+		this.einstelldatum=new DateTime(einstelldatum);
+		this.street=street;
+		this.number=number;
+		this.PLZ=PLZ;
 	
 	}
 
