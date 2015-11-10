@@ -1,29 +1,49 @@
 package kickstart.model;
 
-import java.util.Date;
 
 
 import javax.persistence.Entity;
+
+import org.joda.time.DateTime;
+import org.joda.time.Interval;
 
 @Entity
 public class Activity extends Anzeige{
 	
 	//Dateformat
 	// JodA libary
-	private Date anfang;
-	private Date ende;
-	private long duration;
+	private DateTime anfang;
+	private Interval duration;
 	
 
-	public Activity(String name, String description, String location, Date anfang,Date Ende) {
+	public DateTime getAnfang() {
+		return anfang;
+	}
+
+
+	public void setAnfang(DateTime anfang) {
+		this.anfang = anfang;
+	}
+
+
+	public Interval getDuration() {
+		return duration;
+	}
+
+
+	public void setDuration(Interval duration) {
+		this.duration = duration;
+	}
+
+
+	public Activity(String name, String description, String location, DateTime anfang,DateTime ende) {
 		super(name, description, location);
 		
 		this.anfang=anfang;
-		this.ende=Ende;
 		
 		
-		if (this.anfang.before(this.ende)==true) {
-		duration = this.anfang.getTime()-this.ende.getTime();
+		if (this.anfang.isBefore(ende)==true) {
+		duration = new Interval(this.anfang.getMillis(),ende.getMillis());
 		} 
 		else throw new IllegalArgumentException( "Endzeit ist vor Anfangszeit" );
 	
