@@ -1,4 +1,4 @@
-package com.example;
+package kickstart.model;
 
 import java.util.Optional;
 import org.springframework.data.repository.Repository;

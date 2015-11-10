@@ -1,4 +1,4 @@
-package com.example;
+package kickstart.controller;
 
 import javax.annotation.PostConstruct;
 
