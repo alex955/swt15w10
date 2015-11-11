@@ -22,7 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kickstart.model.Categories;
+import kickstart.model.CategoryRepo;
 import kickstart.model.Category;
 import kickstart.model.CategoryFirstTierObject;
 
@@ -31,12 +31,12 @@ public class WelcomeController {
 	
 	//Classvars
 	@Autowired
-	private final Categories categories;
+	private final CategoryRepo categories;
 	private LinkedList<CategoryFirstTierObject> processedCategories; 
 	
 	//Constructor, insert autowired variables here (?)
 	@Autowired
-	public WelcomeController(Categories categories){
+	public WelcomeController(CategoryRepo categories){
 		this.categories = categories;
 	}
 	
@@ -77,23 +77,48 @@ public class WelcomeController {
 	}
 	
 	@RequestMapping("/UserSettings")
-	public String userSettings(){
+	public String userSettings(Model model){
+		//initiate categories
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		
 		return "userSettings";
 	}
 	
 	@RequestMapping("/Article")
-	public String article(){
+	public String article(Model model){
+		//initiate categories
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		
 		return "article";
 	}
 	
 	@RequestMapping("/registration")
-	public String registration(){
+	public String registration(Model model){
+		//initiate categories
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		
 		return "registration";
 	}
 	
 	@RequestMapping("/NewArticle")
-	public String newArticle(){
+	public String newArticle(Model model){
+		//initiate categories
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		
 		return "newArticle";
+	}
+	
+	@RequestMapping("/adminView")
+	public String adminView(Model model){
+		//initiate categories
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		
+		return "adminView";
 	}
 	//Mappings end
 }

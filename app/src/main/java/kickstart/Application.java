@@ -24,13 +24,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
-import kickstart.model.Categories;
+import kickstart.model.CategoryRepo;
 import kickstart.model.Category;
 
 @EnableSalespoint
 public class Application {
 	
-	@Autowired Categories categories;
+	@Autowired CategoryRepo categories;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
