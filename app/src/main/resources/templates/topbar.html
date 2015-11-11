@@ -24,48 +24,52 @@
 			<section class="top-bar-section">
 				<!-- Right Nav Section -->
 				<ul class="right">
-					<li class="active"><a th:href="@{/NewArticle}">Angebot einstellen</a></li>
+					<li class="active"><a th:href="@{/NewArticle}">Angebot
+							einstellen</a></li>
+					<li class="divider"></li>
 					<li class="has-dropdown"><a href="#">Account</a>
 						<ul class="dropdown">
-							<li><a href="#">Ausloggen</a></li>
 							<li><a th:href="@{/UserSettings}">Einstellungen</a></li>
+							<li><a href="#">Ausloggen</a></li>
 						</ul></li>
 				</ul>
-				
+
 				<!-- Left Nav Section -->
 				<ul class="left">
-					<li class="has-form">
-						<div class="row collapse">
-							<input type="text" placeholder="" />
-							<li class="has-dropdown"><a href="#">in allen Kategorien suchen</a>
-							
-							<!--  actual list -->
+					<li class="has-form"><input type="text" placeholder="" /></li>
+					<li class="divider"></li>
+					<li class="has-dropdown"><a href="#">alle Kategorien</a> 
+					
+					<!--  actual list -->
+						<ul class="dropdown">
+							<li th:each="category : ${categories}" class="has-dropdown">
+								<a th:href="@{/inspectcategory/{id}(id=${category.cat.id})}"><span
+									th:text="${category.cat.name}">Subkategorien anschauen</span></a>
 								<ul class="dropdown">
-									<li th:each="category : ${categories}" class="has-dropdown">
-										<a th:href="@{/inspectcategory/{id}(id=${category.cat.id})}"><span th:text="${category.cat.name}">Subkategorien anschauen</span></a>
-										<ul class="dropdown">
-											<li th:each="subcategory : ${category.subcats}"><a th:href="@{/inspectcategory/{id}(id=${subcategory.id})}"><span th:text="${subcategory.name}">Subkategorien anschauen</span></a></li>
-										</ul>
-									</li>
+									<li th:each="subcategory : ${category.subcats}"><a
+										th:href="@{/inspectcategory/{id}(id=${subcategory.id})}"><span
+											th:text="${subcategory.name}">Subkategorien anschauen</span></a></li>
 								</ul>
-							<!--  actual list end -->	
-								
 							</li>
-								
-						</div>
+						</ul>
+					<!--  actual list end -->
+					
 					</li>
+					<li class="divider"></li>
+					<li class="has-form"><input type="text" placeholder="" /></li>
+					<li class="divider"></li>
+					<li class="has-dropdown"><a href="#">PLZ</a>
+						<ul class="dropdown">
+							<li><a href="#">20KM</a></li>
+							<li><a href="#">30KM</a></li>
+						</ul>
+					</li>
+					<li class="divider"></li>
 					<li class="has-form">
-						<div class="row collapse">
-							<input type="text" placeholder="" />
-							<li class="has-dropdown"><a href="#">PLZ</a>
-								<ul class="dropdown">
-									<li><a href="#">20KM</a></li>
-									<li><a href="#">30KM</a></li>
-								</ul></li>
-						<button type="button" action="/">Suchen</button>
-						</div>
-							 
-					</li>
+      				<a class="small button" action="/">Suchen</a>
+    				</li>
+					
+
 				</ul>
 			</section>
 		</nav>
