@@ -33,7 +33,7 @@ public class RegistrationController {
         User user = new User(registrationForm.getId(), registrationForm.getRole(), registrationForm.getLastName(), registrationForm.getFirstName(), registrationForm.getUsername(), registrationForm.getEmail(), registrationForm.getPassword(), registrationForm.getConfirmPW(), registrationForm.getCity(), registrationForm.getZip(), registrationForm.getStreetName(), registrationForm.getHouseNumber());
         userRepository.save(user);
         System.out.println(user);
-        return ("redirect:/frontpage");
+        return ("redirect:/");
     }
 
 

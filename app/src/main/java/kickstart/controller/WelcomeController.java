@@ -94,13 +94,13 @@ public class WelcomeController {
 		return "article";
 	}
 	
-	@RequestMapping("/registration")
+	@RequestMapping("/initiatecategory")
 	public String registration(Model model){
 		//initiate categories
 		this.processedCategories = this.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		
-		return "registration";
+		return "initiatecategory";
 	}
 	
 	@RequestMapping("/NewArticle")
