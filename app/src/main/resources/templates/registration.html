@@ -21,7 +21,7 @@
 		<p>&nbsp;</p>
 		<div class="small-12 columns">
 			<h4 class="subheader">Registrieren</h4>
-			<form action="#" th:action="@{/registration}"
+			<form data-abide="true" action="#" th:action="@{/registration}"
 				th:object="${RegistrationForm}" method="post">
 				<div class="row">
 					<div class="small-12 large-6 columns">
@@ -34,11 +34,12 @@
 								<label for="volunteer">Helfender</label>
 								<br />
 							</div>
+							<p>&nbsp;</p>
 							<div class="row">
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Name</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" name="lastName" value="Name" required="true"/>
+										<input type="text" name="lastName" placeholder="Name" required="true" pattern="[a-zA-Z]+"/>
 									</div>
 								</div>
 							</div>
@@ -46,7 +47,7 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Vorname</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" name="firstName" value="Vorname" required="true"/>
+										<input type="text" name="firstName" placeholder="Vorname" required="true" pattern="[a-zA-Z]+"/>
 									</div>
 								</div>
 							</div>
@@ -54,7 +55,7 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Username</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" name="username" value="Username" />
+										<input type="text" name="username" placeholder="Username" />
 									</div>
 								</div>
 							</div>
@@ -62,7 +63,7 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">E-Mail</div>
 									<div class="large-7 small-9 columns">
-										<input type="email" name="email" value="E-Mail" />
+										<input type="email" name="email" placeholder="E-Mail" />
 									</div>
 								</div>
 							</div>
@@ -70,7 +71,7 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Passwort</div>
 									<div class="large-7 small-9 columns">
-										<input type="password" name="password" value="Passwort" />
+										<input type="password" name="password" placeholder="Passwort" />
 									</div>
 								</div>
 							</div>
@@ -78,7 +79,7 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Passwort wiederholen</div>
 									<div class="large-7 small-9 columns">
-										<input type="password" name="confirmPW" value="Passwort" />
+										<input type="password" name="confirmPW" placeholder="Passwort"/>
 									</div>
 								</div>
 							</div>
@@ -92,7 +93,7 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Stadt</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" name="city" value="Stadt" />
+										<input type="text" name="city" placeholder="Stadt" pattern="[a-zA-Z]+" />
 									</div>
 								</div>
 							</div>
@@ -100,7 +101,7 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">PLZ</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" pattern="\d{5,5}" name="zip" value="PLZ" />
+										<input type="text" pattern="\d{5,5}" name="zip" placeholder="PLZ" />
 									</div>
 								</div>
 							</div>
@@ -108,9 +109,9 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Straße, Hausnummer</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" name="streetName" value="Straßenname" /> <input
+										<input type="text" name="streetName" placeholder="Straßenname" pattern="[a-zA-Z]+"/> <input
 											type="number" name="houseNumber" min="0" max="999"
-											value="Hausnummer" />
+											placeholder="Hausnummer" />
 									</div>
 								</div>
 							</div>
@@ -145,6 +146,7 @@
 			</form>
 		</div>
 	</div>
+
 
 	<footer th:include="footer :: footer"></footer>
 

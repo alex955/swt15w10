@@ -73,7 +73,7 @@ public class WelcomeController {
 		System.out.println("size of root categories: " + this.processedCategories.size());
 		model.addAttribute("categories", this.processedCategories);
 		
-		return "frontPage";
+		return "search";
 	}
 	
 	@RequestMapping("/UserSettings")
@@ -120,5 +120,15 @@ public class WelcomeController {
 		
 		return "adminView";
 	}
+	
+	@RequestMapping("/frontpage")
+	public String frontpage(Model model){
+		//initiate categories
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		
+		return "frontpage";
+	}
+	
 	//Mappings end
 }
