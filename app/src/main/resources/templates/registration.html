@@ -55,7 +55,7 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Username</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" name="username" placeholder="Username" />
+										<input type="text" name="username" placeholder="Username" required="true"/>
 									</div>
 								</div>
 							</div>
@@ -63,7 +63,7 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">E-Mail</div>
 									<div class="large-7 small-9 columns">
-										<input type="email" name="email" placeholder="E-Mail" />
+										<input type="email" name="email" placeholder="E-Mail" required="true"/>
 									</div>
 								</div>
 							</div>
@@ -71,7 +71,7 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Passwort</div>
 									<div class="large-7 small-9 columns">
-										<input type="password" name="password" placeholder="Passwort" />
+										<input type="password" name="password" placeholder="Passwort" required="true"/>
 									</div>
 								</div>
 							</div>
@@ -79,7 +79,7 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Passwort wiederholen</div>
 									<div class="large-7 small-9 columns">
-										<input type="password" name="confirmPW" placeholder="Passwort"/>
+										<input type="password" name="confirmPW" placeholder="Passwort" required="true"/>
 									</div>
 								</div>
 							</div>
@@ -93,7 +93,7 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Stadt</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" name="city" placeholder="Stadt" pattern="[a-zA-Z]+" />
+										<input type="text" name="city" placeholder="Stadt" pattern="[a-zA-Z]+" required="true"/>
 									</div>
 								</div>
 							</div>
@@ -101,7 +101,7 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">PLZ</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" pattern="\d{5,5}" name="zip" placeholder="PLZ" />
+										<input type="text" pattern="\d{5,5}" name="zip" placeholder="PLZ" required="true"/>
 									</div>
 								</div>
 							</div>
@@ -109,9 +109,9 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Straße, Hausnummer</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" name="streetName" placeholder="Straßenname" pattern="[a-zA-Z]+"/> <input
+										<input type="text" name="streetName" placeholder="Straßenname" pattern="[a-zA-Z]+" required="true"/> <input
 											type="number" name="houseNumber" min="0" max="999"
-											placeholder="Hausnummer" />
+											placeholder="Hausnummer" required="true"/>
 									</div>
 								</div>
 							</div>
