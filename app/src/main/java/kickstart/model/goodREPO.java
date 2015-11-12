@@ -15,14 +15,15 @@ public interface goodREPO extends CrudRepository<Good, Long> {
  
  public long count();
  
+
+ 
  public List<Good> findByname(String name);
  
  public List<Good> findByLocation(String location);
  
  public List<Good> findAll();
- 
 
- 
+
 
  
 }

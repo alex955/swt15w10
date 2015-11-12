@@ -17,6 +17,7 @@ package kickstart;
 
 import javax.annotation.PostConstruct;
 
+import org.joda.time.DateTime;
 import org.salespointframework.EnableSalespoint;
 import org.salespointframework.SalespointSecurityConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +26,17 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
 import kickstart.model.CategoryRepo;
+import kickstart.model.Good;
+import kickstart.model.activityREPO;
+import kickstart.model.goodREPO;
 import kickstart.model.Category;
 
 @EnableSalespoint
 public class Application {
 	
 	@Autowired CategoryRepo categories;
+	@Autowired goodREPO goodREPO;
+	@Autowired activityREPO activityREPO;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -50,7 +56,16 @@ public class Application {
     	categories.save(new Category("Sisisnus und Cosisisnus", 8));
     	categories.save(new Category("nochmal Möbel", -1));
     	categories.save(new Category("nochmal nochmal Möbel", -1));
-    }
+    	
+    	
+    	
+    	goodREPO.save(new Good("Gitarre","Lorem ipsum","img/gitarre.jpg","An der hasseröder",01217,"Dresden","11"));
+    	goodREPO.save(new Good("Uran","Lorem ipsum","img/uran.jpg","An der Jever",01217,"Pirna","11"));
+    	goodREPO.save(new Good("Jeans","Lorem ipsum","img/jeans.jpg","An der hasseröder",01217,"Dresden","11"));
+    	goodREPO.save(new Good("Pommes","Lorem ipsum","img/pommes.jpg","An der Jever",01217,"Pirna","11"));
+    	System.out.println("GOODS ERSCHAFFEN");
+    	System.out.println(goodREPO.count());
+	}
 
 	@Configuration
 	static class WebSecurityConfiguration extends SalespointSecurityConfiguration {
