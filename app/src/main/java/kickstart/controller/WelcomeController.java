@@ -40,31 +40,7 @@ public class WelcomeController extends CommonVariables {
 	}
 	
 	//help functions
-	private LinkedList<CategoryFirstTierObject> getProcessedCategories(){
-		LinkedList<CategoryFirstTierObject> toReturn = new LinkedList<CategoryFirstTierObject>();
-		Iterable<Category> foundCategories = categories.findAll();
-		
-		for(Category s : foundCategories){
-			if(s.getRoot()) {
-				LinkedList<Category> subcats = new LinkedList<Category>();
-				
-				
-				for(Category t : foundCategories){
-					if(t.getPredecessor() == s.getId()){
-						subcats.add(t);
-					}
-				}
-				
-				CategoryFirstTierObject toAdd = new CategoryFirstTierObject(s, subcats);
-				toReturn.add(toAdd);
-			}
-			else{
-			}
-		}
 
-		System.out.println("size at fct call: " + toReturn.size());
-		return toReturn;
-	}
 	
 	//Mappings
 	@RequestMapping("/")
