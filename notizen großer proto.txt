@@ -1,0 +1,6 @@
+großer prototyp
+	-visuell
+	-für alle seiten eine Ansicht da
+	-funktionierende Links zwischen Funktionalitäten
+		-Formular z.B. muss nichts können, Haupstache es ist da
+	-User management, z.B. Link "User wechseln", verschiedene Views für einzelne Seiten
