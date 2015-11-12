@@ -2,18 +2,46 @@
 
 == Einführung und Ziele
 * Aufgabenstellung
+In diesem Projekt wird ein Portal zur Unterstützung von Flüchtlingen erstellt. Hilfsbereite Menschen werden in der Lage sein, Sach- und Dienstleistungsangebote für Flüchtlinge anzubieten. Die Flüchtlinge können auf Angebote antworten. Das Portal unterstützt mehrere Sprachen und übersetzt eingestellte Angebote automatisch in verfügbare Sprachen.
+
 * Qualitätsziele
+
+** Die Webseite muss Platformunabhänigig auf allen Geräten und jedem Webbrowser funktionieren.
+** Ladezeiten müssen den von ähnlichen Webseiten entsprechen, und es darf nicht deutlich mehr als üblich viel Datenvolumen verbraucht werden.
+** Das Design soll schlicht und ansprechend sein.
+ 
+
+
 
 == Randbedingungen
 * Hardware-Vorgaben
+** Javafähiger Server mit Internetanbindung
 * Software-Vorgaben
-* Vorgaben zum Betrieb des Software
+** Bootstrap, Foundation o.Ã¤. Framework fÃ¼r Desktop und Mobile UnterstÃ¼tzung
+** Thymleaf fÃ¼r Templates
+** Spring, Spring+Data mit MySQL Backend, Spring+Security fÃ¼r verschiedene Rollen
+** EclipseLink JPA
+** Lombok
+** ReCaptcha2
+** Log4J
+** Java-Class basierende Konfiguration
+** Maven
+** Git/GitHub
+
+//* Vorgaben zum Betrieb der Software
 
 == Kontextabgrenzung
 * Externe Schnittstellen
+** Google API (Übersetzung)
+** Mail Server
+** Datenbank
+** Spring
+** Maven
+** SalesPoint
 
 == Lösungsstrategie
-Kurzer Überblick über Ihre grundlegenden Entscheidungen und Lösungsansätze, die jeder, der mit der Architektur zu tun hat, verstanden haben sollte.
+//Kurzer Überblick über Ihre grundlegenden Entscheidungen und Lösungsansätze, die jeder, der mit der Architektur zu tun hat, verstanden haben sollte.
+Konstruktion einer plattformübergreifenden Website.
 
 == Bausteinsicht
 * Package-Diagramme
@@ -21,8 +49,10 @@ Kurzer Überblick über Ihre grundlegenden Entscheidungen und Lösungsansätze, 
 == Entwurfsentscheidungen
 * Architektur
 * Verwendete Muster
+** Singelton
 * Persistenz
 * Benutzeroberfläche
+** Foundation
 
 [appendix]
 == Glossar
