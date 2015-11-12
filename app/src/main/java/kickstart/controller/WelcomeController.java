@@ -27,11 +27,10 @@ import kickstart.model.Category;
 import kickstart.model.CategoryFirstTierObject;
 
 @Controller
-public class WelcomeController {
+public class WelcomeController extends CommonVariables {
 	
 	//Classvars
-	@Autowired
-	private final CategoryRepo categories;
+
 	private LinkedList<CategoryFirstTierObject> processedCategories; 
 	
 	//Constructor, insert autowired variables here (?)
@@ -48,6 +47,7 @@ public class WelcomeController {
 		for(Category s : foundCategories){
 			if(s.getRoot()) {
 				LinkedList<Category> subcats = new LinkedList<Category>();
+				
 				
 				for(Category t : foundCategories){
 					if(t.getPredecessor() == s.getId()){

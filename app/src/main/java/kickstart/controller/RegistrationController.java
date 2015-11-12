@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-public class RegistrationController {
+public class RegistrationController extends CommonVariables {
 
-    @Autowired
-    private UserRepository userRepository;
+
     private Model model;
 
     @Autowired
