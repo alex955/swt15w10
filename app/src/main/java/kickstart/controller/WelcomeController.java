@@ -76,7 +76,7 @@ public class WelcomeController extends CommonVariables {
 		return "search";
 	}
 	
-	@RequestMapping("/UserSettings")
+	@RequestMapping("/userSettings")
 	public String userSettings(Model model){
 		//initiate categories
 		this.processedCategories = this.getProcessedCategories();
@@ -85,7 +85,7 @@ public class WelcomeController extends CommonVariables {
 		return "userSettings";
 	}
 	
-	@RequestMapping("/Article")
+	@RequestMapping("/article")
 	public String article(Model model){
 		//initiate categories
 		this.processedCategories = this.getProcessedCategories();
@@ -103,7 +103,7 @@ public class WelcomeController extends CommonVariables {
 		return "initiatecategory";
 	}
 	
-	@RequestMapping("/NewArticle")
+	@RequestMapping("/newArticle")
 	public String newArticle(Model model){
 		//initiate categories
 		this.processedCategories = this.getProcessedCategories();
@@ -128,6 +128,15 @@ public class WelcomeController extends CommonVariables {
 		model.addAttribute("categories", this.processedCategories);
 		
 		return "frontpage";
+	}
+	
+	@RequestMapping("/chat")
+	public String chat(Model model){
+		//initiate categories
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		
+		return "chat";
 	}
 	
 	//Mappings end
