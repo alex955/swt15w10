@@ -1,0 +1,43 @@
+= Protokoll Gruppe 10
+
+
+__Treffen am 06.11.2015__
+
+__Schriftführer:__ Lukas Klose
+
+__Nächstes Treffen:__ 13.11.2015
+
+__Teilnehmer:__ J. Adam, V. Herz, A. Huber, L. Klose, A. Martin, A. Shulga
+
+== Bemerkungen
+//Verwarnungen, besondere Vorfälle, Organisatorisches
+-
+
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe |Status |Bemerkung
+|n.v. |Spring-Prototypen|Fast erledigt |Prototyp von L. Klose fehlt  
+|===
+
+
+== Aktueller Stand
+//Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den Dokumenten.
+Fast alle kleinen Prototypen sind fertig. Die Arbeit am großen Prototyp ist am Anlaufen.
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#24     |Entwicklerdokumentation v1     |-|Lukas Klose|in Arbeit
+|#25|Testplan|verfeinerte Akzeptanztestfälle|Gruppe 10|in Arbeit
+|n.v.|Spring Prototyp|E-Mail Versand|L. Klose|in Arbeit
+|n.v.|Großer Prototyp|Gesamtes GUI + Basisfunktionen|Gruppe 10|in Arbeit
+|===
