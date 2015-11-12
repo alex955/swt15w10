@@ -17,6 +17,33 @@ public class RegistrationForm {
     private long zip;
     private String streetName;
     private long houseNumber;
+    private String language1;
+    private String language2;
+    private String language3;
+
+    public String getLanguage2() {
+        return language2;
+    }
+
+    public void setLanguage2(String language2) {
+        this.language2 = language2;
+    }
+
+    public String getLanguage3() {
+        return language3;
+    }
+
+    public void setLanguage3(String language3) {
+        this.language3 = language3;
+    }
+
+    public String getLanguage1() {
+        return language1;
+    }
+
+    public void setLanguage1(String language1) {
+        this.language1 = language1;
+    }
 
     public long getId() {
         return id;

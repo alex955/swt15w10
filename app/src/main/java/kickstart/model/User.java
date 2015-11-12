@@ -26,10 +26,38 @@ public class User {
     private long zip;
     private String streetName;
     private long houseNumber;
+    private String language1;
+    private String language2;
+    private String language3;
 
     protected User() {}
 
-    public User(long id, String role, String lastName, String firstName, String username, String email, String password, String confirmPW, String city, long zip, String streetName, long houseNumber) {
+    public String getLanguage1() {
+        return language1;
+    }
+
+    public void setLanguage1(String language1) {
+        this.language1 = language1;
+    }
+
+    public String getLanguage2() {
+        return language2;
+    }
+
+    public void setLanguage2(String language2) {
+        this.language2 = language2;
+    }
+
+    public String getLanguage3() {
+        return language3;
+    }
+
+    public void setLanguage3(String language3) {
+        this.language3 = language3;
+    }
+
+    public User(long id, String role, String lastName, String firstName, String username, String email, String password, String confirmPW, String city, long zip, String streetName, long houseNumber, String language1, String language2, String language3) {
+
         this.id = id;
         this.role = role;
         this.lastName = lastName;
@@ -42,12 +70,15 @@ public class User {
         this.zip = zip;
         this.streetName = streetName;
         this.houseNumber = houseNumber;
+        this.language1 = language1;
+        this.language2 = language2;
+        this.language3 = language3;
     }
 
     @Override
     public String toString() {
         return String.format(
-                "User[id=%d, role='%s', lastName='%s', firstName='%s', username='%s', email='%s', password='%s', confirmPW='%s', city='%s', zip=%d, streetName='%s', houseNumber=%d]", id, role, lastName, firstName, username, email, password, confirmPW, city, zip, streetName, houseNumber);
+                "User[id='%d', role='%s', lastName='%s', firstName='%s', username='%s', email='%s', password='%s', confirmPW='%s', city='%s', zip='%d', streetName='%s', houseNumber='%d', language1='%s', language2='%s', language3='%s' ]", id, role, lastName, firstName, username, email, password, confirmPW, city, zip, streetName, houseNumber, language1, language2, language3);
 
     }
 
