@@ -57,7 +57,11 @@ public class AdminController extends CommonVariables {
 		
 		int totalCount = rootCount + subCount;
 		
-        model.addAttribute("categories", testList);
+
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		
+        model.addAttribute("categoriesAdmin", testList);
         model.addAttribute("newCategory", new Category());
         model.addAttribute("rootCount", rootCount);
         model.addAttribute("subCount", subCount);
@@ -120,6 +124,11 @@ public class AdminController extends CommonVariables {
 		for(Category f : categories.findAll()){
 			if(f.getPredecessor() == id) subcategories.add(f);
 		}
+		
+
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		
 		
 		model.addAttribute("category", currCat);
 		model.addAttribute("subcategories", subcategories);

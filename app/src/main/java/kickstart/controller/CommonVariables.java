@@ -25,6 +25,9 @@ public class CommonVariables {
 	@Autowired
 	protected activityREPO activityREPO;
 	
+
+	protected LinkedList<CategoryFirstTierObject> processedCategories; 
+	
 	protected LinkedList<CategoryFirstTierObject> getProcessedCategories(){
 		LinkedList<CategoryFirstTierObject> toReturn = new LinkedList<CategoryFirstTierObject>();
 		Iterable<Category> foundCategories = categories.findAll();

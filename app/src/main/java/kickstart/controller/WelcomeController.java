@@ -31,7 +31,6 @@ public class WelcomeController extends CommonVariables {
 	
 	//Classvars
 
-	private LinkedList<CategoryFirstTierObject> processedCategories; 
 	
 	//Constructor, insert autowired variables here (?)
 	@Autowired
