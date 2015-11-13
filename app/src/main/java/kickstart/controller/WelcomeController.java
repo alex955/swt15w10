@@ -46,9 +46,7 @@ public class WelcomeController extends CommonVariables {
 	@RequestMapping("/")
 	public String frontPage(Model model) {
 		this.processedCategories = this.getProcessedCategories();
-		System.out.println("size of root categories: " + this.processedCategories.size());
 		model.addAttribute("categories", this.processedCategories);
-		
 		return "search";
 	}
 	

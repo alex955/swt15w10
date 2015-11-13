@@ -27,7 +27,7 @@ public class AdminController extends CommonVariables {
 	}
 	
 	@RequestMapping(value = "/admin")
-    public String firstView(Model model) {
+    public String initialView(Model model) {
 		
 		LinkedList<CategoryFirstTierObject> testList = new LinkedList<CategoryFirstTierObject>();
 		Iterable<Category> testSet = categories.findAll();
@@ -65,9 +65,22 @@ public class AdminController extends CommonVariables {
 
         return "admin";
     }
+    @RequestMapping(value="/admin/addSub/{id}", method=RequestMethod.POST)
+    public String addSubcategory(@ModelAttribute Category newCategory, Model model, @PathVariable Long id) {
+    	System.out.println("blabla");
+    	Category toSave = new Category();
+    	toSave.setName(newCategory.getName());
+    	toSave.setPredecessor(id);
+    	toSave.setRoot(false);
+    	
+    	this.categories.save(toSave);
+    	
+        return "redirect:/admin/inspectCategory/{id}";
+    }
 	
-    @RequestMapping(value="/categories", method=RequestMethod.POST)
-    public String secondView(@ModelAttribute Category category, Model model) {
+	
+    @RequestMapping(value="/admin/addRootCat", method=RequestMethod.POST)
+    public String addRootCategory(@ModelAttribute Category category, Model model) {
     	category.setPredecessor(-1);
     	category.setRoot(true);
         this.categories.save(category);
@@ -76,7 +89,9 @@ public class AdminController extends CommonVariables {
         return "redirect:/admin";
     }
     
-	@RequestMapping(value = "/admin/delete/{id}")
+
+    
+	@RequestMapping(value = "/admin/deleteCategory/{id}")
 	public String deleteCategory(@PathVariable Long id) {
 		System.out.println("delete category with id " + id);
 		categories.delete(id);
@@ -95,18 +110,23 @@ public class AdminController extends CommonVariables {
 		}
 	}
 	
+	@RequestMapping(value = "/admin/inspectCategory/{id}")
+	public String showSubcategories(@PathVariable Long id, Model model, @ModelAttribute Category category) {
+		
+		Optional<Category> currOpt = categories.findOne(id);
+		Category currCat = currOpt.get();
+		
+		LinkedList<Category> subcategories = new LinkedList<Category>();
+		
+		for(Category f : categories.findAll()){
+			if(f.getPredecessor() == id) subcategories.add(f);
+		}
+		
+		model.addAttribute("category", currCat);
+		model.addAttribute("subcategories", subcategories);
 
-	
-    @RequestMapping(value="/admin/addCategory/{id}", method=RequestMethod.POST)
-    public String addSubcategory(@ModelAttribute Category newCategory, Model model, @PathVariable Long id) {
-    	Category toSave = new Category();
-    	toSave.setName(newCategory.getName());
-    	toSave.setPredecessor(id);
-    	toSave.setRoot(false);
-    	
-    	this.categories.save(toSave);
-    	
-        return "redirect:/inspectcategory/{id}";
-    }
-
+        model.addAttribute("newCategory", new Category());
+		
+		return "adminSubcategory";
+	}
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import kickstart.model.goodREPO;
+import kickstart.model.Good;
 import kickstart.model.activityREPO;
 
 @Controller
