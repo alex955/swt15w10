@@ -23,7 +23,7 @@ public class User {
     private String password;
     private String confirmPW;
     private String city;
-    private long zip;
+    private String zip;
     private String streetName;
     private long houseNumber;
     private String language1;
@@ -56,7 +56,7 @@ public class User {
         this.language3 = language3;
     }
 
-    public User(long id, String role, String lastName, String firstName, String username, String email, String password, String confirmPW, String city, long zip, String streetName, long houseNumber, String language1, String language2, String language3) {
+    public User(long id, String role, String lastName, String firstName, String username, String email, String password, String confirmPW, String city, String zip, String streetName, long houseNumber, String language1, String language2, String language3) {
 
         this.role = role;
         this.lastName = lastName;
@@ -77,7 +77,7 @@ public class User {
     @Override
     public String toString() {
         return String.format(
-                "User[id='%d', role='%s', lastName='%s', firstName='%s', username='%s', email='%s', password='%s', confirmPW='%s', city='%s', zip='%d', streetName='%s', houseNumber='%d', language1='%s', language2='%s', language3='%s' ]", id, role, lastName, firstName, username, email, password, confirmPW, city, zip, streetName, houseNumber, language1, language2, language3);
+                "User[id='%d', role='%s', lastName='%s', firstName='%s', username='%s', email='%s', password='%s', confirmPW='%s', city='%s', zip='%s', streetName='%s', houseNumber='%d', language1='%s', language2='%s', language3='%s' ]", id, role, lastName, firstName, username, email, password, confirmPW, city, zip, streetName, houseNumber, language1, language2, language3);
 
     }
 
@@ -153,11 +153,11 @@ public class User {
         this.city = city;
     }
 
-    public long getZip() {
+    public String getZip() {
         return zip;
     }
 
-    public void setZip(long zip) {
+    public void setZip(String zip) {
         this.zip = zip;
     }
 
