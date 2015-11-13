@@ -11,53 +11,20 @@
 
 	<nav th:include="topbar :: topbar"></nav>
 
-	<div class="row">
+	<div class="row" >
 		<div class="small-12 columns">
 			<p>&nbsp;</p>
 
-			<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
-				<li>
-					<a th:href="@{/Article}"><img
+			<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4" >
+				<li th:each="Good : ${anzeigen}">
+					<a th:href="@{/article}"><img th:src="@{'/resources/static/' + ${Good.photo}}"
 					src="http://placehold.it/1000x1000&amp;text=Thumbnail" /></a>
 				<div class="panel">
-					<h5>Item Name</h5>
+					<h5 th:text="${Good.name}">Item Name</h5>
+					<h5><small th:text="${Good.location}"></small></h5> 
 				</div>
 				</li>
-				<li>
-					<a th:href="@{/Article}"><img
-					src="http://placehold.it/1000x1000&amp;text=Thumbnail" /></a>
-				<div class="panel">
-					<h5>Item Name</h5>
-				</div>
-				</li>
-				<li>
-					<a th:href="@{/Article}"><img
-					src="http://placehold.it/1000x1000&amp;text=Thumbnail" /></a>
-				<div class="panel">
-					<h5>Item Name</h5>
-				</div>
-				</li>
-				<li>
-					<a th:href="@{/Article}"><img
-					src="http://placehold.it/1000x1000&amp;text=Thumbnail" /></a>
-				<div class="panel">
-					<h5>Item Name</h5>
-				</div>
-				</li>
-				<li>
-					<a th:href="@{/Article}"><img
-					src="http://placehold.it/1000x1000&amp;text=Thumbnail" /></a>
-				<div class="panel">
-					<h5>Item Name</h5>
-				</div>
-				</li>
-				<li>
-					<a th:href="@{/Article}"><img
-					src="http://placehold.it/1000x1000&amp;text=Thumbnail" /></a>
-				<div class="panel">
-					<h5>Item Name</h5>
-				</div>
-				</li>
+				
 			</ul>
 			</div>
 

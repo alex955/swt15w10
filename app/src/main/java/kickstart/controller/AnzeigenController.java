@@ -25,21 +25,20 @@ public class AnzeigenController extends CommonVariables {
     	System.out.println(activityREPO.findAll().size());
 	}
 	
-	@RequestMapping(value = "/anzeigen")
+	/*@RequestMapping(value = "/search")
 	public String anzeigen_anzeigen(Model model) {
 	    model.addAttribute("anzeigen", goodREPO.findAll());
 	    model.addAttribute("newGood",new Good());
 	    System.out.println("GOOD REPO WURDE AN search.html übergeben");
-	 
-	    return "anzeigen";
-	}
+	    return "search";
+	}*/
 	
-	@RequestMapping(value = "/article?{id}")
+	@RequestMapping(value = "/art/{id}")
 	public String anzeige_anzeigen(@PathVariable("id") long id,Model model) {
 	    model.addAttribute("Good", goodREPO.findOne(id));
 	    System.out.println("GOOD"+id+ "WURDE AN article.html übergeben");
 	 
-	    return "article_anzeigen";
+	    return "article_anzeige";
 	}
 	
 

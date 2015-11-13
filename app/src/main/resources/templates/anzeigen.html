@@ -15,7 +15,7 @@
 		<div class="small-12 columns" >
 			<p>&nbsp;</p>
 			<div class=" large-4 small-6 columns" th:each="Good : ${anzeigen}">
-				<a th:href="@{/article?}+${Good.id}"><img th:src="@{'/resources/static/' + ${Good.photo}}" /></a>
+				<a th:href="@{/art/}+${Good.id}"><img th:src="@{'/resources/static/' + ${Good.photo}}" /></a>
 				<div class="panel">
 					<h5 th:text="${Good.name}">Item Name</h5>
 				</div>
