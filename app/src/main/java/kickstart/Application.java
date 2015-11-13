@@ -59,8 +59,8 @@ public class Application {
     	
     	
     	
-    	goodREPO.save(new Good("Gitarre","Lorem ipsum","img/gitarre.jpg","An der hasseröder",01217,"Dresden","11"));
-    	goodREPO.save(new Good("Uran","Lorem ipsum","img/uran.jpg","An der Jever",01217,"Pirna","11"));
+    	goodREPO.save(new Good("Gitarre","Handgefertigt von Rockefeller","img/gitarre.jpg","An der hasseröder",01217,"Dresden","11"));
+    	goodREPO.save(new Good("Hackepeter","Lorem ipsum","img/hacke.jpg","An der Jever",01217,"Pirna","11"));
     	goodREPO.save(new Good("Jeans","Lorem ipsum","img/jeans.jpg","An der hasseröder",01217,"Dresden","11"));
     	goodREPO.save(new Good("Pommes","Lorem ipsum","img/pommes.jpg","An der Jever",01217,"Pirna","11"));
     	System.out.println("GOODS ERSCHAFFEN");
