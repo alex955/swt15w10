@@ -18,10 +18,20 @@
 	</script>
 
 	<nav th:include="topbar :: topbar"></nav>
+	<p>&nbsp;</p>
+	<div class="row">
+		<div class="large-12 columns">
+			<div class="row">
+				<div class="large-12 columns">
+					<div class="large-6 small-12 columns">
+						<h4>Einstellungen</h4>
+					</div>
+				</div>
+			</div>
 
-	<div class="row" data-equalizer="foo">	
 			<div class="large-6 small-12 columns">
-				<div class="panel" data-equalizer-watch="foo">
+				<h5>Passwort ändern</h5>
+				<div class="panel">
 					<div class="row">
 						<div class="small-12 columns">
 							<div class="large-5 small-3 columns">Altes Passwort</div>
@@ -49,9 +59,9 @@
 					</div>
 					<div class="small button">Neues Passwort speichern</div>
 				</div>
-			</div>
-			<div class="large-6 small-12 columns">
-				<div class="panel" data-equalizer-watch="foo">
+
+				<h5>E-Mail-Adresse ändern</h5>
+				<div class="panel">
 					<div class="row">
 						<div class="small-12 columns">
 							<div class="large-5 small-3 columns">Neue E-Mail-Adresse</div>
@@ -71,10 +81,12 @@
 					</div>
 					<div class="small button">E-Mail-Adresse bestätigen</div>
 				</div>
+
 			</div>
 
 			<div class="large-6 small-12 columns">
-				<div class="panel" data-equalizer-watch="foo">
+				<h5>Sprache ändern</h5>
+				<div class="panel">
 					<div class="row">
 						<div class="small-12 columns">
 							<div class="large-5 small-3 columns">Sprache 1</div>
@@ -101,9 +113,9 @@
 					</div>
 					<div class="small button">Sprachen bestätigen</div>
 				</div>
-			</div>
-			<div class="large-6 small-12 columns">
-				<div class="panel" data-equalizer-watch="foo">
+
+				<h5>Wohnort ändern</h5>
+				<div class="panel">
 					<div class="row">
 						<div class="small-12 columns">
 							<div class="large-5 small-3 columns">Stadt</div>
@@ -130,8 +142,11 @@
 					</div>
 					<div class="small button">Wohnort bestätigen</div>
 				</div>
+
 			</div>
+
 		</div>
+	</div>
 
 
 	<footer th:include="footer :: footer"></footer>
