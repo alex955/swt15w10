@@ -65,9 +65,8 @@ public class AdminController extends CommonVariables {
 
         return "admin";
     }
-    @RequestMapping(value="/admin/addSub/{id}", method=RequestMethod.POST)
+    @RequestMapping(value="/admin/addSubcategory/{id}", method=RequestMethod.POST)
     public String addSubcategory(@ModelAttribute Category newCategory, Model model, @PathVariable Long id) {
-    	System.out.println("blabla");
     	Category toSave = new Category();
     	toSave.setName(newCategory.getName());
     	toSave.setPredecessor(id);
