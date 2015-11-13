@@ -27,6 +27,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
 import kickstart.model.CategoryRepo;
 import kickstart.model.Good;
+import kickstart.model.User;
+import kickstart.model.UserRepository;
 import kickstart.model.activityREPO;
 import kickstart.model.goodREPO;
 import kickstart.model.Category;
@@ -37,6 +39,7 @@ public class Application {
 	@Autowired CategoryRepo categories;
 	@Autowired goodREPO goodREPO;
 	@Autowired activityREPO activityREPO;
+    @Autowired UserRepository userRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -65,6 +68,13 @@ public class Application {
     	goodREPO.save(new Good("Pommes","Lorem ipsum","img/pommes.jpg","An der Jever",01217,"Pirna","11"));
     	System.out.println("GOODS ERSCHAFFEN");
     	System.out.println(goodREPO.count());
+    	
+    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", 01067, "straße", 123, "sprache","sprache2","sprache3"));
+    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", 01067, "straße", 123, "sprache","sprache2","sprache3"));
+    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", 01067, "straße", 123, "sprache","sprache2","sprache3"));
+    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", 01067, "straße", 123, "sprache","sprache2","sprache3"));
+    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", 01067, "straße", 123, "sprache","sprache2","sprache3"));
+    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", 01067, "straße", 123, "sprache","sprache2","sprache3"));
 	}
 
 	@Configuration

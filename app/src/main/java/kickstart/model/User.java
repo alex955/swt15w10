@@ -30,7 +30,7 @@ public class User {
     private String language2;
     private String language3;
 
-    protected User() {}
+    public User() {}
 
     public String getLanguage1() {
         return language1;
@@ -58,7 +58,6 @@ public class User {
 
     public User(long id, String role, String lastName, String firstName, String username, String email, String password, String confirmPW, String city, long zip, String streetName, long houseNumber, String language1, String language2, String language3) {
 
-        this.id = id;
         this.role = role;
         this.lastName = lastName;
         this.firstName = firstName;
