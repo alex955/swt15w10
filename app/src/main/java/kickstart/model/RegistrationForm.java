@@ -14,7 +14,7 @@ public class RegistrationForm {
     private String password;
     private String confirmPW;
     private String city;
-    private long zip;
+    private String zip;
     private String streetName;
     private long houseNumber;
     private String language1;
@@ -93,11 +93,11 @@ public class RegistrationForm {
         this.city = city;
     }
 
-    public long getZip() {
+    public String getZip() {
         return zip;
     }
 
-    public void setZip(long zip) {
+    public void setZip(String zip) {
         this.zip = zip;
     }
 
