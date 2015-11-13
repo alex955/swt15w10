@@ -44,22 +44,22 @@
 			<td th:text="${category.cat.name}">platzhalter</td>
 			<td th:text="${category.cat.id}">platzhalter</td>
 			<td>
-				<p th:each="subcategory : ${category.subcats}"><a th:href="@{/inspectcategory/{id}(id=${subcategory.id})}"><span th:text="${subcategory.name}">Subkategorien anschauen</span></a></p>
+				<p th:each="subcategory : ${category.subcats}"><a th:href="@{/admin/inspectCategory/{id}(id=${subcategory.id})}"><span th:text="${subcategory.name}">Subkategorien anschauen</span></a></p>
 			</td>
 			<td>
-				  <a th:href="@{/categories/delete/{id}(id=${category.cat.id})}"><span>Kategorie löschen</span></a>
+				  <a th:href="@{/admin/deleteCategory/{id}(id=${category.cat.id})}"><span>Kategorie löschen</span></a>
 			</td>
 						<td>
-				  <a th:href="@{/inspectcategory/{id}(id=${category.cat.id})}"><span>Subkategorien anschauen</span></a>
+				  <a th:href="@{/admin/inspectCategory/{id}(id=${category.cat.id})}"><span>Subkategorien anschauen</span></a>
 			</td>
 		</tr>
 	</table>
-	</p>
+	</p> 
 
 	<p>
 	<h1>Root-Kategorie hinzufügen:</h1>
 
-	<form action="#" th:action="@{/categories}" th:object="${newCategory}"
+	<form action="#" th:action="@{/admin/addRootCat}" th:object="${newCategory}"
 		method="post" name="form1" onsubmit="return required()">
 		<p>
 			Name der neuen Kategorie: <input type="text" th:field="*{name}" />
