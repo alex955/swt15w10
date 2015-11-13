@@ -14,16 +14,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kickstart.model.Category;
 import kickstart.model.CategoryFirstTierObject;
 import kickstart.model.CategoryRepo;
+import kickstart.model.User;
+import kickstart.model.UserRepository;
 import kickstart.model.activityREPO;
 import kickstart.model.goodREPO;
 
 @Controller
 public class AdminController extends CommonVariables {
 	@Autowired
-	public AdminController(CategoryRepo categories, goodREPO grepo, activityREPO arepo){
+	public AdminController(CategoryRepo categories, goodREPO grepo, activityREPO arepo, UserRepository userRepository){
 		this.categories = categories;
 		this.activityREPO=arepo;
 		this.goodREPO=grepo;
+		this.userRepository = userRepository;
 	}
 	
 	@RequestMapping(value = "/admin")
@@ -66,6 +69,11 @@ public class AdminController extends CommonVariables {
         model.addAttribute("rootCount", rootCount);
         model.addAttribute("subCount", subCount);
         model.addAttribute("totalCount", totalCount);
+        model.addAttribute("registeredUsers", this.userRepository.findAll());
+        
+//        for(User b : this.userRepository.findAll()){
+//        	b.getCity();
+//        }
 
         return "admin";
     }
@@ -137,4 +145,11 @@ public class AdminController extends CommonVariables {
 		
 		return "adminSubcategory";
 	}
+	
+	@RequestMapping(value = "/admin/deleteUser/{id}")
+	public String deleteUser(@PathVariable Long id) {
+		this.userRepository.delete(id);
+		return "redirect:/admin";
+	}
+	
 }
