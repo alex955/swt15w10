@@ -21,7 +21,7 @@ public class Good extends Anzeige{
 	}
 
 	
-	protected Good() {
+	public Good() {
 		super();
 	}
 
