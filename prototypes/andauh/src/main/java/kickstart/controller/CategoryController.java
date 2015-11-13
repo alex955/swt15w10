@@ -26,7 +26,6 @@ public class CategoryController {
 	@Autowired
 	public CategoryController(Categories categories){
 		this.categories = categories;
-    	System.out.println("wird this.categories zugewiesen");
 
 	}
 

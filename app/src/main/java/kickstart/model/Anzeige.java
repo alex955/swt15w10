@@ -14,7 +14,7 @@ public abstract class Anzeige {
 	protected String name;
 	protected String description;
 	protected String location;
-	protected DateTime einstelldatum;
+	
 	protected String street;
 	public String getName() {
 		return name;
@@ -26,14 +26,7 @@ public abstract class Anzeige {
 	}
 
 
-	public DateTime getEinstelldatum() {
-		return einstelldatum;
-	}
-
-
-	public void setEinstelldatum(DateTime einstelldatum) {
-		this.einstelldatum = einstelldatum;
-	}
+	
 
 
 	public String getStreet() {

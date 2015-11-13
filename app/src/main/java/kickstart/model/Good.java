@@ -10,10 +10,10 @@ public class Good extends Anzeige{
 	private String photo;
 	
 
-	public Good(String name, String description,String photo,String street,int PLZ, String location, String number,DateTime einstelldatum) {
+	public Good(String name, String description,String photo,String street,int PLZ, String location, String number) {
 		super(name, description, location);
 		this.photo=photo;
-		this.einstelldatum=new DateTime(einstelldatum);
+	
 		this.street=street;
 		this.number=number;
 		this.PLZ=PLZ;

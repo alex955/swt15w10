@@ -31,7 +31,6 @@ public class WelcomeController extends CommonVariables {
 	
 	//Classvars
 
-	private LinkedList<CategoryFirstTierObject> processedCategories; 
 	
 	//Constructor, insert autowired variables here (?)
 	@Autowired
@@ -46,9 +45,7 @@ public class WelcomeController extends CommonVariables {
 	@RequestMapping("/")
 	public String frontPage(Model model) {
 		this.processedCategories = this.getProcessedCategories();
-		System.out.println("size of root categories: " + this.processedCategories.size());
-		model.addAttribute("categories", this.processedCategories);
-		
+		model.addAttribute("categories", this.processedCategories);		
 		return "frontpage";
 	}
 	
@@ -57,7 +54,6 @@ public class WelcomeController extends CommonVariables {
 		this.processedCategories = this.getProcessedCategories();
 		System.out.println("size of root categories: " + this.processedCategories.size());
 		model.addAttribute("categories", this.processedCategories);
-		
 		return "search";
 	}
 	
