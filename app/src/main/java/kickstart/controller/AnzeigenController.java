@@ -7,12 +7,9 @@ import kickstart.model.goodREPO;
 import kickstart.model.activityREPO;
 
 @Controller
-public class AnzeigenController {
+public class AnzeigenController extends CommonVariables {
 
-	@Autowired
-	private final goodREPO goodREPO;
-	@Autowired
-	private final activityREPO activityREPO;
+
 	
 	@Autowired
 	public AnzeigenController(goodREPO grepo, activityREPO arepo){
