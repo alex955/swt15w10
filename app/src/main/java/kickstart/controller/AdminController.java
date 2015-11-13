@@ -1,4 +1,4 @@
-package com.example;
+package kickstart.controller;
 
 import java.util.LinkedList;
 import java.util.Optional;
@@ -10,28 +10,27 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import kickstart.model.Category;
+import kickstart.model.CategoryFirstTierObject;
+import kickstart.model.CategoryRepo;
+import kickstart.model.User;
+import kickstart.model.UserRepository;
+import kickstart.model.activityREPO;
+import kickstart.model.goodREPO;
 
 @Controller
-public class CategoryController {
-	
+public class AdminController extends CommonVariables {
 	@Autowired
-	private final Categories categories;
-	
-	@RequestMapping("/")
-	public String firstCall() {
-		return "redirect:/categories";
-	}
-	
-	@Autowired
-	public CategoryController(Categories categories){
+	public AdminController(CategoryRepo categories, goodREPO grepo, activityREPO arepo, UserRepository userRepository){
 		this.categories = categories;
-    	System.out.println("wird this.categories zugewiesen");
-
+		this.activityREPO=arepo;
+		this.goodREPO=grepo;
+		this.userRepository = userRepository;
 	}
-
-	@RequestMapping(value = "/categories")
-    public String firstView(Model model) {
+	
+	@RequestMapping(value = "/admin")
+    public String initialView(Model model) {
 		
 		LinkedList<CategoryFirstTierObject> testList = new LinkedList<CategoryFirstTierObject>();
 		Iterable<Category> testSet = categories.findAll();
@@ -61,31 +60,54 @@ public class CategoryController {
 		
 		int totalCount = rootCount + subCount;
 		
-        model.addAttribute("categories", testList);
+
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		
+        model.addAttribute("categoriesAdmin", testList);
         model.addAttribute("newCategory", new Category());
         model.addAttribute("rootCount", rootCount);
         model.addAttribute("subCount", subCount);
         model.addAttribute("totalCount", totalCount);
+        model.addAttribute("registeredUsers", this.userRepository.findAll());
+        
+//        for(User b : this.userRepository.findAll()){
+//        	b.getCity();
+//        }
 
-        return "categories";
+        return "admin";
+    }
+    @RequestMapping(value="/admin/addSubcategory/{id}", method=RequestMethod.POST)
+    public String addSubcategory(@ModelAttribute Category newCategory, Model model, @PathVariable Long id) {
+    	Category toSave = new Category();
+    	toSave.setName(newCategory.getName());
+    	toSave.setPredecessor(id);
+    	toSave.setRoot(false);
+    	
+    	this.categories.save(toSave);
+    	
+        return "redirect:/admin/inspectCategory/{id}";
     }
 	
-    @RequestMapping(value="/categories", method=RequestMethod.POST)
-    public String secondView(@ModelAttribute Category category, Model model) {
+	
+    @RequestMapping(value="/admin/addRootCat", method=RequestMethod.POST)
+    public String addRootCategory(@ModelAttribute Category category, Model model) {
     	category.setPredecessor(-1);
     	category.setRoot(true);
         this.categories.save(category);
         System.out.println("added category");
         //model.addAttribute("categories", categories.findAll());
-        return "redirect:/categories";
+        return "redirect:/admin";
     }
     
-	@RequestMapping(value = "/categories/delete/{id}")
+
+    
+	@RequestMapping(value = "/admin/deleteCategory/{id}")
 	public String deleteCategory(@PathVariable Long id) {
 		System.out.println("delete category with id " + id);
 		categories.delete(id);
 		deleteSubcategories(id);
-		return "redirect:/categories";
+		return "redirect:/admin";
 	}
 	
 	public void deleteSubcategories(long id){
@@ -99,7 +121,7 @@ public class CategoryController {
 		}
 	}
 	
-	@RequestMapping(value = "/inspectcategory/{id}")
+	@RequestMapping(value = "/admin/inspectCategory/{id}")
 	public String showSubcategories(@PathVariable Long id, Model model, @ModelAttribute Category category) {
 		
 		Optional<Category> currOpt = categories.findOne(id);
@@ -111,25 +133,23 @@ public class CategoryController {
 			if(f.getPredecessor() == id) subcategories.add(f);
 		}
 		
+
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		
+		
 		model.addAttribute("category", currCat);
 		model.addAttribute("subcategories", subcategories);
 
         model.addAttribute("newCategory", new Category());
 		
-		return "subcategory";
+		return "adminSubcategory";
 	}
 	
-    @RequestMapping(value="/inspectcategory/add/{id}", method=RequestMethod.POST)
-    public String addSubcategory(@ModelAttribute Category newCategory, Model model, @PathVariable Long id) {
-    	Category toSave = new Category();
-    	toSave.setName(newCategory.getName());
-    	toSave.setPredecessor(id);
-    	toSave.setRoot(false);
-    	
-    	this.categories.save(toSave);
-    	
-        return "redirect:/inspectcategory/{id}";
-    }
-
-
+	@RequestMapping(value = "/admin/deleteUser/{id}")
+	public String deleteUser(@PathVariable Long id) {
+		this.userRepository.delete(id);
+		return "redirect:/admin";
+	}
+	
 }

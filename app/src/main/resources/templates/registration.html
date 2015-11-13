@@ -6,116 +6,168 @@
 <title>Refugee</title>
 <link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
 </head>
-
 <body>
+
+	
 
 	<nav th:include="topbar :: topbar"></nav>
 
 	<div class="row">
 		<p>&nbsp;</p>
-		<div class="large-8 medium-9 small-12 columns">
+		<div class="small-12 columns">
 			<h4 class="subheader">Registrieren</h4>
-			<div class="panel">
-				<div>
-					<ul class="button-group">
-						<li><a class="button">Flüchtling</a></li>
-						<li><a href="#" class="button">Helfender</a></li>
-					</ul>
-				</div>
+			<form action="#" th:action="@{/registration}"
+				th:object="${RegistrationForm}" method="post">
 				<div class="row">
-					<div class="small-12 columns">
-						<div class="large-5 small-3 columns">Name</div>
-						<div class="large-7 small-9 columns">
-							<input type="text" />
+					<div class="small-12 large-6 columns">
+						<div class="panel">
+							<div class="chooseRole">
+								<input id="refugee" type="radio" name="role" value="refugee" />
+								<label	for="refugee">Flüchtling </label>
+								<br /> 
+								<input id="volunteer" type="radio" name="role" value="volunteer" />
+								<label for="volunteer">Helfender</label>
+								<br />
+							</div>
+							<p>&nbsp;</p>
+							<div class="row">
+								<div class="small-12 columns">
+									<div class="large-5 small-3 columns">Name</div>
+									<div class="large-7 small-9 columns">
+										<input type="text" name="lastName" placeholder="Name" required="true" pattern="[a-zA-Z]+"/>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="small-12 columns">
+									<div class="large-5 small-3 columns">Vorname</div>
+									<div class="large-7 small-9 columns">
+										<input type="text" name="firstName" placeholder="Vorname" required="true" pattern="[a-zA-Z]+"/>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="small-12 columns">
+									<div class="large-5 small-3 columns">Username</div>
+									<div class="large-7 small-9 columns">
+										<input type="text" name="username" placeholder="Username" required="true"/>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="small-12 columns">
+									<div class="large-5 small-3 columns">E-Mail</div>
+									<div class="large-7 small-9 columns">
+										<input type="email" name="email" placeholder="E-Mail" required="true"/>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="small-12 columns">
+									<div class="large-5 small-3 columns">Passwort</div>
+									<div class="large-7 small-9 columns">
+										<input type="password" id="password" name="password" placeholder="Passwort" required="true"/>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="small-12 columns">
+									<div class="large-5 small-3 columns">Passwort wiederholen</div>
+									<div class="large-7 small-9 columns">
+										<input type="password" name="confirmPW" placeholder="Passwort" required="true" equalto="password"/>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="small-12 large-6 columns">
+						<div class="panel">
+
+
+							<div class="row">
+								<div class="small-12 columns">
+									<div class="large-5 small-3 columns">Stadt</div>
+									<div class="large-7 small-9 columns">
+										<input type="text" name="city" placeholder="Stadt" pattern="[a-zA-Z]+" required="true"/>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="small-12 columns">
+									<div class="large-5 small-3 columns">PLZ</div>
+									<div class="large-7 small-9 columns">
+										<input type="text" pattern="[0-9]{5,5}" name="zip" placeholder="PLZ" required="true"/>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="small-12 columns">
+									<div class="large-5 small-3 columns">Straße, Hausnummer</div>
+									<div class="large-7 small-9 columns">
+										<input type="text" name="streetName" placeholder="Straßenname" pattern="[a-zA-Z]+" required="true"/> <input
+											type="number" name="houseNumber" min="1" max="999"
+											placeholder="Hausnummer" required="true"/>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="small-12 columns">
+									<div class="large-5 small-3 columns">Sprache 1</div>
+									<div class="large-7 small-9 columns">
+										<select name="language1">
+											<option value="" selected="selected"> - </option>
+											<option value="german">Deutsch</option>
+											<option value="english">Englisch</option>
+											<option value="arab">Arabisch</option>
+											<option value="spanish">Spanisch</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="small-12 columns">
+									<div class="large-5 small-3 columns">Sprache 2</div>
+									<div class="large-7 small-9 columns">
+										<select name="language2">
+                                            <option value="" selected="selected"> - </option>
+											<option value="german">Deutsch</option>
+											<option value="english">Englisch</option>
+											<option value="arab">Arabisch</option>
+											<option value="spanish">Spanisch</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="small-12 columns">
+									<div class="large-5 small-3 columns">Sprache 3</div>
+									<div class="large-7 small-9 columns">
+										<select name="language3">
+											<option value="" selected="selected"> - </option>
+											<option value="german">Deutsch</option>
+											<option value="english">Englisch</option>
+											<option value="arab">Arabisch</option>
+											<option value="spanish">Spanisch</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<button type="submit" th:href="@{/}">Registrieren</button>
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="small-12 columns">
-						<div class="large-5 small-3 columns">Vorname</div>
-						<div class="large-7 small-9 columns">
-							<input type="text" />
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-12 columns">
-						<div class="large-5 small-3 columns">E-Mail</div>
-						<div class="large-7 small-9 columns">
-							<input type="text" />
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-12 columns">
-						<div class="large-5 small-3 columns">Passwort</div>
-						<div class="large-7 small-9 columns">
-							<input type="text" />
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-12 columns">
-						<div class="large-5 small-3 columns">Passwort wiederholen</div>
-						<div class="large-7 small-9 columns">
-							<input type="text" />
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-12 columns">
-						<div class="large-5 small-3 columns">Stadt</div>
-						<div class="large-7 small-9 columns">
-							<input type="text" />
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-12 columns">
-						<div class="large-5 small-3 columns">PLZ</div>
-						<div class="large-7 small-9 columns">
-							<input type="text" />
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-12 columns">
-						<div class="large-5 small-3 columns">Straße, Hausnummer</div>
-						<div class="large-7 small-9 columns">
-							<input type="text" />
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-12 columns">
-						<div class="large-5 small-3 columns">Sprache 1</div>
-						<div class="large-7 small-9 columns">
-							<input type="text" />
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-12 columns">
-						<div class="large-5 small-3 columns">Sprache 2</div>
-						<div class="large-7 small-9 columns">
-							<input type="text" />
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-12 columns">
-						<div class="large-5 small-3 columns">Sprache 3</div>
-						<div class="large-7 small-9 columns">
-							<input type="text" />
-						</div>
-					</div>
-				</div>
-				<a class="button"> Bestätigen </a>
-			</div>
+			</form>
 		</div>
 	</div>
 
 	<footer th:include="footer :: footer"></footer>
 
+	<script th:src="@{/resources/js/foundation/foundation.js}"></script>
+	<script th:src="@{/resources/js/foundation/foundation.abide.js}"></script>
+
+	<script>
+		$(document).foundation();
+		console.log("javascript loaded");
+	</script>
 </body>
 </html>

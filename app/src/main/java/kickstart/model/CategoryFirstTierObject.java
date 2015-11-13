@@ -1,10 +1,11 @@
-package com.example;
+package kickstart.model;
 
 import java.util.LinkedList;
 
 public class CategoryFirstTierObject {
 	private Category cat;
 	private LinkedList<Category> subcats;
+	private boolean subdivided;
 	
 	public CategoryFirstTierObject(Category cat, LinkedList<Category> subcats){
 		this.setCat(cat);
@@ -25,5 +26,13 @@ public class CategoryFirstTierObject {
 
 	public void setSubcats(LinkedList<Category> subcats) {
 		this.subcats = subcats;
+	}
+
+	public boolean isSubdivided() {
+		return subdivided;
+	}
+
+	public void setSubdivided(boolean subdivided) {
+		this.subdivided = subdivided;
 	}
 }

@@ -15,35 +15,106 @@
  */
 package kickstart.controller;
 
+import java.util.LinkedList;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
-public class WelcomeController {
+import kickstart.model.CategoryRepo;
+import kickstart.model.Category;
+import kickstart.model.CategoryFirstTierObject;
 
-	@RequestMapping("/")
-	public String frontPage() {
-		return "frontPage";
+@Controller
+public class WelcomeController extends CommonVariables {
+	
+	//Classvars
+
+	
+	//Constructor, insert autowired variables here (?)
+	@Autowired
+	public WelcomeController(CategoryRepo categories){
+		this.categories = categories;
 	}
 	
-	@RequestMapping("/UserSettings")
-	public String userSettings(){
+	//help functions
+
+	
+	//Mappings
+	@RequestMapping("/")
+	public String frontPage(Model model) {
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);		
+		return "frontpage";
+	}
+	
+	@RequestMapping("/search")
+	public String search(Model model) {
+		this.processedCategories = this.getProcessedCategories();
+		System.out.println("size of root categories: " + this.processedCategories.size());
+		model.addAttribute("categories", this.processedCategories);
+		
+		 model.addAttribute("anzeigen", goodREPO.findAll());
+		    
+		    System.out.println("GOOD REPO WURDE AN html übergeben");
+		 
+		return "search";
+	}
+	
+	@RequestMapping("/userSettings")
+	public String userSettings(Model model){
+		//initiate categories
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		
 		return "userSettings";
 	}
 	
-	@RequestMapping("/Article")
-	public String article(){
+	@RequestMapping("/article")
+	public String article(Model model){
+		//initiate categories
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		
 		return "article";
 	}
 	
-	@RequestMapping("/registration")
-	public String registration(){
-		return "registration";
+	@RequestMapping("/initiatecategory")
+	public String registration(Model model){
+		//initiate categories
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		
+		return "initiatecategory";
 	}
 	
-	@RequestMapping("/NewArticle")
-	public String newArticle(){
+	@RequestMapping("/newArticle")
+	public String newArticle(Model model){
+		//initiate categories
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		
 		return "newArticle";
 	}
 	
+	@RequestMapping("/adminView")
+	public String adminView(Model model){
+		//initiate categories
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		
+		return "adminView";
+	}
+	
+	@RequestMapping("/chat")
+	public String chat(Model model){
+		//initiate categories
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		
+		return "chat";
+	}
+	
+	//Mappings end
 }

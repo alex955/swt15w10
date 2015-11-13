@@ -75,134 +75,22 @@
      
          
     
-<div class="row"><hr/>
-<div class="large-8 medium-9 small-12 columns">
-    <h5>Registrieren</h5>
-  <div class="panel">
-      <div>
-        <ul class="button-group">
-          <li>
-            <a class="button">Flüchtling</a>
-          </li>
-          <li>
-            <a href="#" class="button">Helfender</a>
-          </li>
-        </ul>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            Name
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            Vorname
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            E-Mail
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text">
-          </div>
-        </div>
-      </div>
-     <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            Passwort
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            Passwort wiederholen
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            Stadt
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            PLZ
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            Straße, Hausnummer
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            Sprache 1
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            Sprache 2
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">
-          <div class="large-5 small-3 columns">
-            Sprache 3
-          </div>
-          <div class="large-7 small-9 columns">
-            <input type="text">
-          </div>
-        </div>
-      </div>
-      <a class="button"> Bestätigen </a> 
+
+<form data-abide>
+  <div class="name-field">
+    <label>Your name <small>required</small>
+      <input type="text" required pattern="[a-zA-Z]+">
+    </label>
+    <small class="error">Name is required and must be a string.</small>
   </div>
-</div>
-</div>
+  <div class="email-field">
+    <label>Email <small>required</small>
+      <input type="email" required>
+    </label>
+    <small class="error">An email address is required.</small>
+  </div>
+  <button type="submit">Submit</button>
+</form>
     
     
 <footer class="row">

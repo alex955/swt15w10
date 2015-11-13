@@ -1,4 +1,4 @@
-package com.example;
+package kickstart.controller;
 
 import java.util.LinkedList;
 
@@ -17,7 +17,7 @@ public class Category {
     private boolean root;
     private long predecessor;
 
-    protected Category() {
+    public Category() {
     }
 
     public Category(String name, long pre) {

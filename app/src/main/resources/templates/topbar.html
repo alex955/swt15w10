@@ -11,12 +11,11 @@
 
 <body>
 	<nav th:fragment="topbar">
-	
 		<nav class="top-bar" data-topbar="true" role="navigation">
 			<ul class="title-area">
 				<li class="name">
 					<h1>
-						<a th:href="@{/}">Regee</a>
+						<a th:href="@{/search}">Regee</a>
 					</h1>
 				</li>
 				<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
@@ -25,40 +24,58 @@
 			<section class="top-bar-section">
 				<!-- Right Nav Section -->
 				<ul class="right">
-					<li class="active"><a th:href="@{/NewArticle}">Angebot einstellen</a></li>
+					<li class="active"><a th:href="@{/newArticle}">Angebot
+							einstellen</a></li>
+					<li class="divider"></li>
 					<li class="has-dropdown"><a href="#">Account</a>
 						<ul class="dropdown">
-							<li><a href="#">Ausloggen</a></li>
-							<li><a th:href="@{/UserSettings}">Einstellungen</a></li>
+						<li class="has-dropdown"><a href="#">Sprache</a>
+							<ul class="dropdown">
+							<li><a href="/frontpage">deutsch</a></li>
+							</ul>
+							</li>
+							<li><a th:href="@{/chat}">Nachrichten</a></li>
+							<li><a th:href="@{/userSettings}">Einstellungen</a></li>
+							<li><a href="/">Ausloggen</a></li>	
 						</ul></li>
 				</ul>
 
 				<!-- Left Nav Section -->
 				<ul class="left">
-					<li class="has-form">
-						<div class="row collapse">
-							<input type="text" placeholder="" />
-							<li class="has-dropdown"><a href="#">Kategorie</a>
+					<li class="has-form"><input type="text" placeholder="" /></li>
+					<li class="divider"></li>
+					<li class="has-dropdown"><a href="#">alle Kategorien</a> 
+					
+					<!--  actual list -->
+						<ul class="dropdown">
+							<li th:each="categoryTopbar : ${categories}" class="has-dropdown">
+								<a th:href="@{/search}"><span
+									th:text="${categoryTopbar.cat.name}">Subkategorien anschauen</span></a>
 								<ul class="dropdown">
-									<li class="has-dropdown"><a href="#">Kategorie2</a>
-										<ul class="dropdown">
-											<li><a href="#">Spielzeug2</a></li>
-										</ul></li>
-									<li><a href="#">Spielzeug</a></li>
-									<li><a href="#">Möbel</a></li>
-								</ul></li>
-						</div>
+									<li th:each="subcategory : ${categoryTopbar.subcats}"><a
+										th:href="@{/search}"><span
+											th:text="${subcategory.name}">Subkategorien anschauen</span></a></li>
+								</ul>
+							</li>
+						</ul>
+					<!--  actual list end -->
+					
 					</li>
+					<li class="divider"></li>
+					<li class="has-form"><input type="text" placeholder="" /></li>
+					<li class="divider"></li>
+					<li class="has-dropdown"><a href="#">PLZ</a>
+						<ul class="dropdown">
+							<li><a href="#">20KM</a></li>
+							<li><a href="#">30KM</a></li>
+						</ul>
+					</li>
+					<li class="divider"></li>
 					<li class="has-form">
-						<div class="row collapse">
-							<input type="text" placeholder="" />
-							<li class="has-dropdown"><a href="#">PLZ</a>
-								<ul class="dropdown">
-									<li><a href="#">20KM</a></li>
-									<li><a href="#">30KM</a></li>
-								</ul></li>
-						</div>
-					</li>
+      				<a class="small button" th:href="@{/search}">Suchen</a>
+    				</li>
+					
+
 				</ul>
 			</section>
 		</nav>

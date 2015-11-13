@@ -1,0 +1,83 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>Refugee</title>
+<link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
+<script>
+
+	function required() {
+		var empt = document.forms["form1"]["name"].value;
+		if (empt == "" || empt == null) {
+			alert("Name der Kategorie darf nicht leer sein");
+			return false;
+		} else {
+			return true;
+		}
+	}
+</script>
+</head>
+<body>
+
+	<script th:src="@{/ressources/js/foundation/foundation.js}"></script>
+	<script th:src="@{/ressources/js/foundation/foundation.abide.js}"></script>
+
+	<script>
+		$(document).foundation();
+	</script>
+
+	<nav th:include="topbar :: topbar"></nav>
+
+	<div class="row">
+	<p>
+	<h1>Subkategorien von "<span th:text="${category.name}">kat</span>" (ID: <span th:text="${category.id}">name</span>)</h1>
+	<table border="1">
+		<tr>
+			<td><b>Name</b></td>
+			<td><b>ID</b></td>
+			<td></td>
+			<td>Inspect</td>
+		</tr>
+		<tr th:each="category : ${subcategories}">
+			<td th:text="${category.name}">platzhalter</td>
+			<td th:text="${category.id}">platzhalter</td>
+			<td>
+				  <a th:href="@{/admin/deleteCategory/{id}(id=${category.id})}"><span>delete</span></a>
+			</td>
+						<td>
+				  <a th:href="@{/admin/inspectCategory/{id}(id=${category.id})}"><span>inspect</span></a>
+			</td>
+		</tr>
+	</table>
+
+
+	</p>
+
+	<p>
+	<h1>Subkategorie zur Kategorie "<span th:text="${category.name}">kat</span>" hinzufügen:</h1>
+
+	<form action="#" th:action="@{/admin/addSubcategory/{id}(id=${category.id})}" th:object="${newCategory}"
+		method="post" name="form1" onsubmit="return required()">
+		<p>
+			Name der neuen Kategorie: <input type="text" th:field="*{name}" />
+		</p>
+		<p>
+			<input type="submit" value="Submit" /> <input type="reset"
+				value="Reset" />
+		</p>
+	</form>
+	</p> 
+	
+	
+	
+		
+	<p>
+	<h1><a href="/admin">Zurück zur Wurzelansicht der Kategorien</a></h1>
+	</p>
+	</div>
+
+	<footer th:include="footer :: footer"></footer>
+
+</body>
+</html>
