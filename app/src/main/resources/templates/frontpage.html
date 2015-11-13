@@ -29,8 +29,8 @@
 			<p>&nbsp;</p>
 			<input type="email" name="email" placeholder="Email" required="true" pattern="[a-zA-Z]+"/>
 			<input type="password" name="password" placeholder="Passwort" required="true" pattern="[a-zA-Z]+"/>
-			<div class="small button">Einloggen</div>
-			<div class="small button">Registrieren</div>
+			<a th:href="@{/search}" class="small button">Einloggen</a>
+			<a th:href="@{/registration}" class="small button">Registrieren</a>
 			</div>
 		</div>
 	</div>

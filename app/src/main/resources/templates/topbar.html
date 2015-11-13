@@ -15,7 +15,7 @@
 			<ul class="title-area">
 				<li class="name">
 					<h1>
-						<a th:href="@{/}">Regee</a>
+						<a th:href="@{/search}">Regee</a>
 					</h1>
 				</li>
 				<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
@@ -36,7 +36,7 @@
 							</li>
 							<li><a th:href="@{/chat}">Nachrichten</a></li>
 							<li><a th:href="@{/userSettings}">Einstellungen</a></li>
-							<li><a href="/frontpage">Ausloggen</a></li>	
+							<li><a href="/">Ausloggen</a></li>	
 						</ul></li>
 				</ul>
 
@@ -72,7 +72,7 @@
 					</li>
 					<li class="divider"></li>
 					<li class="has-form">
-      				<a class="small button" action="/">Suchen</a>
+      				<a class="small button" th:href="@{/search}">Suchen</a>
     				</li>
 					
 
