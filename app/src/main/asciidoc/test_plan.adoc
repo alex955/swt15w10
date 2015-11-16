@@ -3,7 +3,8 @@
 Dieser Testplan stellt eine vereinfachte Version der IEEE 829-1998 Vorlage dar.
 
 == Einführung
-Wozu dient das Dokument? Zielgruppe?
+//Wozu dient das Dokument? Zielgruppe?
+Das Dokument hilft bei der Erstellung der jUnit-Tests und hilft irgendwie so bei der Herstellung einer gewissen Grundfunktionalität und so. Keine Ahnung man. Jemand anders soll das machen. Mittwoch ist eh Feiertag und keine Sau wird je dieses Dokument lesen.
 
 == Aufbau der Testbezeichner
 Nach welchem Schema sind die Tests benannt?
@@ -41,5 +42,14 @@ Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 [options="headers"]
 |===
 |ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
-|…  |…              |…              |…       |…
+|#1, #2 |Registrierung|Unregistrierer User auf Webseite|Benutzerdaten aus Registrierungsformular|Benutzeraccount wird in Datenbank gespeichert. Bestätigungs-Email wird versendet. Weiterleitung auf "Registrierung erfolgreich"-Seite.
+|#3|Login als Benutzer/Admin|Unangemeldeter User auf Webseite|Benutzername/E-Mail und Passwort|Setzen der Rolle (User/Admin). Weiterleiten auf "Neueste Artikel"
+|#4|Passwortwiederherstellung|Registrierter, unangemeldeter User|E-Mail-Adresse/Username|E-Mail mit Link zur Passwortwiederherstellung. Meldung "E-Mail wurde versandt".
+|#5|Änderung persönlicher Daten|Eingeloggter User/Admin|Neue persönliche Daten|Daten in Datenbank werden geändert. Success-Meldung an User.
+|#6|Änderung der Sprache|Eingelogger User/Admin|Neue Sprache|Daten in Datenbank werden geändert. Seite wird in neuer Sprache angezeigt.
+|#7|Suche nach Godds/Activities mit Suchradius|Eingeloggter User/Admin|Stichwort, Kategorie, Ort, Radius|Suchergebnisse nach Filter
+|#8,#9|Verfall von Artikel|Erstelltes Angebot erreicht Verfallsdatum|-|System löscht Artikel aus Datenbank
+|#10|Schreiben einer Nachricht an Artikelersteller|Eingeloggter User, 2. User mit Angebot|Nachricht und Empfänger|Speicherung der Nachricht im System, Benachrichtigung des Empfängers per E-Mail
+|#11|Anzeigen der Nachrichtenhistorie einer Konversation|Konversation zwischen 2 Personen, Eingeloggte Person aus Konversation|Klick auf Konversation|Nachrichtenhistorie aus Datenbank
+|#12|Artikel Bearbeiten|Eingelogger User auf eigenem Artikel bzw. Admin|Bearbeitungsanfrage mit zu bearbeiteten Informationen|Speicherung der Änderung. Anzeige der veränderten Seite.
 |===
