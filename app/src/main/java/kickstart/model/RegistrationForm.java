@@ -11,45 +11,47 @@ public class RegistrationForm {
 
     private long id;
 
-    @NotNull
+    @NotNull(message = "Es wurde keine Rolle ausgewählt.")
     private String role;
 
-    @Size(min=2, max=30)
+    @Size(min=2, max=30, message = "Der Name muss zwischen 2 und 30 Zeichen lang sein.")
     private String lastName;
 
-    @Size(min=2, max=30)
+    @Size(min=2, max=30, message = "Der Name muss zwischen 2 und 30 Zeichen lang sein.")
     private String firstName;
 
-    @Size(min=6, max=30)
+    @Size(min=6, max=30, message = "Der Name muss zwischen 6 und 30 Zeichen lang sein.")
     private String username;
 
     @NotNull
-    @Email
+    @Email(message = "Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.")
     private String email;
 
     @NotNull
     //Password must contain at least: 8 characters, 1 Number, 1 lowercase Letter, 1 upercase Letter, no whitespace
-    @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}")
+    @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}", message ="Das Passwort muss mindestens 8 Zeichen lang sein und muss mindestens eine Zahl, einen Klein- und einen Großbuchstaben beinhalten.")
     private String password;
 
     @NotNull
     private String confirmPW;
 
     @NotNull
+   // @Pattern(regexp = "^/[a-z ,.'-]+$/i", message ="Der Stadtname darf keine Zahlen oder Sonderzeichen beinhalten.")
     private String city;
 
     @NotNull
     //Zipcode must be 5 characters long and contain only digits
-    @Pattern(regexp="([0-9]).{5}")
+    @Pattern(regexp="^\\d{5}$", message="Die Postleitzahl muss aus exakt 5 Ziffern bestehen.")
     private String zip;
 
     @NotNull
+    //@Pattern(regexp = "^/[a-z ,.'-]+$/i", message="Der Straßenname darf keine Zahlen oder Sonderzeichen beinhalten.")
     @Size(min=5, max=50)
     private String streetName;
 
     @NotNull
-    @Min(1)
-    @Max(999)
+    @Min(value = 1, message = "Die Hausnummer darf nicht niedriger als 1 sein.")
+    @Max(value = 999, message = "Die Hausnummer darf nicht größer als 999 sein.")
     private long houseNumber;
 
     private String language1;
