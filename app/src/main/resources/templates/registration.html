@@ -22,19 +22,21 @@
 					<div class="small-12 large-6 columns">
 						<div class="panel">
 							<div class="chooseRole">
-								<input id="refugee" type="radio" name="role" value="refugee" />
+								<input id="refugee" type="radio" name="role" value="refugee" th:field ="*{role}"/>
 								<label	for="refugee">Flüchtling </label>
 								<br /> 
-								<input id="volunteer" type="radio" name="role" value="volunteer" />
+								<input id="volunteer" type="radio" name="role"  value="volunteer" th:field ="*{role}" />
 								<label for="volunteer">Helfender</label>
 								<br />
+                                <p th:if="${#fields.hasErrors('role')}" th:errors="*{role}"> ERROR MESSAGE </p>
 							</div>
 							<p>&nbsp;</p>
 							<div class="row">
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Name</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" name="lastName" placeholder="Name" required="true" pattern="[a-zA-Z]+"/>
+										<input type="text" name="lastName" placeholder="Name" th:field ="*{lastName}"/>
+                                        <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"> ERROR MESSAGE </p>
 									</div>
 								</div>
 							</div>
@@ -42,7 +44,8 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Vorname</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" name="firstName" placeholder="Vorname" required="true" pattern="[a-zA-Z]+"/>
+										<input type="text" name="firstName" required="true" placeholder="Vorname" th:field ="*{firstName}"/>
+                                        <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"> ERROR MESSAGE </p>
 									</div>
 								</div>
 							</div>
@@ -50,7 +53,8 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Username</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" name="username" placeholder="Username" required="true"/>
+										<input type="text" name="username" required="true" placeholder="Username" th:field ="*{username}"/>
+                                        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"> ERROR MESSAGE </p>
 									</div>
 								</div>
 							</div>
@@ -58,7 +62,8 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">E-Mail</div>
 									<div class="large-7 small-9 columns">
-										<input type="email" name="email" placeholder="E-Mail" required="true"/>
+										<input type="email" name="email" placeholder="E-Mail" required="true" th:field ="*{email}"/>
+                                        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> ERROR MESSAGE </p>
 									</div>
 								</div>
 							</div>
@@ -66,7 +71,8 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Passwort</div>
 									<div class="large-7 small-9 columns">
-										<input type="password" id="password" name="password" placeholder="Passwort" required="true"/>
+										<input type="password" id="password" name="password" placeholder="Passwort" required="true" th:field ="*{password}"/>
+                                        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> ERROR MESSAGE </p>
 									</div>
 								</div>
 							</div>
@@ -74,7 +80,8 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Passwort wiederholen</div>
 									<div class="large-7 small-9 columns">
-										<input type="password" name="confirmPW" placeholder="Passwort" required="true" equalto="password"/>
+										<input type="password" name="confirmPW" placeholder="Passwort" required="true" th:field ="*{confirmPW}"/>
+                                        <p th:if="${#fields.hasErrors('confirmPW')}" th:errors="*{confirmPW}"> ERROR MESSAGE </p>
 									</div>
 								</div>
 							</div>
@@ -88,7 +95,8 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Stadt</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" name="city" placeholder="Stadt" pattern="[a-zA-Z]+" required="true"/>
+										<input type="text" name="city" placeholder="Stadt" required="true" th:field ="*{city}"/>
+                                        <p th:if="${#fields.hasErrors('city')}" th:errors="*{city}"> ERROR MESSAGE </p>
 									</div>
 								</div>
 							</div>
@@ -96,7 +104,8 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">PLZ</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" pattern="[0-9]{5,5}" name="zip" placeholder="PLZ" required="true"/>
+										<input type="text" name="zip" placeholder="PLZ" required="true" th:field ="*{zip}"/>
+                                        <p th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"> ERROR MESSAGE </p>
 									</div>
 								</div>
 							</div>
@@ -104,9 +113,10 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Straße, Hausnummer</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" name="streetName" placeholder="Straßenname" pattern="[a-zA-Z]+" required="true"/> <input
-											type="number" name="houseNumber" min="1" max="999"
-											placeholder="Hausnummer" required="true"/>
+										<input type="text" name="streetName" placeholder="Straßenname" required="true" th:field ="*{streetName}"/>
+                                        <p th:if="${#fields.hasErrors('streetName')}" th:errors="*{streetName}"> ERROR MESSAGE </p>
+										<input type="number" name="houseNumber" placeholder="Hausnummer" required="true" placeholder="1" th:field ="*{houseNumber}"/>
+                                        <p th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}"> ERROR MESSAGE </p>
 									</div>
 								</div>
 							</div>

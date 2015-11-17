@@ -1,25 +1,63 @@
 package kickstart.model;
 
+import org.hibernate.validator.constraints.Email;
+
+import javax.validation.constraints.*;
+
 /**
  * Created by Vincenz on 30.10.15.
  */
 public class RegistrationForm {
 
     private long id;
+
+    @NotNull
     private String role;
+
+    @Size(min=2, max=30)
     private String lastName;
+
+    @Size(min=2, max=30)
     private String firstName;
+
+    @Size(min=6, max=30)
     private String username;
+
+    @NotNull
+    @Email
     private String email;
+
+    @NotNull
+    //Password must contain at least: 8 characters, 1 Number, 1 lowercase Letter, 1 upercase Letter, no whitespace
+    @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}")
     private String password;
+
+    @NotNull
     private String confirmPW;
+
+    @NotNull
     private String city;
+
+    @NotNull
+    //Zipcode must be 5 characters long and contain only digits
+    @Pattern(regexp="([0-9]).{5}")
     private String zip;
+
+    @NotNull
+    @Size(min=5, max=50)
     private String streetName;
+
+    @NotNull
+    @Min(1)
+    @Max(999)
     private long houseNumber;
+
     private String language1;
+
     private String language2;
+
     private String language3;
+
 
     public String getLanguage2() {
         return language2;

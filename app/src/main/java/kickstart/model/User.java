@@ -1,10 +1,14 @@
 package kickstart.model;
 
 
+import org.hibernate.validator.constraints.Email;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.*;
+
 /**
  * Created by Vincenz on 27.10.15.
  */
@@ -14,6 +18,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
+
     private long id;
     private String role;
     private String lastName;
@@ -29,6 +34,7 @@ public class User {
     private String language1;
     private String language2;
     private String language3;
+
 
     public User() {}
 
