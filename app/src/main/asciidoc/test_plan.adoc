@@ -1,4 +1,4 @@
-= Test-Plan
+﻿= Test-Plan
 
 Dieser Testplan stellt eine vereinfachte Version der IEEE 829-1998 Vorlage dar.
 
@@ -11,9 +11,9 @@ Nach welchem Schema sind die Tests benannt?
 
 *Bsp.*
 
-*U - Unit Test, I -  Integrationstest*
+*U - Unit Test, I -  Integrationstest, A - Akzeptanztests*
 
-*U-1, U-2, I-1*
+*U-1, U-2, I-1, A-1*
 
 == Test Gegenstände
 
@@ -21,6 +21,8 @@ Nach welchem Schema sind die Tests benannt?
 
 == Nicht zu testende Funktionalitäten
 z.B. Bibliotheken von Drittanbietern (eigene Tests beschränken sich auf Schnittstelle, bzw. Zusammenspiel).
+
+* Google API für Übersetzung, Entferungsberechnung (im Umkreis suchen)
 
 == Herangehensweise
 *Bsp.:*
@@ -42,14 +44,24 @@ Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
 [options="headers"]
 |===
 |ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
-|#1, #2 |Registrierung|Unregistrierer User auf Webseite|Benutzerdaten aus Registrierungsformular|Benutzeraccount wird in Datenbank gespeichert. Bestätigungs-Email wird versendet. Weiterleitung auf "Registrierung erfolgreich"-Seite.
-|#3|Login als Benutzer/Admin|Unangemeldeter User auf Webseite|Benutzername/E-Mail und Passwort|Setzen der Rolle (User/Admin). Weiterleiten auf "Neueste Artikel"
-|#4|Passwortwiederherstellung|Registrierter, unangemeldeter User|E-Mail-Adresse/Username|E-Mail mit Link zur Passwortwiederherstellung. Meldung "E-Mail wurde versandt".
-|#5|Änderung persönlicher Daten|Eingeloggter User/Admin|Neue persönliche Daten|Daten in Datenbank werden geändert. Success-Meldung an User.
-|#6|Änderung der Sprache|Eingelogger User/Admin|Neue Sprache|Daten in Datenbank werden geändert. Seite wird in neuer Sprache angezeigt.
-|#7|Suche nach Godds/Activities mit Suchradius|Eingeloggter User/Admin|Stichwort, Kategorie, Ort, Radius|Suchergebnisse nach Filter
-|#8,#9|Verfall von Artikel|Erstelltes Angebot erreicht Verfallsdatum|-|System löscht Artikel aus Datenbank
-|#10|Schreiben einer Nachricht an Artikelersteller|Eingeloggter User, 2. User mit Angebot|Nachricht und Empfänger|Speicherung der Nachricht im System, Benachrichtigung des Empfängers per E-Mail
-|#11|Anzeigen der Nachrichtenhistorie einer Konversation|Konversation zwischen 2 Personen, Eingeloggte Person aus Konversation|Klick auf Konversation|Nachrichtenhistorie aus Datenbank
-|#12|Artikel Bearbeiten|Eingelogger User auf eigenem Artikel bzw. Admin|Bearbeitungsanfrage mit zu bearbeiteten Informationen|Speicherung der Änderung. Anzeige der veränderten Seite.
+|A-1,2 |Registrierung|Unregistrierer User auf Webseite|Benutzerdaten aus Registrierungsformular|Weiterleitung auf "Registrierung erfolgreich"-Seite.
+|U-1,2 |Registrierung|Unregistrierer User auf Webseite|Benutzerdaten aus Registrierungsformular|Benutzeraccount in Datenbank angelegt mit Benutzerdaten
+|A-3|Login als Benutzer|Registrierter, unangemeldeter User auf Webseite|Korrekter Benutzername/E-Mail und korrektes Passwort|Weiterleiten auf "Neueste Artikel"
+|A-3|Login als Benutzer|Registrierter, unangemeldeter User auf Webseite|Falscher Benutzername/E-Mail oder falsches Passwort|Hinweis auf eine falsche Eingabe
+|U-3|Login als Benutzer|Registrierter, unangemeldeter User auf Webseite|Korrekter Benutzername/E-Mail und korrektes Passwort|Setzen der User Rolle
+|A-4|Logout als Benutzer|Angemeldeter User auf Webseite|"Ausloggen Button"|Setzen der Visitor Rolle
+|A-5|Account löschen|Angemeldeter User auf Webseite|"Account Löschen Button"|Weiterleitung auf Frontpage, Benachrichtigung "Account gelöscht"
+|U-5|Account löschen|Angemeldeter User auf Webseite|"Account Löschen Button"|Account aus der Datenbank gelöscht, Visitor Rolle zugeteilt
+|A-6|Passwortwiederherstellung|Registrierter, unangemeldeter User|E-Mail-Adresse/Username|Senden einer E-Mail mit Link zum zurücksetzen des Passworts. Meldung "E-Mail wurde versandt."
+|A-6|Passwortwiederherstellung|Nicht Registrierter User|Nicht registrierte(r) E-Mail-Adresse/Username|Meldung "Nicht registrierte(r) Email Adresse/Username"
+|A-7|Persönliche Daten ändern|Angemeldeter User|Neue persönliche Daten|Success-Meldung an User
+|U-7|Persönliche Daten ändern|Angemeldeter User|Neue persönliche Daten|Aktualisierter Benutzeraccount in der Datenbank
+|A-8|Sprache ändern|Angemeldeter User|Sprachbutton in der Topbar|Seite wird in ausgewählter Sprache angezeigt.
+|A-9|Angebot erstellen|Angemeldeter User|Formular mit Angebotsinformationen|Weiterleitung auf eingestelltes Angebot
+|U-9|Angebot erstellen|Angemeldeter User|Formular mit Angebotsinformationen|Speichern des Angebots in der Datenbank, zuweisen zum Benutzeraccount 
+|A-10|Angebot bearbeiten|Angemeldeter User auf eigenem Artikel, Admin|Bearbeitungsanfrage mit zu bearbeiteten Informationen|Anzeige der veränderten Seite
+|U-10|Angebot bearbeiten|Angemeldeter User auf eigenem Artikel, Admin|Bearbeitungsanfrage mit zu bearbeiteten Informationen|Aktualisieren des Angebots in der Datenbank
+|A-11|Angebot löschen|Angemeldeter User auf eigenem Artikel, Admin|Angebot löschen Button|Meldung "erfolgreich gelöscht"
+|U-11|Angebot löschen|Angemeldeter User auf eigenem Artikel, Admin|Angebot löschen Button|Angebot aus der Datenbank löschen
+fortsetzung folgt
 |===
