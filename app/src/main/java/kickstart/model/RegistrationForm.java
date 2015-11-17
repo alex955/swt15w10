@@ -1,6 +1,7 @@
 package kickstart.model;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.*;
 
@@ -23,33 +24,33 @@ public class RegistrationForm {
     @Size(min=6, max=30, message = "Der Name muss zwischen 6 und 30 Zeichen lang sein.")
     private String username;
 
-    @NotNull(message = "Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.")
+    @NotEmpty(message = "Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.")
     @Email(message = "Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.")
     private String email;
 
-    @NotNull
+    @NotEmpty
     //Password must contain at least: 8 characters, 1 Number, 1 lowercase Letter, 1 upercase Letter, no whitespace
     @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}", message ="Das Passwort muss mindestens 8 Zeichen lang sein und muss mindestens eine Zahl, einen Klein- und einen Großbuchstaben beinhalten.")
     private String password;
 
-    @NotNull
+    @NotEmpty
     private String confirmPW;
 
-    @NotNull(message = "Geben Sie einen Stadtnamen ein")
+    @NotEmpty(message = "Geben Sie einen Stadtnamen ein")
    // @Pattern(regexp = "^/[a-z ,.'-]+$/i", message ="Der Stadtname darf keine Zahlen oder Sonderzeichen beinhalten.")
     private String city;
 
-    @NotNull
+    @NotEmpty
     //Zipcode must be 5 characters long and contain only digits
     @Pattern(regexp="^\\d{5}$", message="Die Postleitzahl muss aus exakt 5 Ziffern bestehen.")
     private String zip;
 
-    @NotNull(message = "Geben Sie einen Straßennamen ein.")
+    @NotEmpty(message = "Geben Sie einen Straßennamen ein.")
     //@Pattern(regexp = "^/[a-z ,.'-]+$/i", message="Der Straßenname darf keine Zahlen oder Sonderzeichen beinhalten.")
     @Size(min=5, max=50, message = "Geben Sie einen Straßennamen ein.")
     private String streetName;
 
-    @NotNull
+    @NotEmpty
     @Min(value = 1, message = "Die Hausnummer darf nicht niedriger als 1 sein.")
     @Max(value = 999, message = "Die Hausnummer darf nicht größer als 999 sein.")
     private long houseNumber;
