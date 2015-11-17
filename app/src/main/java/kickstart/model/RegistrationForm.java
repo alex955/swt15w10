@@ -23,7 +23,7 @@ public class RegistrationForm {
     @Size(min=6, max=30, message = "Der Name muss zwischen 6 und 30 Zeichen lang sein.")
     private String username;
 
-    @NotNull
+    @NotNull(message = "Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.")
     @Email(message = "Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.")
     private String email;
 
@@ -35,7 +35,7 @@ public class RegistrationForm {
     @NotNull
     private String confirmPW;
 
-    @NotNull
+    @NotNull(message = "Geben Sie einen Stadtnamen ein")
    // @Pattern(regexp = "^/[a-z ,.'-]+$/i", message ="Der Stadtname darf keine Zahlen oder Sonderzeichen beinhalten.")
     private String city;
 
@@ -44,7 +44,7 @@ public class RegistrationForm {
     @Pattern(regexp="^\\d{5}$", message="Die Postleitzahl muss aus exakt 5 Ziffern bestehen.")
     private String zip;
 
-    @NotNull
+    @NotNull(message = "Geben Sie einen Straßennamen ein.")
     //@Pattern(regexp = "^/[a-z ,.'-]+$/i", message="Der Straßenname darf keine Zahlen oder Sonderzeichen beinhalten.")
     @Size(min=5, max=50)
     private String streetName;
