@@ -50,7 +50,7 @@ public class RegistrationForm {
     @Size(min=5, max=50, message = "Geben Sie einen Straßennamen ein.")
     private String streetName;
 
-    @NotEmpty
+    @NotNull
     @Min(value = 1, message = "Die Hausnummer darf nicht niedriger als 1 sein.")
     @Max(value = 999, message = "Die Hausnummer darf nicht größer als 999 sein.")
     private long houseNumber;
