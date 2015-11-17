@@ -97,11 +97,9 @@ Die typischen Anwendungsfälle (Anlegen, Ändern, Löschen) können zu einem ein
 |Auswahl und Suche Goods/Activities | eingeloggter Nutzer | nach einloggen hat man die Möglichkeit entweder durch Klick auf einen "Goods" oder "Activities"-Button die jeweiligen Kategorien durchsuchen zu können. Nach dem Klicken erscheint eine Suchmaske.  | Article Management |
 |Auswahl Goods | eingeloggter Nutzer | in der Anzeige der Goods-Kategorie ist die Suchmaske erweitert mit einer Option, sich Angebote  in einem bestimmten Ort oder im Umkreis von x Kilometern (x auswählbar) anzeigen zu lassen. Ferner lassen sich verschiedene Kategorien anklicken, um die Suche auf diese zu beschränken.| Article Management |
 |Auswahl Activities | eingeloggter Nutzer | in der Anzeige der Activities-Kategorie ist die Suchmaske ebenso erweitert mit einer Option, sich Angebote  in einem bestimmten Ort oder im Umkreis von x Kilometern (x auswählbar) anzeigen zu lassen| Article Management |
-|Anzeige eines Artikels (Good oder Activity)| eingeloggter Benutzer | inserierte Artikel werden mit optionalem Photo, Ort und PLZ des Anbieters, Einstellungsdatum, einer Liste aus Attributen (z.B. Größe, Farbe,..), einer Freitextbeschreibung des Anbieters sowie einem Button zur Kontaktaufnahme angezeigt  | Article Management |
-|Löschen eines Artikels | Inserierender, Admin | Inserierende eines Artikels haben die Möglichkeit, den inserierten Artikel zu löschen. Dies wird durch einen Button gewährleistet, der im Artikel zu sehen ist. Admins können jeden beliebigen Artikel löschen | Article Management, User Management |
-|Verfall von Artikeln mit Verfallsdatum | Inserierender | Artikel haben optionale Verfallsdaten, nach deren Ablauf der Artikel automatisch aus dem System gelöscht wird | Article Management |
-|Verfall von Artikeln ohne Verfallsdatum | Admin/System | Artikel ohne explizit definiertes Vefallsdatum werden nach 3 Monaten automatisch gelöscht | Article Management |
-|Kontaktaufnahme bei Artikeldarstellung | registrierter Benutzer | jede Darstellung eines Artikels hat einen Button, durch den Kontakt zum Inserierenden aufgenommen werden kann. Nach Klick öffnet sich eine Maske, mit deren Hilfe bausteinhaft ein Kontaktgesuch zusammengebaut werden kann | Article Management |
+|Anzeige eines Angebots (Good oder Activity)| eingeloggter Benutzer | inserierte Angebote werden mit optionalem Photo, Ort und PLZ des Anbieters, Einstellungsdatum, einer Liste aus Attributen (z.B. Größe, Farbe,..), einer Freitextbeschreibung des Anbieters sowie einem Button zur Kontaktaufnahme angezeigt  | Article Management |
+|Anlegen, Bearbeiten, Löschen eines Angebots | Inserierender, Admin | Ein eingeloggter Benutzer hat die Möglichkeit ein Angebot zu erstellen. Eigene bereits erstellte Angebote können bearbeitet werden. Inserierende eines Angebots haben die Möglichkeit, das Angebot zu löschen. Dies wird durch einen Button gewährleistet, der im Angebot zu sehen ist. Admins können jedes beliebige Angebot löschen | Article Management, User Management |
+|Kontaktaufnahme bei Anzeige eines Angebots | registrierter Benutzer | jede Darstellung eines Angebots hat einen Button, durch den Kontakt zum Inserierenden aufgenommen werden kann. Nach Klick öffnet sich eine Maske, mit deren Hilfe bausteinhaft ein Kontaktgesuch zusammengebaut werden kann | Article Management |
 |- |- | - | - |
 |Formularmaske für Kontaktaufnahme | registrierter Benutzer, Inserierender | in der Kontaktaufname kann eine Nachricht an den Inserierenden durch zusammenfügen von Textbausteinen erzeugt werden. Dabei werden mehrere Elemente aus verschiedenen Kategorien (z.B. Begrüßung, Termin zur Abholung [mit popup zur Selektion des Termins]) ausgewählt. Ferner gibt es ein Freitext-Feld, bei dem automatisch durch z.B. Google Translator von dem geschriebenen Text des Kontaktaufnehmenden in die Sprache des Inserierenden übersetzt wird. | Communication Management |
 |Anzeige der Nachrichtenhistorie | registrierter Benutzer, Inserierender | bisher ausgetauschte Nachrichten zwischen zwei bestimmten registrierten Mitgliedern können in einer Art Chat History angezeigt werden. | Communication Management |
@@ -235,7 +233,7 @@ link="Artikelseite.png"]
 ** Auf jeder Seite sichtbar
 ** Klick auf das Logo führt zur Startseite
 ** Kategorie und PLZ sind Dropdown Menüs
-** In den Textfeldern kann man Artikel und PLZ eingeben und durch Enter bestätigen
+** In den Textfeldern kann man das gesuchte Angebot und PLZ eingeben und durch Enter bestätigen
 ** Angebot einstellen leitet weiter zu einer entsprechenden Seite
 ** Account ist ein Dropdown Menü mit den Buttons Ausloggen und Einstellungen
 
@@ -243,7 +241,7 @@ link="Artikelseite.png"]
 ** Durch das Betätigen der Buttons in den einzelnen Panels bleibt man auf der Einstellungen Seite
 
 ==== Suchergebnisse
-** Klick auf ein Thumbnail leitet weiter zu der Artikelseite
+** Klick auf ein Thumbnail leitet weiter zu der Angebotseite
 
 ==== Registrierung
 ** Flüchtling/Helfender Buttongruppe wechselt die Farbe je nach was man anklickt
@@ -271,22 +269,22 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 |===
 |Klasse/Enumeration |Beschreibung |
 |User                 | Generalisiertester Nutzer des Systems - keine Kenntnis über Account oder ob der User eingeloggt ist |
-|RegisteredUser                  | Abstraktion von Usern, die im System registriert sind. Kapselt alle Grundgemeinsamkeiten wie Stammdaten, Kontaktmöglichkeiten, Sprachen etc. Basisfunktionalitäten des Systems sind für die erbenden Nutzergruppen verfügbar. Angebotene Artikel werden dem jeweiligen Nutzer zugewiesen.|
+|RegisteredUser                  | Abstraktion von Usern, die im System registriert sind. Kapselt alle Grundgemeinsamkeiten wie Stammdaten, Kontaktmöglichkeiten, Sprachen etc. Basisfunktionalitäten des Systems sind für die erbenden Nutzergruppen verfügbar. Angebote werden dem jeweiligen Nutzer zugewiesen.|
 |Volunteer                  | Spezialisierung von RegisteredUser - jemand, der sich als Helfender im System registriert hat            |
 |Refugee                  |Spezialisierung von RegisteredUser - jemand, der sich als Flüchtling im System registriert hat            |
 |Admin                  | Administrator  mit Sonderberechtigungen zur Verwaltung des Systems          |
 |-                  |-           |
 |Language                  | Repräsentation einer Sprache, soll bestimmen in welcher Sprache das System angezeigt wird. Jeder nutzer hat eine Haupt- und keine oder mehrere Zweitsprachen.          |
 |-                  |-           |
-|Article                  | Abstraktion von angebotenen Artikeln, kapselt Grunddaten aller Artikel wie z.B. ID, Name, Ort, Angebotsdauer,... . Besitzt verschiedene Tags/Keywords nach denen gesucht werden kann.       |
+|Article                  | Abstraktion von Angeboten, kapselt Grunddaten aller Angebote wie z.B. ID, Name, Ort, Angebotsdauer,... . Besitzt verschiedene Tags/Keywords nach denen gesucht werden kann.       |
 |Good            | Repräsentiert "Güter", also physischer Waren die von Volunteers und/oder Refugees angeboten werden können. Besitzt verschiedene Attribute, die als ArticleBlock repräsentiert sind.          |
 |Activity                 | Repräsentiert "Aktivitäten" die im System angeboten werden können.          |
 |Category                 | Dient der Kategorisierung von Goods. Eine Kategorie kann wiederrum in mehrere Subkategorien unterteilt werden.          |
 |-                  |-           |
-|Message                  | Nachrichten, die im System zwischen Nutzern geschrieben wurden, z.B. Kontaktaufnahmen über Artikelmasken. Sind immer zwei RegisteredUsern zugewiesen und bestehen aus mehreren Textblöcken.           |
+|Message                  | Nachrichten, die im System zwischen Nutzern geschrieben wurden, z.B. Kontaktaufnahmen über Angebotmasken. Sind immer zwei RegisteredUsern zugewiesen und bestehen aus mehreren Textblöcken.           |
 |-                  |-           |
 |TextBlock                  | Abstrakte Repräsentation eines Textbausteins, enthält immer eine ID, Inhalt, eine Sprache sowie eine Übersetzung in eben diese Sprache.           |
-|SearchTag                  | Keyword, nach dem Artikeldatenbank durchsucht werden kann.           |
+|SearchTag                  | Keyword, nach dem Angebotdatenbank durchsucht werden kann.           |
 |PortalBlock                  | Repräsentation eines GUI-Elements, das in bestimmter Sprache dargestellt werden soll.           |
 |ArticleBlock                  | Repräsentation von Textbausteinen, die in Nachrichtendialogen der Kontaktaufnahme dienen sollen.           |
 
@@ -296,20 +294,25 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 == Akzeptanztestfälle
 //Mithilfe von Akzeptanztests wird geprüft, ob die Software die funktionalen Erwartungen und Anforderungen im Gebrauch erfüllt. Diese sollen und können aus den Anwendungsfallbeschreibungen und den UML-Sequenzdiagrammen abgeleitet werden. D.h., pro (komplexen) Anwendungsfall gibt es typischerweise mindestens ein Sequenzdiagramm (welches ein Szenarium beschreibt). Für jedes Szenarium sollte es einen Akzeptanztestfall geben. Listen Sie alle Akzeptanztestfälle in tabellarischer Form auf.
 //Jeder Testfall soll mit einer ID versehen werde, um später zwischen den Dokumenten (z.B. im Test-Plan) referenzieren zu können.
-(Angelehnt ans Anwendungsfallbeschreibungen)
+(Angelehnt an Anwendungsfallbeschreibungen)
 |===
 |ID|Beschreibung
 |#1|Accountregistrierung als Flüchtling
 |#2|Accountregistrierung als Helfender
 |#3|Login als Benutzer/Admin
-|#4|Passwortwiederherstellung
-|#5|Änderung persönlicher Daten
-|#6|Änderung der Sprache
-|#7|Suche nach Goods/Activities mit Suchradius
-|#8|Verfall von Artikel mit Verfallsdatum
-|#9|Verfall von Artikel ohne Verfallsdatum (nach 3 Monaten)
-|#10|Schreiben einer Nachricht an Artikelersteller
-|#11|Anzeigen der Nachrichtenhistorie einer Konversation
+|#4|Logout als Benutzer/Admin
+|#5|Löschen des Accounts
+|#6|Passwortwiederherstellung
+|#7|Änderung persönlicher Daten
+|#8|Änderung der Sprache (Topbar)
+|#9|Erstellen eines Angebots
+|#10|Bearbeiten, Löschen eines Angebots
+|#11|Suche nach Angeboten mit Stichwörtern
+|#12|Filtern der Angebote durch Suchradius
+|#13|Filtern der Angeboten durch Kategorien
+|#14|Verfall von Angeboten mit Verfallsdatum
+|#15|Schreiben einer Nachricht an Angebotersteller
+|#16|Anzeigen der Nachrichtenhistorie einer Konversation
 
 |===
 
