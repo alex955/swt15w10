@@ -46,7 +46,7 @@ public class RegistrationForm {
 
     @NotNull(message = "Geben Sie einen Straßennamen ein.")
     //@Pattern(regexp = "^/[a-z ,.'-]+$/i", message="Der Straßenname darf keine Zahlen oder Sonderzeichen beinhalten.")
-    @Size(min=5, max=50)
+    @Size(min=5, max=50, message = "Geben Sie einen Straßennamen ein.")
     private String streetName;
 
     @NotNull
