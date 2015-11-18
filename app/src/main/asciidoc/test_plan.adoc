@@ -14,10 +14,10 @@ Tests, die modulübergreifend stattfinden und "größere" Funktionalität testen
 Wie obig beschrieben sollen die in diesem Dokument beschriebenen Testfälle die Funktionalität des ganzen System und seiner Subsysteme demonstrieren - Testgegenstände sind demnach die einzelnen Module (User-, Artikel-, Sprach- sowie Kommunikationsmanagement) sowie deren integrative Nutzung.
 
 == Zu testende Funktionalitäten
--User-Management: Registrierung eines neuen Users, Accountbestätigung per Mail, Login, Logout, Adminfunktionen (User löschen)
--Artikelmanagement: Hinzufügen und Löschen) von (eigenen) Artikeln, Adminfunktionen (Artikel löschen, Kategorisierung verwalten)
--Sprachmanagement: Anzeige verschiedener Sprachen auf allen Anzeigen 
--Kommunikationsmanagement: Artikelbezogene Kommunikation in verschiedenen Sprachen, Textbausteinartige Kommunikation, Chatfunktion
+* User-Management: Registrierung eines neuen Users, Accountbestätigung per Mail, Login, Logout, Adminfunktionen (User löschen)
+* Artikelmanagement: Hinzufügen und Löschen) von (eigenen) Artikeln, Adminfunktionen (Artikel löschen, Kategorisierung verwalten)
+* Sprachmanagement: Anzeige verschiedener Sprachen auf allen Anzeigen 
+* Kommunikationsmanagement: Artikelbezogene Kommunikation in verschiedenen Sprachen, Textbausteinartige Kommunikation, Chatfunktion
 
 == Nicht zu testende Funktionalitäten
 * Google API für Übersetzung, Entferungsberechnung (im Umkreis suchen)
