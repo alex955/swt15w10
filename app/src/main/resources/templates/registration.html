@@ -94,10 +94,11 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Passwort wiederholen</div>
 									<div class="large-7 small-9 columns">
-									<label> 
-										<div th:if="${#fields.hasErrors('confirmPW')}" th:errors="*{confirmPW}"> ERROR MESSAGE </div>
-										<input type="password" name="confirmPW" placeholder="Passwort" th:field ="*{confirmPW}"/>
-                                       </label>
+									<label>
+                                        <input type="password" name="confirmPW" placeholder="Passwort" th:field ="*{confirmPW}"/>
+                                        <div th:if="${#fields.hasErrors('confirmPW')}" th:errors="*{confirmPW}"> ERROR MESSAGE </div>
+                                        <div th:if="${#fields.hasErrors('global')}" th:errors="*{global}"> ERROR MESSAGE </div>
+                                    </label>
 									</div>
 								</div>
 							</div>
@@ -129,15 +130,20 @@
 							</div>
 							<div class="row">
 								<div class="small-12 columns">
-									<div class="large-5 small-3 columns">Straße, Hausnummer</div>
+									<div class="large-5 small-3 columns">Straße, Hausnummer, Addresszusatz</div>
 									<div class="large-7 small-9 columns">
-									<label>
-										<div th:if="${#fields.hasErrors('streetName')}" th:errors="*{streetName}"> ERROR MESSAGE </div>
-										<input type="text" name="streetName" placeholder="Straßenname" th:field ="*{streetName}"/>
+										<label>
+											<div th:if="${#fields.hasErrors('streetName')}" th:errors="*{streetName}"> ERROR MESSAGE </div>
+											<input type="text" name="streetName" placeholder="Straßenname" th:field ="*{streetName}"/>
+										</label>
+										<label>
+											<div th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}"> ERROR MESSAGE </div>
+											<input type="number" name="houseNumber" placeholder="1" th:field ="*{houseNumber}"/>
                                         </label>
-                                        <label><div th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}"> ERROR MESSAGE </div>
-										<input type="number" name="houseNumber" placeholder="1" th:field ="*{houseNumber}"/>
-                                        </label>
+										<label>
+											<div th:if="${#fields.hasErrors('addressAddition')}" th:errors="*{addressAddition}"> ERROR MESSAGE </div>
+											<input type="text" name="addressAddition" placeholder="(optional)" th:field ="*{addressAddition}"/>
+										</label>
 									</div>
 								</div>
 							</div>

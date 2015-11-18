@@ -36,7 +36,7 @@ public class RegistrationController extends CommonVariables {
         if(result.hasErrors())
             return "registration";
 
-        User user = new User(registrationForm.getId(), registrationForm.getRole(), registrationForm.getLastName(), registrationForm.getFirstName(), registrationForm.getUsername(), registrationForm.getEmail(), registrationForm.getPassword(), registrationForm.getConfirmPW(), registrationForm.getCity(), registrationForm.getZip(), registrationForm.getStreetName(), registrationForm.getHouseNumber(), registrationForm.getLanguage1(), registrationForm.getLanguage2(), registrationForm.getLanguage3());
+        User user = new User(registrationForm.getId(), registrationForm.getRole(), registrationForm.getLastName(), registrationForm.getFirstName(), registrationForm.getUsername(), registrationForm.getEmail(), registrationForm.getPassword(), registrationForm.getConfirmPW(), registrationForm.getCity(), registrationForm.getZip(), registrationForm.getStreetName(), registrationForm.getHouseNumber(),registrationForm.getAddressAddition(), registrationForm.getLanguage1(), registrationForm.getLanguage2(), registrationForm.getLanguage3());
         userRepository.save(user);
         System.out.println(user);
         return ("redirect:/");

@@ -1,13 +1,10 @@
 package kickstart.model;
 
 
-import org.hibernate.validator.constraints.Email;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.*;
 
 /**
  * Created by Vincenz on 27.10.15.
@@ -31,6 +28,7 @@ public class User {
     private String zip;
     private String streetName;
     private long houseNumber;
+    private String addressAddition;
     private String language1;
     private String language2;
     private String language3;
@@ -62,7 +60,7 @@ public class User {
         this.language3 = language3;
     }
 
-    public User(long id, String role, String lastName, String firstName, String username, String email, String password, String confirmPW, String city, String zip, String streetName, long houseNumber, String language1, String language2, String language3) {
+    public User(long id, String role, String lastName, String firstName, String username, String email, String password, String confirmPW, String city, String zip, String streetName, long houseNumber,String addressAddition, String language1, String language2, String language3) {
 
         this.role = role;
         this.lastName = lastName;
@@ -75,6 +73,7 @@ public class User {
         this.zip = zip;
         this.streetName = streetName;
         this.houseNumber = houseNumber;
+        this.addressAddition = addressAddition;
         this.language1 = language1;
         this.language2 = language2;
         this.language3 = language3;
@@ -83,7 +82,7 @@ public class User {
     @Override
     public String toString() {
         return String.format(
-                "User[id='%d', role='%s', lastName='%s', firstName='%s', username='%s', email='%s', password='%s', confirmPW='%s', city='%s', zip='%s', streetName='%s', houseNumber='%d', language1='%s', language2='%s', language3='%s' ]", id, role, lastName, firstName, username, email, password, confirmPW, city, zip, streetName, houseNumber, language1, language2, language3);
+                "User[id='%d', role='%s', lastName='%s', firstName='%s', username='%s', email='%s', password='%s', confirmPW='%s', city='%s', zip='%s', streetName='%s', houseNumber='%d', addressAddition='%s', language1='%s', language2='%s', language3='%s' ]", id, role, lastName, firstName, username, email, password, confirmPW, city, zip, streetName, houseNumber, addressAddition, language1, language2, language3);
 
     }
 
@@ -181,6 +180,14 @@ public class User {
 
     public void setHouseNumber(long houseNumber) {
         this.houseNumber = houseNumber;
+    }
+
+    public String getAddressAddition() {
+        return addressAddition;
+    }
+
+    public void setAddressAddition(String addressAddition) {
+        this.addressAddition = addressAddition;
     }
 }
 
