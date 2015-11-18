@@ -4,41 +4,34 @@ Dieser Testplan stellt eine vereinfachte Version der IEEE 829-1998 Vorlage dar.
 
 == Einführung
 //Wozu dient das Dokument? Zielgruppe?
-Das Dokument hilft bei der Erstellung der jUnit-Tests und hilft irgendwie so bei der Herstellung einer gewissen Grundfunktionalität und so. Keine Ahnung man. Jemand anders soll das machen. Mittwoch ist eh Feiertag und keine Sau wird je dieses Dokument lesen.
+Dieses Dokument dient der Übersicht über die Testfälle, die die korrekte Funktionalität der Refugee-App gewährleisten und demonstrieren sollen. 
 
 == Aufbau der Testbezeichner
-Nach welchem Schema sind die Tests benannt?
-
-*Bsp.*
-
-*U - Unit Test, I -  Integrationstest, A - Akzeptanztests*
-
-*U-1, U-2, I-1, A-1*
+Im Folgenden werden Tests, die zur Überprüfung der Funktionalität eines einzelnen, isoliert testbaren Moduls dienen mit dem Präfix *U* (für Unit-Test) versehen.
+Tests, die modulübergreifend stattfinden und "größere" Funktionalität testen werden hingegen mit dem Präfix *I* (für Integration-Test) versehen. Beide Arten werden fortlaufend nummeriert.
 
 == Test Gegenstände
+Wie obig beschrieben sollen die in diesem Dokument beschriebenen Testfälle die Funktionalität des ganzen System und seiner Subsysteme demonstrieren - Testgegenstände sind demnach die einzelnen Module (User-, Artikel-, Sprach- sowie Kommunikationsmanagement) sowie deren integrative Nutzung.
 
 == Zu testende Funktionalitäten
+-User-Management: Registrierung eines neuen Users, Accountbestätigung per Mail, Login, Logout, Adminfunktionen (User löschen)
+-Artikelmanagement: Hinzufügen und Löschen) von (eigenen) Artikeln, Adminfunktionen (Artikel löschen, Kategorisierung verwalten)
+-Sprachmanagement: Anzeige verschiedener Sprachen auf allen Anzeigen 
+-Kommunikationsmanagement: Artikelbezogene Kommunikation in verschiedenen Sprachen, Textbausteinartige Kommunikation, Chatfunktion
 
 == Nicht zu testende Funktionalitäten
-z.B. Bibliotheken von Drittanbietern (eigene Tests beschränken sich auf Schnittstelle, bzw. Zusammenspiel).
-
 * Google API für Übersetzung, Entferungsberechnung (im Umkreis suchen)
 
 == Herangehensweise
-*Bsp.:*
-
-*Klassen werden mit JUnit getestet.*
-
-*Integrationstest nach Bottom-Up Prinzip*
+Zuerst soll durch die Unit-Tests sichergestellt werden, dass alle Teilfunktionalitäten geschlossen in sich wie vorgegeben funktionieren. Ist dies gewährleistet, wird deren Integration in Integrationstests sichergestellt durch holistische Testfälle. Die Module/Units werden durch jUnit getests, die Integration händisch nach striktem Testplan durchgeführt - mit diesem Ansatz soll Bottom Up getestet werden.
 
 == Umgebungsvoraussetzungen
-* Wird spezielle Hardware benötigt?
-* Welche Daten müssen bereitgestellt werden? Wie werden die Daten bereitgestellt?
-* Wird zusätzliche Software für das Testen benötigt?
-* Wie kommuniziert die Software während des Testens? Internet? Netzwerk?
+Da für die Anwendung keine speziellen Hard- sowie Softwarevoraussettzungen erfüllt sein müssen können die Tests quasi auf jedem System auf dem Java (für die Integrationstests auf dem fertig kompiliertem System) sowie Spring, Maven und jUnit für die Unittests.
+Die Daten für die Unittests werden in den Unit-Tests bereitgestellt, für die Integrationstests werden - da das System von der Interaktion mit einem Nutzer bzw. dessen Eingaben abhängt - die Daten im Testfall bereitgestellt und händisch ins System eingegeben.
+Während des Testens wird die Anwendung als lokaler Server auf dem Testsystem ausgeführt und darauf getestet.
 
 == Testfälle und Verantwortlichkeit
-Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
+Die Verantwortlichkeiten der Testfälle finden sich in der untenstehenden Tabelle.
 
 // See http://asciidoctor.org/docs/user-manual/#tables
 [options="headers"]
