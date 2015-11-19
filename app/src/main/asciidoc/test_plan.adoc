@@ -14,8 +14,8 @@ Tests, die modulübergreifend stattfinden und "größere" Funktionalität testen
 Wie obig beschrieben sollen die in diesem Dokument beschriebenen Testfälle die Funktionalität des ganzen System und seiner Subsysteme demonstrieren - Testgegenstände sind demnach die einzelnen Module (User-, Artikel-, Sprach- sowie Kommunikationsmanagement) sowie deren integrative Nutzung.
 
 == Zu testende Funktionalitäten
-* User-Management: Registrierung eines neuen Users, Accountbestätigung per Mail, Login, Logout, Adminfunktionen (User löschen)
-* Artikelmanagement: Hinzufügen und Löschen) von (eigenen) Artikeln, Adminfunktionen (Artikel löschen, Kategorisierung verwalten)
+* User-Management: Registrierung eines neuen Users, Accountbestätigung per Mail, Login, Logout, persönliche Daten ändern, Adminfunktionen (User löschen)
+* Artikelmanagement: Hinzufügen, Bearbeiten und Löschen von (eigenen) Artikeln, Adminfunktionen (Artikel löschen, bearbeiten, Kategorisierung verwalten)
 * Sprachmanagement: Anzeige verschiedener Sprachen auf allen Anzeigen 
 * Kommunikationsmanagement: Artikelbezogene Kommunikation in verschiedenen Sprachen, Textbausteinartige Kommunikation, Chatfunktion
 
@@ -26,7 +26,7 @@ Wie obig beschrieben sollen die in diesem Dokument beschriebenen Testfälle die 
 Zuerst soll durch die Unit-Tests sichergestellt werden, dass alle Teilfunktionalitäten geschlossen in sich wie vorgegeben funktionieren. Ist dies gewährleistet, wird deren Integration in Integrationstests sichergestellt durch holistische Testfälle. Die Module/Units werden durch jUnit getests, die Integration händisch nach striktem Testplan durchgeführt - mit diesem Ansatz soll Bottom Up getestet werden.
 
 == Umgebungsvoraussetzungen
-Da für die Anwendung keine speziellen Hard- sowie Softwarevoraussettzungen erfüllt sein müssen können die Tests quasi auf jedem System auf dem Java (für die Integrationstests auf dem fertig kompiliertem System) sowie Spring, Maven und jUnit für die Unittests.
+Da für die Anwendung keine speziellen Hard- sowie Softwarevoraussettzungen erfüllt sein müssen, können die Tests quasi auf jedem System auf dem Java (für die Integrationstests auf dem fertig kompiliertem System) sowie Spring, Maven und jUnit für die Unittests laufen, ausgeführt werden.
 Die Daten für die Unittests werden in den Unit-Tests bereitgestellt, für die Integrationstests werden - da das System von der Interaktion mit einem Nutzer bzw. dessen Eingaben abhängt - die Daten im Testfall bereitgestellt und händisch ins System eingegeben.
 Während des Testens wird die Anwendung als lokaler Server auf dem Testsystem ausgeführt und darauf getestet.
 
