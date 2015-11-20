@@ -306,16 +306,16 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 |#9|Erstellen eines Angebots
 |#10|Bearbeiten eines Angebots
 |#11|Löschen eines Angebots
-|#12|Suche nach Angeboten mit Stichwörtern
-|#13|Filtern der Angebote durch Suchradius
-|#14|Filtern der Angeboten durch Kategorien
-|#15|Verfall von Angeboten mit Verfallsdatum
-|#16|Schreiben einer Nachricht an Angebotersteller
-|#17|Anzeigen der Nachrichtenhistorie einer Konversation
-|#18|Sperren eines Benutzeraccounts als Admin
-|#19|Kategorie hinzufügen als Admin
-|#20|Kategorie bearbeiten als Admin
-|#21|Kategorie löschen als Admin
+//|#12|Suche nach Angeboten mit Stichwörtern
+|#12|Filtern der Angebote durch Suchradius
+|#13|Filtern der Angeboten durch Kategorien
+|#14|Verfall von Angeboten mit Verfallsdatum
+|#15|Schreiben einer Nachricht an Angebotersteller
+|#16|Anzeigen der Nachrichtenhistorie einer Konversation
+|#17|Sperren eines Benutzeraccounts als Admin
+|#18|Kategorie hinzufügen als Admin
+|#19|Kategorie bearbeiten als Admin
+|#20|Kategorie löschen als Admin
 
 |===
 

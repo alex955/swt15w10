@@ -56,5 +56,9 @@ Die Verantwortlichkeiten der Testfälle finden sich in der untenstehenden Tabell
 |U-10|Angebot bearbeiten|Angemeldeter User auf eigenem Artikel, Admin|Bearbeitungsanfrage mit zu bearbeiteten Informationen|Aktualisieren des Angebots in der Datenbank
 |A-11|Angebot löschen|Angemeldeter User auf eigenem Artikel, Admin|Angebot löschen Button|Meldung "erfolgreich gelöscht"
 |U-11|Angebot löschen|Angemeldeter User auf eigenem Artikel, Admin|Angebot löschen Button|Angebot aus der Datenbank löschen
+|A-12|Filtern der Angebote durch Suchradius|Angemeldeter/unangemeldeter User|Auswählen des Suchradius|Anzeige entsprechender Angebote
+|U-12|Filtern der Angebote durch Suchradius|Angemeldeter/unangemeldeter User|Auswählen des Suchradius|Berechnung der Entfernungen zu jedem Angebot und anschließendes Filtern
+|A-13|Filtern der Angeboten durch Kategorien|Angemeldeter/unangemeldeter User|Auswählen der Kategorie|Anzeige entsprechender Angebote
+|U-13|Filtern der Angeboten durch Kategorien|Angemeldeter/unangemeldeter User|Auswählen der Kategorie|Ausgabe jener Angebote mit entsprechender Kategorie
 fortsetzung folgt
 |===

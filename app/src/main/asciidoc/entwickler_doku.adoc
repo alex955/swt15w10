@@ -1,8 +1,8 @@
-= Entwicklerdokumentation
+﻿= Entwicklerdokumentation
 
 == Einführung und Ziele
 * Aufgabenstellung
-In diesem Projekt wird ein Portal zur Unterstützung von Flüchtlingen erstellt. Hilfsbereite Menschen werden in der Lage sein, Sach- und Dienstleistungsangebote für Flüchtlinge anzubieten. Die Flüchtlinge können auf Angebote antworten. Das Portal unterstützt mehrere Sprachen und übersetzt eingestellte Angebote automatisch in verfügbare Sprachen.
+** In diesem Projekt wird ein Portal zur Unterstützung von Flüchtlingen erstellt. Hilfsbereite Menschen werden in der Lage sein, Sach- und Dienstleistungsangebote für Flüchtlinge anzubieten. Die Flüchtlinge können auf Angebote antworten. Das Portal unterstützt mehrere Sprachen und übersetzt eingestellte Angebote automatisch in verfügbare Sprachen.
 
 * Qualitätsziele
 
