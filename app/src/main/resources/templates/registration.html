@@ -137,8 +137,8 @@
 											<input type="text" name="streetName" placeholder="Straßenname" th:field ="*{streetName}"/>
 										</label>
 										<label>
-											<div th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}"> ERROR MESSAGE </div>
-											<input type="number" name="houseNumber" placeholder="1" th:field ="*{houseNumber}"/>
+                                            <input type="number" name="houseNumber" value="1"  min="1" maxlength="3" th:field ="*{houseNumber}"/>
+                                            <div th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}"> ERROR MESSAGE </div>
                                         </label>
 										<label>
 											<div th:if="${#fields.hasErrors('addressAddition')}" th:errors="*{addressAddition}"> ERROR MESSAGE </div>
