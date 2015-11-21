@@ -89,15 +89,6 @@ public class WelcomeController extends CommonVariables {
 		return "initiatecategory";
 	}
 	
-	@RequestMapping("/newArticle")
-	public String newArticle(Model model){
-		//initiate categories
-		this.processedCategories = this.getProcessedCategories();
-		model.addAttribute("categories", this.processedCategories);
-		
-		return "newArticle";
-	}
-	
 	@RequestMapping("/adminView")
 	public String adminView(Model model){
 		//initiate categories

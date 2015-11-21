@@ -16,8 +16,7 @@
 		<p>&nbsp;</p>
 		<div class="small-12 columns">
 			<h4 class="subheader">Registrieren</h4>
-			<form action="#" th:action="@{/registration}"
-				th:object="${RegistrationForm}" method="post">
+			<form action="#" th:action="@{/registration}" th:object="${RegistrationForm}" method="post">
 				<div class="row">
 					<div class="small-12 large-6 columns">
 						<div class="panel">
@@ -82,8 +81,6 @@
 					</div>
 					<div class="small-12 large-6 columns">
 						<div class="panel">
-
-
 							<div class="row">
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Stadt</div>
@@ -104,9 +101,8 @@
 								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Straße, Hausnummer</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" name="streetName" placeholder="Straßenname" pattern="[a-zA-Z]+" required="true"/> <input
-											type="number" name="houseNumber" min="1" max="999"
-											placeholder="Hausnummer" required="true"/>
+										<input type="text" name="streetName" placeholder="Straßenname" pattern="[a-zA-Z]+" required="true"/> 
+										<input type="number" name="houseNumber" min="1" max="999"	placeholder="Hausnummer" required="true"/>
 									</div>
 								</div>
 							</div>
