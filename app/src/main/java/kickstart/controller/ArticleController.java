@@ -56,14 +56,16 @@ public class ArticleController extends CommonVariables {
 		//initiate categories
 		this.processedCategories = this.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
+		model.addAttribute("categoriesForm", this.categories.findAll());
 		
 		return "newArticle";
 	}
 	
+	
 	//create a new Good
 	@RequestMapping(value = "/newArticle", method = RequestMethod.POST)
     public String newArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm) {
-    Good good = new Good(newArticleForm.getTitle(), newArticleForm.getDescription(), "01309", null, 0, null, null);
+    Good good = new Good(newArticleForm.getTitle(), newArticleForm.getDescription(), "01309", null, 0, null, null, newArticleForm.getId());
     goodREPO.save(good);
     System.out.println(good);
     return ("redirect:/");

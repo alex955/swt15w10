@@ -20,9 +20,18 @@
 					<div class="row">
 						<div class="small-12 columns">
 							<div class="small-12 large-4 columns">
-								<p>Kategorie*: Hab noch keine gute Idee wie man die Kategorie einstellt. Falls jemand Bock hat, Hilfe ist erwuenscht.</p>
+								<p>Kategorie*: </p>
+							</div>
+							
+							<div class="small-12 large-8 columns">
+								<select name="id">
+									<option th:each="categoryForm : ${categoriesForm}" th:value="${categoryForm.id}"><span th:text="${categoryForm.name}"></span></option>
+									
+								</select>
 							</div>
 							<hr />
+							
+							
 							<div class="small-12 large-4 columns">
 								<p>Titel der Anzeige*</p>
 							</div>

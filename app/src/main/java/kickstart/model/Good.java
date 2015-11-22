@@ -19,6 +19,17 @@ public class Good extends Anzeige{
 		this.PLZ=PLZ;
 	
 	}
+	
+	public Good(String name, String description,String photo,String street,int PLZ, String location, String number, long categoryId) {
+		super(name, description, location);
+		this.photo=photo;
+	
+		this.street=street;
+		this.number=number;
+		this.PLZ=PLZ;
+		this.id = categoryId;
+	
+	}
 
 	
 	public Good() {

@@ -16,6 +16,19 @@ public abstract class Anzeige {
 	protected String location;
 	
 	protected String street;
+	
+	protected long category;
+	
+	public long getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(long category) {
+		this.category = category;
+	}
+
+
 	public String getName() {
 		return name;
 	}
