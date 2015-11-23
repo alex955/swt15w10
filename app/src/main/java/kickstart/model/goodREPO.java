@@ -22,6 +22,8 @@ public interface goodREPO extends CrudRepository<Good, Long> {
  public List<Good> findByLocation(String location);
  
  public List<Good> findAll();
+ 
+ public List<Good> findByCategory(long category);
 
 
 

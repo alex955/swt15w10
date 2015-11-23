@@ -16,7 +16,7 @@ public interface activityREPO extends CrudRepository<Activity, Long> {
 	 
 	 public List<Activity> findAll();
 	 
-	 
+	 public List<Activity> findByCategory(long category);
 	 
 
 }

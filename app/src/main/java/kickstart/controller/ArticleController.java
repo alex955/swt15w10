@@ -1,6 +1,7 @@
 package kickstart.controller;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,24 +32,25 @@ public class ArticleController extends CommonVariables {
 	}
 	
 	
-	@RequestMapping(value = "/inspectcategory/{id}")
-	public String showSubcategories(@PathVariable Long id, Model model, @ModelAttribute Category category) {
+	@RequestMapping(value = "/inspectcategory/{categoryId}")
+	public String showSubcategories(@PathVariable Long categoryId, Model model, @ModelAttribute Category category) {
+		List<Good> catGoods = this.goodREPO.findByCategory(categoryId);
 		
-		Optional<Category> currOpt = categories.findOne(id);
-		Category currCat = currOpt.get();
+		//todo - ändern! nur Testinitialisierung
+		catGoods.add(new Good("a", "b", "c", "d", 0, null, null, 1));
+		catGoods.add(new Good("a", "b", "c", "d", 0, null, null, 1));
+		catGoods.add(new Good("a", "b", "c", "d", 0, null, null, 1));
+		catGoods.add(new Good("a", "b", "c", "d", 0, null, null, 1));
 		
-		LinkedList<Category> subcategories = new LinkedList<Category>();
+		System.out.println("Länge: "+catGoods.size());
 		
-		for(Category f : categories.findAll()){
-			if(f.getPredecessor() == id) subcategories.add(f);
-		}
-		
-		model.addAttribute("category", currCat);
-		model.addAttribute("subcategories", subcategories);
 
-        model.addAttribute("newCategory", new Category());
 		
-		return "subcategory";
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		model.addAttribute("anzeigen", catGoods);
+		
+		return "anzeigen";
 	}
 	
 	@RequestMapping("/newArticle")

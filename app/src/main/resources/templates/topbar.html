@@ -50,11 +50,11 @@
 					<!--  actual list -->
 						<ul class="dropdown">
 							<li th:each="categoryTopbar : ${categories}" class="has-dropdown">
-								<a th:href="@{/search}"><span
+								<a th:href="@{/inspectcategory/{id}(id=${categoryTopbar.cat.id})}"><span
 									th:text="${categoryTopbar.cat.name}">Subkategorien anschauen</span></a>
 								<ul class="dropdown">
 									<li th:each="subcategory : ${categoryTopbar.subcats}"><a
-										th:href="@{/search}"><span
+										th:href="@{/inspectcategory/{id}(id=${subcategory.id})}"><span
 											th:text="${subcategory.name}">Subkategorien anschauen</span></a></li>
 								</ul>
 							</li>
