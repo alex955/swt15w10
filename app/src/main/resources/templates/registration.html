@@ -5,6 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <title>Refugee</title>
 <link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
 
@@ -188,8 +189,17 @@
 										</select>
 									</div>
 								</div>
-							</div>
-							<button type="submit" th:href="@{/}">Registrieren</button>
+                            </div>
+                            <div class="row">
+                                <div class="small-12 columns">
+                                <div class="g-recaptcha" data-sitekey="6LdakhETAAAAAJtE5rWb3kQuTi-GcEoUiS94ULai"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="small-12 columns">
+                                    <button type="submit" th:href="@{/}">Registrieren</button>
+                                </div>
+                            </div>
 						</div>
 					</div>
 				</div>
