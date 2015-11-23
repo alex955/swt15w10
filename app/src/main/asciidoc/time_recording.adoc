@@ -6,12 +6,12 @@ Die verwendete Zeit beinhaltet auch das Lesen von Dokumentationen, Besprechungen
 // See http://asciidoctor.org/docs/user-manual/#tables
 [option="headers"]
 |===
-|Von |Bis |Vincenz Herz |Alexander Herzog |Andreas Hubert |Lukas Klose |Alexander Shulga |Meeting
-|14.10.2015   |18.10.2015   |…    |…    |…    |…    |420   |70
-|19.10.2015   |25.10.2015   |…    |…    |…    |…    |1020    |60
-|26.10.2015   |01.11.2015   |…    |…    |…    |…    |1050    |90
-|02.11.2015   |08.11.2015   |…    |…    |…    |…    |1260   |70
-|09.11.2015   |15.11.2015   |…    |…    |…    |…    |660    |90
-|16.11.2015   |22.11.2015   |…    |…    |…    |…    |900    |70
+|Von |Bis |Vincenz Herz |Alexander Herzog |Andreas Huber |Lukas Klose |Alexander Shulga |Meeting
+|14.10.2015   |18.10.2015   |…    |…    |360    |…    |420   |70
+|19.10.2015   |25.10.2015   |…    |…    |720    |…    |1020    |60
+|26.10.2015   |01.11.2015   |…    |…    |900    |…    |1050    |90
+|02.11.2015   |08.11.2015   |…    |…    |1140    |…    |1260   |70
+|09.11.2015   |15.11.2015   |…    |…    |720    |…    |660    |90
+|16.11.2015   |22.11.2015   |…    |…    |540    |…    |900    |70
 
 |===
