@@ -36,9 +36,28 @@ public class User {
     private String language1;
     private String language2;
     private String language3;
+    
+    private boolean validated;
+    private int hashcode;
 
 
-    public User() {}
+    public boolean isValidated() {
+		return validated;
+	}
+
+	public void setValidated(boolean validated) {
+		this.validated = validated;
+	}
+
+	public int getHashcode() {
+		return hashcode;
+	}
+
+	public void setHashcode(int hashcode) {
+		this.hashcode = hashcode;
+	}
+
+	public User() {}
 
     public User(long id, UserAccount userAccount, String lastName, String firstName, String email, String city, String zip, String streetName, String houseNumber, String addressAddition, String language1, String language2, String language3) {
 
@@ -54,6 +73,10 @@ public class User {
         this.language1 = language1;
         this.language2 = language2;
         this.language3 = language3;
+        
+        this.validated = false;
+        this.hashcode = (lastName + firstName + Long.toString(id)).hashCode();
+        
     }
 
     @Override

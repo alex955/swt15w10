@@ -13,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.validation.Valid;
 
 
@@ -35,7 +37,7 @@ public class RegistrationController extends CommonVariables {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String newRegistration(@ModelAttribute("RegistrationForm") @Valid RegistrationForm registrationForm, BindingResult result) {
+    public String newRegistration(@ModelAttribute("RegistrationForm") @Valid RegistrationForm registrationForm, BindingResult result) throws AddressException, MessagingException {
 
         if(result.hasErrors())
             return "registration";
@@ -43,9 +45,16 @@ public class RegistrationController extends CommonVariables {
         UserAccount userAccount = userAccountManager.create(registrationForm.getUsername(), registrationForm.getPassword(), registrationForm.getRole());
         userAccountManager.save(userAccount);
 
+        
+        
+        
         User user = new User(registrationForm.getId(), userAccount, registrationForm.getLastName(), registrationForm.getFirstName(), registrationForm.getEmail(), registrationForm.getCity(), registrationForm.getZip(), registrationForm.getStreetName(), registrationForm.getHouseNumber(),registrationForm.getAddressAddition(), registrationForm.getLanguage1(), registrationForm.getLanguage2(), registrationForm.getLanguage3());
         userRepository.save(user);
         System.out.println(user);
+        System.out.println(user.getHashcode());
+        
+        EMailController.SendEmail(user.getEmail(), user.getHashcode());
+        
         return ("redirect:/");
     }
 

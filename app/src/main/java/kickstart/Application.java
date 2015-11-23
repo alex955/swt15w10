@@ -16,6 +16,8 @@
 package kickstart;
 
 import javax.annotation.PostConstruct;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 
 import org.joda.time.DateTime;
 import org.salespointframework.EnableSalespoint;
@@ -32,6 +34,7 @@ import kickstart.model.User;
 import kickstart.model.UserRepository;
 import kickstart.model.activityREPO;
 import kickstart.model.goodREPO;
+import kickstart.controller.EMailController;
 import kickstart.model.Category;
 
 @EnableSalespoint
@@ -47,7 +50,7 @@ public class Application {
 	}
 	
 	@PostConstruct
-    void initialize(){
+    void initialize() throws AddressException, MessagingException{
 
 		final Role refugee = new Role("ROLE_REFUGEE");
 		final Role volunteer = new Role("ROLE_VOLUNTEER");
@@ -74,6 +77,8 @@ public class Application {
     	System.out.println("GOODS ERSCHAFFEN");
     	System.out.println(goodREPO.count());
 
+    	
+    	 EMailController.SendEmail("luk@sklose.de", 244444443);
     	/*
     	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", "123","", "sprache","sprache2","sprache3"));
     	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", "123","", "sprache","sprache2","sprache3"));
@@ -97,4 +102,7 @@ public class Application {
 					.logout().logoutUrl("/logout").logoutSuccessUrl("/");
 		}
 	}
+
+
+
 }
