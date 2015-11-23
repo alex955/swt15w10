@@ -37,12 +37,35 @@ public class ArticleController extends CommonVariables {
 		this.goodREPO=grepo;
 	}
 	
+	public List<Good> getAllSubcategoryItems(long subcatId){
+		List<Good> toReturn = getAllCategoryItems(subcatId);
+		
+		List<Long> subcategories = new LinkedList<Long>();
+		for(Category s : categories.findAll()){
+			if(s.getPredecessor() == subcatId){
+				subcategories.add(s.getId());
+				//System.out.println("\tsubcategory zum durchschauen: "+s.getName());
+			}
+		}
+		
+		for(Long l : subcategories){
+			toReturn.addAll(getAllSubcategoryItems(l));
+		}
+		
+		return toReturn;
+	}
+	
+	public List<Good> getAllCategoryItems(long subcatID){
+		return this.goodREPO.findByCategory(subcatID);
+	}
 	
 	@RequestMapping(value = "/inspectcategory/{categoryId}")
 	public String showSubcategories(@PathVariable Long categoryId, Model model, @ModelAttribute Category category) {
-		List<Good> catGoods = this.goodREPO.findByCategory(categoryId);
 		
-		System.out.println("Length of list: " + catGoods.size());
+		//List<Good> catGoods = this.goodREPO.findByCategory(categoryId);
+		List<Good> catGoods = getAllSubcategoryItems(categoryId);
+		
+		//System.out.println("Length of list: " + catGoods.size());
 		
 
 		
