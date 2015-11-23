@@ -42,13 +42,7 @@ public class ArticleController extends CommonVariables {
 	public String showSubcategories(@PathVariable Long categoryId, Model model, @ModelAttribute Category category) {
 		List<Good> catGoods = this.goodREPO.findByCategory(categoryId);
 		
-		//todo - ändern! nur Testinitialisierung
-		catGoods.add(new Good("a", "b", "c", "d", 0, null, null, 1));
-		catGoods.add(new Good("a", "b", "c", "d", 0, null, null, 1));
-		catGoods.add(new Good("a", "b", "c", "d", 0, null, null, 1));
-		catGoods.add(new Good("a", "b", "c", "d", 0, null, null, 1));
-		
-		System.out.println("Länge: "+catGoods.size());
+		System.out.println("Length of list: " + catGoods.size());
 		
 
 		

@@ -27,7 +27,7 @@ public class Good extends Anzeige{
 		this.street=street;
 		this.number=number;
 		this.PLZ=PLZ;
-		this.id = categoryId;
+		this.category = categoryId;
 	
 	}
 
