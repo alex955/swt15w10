@@ -69,12 +69,12 @@ public class Application {
     	System.out.println("GOODS ERSCHAFFEN");
     	System.out.println(goodREPO.count());
     	
-    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", 123,"", "sprache","sprache2","sprache3"));
-    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", 123,"", "sprache","sprache2","sprache3"));
-    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", 123,"", "sprache","sprache2","sprache3"));
-    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", 123,"", "sprache","sprache2","sprache3"));
-    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", 123,"", "sprache","sprache2","sprache3"));
-    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", 123,"", "sprache","sprache2","sprache3"));
+    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", "123","", "sprache","sprache2","sprache3"));
+    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", "123","", "sprache","sprache2","sprache3"));
+    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", "123","", "sprache","sprache2","sprache3"));
+    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße","123","", "sprache","sprache2","sprache3"));
+    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", "123","", "sprache","sprache2","sprache3"));
+    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", "123","", "sprache","sprache2","sprache3"));
 	}
 
 	@Configuration

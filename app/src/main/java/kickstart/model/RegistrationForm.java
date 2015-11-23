@@ -51,10 +51,9 @@ public class RegistrationForm {
     @Size(min=5, max=50, message = "Geben Sie einen Straßennamen ein.")
     private String streetName;
 
-
-    @Min(value = 1, message = "Die Hausnummer darf nicht niedriger als 1 sein.")
-    @Max(value = 999, message = "Die Hausnummer darf nicht größer als 999 sein.")
-    private long houseNumber;
+    //Must start with at least one digit. "1a", "12b", etc. possible
+    @Pattern(regexp = "^\\d+[a-zA-Z]*$", message="Geben Sie eine gültige Hausnummer ein.")
+    private String houseNumber;
 
     private String addressAddition;
 
@@ -154,11 +153,11 @@ public class RegistrationForm {
         this.streetName = streetName;
     }
 
-    public long getHouseNumber() {
+    public String getHouseNumber() {
         return houseNumber;
     }
 
-    public void setHouseNumber(long houseNumber) {
+    public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
     }
 

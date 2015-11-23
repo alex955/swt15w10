@@ -27,7 +27,7 @@ public class User {
     private String city;
     private String zip;
     private String streetName;
-    private long houseNumber;
+    private String houseNumber;
     private String addressAddition;
     private String language1;
     private String language2;
@@ -60,7 +60,7 @@ public class User {
         this.language3 = language3;
     }
 
-    public User(long id, String role, String lastName, String firstName, String username, String email, String password, String confirmPW, String city, String zip, String streetName, long houseNumber,String addressAddition, String language1, String language2, String language3) {
+    public User(long id, String role, String lastName, String firstName, String username, String email, String password, String confirmPW, String city, String zip, String streetName, String houseNumber,String addressAddition, String language1, String language2, String language3) {
 
         this.role = role;
         this.lastName = lastName;
@@ -82,7 +82,7 @@ public class User {
     @Override
     public String toString() {
         return String.format(
-                "User[id='%d', role='%s', lastName='%s', firstName='%s', username='%s', email='%s', password='%s', confirmPW='%s', city='%s', zip='%s', streetName='%s', houseNumber='%d', addressAddition='%s', language1='%s', language2='%s', language3='%s' ]", id, role, lastName, firstName, username, email, password, confirmPW, city, zip, streetName, houseNumber, addressAddition, language1, language2, language3);
+                "User[id='%d', role='%s', lastName='%s', firstName='%s', username='%s', email='%s', password='%s', confirmPW='%s', city='%s', zip='%s', streetName='%s', houseNumber='%s', addressAddition='%s', language1='%s', language2='%s', language3='%s' ]", id, role, lastName, firstName, username, email, password, confirmPW, city, zip, streetName, houseNumber, addressAddition, language1, language2, language3);
 
     }
 
@@ -174,11 +174,11 @@ public class User {
         this.streetName = streetName;
     }
 
-    public long getHouseNumber() {
+    public String getHouseNumber() {
         return houseNumber;
     }
 
-    public void setHouseNumber(long houseNumber) {
+    public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
     }
 
