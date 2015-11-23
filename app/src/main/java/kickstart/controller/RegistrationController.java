@@ -1,4 +1,6 @@
 package kickstart.controller;
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -19,9 +21,11 @@ public class RegistrationController extends CommonVariables {
 
 
     private Model model;
+    private UserAccountManager userAccountManager;
 
     @Autowired
-    public RegistrationController(UserRepository userRepository){
+    public RegistrationController(UserAccountManager userAccountManager, UserRepository userRepository){
+        this.userAccountManager = userAccountManager;
         this.userRepository = userRepository;
     }
 
@@ -36,7 +40,10 @@ public class RegistrationController extends CommonVariables {
         if(result.hasErrors())
             return "registration";
 
-        User user = new User(registrationForm.getId(), registrationForm.getRole(), registrationForm.getLastName(), registrationForm.getFirstName(), registrationForm.getUsername(), registrationForm.getEmail(), registrationForm.getPassword(), registrationForm.getConfirmPW(), registrationForm.getCity(), registrationForm.getZip(), registrationForm.getStreetName(), registrationForm.getHouseNumber(),registrationForm.getAddressAddition(), registrationForm.getLanguage1(), registrationForm.getLanguage2(), registrationForm.getLanguage3());
+        UserAccount userAccount = userAccountManager.create(registrationForm.getUsername(), registrationForm.getPassword(), registrationForm.getRole());
+        userAccountManager.save(userAccount);
+
+        User user = new User(registrationForm.getId(), userAccount, registrationForm.getLastName(), registrationForm.getFirstName(), registrationForm.getEmail(), registrationForm.getCity(), registrationForm.getZip(), registrationForm.getStreetName(), registrationForm.getHouseNumber(),registrationForm.getAddressAddition(), registrationForm.getLanguage1(), registrationForm.getLanguage2(), registrationForm.getLanguage3());
         userRepository.save(user);
         System.out.println(user);
         return ("redirect:/");

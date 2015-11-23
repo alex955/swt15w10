@@ -20,6 +20,7 @@ import javax.annotation.PostConstruct;
 import org.joda.time.DateTime;
 import org.salespointframework.EnableSalespoint;
 import org.salespointframework.SalespointSecurityConfiguration;
+import org.salespointframework.useraccount.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Configuration;
@@ -47,6 +48,10 @@ public class Application {
 	
 	@PostConstruct
     void initialize(){
+
+		final Role refugee = new Role("ROLE_REFUGEE");
+		final Role volunteer = new Role("ROLE_VOLUNTEER");
+
     	categories.save(new Category("Möbel", -1));
     	categories.save(new Category("Badmöbel", 1));
     	categories.save(new Category("Küchenmöbel", 1));
@@ -68,13 +73,16 @@ public class Application {
     	goodREPO.save(new Good("Pommes","Lorem ipsum","img/pommes.jpg","An der Jever",01217,"Pirna","11"));
     	System.out.println("GOODS ERSCHAFFEN");
     	System.out.println(goodREPO.count());
-    	
+
+    	/*
     	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", "123","", "sprache","sprache2","sprache3"));
     	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", "123","", "sprache","sprache2","sprache3"));
     	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", "123","", "sprache","sprache2","sprache3"));
     	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße","123","", "sprache","sprache2","sprache3"));
     	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", "123","", "sprache","sprache2","sprache3"));
     	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", "123","", "sprache","sprache2","sprache3"));
+    	*/
+
 	}
 
 	@Configuration

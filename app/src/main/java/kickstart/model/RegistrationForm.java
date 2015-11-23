@@ -2,8 +2,7 @@ package kickstart.model;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.beans.factory.annotation.Value;
-
+import org.salespointframework.useraccount.Role;
 import javax.validation.constraints.*;
 
 /**
@@ -14,7 +13,7 @@ public class RegistrationForm {
     private long id;
 
     @NotNull(message = "Es wurde keine Rolle ausgewählt.")
-    private String role;
+    private Role role;
 
     @Size(min=2, max=30, message = "Der Name muss zwischen 2 und 30 Zeichen lang sein.")
     private String lastName;
@@ -97,11 +96,11 @@ public class RegistrationForm {
         this.id = id;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

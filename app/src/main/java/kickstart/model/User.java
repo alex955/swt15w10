@@ -1,10 +1,10 @@
 package kickstart.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.salespointframework.useraccount.Role;
+import org.salespointframework.useraccount.UserAccount;
+
+import javax.persistence.*;
 
 /**
  * Created by Vincenz on 27.10.15.
@@ -17,7 +17,11 @@ public class User {
     @GeneratedValue(strategy= GenerationType.AUTO)
 
     private long id;
-    private String role;
+
+    @OneToOne
+    private UserAccount userAccount;
+
+    private Role role;
     private String lastName;
     private String firstName;
     private String username;
@@ -36,39 +40,12 @@ public class User {
 
     public User() {}
 
-    public String getLanguage1() {
-        return language1;
-    }
+    public User(long id, UserAccount userAccount, String lastName, String firstName, String email, String city, String zip, String streetName, String houseNumber, String addressAddition, String language1, String language2, String language3) {
 
-    public void setLanguage1(String language1) {
-        this.language1 = language1;
-    }
-
-    public String getLanguage2() {
-        return language2;
-    }
-
-    public void setLanguage2(String language2) {
-        this.language2 = language2;
-    }
-
-    public String getLanguage3() {
-        return language3;
-    }
-
-    public void setLanguage3(String language3) {
-        this.language3 = language3;
-    }
-
-    public User(long id, String role, String lastName, String firstName, String username, String email, String password, String confirmPW, String city, String zip, String streetName, String houseNumber,String addressAddition, String language1, String language2, String language3) {
-
-        this.role = role;
+        this.userAccount = userAccount;
         this.lastName = lastName;
         this.firstName = firstName;
-        this.username = username;
         this.email = email;
-        this.password = password;
-        this.confirmPW = confirmPW;
         this.city = city;
         this.zip = zip;
         this.streetName = streetName;
@@ -82,7 +59,7 @@ public class User {
     @Override
     public String toString() {
         return String.format(
-                "User[id='%d', role='%s', lastName='%s', firstName='%s', username='%s', email='%s', password='%s', confirmPW='%s', city='%s', zip='%s', streetName='%s', houseNumber='%s', addressAddition='%s', language1='%s', language2='%s', language3='%s' ]", id, role, lastName, firstName, username, email, password, confirmPW, city, zip, streetName, houseNumber, addressAddition, language1, language2, language3);
+                "User[id='%d', role='%s', lastName='%s', firstName='%s', username='%s', email='%s', password='%s', city='%s', zip='%s', streetName='%s', houseNumber='%s', addressAddition='%s', language1='%s', language2='%s', language3='%s' ]", id, userAccount.getRoles(), lastName, firstName, userAccount.getUsername(), email, userAccount.getPassword(), city, zip, streetName, houseNumber, addressAddition, language1, language2, language3);
 
     }
 
@@ -118,11 +95,11 @@ public class User {
         return password;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
@@ -188,6 +165,38 @@ public class User {
 
     public void setAddressAddition(String addressAddition) {
         this.addressAddition = addressAddition;
+    }
+
+    public String getLanguage1() {
+        return language1;
+    }
+
+    public void setLanguage1(String language1) {
+        this.language1 = language1;
+    }
+
+    public String getLanguage2() {
+        return language2;
+    }
+
+    public void setLanguage2(String language2) {
+        this.language2 = language2;
+    }
+
+    public String getLanguage3() {
+        return language3;
+    }
+
+    public void setLanguage3(String language3) {
+        this.language3 = language3;
+    }
+
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
     }
 }
 
