@@ -6,7 +6,7 @@
 
 * Qualitätsziele
 
-** Die Webseite muss Platformunabhänigig auf allen Geräten und jedem Webbrowser funktionieren.
+** Die Webseite muss plattformunabhänigig auf allen Geräten und jedem Webbrowser funktionieren.
 ** Ladezeiten müssen den von ähnlichen Webseiten entsprechen, und es darf nicht deutlich mehr als üblich viel Datenvolumen verbraucht werden.
 ** Das Design soll schlicht und ansprechend sein.
  
@@ -17,9 +17,9 @@
 * Hardware-Vorgaben
 ** Javafähiger Server mit Internetanbindung
 * Software-Vorgaben
-** Bootstrap, Foundation o.Ã¤. Framework fÃ¼r Desktop und Mobile UnterstÃ¼tzung
-** Thymleaf fÃ¼r Templates
-** Spring, Spring+Data mit MySQL Backend, Spring+Security fÃ¼r verschiedene Rollen
+** Bootstrap, Foundation o.Ã¤. Framework fÃ¼r Desktop und Mobile Unterstützung
+** Thymleaf für Templates
+** Spring, Spring+Data mit MySQL Backend, Spring+Security für verschiedene Rollen
 ** EclipseLink JPA
 ** Lombok
 ** ReCaptcha2
@@ -51,6 +51,7 @@ Konstruktion einer plattformübergreifenden Website.
 * Verwendete Muster
 ** Singelton
 * Persistenz
+** Durch das Benutzen der JPA sind wir variable im Hinblick auf die Wahl der konkreten Datenbank
 * Benutzeroberfläche
 ** Foundation
 
