@@ -1,9 +1,17 @@
-= Zeiterfassung für Gruppe XX
+﻿= Zeiterfassung für Gruppe XX
 
 Notieren Sie die Zeit in Minuten für jeden Entwickler und für Team-Treffen pro Woche.
 Die verwendete Zeit beinhaltet auch das Lesen von Dokumentationen, Besprechungen mit Teamkollegen und sonstige auf das Praktikum bezogene Aufgaben.
 
 // See http://asciidoctor.org/docs/user-manual/#tables
 [option="headers"]
-|Von |Bis |Dev1 |Dev2 |Dev3 |Dev4 |Dev5 |Dev6 |Meeting
-|…   |…   |…    |…    |…    |…    |…    |…    |…
+|===
+|Von |Bis |Vincenz Herz |Alexander Herzog |Andreas Hubert |Lukas Klose |Alexander Shulga |Meeting
+|14.10.2015   |18.10.2015   |…    |…    |…    |…    |420   |70
+|19.10.2015   |25.10.2015   |…    |…    |…    |…    |1020    |60
+|26.10.2015   |01.11.2015   |…    |…    |…    |…    |1050    |90
+|02.11.2015   |08.11.2015   |…    |…    |…    |…    |1260   |70
+|09.11.2015   |15.11.2015   |…    |…    |…    |…    |660    |90
+|16.11.2015   |22.11.2015   |…    |…    |…    |…    |900    |70
+
+|===
