@@ -3,6 +3,7 @@ package kickstart.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 import org.joda.time.DateTime;
 
@@ -13,6 +14,18 @@ public abstract class Anzeige {
 	protected @Id @GeneratedValue long id;
 	protected String name;
 	protected String description;
+	private String picPath;
+
+	public String getPicPath() {
+		return picPath;
+	}
+
+
+	public void setPicPath(String picPath) {
+		this.picPath = picPath;
+	}
+
+
 	protected String location;
 	
 	protected String street;
@@ -81,9 +94,10 @@ public abstract class Anzeige {
 	}
 	
 	
-	public Anzeige(String name,String description,String location){
+	public Anzeige(String name,String description, String picPath, String location){
 		this.name=name;
 		this.description=description;
+		this.picPath = picPath;
 		this.location=location;
 	}
 	

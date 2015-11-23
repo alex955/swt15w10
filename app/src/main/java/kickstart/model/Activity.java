@@ -36,8 +36,8 @@ public class Activity extends Anzeige{
 	}
 
 
-	public Activity(String name, String description, DateTime anfang,DateTime ende,String street,int PLZ, String location, String number) {
-		super(name, description, location);
+	public Activity(String name, String description, String picPath, DateTime anfang,DateTime ende,String street,int PLZ, String location, String number) {
+		super(name, description, picPath, location);
 		
 		this.anfang=anfang;
 		

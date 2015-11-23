@@ -15,7 +15,7 @@
 		<div class="large-12 columns">
 			<p>&nbsp;</p>
 			<h4 class="subheader">Angebot einstellen</h4>
-			<form action="#" th:action="@{/newArticle}" th:object="${NewArticleForm}" method="post">
+			<form action="#" th:action="@{/newArticle}" th:object="${NewArticleForm}" method="post" enctype="multipart/form-data">
 				<div class="panel">
 					<div class="row">
 						<div class="small-12 columns">
@@ -48,7 +48,7 @@
 								<p>Bilder</p>
 							</div>
 							<div class="small-12 large-8 columns">
-								<a><input type="file" /></a>
+								<a><input type="file" name="file"/></a>
 							</div>
 							<hr />
 						</div>
