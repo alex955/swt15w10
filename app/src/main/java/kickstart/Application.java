@@ -80,9 +80,7 @@ public class Application {
     	goodREPO.save(new Good("Pommes","Lorem ipsum","img/pommes.jpg","An der Jever",01217,"Pirna","11"));
     	System.out.println("GOODS ERSCHAFFEN");
     	System.out.println(goodREPO.count());
-
-    	
-    	 EMailController.SendEmail("luk@sklose.de", 244444443);
+		
     	/*
     	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", "123","", "sprache","sprache2","sprache3"));
     	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", "123","", "sprache","sprache2","sprache3"));
