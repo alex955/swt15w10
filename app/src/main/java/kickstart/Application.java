@@ -71,7 +71,7 @@ public class Application {
     	Good g9 = new Good("in Blablub", "Beschreibung", "picPath", "photo", "straße", 01067, "ort", "number", 7);
     	Good g10 = new Good("in weapons", "Beschreibung", "picPath", "photo", "straße", 01067, "ort", "number", 8);
     	Good g11 = new Good("in gruppenter", "Beschreibung", "picPath", "photo", "straße", 01067, "ort", "number", 9);
-    	Good g12 = new Good("in nochmal möbel", "Beschreibung", "picPath", "photo", "straße", 01067, "ort", "number", 10);
+    	Good g12 = new Good("in nochmal möbel", "Beschreibung", "picPath", "photo", "straße", 01067, "ort", "number", 11);
     	
     	
     	goodREPO.save(g1);
