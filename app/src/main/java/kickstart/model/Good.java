@@ -10,13 +10,24 @@ public class Good extends Anzeige{
 	private String photo;
 	
 
-	public Good(String name, String description,String photo,String street,int PLZ, String location, String number) {
-		super(name, description, location);
+	public Good(String name, String description, String picPath, String photo,String street,int PLZ, String location, String number) {
+		super(name, description, picPath, location);
 		this.photo=photo;
 	
 		this.street=street;
 		this.number=number;
 		this.PLZ=PLZ;
+	
+	}
+	
+	public Good(String name, String description, String picPath, String photo,String street,int PLZ, String location, String number, long categoryId) {
+		super(name, description, picPath, location);
+		this.photo=photo;
+	
+		this.street=street;
+		this.number=number;
+		this.PLZ=PLZ;
+		this.category = categoryId;
 	
 	}
 

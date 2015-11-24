@@ -1,55 +1,64 @@
-= Test-Plan
+﻿= Test-Plan
 
 Dieser Testplan stellt eine vereinfachte Version der IEEE 829-1998 Vorlage dar.
 
 == Einführung
 //Wozu dient das Dokument? Zielgruppe?
-Das Dokument hilft bei der Erstellung der jUnit-Tests und hilft irgendwie so bei der Herstellung einer gewissen Grundfunktionalität und so. Keine Ahnung man. Jemand anders soll das machen. Mittwoch ist eh Feiertag und keine Sau wird je dieses Dokument lesen.
+Dieses Dokument dient der Übersicht über die Testfälle, die die korrekte Funktionalität der Refugee-App gewährleisten und demonstrieren sollen. 
 
 == Aufbau der Testbezeichner
-Nach welchem Schema sind die Tests benannt?
-
-*Bsp.*
-
-*U - Unit Test, I -  Integrationstest*
-
-*U-1, U-2, I-1*
+Im Folgenden werden Tests, die zur Überprüfung der Funktionalität eines einzelnen, isoliert testbaren Moduls dienen mit dem Präfix *U* (für Unit-Test) versehen.
+Tests, die modulübergreifend stattfinden und "größere" Funktionalität testen werden hingegen mit dem Präfix *I* (für Integration-Test) versehen. Beide Arten werden fortlaufend nummeriert.
 
 == Test Gegenstände
+Wie obig beschrieben sollen die in diesem Dokument beschriebenen Testfälle die Funktionalität des ganzen System und seiner Subsysteme demonstrieren - Testgegenstände sind demnach die einzelnen Module (User-, Artikel-, Sprach- sowie Kommunikationsmanagement) sowie deren integrative Nutzung.
 
 == Zu testende Funktionalitäten
+* User-Management: Registrierung eines neuen Users, Accountbestätigung per Mail, Login, Logout, persönliche Daten ändern, Adminfunktionen (User löschen)
+* Artikelmanagement: Hinzufügen, Bearbeiten und Löschen von (eigenen) Artikeln, Adminfunktionen (Artikel löschen, bearbeiten, Kategorisierung verwalten)
+* Sprachmanagement: Anzeige verschiedener Sprachen auf allen Anzeigen 
+* Kommunikationsmanagement: Artikelbezogene Kommunikation in verschiedenen Sprachen, Textbausteinartige Kommunikation, Chatfunktion
 
 == Nicht zu testende Funktionalitäten
-z.B. Bibliotheken von Drittanbietern (eigene Tests beschränken sich auf Schnittstelle, bzw. Zusammenspiel).
+* Google API für Übersetzung, Entferungsberechnung (im Umkreis suchen)
 
 == Herangehensweise
-*Bsp.:*
-
-*Klassen werden mit JUnit getestet.*
-
-*Integrationstest nach Bottom-Up Prinzip*
+Zuerst soll durch die Unit-Tests sichergestellt werden, dass alle Teilfunktionalitäten geschlossen in sich wie vorgegeben funktionieren. Ist dies gewährleistet, wird deren Integration in Integrationstests sichergestellt durch holistische Testfälle. Die Module/Units werden durch jUnit getests, die Integration händisch nach striktem Testplan durchgeführt - mit diesem Ansatz soll Bottom Up getestet werden.
 
 == Umgebungsvoraussetzungen
-* Wird spezielle Hardware benötigt?
-* Welche Daten müssen bereitgestellt werden? Wie werden die Daten bereitgestellt?
-* Wird zusätzliche Software für das Testen benötigt?
-* Wie kommuniziert die Software während des Testens? Internet? Netzwerk?
+Da für die Anwendung keine speziellen Hard- sowie Softwarevoraussettzungen erfüllt sein müssen, können die Tests quasi auf jedem System auf dem Java (für die Integrationstests auf dem fertig kompiliertem System) sowie Spring, Maven und jUnit für die Unittests laufen, ausgeführt werden.
+Die Daten für die Unittests werden in den Unit-Tests bereitgestellt, für die Integrationstests werden - da das System von der Interaktion mit einem Nutzer bzw. dessen Eingaben abhängt - die Daten im Testfall bereitgestellt und händisch ins System eingegeben.
+Während des Testens wird die Anwendung als lokaler Server auf dem Testsystem ausgeführt und darauf getestet.
 
 == Testfälle und Verantwortlichkeit
-Jede testbezogene Aufgabe muss einem Ansprechpartner zugeordnet werden.
+Die Verantwortlichkeiten der Testfälle finden sich in der untenstehenden Tabelle.
 
 // See http://asciidoctor.org/docs/user-manual/#tables
 [options="headers"]
 |===
 |ID |Anwendungsfall |Vorbedingungen |Eingabe |Ausgabe
-|#1, #2 |Registrierung|Unregistrierer User auf Webseite|Benutzerdaten aus Registrierungsformular|Benutzeraccount wird in Datenbank gespeichert. Bestätigungs-Email wird versendet. Weiterleitung auf "Registrierung erfolgreich"-Seite.
-|#3|Login als Benutzer/Admin|Unangemeldeter User auf Webseite|Benutzername/E-Mail und Passwort|Setzen der Rolle (User/Admin). Weiterleiten auf "Neueste Artikel"
-|#4|Passwortwiederherstellung|Registrierter, unangemeldeter User|E-Mail-Adresse/Username|E-Mail mit Link zur Passwortwiederherstellung. Meldung "E-Mail wurde versandt".
-|#5|Änderung persönlicher Daten|Eingeloggter User/Admin|Neue persönliche Daten|Daten in Datenbank werden geändert. Success-Meldung an User.
-|#6|Änderung der Sprache|Eingelogger User/Admin|Neue Sprache|Daten in Datenbank werden geändert. Seite wird in neuer Sprache angezeigt.
-|#7|Suche nach Godds/Activities mit Suchradius|Eingeloggter User/Admin|Stichwort, Kategorie, Ort, Radius|Suchergebnisse nach Filter
-|#8,#9|Verfall von Artikel|Erstelltes Angebot erreicht Verfallsdatum|-|System löscht Artikel aus Datenbank
-|#10|Schreiben einer Nachricht an Artikelersteller|Eingeloggter User, 2. User mit Angebot|Nachricht und Empfänger|Speicherung der Nachricht im System, Benachrichtigung des Empfängers per E-Mail
-|#11|Anzeigen der Nachrichtenhistorie einer Konversation|Konversation zwischen 2 Personen, Eingeloggte Person aus Konversation|Klick auf Konversation|Nachrichtenhistorie aus Datenbank
-|#12|Artikel Bearbeiten|Eingelogger User auf eigenem Artikel bzw. Admin|Bearbeitungsanfrage mit zu bearbeiteten Informationen|Speicherung der Änderung. Anzeige der veränderten Seite.
+|A-1,2 |Registrierung|Unregistrierer User auf Webseite|Benutzerdaten aus Registrierungsformular|Weiterleitung auf "Registrierung erfolgreich"-Seite.
+|U-1,2 |Registrierung|Unregistrierer User auf Webseite|Benutzerdaten aus Registrierungsformular|Benutzeraccount in Datenbank angelegt mit Benutzerdaten
+|A-3|Login als Benutzer|Registrierter, unangemeldeter User auf Webseite|Korrekter Benutzername/E-Mail und korrektes Passwort|Weiterleiten auf "Neueste Artikel"
+|A-3|Login als Benutzer|Registrierter, unangemeldeter User auf Webseite|Falscher Benutzername/E-Mail oder falsches Passwort|Hinweis auf eine falsche Eingabe
+|U-3|Login als Benutzer|Registrierter, unangemeldeter User auf Webseite|Korrekter Benutzername/E-Mail und korrektes Passwort|Setzen der User Rolle
+|A-4|Logout als Benutzer|Angemeldeter User auf Webseite|"Ausloggen Button"|Setzen der Visitor Rolle
+|A-5|Account löschen|Angemeldeter User auf Webseite|"Account Löschen Button"|Weiterleitung auf Frontpage, Benachrichtigung "Account gelöscht"
+|U-5|Account löschen|Angemeldeter User auf Webseite|"Account Löschen Button"|Account aus der Datenbank gelöscht, Visitor Rolle zugeteilt
+|A-6|Passwortwiederherstellung|Registrierter, unangemeldeter User|E-Mail-Adresse/Username|Senden einer E-Mail mit Link zum zurücksetzen des Passworts. Meldung "E-Mail wurde versandt."
+|A-6|Passwortwiederherstellung|Nicht Registrierter User|Nicht registrierte(r) E-Mail-Adresse/Username|Meldung "Nicht registrierte(r) Email Adresse/Username"
+|A-7|Persönliche Daten ändern|Angemeldeter User|Neue persönliche Daten|Success-Meldung an User
+|U-7|Persönliche Daten ändern|Angemeldeter User|Neue persönliche Daten|Aktualisierter Benutzeraccount in der Datenbank
+|A-8|Sprache ändern|Angemeldeter User|Sprachbutton in der Topbar|Seite wird in ausgewählter Sprache angezeigt.
+|A-9|Angebot erstellen|Angemeldeter User|Formular mit Angebotsinformationen|Weiterleitung auf eingestelltes Angebot
+|U-9|Angebot erstellen|Angemeldeter User|Formular mit Angebotsinformationen|Speichern des Angebots in der Datenbank, zuweisen zum Benutzeraccount 
+|A-10|Angebot bearbeiten|Angemeldeter User auf eigenem Artikel, Admin|Bearbeitungsanfrage mit zu bearbeiteten Informationen|Anzeige der veränderten Seite
+|U-10|Angebot bearbeiten|Angemeldeter User auf eigenem Artikel, Admin|Bearbeitungsanfrage mit zu bearbeiteten Informationen|Aktualisieren des Angebots in der Datenbank
+|A-11|Angebot löschen|Angemeldeter User auf eigenem Artikel, Admin|Angebot löschen Button|Meldung "erfolgreich gelöscht"
+|U-11|Angebot löschen|Angemeldeter User auf eigenem Artikel, Admin|Angebot löschen Button|Angebot aus der Datenbank löschen
+|A-12|Filtern der Angebote durch Suchradius|Angemeldeter/unangemeldeter User|Auswählen des Suchradius|Anzeige entsprechender Angebote
+|U-12|Filtern der Angebote durch Suchradius|Angemeldeter/unangemeldeter User|Auswählen des Suchradius|Berechnung der Entfernungen zu jedem Angebot und anschließendes Filtern
+|A-13|Filtern der Angeboten durch Kategorien|Angemeldeter/unangemeldeter User|Auswählen der Kategorie|Anzeige entsprechender Angebote
+|U-13|Filtern der Angeboten durch Kategorien|Angemeldeter/unangemeldeter User|Auswählen der Kategorie|Ausgabe jener Angebote mit entsprechender Kategorie
+fortsetzung folgt
 |===

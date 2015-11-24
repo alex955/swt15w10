@@ -85,24 +85,24 @@ Die typischen Anwendungsfälle (Anlegen, Ändern, Löschen) können zu einem ein
 // See http://asciidoctor.org/docs/user-manual/#tables
 [options="header"]
 |===
-|Anwendungsfall |Akteure | Beschreibung | Modul |
-| initiale Registrierung | nicht angemeldeter Besucher des Systems + Administrator| ein nicht registrierter Nutzer hat die Möglichkeit, sich unter Angabe von Name, Adresse, Mailadresse, bevorzugter Sprache (mehrere auswähl- und rank-bar) zu registrieren um danach das System nutzen zu können. Die Nutzung ist erst nach dem Bestätigen einer vom System automatisch generierten Mail möglich. Ferner muss ein Captcha richtig eingegeben werden, um den Prozess abschließen zu können. | User Management |
-| Rolle bei Registrierung | registrierender Benutzer | man kann sich entweder als Helfender oder Flüchtling registrieren |User Management |
-| Login | registrierter Benutzer, Administrator| es existiert ein Login-Panel, bei dem man sich unter Angabe von Nutzername oder Mailadresse und Passwort einloggen kann |User Management |
-| Passwort Retrieval | registrierter Benutzer, Administrator| sollte man seinen Nutzernamen/registrierte Mailadresse noch kennen jedoch das Passwort vergessen haben, gibt es die Möglichkeit sich einen Link zusenden zu lassen, der nach Klicken eines darin enthaltenen Links ein neues Passwort generiert und zuschickt |User Management |
-| Änderung persönlicher Daten | registrierter Benutzer | nach einloggen gibt es die Möglichkeit, die angegebene Adresse, Sprachen, Mailadresse oder Passwort ändern zu können |User Management |
-|- |- | - | - |
-| Sprachänderung | registrierender/registrierter Benutzer | nach selektieren der am meisten bevorzugten Sprache bei der Registrierung bzw. nach dem Login ändert sich der Anzeigetext des Systems  | Language Management |
-|- |- | - | - |
-|Auswahl und Suche Goods/Activities | eingeloggter Nutzer | nach einloggen hat man die Möglichkeit entweder durch Klick auf einen "Goods" oder "Activities"-Button die jeweiligen Kategorien durchsuchen zu können. Nach dem Klicken erscheint eine Suchmaske.  | Article Management |
-|Auswahl Goods | eingeloggter Nutzer | in der Anzeige der Goods-Kategorie ist die Suchmaske erweitert mit einer Option, sich Angebote  in einem bestimmten Ort oder im Umkreis von x Kilometern (x auswählbar) anzeigen zu lassen. Ferner lassen sich verschiedene Kategorien anklicken, um die Suche auf diese zu beschränken.| Article Management |
-|Auswahl Activities | eingeloggter Nutzer | in der Anzeige der Activities-Kategorie ist die Suchmaske ebenso erweitert mit einer Option, sich Angebote  in einem bestimmten Ort oder im Umkreis von x Kilometern (x auswählbar) anzeigen zu lassen| Article Management |
-|Anzeige eines Angebots (Good oder Activity)| eingeloggter Benutzer | inserierte Angebote werden mit optionalem Photo, Ort und PLZ des Anbieters, Einstellungsdatum, einer Liste aus Attributen (z.B. Größe, Farbe,..), einer Freitextbeschreibung des Anbieters sowie einem Button zur Kontaktaufnahme angezeigt  | Article Management |
-|Anlegen, Bearbeiten, Löschen eines Angebots | Inserierender, Admin | Ein eingeloggter Benutzer hat die Möglichkeit ein Angebot zu erstellen. Eigene bereits erstellte Angebote können bearbeitet werden. Inserierende eines Angebots haben die Möglichkeit, das Angebot zu löschen. Dies wird durch einen Button gewährleistet, der im Angebot zu sehen ist. Admins können jedes beliebige Angebot löschen | Article Management, User Management |
-|Kontaktaufnahme bei Anzeige eines Angebots | registrierter Benutzer | jede Darstellung eines Angebots hat einen Button, durch den Kontakt zum Inserierenden aufgenommen werden kann. Nach Klick öffnet sich eine Maske, mit deren Hilfe bausteinhaft ein Kontaktgesuch zusammengebaut werden kann | Article Management |
-|- |- | - | - |
-|Formularmaske für Kontaktaufnahme | registrierter Benutzer, Inserierender | in der Kontaktaufname kann eine Nachricht an den Inserierenden durch zusammenfügen von Textbausteinen erzeugt werden. Dabei werden mehrere Elemente aus verschiedenen Kategorien (z.B. Begrüßung, Termin zur Abholung [mit popup zur Selektion des Termins]) ausgewählt. Ferner gibt es ein Freitext-Feld, bei dem automatisch durch z.B. Google Translator von dem geschriebenen Text des Kontaktaufnehmenden in die Sprache des Inserierenden übersetzt wird. | Communication Management |
-|Anzeige der Nachrichtenhistorie | registrierter Benutzer, Inserierender | bisher ausgetauschte Nachrichten zwischen zwei bestimmten registrierten Mitgliedern können in einer Art Chat History angezeigt werden. | Communication Management |
+|Anwendungsfall |Akteure | Beschreibung | Modul 
+| Account anlegen, bearbeiten, löschen | nicht angemeldeter Besucher des Systems, Administrator, angemeldeter Benutzer| Ein nicht registrierter Nutzer hat die Möglichkeit, sich unter Angabe von Name, Adresse, Mailadresse, bevorzugter Sprache (mehrere auswähl- und rank-bar) zu registrieren um danach das System nutzen zu können. Die Nutzung ist erst nach dem Bestätigen einer vom System automatisch generierten Mail möglich. Ferner muss ein Captcha richtig eingegeben werden, um den Prozess abschließen zu können. Man kann sich entweder als Helfender oder Flüchtling registrieren. Nach Einloggen gibt es die Möglichkeit seine angegebene Adresse (bzw. Admin bei allen Accounts), Sprachen, Mailadresse oder Passwort ändern zu können oder auch seinen Account zu löschen. | User Management 
+| Login | registrierter Benutzer, Administrator| es existiert ein Login-Panel, bei dem man sich unter Angabe von Nutzername oder Mailadresse und Passwort einloggen kann |User Management 
+| Passwort Retrieval | registrierter Benutzer, Administrator| sollte man seinen Nutzernamen/registrierte Mailadresse noch kennen jedoch das Passwort vergessen haben, gibt es die Möglichkeit sich einen Link zusenden zu lassen, der nach Klicken eines darin enthaltenen Links ein neues Passwort generiert und zuschickt |User Management 
+|- |- | - | - 
+| Sprachänderung | registrierender/registrierter Benutzer | nach selektieren der am meisten bevorzugten Sprache bei der Registrierung bzw. nach dem Login ändert sich der Anzeigetext des Systems  | Language Management 
+|- |- | - | - 
+|Auswahl und Suche Goods/Activities | eingeloggter Nutzer | nach einloggen hat man die Möglichkeit entweder durch Klick auf einen "Goods" oder "Activities"-Button die jeweiligen Kategorien durchsuchen zu können. Nach dem Klicken erscheint eine Suchmaske.  | Article Management 
+|Auswahl Goods | eingeloggter Nutzer | in der Anzeige der Goods-Kategorie ist die Suchmaske erweitert mit einer Option, sich Angebote  in einem bestimmten Ort oder im Umkreis von x Kilometern (x auswählbar) anzeigen zu lassen. Ferner lassen sich verschiedene Kategorien anklicken, um die Suche auf diese zu beschränken.| Article Management 
+|Auswahl Activities | eingeloggter Nutzer | in der Anzeige der Activities-Kategorie ist die Suchmaske ebenso erweitert mit einer Option, sich Angebote  in einem bestimmten Ort oder im Umkreis von x Kilometern (x auswählbar) anzeigen zu lassen| Article Management 
+|Anzeige eines Angebots (Good oder Activity)| eingeloggter Benutzer | inserierte Angebote werden mit optionalem Photo, Ort und PLZ des Anbieters, Einstellungsdatum, einer Liste aus Attributen (z.B. Größe, Farbe,..), einer Freitextbeschreibung des Anbieters sowie einem Button zur Kontaktaufnahme angezeigt  | Article Management 
+|Angebot anlegen, bearbeiten, löschen | Inserierender, Admin | Ein eingeloggter Benutzer hat die Möglichkeit ein Angebot zu erstellen. Eigene bereits erstellte Angebote können bearbeitet werden. Inserierende eines Angebots haben die Möglichkeit, das Angebot zu löschen. Dies wird durch einen Button gewährleistet, der im Angebot zu sehen ist. Admins können jedes beliebige Angebot löschen | Article Management, User Management 
+|Kontaktaufnahme bei Anzeige eines Angebots | registrierter Benutzer | jede Darstellung eines Angebots hat einen Button, durch den Kontakt zum Inserierenden aufgenommen werden kann. Nach Klick öffnet sich eine Maske, mit deren Hilfe bausteinhaft ein Kontaktgesuch zusammengebaut werden kann | Article Management 
+|- |- | - | - 
+|Formularmaske für Kontaktaufnahme | registrierter Benutzer, Inserierender | in der Kontaktaufname kann eine Nachricht an den Inserierenden durch zusammenfügen von Textbausteinen erzeugt werden. Dabei werden mehrere Elemente aus verschiedenen Kategorien (z.B. Begrüßung, Termin zur Abholung [mit popup zur Selektion des Termins]) ausgewählt. Ferner gibt es ein Freitext-Feld, bei dem automatisch durch z.B. Google Translator von dem geschriebenen Text des Kontaktaufnehmenden in die Sprache des Inserierenden übersetzt wird. | Communication Management 
+|Anzeige der Nachrichtenhistorie | registrierter Benutzer, Inserierender | bisher ausgetauschte Nachrichten zwischen zwei bestimmten registrierten Mitgliedern können in einer Art Chat History angezeigt werden. | Communication Management 
+|- |- | - | - 
+|Kategorie hinzufügen, bearbeiten, löschen | Admin | Ein Nutzer mit der Rolle Admin kann neue Kategorien hinzufügen, bestehende bearbeiten und bestehende Kategorien löschen. | Category Management 
 |===
 
 == Anforderungen
@@ -267,28 +267,26 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 // See http://asciidoctor.org/docs/user-manual/#tables
 [options="header"]
 |===
-|Klasse/Enumeration |Beschreibung |
-|User                 | Generalisiertester Nutzer des Systems - keine Kenntnis über Account oder ob der User eingeloggt ist |
-|RegisteredUser                  | Abstraktion von Usern, die im System registriert sind. Kapselt alle Grundgemeinsamkeiten wie Stammdaten, Kontaktmöglichkeiten, Sprachen etc. Basisfunktionalitäten des Systems sind für die erbenden Nutzergruppen verfügbar. Angebote werden dem jeweiligen Nutzer zugewiesen.|
-|Volunteer                  | Spezialisierung von RegisteredUser - jemand, der sich als Helfender im System registriert hat            |
-|Refugee                  |Spezialisierung von RegisteredUser - jemand, der sich als Flüchtling im System registriert hat            |
-|Admin                  | Administrator  mit Sonderberechtigungen zur Verwaltung des Systems          |
-|-                  |-           |
-|Language                  | Repräsentation einer Sprache, soll bestimmen in welcher Sprache das System angezeigt wird. Jeder nutzer hat eine Haupt- und keine oder mehrere Zweitsprachen.          |
-|-                  |-           |
-|Article                  | Abstraktion von Angeboten, kapselt Grunddaten aller Angebote wie z.B. ID, Name, Ort, Angebotsdauer,... . Besitzt verschiedene Tags/Keywords nach denen gesucht werden kann.       |
-|Good            | Repräsentiert "Güter", also physischer Waren die von Volunteers und/oder Refugees angeboten werden können. Besitzt verschiedene Attribute, die als ArticleBlock repräsentiert sind.          |
-|Activity                 | Repräsentiert "Aktivitäten" die im System angeboten werden können.          |
-|Category                 | Dient der Kategorisierung von Goods. Eine Kategorie kann wiederrum in mehrere Subkategorien unterteilt werden.          |
-|-                  |-           |
-|Message                  | Nachrichten, die im System zwischen Nutzern geschrieben wurden, z.B. Kontaktaufnahmen über Angebotmasken. Sind immer zwei RegisteredUsern zugewiesen und bestehen aus mehreren Textblöcken.           |
-|-                  |-           |
-|TextBlock                  | Abstrakte Repräsentation eines Textbausteins, enthält immer eine ID, Inhalt, eine Sprache sowie eine Übersetzung in eben diese Sprache.           |
-|SearchTag                  | Keyword, nach dem Angebotdatenbank durchsucht werden kann.           |
-|PortalBlock                  | Repräsentation eines GUI-Elements, das in bestimmter Sprache dargestellt werden soll.           |
-|ArticleBlock                  | Repräsentation von Textbausteinen, die in Nachrichtendialogen der Kontaktaufnahme dienen sollen.           |
-
-|…                  |…            |
+|Klasse/Enumeration |Beschreibung 
+|User                 | Generalisiertester Nutzer des Systems - keine Kenntnis über Account oder ob der User eingeloggt ist 
+|RegisteredUser                  | Abstraktion von Usern, die im System registriert sind. Kapselt alle Grundgemeinsamkeiten wie Stammdaten, Kontaktmöglichkeiten, Sprachen etc. Basisfunktionalitäten des Systems sind für die erbenden Nutzergruppen verfügbar. Angebote werden dem jeweiligen Nutzer zugewiesen.
+|Volunteer                  | Spezialisierung von RegisteredUser - jemand, der sich als Helfender im System registriert hat            
+|Refugee                  |Spezialisierung von RegisteredUser - jemand, der sich als Flüchtling im System registriert hat            
+|Admin                  | Administrator  mit Sonderberechtigungen zur Verwaltung des Systems          
+|-                  |-           
+|Language                  | Repräsentation einer Sprache, soll bestimmen in welcher Sprache das System angezeigt wird. Jeder nutzer hat eine Haupt- und keine oder mehrere Zweitsprachen.          
+|-                  |-           
+|Article                  | Abstraktion von Angeboten, kapselt Grunddaten aller Angebote wie z.B. ID, Name, Ort, Angebotsdauer,... . Besitzt verschiedene Tags/Keywords nach denen gesucht werden kann.       
+|Good            | Repräsentiert "Güter", also physischer Waren die von Volunteers und/oder Refugees angeboten werden können. Besitzt verschiedene Attribute, die als ArticleBlock repräsentiert sind.          
+|Activity                 | Repräsentiert "Aktivitäten" die im System angeboten werden können.          
+|Category                 | Dient der Kategorisierung von Goods. Eine Kategorie kann wiederrum in mehrere Subkategorien unterteilt werden.          
+|-                  |-           
+|Message                  | Nachrichten, die im System zwischen Nutzern geschrieben wurden, z.B. Kontaktaufnahmen über Angebotmasken. Sind immer zwei RegisteredUsern zugewiesen und bestehen aus mehreren Textblöcken.           
+|-                  |-           
+|TextBlock                  | Abstrakte Repräsentation eines Textbausteins, enthält immer eine ID, Inhalt, eine Sprache sowie eine Übersetzung in eben diese Sprache.           
+|SearchTag                  | Keyword, nach dem Angebotdatenbank durchsucht werden kann.           
+|PortalBlock                  | Repräsentation eines GUI-Elements, das in bestimmter Sprache dargestellt werden soll.           
+|ArticleBlock                  | Repräsentation von Textbausteinen, die in Nachrichtendialogen der Kontaktaufnahme dienen sollen.           
 |===
 
 == Akzeptanztestfälle
@@ -299,20 +297,25 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 |ID|Beschreibung
 |#1|Accountregistrierung als Flüchtling
 |#2|Accountregistrierung als Helfender
-|#3|Login als Benutzer/Admin
-|#4|Logout als Benutzer/Admin
+|#3|Login als Benutzer
+|#4|Logout als Benutzer
 |#5|Löschen des Accounts
 |#6|Passwortwiederherstellung
 |#7|Änderung persönlicher Daten
 |#8|Änderung der Sprache (Topbar)
 |#9|Erstellen eines Angebots
-|#10|Bearbeiten, Löschen eines Angebots
-|#11|Suche nach Angeboten mit Stichwörtern
+|#10|Bearbeiten eines Angebots
+|#11|Löschen eines Angebots
+//|#12|Suche nach Angeboten mit Stichwörtern
 |#12|Filtern der Angebote durch Suchradius
 |#13|Filtern der Angeboten durch Kategorien
 |#14|Verfall von Angeboten mit Verfallsdatum
 |#15|Schreiben einer Nachricht an Angebotersteller
 |#16|Anzeigen der Nachrichtenhistorie einer Konversation
+|#17|Sperren eines Benutzeraccounts als Admin
+|#18|Kategorie hinzufügen als Admin
+|#19|Kategorie bearbeiten als Admin
+|#20|Kategorie löschen als Admin
 
 |===
 

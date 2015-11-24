@@ -52,12 +52,12 @@ public class WelcomeController extends CommonVariables {
 	@RequestMapping("/search")
 	public String search(Model model) {
 		this.processedCategories = this.getProcessedCategories();
-		System.out.println("size of root categories: " + this.processedCategories.size());
+		//System.out.println("size of root categories: " + this.processedCategories.size());
 		model.addAttribute("categories", this.processedCategories);
 		
 		 model.addAttribute("anzeigen", goodREPO.findAll());
 		    
-		    System.out.println("GOOD REPO WURDE AN html übergeben");
+		   // System.out.println("GOOD REPO WURDE AN html übergeben");
 		 
 		return "search";
 	}
@@ -87,15 +87,6 @@ public class WelcomeController extends CommonVariables {
 		model.addAttribute("categories", this.processedCategories);
 		
 		return "initiatecategory";
-	}
-	
-	@RequestMapping("/newArticle")
-	public String newArticle(Model model){
-		//initiate categories
-		this.processedCategories = this.getProcessedCategories();
-		model.addAttribute("categories", this.processedCategories);
-		
-		return "newArticle";
 	}
 	
 	@RequestMapping("/adminView")

@@ -49,8 +49,6 @@ public class CommonVariables {
 			else{
 			}
 		}
-
-		System.out.println("size at fct call: " + toReturn.size());
 		return toReturn;
 	}
 }

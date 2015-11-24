@@ -1,11 +1,14 @@
 package kickstart.controller;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Category {
@@ -16,6 +19,12 @@ public class Category {
     private String name;
     private boolean root;
     private long predecessor;
+    
+    @ManyToOne
+    private Category pre;
+    
+    @OneToMany(mappedBy="pre")
+    private List<Category> post;
 
     public Category() {
     }
