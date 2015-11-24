@@ -13,143 +13,141 @@
 	<script th:src="@{/resources/js/foundation/foundation.js}"></script>
 	<script th:src="@{/resources/js/foundation/foundation.equalizer.js}"></script>
 
-	<script>
-		$(document).foundation();
-	</script>
-
 	<nav th:include="topbar :: topbar"></nav>
 	<p>&nbsp;</p>
 	<div class="row">
 		<div class="large-12 columns">
 			<div class="row">
-				<div class="large-12 columns">
+				<div class="large-6 small-12 columns">
+					<h4 class="header">Einstellungen</h4>
+				</div>
+			</div>
+			
+			<div class="row" data-equalizer="1">
+				<div class="large-6 small-12 columns">
+					<h5>Passwort ändern</h5>
+					<div class="panel" data-equalizer-watch="1">
+						<div class="row">
+								<div class="large-5 small-3 columns">Altes Passwort</div>
+								<div class="large-7 small-9 columns"><input type="text" /></div>
+						</div>
+						<div class="row">
+								<div class="large-5 small-3 columns">Neues Passwort</div>
+								<div class="large-7 small-9 columns"><input type="text" /></div>
+						</div>
+						<div class="row">
+								<div class="large-5 small-3 columns">Neues Passwort wiederholen</div>
+								<div class="large-7 small-9 columns"><input type="text" /></div>
+						</div>
+					</div>
+				</div>
 					<div class="large-6 small-12 columns">
-						<h4>Einstellungen</h4>
+						<h5>Sprache ändern</h5>
+						<div class="panel" data-equalizer-watch="1">
+							<div class="row">
+									<div class="large-5 small-3 columns">Sprache 1</div>
+									<div class="large-7 small-9 columns">
+										<select name="language1">
+											<option value="" selected="selected"> - </option>
+											<option value="german">Deutsch</option>
+											<option value="english">Englisch</option>
+											<option value="arab">Arabisch</option>
+											<option value="spanish">Spanisch</option>
+										</select>
+									</div>
+							</div>
+							<div class="row">
+									<div class="large-5 small-3 columns">Sprache 2</div>
+									<div class="large-7 small-9 columns">
+										<select name="language2">
+											<option value="" selected="selected"> - </option>
+											<option value="german">Deutsch</option>
+											<option value="english">Englisch</option>
+											<option value="arab">Arabisch</option>
+											<option value="spanish">Spanisch</option>
+										</select>
+									</div>
+							</div>
+							<div class="row">
+									<div class="large-5 small-3 columns">Sprache 3</div>
+									<div class="large-7 small-9 columns">
+										<select name="language3">
+                                            <option value="" selected="selected"> - </option>
+											<option value="german">Deutsch</option>
+											<option value="english">Englisch</option>
+											<option value="arab">Arabisch</option>
+											<option value="spanish">Spanisch</option>
+										</select>
+									</div>
+							</div>
+						</div>	
 					</div>
 				</div>
+				
+				<div class="row" data-equalizer="2">
+					<div class="large-6 small-12 columns">
+						<h5>E-Mail-Adresse ändern</h5>
+						<div class="panel" data-equalizer-watch="2">
+							<div class="row">							                                                      
+								<div class="small-12 columns">
+		                            Um Ihre E-Mail-Adresse zu ändern, sind zwei Schritte nötig: 
+		                            <br></br>
+		                            <ol>
+			                            <li>Wir verschicken eine E-Mail an Ihre bisherige E-Mail Adresse. Bitte bestätigen Sie zu Ihrer Sicherheit durch Auswahl des Links in der E-Mail, dass Sie der Besitzer dieses E-Mail-Kontos sind.</li>
+			                            <li>Anschließend erhalten Sie eine weitere E-Mail an die neue E-Mail-Adresse und können die Änderung dann abschließen.</li>
+			                        </ol>              
+								</div>
+							</div>
+							<div class="row">							                                                      
+								<div class="large-5 small-3 columns">Registrierte E-Mail-Adresse</div>
+								<div class="large-7 small-9 columns"><input type="text" disabled="" placeholder="fluechtling@deutschland.com" /></div>
+							</div>
+							<div class="row">							                                                      
+								<div class="large-5 small-3 columns">Neue E-Mail-Adresse</div>
+								<div class="large-7 small-9 columns"><input type="text" placeholder="fluechtling@deutschland.com" /></div>
+							</div>
+							<div class="row">
+								<div class="large-5 small-3 columns">Neue E-Mail-Adresse wiederholen</div>
+								<div class="large-7 small-9 columns"><input type="text" placeholder="fluechtling@deutschland.com" /></div>
+							</div>
+						</div>
+					</div>
+					<div class="large-6 small-12 columns">
+						<h5>Wohnort ändern</h5>
+						<div class="panel" data-equalizer-watch="2">
+							<div class="row">
+								<div class="large-5 small-3 columns">Stadt</div>
+								<div class="large-7 small-9 columns">
+									<input type="text" name="city" placeholder="Stadt"/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="large-5 small-3 columns">PLZ</div>
+								<div class="large-7 small-9 columns">
+									<input type="text" name="zip" placeholder="PLZ"/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="large-5 small-3 columns">Straße, Hausnummer, Addresszusatz</div>
+								<div class="large-7 small-9 columns">
+									<input type="text" name="streetName" placeholder="Straßenname"/>
+									<input type="text" name="houseNumber" placeholder="Hausnummmer"/>
+									<input type="text" name="addressAddition" placeholder="(optional)"/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<button class="button left" type="submit" th:href="@{/}">Änderungen speichern</button>
 			</div>
-
-			<div class="large-6 small-12 columns">
-				<h5>Passwort ändern</h5>
-				<div class="panel">
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="large-5 small-3 columns">Altes Passwort</div>
-							<div class="large-7 small-9 columns">
-								<input type="text" />
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="large-5 small-3 columns">Neues Passwort</div>
-							<div class="large-7 small-9 columns">
-								<input type="text" />
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="large-5 small-3 columns">Neues Passwort
-								wiederholen</div>
-							<div class="large-7 small-9 columns">
-								<input type="text" />
-							</div>
-						</div>
-					</div>
-					<div class="small button">Neues Passwort speichern</div>
-				</div>
-
-				<h5>E-Mail-Adresse ändern</h5>
-				<div class="panel">
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="large-5 small-3 columns">Neue E-Mail-Adresse</div>
-							<div class="large-7 small-9 columns">
-								<input type="text" placeholder="fluechtling@deutschland.com" />
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="large-5 small-3 columns">Neue E-Mail-Adresse
-								wiederholen</div>
-							<div class="large-7 small-9 columns">
-								<input type="text" placeholder="fluechtling@deutschland.com" />
-							</div>
-						</div>
-					</div>
-					<div class="small button">E-Mail-Adresse bestätigen</div>
-				</div>
-
-			</div>
-
-			<div class="large-6 small-12 columns">
-				<h5>Sprache ändern</h5>
-				<div class="panel">
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="large-5 small-3 columns">Sprache 1</div>
-							<div class="large-7 small-9 columns">
-								<input type="text" placeholder="Deutsch" />
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="large-5 small-3 columns">Sprache 2</div>
-							<div class="large-7 small-9 columns">
-								<input type="text" placeholder="Englisch" />
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="large-5 small-3 columns">Sprache 3</div>
-							<div class="large-7 small-9 columns">
-								<input type="text" placeholder="Russisch" />
-							</div>
-						</div>
-					</div>
-					<div class="small button">Sprachen bestätigen</div>
-				</div>
-
-				<h5>Wohnort ändern</h5>
-				<div class="panel">
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="large-5 small-3 columns">Stadt</div>
-							<div class="large-7 small-9 columns">
-								<input type="text" placeholder="Dresden" />
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="large-5 small-3 columns">PLZ</div>
-							<div class="large-7 small-9 columns">
-								<input type="text" placeholder="01309" />
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="small-12 columns">
-							<div class="large-5 small-3 columns">Straße, Hausnummer</div>
-							<div class="large-7 small-9 columns">
-								<input type="text" placeholder="irgendwo, 42" />
-							</div>
-						</div>
-					</div>
-					<div class="small button">Wohnort bestätigen</div>
-				</div>
-
-			</div>
-
 		</div>
-	</div>
 
 
 	<footer th:include="footer :: footer"></footer>
 
+	<script>
+		$(document).foundation();
+	</script>
+	
 </body>
 </html>

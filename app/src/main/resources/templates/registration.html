@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<script th:src="@{/resources/js/vendor/jquery.js}"></script>
+	<script th:src="@{/resources/js/vendor/jquery.js}"></script>
 	<script th:src="@{/resources/js/foundation/foundation.js}"></script>
 	<script th:src="@{/resources/js/foundation/foundation.equalizer.js}"></script>
 
@@ -18,77 +18,76 @@
 	<div class="row" >
 		<p>&nbsp;</p>
 		<div class="small-12 columns">
-			<h4 class="subheader">Registrieren</h4>
-			<form action="#" th:action="@{/registration}"
-				th:object="${RegistrationForm}" method="post">
-				<div class="row" data-equalizer="true">
+			<h4 class="header">Registrieren</h4>
+			<form action="#" th:action="@{/registration}" th:object="${RegistrationForm}" method="post">
+				<div class="row" data-equalizer="1">
 					<div class="small-12 large-6 columns">
-						<div class="panel" data-equalizer-watch="true">
-						<div class="row">
-    						<div class="small-12 columns">
-							<div class="chooseRole">
-							<label><font color="red" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"> ERROR MESSAGE </font></label>
-								<input id="refugee" type="radio" name="role" value="refugee" th:field ="*{role}"/>
-								<label	for="refugee"><p> Flüchtling</p></label>
-								<input id="volunteer" type="radio" name="role"  value="volunteer" th:field ="*{role}" />
-								<label for="volunteer"><p> Helfender</p></label>
-								<br />
-							</div>
-							</div>
+						<div class="panel" data-equalizer-watch="1">
+							<div class="row">
+    							<div class="small-12 columns">
+									<div class="chooseRole">
+										<label><font color="red" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"> ERROR MESSAGE </font></label>
+										<input id="refugee" type="radio" name="role" value="refugee" th:field ="*{role}"/>
+										<label	for="refugee"><p> Flüchtling</p></label>
+										<input id="volunteer" type="radio" name="role"  value="volunteer" th:field ="*{role}" />
+										<label for="volunteer"><p> Helfender</p></label>
+										<br />
+									</div>
+								</div>
 							</div>
 							<div class="row">
 									<div class="large-5 small-3 columns">Name</div>
 									<div class="large-7 small-9 columns">
-									<label>
-										<font color="red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"> ERROR MESSAGE</font>
-										<input type="text" name="lastName" placeholder="Name" th:field ="*{lastName}"/>
-									</label>                                        
+										<label>
+											<font color="red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"> ERROR MESSAGE</font>
+											<input type="text" name="lastName" placeholder="Name" th:field ="*{lastName}"/>
+										</label>                                        
 									</div>
 							</div>
 							<div class="row">
 									<div class="large-5 small-3 columns">Vorname</div>
 									<div class="large-7 small-9 columns">
-									<label>
-										<font color="red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"> ERROR MESSAGE </font>
-										<input type="text" name="firstName" placeholder="Vorname" th:field ="*{firstName}"/>
-                                    </label>
+										<label>
+											<font color="red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"> ERROR MESSAGE </font>
+											<input type="text" name="firstName" placeholder="Vorname" th:field ="*{firstName}"/>
+	                                    </label>
 									</div>
 							</div>
 							<div class="row">
 									<div class="large-5 small-3 columns">Username</div>
 									<div class="large-7 small-9 columns">
-									<label>
-										<font color="red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"> ERROR MESSAGE </font>
-										<input type="text" name="username" placeholder="Username" th:field ="*{username}"/>
-                                    </label>  
+										<label>
+											<font color="red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"> ERROR MESSAGE </font>
+											<input type="text" name="username" placeholder="Username" th:field ="*{username}"/>
+	                                    </label>  
 									</div>
 							</div>
 							<div class="row">
 									<div class="large-5 small-3 columns">E-Mail</div>
 									<div class="large-7 small-9 columns">
-									<label> 
-										<font color="red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> ERROR MESSAGE </font>
-										<input type="email" name="email" placeholder="E-Mail" th:field ="*{email}"/>
-                                    </label> 
+										<label> 
+											<font color="red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> ERROR MESSAGE </font>
+											<input type="email" name="email" placeholder="E-Mail" th:field ="*{email}"/>
+	                                    </label> 
 									</div>
 							</div>
 							<div class="row">
 									<div class="large-5 small-3 columns">Passwort</div>
 									<div class="large-7 small-9 columns">
-									<label>
-										<font color="red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> ERROR MESSAGE </font>
-										<input type="password" id="password" name="password" placeholder="Passwort" th:field ="*{password}"/>
-                                    </label> 
+										<label>
+											<font color="red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> ERROR MESSAGE </font>
+											<input type="password" id="password" name="password" placeholder="Passwort" th:field ="*{password}"/>
+	                                    </label> 
 									</div>
 							</div>
 							<div class="row">
 									<div class="large-5 small-3 columns">Passwort wiederholen</div>
 									<div class="large-7 small-9 columns">
-									<label>
-										<font color="red" th:if="${#fields.hasErrors('confirmPW')}" th:errors="*{confirmPW}"> ERROR MESSAGE </font>
-                                        <font color="red" th:if="${#fields.hasErrors('global')}" th:errors="*{global}"> ERROR MESSAGE </font>
-                                        <input type="password" name="confirmPW" placeholder="Passwort" th:field ="*{confirmPW}"/>
-                                    </label>
+										<label>
+											<font color="red" th:if="${#fields.hasErrors('confirmPW')}" th:errors="*{confirmPW}"> ERROR MESSAGE </font>
+	                                        <font color="red" th:if="${#fields.hasErrors('global')}" th:errors="*{global}"> ERROR MESSAGE </font>
+	                                        <input type="password" name="confirmPW" placeholder="Passwort" th:field ="*{confirmPW}"/>
+	                                    </label>
 									</div>
 							</div>
 							<div class="row">
@@ -99,23 +98,23 @@
 						</div>
 					</div>
 					<div class="small-12 large-6 columns">
-						<div class="panel" data-equalizer-watch="true">
+						<div class="panel" data-equalizer-watch="1">
 							<div class="row">
 									<div class="large-5 small-3 columns">Stadt</div>
 									<div class="large-7 small-9 columns">
-									<label>
-										<font color="red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"> ERROR MESSAGE </font>
-										<input type="text" name="city" placeholder="Stadt" th:field ="*{city}"/>
-                                    </label>
+										<label>
+											<font color="red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"> ERROR MESSAGE </font>
+											<input type="text" name="city" placeholder="Stadt" th:field ="*{city}"/>
+	                                    </label>
 									</div>
 							</div>
 							<div class="row">
 									<div class="large-5 small-3 columns">PLZ</div>
 									<div class="large-7 small-9 columns">
-									<label>
-										<font color="red" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"> ERROR MESSAGE </font>
-										<input type="text" name="zip" placeholder="PLZ" th:field ="*{zip}"/>
-                                    </label>  
+										<label>
+											<font color="red" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"> ERROR MESSAGE </font>
+											<input type="text" name="zip" placeholder="PLZ" th:field ="*{zip}"/>
+	                                    </label>  
 									</div>
 							</div>
 							<div class="row">
