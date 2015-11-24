@@ -128,24 +128,31 @@ public class ArticleController extends CommonVariables {
 	
 	//@RequestMapping(value = "/search?{name}?{plz}?{distance}?{search}?{category}")
 	
-		@RequestMapping(value = "/search?{text}?{category}")
-		public String suche_via_name_category(@PathVariable("name") String text, @PathVariable("category") Long catID, Model model)
+		@RequestMapping(value = "/search/{text}/{category}")
+		public String suche_via_name_category(@PathVariable("text") String text, @PathVariable("category") Long catID, Model model)
 		{  System.out.println("Es wird nach "+text+" in der Kategorie "+catID+" gesucht");
 			
-			List<Good> catGoods = getAllSubcategoryItems(catID);
-		   List<Good> nameGoods = goodREPO.findByname(text);
+			List<Good> catGoods = goodREPO.findByCategory(catID);
+			System.out.println("Length of list: " + catGoods.size());
+		 
 		   List<Good> übergabe = new LinkedList<Good>();
  		   
-		   
-		   for (Good good : catGoods)
-		     {
-		       if (nameGoods.contains(good)) übergabe.add(good);
-		       if (good.getDescription().toLowerCase().contains(text) && !übergabe.contains(good)) übergabe.add(good); 
+		   int count = 1;
+		   for (Good good : catGoods) 
+		     { System.out.println(count); count++;
+		     System.out.println(good.getName()+"    "+good.getCategory());
+		  
+		     
+		     	if (good.getName().toLowerCase().contains(text.toLowerCase())) { System.out.println("match"); übergabe.add(good);} else System.out.println("dismatch"); 
+		     	if(good.getDescription().toLowerCase().contains(text.toLowerCase()) && !übergabe.contains(good)) übergabe.add(good);
+		     
 		     }
+		 
+		  
 		   
-		   model.addAttribute("suche", übergabe);
+		   model.addAttribute("anzeigen", übergabe);
 
-		    return "search2";
+		    return "anzeigen";
 		}
 }
 
