@@ -5,109 +5,136 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <title>Refugee</title>
 <link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
 
-	
+	<script th:src="@{/resources/js/vendor/jquery.js}"></script>
+	<script th:src="@{/resources/js/foundation/foundation.js}"></script>
+	<script th:src="@{/resources/js/foundation/foundation.equalizer.js}"></script>
 
 	<nav th:include="topbar :: topbar"></nav>
 
-	<div class="row">
+	<div class="row" >
 		<p>&nbsp;</p>
 		<div class="small-12 columns">
-			<h4 class="subheader">Registrieren</h4>
+			<h4 class="header">Registrieren</h4>
 			<form action="#" th:action="@{/registration}" th:object="${RegistrationForm}" method="post">
-				<div class="row">
+				<div class="row" data-equalizer="1">
 					<div class="small-12 large-6 columns">
-						<div class="panel">
-							<div class="chooseRole">
-								<input id="refugee" type="radio" name="role" value="refugee" />
-								<label	for="refugee">Flüchtling </label>
-								<br /> 
-								<input id="volunteer" type="radio" name="role" value="volunteer" />
-								<label for="volunteer">Helfender</label>
-								<br />
-							</div>
-							<p>&nbsp;</p>
+						<div class="panel" data-equalizer-watch="1">
 							<div class="row">
-								<div class="small-12 columns">
+    							<div class="small-12 columns">
+									<div class="chooseRole">
+										<label><font color="red" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"> ERROR MESSAGE </font></label>
+										<input id="refugee" type="radio" name="role" value="refugee" th:field ="*{role}"/>
+										<label	for="refugee"><p> Flüchtling</p></label>
+										<input id="volunteer" type="radio" name="role"  value="volunteer" th:field ="*{role}" />
+										<label for="volunteer"><p> Helfender</p></label>
+										<br />
+									</div>
+								</div>
+							</div>
+							<div class="row">
 									<div class="large-5 small-3 columns">Name</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" name="lastName" placeholder="Name" required="true" pattern="[a-zA-Z]+"/>
+										<label>
+											<font color="red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"> ERROR MESSAGE</font>
+											<input type="text" name="lastName" placeholder="Name" th:field ="*{lastName}"/>
+										</label>                                        
 									</div>
-								</div>
 							</div>
 							<div class="row">
-								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Vorname</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" name="firstName" placeholder="Vorname" required="true" pattern="[a-zA-Z]+"/>
+										<label>
+											<font color="red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"> ERROR MESSAGE </font>
+											<input type="text" name="firstName" placeholder="Vorname" th:field ="*{firstName}"/>
+	                                    </label>
 									</div>
-								</div>
 							</div>
 							<div class="row">
-								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Username</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" name="username" placeholder="Username" required="true"/>
+										<label>
+											<font color="red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"> ERROR MESSAGE </font>
+											<input type="text" name="username" placeholder="Username" th:field ="*{username}"/>
+	                                    </label>  
 									</div>
-								</div>
 							</div>
 							<div class="row">
-								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">E-Mail</div>
 									<div class="large-7 small-9 columns">
-										<input type="email" name="email" placeholder="E-Mail" required="true"/>
+										<label> 
+											<font color="red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> ERROR MESSAGE </font>
+											<input type="email" name="email" placeholder="E-Mail" th:field ="*{email}"/>
+	                                    </label> 
 									</div>
-								</div>
 							</div>
 							<div class="row">
-								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Passwort</div>
 									<div class="large-7 small-9 columns">
-										<input type="password" id="password" name="password" placeholder="Passwort" required="true"/>
+										<label>
+											<font color="red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> ERROR MESSAGE </font>
+											<input type="password" id="password" name="password" placeholder="Passwort" th:field ="*{password}"/>
+	                                    </label> 
 									</div>
-								</div>
 							</div>
 							<div class="row">
-								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Passwort wiederholen</div>
 									<div class="large-7 small-9 columns">
-										<input type="password" name="confirmPW" placeholder="Passwort" required="true" equalto="password"/>
+										<label>
+											<font color="red" th:if="${#fields.hasErrors('confirmPW')}" th:errors="*{confirmPW}"> ERROR MESSAGE </font>
+	                                        <font color="red" th:if="${#fields.hasErrors('global')}" th:errors="*{global}"> ERROR MESSAGE </font>
+	                                        <input type="password" name="confirmPW" placeholder="Passwort" th:field ="*{confirmPW}"/>
+	                                    </label>
 									</div>
-								</div>
 							</div>
+							<div class="row">
+                                <div class="small-12 columns">
+                                <div class="g-recaptcha" data-sitekey="6LdakhETAAAAAJtE5rWb3kQuTi-GcEoUiS94ULai"></div>
+                                </div>
+                            </div>
 						</div>
 					</div>
 					<div class="small-12 large-6 columns">
-						<div class="panel">
+						<div class="panel" data-equalizer-watch="1">
 							<div class="row">
-								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Stadt</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" name="city" placeholder="Stadt" pattern="[a-zA-Z]+" required="true"/>
+										<label>
+											<font color="red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"> ERROR MESSAGE </font>
+											<input type="text" name="city" placeholder="Stadt" th:field ="*{city}"/>
+	                                    </label>
 									</div>
-								</div>
 							</div>
 							<div class="row">
-								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">PLZ</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" pattern="[0-9]{5,5}" name="zip" placeholder="PLZ" required="true"/>
+										<label>
+											<font color="red" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"> ERROR MESSAGE </font>
+											<input type="text" name="zip" placeholder="PLZ" th:field ="*{zip}"/>
+	                                    </label>  
 									</div>
-								</div>
 							</div>
 							<div class="row">
-								<div class="small-12 columns">
-									<div class="large-5 small-3 columns">Straße, Hausnummer</div>
+									<div class="large-5 small-3 columns">Straße, Hausnummer, Addresszusatz</div>
 									<div class="large-7 small-9 columns">
-										<input type="text" name="streetName" placeholder="Straßenname" pattern="[a-zA-Z]+" required="true"/> 
-										<input type="number" name="houseNumber" min="1" max="999"	placeholder="Hausnummer" required="true"/>
+										<label>
+											<font color="red" th:if="${#fields.hasErrors('streetName')}" th:errors="*{streetName}"> ERROR MESSAGE </font>
+											<input type="text" name="streetName" placeholder="Straßenname" th:field ="*{streetName}"/>
+										</label>
+										<label>
+                                            <input type="text" name="houseNumber" placeholder="Hausnummmer" th:field ="*{houseNumber}"/>
+                                            <font color="red" th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}"> ERROR MESSAGE </font>
+                                        </label>
+										<label>
+											<font color="red" th:if="${#fields.hasErrors('addressAddition')}" th:errors="*{addressAddition}"> ERROR MESSAGE </font>
+											<input type="text" name="addressAddition" placeholder="(optional)" th:field ="*{addressAddition}"/>
+										</label>
 									</div>
-								</div>
 							</div>
 							<div class="row">
-								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Sprache 1</div>
 									<div class="large-7 small-9 columns">
 										<select name="language1">
@@ -118,10 +145,8 @@
 											<option value="spanish">Spanisch</option>
 										</select>
 									</div>
-								</div>
 							</div>
 							<div class="row">
-								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Sprache 2</div>
 									<div class="large-7 small-9 columns">
 										<select name="language2">
@@ -132,10 +157,8 @@
 											<option value="spanish">Spanisch</option>
 										</select>
 									</div>
-								</div>
 							</div>
 							<div class="row">
-								<div class="small-12 columns">
 									<div class="large-5 small-3 columns">Sprache 3</div>
 									<div class="large-7 small-9 columns">
 										<select name="language3">
@@ -146,9 +169,12 @@
 											<option value="spanish">Spanisch</option>
 										</select>
 									</div>
-								</div>
-							</div>
-							<button type="submit" th:href="@{/}">Registrieren</button>
+                            </div>
+                            <div class="row">
+                                <div class="small-12 columns">
+                                    <button type="submit" th:href="@{/}">Registrieren</button>
+                                </div>
+                            </div>
 						</div>
 					</div>
 				</div>
@@ -158,12 +184,10 @@
 
 	<footer th:include="footer :: footer"></footer>
 
-	<script th:src="@{/resources/js/foundation/foundation.js}"></script>
-	<script th:src="@{/resources/js/foundation/foundation.abide.js}"></script>
-
 	<script>
 		$(document).foundation();
 		console.log("javascript loaded");
 	</script>
+	
 </body>
 </html>

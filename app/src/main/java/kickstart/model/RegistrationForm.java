@@ -1,25 +1,68 @@
 package kickstart.model;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.salespointframework.useraccount.Role;
+import javax.validation.constraints.*;
+
 /**
  * Created by Vincenz on 30.10.15.
  */
 public class RegistrationForm {
 
     private long id;
-    private String role;
+
+    @NotNull(message = "Es wurde keine Rolle ausgewählt.")
+    private Role role;
+
+    @Size(min=2, max=30, message = "Der Name muss zwischen 2 und 30 Zeichen lang sein.")
     private String lastName;
+
+    @Size(min=2, max=30, message = "Der Name muss zwischen 2 und 30 Zeichen lang sein.")
     private String firstName;
+
+    @Size(min=6, max=30, message = "Der Name muss zwischen 6 und 30 Zeichen lang sein.")
     private String username;
+
+    @Email(message = "Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.")
     private String email;
+
+    //Password must contain at least: 8 characters, 1 Number, 1 lowercase Letter, 1 upercase Letter, no whitespace
+    @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}", message ="Das Passwort muss mindestens 8 Zeichen lang sein und muss mindestens eine Zahl, einen Klein- und einen Großbuchstaben beinhalten.")
     private String password;
+
+    @NotEmpty
     private String confirmPW;
+
+    //Check if password == confirmPW
+    @AssertTrue(message = "Die Passwörter stimmen nicht überein.")
+    private boolean isValid(){
+        return this.password.equals(this.confirmPW);
+    }
+
+    @NotEmpty(message = "Geben Sie einen Stadtnamen ein")
     private String city;
+
+    //Zipcode must be 5 characters long and contain only digits
+    @Pattern(regexp="^\\d{5}$", message="Die Postleitzahl muss aus exakt 5 Ziffern bestehen.")
     private String zip;
+
+    @Size(min=5, max=50, message = "Geben Sie einen Straßennamen ein.")
     private String streetName;
-    private long houseNumber;
+
+    //Must start with at least one digit. "1a", "12b", etc. possible
+    @Pattern(regexp = "^\\d+[a-zA-Z]*$", message="Geben Sie eine gültige Hausnummer ein.")
+    private String houseNumber;
+
+    private String addressAddition;
+
+
     private String language1;
+
     private String language2;
+
     private String language3;
+
 
     public String getLanguage2() {
         return language2;
@@ -53,11 +96,11 @@ public class RegistrationForm {
         this.id = id;
     }
 
-    public String getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
@@ -109,11 +152,11 @@ public class RegistrationForm {
         this.streetName = streetName;
     }
 
-    public long getHouseNumber() {
+    public String getHouseNumber() {
         return houseNumber;
     }
 
-    public void setHouseNumber(long houseNumber) {
+    public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
     }
 
@@ -139,5 +182,13 @@ public class RegistrationForm {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getAddressAddition() {
+        return addressAddition;
+    }
+
+    public void setAddressAddition(String addressAddition) {
+        this.addressAddition = addressAddition;
     }
 }

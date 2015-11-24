@@ -27,10 +27,26 @@
 			<div class="small-4 columns">
 			<p>&nbsp;</p>
 			<p>&nbsp;</p>
-			<input type="email" name="email" placeholder="Email" required="true" pattern="[a-zA-Z]+"/>
-			<input type="password" name="password" placeholder="Passwort" required="true" pattern="[a-zA-Z]+"/>
-			<a th:href="@{/search}" class="small button">Einloggen</a>
-			<a th:href="@{/registration}" class="small button">Registrieren</a>
+			
+				<form action="#" th:action="@{/}" method="post">
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<div th:if="${param.error}" class="alert alert-error"><font color="red"> Ungültger Username und/oder Passwort.</font></div>
+					<div th:if="${param.logout}" class="alert alert-success"> Sie wurden ausgeloggt. </div>
+					<label>
+						<input type="text" name="username" placeholder="Username" />
+					</label>
+					<label>
+						<input type="password" name="password" placeholder="Passwort"/>
+					</label>
+					<div class="row">
+						<div class="small-12 columns">
+							<button type="submit" class="small button">Login</button>
+						</div>
+					</div>
+				</form>
+
+				<a th:href="@{/registration}" href="#">Noch keinen Account? Hier registrieren!</a>
 			</div>
 		</div>
 	</div>

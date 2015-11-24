@@ -16,10 +16,14 @@
 package kickstart;
 
 import javax.annotation.PostConstruct;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 
 import org.joda.time.DateTime;
 import org.salespointframework.EnableSalespoint;
 import org.salespointframework.SalespointSecurityConfiguration;
+import org.salespointframework.SalespointWebConfiguration;
+import org.salespointframework.useraccount.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Configuration;
@@ -31,10 +35,14 @@ import kickstart.model.User;
 import kickstart.model.UserRepository;
 import kickstart.model.activityREPO;
 import kickstart.model.goodREPO;
+import kickstart.controller.EMailController;
 import kickstart.model.Category;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 @EnableSalespoint
 public class Application {
+
+	private static final String LOGIN_ROUTE = "/";
 	
 	@Autowired CategoryRepo categories;
 	@Autowired goodREPO goodREPO;
@@ -46,7 +54,11 @@ public class Application {
 	}
 	
 	@PostConstruct
-    void initialize(){
+    void initialize() throws AddressException, MessagingException{
+
+		final Role refugee = new Role("ROLE_REFUGEE");
+		final Role volunteer = new Role("ROLE_VOLUNTEER");
+
     	categories.save(new Category("Möbel", -1));
     	categories.save(new Category("Badmöbel", 1));
     	categories.save(new Category("Küchenmöbel", 1));
@@ -72,33 +84,44 @@ public class Application {
     	Good g10 = new Good("in weapons", "Beschreibung", "picPath", "photo", "straße", 01067, "ort", "number", 8);
     	Good g11 = new Good("in gruppenter", "Beschreibung", "picPath", "photo", "straße", 01067, "ort", "number", 9);
     	Good g12 = new Good("in nochmal möbel", "Beschreibung", "picPath", "photo", "straße", 01067, "ort", "number", 11);
-    	
-    	
-    	goodREPO.save(g1);
-    	goodREPO.save(g2);
-    	goodREPO.save(g3);
-    	goodREPO.save(g4);
-    	goodREPO.save(g5);
-    	goodREPO.save(g6);
-    	goodREPO.save(g7);
-    	goodREPO.save(g8);
-    	goodREPO.save(g9);
-    	goodREPO.save(g10);
-    	goodREPO.save(g11);
-    	goodREPO.save(g12);
-    	
+
+		goodREPO.save(g1);
+		goodREPO.save(g2);
+		goodREPO.save(g3);
+		goodREPO.save(g4);
+		goodREPO.save(g5);
+		goodREPO.save(g6);
+		goodREPO.save(g7);
+		goodREPO.save(g8);
+		goodREPO.save(g9);
+		goodREPO.save(g10);
+		goodREPO.save(g11);
+		goodREPO.save(g12);
+
+//    	goodREPO.save(new Good("Gitarre","Handgefertigt von Rockefeller","img/gitarre.jpg","An der hasseröder",01217,"Dresden","11"));
 //    	goodREPO.save(new Good("Hackepeter","Lorem ipsum","img/hacke.jpg","An der Jever",01217,"Pirna","11"));
 //    	goodREPO.save(new Good("Jeans","Lorem ipsum","img/jeans.jpg","An der hasseröder",01217,"Dresden","11"));
 //    	goodREPO.save(new Good("Pommes","Lorem ipsum","img/pommes.jpg","An der Jever",01217,"Pirna","11"));
-    	
-    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", 123, "sprache","sprache2","sprache3"));
-    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", 123, "sprache","sprache2","sprache3"));
-    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", 123, "sprache","sprache2","sprache3"));
-    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", 123, "sprache","sprache2","sprache3"));
-    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", 123, "sprache","sprache2","sprache3"));
-    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", 123, "sprache","sprache2","sprache3"));
-	}
+//    	System.out.println("GOODS ERSCHAFFEN");
+//    	System.out.println(goodREPO.count());
+		
+    	/*
+    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", "123","", "sprache","sprache2","sprache3"));
+    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", "123","", "sprache","sprache2","sprache3"));
+    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", "123","", "sprache","sprache2","sprache3"));
+    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße","123","", "sprache","sprache2","sprache3"));
+    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", "123","", "sprache","sprache2","sprache3"));
+    	this.userRepository.save(new User(1,"rolle","nachname","vorname","username", "mail", "pwd", "pwd", "stadt", "01067", "straße", "123","", "sprache","sprache2","sprache3"));
+    	*/
 
+	}
+	@Configuration
+	static class RefugeeWebConfiguration extends SalespointWebConfiguration {
+		@Override
+		public void addViewControllers(ViewControllerRegistry registry){
+			registry.addViewController(LOGIN_ROUTE).setViewName("");
+		}
+	}
 	@Configuration
 	static class WebSecurityConfiguration extends SalespointSecurityConfiguration {
 
@@ -107,8 +130,11 @@ public class Application {
 
 			http.csrf().disable();
 
-			http.authorizeRequests().antMatchers("/**").permitAll().and().formLogin().loginProcessingUrl("/login").and()
+			http.authorizeRequests().antMatchers("/resources/**").permitAll().and().formLogin().loginPage(LOGIN_ROUTE).loginProcessingUrl(LOGIN_ROUTE).defaultSuccessUrl("/search").and()
 					.logout().logoutUrl("/logout").logoutSuccessUrl("/");
 		}
 	}
+
+
+
 }
