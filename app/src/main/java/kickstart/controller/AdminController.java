@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +21,7 @@ import kickstart.model.ActivityRepo;
 import kickstart.model.GoodRepo;
 
 @Controller
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 public class AdminController extends CommonVariables {
 	@Autowired
 	public AdminController(CategoryRepo categories, GoodRepo grepo, ActivityRepo arepo, UserRepository userRepository){

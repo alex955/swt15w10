@@ -18,8 +18,7 @@
 					</div>
 					
 					<div class="small-4 columns">
-							<li><a th:href="@{/admin}" href="#">[PROTOTYP: Admin-Mode]</a></li>
-							<li><a th:href="@{/}" href="#">[PROTOTYP: User-Mode]</a></li>
+							<li sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin}" href="#">[PROTOTYP: Admin-Mode]</a></li>
 					</div>
 
 					<div class="small-4 columns">
