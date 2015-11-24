@@ -22,6 +22,7 @@ import javax.mail.internet.AddressException;
 import org.joda.time.DateTime;
 import org.salespointframework.EnableSalespoint;
 import org.salespointframework.SalespointSecurityConfiguration;
+import org.salespointframework.SalespointWebConfiguration;
 import org.salespointframework.useraccount.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -36,9 +37,12 @@ import kickstart.model.activityREPO;
 import kickstart.model.goodREPO;
 import kickstart.controller.EMailController;
 import kickstart.model.Category;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 
 @EnableSalespoint
 public class Application {
+
+	private static final String LOGIN_ROUTE = "/";
 	
 	@Autowired CategoryRepo categories;
 	@Autowired goodREPO goodREPO;
@@ -89,7 +93,13 @@ public class Application {
     	*/
 
 	}
-
+	@Configuration
+	static class RefugeeWebConfiguration extends SalespointWebConfiguration {
+		@Override
+		public void addViewControllers(ViewControllerRegistry registry){
+			registry.addViewController(LOGIN_ROUTE).setViewName("");
+		}
+	}
 	@Configuration
 	static class WebSecurityConfiguration extends SalespointSecurityConfiguration {
 
@@ -98,7 +108,7 @@ public class Application {
 
 			http.csrf().disable();
 
-			http.authorizeRequests().antMatchers("/**").permitAll().and().formLogin().loginProcessingUrl("/login").and()
+			http.authorizeRequests().antMatchers("/resources/**").permitAll().and().formLogin().loginPage(LOGIN_ROUTE).loginProcessingUrl(LOGIN_ROUTE).defaultSuccessUrl("/search").and()
 					.logout().logoutUrl("/logout").logoutSuccessUrl("/");
 		}
 	}

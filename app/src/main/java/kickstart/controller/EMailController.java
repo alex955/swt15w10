@@ -64,7 +64,7 @@ public class EMailController extends CommonVariables{
 		      message.setRecipients(Message.RecipientType.TO,
 		              InternetAddress.parse(reciever));
 		      message.setSubject("RegistrierungsID");
-		      message.setText("Ihre ID lautet" + id + "http://localhost:8080/validate?id=" + id);
+		      message.setText("Ihre ID lautet " + id +".\n\n" + "http://localhost:8080/validate?id=" + id);
 
 		      Transport.send(message);
 		     System.out.println("E-Mail gesendet an " + reciever);
