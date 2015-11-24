@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface activityREPO extends CrudRepository<Activity, Long> {
+public interface ActivityRepo extends CrudRepository<Activity, Long> {
 
 	 public void delete(Long id);
 	 
