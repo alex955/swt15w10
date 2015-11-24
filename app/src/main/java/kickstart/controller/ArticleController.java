@@ -121,8 +121,32 @@ public class ArticleController extends CommonVariables {
         } else {
             return "You failed to upload " + newArticleForm.getTitle()
                     + " because the file was empty.";
+            
         }
 	}
+	
+	
+	//@RequestMapping(value = "/search?{name}?{plz}?{distance}?{search}?{category}")
+	
+		@RequestMapping(value = "/search?{text}?{category}")
+		public String suche_via_name_category(@PathVariable("name") String text, @PathVariable("category") Long catID, Model model)
+		{  System.out.println("Es wird nach "+text+" in der Kategorie "+catID+" gesucht");
+			
+			List<Good> catGoods = getAllSubcategoryItems(catID);
+		   List<Good> nameGoods = goodREPO.findByname(text);
+		   List<Good> übergabe = new LinkedList<Good>();
+ 		   
+		   
+		   for (Good good : catGoods)
+		     {
+		       if (nameGoods.contains(good)) übergabe.add(good);
+		       if (good.getDescription().toLowerCase().contains(text) && !übergabe.contains(good)) übergabe.add(good); 
+		     }
+		   
+		   model.addAttribute("suche", übergabe);
+
+		    return "search2";
+		}
 }
 
 	

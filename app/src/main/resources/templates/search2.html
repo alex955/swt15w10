@@ -16,7 +16,7 @@
 			<p>&nbsp;</p>
 
 			<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4" >
-				<li th:each="Good : ${anzeigen}">
+				<li th:each="Good : ${suche}">
 					<a th:href="@{/art/}+${Good.id}"><img th:src="@{'/resources/' + ${Good.photo}}"
 					src="http://placehold.it/1000x1000&amp;text=Thumbnail" /></a>
 				<div class="panel">

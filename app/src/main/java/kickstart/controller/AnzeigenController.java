@@ -38,7 +38,7 @@ public class AnzeigenController extends CommonVariables {
 	    model.addAttribute("Good", goodREPO.findOne(id));
 //	    System.out.println("GOOD"+id+ "WURDE AN article.html übergeben");
 	 
-	    return "article_anzeige";
+	    return "article_anzeigen";
 	}
 	
 
