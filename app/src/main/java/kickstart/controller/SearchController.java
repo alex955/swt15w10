@@ -44,7 +44,7 @@ public class SearchController extends CommonVariables {
 			   
 			   model.addAttribute("anzeigen", übergabe);
 
-			    return "anzeigen";
+			    return "search";
 			}
 	
 }
