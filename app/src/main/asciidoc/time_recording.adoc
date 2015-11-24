@@ -1,4 +1,4 @@
-﻿= Zeiterfassung für Gruppe XX
+﻿= Zeiterfassung für Gruppe 10
 
 Notieren Sie die Zeit in Minuten für jeden Entwickler und für Team-Treffen pro Woche.
 Die verwendete Zeit beinhaltet auch das Lesen von Dokumentationen, Besprechungen mit Teamkollegen und sonstige auf das Praktikum bezogene Aufgaben.
