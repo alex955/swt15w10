@@ -9,7 +9,7 @@ import org.joda.time.DateTime;
 
 
 @Entity
-public abstract class Anzeige {
+public abstract class Article {
 	
 	protected @Id @GeneratedValue long id;
 	protected String name;
@@ -90,11 +90,11 @@ public abstract class Anzeige {
 	 
 	
 	@SuppressWarnings("unused")
-	protected Anzeige(){
+	protected Article(){
 	}
 	
 	
-	public Anzeige(String name,String description, String picPath, String location){
+	public Article(String name,String description, String picPath, String location){
 		this.name=name;
 		this.description=description;
 		this.picPath = picPath;

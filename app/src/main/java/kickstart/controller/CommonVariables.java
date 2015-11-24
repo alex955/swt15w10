@@ -9,8 +9,8 @@ import kickstart.model.Category;
 import kickstart.model.CategoryFirstTierObject;
 import kickstart.model.CategoryRepo;
 import kickstart.model.UserRepository;
-import kickstart.model.activityREPO;
-import kickstart.model.goodREPO;
+import kickstart.model.ActivityRepo;
+import kickstart.model.GoodRepo;
 
 @Controller
 public class CommonVariables {
@@ -21,9 +21,9 @@ public class CommonVariables {
 	protected CategoryRepo categories;
 	
 	@Autowired
-	protected goodREPO goodREPO;
+	protected GoodRepo goodREPO;
 	@Autowired
-	protected activityREPO activityREPO;
+	protected ActivityRepo activityREPO;
 	
 
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 

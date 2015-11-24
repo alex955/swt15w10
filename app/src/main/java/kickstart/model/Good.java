@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import org.joda.time.DateTime;
 
 @Entity
-public class Good extends Anzeige{
+public class Good extends Article{
 	
 	private String photo;
 	

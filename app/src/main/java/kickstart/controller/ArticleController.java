@@ -18,20 +18,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import kickstart.model.Anzeige;
+import kickstart.model.Article;
 import kickstart.model.Category;
 import kickstart.model.CategoryRepo;
 import kickstart.model.Good;
 import kickstart.model.NewArticleForm;
 import kickstart.model.RegistrationForm;
 import kickstart.model.User;
-import kickstart.model.activityREPO;
-import kickstart.model.goodREPO;
+import kickstart.model.ActivityRepo;
+import kickstart.model.GoodRepo;
 
 @Controller
 public class ArticleController extends CommonVariables {
 	@Autowired
-	public ArticleController(CategoryRepo categories, goodREPO grepo, activityREPO arepo){
+	public ArticleController(CategoryRepo categories, GoodRepo grepo, ActivityRepo arepo){
 		this.categories = categories;
 		this.activityREPO=arepo;
 		this.goodREPO=grepo;

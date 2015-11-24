@@ -16,13 +16,13 @@ import kickstart.model.CategoryFirstTierObject;
 import kickstart.model.CategoryRepo;
 import kickstart.model.User;
 import kickstart.model.UserRepository;
-import kickstart.model.activityREPO;
-import kickstart.model.goodREPO;
+import kickstart.model.ActivityRepo;
+import kickstart.model.GoodRepo;
 
 @Controller
 public class AdminController extends CommonVariables {
 	@Autowired
-	public AdminController(CategoryRepo categories, goodREPO grepo, activityREPO arepo, UserRepository userRepository){
+	public AdminController(CategoryRepo categories, GoodRepo grepo, ActivityRepo arepo, UserRepository userRepository){
 		this.categories = categories;
 		this.activityREPO=arepo;
 		this.goodREPO=grepo;

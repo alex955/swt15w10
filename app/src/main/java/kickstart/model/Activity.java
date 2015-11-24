@@ -8,7 +8,7 @@ import org.joda.time.DateTime;
 import org.joda.time.Interval;
 
 @Entity
-public class Activity extends Anzeige{
+public class Activity extends Article{
 	
 	//Dateformat
 	// JodA libary

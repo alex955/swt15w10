@@ -6,9 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kickstart.model.goodREPO;
+import kickstart.model.GoodRepo;
 import kickstart.model.Good;
-import kickstart.model.activityREPO;
+import kickstart.model.ActivityRepo;
 
 @Controller
 public class AnzeigenController extends CommonVariables {
@@ -16,7 +16,7 @@ public class AnzeigenController extends CommonVariables {
 
 	
 	@Autowired
-	public AnzeigenController(goodREPO grepo, activityREPO arepo){
+	public AnzeigenController(GoodRepo grepo, ActivityRepo arepo){
 		this.activityREPO=arepo;
 		this.goodREPO=grepo;
 		//System.out.println("GOOD REPO IST ANGELEGT UND CONTROLLER ZUGEWIESEN");
