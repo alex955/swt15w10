@@ -12,7 +12,14 @@ public class NewArticleForm {
     private String description;
     private String plz;
     private MultipartFile file;
+    private String kind;
     
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
 	public MultipartFile getFile() {
 		return file;
 	}

@@ -14,11 +14,23 @@
 	<div class="row">
 		<div class="large-12 columns">
 			<p>&nbsp;</p>
-			<h4 class="subheader">Angebot einstellen</h4>
+			<h4 class="header">Angebot einstellen</h4>
 			<form action="#" th:action="@{/newArticle}" th:object="${NewArticleForm}" method="post" enctype="multipart/form-data">
 				<div class="panel">
 					<div class="row">
 						<div class="small-12 columns">
+							<div class="small-12 columns">
+								<p>Möchten Sie eine Aktivität (z.b. Sprachkurs, Stadtausflug, Bowlingspiel) oder einen Artikel erstellen?</p>
+							</div>
+							<div class="small-12 columns">
+								<div class="chooseRole">
+										<input id="activity" type="radio" name="kind"/>
+										<label	for="activity"><p> Aktivität</p></label>
+										<input id="article" type="radio" name="kind"/>
+										<label for="article"><p> Artikel</p></label>
+										<br />
+								</div>
+							</div>
 							<div class="small-12 large-4 columns">
 								<p>Kategorie*: </p>
 							</div>

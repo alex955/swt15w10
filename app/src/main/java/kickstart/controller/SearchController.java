@@ -22,6 +22,10 @@ public class SearchController extends CommonVariables {
 			@RequestMapping(value = "/search/{text}/{category}")
 			public String suche_via_name_category(@PathVariable("text") String text, @PathVariable("category") Long catID, Model model)
 			{  System.out.println("Es wird nach "+text+" in der Kategorie "+catID+" gesucht");
+			//initiate categories
+			this.processedCategories = this.getProcessedCategories();
+			model.addAttribute("categories", this.processedCategories);
+			model.addAttribute("categoriesForm", this.categories.findAll());
 				
 				List<Good> catGoods = goodREPO.findByCategory(catID);
 				System.out.println("Length of list: " + catGoods.size());
