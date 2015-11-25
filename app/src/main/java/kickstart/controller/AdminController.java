@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kickstart.model.Category;
 import kickstart.model.CategoryFirstTierObject;
 import kickstart.model.CategoryRepo;
-import kickstart.model.User;
 import kickstart.model.UserRepository;
 import kickstart.model.ActivityRepo;
 import kickstart.model.GoodRepo;

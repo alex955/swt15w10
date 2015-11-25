@@ -42,7 +42,7 @@ public class WelcomeController extends CommonVariables {
 
 	
 	//Mappings
-	@RequestMapping("/")
+	@RequestMapping({"/", "/frontpage"})
 	public String frontPage(Model model) {
 		this.processedCategories = this.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);		
@@ -89,14 +89,6 @@ public class WelcomeController extends CommonVariables {
 		return "initiatecategory";
 	}
 	
-	@RequestMapping("/adminView")
-	public String adminView(Model model){
-		//initiate categories
-		this.processedCategories = this.getProcessedCategories();
-		model.addAttribute("categories", this.processedCategories);
-		
-		return "adminView";
-	}
 	
 	@RequestMapping("/chat")
 	public String chat(Model model){
