@@ -37,27 +37,7 @@ public class ArticleController extends CommonVariables {
 		this.goodREPO=grepo;
 	}
 	
-	public List<Good> getAllSubcategoryItems(long subcatId){
-		List<Good> toReturn = getAllCategoryItems(subcatId);
-		
-		List<Long> subcategories = new LinkedList<Long>();
-		for(Category s : categories.findAll()){
-			if(s.getPredecessor() == subcatId){
-				subcategories.add(s.getId());
-				//System.out.println("\tsubcategory zum durchschauen: "+s.getName());
-			}
-		}
-		
-		for(Long l : subcategories){
-			toReturn.addAll(getAllSubcategoryItems(l));
-		}
-		
-		return toReturn;
-	}
 	
-	public List<Good> getAllCategoryItems(long subcatID){
-		return this.goodREPO.findByCategory(subcatID);
-	}
 	
 	@RequestMapping(value = "/showArticle/{id}")
 	public String anzeige_anzeigen(@PathVariable("id") long id,Model model) {
@@ -69,22 +49,22 @@ public class ArticleController extends CommonVariables {
 	    return "article";
 	}
 	
-	@RequestMapping(value = "/inspectcategory/{categoryId}")
-	public String showSubcategories(@PathVariable Long categoryId, Model model, @ModelAttribute Category category) {
-		
-		//List<Good> catGoods = this.goodREPO.findByCategory(categoryId);
-		List<Good> catGoods = getAllSubcategoryItems(categoryId);
-		
-		//System.out.println("Length of list: " + catGoods.size());
-		
-
-		
-		this.processedCategories = this.getProcessedCategories();
-		model.addAttribute("categories", this.processedCategories);
-		model.addAttribute("anzeigen", catGoods);
-		
-		return "search";
-	}
+//	@RequestMapping(value = "/inspectcategory/{categoryId}")
+//	public String showSubcategories(@PathVariable Long categoryId, Model model, @ModelAttribute Category category) {
+//		
+//		//List<Good> catGoods = this.goodREPO.findByCategory(categoryId);
+//		List<Good> catGoods = getAllSubcategoryItems(categoryId);
+//		
+//		//System.out.println("Length of list: " + catGoods.size());
+//		
+//
+//		
+//		this.processedCategories = this.getProcessedCategories();
+//		model.addAttribute("categories", this.processedCategories);
+//		model.addAttribute("anzeigen", catGoods);
+//		
+//		return "search";
+//	}
 	
 	@RequestMapping("/newArticle")
 	public String newArticle(Model model){
