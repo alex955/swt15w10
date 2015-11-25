@@ -22,7 +22,6 @@ import javax.validation.Valid;
 public class RegistrationController extends CommonVariables {
 
 
-    private Model model;
     private UserAccountManager userAccountManager;
 
     @Autowired
