@@ -30,7 +30,7 @@ import scala.Int;
 public class EMailController extends CommonVariables{
 	
     @Autowired
-    public EMailController(UserAccountManager userAccountManager, UserRepository userRepository){
+    public EMailController(UserRepository userRepository){
         //this.userAccountManager = userAccountManager;
         this.userRepository = userRepository;
     }
