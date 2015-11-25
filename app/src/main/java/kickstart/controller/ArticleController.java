@@ -73,7 +73,7 @@ public class ArticleController extends CommonVariables {
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("anzeigen", catGoods);
 		
-		return "anzeigen";
+		return "search";
 	}
 	
 	@RequestMapping("/newArticle")
