@@ -42,7 +42,7 @@ public class ArticleController extends CommonVariables {
 				this.processedCategories = this.getProcessedCategories();
 				model.addAttribute("categories", this.processedCategories);
 				model.addAttribute("categoriesForm", this.categories.findAll());
-	    model.addAttribute("Good", articleRepo.findOne(id));
+	    model.addAttribute("Article", articleRepo.findOne(id));
 	    
 	    model=this.getCurrent_cat(model);
 	    return "article";
