@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 
 import kickstart.model.Category;
 import kickstart.model.CategoryFirstTierObject;
@@ -24,6 +25,9 @@ public class CommonVariables {
 	protected GoodRepo goodREPO;
 	@Autowired
 	protected ActivityRepo activityREPO;
+	
+	
+	protected long current_cat=0;
 	
 
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
@@ -51,4 +55,27 @@ public class CommonVariables {
 		}
 		return toReturn;
 	}
+
+	public Model getCurrent_cat(Model model) {
+		if (current_cat==0) model.addAttribute("current_category",new Category("Alle Kategorien", 0));
+		else model.addAttribute("current_category",this.categories.findOne(current_cat).get());
+		
+		return model;
+	}
+
+	public void setCurrent_cat(long current_cat) {
+		if (this.categories.findOne(current_cat).get().getId()==current_cat) this.current_cat = current_cat; 
+		else throw new IllegalArgumentException("Kategorie ID existiert nicht!");
+	}
+	
+	public Model cat_exchange(Model model){
+		if (current_cat==0) model.addAttribute("current_category",new Category("Alle Kategorien", 0));
+		else model.addAttribute("current_category",this.categories.findOne(current_cat).get());
+		
+		return model;
+		
+	}
+	
+	
+	
 }

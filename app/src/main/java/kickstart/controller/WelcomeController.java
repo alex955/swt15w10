@@ -45,7 +45,9 @@ public class WelcomeController extends CommonVariables {
 	@RequestMapping({"/", "/frontpage"})
 	public String frontPage(Model model) {
 		this.processedCategories = this.getProcessedCategories();
-		model.addAttribute("categories", this.processedCategories);		
+		model.addAttribute("categories", this.processedCategories);
+		
+		model=this.getCurrent_cat(model);
 		return "frontpage";
 	}
 	
@@ -59,6 +61,8 @@ public class WelcomeController extends CommonVariables {
 		    
 		   // System.out.println("GOOD REPO WURDE AN html übergeben");
 		 
+		 model=this.getCurrent_cat(model);
+		 
 		return "search";
 	}
 	
@@ -67,6 +71,8 @@ public class WelcomeController extends CommonVariables {
 		//initiate categories
 		this.processedCategories = this.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
+		
+		model=this.getCurrent_cat(model);
 		
 		return "userSettings";
 	}
@@ -77,6 +83,8 @@ public class WelcomeController extends CommonVariables {
 		this.processedCategories = this.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		
+		model=this.getCurrent_cat(model);
+		
 		return "article";
 	}
 	
@@ -85,6 +93,8 @@ public class WelcomeController extends CommonVariables {
 		//initiate categories
 		this.processedCategories = this.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
+		
+		model=this.getCurrent_cat(model);
 		
 		return "initiatecategory";
 	}
@@ -95,6 +105,8 @@ public class WelcomeController extends CommonVariables {
 		//initiate categories
 		this.processedCategories = this.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
+		
+		model=this.getCurrent_cat(model);
 		
 		return "chat";
 	}

@@ -80,6 +80,10 @@ public class SearchController extends CommonVariables {
 			@RequestMapping(value = "/search/{category}")
 			public String suche_via_categorie(@PathVariable("category") Long catID, Model model)
 			{  System.out.println("Es wird in der Kategorie "+catID+" gesucht");
+			
+			//setzt aktuelle kategorie auf catID
+			this.setCurrent_cat(catID);
+			
 			List<Good> catGoods = this.getAllSubcategoryItems(catID);
 		
 			
@@ -91,9 +95,7 @@ public class SearchController extends CommonVariables {
 			model.addAttribute("categories", this.processedCategories);
 			model.addAttribute("anzeigen", catGoods);
 			
-			// Um ausgewählte kategorie anzuzeigen
-			if (catID==0) model.addAttribute("current_category",new Category("Alle Kategorien", 0));
-			else model.addAttribute("current_category",this.categories.findOne(catID).get());
+			model=this.getCurrent_cat(model);
 			
 			
 			return "search";
