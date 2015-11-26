@@ -61,15 +61,7 @@ public class WelcomeController extends CommonVariables {
 		 
 		return "search";
 	}
-	
-	@RequestMapping("/userSettings")
-	public String userSettings(Model model){
-		//initiate categories
-		this.processedCategories = this.getProcessedCategories();
-		model.addAttribute("categories", this.processedCategories);
-		
-		return "userSettings";
-	}
+
 	
 	@RequestMapping("/article")
 	public String article(Model model){

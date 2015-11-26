@@ -25,19 +25,19 @@ import javax.validation.Valid;
 @PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_REFUGEE, ROLE_VOLUNTEER')")
 public class SettingsController {
 
-    @RequestMapping(value = "/usersettings", method = RequestMethod.POST)
-    public String changeSettings(@ModelAttribute("UserSettings") @Valid UserSettings userSettings, BindingResult result, UserAccountManager userAccountManager, UserRepository userRepository, UserAccount userAccount) throws AddressException, MessagingException {
+    @RequestMapping(value = "/usersettings", method = RequestMethod.GET)
+    public String changeSettings(@ModelAttribute("UserSettings") @Valid UserSettings userSettings, BindingResult result, UserAccountManager userAccountManager, UserRepository userRepository) throws AddressException, MessagingException {
 
         if(result.hasErrors())
             return "usersettings";
 
         System.out.println(userRepository);
 
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        //UserAccountManager userAccountManager = (UserAccountManager) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        //UserRepository userRepository = (UserRepository) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        //UserAccount userAccount = (UserAccount) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        UserAccount userAccount = user.getUserAccount();
+
+        System.out.println(user);
         //Adressänderung
         if(!userSettings.getNewCity().isEmpty())
         user.setCity(userSettings.getNewCity());

@@ -221,5 +221,7 @@ public class User {
     public void setUserAccount(UserAccount userAccount) {
         this.userAccount = userAccount;
     }
+
+
 }
 
