@@ -93,7 +93,7 @@ public class SearchController extends CommonVariables {
 			
 			// Um ausgewählte kategorie anzuzeigen
 			if (catID==0) model.addAttribute("current_category",new Category("Alle Kategorien", 0));
-			else  model.addAttribute("current_category",this.getProcessedCategories().get(catID.intValue()));
+			else model.addAttribute("current_category",this.categories.findOne(catID).get());
 			
 			
 			return "search";
