@@ -21,20 +21,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kickstart.model.Article;
 import kickstart.model.Category;
 import kickstart.model.CategoryRepo;
-import kickstart.model.Good;
 import kickstart.model.NewArticleForm;
 import kickstart.model.RegistrationForm;
 import kickstart.model.User;
-import kickstart.model.ActivityRepo;
-import kickstart.model.GoodRepo;
+import kickstart.model.ArticleRepo;
 
 @Controller
 public class ArticleController extends CommonVariables {
 	@Autowired
-	public ArticleController(CategoryRepo categories, GoodRepo grepo, ActivityRepo arepo){
+	public ArticleController(CategoryRepo categories, ArticleRepo articleRepo){
 		this.categories = categories;
-		this.activityREPO=arepo;
-		this.goodREPO=grepo;
+		this.articleRepo=articleRepo;
 	}
 	
 	
@@ -45,7 +42,7 @@ public class ArticleController extends CommonVariables {
 				this.processedCategories = this.getProcessedCategories();
 				model.addAttribute("categories", this.processedCategories);
 				model.addAttribute("categoriesForm", this.categories.findAll());
-	    model.addAttribute("Good", goodREPO.findOne(id));
+	    model.addAttribute("Good", articleRepo.findOne(id));
 	    
 	    model=this.getCurrent_cat(model);
 	    return "article";
@@ -102,9 +99,9 @@ public class ArticleController extends CommonVariables {
                 System.out.println("Server File Location="
                         + serverFile.getAbsolutePath());
  
-                Good good = new Good(newArticleForm.getTitle(), newArticleForm.getDescription(), serverFile.getAbsolutePath(), "01309", null, 0, null, null, newArticleForm.getId());
-        		goodREPO.save(good);
-        		System.out.println(good);
+                Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), serverFile.getAbsolutePath(), "dresden", "eilenburger", newArticleForm.getId(), "16", 1);
+        		articleRepo.save(article);
+        		System.out.println(article);
         		
         		System.out.println("You successfully uploaded file=" + newArticleForm.getTitle());
             	return ("redirect:/");

@@ -14,12 +14,12 @@
 	<div class="row">
 		<div class="large-12 columns">
 			<p>&nbsp;</p>
-			<h4 class="header" th:text="${Good.name}">Name des Artikels</h4>
+			<h4 class="header" th:text="${Article.title}">Name des Artikels</h4>
 			<div class="panel">
 				<div class="row">
 					<div class="small-12 columns">
 						<div class="small-12 large-9 columns">
-							<img th:src="@{'/resources/static/' + ${Good.photo}}" src="http://placehold.it/800x600&amp;text=Artikel" />
+							<img th:src="@{'/resources/static/' + ${Article.photo}}" src="http://placehold.it/800x600&amp;text=Artikel" />
 						</div>
 						<p>&nbsp;</p>
 						<p>&nbsp;</p>
@@ -33,14 +33,14 @@
 									<p>Anbieter:</p>
 								</div>
 								<div class="small-6 large-9 columns">
-									<p th:text="${Good.location}"></p>
+									<p th:text="${Article.location}"></p>
 									<p>07.11.2015</p>
 									<p>Max Muster</p>
 								</div>
 								<p>&nbsp;</p>
 								<h5 class="subheader">Beschreibung</h5>
 								<hr></hr>
-								<font th:text="${Good.description}"></font>
+								<font th:text="${Article.description}"></font>
 							</div>
 						</div>
 					</div>

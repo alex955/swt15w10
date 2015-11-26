@@ -18,14 +18,14 @@ public class RefugeeDataInitializer implements DataInitializer {
     private final UserAccountManager userAccountManager;
     private final UserRepository userRepository;
     private final CategoryRepo categories;
-    private final GoodRepo goodREPO;
+    private final ArticleRepo goodREPO;
 
     final Role refugee = new Role("ROLE_REFUGEE");
     final Role volunteer = new Role("ROLE_VOLUNTEER");
     final Role admin = new Role("ROLE_ADMIN");
 
     @Autowired
-    public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, kickstart.model.GoodRepo goodREPO) {
+    public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, kickstart.model.ArticleRepo goodREPO) {
 
         Assert.notNull(userAccountManager, "UserManagerAccount must not be null!");
         Assert.notNull(userRepository, "UserRepository must not be null!");
@@ -63,18 +63,18 @@ public class RefugeeDataInitializer implements DataInitializer {
     }
 
     public void initializeGoods(){
-        Good g1 = new Good("in Möbel1", "Beschreibung", "picPath", "photo", "straße", 01067, "ort", "number", 1);
-        Good g2 = new Good("in Möbel2", "Beschreibung", "picPath", "photo", "straße", 01067, "ort", "number", 1);
-        Good g3 = new Good("in Badmöbel1", "Beschreibung", "picPath", "photo", "straße", 01067, "ort", "number", 2);
-        Good g4 = new Good("in Badmöbel2", "Beschreibung", "picPath", "photo", "straße", 01067, "ort", "number", 2);
-        Good g5 = new Good("in Küchenmöbel", "Beschreibung", "picPath", "photo", "straße", 01067, "ort", "number", 3);
-        Good g6 = new Good("in Bücher", "Beschreibung", "picPath", "photo", "straße", 01067, "ort", "number", 4);
-        Good g7 = new Good("in gute Bücher", "Beschreibung", "picPath", "photo", "straße", 01067, "ort", "number", 5);
-        Good g8 = new Good("in schlechte Bücher", "Beschreibung", "picPath", "photo", "straße", 01067, "ort", "number", 6);
-        Good g9 = new Good("in Blablub", "Beschreibung", "picPath", "photo", "straße", 01067, "ort", "number", 7);
-        Good g10 = new Good("in weapons", "Beschreibung", "picPath", "photo", "straße", 01067, "ort", "number", 8);
-        Good g11 = new Good("in gruppenter", "Beschreibung", "picPath", "photo", "straße", 01067, "ort", "number", 9);
-        Good g12 = new Good("in nochmal möbel", "Beschreibung", "picPath", "photo", "straße", 01067, "ort", "number", 11);
+        Article g1 = new Article("in Möbel1", "Beschreibung", "picPath", "ort", "straße", 1, "number", 01067);
+        Article g2 = new Article("in Möbel2", "Beschreibung", "picPath", "ort", "straße", 1, "number", 01067);
+        Article g3 = new Article("in Badmöbel1", "Beschreibung", "picPath", "ort", "straße", 2, "number", 01067);
+        Article g4 = new Article("in Badmöbel2", "Beschreibung", "picPath", "ort", "straße", 2, "number", 01067);
+        Article g5 = new Article("in Küchenmöbel", "Beschreibung", "picPath", "ort", "straße", 3, "number", 01067);
+        Article g6 = new Article("in Bücher", "Beschreibung", "picPath", "ort", "straße", 4, "number", 01067);
+        Article g7 = new Article("in gute Bücher", "Beschreibung", "picPath", "ort", "straße", 5, "number", 01067);
+        Article g8 = new Article("in schlechte Bücher", "Beschreibung", "picPath", "ort", "straße", 6, "number", 01067);
+        Article g9 = new Article("in Blablub", "Beschreibung", "picPath", "ort", "straße", 7, "number", 01067);
+        Article g10 = new Article("in weapons", "Beschreibung", "picPath", "ort", "straße", 8, "number", 01067);
+        Article g11 = new Article("in gruppenter", "Beschreibung", "picPath", "ort", "straße", 9, "number", 01067);
+        Article g12 = new Article("in nochmal möbel", "Beschreibung", "picPath", "ort", "straße", 11, "number", 01067);
 
         goodREPO.save(g1);
         goodREPO.save(g2);

@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kickstart.model.Category;
-import kickstart.model.Good;
+import kickstart.model.Article;
 
 
 @Controller
 public class SearchController extends CommonVariables {
 			
 	
-	public List<Good> getAllSubcategoryItems(long subcatId){
-		List<Good> toReturn = getAllCategoryItems(subcatId);
+	public List<Article> getAllSubcategoryItems(long subcatId){
+		List<Article> toReturn = getAllCategoryItems(subcatId);
 		
 		List<Long> subcategories = new LinkedList<Long>();
 		for(Category s : categories.findAll()){
@@ -37,8 +37,8 @@ public class SearchController extends CommonVariables {
 	}
 	
 
-	public List<Good> getAllCategoryItems(long subcatID){
-		return this.goodREPO.findByCategory(subcatID);
+	public List<Article> getAllCategoryItems(long subcatID){
+		return this.articleRepo.findByCategory(subcatID);
 	}
 	
 	//@RequestMapping(value = "/search?{name}?{plz}?{distance}?{search}?{category}")
@@ -51,18 +51,18 @@ public class SearchController extends CommonVariables {
 			model.addAttribute("categories", this.processedCategories);
 			model.addAttribute("categoriesForm", this.categories.findAll());
 				
-				List<Good> catGoods = goodREPO.findByCategory(catID);
+				List<Article> catGoods = articleRepo.findByCategory(catID);
 				System.out.println("Length of list: " + catGoods.size());
 			 
-			   List<Good> output = new LinkedList<Good>();
+			   List<Article> output = new LinkedList<Article>();
 	 		   
 			   int count = 1;
-			   for (Good good : catGoods) 
+			   for (Article good : catGoods) 
 			     { System.out.println(count); count++;
-			     System.out.println(good.getName()+"    "+good.getCategory());
+			     System.out.println(good.getTitle()+"    "+good.getCategory());
 			  
 			     	// Überprüfung ob Name gleich
-			     	if (good.getName().toLowerCase().contains(text.toLowerCase())) { System.out.println("match"); output.add(good);} else System.out.println("dismatch"); 
+			     	if (good.getTitle().toLowerCase().contains(text.toLowerCase())) { System.out.println("match"); output.add(good);} else System.out.println("dismatch"); 
 			     	// Überprüfung ob Suchtext in Description
 			     	if (good.getDescription().toLowerCase().contains(text.toLowerCase()) && !output.contains(good)) output.add(good);
 			     
@@ -84,7 +84,7 @@ public class SearchController extends CommonVariables {
 			//setzt aktuelle kategorie auf catID
 			this.setCurrent_cat(catID);
 			
-			List<Good> catGoods = this.getAllSubcategoryItems(catID);
+			List<Article> catGoods = this.getAllSubcategoryItems(catID);
 		
 			
 			System.out.println("Anzahl an Artikeln: " + catGoods.size());

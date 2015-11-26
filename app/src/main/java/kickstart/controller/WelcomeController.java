@@ -57,9 +57,9 @@ public class WelcomeController extends CommonVariables {
 		//System.out.println("size of root categories: " + this.processedCategories.size());
 		model.addAttribute("categories", this.processedCategories);
 		
-		 model.addAttribute("anzeigen", goodREPO.findAll());
+		 model.addAttribute("anzeigen", articleRepo.findAll());
 		    
-		   // System.out.println("GOOD REPO WURDE AN html übergeben");
+		   // System.out.println(s"GOOD REPO WURDE AN html übergeben");
 		 
 		 model=this.getCurrent_cat(model);
 		 

@@ -16,17 +16,15 @@ import kickstart.model.Category;
 import kickstart.model.CategoryFirstTierObject;
 import kickstart.model.CategoryRepo;
 import kickstart.model.UserRepository;
-import kickstart.model.ActivityRepo;
-import kickstart.model.GoodRepo;
+import kickstart.model.ArticleRepo;
 
 @Controller
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 public class AdminController extends CommonVariables {
 	@Autowired
-	public AdminController(CategoryRepo categories, GoodRepo grepo, ActivityRepo arepo, UserRepository userRepository){
+	public AdminController(CategoryRepo categories, ArticleRepo articleRepo, UserRepository userRepository){
 		this.categories = categories;
-		this.activityREPO=arepo;
-		this.goodREPO=grepo;
+		this.articleRepo=articleRepo;
 		this.userRepository = userRepository;
 	}
 	
