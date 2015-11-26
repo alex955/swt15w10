@@ -31,15 +31,16 @@ public class RegistrationController extends CommonVariables {
     }
 
     @RequestMapping(value ="/registration")
-    public String firstView(@ModelAttribute("RegistrationForm") RegistrationForm registrationForm) {
+    public String firstView(@ModelAttribute("RegistrationForm") RegistrationForm registrationForm, Model model) {
+    	model=this.getCurrent_cat(model);
         return ("registration");
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String newRegistration(@ModelAttribute("RegistrationForm") @Valid RegistrationForm registrationForm, BindingResult result) throws AddressException, MessagingException {
+    public String newRegistration(@ModelAttribute("RegistrationForm") @Valid RegistrationForm registrationForm, BindingResult result, Model model) throws AddressException, MessagingException {
 
-        if(result.hasErrors())
-            return "registration";
+        if(result.hasErrors()) { model=this.getCurrent_cat(model);
+            return "registration";}
 
         UserAccount userAccount = userAccountManager.create(registrationForm.getUsername(), registrationForm.getPassword(), registrationForm.getRole());
         userAccountManager.save(userAccount);
@@ -51,6 +52,7 @@ public class RegistrationController extends CommonVariables {
         
         EMailController.SendEmail(user.getEmail(), user.getHashcode());
         
+        model=this.getCurrent_cat(model);
         return ("redirect:/");
     }
 
