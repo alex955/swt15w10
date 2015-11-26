@@ -1,11 +1,17 @@
 package kickstart.model;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 
 import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 
 @Entity
@@ -21,7 +27,29 @@ public class Article {
 	private String number;
 	private int plz;
 	private long userID;
-	private String date;
+	
+	@DateTimeFormat(pattern = "dd.MM.yyyy")
+	private LocalDate creationdate;
+	
+	@DateTimeFormat(pattern = "HH:mm dd-MM-yyyy")
+	private LocalDateTime activitydate;
+		
+	public LocalDateTime getActivitydate() {
+		return activitydate;
+	}
+
+	public void setActivitydate(LocalDateTime activitydate) {
+		this.activitydate = activitydate;
+	}
+
+	public LocalDate getCreationdate() {
+		return creationdate;
+	}
+
+	public void setCreationdate(LocalDate creationdate) {
+		this.creationdate = creationdate;
+	}
+
 	private String photo;
 	
 	public String getPhoto() {
@@ -32,22 +60,17 @@ public class Article {
 		this.photo = photo;
 	}
 
-	public String getDate() {
-		return date;
-	}
+	
+	
 
-	public void setDate(String date) {
-		this.date = date;
-	}
-	
-	
 
 	public Article() {
 		super();
 	}
 
+	
 	public Article(String title, String description, String picPath, String location, String street,
-			long category, String number, int plz) {
+			long category, String number, int plz, String creationdate) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -57,10 +80,11 @@ public class Article {
 		this.category = category;
 		this.number = number;
 		this.plz = plz;
+		this.creationdate.parse(creationdate, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 	}
 	
 	public Article(String title, String description, String picPath, String location, String street,
-			long category, String number, int plz, String date) {
+			long category, String number, int plz, String creationdate, String activitydate) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -70,14 +94,15 @@ public class Article {
 		this.category = category;
 		this.number = number;
 		this.plz = plz;
-		this.date = date;
+		this.creationdate.parse(creationdate,DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+		this.activitydate.parse(activitydate,DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy"));
 	}
 
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", description=" + description + ", picPath=" + picPath
 				+ ", location=" + location + ", street=" + street + ", category=" + category + ", number=" + number
-				+ ", plz=" + plz + ", userID=" + userID + ", date=" + date + "]";
+				+ ", plz=" + plz + ", userID=" + userID + ", date=" + creationdate.toString() + "]";
 	}
 
 	public long getId() {

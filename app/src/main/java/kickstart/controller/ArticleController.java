@@ -4,12 +4,15 @@ import java.io.BufferedOutputStream;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 import org.apache.tomcat.util.http.fileupload.FileUtils;
+import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -99,7 +102,12 @@ public class ArticleController extends CommonVariables {
                 System.out.println("Server File Location="
                         + serverFile.getAbsolutePath());
  
-                Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), serverFile.getAbsolutePath(), "dresden", "eilenburger", newArticleForm.getId(), "16", 1);
+                // aktuelles Datum in String umgewandelt
+                LocalDate date = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+                String current_datum = date.format(formatter);
+                
+                Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), serverFile.getAbsolutePath(), "dresden", "eilenburger", newArticleForm.getId(), "16", 1,current_datum);
         		articleRepo.save(article);
         		System.out.println(article);
         		

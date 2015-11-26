@@ -63,18 +63,18 @@ public class RefugeeDataInitializer implements DataInitializer {
     }
 
     public void initializeGoods(){
-        Article g1 = new Article("in Möbel1", "Beschreibung", "picPath", "ort", "straße", 1, "number", 01067);
-        Article g2 = new Article("in Möbel2", "Beschreibung", "picPath", "ort", "straße", 1, "number", 01067);
-        Article g3 = new Article("in Badmöbel1", "Beschreibung", "picPath", "ort", "straße", 2, "number", 01067);
-        Article g4 = new Article("in Badmöbel2", "Beschreibung", "picPath", "ort", "straße", 2, "number", 01067);
-        Article g5 = new Article("in Küchenmöbel", "Beschreibung", "picPath", "ort", "straße", 3, "number", 01067);
-        Article g6 = new Article("in Bücher", "Beschreibung", "picPath", "ort", "straße", 4, "number", 01067);
-        Article g7 = new Article("in gute Bücher", "Beschreibung", "picPath", "ort", "straße", 5, "number", 01067);
-        Article g8 = new Article("in schlechte Bücher", "Beschreibung", "picPath", "ort", "straße", 6, "number", 01067);
-        Article g9 = new Article("in Blablub", "Beschreibung", "picPath", "ort", "straße", 7, "number", 01067);
-        Article g10 = new Article("in weapons", "Beschreibung", "picPath", "ort", "straße", 8, "number", 01067);
-        Article g11 = new Article("in gruppenter", "Beschreibung", "picPath", "ort", "straße", 9, "number", 01067);
-        Article g12 = new Article("in nochmal möbel", "Beschreibung", "picPath", "ort", "straße", 11, "number", 01067);
+        Article g1 = new Article("in Möbel1", "Beschreibung", "picPath", "ort", "straße", 1, "number", 01067,"25.11.2015");
+        Article g2 = new Article("in Möbel2", "Beschreibung", "picPath", "ort", "straße", 1, "number", 01067,"02.11.2015");
+        Article g3 = new Article("in Badmöbel1", "Beschreibung", "picPath", "ort", "straße", 2, "number", 01067,"12.11.2015");
+        Article g4 = new Article("in Badmöbel2", "Beschreibung", "picPath", "ort", "straße", 2, "number", 01067,"14.11.2015");
+        Article g5 = new Article("in Küchenmöbel", "Beschreibung", "picPath", "ort", "straße", 3, "number", 01067,"02.11.2015");
+        Article g6 = new Article("in Bücher", "Beschreibung", "picPath", "ort", "straße", 4, "number", 01067,"25.11.2015");
+        Article g7 = new Article("in gute Bücher", "Beschreibung", "picPath", "ort", "straße", 5, "number", 01067,"25.11.2015");
+        Article g8 = new Article("in schlechte Bücher", "Beschreibung", "picPath", "ort", "straße", 6, "number", 01067,"25.11.2015");
+        Article g9 = new Article("in Blablub", "Beschreibung", "picPath", "ort", "straße", 7, "number", 01067,"25.11.2015");
+        Article g10 = new Article("in weapons", "Beschreibung", "picPath", "ort", "straße", 8, "number", 01067,"25.11.2015");
+        Article g11 = new Article("in gruppenter", "Beschreibung", "picPath", "ort", "straße", 9, "number", 01067,"25.11.2015");
+        Article g12 = new Article("in nochmal möbel", "Beschreibung", "picPath", "ort", "straße", 11, "number", 01067,"25.11.2015");
 
         goodREPO.save(g1);
         goodREPO.save(g2);
