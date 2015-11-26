@@ -75,7 +75,9 @@ public class AdminController extends CommonVariables {
 //        for(User b : this.userRepository.findAll()){
 //        	b.getCity();
 //        }
-
+        
+        
+        model=this.getCurrent_cat(model);
         return "admin";
     }
     @RequestMapping(value="/admin/addSubcategory/{id}", method=RequestMethod.POST)
@@ -87,6 +89,7 @@ public class AdminController extends CommonVariables {
     	
     	this.categories.save(toSave);
     	
+    	model=this.getCurrent_cat(model);
         return "redirect:/admin/inspectCategory/{id}";
     }
 	
@@ -98,6 +101,8 @@ public class AdminController extends CommonVariables {
         this.categories.save(category);
         System.out.println("added category");
         //model.addAttribute("categories", categories.findAll());
+        
+        model=this.getCurrent_cat(model);
         return "redirect:/admin";
     }
     
@@ -144,6 +149,7 @@ public class AdminController extends CommonVariables {
 
         model.addAttribute("newCategory", new Category());
 		
+        model=this.getCurrent_cat(model);
 		return "adminSubcategory";
 	}
 	

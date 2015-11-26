@@ -7,6 +7,7 @@
 <link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
 <link rel="stylesheet" th:href="@{/resources/css/style_button.css}" />
 <script th:src="@{/resources/js/vendor/modernizr.js}"></script>
+
 </head>
 
 <body>
@@ -46,16 +47,16 @@
 				<ul class="left">
 					<li class="has-form"><input type="text" placeholder="" /></li>
 					<li class="divider"></li>
-					<li class="has-dropdown"><a href="#">alle Kategorien</a> 
+					<li class="has-dropdown"><a href="#" th:text="${current_category.name}">alle Kategorien</a> 
 					
 					<!--  actual list -->
-						<ul class="dropdown">
+						<ul class="dropdown" id="dropdown">
 							<li th:each="categoryTopbar : ${categories}" class="has-dropdown">
-								<a th:href="@{/inspectcategory/{id}(id=${categoryTopbar.cat.id})}"><span
+								<a th:href="@{/search/{id}(id=${categoryTopbar.cat.id})}"><span
 									th:text="${categoryTopbar.cat.name}">Subkategorien anschauen</span></a>
 								<ul class="dropdown">
 									<li th:each="subcategory : ${categoryTopbar.subcats}"><a
-										th:href="@{/inspectcategory/{id}(id=${subcategory.id})}"><span
+										th:href="@{/search/{id}(id=${subcategory.id})}"><span
 											th:text="${subcategory.name}">Subkategorien anschauen</span></a></li>
 								</ul>
 							</li>
@@ -90,6 +91,7 @@
 			$(document).foundation();
 		</script>
 
+		
 	</nav>
 </body>
 </html>
