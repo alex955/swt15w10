@@ -14,6 +14,7 @@ import kickstart.model.GoodRepo;
 
 @Controller
 public class CommonVariables {
+
     @Autowired
     protected UserRepository userRepository;
     

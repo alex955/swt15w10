@@ -4,10 +4,14 @@ import kickstart.model.User;
 import kickstart.model.UserRepository;
 import kickstart.model.UserSettings;
 import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.UserAccountIdentifier;
 import org.salespointframework.useraccount.UserAccountManager;
+import org.salespointframework.useraccount.web.LoggedIn;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,29 +20,37 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.validation.Valid;
+import java.util.Optional;
 
 /**
  * Created by Vincenz on 25.11.15.
  */
 
 @Controller
-@PreAuthorize("hasAnyRole('ROLE_ADMIN, ROLE_REFUGEE, ROLE_VOLUNTEER')")
-public class SettingsController {
+@PreAuthorize("isAuthenticated()")
+public class SettingsController extends CommonVariables {
+
+private UserAccountManager userAccountManager;
+
+    @Autowired
+    public SettingsController(UserRepository userRepository, UserAccountManager userAccountManager){
+        this.userAccountManager = userAccountManager;
+        this.userRepository = userRepository;
+    }
 
     @RequestMapping(value = "/usersettings", method = RequestMethod.GET)
-    public String changeSettings(@ModelAttribute("UserSettings") @Valid UserSettings userSettings, BindingResult result, UserAccountManager userAccountManager, UserRepository userRepository) throws AddressException, MessagingException {
+    public String changeSettings(@LoggedIn Optional<UserAccount> userAccount, @Valid UserSettings userSettings, BindingResult result) throws AddressException, MessagingException {
+
 
         if(result.hasErrors())
             return "usersettings";
 
-        System.out.println(userRepository);
-
-
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        UserAccount userAccount = user.getUserAccount();
+        String userID = userAccountManager.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get().getUsername();
+        User user = userRepository.findByUsername(userID);
 
         System.out.println(user);
-        //Adressänderung
+
+        /*//Adressänderung
         if(!userSettings.getNewCity().isEmpty())
         user.setCity(userSettings.getNewCity());
 
@@ -63,7 +75,7 @@ public class SettingsController {
 
         //Passwort-Änderung
         if(!userSettings.getNewPassword().isEmpty())
-        if(user.getPassword().equals(userSettings.getNewPassword()) && user.getPassword().equals(userSettings.getConfirmPW())){
+        if(.getPassword().equals(userSettings.getNewPassword()) && user.getPassword().equals(userSettings.getConfirmPW())){
             userAccountManager.changePassword(userAccount, userSettings.getNewPassword());
         }
 
@@ -81,7 +93,7 @@ public class SettingsController {
         userRepository.save(user);
 
 
-        System.out.println(user);
+        System.out.println(user); */
         return "redirect:/";
     }
 }

@@ -1,5 +1,6 @@
 package kickstart.controller;
 import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.UserAccountIdentifier;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
