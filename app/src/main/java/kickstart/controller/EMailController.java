@@ -2,7 +2,6 @@ package kickstart.controller;
 
 
 import java.util.Properties;
-
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -11,20 +10,13 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
-import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import kickstart.model.User;
 import kickstart.model.UserRepository;
-import scala.Int;
 
-
-// import index.model.RegistrationForm;
 
 @Controller
 public class EMailController extends CommonVariables{
@@ -36,7 +28,7 @@ public class EMailController extends CommonVariables{
     }
 	
     /**
-     * Sends E-Mail by using the MimeMessage Class with the smpt protocoll.
+     * Sends E-Mail by using the MimeMessage Class with the smpt protocol.
      * 
      * @author Lukas Klose
      */
