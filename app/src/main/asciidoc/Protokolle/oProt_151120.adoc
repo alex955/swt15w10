@@ -10,7 +10,9 @@ __Teilnehmer:__ J. Adam, V. Herz, A. Huber, L. Klose, A. Shulga
 == Bemerkungen
 //Verwarnungen, besondere Vorfälle, Organisatorisches
 -
+
 == Retrospektive des letzten Sprints
+
 *Issue referenziert die Issue ID von GitHub*
 
 // See http://asciidoctor.org/docs/user-manual/=tables
