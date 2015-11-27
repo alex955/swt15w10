@@ -1,0 +1,40 @@
+= Protokoll Gruppe 10
+__Treffen am 20.11.2015__
+
+__Schriftführer:__ Lukas Klose
+
+__Nächstes Treffen:__ 27.11.2015
+
+__Teilnehmer:__ J. Adam, V. Herz, A. Huber, L. Klose, A. Shulga
+
+== Bemerkungen
+//Verwarnungen, besondere Vorfälle, Organisatorisches
+-
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe |Status |Bemerkung
+|#25     |Testplan       |Erledigt      |-
+|===
+
+
+== Aktueller Stand
+//Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den Dokumenten.
+-
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#54     |Einloggen, Ausloggen, Registrierung||Gruppe 10 |in Arbeit
+|#54     |User bearbeiten|Normaler User sich selbst, Admin alle User|Gruppe 10 |in Arbeit
+|#54     |Produkte überarbeiten|und Fotos hochladen| Gruppe 10|in Arbeit
+|#54     |Produkte erstellen|-|Gruppe 10 |in Arbeit
+|#54     |Übersichtsseite aller Güter|-|Gruppe 10 |in Arbeit
+|===
