@@ -122,7 +122,7 @@ public class ArticleController extends CommonVariables {
         		System.out.println(article);
         		
         		System.out.println("You successfully uploaded file=" + newArticleForm.getTitle());
-            	return ("redirect:/");
+            	return ("redirect:/search");
             } catch (Exception e) {
                 return "You failed to upload " + newArticleForm.getTitle() + " => " + e.getMessage();
             }
