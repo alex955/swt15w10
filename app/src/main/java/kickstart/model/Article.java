@@ -27,9 +27,7 @@ public class Article {
 	private String number;
 	private int plz;
 	private long userID;
-	
-	@DateTimeFormat(pattern = "dd.MM.yyyy")
-	private LocalDate creationdate;
+	private String creationDate;
 	
 	@DateTimeFormat(pattern = "HH:mm dd-MM-yyyy")
 	private LocalDateTime activitydate;
@@ -42,12 +40,12 @@ public class Article {
 		this.activitydate = activitydate;
 	}
 
-	public LocalDate getCreationdate() {
-		return creationdate;
+	public String getCreationdate() {
+		return creationDate;
 	}
 
-	public void setCreationdate(LocalDate creationdate) {
-		this.creationdate = creationdate;
+	public void setCreationdate(String creationdate) {
+		this.creationDate = creationdate;
 	}
 
 	private String photo;
@@ -80,7 +78,21 @@ public class Article {
 		this.category = category;
 		this.number = number;
 		this.plz = plz;
-		this.creationdate.parse(creationdate, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+		this.creationDate = creationdate;
+	}
+	
+	public Article(String title, String description, String picPath, String location, String street,
+			long category, String number, int plz) {
+		super();
+		this.title = title;
+		this.description = description;
+		this.picPath = picPath;
+		this.location = location;
+		this.street = street;
+		this.category = category;
+		this.number = number;
+		this.plz = plz;
+		//this.creationdate.parse(creationdate, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
 	}
 	
 	public Article(String title, String description, String picPath, String location, String street,
@@ -94,7 +106,7 @@ public class Article {
 		this.category = category;
 		this.number = number;
 		this.plz = plz;
-		this.creationdate.parse(creationdate,DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+		this.creationDate = creationdate;
 		this.activitydate.parse(activitydate,DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy"));
 	}
 
@@ -102,7 +114,7 @@ public class Article {
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", description=" + description + ", picPath=" + picPath
 				+ ", location=" + location + ", street=" + street + ", category=" + category + ", number=" + number
-				+ ", plz=" + plz + ", userID=" + userID + ", date=" + creationdate.toString() + "]";
+				+ ", plz=" + plz + ", userID=" + userID + ", creationDate=" + creationDate + "]";
 	}
 
 	public long getId() {

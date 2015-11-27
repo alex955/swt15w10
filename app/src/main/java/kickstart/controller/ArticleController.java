@@ -90,7 +90,7 @@ public class ArticleController extends CommonVariables {
 	}
 	
 	
-	//create a new Good
+	//create a new Article
 	@RequestMapping(value = "/newArticle", method = RequestMethod.POST)
     public String newArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm) {
 		if (!((newArticleForm.getFile()).isEmpty())) {
@@ -117,7 +117,7 @@ public class ArticleController extends CommonVariables {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
                 String current_datum = date.format(formatter);
                 
-                Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), serverFile.getAbsolutePath(), "dresden", "eilenburger", newArticleForm.getId(), "16", 1,current_datum);
+                Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), serverFile.getAbsolutePath(), "dresden", "eilenburger", newArticleForm.getId(), "16", 1, current_datum);
         		articleRepo.save(article);
         		System.out.println(article);
         		
