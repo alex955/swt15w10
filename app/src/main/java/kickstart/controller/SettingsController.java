@@ -1,5 +1,6 @@
 package kickstart.controller;
 
+import kickstart.model.RegistrationForm;
 import kickstart.model.User;
 import kickstart.model.UserRepository;
 import kickstart.model.UserSettings;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -39,64 +41,74 @@ public class SettingsController extends CommonVariables {
         this.userAccountManager= userAccountManager;
     }
 
+    @RequestMapping(value ="/usersettings")
+    public String firstView(@ModelAttribute("UserSettings") UserSettings userSettings) {
+        return ("usersettings");
+    }
+
     @RequestMapping(value = "/usersettings", method = RequestMethod.GET)
-    public String changeSettings(@LoggedIn Optional<UserAccount> userAccount, @Valid UserSettings userSettings, BindingResult result) throws AddressException, MessagingException {
+    public String changeSettings(@LoggedIn Optional<UserAccount> userAccount, @ModelAttribute("UserSettings") @Valid UserSettings userSettings, BindingResult result) throws AddressException, MessagingException {
 
 
         if(result.hasErrors())
             return "usersettings";
 
-        //returning null for whatever reason
-        User user = userRepository.findByUsername(userAccount.get().getUsername()); //  Bekommt theoretisch den User; praktisch null
+        List<User> userList = userRepository.findAll();
 
-        // DEBUGGING
-        System.out.println(userAccount.get().getUsername());    //  Gibt Username aus
-        System.out.println(userRepository.findAll().toString(); //  Gibt UserRepo aus
-        System.out.println(user);                               //  Gibt null aus
-        System.out.println(user.toString());                    // NullPointer
+        User changedUser = null;
+
+        for(User oldUser: userList){
+            if (oldUser.getUserAccount().getUsername().equals(userAccount.get().getUsername())){
+                changedUser = oldUser;
+                System.out.println(changedUser);
+            }
+        }
+
+        if(changedUser == null) {
+            return "redirect:/";
+        }
 
         //Adressänderung
         if(!userSettings.getNewCity().isEmpty())
-        user.setCity(userSettings.getNewCity());
+        changedUser.setCity(userSettings.getNewCity());
 
         if(!userSettings.getNewZip().isEmpty())
-        user.setZip(userSettings.getNewZip());
+        changedUser.setZip(userSettings.getNewZip());
 
         if(!userSettings.getNewStreetName().isEmpty())
-        user.setStreetName(userSettings.getNewStreetName());
+        changedUser.setStreetName(userSettings.getNewStreetName());
 
         if(!userSettings.getNewHouseNumber().isEmpty())
-        user.setHouseNumber(userSettings.getNewHouseNumber());
+        changedUser.setHouseNumber(userSettings.getNewHouseNumber());
 
         if(!userSettings.getNewAddressAddition().isEmpty())
-        user.setAddressAddition(userSettings.getNewAddressAddition());
+        changedUser.setAddressAddition(userSettings.getNewAddressAddition());
 
         //Email-Änderung
 
         //TODO: Email Confirmation
 
         if(!userSettings.getNewEmail().isEmpty())
-        user.setEmail(userSettings.getNewEmail());
+        changedUser.setEmail(userSettings.getNewEmail());
 
         //Passwort-Änderung
         if(!userSettings.getNewPassword().isEmpty())
-        if(user.getPassword().equals(userSettings.getNewPassword()) && user.getPassword().equals(userSettings.getConfirmPW())){
-            userAccountManager.changePassword(user.getUserAccount(), userSettings.getNewPassword());
+        if(changedUser.getPassword().equals(userSettings.getNewPassword()) && changedUser.getPassword().equals(userSettings.getConfirmPW())){
+            userAccountManager.changePassword(changedUser.getUserAccount(), userSettings.getNewPassword());
         }
 
         //Sprachenänderung
         if(!userSettings.getNewLanguage1().isEmpty())
-        user.setLanguage1(userSettings.getNewLanguage1());
+        changedUser.setLanguage1(userSettings.getNewLanguage1());
 
         if(!userSettings.getNewLanguage2().isEmpty())
-        user.setLanguage2(userSettings.getNewLanguage2());
+        changedUser.setLanguage2(userSettings.getNewLanguage2());
 
         if(!userSettings.getNewLanguage3().isEmpty())
-        user.setLanguage3(userSettings.getNewLanguage3());
+        changedUser.setLanguage3(userSettings.getNewLanguage3());
 
-        userAccountManager.save(user.getUserAccount());
-        userRepository.save(user);
-
+        userAccountManager.save(changedUser.getUserAccount());
+        userRepository.save(changedUser);
 
 
 
