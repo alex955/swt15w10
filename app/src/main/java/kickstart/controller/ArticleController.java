@@ -40,7 +40,7 @@ public class ArticleController extends CommonVariables {
 	
 	
 	@RequestMapping(value = "/showArticle/{id}")
-	public String anzeige_anzeigen(@PathVariable("id") long id,Model model) {
+	public String showArticle(@PathVariable("id") long id,Model model) {
 		//initiate categories
 				this.processedCategories = this.getProcessedCategories();
 				model.addAttribute("categories", this.processedCategories);

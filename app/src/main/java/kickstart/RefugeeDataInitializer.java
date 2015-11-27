@@ -64,7 +64,7 @@ public class RefugeeDataInitializer implements DataInitializer {
     }
 
     public void initializeGoods(){
-        Article g1 = new Article("Spiegelschrank", "Dieser Spiegelschrank ist 60 cm breit", "img/a1.jpg", "Dresden - Zschertnitz", "Bergstraße 5", 2, "17", 01217,"25.11.2015");
+        Article g1 = new Article("Spiegelschrank", "Dieser Spiegelschrank ist 60 cm breit", "img/a1.jpg", "Dresden - Zschernitz", "Bergstraße 5", 2, "17", 01217,"25.11.2015");
         Article g2 = new Article("Sofa", "Einladender Blickfang! Das stylishe Schlafsofa mit dem zweifarbigen Look lädt zum Entspannen und Träumen ein.", "img/a2.jpg", "Dresden - Südvorstadt", "straße", 1, "number", 01067,"02.11.2015");
         Article g3 = new Article("Stuhl", "Schöner Bürostuhl mit einem Bezug aus hochwertigem Kunstleder, kombiniert mit atmungsaktivem Netzstoff im Rückenausschnitt in Schwarz", "img/a3.jpg", "Pirna", "straße", 1, "number", 01067,"12.11.2015");
         Article g4 = new Article("Spiegel", "Aus Metall mit aufwendigen Verzierungen", "img/a4.jpg", "Dresden - Seidnitz", "straße", 2, "number", 01067,"14.11.2015");

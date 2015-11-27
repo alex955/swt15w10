@@ -78,7 +78,7 @@ public class SearchController extends CommonVariables {
 			
 			
 			@RequestMapping(value = "/search/{category}")
-			public String suche_via_categorie(@PathVariable("category") Long catID, Model model)
+			public String searchByCategory(@PathVariable("category") Long catID, Model model)
 			{  System.out.println("Es wird in der Kategorie "+catID+" gesucht");
 			
 			//setzt aktuelle kategorie auf catID

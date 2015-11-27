@@ -1,0 +1,100 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>Refugee</title>
+<link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
+</head>
+
+<body>
+
+	<nav th:include="topbar :: topbar"></nav>
+
+	<div class="row">
+		<div class="large-12 columns">
+			<p>&nbsp;</p>
+			<h4 class="header">Angebot einstellen</h4>
+			<form action="#" th:action="@{/newArticle}" th:object="${NewArticleForm}" method="post" enctype="multipart/form-data">
+				<div class="panel">
+					<div class="row">
+						<div class="small-12 columns">
+							<div class="small-12 columns">
+								<p>Möchten Sie eine Aktivität (z.b. Sprachkurs, Stadtausflug, Bowlingspiel) oder einen Artikel erstellen?</p>
+							</div>
+							<div class="small-12 columns">
+								<div class="chooseRole">
+										<input id="activity" type="radio" name="kind"/>
+										<label	for="activity"><p> Aktivität</p></label>
+										<input id="article" type="radio" name="kind"/>
+										<label for="article"><p> Artikel</p></label>
+										<br />
+								</div>
+							</div>
+							<div class="small-12 large-4 columns">
+								<p>Kategorie*: </p>
+							</div>
+							
+							<div class="small-12 large-8 columns">
+								<select name="id">
+									<option th:each="categoryForm : ${categoriesForm}" th:value="${categoryForm.id}"><span th:text="${categoryForm.name}"></span></option>
+									
+								</select>
+							</div>
+							<hr />
+							
+							
+							<div class="small-12 large-4 columns">
+								<p>Titel der Anzeige*</p>
+							</div>
+							<div class="small-12 large-8 columns">
+								<input type="text" name="title" placeholder="" />
+							</div>
+							<div class="small-12 large-4 columns">
+								<p>Beschreibung*</p>
+							</div>
+							<div class="small-12 large-8 columns">
+								<textarea name="description" rows="4"></textarea>
+							</div>
+							<div class="small-12 large-4 columns">
+								<p>Bilder</p>
+							</div>
+							<div class="small-12 large-8 columns">
+								<a><input type="file" name="file"/></a>
+							</div>
+							<hr />
+						</div>
+					</div>
+					<div class="row">
+						<div class="small-12 columns">
+							<div class="small-12 large-4 columns">
+								<p>PLZ*</p>
+							</div>
+							<div class="small-3 large-2 columns">
+								<input type="text" placeholder="PLZ" />
+							</div>
+							<div class="small-9 large-6 columns">
+								<input type="text" placeholder="zugehoerige Stadt automatisch" />
+							</div>
+	
+							<div class="small-12 large-4 columns">
+								<p>Straße/Nr.</p>
+							</div>
+							<div class="small-12 large-8 columns">
+								<input type="text" placeholder="" />
+							</div>
+							<hr />
+							<div class="small-12 columns">
+								<button type="submit" th:href="@{/}">Angebot Einstellen</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<footer th:include="footer :: footer"></footer>
+
+</body>
+</html>
