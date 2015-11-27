@@ -19,25 +19,13 @@
 				<div class="panel">
 					<div class="row">
 						<div class="small-12 columns">
-							<div class="small-12 columns">
-								<p>Möchten Sie eine Aktivität (z.b. Sprachkurs, Stadtausflug, Bowlingspiel) oder einen Artikel erstellen?</p>
-							</div>
-							<div class="small-12 columns">
-								<div class="chooseRole">
-										<input id="activity" type="radio" name="kind"/>
-										<label	for="activity"><p> Aktivität</p></label>
-										<input id="article" type="radio" name="kind"/>
-										<label for="article"><p> Artikel</p></label>
-										<br />
-								</div>
-							</div>
 							<div class="small-12 large-4 columns">
 								<p>Kategorie*: </p>
 							</div>
 							
 							<div class="small-12 large-8 columns">
 								<select name="id">
-									<option th:each="categoryForm : ${categoriesForm}" th:value="${categoryForm.id}"><span th:text="${categoryForm.name}"></span></option>
+									<option th:each="categoryForm : ${categoriesForm}" th:value="${categoryForm.id}" th:selected="${categoryForm.id == editArticle.id}"><span th:text="${categoryForm.name}"></span></option>
 									
 								</select>
 							</div>
@@ -48,13 +36,13 @@
 								<p>Titel der Anzeige*</p>
 							</div>
 							<div class="small-12 large-8 columns">
-								<input type="text" name="title" placeholder="" />
+								<input type="text" name="title" th:value="${editArticle.title}" />
 							</div>
 							<div class="small-12 large-4 columns">
 								<p>Beschreibung*</p>
 							</div>
 							<div class="small-12 large-8 columns">
-								<textarea name="description" rows="4"></textarea>
+								<textarea name="description" rows="4" th:field="${editArticle.description}"></textarea>
 							</div>
 							<div class="small-12 large-4 columns">
 								<p>Bilder</p>
@@ -71,17 +59,17 @@
 								<p>PLZ*</p>
 							</div>
 							<div class="small-3 large-2 columns">
-								<input type="text" placeholder="PLZ" />
+								<input type="text" placeholder="PLZ" th:value="${editArticle.plz}"/>
 							</div>
 							<div class="small-9 large-6 columns">
-								<input type="text" placeholder="zugehoerige Stadt automatisch" />
+								<input type="text" placeholder="zugehoerige Stadt automatisch" th:value="${editArticle.location}"/>
 							</div>
 	
 							<div class="small-12 large-4 columns">
 								<p>Straße/Nr.</p>
 							</div>
 							<div class="small-12 large-8 columns">
-								<input type="text" placeholder="" />
+								<input type="text" placeholder="" th:value="${editArticle.street}"/>
 							</div>
 							<hr />
 							<div class="small-12 columns">

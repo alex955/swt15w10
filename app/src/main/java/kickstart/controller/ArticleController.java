@@ -51,6 +51,16 @@ public class ArticleController extends CommonVariables {
 	    return "article";
 	}
 	
+	@RequestMapping(value = "/editArticle/{id}")
+	public String editArtile(@PathVariable("id") long id,Model model) {
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		model.addAttribute("categoriesForm", this.categories.findAll());
+		model.addAttribute("editArticle", articleRepo.findOne(id));
+		model=this.getCurrent_cat(model);
+	    return "editArticle";
+	}
+	
 //	@RequestMapping(value = "/inspectcategory/{categoryId}")
 //	public String showSubcategories(@PathVariable Long categoryId, Model model, @ModelAttribute Category category) {
 //		
