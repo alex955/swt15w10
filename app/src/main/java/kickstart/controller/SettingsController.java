@@ -46,10 +46,10 @@ public class SettingsController extends CommonVariables {
         if(result.hasErrors())
             return "usersettings";
 
-        UserAccountIdentifier userID = userAccount.get().getIdentifier();
         //returning null for whatever reason
-        User user = userRepository.findById(userID);
+        User user = userRepository.findByUsername(userAccount.get().getUsername());
 
+      //  System.out.println(user);
 
        //Adressänderung
         if(!userSettings.getNewCity().isEmpty())
@@ -94,7 +94,8 @@ public class SettingsController extends CommonVariables {
         userRepository.save(user);
 
 
-        System.out.println(user);
+
+
         return "redirect:/search";
     }
 }
