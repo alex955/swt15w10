@@ -1,4 +1,5 @@
 package kickstart.model;
+import org.salespointframework.useraccount.UserAccountIdentifier;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -8,5 +9,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     User findByUsername(String username);
     User findByHashcode(int hashcode);
+    User findById(UserAccountIdentifier userID);
 
 }

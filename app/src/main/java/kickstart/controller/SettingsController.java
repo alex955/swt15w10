@@ -30,12 +30,13 @@ import java.util.Optional;
 @PreAuthorize("isAuthenticated()")
 public class SettingsController extends CommonVariables {
 
-private UserAccountManager userAccountManager;
+    @Autowired
+    private UserAccountManager userAccountManager;
 
     @Autowired
     public SettingsController(UserRepository userRepository, UserAccountManager userAccountManager){
-        this.userAccountManager = userAccountManager;
         this.userRepository = userRepository;
+        this.userAccountManager= userAccountManager;
     }
 
     @RequestMapping(value = "/usersettings", method = RequestMethod.GET)
@@ -45,12 +46,12 @@ private UserAccountManager userAccountManager;
         if(result.hasErrors())
             return "usersettings";
 
-        String userID = userAccountManager.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get().getUsername();
-        User user = userRepository.findByUsername(userID);
+        UserAccountIdentifier userID = userAccount.get().getIdentifier();
+        //returning null for whatever reason
+        User user = userRepository.findById(userID);
 
-        System.out.println(user);
 
-        /*//Adressänderung
+       //Adressänderung
         if(!userSettings.getNewCity().isEmpty())
         user.setCity(userSettings.getNewCity());
 
@@ -75,8 +76,8 @@ private UserAccountManager userAccountManager;
 
         //Passwort-Änderung
         if(!userSettings.getNewPassword().isEmpty())
-        if(.getPassword().equals(userSettings.getNewPassword()) && user.getPassword().equals(userSettings.getConfirmPW())){
-            userAccountManager.changePassword(userAccount, userSettings.getNewPassword());
+        if(user.getPassword().equals(userSettings.getNewPassword()) && user.getPassword().equals(userSettings.getConfirmPW())){
+            userAccountManager.changePassword(user.getUserAccount(), userSettings.getNewPassword());
         }
 
         //Sprachenänderung
@@ -89,11 +90,11 @@ private UserAccountManager userAccountManager;
         if(!userSettings.getNewLanguage3().isEmpty())
         user.setLanguage3(userSettings.getNewLanguage3());
 
-        userAccountManager.save(userAccount);
+        userAccountManager.save(user.getUserAccount());
         userRepository.save(user);
 
 
-        System.out.println(user); */
-        return "redirect:/";
+        System.out.println(user);
+        return "redirect:/search";
     }
 }
