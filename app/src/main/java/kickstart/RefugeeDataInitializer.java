@@ -47,34 +47,35 @@ public class RefugeeDataInitializer implements DataInitializer {
         initializeUsers(userAccountManager, userRepository);
     }
 
-    public void initializeCategories(){
+    public void initializeCategories(){ 
+    
         categories.save(new Category("Möbel", -1));
         categories.save(new Category("Badmöbel", 1));
         categories.save(new Category("Küchenmöbel", 1));
         categories.save(new Category("Bücher", -1));
-        categories.save(new Category("gute Bücher", 4));
-        categories.save(new Category("schlechte Bücher", 4));
-        categories.save(new Category("Blablub", 4));
-        categories.save(new Category("Weapons of math instruction", -1));
-        categories.save(new Category("Gruppenterrorie", 8));
-        categories.save(new Category("Sisisnus und Cosisisnus", 8));
-        categories.save(new Category("nochmal Möbel", -1));
-        categories.save(new Category("nochmal nochmal Möbel", -1));
+        categories.save(new Category("Sprachkurs", 4));
+        categories.save(new Category("Romane", 4));
+        categories.save(new Category("Survivalguides", 4));
+        categories.save(new Category("Multimedia & Elektronik", -1));
+        categories.save(new Category("Handy", 8));
+        categories.save(new Category("Computer", 8));
+        categories.save(new Category("Mode", -1));
+        categories.save(new Category("Kurse", -1));
     }
 
     public void initializeGoods(){
-        Article g1 = new Article("in Möbel1", "Beschreibung", "picPath", "ort", "straße", 1, "number", 01067,"25.11.2015");
-        Article g2 = new Article("in Möbel2", "Beschreibung", "picPath", "ort", "straße", 1, "number", 01067,"02.11.2015");
-        Article g3 = new Article("in Badmöbel1", "Beschreibung", "picPath", "ort", "straße", 2, "number", 01067,"12.11.2015");
-        Article g4 = new Article("in Badmöbel2", "Beschreibung", "picPath", "ort", "straße", 2, "number", 01067,"14.11.2015");
-        Article g5 = new Article("in Küchenmöbel", "Beschreibung", "picPath", "ort", "straße", 3, "number", 01067,"02.11.2015");
-        Article g6 = new Article("in Bücher", "Beschreibung", "picPath", "ort", "straße", 4, "number", 01067,"25.11.2015");
-        Article g7 = new Article("in gute Bücher", "Beschreibung", "picPath", "ort", "straße", 5, "number", 01067,"25.11.2015");
-        Article g8 = new Article("in schlechte Bücher", "Beschreibung", "picPath", "ort", "straße", 6, "number", 01067,"25.11.2015");
-        Article g9 = new Article("in Blablub", "Beschreibung", "picPath", "ort", "straße", 7, "number", 01067,"25.11.2015");
-        Article g10 = new Article("in weapons", "Beschreibung", "picPath", "ort", "straße", 8, "number", 01067,"25.11.2015");
-        Article g11 = new Article("in gruppenter", "Beschreibung", "picPath", "ort", "straße", 9, "number", 01067,"25.11.2015");
-        Article g12 = new Article("in nochmal möbel", "Beschreibung", "picPath", "ort", "straße", 11, "number", 01067,"25.11.2015");
+        Article g1 = new Article("Spiegelschrank", "Dieser Spiegelschrank ist 60 cm breit", "img/a1.jpg", "Dresden - Zschertnitz", "Bergstraße 5", 2, "17", 01217,"25.11.2015");
+        Article g2 = new Article("Sofa", "Einladender Blickfang! Das stylishe Schlafsofa mit dem zweifarbigen Look lädt zum Entspannen und Träumen ein.", "img/a2.jpg", "Dresden - Südvorstadt", "straße", 1, "number", 01067,"02.11.2015");
+        Article g3 = new Article("Stuhl", "Schöner Bürostuhl mit einem Bezug aus hochwertigem Kunstleder, kombiniert mit atmungsaktivem Netzstoff im Rückenausschnitt in Schwarz", "img/a3.jpg", "Pirna", "straße", 1, "number", 01067,"12.11.2015");
+        Article g4 = new Article("Spiegel", "Aus Metall mit aufwendigen Verzierungen", "img/a4.jpg", "Dresden - Seidnitz", "straße", 2, "number", 01067,"14.11.2015");
+        Article g5 = new Article("Messerblock", "EINFACH GUT! Eine rundum gute Entscheidung wenn es etwas preiswerter sein soll und trotzdem zuverlässig und praktisch. TWIN Point überzeugt durch eine scharfe Klinge.", "img/a5.jpg", "Ottendorf Orkrilla", "straße", 3, "number", 01067,"02.11.2015");
+        Article g6 = new Article("Buch", "bestens erhalten ohne Eselsohren", "img/a6.jpg", "Leipzig", "straße", 4, "number", 01067,"25.11.2015");
+        Article g7 = new Article("Deutsch für Anfänger", "Gutes Buch zum lernen", "img/a12.jpg", "ort", "straße", 5, "number", 01067,"25.11.2015");
+        Article g8 = new Article("Harry Potter", "Harry Potter (* 24.12.0 um 12:30 Uhr) ist ein kleiner Zauberer aus England. Harry lernte in Hogwarts das Zauberstabwedeln", "img/a7.jpg", "Hoyerswerda", "straße", 6, "number", 01067,"25.11.2015");
+        Article g9 = new Article("Das Survival Duo", "Survival-Duo (Mehrzahl: Survival-Quartett) ist eine satirische und oscarprämierte TV-Sendung auf DMAX.", "img/a8.jpg", "Dresden - Prohlis", "straße", 7, "number", 01067,"25.11.2015");
+        Article g10 = new Article("Motorola Razor", "Perfektes Handy. Wirkt sogar als Boomerang", "img/a9.jpg", "Dresden - Gorbitz", "straße", 9, "number", 01067,"13.11.2015");
+        Article g11 = new Article("Jeans", "Beschreibung", "img/a10.jpg", "ort", "straße",11, "number", 01067,"25.11.2015");
+        Article g12 = new Article("Deutschkurs", "Beschreibung", "img/a11.jpg", "ort", "straße", 12, "number", 01067,"25.11.2015");
 
         goodREPO.save(g1);
         goodREPO.save(g2);
