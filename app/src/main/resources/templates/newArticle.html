@@ -36,7 +36,7 @@
 							</div>
 							
 							<div class="small-12 large-8 columns">
-								<select name="id">
+								<select name="categoryId">
 									<option th:each="categoryForm : ${categoriesForm}" th:value="${categoryForm.id}"><span th:text="${categoryForm.name}"></span></option>
 									
 								</select>
@@ -71,7 +71,7 @@
 								<p>PLZ*</p>
 							</div>
 							<div class="small-3 large-2 columns">
-								<input type="text" placeholder="PLZ" />
+								<input type="text" name="plz" placeholder="PLZ" />
 							</div>
 							<div class="small-9 large-6 columns">
 								<input type="text" placeholder="zugehoerige Stadt automatisch" />

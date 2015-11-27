@@ -25,7 +25,7 @@ public class Article {
 	private String street;	
 	private long category;
 	private String number;
-	private int plz;
+	private String plz;
 	private long userID;
 	private String creationDate;
 	
@@ -68,7 +68,7 @@ public class Article {
 
 	
 	public Article(String title, String description, String picPath, String location, String street,
-			long category, String number, int plz, String creationdate) {
+			long category, String number, String plz, String creationdate) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -82,7 +82,7 @@ public class Article {
 	}
 	
 	public Article(String title, String description, String picPath, String location, String street,
-			long category, String number, int plz) {
+			long category, String number, String plz) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -96,7 +96,7 @@ public class Article {
 	}
 	
 	public Article(String title, String description, String picPath, String location, String street,
-			long category, String number, int plz, String creationdate, String activitydate) {
+			long category, String number, String plz, String creationdate, String activitydate) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -181,11 +181,11 @@ public class Article {
 		this.number = number;
 	}
 
-	public int getPlz() {
+	public String getPlz() {
 		return plz;
 	}
 
-	public void setPlz(int plz) {
+	public void setPlz(String plz) {
 		this.plz = plz;
 	}
 

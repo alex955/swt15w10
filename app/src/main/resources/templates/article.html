@@ -30,12 +30,14 @@
 								<hr></hr>
 								<div class="small-6 large-3 columns">
 									<p>Ort:</p>
+									<p>PLZ:</p>
 									<p>Erstellungsdatum:</p>
 									<p>Anbieter:</p>
 								</div>
 								<div class="small-6 large-9 columns">
 									<p th:text="${Article.location}"></p>
-									<p th:date="${Article.creationdate}">07.11.2015</p>
+									<p th:text="${Article.plz}"></p>
+									<p th:text="${Article.creationdate}"></p>
 									<p>Max Muster</p>
 								</div>
 								<p>&nbsp;</p>

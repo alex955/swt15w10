@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class NewArticleForm {
 	
-	private long id;
+	private long categoryId;
     private String title;
     private String description;
     private String plz;
@@ -26,11 +26,11 @@ public class NewArticleForm {
 	public void setFile(MultipartFile file) {
 		this.file = file;
 	}
-	public long getId() {
-		return id;
+	public long getCategoryId() {
+		return categoryId;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setCategoryId(long categoryId) {
+		this.categoryId = categoryId;
 	}
 	public String getTitle() {
 		return title;
