@@ -47,14 +47,15 @@ public class SettingsController extends CommonVariables {
             return "usersettings";
 
         //returning null for whatever reason
-        System.out.println(userAccount.get().getUsername());
-        System.out.println(userRepository.findById(1).toString());
+        User user = userRepository.findByUsername(userAccount.get().getUsername()); //  Bekommt theoretisch den User; praktisch null
 
-        User user = userRepository.findByUsername(userAccount.get().getUsername());
+        // DEBUGGING
+        System.out.println(userAccount.get().getUsername());    //  Gibt Username aus
+        System.out.println(userRepository.findAll().toString(); //  Gibt UserRepo aus
+        System.out.println(user);                               //  Gibt null aus
+        System.out.println(user.toString());                    // NullPointer
 
-        System.out.println(user);
-
-       //Adressänderung
+        //Adressänderung
         if(!userSettings.getNewCity().isEmpty())
         user.setCity(userSettings.getNewCity());
 
