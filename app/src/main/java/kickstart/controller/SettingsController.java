@@ -55,10 +55,12 @@ public class SettingsController extends CommonVariables {
     public String saveSettings(@LoggedIn Optional<UserAccount> userAccount, @ModelAttribute("UserSettings") @Valid UserSettings userSettings, BindingResult result) throws AddressException, MessagingException {
 
 
+        if(result.hasErrors())
+            return "usersettings";
+
         List<User> userList = userRepository.findByUserAccount(userAccount.get());
         User user = userList.get(0);
         System.out.println(user);
-
 
         //Adressänderung
         if(!userSettings.getNewCity().isEmpty())
