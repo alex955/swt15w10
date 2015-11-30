@@ -101,13 +101,13 @@ public class ArticleController extends CommonVariables {
                 byte[] bytes = (newArticleForm.getFile()).getBytes();
  
                 // Creating the directory to store file
-                String rootPath = System.getProperty("catalina.home");
-                File dir = new File(rootPath + File.separator + "tmpFiles");
+                String rootPath = System.getProperty("user.home");
+                File dir = new File(rootPath + "/" + "Pics");
                 if (!dir.exists())
                     dir.mkdirs();
  
                 // Create the file on server
-                File serverFile = new File(dir.getAbsolutePath() + File.separator + newArticleForm.getTitle()+ ".jpg"); 
+                File serverFile = new File(dir.getAbsolutePath() + "/" + newArticleForm.getTitle()+ ".jpg"); 
                 BufferedOutputStream stream = new BufferedOutputStream( new FileOutputStream(serverFile));
                 stream.write(bytes);
                 stream.close();
