@@ -118,9 +118,9 @@ public class ArticleController extends CommonVariables {
                 // aktuelles Datum in String umgewandelt
                 LocalDate date = LocalDate.now();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                String current_datum = date.format(formatter);
+                String currentDate = date.format(formatter);
                 
-                Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), serverFile.getAbsolutePath(), "dresden", "eilenburger", newArticleForm.getCategoryId(), "16", newArticleForm.getPlz(), current_datum);
+                Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), serverFile.getAbsolutePath(), "dresden", "eilenburger", newArticleForm.getCategoryId(), "16", newArticleForm.getPlz(), currentDate);
         		articleRepo.save(article);
         		System.out.println(article);
         		
