@@ -56,12 +56,21 @@ public class SettingsController extends CommonVariables {
 
         model.addAttribute("user", user);
 
+        this.processedCategories = this.getProcessedCategories();
+        model.addAttribute("categories", this.processedCategories);
+        model=this.getCurrent_cat(model);
+
+
         return "usersettings";
     }
 
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/usersettings", method = RequestMethod.POST)
-    public String saveSettings(@LoggedIn Optional<UserAccount> userAccount, @ModelAttribute("UserSettings") @Valid UserSettings userSettings, BindingResult result) throws AddressException, MessagingException {
+    public String saveSettings(@LoggedIn Optional<UserAccount> userAccount, @ModelAttribute("UserSettings") @Valid UserSettings userSettings, BindingResult result, Model model) throws AddressException, MessagingException {
+
+
+        this.processedCategories = this.getProcessedCategories();
+        model.addAttribute("categories", this.processedCategories);
 
 
         if(result.hasErrors())
@@ -114,6 +123,9 @@ public class SettingsController extends CommonVariables {
         userRepository.save(user);
 
         System.out.println(user);
+
+        model=this.getCurrent_cat(model);
+
 
         return "redirect:/search";
     }

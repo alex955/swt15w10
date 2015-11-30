@@ -37,7 +37,7 @@
 							</li>
 							<li><a th:href="@{/chat}">Nachrichten</a></li>
 							<li><a th:href="@{/search}">Meine Angebote</a></li>
-							<li><a th:href="@{/userSettings}">Einstellungen</a></li>
+							<li><a th:href="@{/usersettings}">Einstellungen</a></li>
 							<li sec:authorize="isAuthenticated()"><a href="/logout">Ausloggen</a></li>
 							<li sec:authorize="!isAuthenticated()"><a href="/">Einloggen</a></li>
 						</ul></li>
