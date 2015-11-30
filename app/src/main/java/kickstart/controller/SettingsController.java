@@ -42,7 +42,7 @@ public class SettingsController extends CommonVariables {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public SettingsController(UserRepository userRepository, UserAccountManager userAccountManager, PasswordEncoder passwordEncoder){
+    public SettingsController(UserRepository userRepository, UserAccountManager userAccountManager, PasswordEncoder passwordEncoderkönn){
         this.userRepository = userRepository;
         this.userAccountManager= userAccountManager;
         this.passwordEncoder = passwordEncoder;
@@ -76,7 +76,7 @@ public class SettingsController extends CommonVariables {
         if(result.hasErrors())
             return "usersettings";
 
-        System.out.println(user);
+        // System.out.println(user);
 
         //Adressänderung
         if(!userSettings.getNewCity().isEmpty())
@@ -102,8 +102,9 @@ public class SettingsController extends CommonVariables {
         user.setEmail(userSettings.getNewEmail());
 
         //Passwort-Änderung
-        if (!userSettings.getNewPassword().isEmpty()) {
+        if(!userSettings.getNewPassword().isEmpty()) {
 
+            /* CONTROL OUTPUT
             System.out.println();
             System.out.println("Altes PW Eingabe: " + userSettings.getOldPassword());
             System.out.println("Altes PW verschlüsselt: " + passwordEncoder.encode(userSettings.getOldPassword()));
@@ -114,18 +115,20 @@ public class SettingsController extends CommonVariables {
             System.out.println("ConfirmPW: " + userSettings.getConfirmPW());
             System.out.println("Neues PW = confirmPW? " + userSettings.getNewPassword().equals(userSettings.getConfirmPW()));
             System.out.println();
-        }
-        if(passwordEncoder.matches(userSettings.getOldPassword(), userAccount.get().getPassword().toString()) && userSettings.getNewPassword().equals(userSettings.getConfirmPW())){
-            userAccountManager.changePassword(userAccount.get(), userSettings.getNewPassword());
-            System.out.println("PW geändert");
-            System.out.println();
+            */
 
-        } else {
+            if (passwordEncoder.matches(userSettings.getOldPassword(), userAccount.get().getPassword().toString()) && userSettings.getNewPassword().equals(userSettings.getConfirmPW())) {
+                userAccountManager.changePassword(userAccount.get(), userSettings.getNewPassword());
+                //System.out.println("PW geändert");
+                //System.out.println();
 
-            System.out.println("PW nicht geändert");
-            System.out.println();
+            } else {
 
-            return "usersettings";
+               // System.out.println("PW nicht geändert");
+               // System.out.println();
+
+                return "usersettings";
+            }
         }
 
         //Sprachenänderung
@@ -141,9 +144,7 @@ public class SettingsController extends CommonVariables {
         userAccountManager.save(user.getUserAccount());
         userRepository.save(user);
 
-        System.out.println(user);
-
-
+        // System.out.println(user);
 
         return "redirect:/search";
     }
