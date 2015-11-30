@@ -154,11 +154,11 @@ public class AdminController extends CommonVariables {
 		return "redirect:/admin";
 	}
 
-	@RequestMapping(value="/admin/editUser/{id}")
+	/*@RequestMapping(value="/admin/editUser/{id}")
 	public String editUser(@PathVariable Long id, @Valid UserSettings userSettings, BindingResult result) {
 
 
-		User user = this.userRepository.findById(id);
+		User user = this.userRepository.findByUserAccount();
 
 		System.out.println(user.toString());
 
@@ -206,5 +206,5 @@ public class AdminController extends CommonVariables {
 
 		return "/admin";
 	}
-	
+	*/
 }

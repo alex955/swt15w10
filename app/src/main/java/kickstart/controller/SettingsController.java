@@ -41,11 +41,6 @@ public class SettingsController extends CommonVariables {
         this.userAccountManager= userAccountManager;
     }
 
-    @RequestMapping(value ="/usersettings")
-    public String firstView(@ModelAttribute("UserSettings") UserSettings userSettings) {
-        return ("usersettings");
-    }
-
     @RequestMapping(value = "/usersettings", method = RequestMethod.GET)
     public String changeSettings(@LoggedIn Optional<UserAccount> userAccount, @ModelAttribute("UserSettings") @Valid UserSettings userSettings, BindingResult result) throws AddressException, MessagingException {
 
@@ -53,64 +48,52 @@ public class SettingsController extends CommonVariables {
         if(result.hasErrors())
             return "usersettings";
 
-        List<User> userList = userRepository.findAll();
+        List<User> userList = userRepository.findByUserAccount(userAccount.get());
+        User user = userList.get(0);
+        System.out.println(user);
 
-        User changedUser = null;
-
-        for(User oldUser: userList){
-            if (oldUser.getUserAccount().getUsername().equals(userAccount.get().getUsername())){
-                changedUser = oldUser;
-                System.out.println(changedUser);
-            }
-        }
-
-        if(changedUser == null) {
-            return "redirect:/";
-        }
 
         //Adressänderung
         if(!userSettings.getNewCity().isEmpty())
-        changedUser.setCity(userSettings.getNewCity());
+        user.setCity(userSettings.getNewCity());
 
         if(!userSettings.getNewZip().isEmpty())
-        changedUser.setZip(userSettings.getNewZip());
+        user.setZip(userSettings.getNewZip());
 
         if(!userSettings.getNewStreetName().isEmpty())
-        changedUser.setStreetName(userSettings.getNewStreetName());
+        user.setStreetName(userSettings.getNewStreetName());
 
         if(!userSettings.getNewHouseNumber().isEmpty())
-        changedUser.setHouseNumber(userSettings.getNewHouseNumber());
+        user.setHouseNumber(userSettings.getNewHouseNumber());
 
         if(!userSettings.getNewAddressAddition().isEmpty())
-        changedUser.setAddressAddition(userSettings.getNewAddressAddition());
+        user.setAddressAddition(userSettings.getNewAddressAddition());
 
         //Email-Änderung
 
         //TODO: Email Confirmation
 
         if(!userSettings.getNewEmail().isEmpty())
-        changedUser.setEmail(userSettings.getNewEmail());
+        user.setEmail(userSettings.getNewEmail());
 
         //Passwort-Änderung
         if(!userSettings.getNewPassword().isEmpty())
-        if(changedUser.getPassword().equals(userSettings.getNewPassword()) && changedUser.getPassword().equals(userSettings.getConfirmPW())){
-            userAccountManager.changePassword(changedUser.getUserAccount(), userSettings.getNewPassword());
+        if(user.getPassword().equals(userSettings.getNewPassword()) && user.getPassword().equals(userSettings.getConfirmPW())){
+            userAccountManager.changePassword(user.getUserAccount(), userSettings.getNewPassword());
         }
 
         //Sprachenänderung
         if(!userSettings.getNewLanguage1().isEmpty())
-        changedUser.setLanguage1(userSettings.getNewLanguage1());
+        user.setLanguage1(userSettings.getNewLanguage1());
 
         if(!userSettings.getNewLanguage2().isEmpty())
-        changedUser.setLanguage2(userSettings.getNewLanguage2());
+        user.setLanguage2(userSettings.getNewLanguage2());
 
         if(!userSettings.getNewLanguage3().isEmpty())
-        changedUser.setLanguage3(userSettings.getNewLanguage3());
+        user.setLanguage3(userSettings.getNewLanguage3());
 
-        userAccountManager.save(changedUser.getUserAccount());
-        userRepository.save(changedUser);
-
-
+        userAccountManager.save(user.getUserAccount());
+        userRepository.save(user);
 
         return "redirect:/search";
     }
