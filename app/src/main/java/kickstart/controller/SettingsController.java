@@ -45,7 +45,12 @@ public class SettingsController extends CommonVariables {
 
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value ="/usersettings")
-    public String changeSettings(@ModelAttribute("UserSettings") @Valid UserSettings userSettings, @LoggedIn Optional<UserAccount> userAccount ){
+    public String changeSettings(@ModelAttribute("UserSettings") @Valid UserSettings userSettings, @LoggedIn Optional<UserAccount> userAccount, Model model){
+
+        List<User> userList = userRepository.findByUserAccount(userAccount.get());
+        User user = userList.get(0);
+
+        model.addAttribute("user", user);
 
         return "usersettings";
     }
