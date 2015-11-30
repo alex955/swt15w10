@@ -1,21 +1,16 @@
 package kickstart.controller;
 
-import com.sun.istack.internal.NotNull;
-import kickstart.model.RegistrationForm;
 import kickstart.model.User;
 import kickstart.model.UserRepository;
 import kickstart.model.UserSettings;
 import org.salespointframework.useraccount.UserAccount;
-import org.salespointframework.useraccount.UserAccountIdentifier;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,9 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
-import javax.swing.text.html.Option;
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Optional;
 
 /**

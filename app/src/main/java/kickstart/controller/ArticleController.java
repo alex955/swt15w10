@@ -5,28 +5,20 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.time.format.DateTimeFormatter;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Optional;
 
-import org.apache.tomcat.util.http.fileupload.FileUtils;
+
 import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import kickstart.model.Article;
-import kickstart.model.Category;
 import kickstart.model.CategoryRepo;
 import kickstart.model.NewArticleForm;
-import kickstart.model.RegistrationForm;
-import kickstart.model.User;
 import kickstart.model.ArticleRepo;
 
 @Controller
@@ -101,26 +93,25 @@ public class ArticleController extends CommonVariables {
                 byte[] bytes = (newArticleForm.getFile()).getBytes();
  
                 // Creating the directory to store file
-                String rootPath = System.getProperty("catalina.home");
-                File dir = new File(rootPath + File.separator + "tmpFiles");
+                String rootPath = System.getProperty("user.home");
+                File dir = new File(rootPath + "/" + "Pics");
                 if (!dir.exists())
                     dir.mkdirs();
  
-                // Create the file on server
-                File serverFile = new File(dir.getAbsolutePath() + File.separator + newArticleForm.getTitle()+ ".jpg"); 
+                // Create the file local
+                File serverFile = new File(dir.getAbsolutePath() + "/" + newArticleForm.getFile().getOriginalFilename()); 
                 BufferedOutputStream stream = new BufferedOutputStream( new FileOutputStream(serverFile));
                 stream.write(bytes);
                 stream.close();
- 
                 System.out.println("Server File Location="
                         + serverFile.getAbsolutePath());
  
                 // aktuelles Datum in String umgewandelt
                 LocalDate date = LocalDate.now();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                String current_datum = date.format(formatter);
+                String currentDate = date.format(formatter);
                 
-                Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), serverFile.getAbsolutePath(), "dresden", "eilenburger", newArticleForm.getCategoryId(), "16", newArticleForm.getPlz(), current_datum);
+                Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), serverFile.getAbsolutePath(), newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getHouseNumber(), newArticleForm.getZip(), currentDate);
         		articleRepo.save(article);
         		System.out.println(article);
         		
