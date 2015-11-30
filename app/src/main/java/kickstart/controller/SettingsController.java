@@ -12,6 +12,7 @@ import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -38,17 +39,20 @@ public class SettingsController extends CommonVariables {
     private UserAccountManager userAccountManager;
 
     @Autowired
-    public SettingsController(UserRepository userRepository, UserAccountManager userAccountManager){
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public SettingsController(UserRepository userRepository, UserAccountManager userAccountManager, PasswordEncoder passwordEncoder){
         this.userRepository = userRepository;
         this.userAccountManager= userAccountManager;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value ="/usersettings")
     public String changeSettings(@ModelAttribute("UserSettings") @Valid UserSettings userSettings, @LoggedIn Optional<UserAccount> userAccount, Model model){
 
-        List<User> userList = userRepository.findByUserAccount(userAccount.get());
-        User user = userList.get(0);
+        User user = userRepository.findByUserAccount(userAccount.get());
 
         model.addAttribute("user", user);
 
@@ -63,8 +67,8 @@ public class SettingsController extends CommonVariables {
         if(result.hasErrors())
             return "usersettings";
 
-        List<User> userList = userRepository.findByUserAccount(userAccount.get());
-        User user = userList.get(0);
+        User user = userRepository.findByUserAccount(userAccount.get());
+
         System.out.println(user);
 
         //Adressänderung
@@ -92,7 +96,7 @@ public class SettingsController extends CommonVariables {
 
         //Passwort-Änderung
         if (!userSettings.getNewPassword().isEmpty())
-        if(userAccount.get().getPassword().equals(user.getPassword()) && userSettings.getNewPassword().equals(userSettings.getConfirmPW())){
+        if(passwordEncoder.matches(userSettings.getOldPassword(), user.getUserAccount().getPassword().toString()) && userSettings.getNewPassword().equals(userSettings.getConfirmPW())){
             userAccountManager.changePassword(userAccount.get(), userSettings.getNewPassword());
         }
 
