@@ -4,6 +4,7 @@ package kickstart.model;
 import org.hibernate.validator.constraints.Email;
 
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  * Created by Vincenz on 25.11.15.
@@ -24,6 +25,8 @@ public class UserSettings {
     private String newZip;
 
     private String newStreetName;
+
+    @Pattern(regexp = "(^$| | ^(\\d+[a-zA-Z])$)", message="Geben Sie eine gültige Hausnummer ein.")
     private String newHouseNumber;
     private String newAddressAddition;
     private String newLanguage1;

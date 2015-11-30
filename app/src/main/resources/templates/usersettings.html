@@ -30,15 +30,18 @@
 					<div class="panel" data-equalizer-watch="1">
 						<div class="row">
 								<div class="large-5 small-3 columns">Altes Passwort</div>
-								<div class="large-7 small-9 columns"><input type="text" name="oldPassword" /></div>
+								<font color="red" th:if="${#fields.hasErrors('oldPassword')}" th:errors="*{oldPassword}"> ERROR MESSAGE </font>
+								<div class="large-7 small-9 columns"><input type="password" name="oldPassword" /></div>
 						</div>
 						<div class="row">
 								<div class="large-5 small-3 columns">Neues Passwort</div>
-								<div class="large-7 small-9 columns"><input type="text" name="newPassword" /></div>
+								<font color="red" th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}"> ERROR MESSAGE </font>
+								<div class="large-7 small-9 columns"><input type="password" name="newPassword" /></div>
 						</div>
 						<div class="row">
 								<div class="large-5 small-3 columns">Neues Passwort wiederholen</div>
-								<div class="large-7 small-9 columns"><input type="text" name="confirmPW" /></div>
+							<font color="red" th:if="${#fields.hasErrors('confirmPW')}" th:errors="*{confirmPW}"> ERROR MESSAGE </font>
+							<div class="large-7 small-9 columns"><input type="password" name="confirmPW" /></div>
 						</div>
 					</div>
 				</div>
@@ -105,7 +108,8 @@
 							</div>
 							<div class="row">							                                                      
 								<div class="large-5 small-3 columns">Neue E-Mail-Adresse</div>
-								<div class="large-7 small-9 columns"><input type="text" name ="newEmail" placeholder="fluechtling@deutschland.com" /></div>
+								<font color="red" th:if="${#fields.hasErrors('newEmail')}" th:errors="*{newEmail}"> ERROR MESSAGE </font>
+								<div class="large-7 small-9 columns"><input type="text" name ="newEmail" placeholder="Neue Email-Adresse" /></div>
 							</div>
 						</div>
 					</div>
@@ -121,15 +125,19 @@
 							<div class="row">
 								<div class="large-5 small-3 columns">PLZ</div>
 								<div class="large-7 small-9 columns">
+									<font color="red" th:if="${#fields.hasErrors('newZip')}" th:errors="*{newZip}"> ERROR MESSAGE </font>
 									<input type="text" name="newZip" placeholder="PLZ"/>
 								</div>
 							</div>
 							<div class="row">
 								<div class="large-5 small-3 columns">Straße, Hausnummer, Addresszusatz</div>
 								<div class="large-7 small-9 columns">
+									<font color="red" th:if="${#fields.hasErrors('newStreetName')}" th:errors="*{newStreetName}"> ERROR MESSAGE </font>
 									<input type="text" name="newStreetName" placeholder="Straßenname"/>
+									<font color="red" th:if="${#fields.hasErrors('newHouseNumber')}" th:errors="*{newHouseNumber}"> ERROR MESSAGE </font>
 									<input type="text" name="newHouseNumber" placeholder="Hausnummmer"/>
 									<input type="text" name="newAddressAddition" placeholder="(optional)"/>
+
 								</div>
 							</div>
 						</div>
