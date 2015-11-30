@@ -19,14 +19,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kickstart.model.Article;
 import kickstart.model.CategoryRepo;
 import kickstart.model.NewArticleForm;
+import kickstart.model.Picture;
+import kickstart.model.PictureRepo;
 import kickstart.model.ArticleRepo;
 
 @Controller
 public class ArticleController extends CommonVariables {
+	private PictureRepo pictureRepo;
+	
 	@Autowired
-	public ArticleController(CategoryRepo categories, ArticleRepo articleRepo){
+	public ArticleController(CategoryRepo categories, ArticleRepo articleRepo, PictureRepo pictureRepo){
 		this.categories = categories;
 		this.articleRepo=articleRepo;
+		this.pictureRepo = pictureRepo;
 	}
 	
 	
@@ -111,7 +116,9 @@ public class ArticleController extends CommonVariables {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
                 String currentDate = date.format(formatter);
                 
-                Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), serverFile.getAbsolutePath(), newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getHouseNumber(), newArticleForm.getZip(), currentDate);
+                Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename());
+				pictureRepo.save(picture);
+                Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), picture, newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getHouseNumber(), newArticleForm.getZip(), currentDate);
         		articleRepo.save(article);
         		System.out.println(article);
         		
