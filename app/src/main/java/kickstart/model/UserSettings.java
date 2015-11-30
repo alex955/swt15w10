@@ -13,13 +13,14 @@ public class UserSettings {
     @Email(message = "Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.")
     private String newEmail;
 
-    @Pattern(regexp="(\\s* | (?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,})", message ="Das Passwort muss mindestens 8 Zeichen lang sein und muss mindestens eine Zahl, einen Klein- und einen Großbuchstaben beinhalten.")
+    @Pattern(regexp="(null | (?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,})", message ="Das Passwort muss mindestens 8 Zeichen lang sein und muss mindestens eine Zahl, einen Klein- und einen Großbuchstaben beinhalten.")
     private String newPassword;
 
+    private String oldPassword;
     private String confirmPW;
     private String newCity;
 
-    @Pattern(regexp="^(\\s*|\\d{5}$)", message="Die Postleitzahl muss aus exakt 5 Ziffern bestehen.")
+    @Pattern(regexp="(null | \\d{5})", message="Die Postleitzahl muss aus exakt 5 Ziffern bestehen.")
     private String newZip;
 
     private String newStreetName;
@@ -43,6 +44,14 @@ public class UserSettings {
 
     public void setNewPassword(String newPassword) {
         this.newPassword = newPassword;
+    }
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
     }
 
     public String getConfirmPW() {

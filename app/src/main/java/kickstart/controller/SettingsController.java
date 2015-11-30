@@ -1,5 +1,6 @@
 package kickstart.controller;
 
+import com.sun.istack.internal.NotNull;
 import kickstart.model.RegistrationForm;
 import kickstart.model.User;
 import kickstart.model.UserRepository;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
+import javax.swing.text.html.Option;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +32,6 @@ import java.util.Optional;
  */
 
 @Controller
-@PreAuthorize("isAuthenticated()")
 public class SettingsController extends CommonVariables {
 
     @Autowired
@@ -41,12 +43,17 @@ public class SettingsController extends CommonVariables {
         this.userAccountManager= userAccountManager;
     }
 
-    @RequestMapping(value = "/usersettings", method = RequestMethod.GET)
-    public String changeSettings(@LoggedIn Optional<UserAccount> userAccount, @ModelAttribute("UserSettings") @Valid UserSettings userSettings, BindingResult result) throws AddressException, MessagingException {
+    @PreAuthorize("isAuthenticated()")
+    @RequestMapping(value ="/usersettings")
+    public String changeSettings(@ModelAttribute("UserSettings") @Valid UserSettings userSettings, @LoggedIn Optional<UserAccount> userAccount ){
 
+        return "usersettings";
+    }
 
-        if(result.hasErrors())
-            return "usersettings";
+    @PreAuthorize("isAuthenticated()")
+    @RequestMapping(value = "/usersettings", method = RequestMethod.POST)
+    public String saveSettings(@LoggedIn Optional<UserAccount> userAccount, @ModelAttribute("UserSettings") @Valid UserSettings userSettings, BindingResult result) throws AddressException, MessagingException {
+
 
         List<User> userList = userRepository.findByUserAccount(userAccount.get());
         User user = userList.get(0);
@@ -77,9 +84,9 @@ public class SettingsController extends CommonVariables {
         user.setEmail(userSettings.getNewEmail());
 
         //Passwort-Änderung
-        if(!userSettings.getNewPassword().isEmpty())
-        if(user.getPassword().equals(userSettings.getNewPassword()) && user.getPassword().equals(userSettings.getConfirmPW())){
-            userAccountManager.changePassword(user.getUserAccount(), userSettings.getNewPassword());
+        if (!userSettings.getNewPassword().isEmpty())
+        if(userAccount.get().getPassword().equals(user.getPassword()) && userSettings.getNewPassword().equals(userSettings.getConfirmPW())){
+            userAccountManager.changePassword(userAccount.get(), userSettings.getNewPassword());
         }
 
         //Sprachenänderung
@@ -94,6 +101,8 @@ public class SettingsController extends CommonVariables {
 
         userAccountManager.save(user.getUserAccount());
         userRepository.save(user);
+
+        System.out.println(user);
 
         return "redirect:/search";
     }
