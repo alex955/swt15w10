@@ -58,7 +58,7 @@ public class WelcomeController extends CommonVariables {
 		model.addAttribute("categories", this.processedCategories);
 		
 		 model.addAttribute("anzeigen", articleRepo.findAll());
-		    
+
 		   // System.out.println(s"GOOD REPO WURDE AN html übergeben");
 		 
 		 model=this.getCurrent_cat(model);

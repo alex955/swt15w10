@@ -3,20 +3,25 @@ package kickstart.controller;
 import java.util.LinkedList;
 import java.util.Optional;
 
+import kickstart.model.*;
+import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 
 import kickstart.model.Category;
 import kickstart.model.CategoryFirstTierObject;
 import kickstart.model.CategoryRepo;
 import kickstart.model.UserRepository;
 import kickstart.model.ArticleRepo;
+import javax.validation.Valid;
 
 @Controller
 @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -27,7 +32,10 @@ public class AdminController extends CommonVariables {
 		this.articleRepo=articleRepo;
 		this.userRepository = userRepository;
 	}
-	
+
+	@Autowired
+	private UserAccountManager userAccountManager;
+
 	@RequestMapping(value = "/admin")
     public String initialView(Model model) {
 		
@@ -156,5 +164,58 @@ public class AdminController extends CommonVariables {
 		this.userRepository.delete(id);
 		return "redirect:/admin";
 	}
-	
+
+	/*@RequestMapping(value="/admin/editUser/{id}")
+	public String editUser(@PathVariable Long id, @Valid UserSettings userSettings, BindingResult result) {
+
+
+		User user = this.userRepository.findByUserAccount();
+
+		System.out.println(user.toString());
+
+		if(!userSettings.getNewCity().isEmpty())
+			user.setCity(userSettings.getNewCity());
+
+		if(!userSettings.getNewZip().isEmpty())
+			user.setZip(userSettings.getNewZip());
+
+		if(!userSettings.getNewStreetName().isEmpty())
+			user.setStreetName(userSettings.getNewStreetName());
+
+		if(!userSettings.getNewHouseNumber().isEmpty())
+			user.setHouseNumber(userSettings.getNewHouseNumber());
+
+		if(!userSettings.getNewAddressAddition().isEmpty())
+			user.setAddressAddition(userSettings.getNewAddressAddition());
+
+		//Email-Änderung
+
+		//TODO: Email Confirmation
+
+		if(!userSettings.getNewEmail().isEmpty())
+			user.setEmail(userSettings.getNewEmail());
+
+		//Passwort-Änderung
+		if(!userSettings.getNewPassword().isEmpty())
+			if(user.getPassword().equals(userSettings.getNewPassword()) && user.getPassword().equals(userSettings.getConfirmPW())){
+				userAccountManager.changePassword(user.getUserAccount(), userSettings.getNewPassword());
+			}
+
+		//Sprachenänderung
+		if(!userSettings.getNewLanguage1().isEmpty())
+			user.setLanguage1(userSettings.getNewLanguage1());
+
+		if(!userSettings.getNewLanguage2().isEmpty())
+			user.setLanguage2(userSettings.getNewLanguage2());
+
+		if(!userSettings.getNewLanguage3().isEmpty())
+			user.setLanguage3(userSettings.getNewLanguage3());
+
+		userAccountManager.save(user.getUserAccount());
+		userRepository.save(user);
+
+
+		return "/admin";
+	}
+	*/
 }
