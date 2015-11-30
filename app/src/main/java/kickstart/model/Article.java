@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,7 +17,6 @@ public class Article {
 	private @Id @GeneratedValue long id;
 	private String title;
 	private String description;
-	private String picPath;
 	private String location;	
 	private String street;	
 	private long category;
@@ -24,7 +24,17 @@ public class Article {
 	private String zip;
 	private long userID;
 	private String creationDate;
+	@OneToOne
+	private Picture picture;
 	
+	public Picture getPicture() {
+		return picture;
+	}
+
+	public void setPicture(Picture picture) {
+		this.picture = picture;
+	}
+
 	@DateTimeFormat(pattern = "HH:mm dd-MM-yyyy")
 	private LocalDateTime activitydate;
 		
@@ -63,12 +73,12 @@ public class Article {
 	}
 
 	//constructor with creationdate
-	public Article(String title, String description, String picPath, String location, String street,
+	public Article(String title, String description, Picture picture, String location, String street,
 			long category, String number, String zip, String creationdate) {
 		super();
 		this.title = title;
 		this.description = description;
-		this.picPath = picPath;
+		this.picture = picture;
 		this.location = location;
 		this.street = street;
 		this.category = category;
@@ -77,28 +87,14 @@ public class Article {
 		this.creationDate = creationdate;
 	}
 	
-	//constructor without creationdate
-	public Article(String title, String description, String picPath, String location, String street,
-			long category, String number, String zip) {
-		super();
-		this.title = title;
-		this.description = description;
-		this.picPath = picPath;
-		this.location = location;
-		this.street = street;
-		this.category = category;
-		this.number = number;
-		this.zip = zip;
-		//this.creationdate.parse(creationdate, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-	}
 	
 	//constructor with creationdate and activitydate
-	public Article(String title, String description, String picPath, String location, String street,
+	public Article(String title, String description, Picture picture, String location, String street,
 			long category, String number, String zip, String creationdate, String activitydate) {
 		super();
 		this.title = title;
 		this.description = description;
-		this.picPath = picPath;
+		this.picture = picture;
 		this.location = location;
 		this.street = street;
 		this.category = category;
@@ -110,9 +106,10 @@ public class Article {
 
 	@Override
 	public String toString() {
-		return "Article [id=" + id + ", title=" + title + ", description=" + description + ", picPath=" + picPath
+		return "Article [id=" + id + ", title=" + title + ", description=" + description + ", picture=" + picture
 				+ ", location=" + location + ", street=" + street + ", category=" + category + ", number=" + number
-				+ ", zip=" + zip + ", userID=" + userID + ", creationDate=" + creationDate + "]";
+				+ ", zip=" + zip + ", userID=" + userID + ", creationDate=" + creationDate
+				+ ", activitydate=" + activitydate + ", photo=" + photo + "]";
 	}
 
 	public long getId() {
@@ -137,14 +134,6 @@ public class Article {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public String getPicPath() {
-		return picPath;
-	}
-
-	public void setPicPath(String picPath) {
-		this.picPath = picPath;
 	}
 
 	public String getLocation() {
