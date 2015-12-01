@@ -13,25 +13,29 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import kickstart.model.ArticleRepo;
-import kickstart.model.PictureRepo;
 
 @Controller
 public class PictureController{
 	
 	private ArticleRepo articleRepo;
 	private FileSystemResource resource;
-	private PictureRepo pictureRepo;
 	
 	@Autowired
-	public PictureController(ArticleRepo articleRepo, PictureRepo pictureRepo){
+	public PictureController(ArticleRepo articleRepo){
 		this.articleRepo=articleRepo;
-		this.pictureRepo = pictureRepo;
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/showPicture/{id}", produces = "image/jpg")
 	public FileSystemResource showArticle(@PathVariable("id") long id) throws IOException{
-		resource = new FileSystemResource(articleRepo.findOne(id).getPicture().getPicPath());
+		if(articleRepo.findOne(id).getPicture() == null){
+			//in case some does not upload a picture
+			//this is the path on saschas computer, at the end we have to change to the picture on the server
+			String standardPicPath = "C:/Users/sasch/Documents/swt15w10/app/src/main/resources/static/resources/img/keinbild.png";
+			resource = new FileSystemResource(standardPicPath);
+		}
+		else	
+			resource = new FileSystemResource(articleRepo.findOne(id).getPicture().getPicPath());
 		return resource;
 	}
 

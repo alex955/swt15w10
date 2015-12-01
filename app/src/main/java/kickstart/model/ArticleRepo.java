@@ -21,6 +21,8 @@ public interface ArticleRepo extends CrudRepository<Article, Long> {
  
  public List<Article> findAll();
  
+ public List<Article> findByCreator(User creator);
+ 
  public List<Article> findByCategory(long category);
 
 

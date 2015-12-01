@@ -22,11 +22,18 @@ public class Article {
 	private long category;
 	private String number;
 	private String zip;
-	private long userID;
+	@OneToOne
+	private User creator;	
 	private String creationDate;
 	@OneToOne
 	private Picture picture;
-	
+	@DateTimeFormat(pattern = "HH:mm dd-MM-yyyy")
+	private LocalDateTime activitydate;
+		
+	public User getCreator() {
+		return creator;
+	}
+
 	public Picture getPicture() {
 		return picture;
 	}
@@ -34,10 +41,11 @@ public class Article {
 	public void setPicture(Picture picture) {
 		this.picture = picture;
 	}
-
-	@DateTimeFormat(pattern = "HH:mm dd-MM-yyyy")
-	private LocalDateTime activitydate;
-		
+	
+	public void setCreator(User creator) {
+		this.creator = creator;
+	}
+	
 	public LocalDateTime getActivitydate() {
 		return activitydate;
 	}
@@ -54,27 +62,13 @@ public class Article {
 		this.creationDate = creationdate;
 	}
 
-	private String photo;
-	
-	public String getPhoto() {
-		return photo;
-	}
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
-	}
-
-	
-	
-
-
 	public Article() {
 		super();
 	}
 
 	//constructor with creationdate
 	public Article(String title, String description, Picture picture, String location, String street,
-			long category, String number, String zip, String creationdate) {
+			long category, String number, String zip, String creationdate, User creator) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -85,7 +79,37 @@ public class Article {
 		this.number = number;
 		this.zip = zip;
 		this.creationDate = creationdate;
+		this.creator = creator;
 	}
+	
+	//constructor without Picture
+		public Article(String title, String description, String location, String street,
+				long category, String number, String zip, String creationdate, User creator) {
+			super();
+			this.title = title;
+			this.description = description;
+			this.location = location;
+			this.street = street;
+			this.category = category;
+			this.number = number;
+			this.zip = zip;
+			this.creationDate = creationdate;
+			this.creator = creator;
+		}
+		
+	//constructor without Picture, User
+			public Article(String title, String description, String location, String street,
+					long category, String number, String zip, String creationdate) {
+				super();
+				this.title = title;
+				this.description = description;
+				this.location = location;
+				this.street = street;
+				this.category = category;
+				this.number = number;
+				this.zip = zip;
+				this.creationDate = creationdate;
+			}
 	
 	
 	//constructor with creationdate and activitydate
@@ -106,10 +130,10 @@ public class Article {
 
 	@Override
 	public String toString() {
-		return "Article [id=" + id + ", title=" + title + ", description=" + description + ", picture=" + picture
-				+ ", location=" + location + ", street=" + street + ", category=" + category + ", number=" + number
-				+ ", zip=" + zip + ", userID=" + userID + ", creationDate=" + creationDate
-				+ ", activitydate=" + activitydate + ", photo=" + photo + "]";
+		return "Article [id=" + id + ", title=" + title + ", description=" + description + ", location=" + location
+				+ ", street=" + street + ", category=" + category + ", number=" + number + ", zip=" + zip + ", creator="
+				+ creator + ", creationDate=" + creationDate + ", picture=" + picture + ", activitydate=" + activitydate
+				+ "]";
 	}
 
 	public long getId() {
@@ -183,14 +207,4 @@ public class Article {
 	public void setCreationDate(String creationDate) {
 		this.creationDate = creationDate;
 	}
-
-	public long getUserID() {
-		return userID;
-	}
-
-	public void setUserID(long userID) {
-		this.userID = userID;
-	} 
-	
-
 }

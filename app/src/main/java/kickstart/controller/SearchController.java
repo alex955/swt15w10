@@ -4,13 +4,18 @@ package kickstart.controller;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.web.LoggedIn;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kickstart.model.Category;
+import kickstart.model.User;
 import kickstart.model.Article;
 
 
@@ -99,6 +104,25 @@ public class SearchController extends CommonVariables {
 			
 			
 			return "search";
+			}
+			
+			
+			@PreAuthorize("isAuthenticated()")
+			@RequestMapping(value = "/search/myArticles")
+			public String searchByUser(Model model, @LoggedIn Optional<UserAccount> userAccount){  
+			
+			User creator = userRepository.findByUserAccount(userAccount.get());
+			List<Article> articles = articleRepo.findByCreator(creator);
+					
+			this.processedCategories = this.getProcessedCategories();
+			model.addAttribute("categories", this.processedCategories);
+			model.addAttribute("anzeigen", articles);
+			
+			model=this.getCurrent_cat(model);
+			
+			
+			return "search";
+			
 			}
 			 
 			 

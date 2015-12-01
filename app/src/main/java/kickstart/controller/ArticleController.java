@@ -5,10 +5,13 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.time.format.DateTimeFormatter;
-
-
+import java.util.Optional;
 import java.time.LocalDate;
+
+import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,6 +24,7 @@ import kickstart.model.CategoryRepo;
 import kickstart.model.NewArticleForm;
 import kickstart.model.Picture;
 import kickstart.model.PictureRepo;
+import kickstart.model.User;
 import kickstart.model.ArticleRepo;
 
 @Controller
@@ -39,10 +43,12 @@ public class ArticleController extends CommonVariables {
 	@RequestMapping(value = "/showArticle/{id}")
 	public String showArticle(@PathVariable("id") long id,Model model) {
 		//initiate categories
-				this.processedCategories = this.getProcessedCategories();
-				model.addAttribute("categories", this.processedCategories);
-				model.addAttribute("categoriesForm", this.categories.findAll());
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		model.addAttribute("categoriesForm", this.categories.findAll());
 	    model.addAttribute("Article", articleRepo.findOne(id));
+	    model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
+	    model.addAttribute("Useraccount", articleRepo.findOne(id).getCreator().getUserAccount());
 	    
 	    model=this.getCurrent_cat(model);
 	    return "article";
@@ -77,7 +83,7 @@ public class ArticleController extends CommonVariables {
 //		
 //		return "search";
 //	}
-	
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping("/newArticle")
 	public String newArticle(Model model){
 		//initiate categories
@@ -91,8 +97,9 @@ public class ArticleController extends CommonVariables {
 	
 	
 	//create a new Article
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/newArticle", method = RequestMethod.POST)
-    public String newArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm) {
+    public String newArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, @LoggedIn Optional<UserAccount> userAccount) {
 		if (!((newArticleForm.getFile()).isEmpty())) {
             try {
                 byte[] bytes = (newArticleForm.getFile()).getBytes();
@@ -116,9 +123,11 @@ public class ArticleController extends CommonVariables {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
                 String currentDate = date.format(formatter);
                 
-                Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename());
+                //get the logged in user
+                User creator = userRepository.findByUserAccount(userAccount.get());
+                Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename(), creator);
 				pictureRepo.save(picture);
-                Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), picture, newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getHouseNumber(), newArticleForm.getZip(), currentDate);
+                Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), picture, newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getHouseNumber(), newArticleForm.getZip(), currentDate, creator);
         		articleRepo.save(article);
         		System.out.println(article);
         		
@@ -128,8 +137,17 @@ public class ArticleController extends CommonVariables {
                 return "You failed to upload " + newArticleForm.getTitle() + " => " + e.getMessage();
             }
         } else {
-            return "You failed to upload " + newArticleForm.getTitle()
-                    + " because the file was empty.";
+        	// aktuelles Datum in String umgewandelt
+        	LocalDate date = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            String currentDate = date.format(formatter);
+            //get the logged in user
+            User creator = userRepository.findByUserAccount(userAccount.get());
+            //save article without Picture
+        	Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getHouseNumber(), newArticleForm.getZip(), currentDate, creator);
+    		articleRepo.save(article);
+    		System.out.println(article);
+            return ("redirect:/search");
             
         }
 	}
