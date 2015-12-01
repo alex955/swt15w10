@@ -87,6 +87,20 @@ public class Article {
 		this.creationDate = creationdate;
 	}
 	
+	//constructor without Picture
+		public Article(String title, String description, String location, String street,
+				long category, String number, String zip, String creationdate) {
+			super();
+			this.title = title;
+			this.description = description;
+			this.location = location;
+			this.street = street;
+			this.category = category;
+			this.number = number;
+			this.zip = zip;
+			this.creationDate = creationdate;
+		}
+	
 	
 	//constructor with creationdate and activitydate
 	public Article(String title, String description, Picture picture, String location, String street,

@@ -128,8 +128,15 @@ public class ArticleController extends CommonVariables {
                 return "You failed to upload " + newArticleForm.getTitle() + " => " + e.getMessage();
             }
         } else {
-            return "You failed to upload " + newArticleForm.getTitle()
-                    + " because the file was empty.";
+        	// aktuelles Datum in String umgewandelt
+        	LocalDate date = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            String currentDate = date.format(formatter);
+            //save article without Picture
+        	Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getHouseNumber(), newArticleForm.getZip(), currentDate);
+    		articleRepo.save(article);
+    		System.out.println(article);
+            return ("redirect:/search");
             
         }
 	}
