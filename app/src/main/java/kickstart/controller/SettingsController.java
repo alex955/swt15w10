@@ -1,21 +1,16 @@
 package kickstart.controller;
 
-import com.sun.istack.internal.NotNull;
-import kickstart.model.RegistrationForm;
 import kickstart.model.User;
 import kickstart.model.UserRepository;
 import kickstart.model.UserSettings;
 import org.salespointframework.useraccount.UserAccount;
-import org.salespointframework.useraccount.UserAccountIdentifier;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,9 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
-import javax.swing.text.html.Option;
 import javax.validation.Valid;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -42,7 +35,7 @@ public class SettingsController extends CommonVariables {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public SettingsController(UserRepository userRepository, UserAccountManager userAccountManager, PasswordEncoder passwordEncoder){
+    public SettingsController(UserRepository userRepository, UserAccountManager userAccountManager, PasswordEncoder passwordEncoderkönn){
         this.userRepository = userRepository;
         this.userAccountManager= userAccountManager;
         this.passwordEncoder = passwordEncoder;
@@ -54,6 +47,9 @@ public class SettingsController extends CommonVariables {
 
         User user = userRepository.findByUserAccount(userAccount.get());
 
+        this.processedCategories = this.getProcessedCategories();
+        model.addAttribute("categories", this.processedCategories);
+        model=this.getCurrent_cat(model);
         model.addAttribute("user", user);
 
         return "usersettings";
@@ -61,15 +57,19 @@ public class SettingsController extends CommonVariables {
 
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/usersettings", method = RequestMethod.POST)
-    public String saveSettings(@LoggedIn Optional<UserAccount> userAccount, @ModelAttribute("UserSettings") @Valid UserSettings userSettings, BindingResult result) throws AddressException, MessagingException {
+    public String saveSettings(@LoggedIn Optional<UserAccount> userAccount, @ModelAttribute("UserSettings") @Valid UserSettings userSettings, BindingResult result, Model model) throws AddressException, MessagingException {
 
+        User user = userRepository.findByUserAccount(userAccount.get());
+
+        this.processedCategories = this.getProcessedCategories();
+        model.addAttribute("categories", this.processedCategories);
+        model=this.getCurrent_cat(model);
+        model.addAttribute("user", user);
 
         if(result.hasErrors())
             return "usersettings";
 
-        User user = userRepository.findByUserAccount(userAccount.get());
-
-        System.out.println(user);
+        // System.out.println(user);
 
         //Adressänderung
         if(!userSettings.getNewCity().isEmpty())
@@ -95,9 +95,33 @@ public class SettingsController extends CommonVariables {
         user.setEmail(userSettings.getNewEmail());
 
         //Passwort-Änderung
-        if (!userSettings.getNewPassword().isEmpty())
-        if(passwordEncoder.matches(userSettings.getOldPassword(), user.getUserAccount().getPassword().toString()) && userSettings.getNewPassword().equals(userSettings.getConfirmPW())){
-            userAccountManager.changePassword(userAccount.get(), userSettings.getNewPassword());
+        if(!userSettings.getNewPassword().isEmpty()) {
+
+            /* CONTROL OUTPUT
+            System.out.println();
+            System.out.println("Altes PW Eingabe: " + userSettings.getOldPassword());
+            System.out.println("Altes PW verschlüsselt: " + passwordEncoder.encode(userSettings.getOldPassword()));
+            System.out.println("Altes PW von UserAccount:  " + user.getUserAccount().getPassword().toString());
+            System.out.println("Altes PW = UserAccount altes PW? " + passwordEncoder.matches(userSettings.getOldPassword(), user.getUserAccount().getPassword().toString()));
+            System.out.println();
+            System.out.println("Neues PW: " + userSettings.getNewPassword());
+            System.out.println("ConfirmPW: " + userSettings.getConfirmPW());
+            System.out.println("Neues PW = confirmPW? " + userSettings.getNewPassword().equals(userSettings.getConfirmPW()));
+            System.out.println();
+            */
+
+            if (passwordEncoder.matches(userSettings.getOldPassword(), userAccount.get().getPassword().toString()) && userSettings.getNewPassword().equals(userSettings.getConfirmPW())) {
+                userAccountManager.changePassword(userAccount.get(), userSettings.getNewPassword());
+                //System.out.println("PW geändert");
+                //System.out.println();
+
+            } else {
+
+               // System.out.println("PW nicht geändert");
+               // System.out.println();
+
+                return "usersettings";
+            }
         }
 
         //Sprachenänderung
@@ -113,7 +137,7 @@ public class SettingsController extends CommonVariables {
         userAccountManager.save(user.getUserAccount());
         userRepository.save(user);
 
-        System.out.println(user);
+        // System.out.println(user);
 
         return "redirect:/search";
     }

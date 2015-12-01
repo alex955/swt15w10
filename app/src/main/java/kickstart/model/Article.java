@@ -1,17 +1,14 @@
 package kickstart.model;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 
-import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 
 @Entity
@@ -20,15 +17,24 @@ public class Article {
 	private @Id @GeneratedValue long id;
 	private String title;
 	private String description;
-	private String picPath;
 	private String location;	
 	private String street;	
 	private long category;
 	private String number;
-	private String plz;
+	private String zip;
 	private long userID;
 	private String creationDate;
+	@OneToOne
+	private Picture picture;
 	
+	public Picture getPicture() {
+		return picture;
+	}
+
+	public void setPicture(Picture picture) {
+		this.picture = picture;
+	}
+
 	@DateTimeFormat(pattern = "HH:mm dd-MM-yyyy")
 	private LocalDateTime activitydate;
 		
@@ -66,55 +72,44 @@ public class Article {
 		super();
 	}
 
-	
-	public Article(String title, String description, String picPath, String location, String street,
-			long category, String number, String plz, String creationdate) {
+	//constructor with creationdate
+	public Article(String title, String description, Picture picture, String location, String street,
+			long category, String number, String zip, String creationdate) {
 		super();
 		this.title = title;
 		this.description = description;
-		this.picPath = picPath;
+		this.picture = picture;
 		this.location = location;
 		this.street = street;
 		this.category = category;
 		this.number = number;
-		this.plz = plz;
+		this.zip = zip;
 		this.creationDate = creationdate;
 	}
 	
-	public Article(String title, String description, String picPath, String location, String street,
-			long category, String number, String plz) {
-		super();
-		this.title = title;
-		this.description = description;
-		this.picPath = picPath;
-		this.location = location;
-		this.street = street;
-		this.category = category;
-		this.number = number;
-		this.plz = plz;
-		//this.creationdate.parse(creationdate, DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-	}
 	
-	public Article(String title, String description, String picPath, String location, String street,
-			long category, String number, String plz, String creationdate, String activitydate) {
+	//constructor with creationdate and activitydate
+	public Article(String title, String description, Picture picture, String location, String street,
+			long category, String number, String zip, String creationdate, String activitydate) {
 		super();
 		this.title = title;
 		this.description = description;
-		this.picPath = picPath;
+		this.picture = picture;
 		this.location = location;
 		this.street = street;
 		this.category = category;
 		this.number = number;
-		this.plz = plz;
+		this.zip = zip;
 		this.creationDate = creationdate;
 		this.activitydate.parse(activitydate,DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy"));
 	}
 
 	@Override
 	public String toString() {
-		return "Article [id=" + id + ", title=" + title + ", description=" + description + ", picPath=" + picPath
+		return "Article [id=" + id + ", title=" + title + ", description=" + description + ", picture=" + picture
 				+ ", location=" + location + ", street=" + street + ", category=" + category + ", number=" + number
-				+ ", plz=" + plz + ", userID=" + userID + ", creationDate=" + creationDate + "]";
+				+ ", zip=" + zip + ", userID=" + userID + ", creationDate=" + creationDate
+				+ ", activitydate=" + activitydate + ", photo=" + photo + "]";
 	}
 
 	public long getId() {
@@ -139,14 +134,6 @@ public class Article {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public String getPicPath() {
-		return picPath;
-	}
-
-	public void setPicPath(String picPath) {
-		this.picPath = picPath;
 	}
 
 	public String getLocation() {
@@ -181,12 +168,20 @@ public class Article {
 		this.number = number;
 	}
 
-	public String getPlz() {
-		return plz;
+	public String getZip() {
+		return zip;
 	}
 
-	public void setPlz(String plz) {
-		this.plz = plz;
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	public String getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(String creationDate) {
+		this.creationDate = creationDate;
 	}
 
 	public long getUserID() {

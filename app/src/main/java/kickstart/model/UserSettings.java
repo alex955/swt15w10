@@ -26,7 +26,7 @@ public class UserSettings {
 
     private String newStreetName;
 
-    @Pattern(regexp = "(^$| | ^(\\d+[a-zA-Z])$)", message="Geben Sie eine gültige Hausnummer ein.")
+    @Pattern(regexp = "(^$|^(\\d+[a-zA-Z]*)$)", message="Geben Sie eine gültige Hausnummer ein.")
     private String newHouseNumber;
     private String newAddressAddition;
     private String newLanguage1;

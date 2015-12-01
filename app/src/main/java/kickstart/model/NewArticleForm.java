@@ -10,8 +10,42 @@ public class NewArticleForm {
 	private long categoryId;
     private String title;
     private String description;
-    private String plz;
-    private MultipartFile file;
+    private String zip;
+    private String city;
+    private String streetName;
+    private String houseNumber;
+    private String adressAddition;
+    public String getStreetName() {
+		return streetName;
+	}
+	public void setStreetName(String streetName) {
+		this.streetName = streetName;
+	}
+	public String getHouseNumber() {
+		return houseNumber;
+	}
+	public void setHouseNumber(String houseNumber) {
+		this.houseNumber = houseNumber;
+	}
+	public String getAdressAddition() {
+		return adressAddition;
+	}
+	public void setAdressAddition(String adressAddition) {
+		this.adressAddition = adressAddition;
+	}
+	public String getZip() {
+		return zip;
+	}
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	private MultipartFile file;
     private String kind;
     
 	public String getKind() {
@@ -43,12 +77,6 @@ public class NewArticleForm {
 	}
 	public void setDescription(String description) {
 		this.description = description;
-	}
-	public String getPlz() {
-		return plz;
-	}
-	public void setPlz(String plz) {
-		this.plz = plz;
 	}
     
 }

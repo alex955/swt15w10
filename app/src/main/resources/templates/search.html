@@ -17,7 +17,7 @@
 
 			<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4" >
 				<li th:each="Article : ${anzeigen}">
-					<a th:href="@{/showArticle/}+${Article.id}"><img th:src="@{'/resources/' + ${Article.picPath}}" src="http://placehold.it/1000x1000&amp;text=Thumbnail" style="width:208px;height:155px"/></a>
+					<a th:href="@{/showArticle/}+${Article.id}"><img th:src="@{/showPicture/}+${Article.id}" src="http://placehold.it/1000x1000&amp;text=Thumbnail" style="width:230px;height:155px"/></a>
 					<div class="panel">
 						<h5 th:text="${Article.title}">Item Name</h5>
 						<h5><small th:text="${Article.location}"></small></h5> 
