@@ -169,16 +169,22 @@ public class AdminController extends CommonVariables {
 	}
 	
 	@RequestMapping(value = "/admin/editUser/{id}")
-	public String editUser(@PathVariable Long id) {
-		this.userRepository.delete(id);
+	public String editUser(@PathVariable Long id, Model model) {
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		model=this.getCurrent_cat(model);
+		
+		User user = this.userRepository.findOne(id);
+        model.addAttribute("user", user);
+		
 		return "admin/adminEditUser";
 	}
 
-	/*@RequestMapping(value="/admin/editUser/{id}")
-	public String editUser(@PathVariable Long id, @Valid UserSettings userSettings, BindingResult result) {
+	@RequestMapping(value="/admin/editUser/{id}",method=RequestMethod.POST)
+	public String processEditUser(@PathVariable Long id, @Valid UserSettings userSettings, BindingResult result) {
 
 
-		User user = this.userRepository.findByUserAccount();
+		User user = this.userRepository.findOne(id);
 
 		System.out.println(user.toString());
 
@@ -198,8 +204,6 @@ public class AdminController extends CommonVariables {
 			user.setAddressAddition(userSettings.getNewAddressAddition());
 
 		//Email-Änderung
-
-		//TODO: Email Confirmation
 
 		if(!userSettings.getNewEmail().isEmpty())
 			user.setEmail(userSettings.getNewEmail());
@@ -224,7 +228,7 @@ public class AdminController extends CommonVariables {
 		userRepository.save(user);
 
 
-		return "/admin";
+		return "redirect:/admin";
 	}
-	*/
+	
 }

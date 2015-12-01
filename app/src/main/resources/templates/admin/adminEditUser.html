@@ -1,139 +1,145 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+	xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-    <title>Refugee</title>
-    <link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>Refugee</title>
+<link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
 </head>
+
 <body>
 
-<script th:src="@{/ressources/js/foundation/foundation.js}"></script>
-<script th:src="@{/ressources/js/foundation/foundation.abide.js}"></script>
+	<script th:src="@{/resources/js/vendor/jquery.js}"></script>
+	<script th:src="@{/resources/js/foundation/foundation.js}"></script>
+	<script th:src="@{/resources/js/foundation/foundation.equalizer.js}"></script>
+
+	<nav th:include="topbar :: topbar"></nav>
+	<p>&nbsp;</p>
+
+	<div class="row">
+		<div class="large-12 columns">
+			<div class="row">
+				<div class="large-6 small-12 columns">
+					<h4 class="header">Einstellungen</h4>
+				</div>
+			</div>
+			<form action="#" th:action="@{/admin/editUser/{id}(id=${user.id})}" th:object="${UserSettings}" method="post">
+			<div class="row" data-equalizer="1">
+				<div class="large-6 small-12 columns">
+					<h5>Passwort ändern</h5>
+					<div class="panel" data-equalizer-watch="1">
+						<div class="row">
+								<div class="large-5 small-3 columns">Neues Passwort</div>
+								
+								<div class="large-7 small-9 columns"><input type="password" name="newPassword" /></div>
+						</div>
+						<div class="row">
+							<div class="large-5 small-3 columns">Neues Passwort wiederholen</div>
+						
+							<div class="large-7 small-9 columns"><input type="password" name="confirmPW" /></div>
+						</div>
+					</div>
+				</div>
+					<div class="large-6 small-12 columns">
+						<h5>Sprache ändern</h5>
+						<div class="panel" data-equalizer-watch="1">
+							<div class="row">
+									<div class="large-5 small-3 columns">Sprache 1</div>
+									<div class="large-7 small-9 columns">
+										<select name="newLanguage1">
+											<option value=""> - </option>
+											<option value="german" th:selected="${user.language1 == 'german'}">Deutsch</option>
+											<option value="english" th:selected="${user.language1 == 'english'}">Englisch</option>
+											<option value="arab" th:selected="${user.language1 == 'arab'}">Arabisch</option>
+											<option value="spanish" th:selected="${user.language1 == 'spanish'}">Spanisch</option>
+										</select>
+									</div>
+							</div>
+							<div class="row">
+									<div class="large-5 small-3 columns">Sprache 2</div>
+									<div class="large-7 small-9 columns">
+										<select name="newLanguage2">
+                                            <option value="" th:selected="${user.language2 == ''}"> - </option>
+											<option value="german" th:selected="${user.language2 == 'german'}">Deutsch</option>
+											<option value="english" th:selected="${user.language2 == 'english'}">Englisch</option>
+											<option value="arab" th:selected="${user.language2 == 'arab'}">Arabisch</option>
+											<option value="spanish" th:selected="${user.language2 == 'spanish'}">Spanisch</option>
+										</select>
+									</div>
+							</div>
+							<div class="row">
+									<div class="large-5 small-3 columns">Sprache 3</div>
+									<div class="large-7 small-9 columns">
+										<select name="newLanguage3">
+                                            <option value="" th:selected="${user.language3 == ''}"> - </option>
+											<option value="german" th:selected="${user.language3 == 'german'}">Deutsch</option>
+											<option value="english" th:selected="${user.language3 == 'english'}">Englisch</option>
+											<option value="arab" th:selected="${user.language3 == 'arab'}">Arabisch</option>
+											<option value="spanish" th:selected="${user.language3 == 'spanish'}">Spanisch</option>
+										</select>
+									</div>
+							</div>
+						</div>	
+					</div>
+				</div>
+				
+				<div class="row" data-equalizer="2">
+					<div class="large-6 small-12 columns">
+						<h5>E-Mail-Adresse ändern</h5>
+						<div class="panel" data-equalizer-watch="2">
+
+							<div class="row">							                                                      
+								<div class="large-5 small-3 columns">Registrierte E-Mail-Adresse</div>
+								<div class="large-7 small-9 columns"><input type="text" disabled="" th:value="${user.email}" /></div>
+							</div>
+							<div class="row">							                                                      
+								<div class="large-5 small-3 columns">Neue E-Mail-Adresse</div>
+								
+								<div class="large-7 small-9 columns"><input type="text" name ="newEmail" placeholder="Neue Email-Adresse" /></div>
+							</div>
+						</div>
+					</div>
+					<div class="large-6 small-12 columns">
+						<h5>Wohnort ändern</h5>
+						<div class="panel" data-equalizer-watch="2">
+							<div class="row">
+								<div class="large-5 small-3 columns">Stadt</div>
+								<div class="large-7 small-9 columns">
+									<input type="text" name="newCity" placeholder="Stadt" th:value="${user.city}"/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="large-5 small-3 columns">PLZ</div>
+								<div class="large-7 small-9 columns">
+
+									<input type="text" name="newZip" placeholder="PLZ" th:value="${user.zip}"/>
+								</div>
+							</div>
+							<div class="row">
+								<div class="large-5 small-3 columns">Straße, Hausnummer, Addresszusatz</div>
+								<div class="large-7 small-9 columns">
+
+									<input type="text" name="newStreetName" placeholder="Straßenname" th:value="${user.streetName}"/>
+		
+									<input type="text" name="newHouseNumber" placeholder="Hausnummmer" th:value="${user.houseNumber}"/>
+									<input type="text" name="newAddressAddition" placeholder="(optional)" th:value="${user.addressAddition}"/>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<button class="button left" type="submit" th:href="@{/usersettings}">Änderungen speichern</button>
+			</form>
+		</div>
+	</div>
 
 
-<nav th:include="topbar :: topbar"></nav>
+	<footer th:include="footer :: footer"></footer>
 
-<div class="row">
-    <p>
-    <h1>Nutzer bearbeiten (ID: <span th:text="${user.id}">id</span>)</h1>
-    </p>
-    <form action="#" th:action="@{/admin/editUser/{id}(id=${user.id})}" th:object="${UserSettings}"
-          method="post" name="" onsubmit="return required()">
-                    <div class="row" data-equalizer="1">
-                        <div class="large-6 small-12 columns">
-                            <h5>Passwort ändern</h5>
-                            <div class="panel" data-equalizer-watch="1">
-                                <div class="row">
-                                    <div class="large-5 small-3 columns">Altes Passwort</div>
-                                    <div class="large-7 small-9 columns"><input type="text" /></div>
-                                </div>
-                                <div class="row">
-                                    <div class="large-5 small-3 columns">Neues Passwort</div>
-                                    <div class="large-7 small-9 columns"><input type="text" name="newPassword" /></div>
-                                </div>
-                                <div class="row">
-                                    <div class="large-5 small-3 columns">Neues Passwort wiederholen</div>
-                                    <div class="large-7 small-9 columns"><input type="text" name="confirmPW" /></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="large-6 small-12 columns">
-                            <h5>Sprache ändern</h5>
-                            <div class="panel" data-equalizer-watch="1">
-                                <div class="row">
-                                    <div class="large-5 small-3 columns">Sprache 1</div>
-                                    <div class="large-7 small-9 columns">
-                                        <select name="newLanguage1">
-                                            <option value="" selected="selected"> - </option>
-                                            <option value="german">Deutsch</option>
-                                            <option value="english">Englisch</option>
-                                            <option value="arab">Arabisch</option>
-                                            <option value="spanish">Spanisch</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="large-5 small-3 columns">Sprache 2</div>
-                                    <div class="large-7 small-9 columns">
-                                        <select name="newLanguage2">
-                                            <option value="" selected="selected"> - </option>
-                                            <option value="german">Deutsch</option>
-                                            <option value="english">Englisch</option>
-                                            <option value="arab">Arabisch</option>
-                                            <option value="spanish">Spanisch</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="large-5 small-3 columns">Sprache 3</div>
-                                    <div class="large-7 small-9 columns">
-                                        <select name="newLanguage3">
-                                            <option value="" selected="selected"> - </option>
-                                            <option value="german">Deutsch</option>
-                                            <option value="english">Englisch</option>
-                                            <option value="arab">Arabisch</option>
-                                            <option value="spanish">Spanisch</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row" data-equalizer="2">
-                        <div class="large-6 small-12 columns">
-                            <h5>E-Mail-Adresse ändern</h5>
-                            <div class="panel" data-equalizer-watch="2">
-                                <div class="row">
-                                </div>
-                                <div class="row">
-                                    <div class="large-5 small-3 columns">Registrierte E-Mail-Adresse</div>
-                                    <div class="large-7 small-9 columns"><input type="text" disabled="" placeholder="fluechtling@deutschland.com" /></div>
-                                </div>
-                                <div class="row">
-                                    <div class="large-5 small-3 columns">Neue E-Mail-Adresse</div>
-                                    <div class="large-7 small-9 columns"><input type="text" name ="newEmail" placeholder="fluechtling@deutschland.com" /></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="large-6 small-12 columns">
-                            <h5>Wohnort ändern</h5>
-                            <div class="panel" data-equalizer-watch="2">
-                                <div class="row">
-                                    <div class="large-5 small-3 columns">Stadt</div>
-                                    <div class="large-7 small-9 columns">
-                                        <input type="text" name="newCity" placeholder="Stadt"/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="large-5 small-3 columns">PLZ</div>
-                                    <div class="large-7 small-9 columns">
-                                        <input type="text" name="newZip" placeholder="PLZ"/>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="large-5 small-3 columns">Straße, Hausnummer, Addresszusatz</div>
-                                    <div class="large-7 small-9 columns">
-                                        <input type="text" name="newStreetName" placeholder="Straßenname"/>
-                                        <input type="text" name="newHouseNumber" placeholder="Hausnummmer"/>
-                                        <input type="text" name="newAddressAddition" placeholder="(optional)"/>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="button left" type="submit" th:href="@{/usersettings}">Änderungen speichern</button>
-                </form>
-            </div>
-        </div>
-    </form>
-    <p>
-    <h1><a href="/admin">Zurück zur Adminübersicht</a></h1>
-    </p>
-</div>
-
-<footer th:include="footer :: footer"></footer>
-
+	<script>
+		$(document).foundation();
+	</script>
+	
 </body>
 </html>
