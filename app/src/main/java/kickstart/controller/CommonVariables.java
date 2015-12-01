@@ -53,6 +53,16 @@ public class CommonVariables {
 		}
 		return toReturn;
 	}
+	
+	public LinkedList<Category> getChildren(long id){
+		LinkedList<Category> toReturn = new LinkedList<Category>();
+		for(Category c : this.categories.findAll()){
+			if(c.getPredecessor() == id) toReturn.add(c);
+		}
+		
+		return toReturn;
+		
+	}
 
 	public Model getCurrent_cat(Model model) {
 		if (current_cat==0) model.addAttribute("current_category",new Category("Alle Kategorien", 0));
