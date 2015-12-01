@@ -104,9 +104,9 @@
 			</tr>
 			<tr th:each="user : ${registeredUsers}">
 				<td th:text="${user.id}">platzhalter</td>
-				<td th:text="${user.role}">platzhalter</td>
+				<td th:text="${user.userAccount.roles}">platzhalter</td>
 				<td><span th:text="${user.lastName}"></span>,<span th:text="${user.firstName}"></span></td>
-				<td th:text="${user.username}">platzhalter</td>
+				<td th:text="${user.userAccount.username}">platzhalter</td>
 				<td th:text="${user.email}">platzhalter</td>
 				<td><span th:text="${user.streetName}"></span> <span th:text="${user.houseNumber}"></span>, <span th:text="${user.zip}"></span> <span th:text="${user.city}"></span></td>
 				<td><span th:text="${user.language1}"></span>, <span th:text="${user.language2}"></span>, <span th:text="${user.language3}"></span></td>
