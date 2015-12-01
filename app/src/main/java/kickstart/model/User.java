@@ -80,11 +80,14 @@ public class User {
     }
 
     @Override
-    public String toString() {
-        return String.format(
-                "User[id='%d', role='%s', lastName='%s', firstName='%s', username='%s', email='%s', password='%s', city='%s', zip='%s', streetName='%s', houseNumber='%s', addressAddition='%s', language1='%s', language2='%s', language3='%s' ]", id, userAccount.getRoles(), lastName, firstName, userAccount.getUsername(), email, userAccount.getPassword(), city, zip, streetName, houseNumber, addressAddition, language1, language2, language3);
-
-    }
+	public String toString() {
+		return "User [id=" + id + ", userAccount=" + userAccount + ", role=" + role + ", lastName=" + lastName
+				+ ", firstName=" + firstName + ", username=" + username + ", email=" + email + ", password=" + password
+				+ ", confirmPW=" + confirmPW + ", city=" + city + ", zip=" + zip + ", streetName=" + streetName
+				+ ", houseNumber=" + houseNumber + ", addressAddition=" + addressAddition + ", language1=" + language1
+				+ ", language2=" + language2 + ", language3=" + language3 + ", validated=" + validated + ", hashcode="
+				+ hashcode + "]";
+	}
 
     public void setId(long id) {
         this.id = id;

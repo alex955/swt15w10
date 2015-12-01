@@ -13,11 +13,11 @@ public class Picture {
 	@OneToOne
 	private User uploader;
 	
-	public Picture(String picPath, String originalFileName) {
+	public Picture(String picPath, String originalFileName, User uploader) {
 		super();
 		this.picPath = picPath;
 		this.originalFileName = originalFileName;
-		
+		this.uploader = uploader;
 	
 		
 	}
