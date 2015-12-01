@@ -14,69 +14,83 @@
 	<div class="row">
 		<div class="large-12 columns">
 			<p>&nbsp;</p>
-			<h4 class="header">Angebot editieren</h4>
+			<h4 class="header">Angebot einstellen</h4>
 			<form action="#" th:action="@{/editArticle/{id}(id=$(editArticle.id))}" th:object="${NewArticleForm}" method="post" enctype="multipart/form-data">
 				<div class="panel">
 					<div class="row">
 						<div class="small-12 columns">
-							<div class="small-12 large-4 columns">
-								<p>Kategorie*: </p>
+							<p>Möchten Sie eine Aktivität (z.b. Sprachkurs, Stadtausflug, Bowlingspiel) oder einen Artikel erstellen?</p>
+							<div class="chooseRole">
+								<input id="activity" type="radio" name="kind"/>
+								<label	for="activity"><a> Aktivität</a></label>
+								<input id="article" type="radio" name="kind"/>
+								<label for="article"><a> Artikel</a></label>
+								<br />
 							</div>
-							
-							<div class="small-12 large-8 columns">
-								<select name="categoryId">
-									<option th:each="categoryForm : ${categoriesForm}" th:value="${categoryForm.id}"><span th:text="${categoryForm.name}"></span></option>
-									
-								</select>
-							</div>
-							<hr />
-							
-							
-							<div class="small-12 large-4 columns">
-								<p>Titel der Anzeige*</p>
-							</div>
-							<div class="small-12 large-8 columns">
-								<input type="text" name="title" placeholder="" />
-							</div>
-							<div class="small-12 large-4 columns">
-								<p>Beschreibung*</p>
-							</div>
-							<div class="small-12 large-8 columns">
-								<textarea name="description" rows="4"></textarea>
-							</div>
-							<div class="small-12 large-4 columns">
-								<p>Bilder</p>
-							</div>
-							<div class="small-12 large-8 columns">
-								<a><input type="file" name="file"/></a>
-							</div>
-							<hr />
 						</div>
 					</div>
 					<div class="row">
-						<div class="small-12 columns">
-							<div class="small-12 large-4 columns">
-								<p>PLZ*</p>
-							</div>
-							<div class="small-3 large-2 columns">
-								<input type="text" name="plz" placeholder="PLZ" />
-							</div>
-							<div class="small-9 large-6 columns">
-								<input type="text" placeholder="zugehoerige Stadt automatisch" />
-							</div>
-	
-							<div class="small-12 large-4 columns">
-								<p>Straße/Nr.</p>
-							</div>
-							<div class="small-12 large-8 columns">
-								<input type="text" placeholder="" />
-							</div>
-							<hr />
-							<div class="small-12 columns">
-								<button type="submit" th:href="@{/}">Angebot Einstellen</button>
-							</div>
+						<div class="small-4 columns">
+							<p>Kategorie*: </p>
+						</div>
+						<div class="small-8 columns">
+							<select name="categoryId">
+								<option th:each="categoryForm : ${categoriesForm}" th:value="${categoryForm.id}"><span th:text="${categoryForm.name}"></span></option>		
+							</select>
 						</div>
 					</div>
+					<hr />
+					<div class="row">
+						<div class="small-4 columns">
+							<p>Titel der Anzeige*</p>
+						</div>
+						<div class="small-8 columns">
+							<input type="text" name="title" placeholder="" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="small-4 columns">
+							<p>Beschreibung*</p>
+						</div>
+						<div class="small-8 columns">
+							<textarea name="description" rows="4"></textarea>
+						</div>
+					</div>
+					<div class="row">
+						<div class="small-4 columns">
+							<p>Bilder</p>
+						</div>
+						<div class="small-8 columns">
+							<a><input type="file" name="file"/></a>
+						</div>
+					</div>
+					<hr />
+					<div class="row">
+						<div class="small-4 columns">Stadt</div>
+						<div class="small-8 columns">										
+							<input type="text" name="city" placeholder="Stadt" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="small-4 columns">PLZ</div>
+						<div class="small-8 columns">										
+							<input type="text" name="zip" placeholder="PLZ" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="small-4 columns">Straße, Hausnummer, Addresszusatz</div>
+						<div class="small-8 columns">
+							<input type="text" name="streetName" placeholder="Straßenname" />
+                            <input type="text" name="houseNumber" placeholder="Hausnummmer" />                            						
+							<input type="text" name="addressAddition" placeholder="(optional)" />
+						</div>
+					</div>	
+					<hr />
+					<div class="row">
+	                   <div class="small-12 columns">
+	                   		<button type="submit" th:href="@{/}">Angebot erstellen</button>
+	                   </div>
+                    </div>						
 				</div>
 			</form>
 		</div>

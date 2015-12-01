@@ -62,8 +62,6 @@ public class ArticleController extends CommonVariables {
 		model.addAttribute("editArticle", articleRepo.findOne(id));
 		model=this.getCurrent_cat(model);
 		
-		
-		
 	    return "editArticle";
 	}
 	
