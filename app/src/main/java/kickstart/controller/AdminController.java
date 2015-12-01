@@ -209,10 +209,11 @@ public class AdminController extends CommonVariables {
 			user.setEmail(userSettings.getNewEmail());
 
 		//Passwort-Änderung
-		if(!userSettings.getNewPassword().isEmpty())
-			if(user.getPassword().equals(userSettings.getNewPassword()) && user.getPassword().equals(userSettings.getConfirmPW())){
-				userAccountManager.changePassword(user.getUserAccount(), userSettings.getNewPassword());
-			}
+		if(!userSettings.getNewPassword().isEmpty()){
+			userAccountManager.changePassword(user.getUserAccount(), userSettings.getNewPassword());
+
+		}
+			
 
 		//Sprachenänderung
 		if(!userSettings.getNewLanguage1().isEmpty())
