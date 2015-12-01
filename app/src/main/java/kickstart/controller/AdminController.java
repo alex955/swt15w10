@@ -182,11 +182,16 @@ public class AdminController extends CommonVariables {
 
 	@RequestMapping(value="/admin/editUser/{id}",method=RequestMethod.POST)
 	public String processEditUser(@PathVariable Long id, @Valid UserSettings userSettings, BindingResult result) {
-
-
 		User user = this.userRepository.findOne(id);
 
 		System.out.println(user.toString());
+		
+		
+		if(!userSettings.getNewFirstName().isEmpty())
+			user.setFirstName(userSettings.getNewFirstName());
+		
+		if(!userSettings.getNewLastName().isEmpty())
+			user.setLastName(userSettings.getNewLastName());
 
 		if(!userSettings.getNewCity().isEmpty())
 			user.setCity(userSettings.getNewCity());
@@ -209,9 +214,8 @@ public class AdminController extends CommonVariables {
 			user.setEmail(userSettings.getNewEmail());
 
 		//Passwort-Änderung
-		if(!userSettings.getNewPassword().isEmpty()){
+		if(!userSettings.getNewPassword().isEmpty() && userSettings.getNewPassword().equals(userSettings.getConfirmPW()) ){
 			userAccountManager.changePassword(user.getUserAccount(), userSettings.getNewPassword());
-
 		}
 			
 
