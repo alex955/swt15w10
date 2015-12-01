@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.Optional;
 
 import kickstart.model.*;
+
+import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,16 +28,17 @@ import javax.validation.Valid;
 @Controller
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 public class AdminController extends CommonVariables {
+    
 	@Autowired
-	public AdminController(CategoryRepo categories, ArticleRepo articleRepo, UserRepository userRepository){
+	public AdminController(CategoryRepo categories, ArticleRepo articleRepo, UserRepository userRepository, UserAccountManager userAccountManager){
 		this.categories = categories;
 		this.articleRepo=articleRepo;
 		this.userRepository = userRepository;
+		this.userAccountManager = userAccountManager;
 	}
 
 	@Autowired
 	private UserAccountManager userAccountManager;
-
 	@RequestMapping(value = "/admin")
     public String initialView(Model model) {
 		
@@ -163,6 +166,12 @@ public class AdminController extends CommonVariables {
 	public String deleteUser(@PathVariable Long id) {
 		this.userRepository.delete(id);
 		return "redirect:/admin";
+	}
+	
+	@RequestMapping(value = "/admin/editUser/{id}")
+	public String editUser(@PathVariable Long id) {
+		this.userRepository.delete(id);
+		return "admin/adminEditUser";
 	}
 
 	/*@RequestMapping(value="/admin/editUser/{id}")
