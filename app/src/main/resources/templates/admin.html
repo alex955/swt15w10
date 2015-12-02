@@ -100,6 +100,7 @@
 				<td>Adresse</td>
 				<td>Sprachen</td>
 				<td></td>
+				<td></td>
 				
 			</tr>
 			<tr th:each="user : ${registeredUsers}">
@@ -111,7 +112,7 @@
 				<td><span th:text="${user.streetName}"></span> <span th:text="${user.houseNumber}"></span>, <span th:text="${user.zip}"></span> <span th:text="${user.city}"></span></td>
 				<td><span th:text="${user.language1}"></span>, <span th:text="${user.language2}"></span>, <span th:text="${user.language3}"></span></td>
 				<td> <a th:href="@{/admin/deleteUser/{id}(id=${user.id})}"><span>User löschen</span></a></td>
-				
+				<td> <a th:href="@{/admin/editUser/{id}(id=${user.id})}"><span>User bearbeiten</span></a></td>
 			</tr>
 		</table>
 	</p>

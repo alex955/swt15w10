@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.validation.Valid;
+import javax.validation.constraints.Null;
 import java.util.Optional;
 
 /**
@@ -125,14 +126,24 @@ public class SettingsController extends CommonVariables {
         }
 
         //Sprachenänderung
-        if(!userSettings.getNewLanguage1().isEmpty())
-        user.setLanguage1(userSettings.getNewLanguage1());
+        if(userSettings.getNewLanguage1().equals("null")){
+            user.setLanguage1(null);
+        } else {
+            user.setLanguage1(userSettings.getNewLanguage1());
+        }
 
-        if(!userSettings.getNewLanguage2().isEmpty())
-        user.setLanguage2(userSettings.getNewLanguage2());
+        if(userSettings.getNewLanguage2().equals("null")){
+            user.setLanguage2(null);
+        } else {
+            user.setLanguage2(userSettings.getNewLanguage2());
+        }
 
-        if(!userSettings.getNewLanguage3().isEmpty())
-        user.setLanguage3(userSettings.getNewLanguage3());
+        if(userSettings.getNewLanguage3().equals("null")){
+            user.setLanguage3(null);
+        } else {
+            user.setLanguage3(userSettings.getNewLanguage3());
+        }
+
 
         userAccountManager.save(user.getUserAccount());
         userRepository.save(user);

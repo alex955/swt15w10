@@ -4,6 +4,8 @@ import java.util.LinkedList;
 import java.util.Optional;
 
 import kickstart.model.*;
+
+import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,16 +28,17 @@ import javax.validation.Valid;
 @Controller
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 public class AdminController extends CommonVariables {
+    
 	@Autowired
-	public AdminController(CategoryRepo categories, ArticleRepo articleRepo, UserRepository userRepository){
+	public AdminController(CategoryRepo categories, ArticleRepo articleRepo, UserRepository userRepository, UserAccountManager userAccountManager){
 		this.categories = categories;
 		this.articleRepo=articleRepo;
 		this.userRepository = userRepository;
+		this.userAccountManager = userAccountManager;
 	}
 
 	@Autowired
 	private UserAccountManager userAccountManager;
-
 	@RequestMapping(value = "/admin")
     public String initialView(Model model) {
 		
@@ -164,14 +167,31 @@ public class AdminController extends CommonVariables {
 		this.userRepository.delete(id);
 		return "redirect:/admin";
 	}
+	
+	@RequestMapping(value = "/admin/editUser/{id}")
+	public String editUser(@PathVariable Long id, Model model) {
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		model=this.getCurrent_cat(model);
+		
+		User user = this.userRepository.findOne(id);
+        model.addAttribute("user", user);
+		
+		return "admin/adminEditUser";
+	}
 
-	/*@RequestMapping(value="/admin/editUser/{id}")
-	public String editUser(@PathVariable Long id, @Valid UserSettings userSettings, BindingResult result) {
-
-
-		User user = this.userRepository.findByUserAccount();
+	@RequestMapping(value="/admin/editUser/{id}",method=RequestMethod.POST)
+	public String processEditUser(@PathVariable Long id, @Valid UserSettings userSettings, BindingResult result) {
+		User user = this.userRepository.findOne(id);
 
 		System.out.println(user.toString());
+		
+		
+		if(!userSettings.getNewFirstName().isEmpty())
+			user.setFirstName(userSettings.getNewFirstName());
+		
+		if(!userSettings.getNewLastName().isEmpty())
+			user.setLastName(userSettings.getNewLastName());
 
 		if(!userSettings.getNewCity().isEmpty())
 			user.setCity(userSettings.getNewCity());
@@ -190,32 +210,38 @@ public class AdminController extends CommonVariables {
 
 		//Email-Änderung
 
-		//TODO: Email Confirmation
-
 		if(!userSettings.getNewEmail().isEmpty())
 			user.setEmail(userSettings.getNewEmail());
 
 		//Passwort-Änderung
-		if(!userSettings.getNewPassword().isEmpty())
-			if(user.getPassword().equals(userSettings.getNewPassword()) && user.getPassword().equals(userSettings.getConfirmPW())){
-				userAccountManager.changePassword(user.getUserAccount(), userSettings.getNewPassword());
-			}
+		if(!userSettings.getNewPassword().isEmpty() && userSettings.getNewPassword().equals(userSettings.getConfirmPW()) ){
+			userAccountManager.changePassword(user.getUserAccount(), userSettings.getNewPassword());
+		}
 
 		//Sprachenänderung
-		if(!userSettings.getNewLanguage1().isEmpty())
+		if(userSettings.getNewLanguage1().equals("null")){
+			user.setLanguage1(null);
+		} else {
 			user.setLanguage1(userSettings.getNewLanguage1());
+		}
 
-		if(!userSettings.getNewLanguage2().isEmpty())
+		if(userSettings.getNewLanguage2().equals("null")){
+			user.setLanguage2(null);
+		} else {
 			user.setLanguage2(userSettings.getNewLanguage2());
+		}
 
-		if(!userSettings.getNewLanguage3().isEmpty())
+		if(userSettings.getNewLanguage3().equals("null")){
+			user.setLanguage3(null);
+		} else {
 			user.setLanguage3(userSettings.getNewLanguage3());
+		}
 
 		userAccountManager.save(user.getUserAccount());
 		userRepository.save(user);
 
 
-		return "/admin";
+		return "redirect:/admin";
 	}
-	*/
+	
 }

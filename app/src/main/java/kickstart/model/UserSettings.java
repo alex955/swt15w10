@@ -2,6 +2,7 @@ package kickstart.model;
 
 
 import org.hibernate.validator.constraints.Email;
+import org.salespointframework.useraccount.Role;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -10,6 +11,8 @@ import javax.validation.constraints.Size;
  * Created by Vincenz on 25.11.15.
  */
 public class UserSettings {
+	private String newLastName;
+	private String newFirstName;
 
     @Email(message = "Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.")
     private String newEmail;
@@ -128,4 +131,22 @@ public class UserSettings {
     public void setNewLanguage3(String newLanguage3) {
         this.newLanguage3 = newLanguage3;
     }
+
+
+	public String getNewLastName() {
+		return this.newLastName;
+	}
+
+	public void setNewLastName(String newLastName) {
+		this.newLastName = newLastName;
+	}
+
+
+	public String getNewFirstName() {
+		return this.newFirstName;
+	}
+
+	public void setNewFirstName(String newFirstName) {
+		this.newFirstName = newFirstName;
+	}
 }
