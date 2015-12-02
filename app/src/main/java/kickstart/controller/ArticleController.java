@@ -55,11 +55,17 @@ public class ArticleController extends CommonVariables {
 	}
 	
 	@RequestMapping(value = "/editArticle/{id}")
-	public String editArticle(@PathVariable("id") long id,Model model) {
+	public String editArticle(@PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount, Model model) {
 		this.processedCategories = this.getProcessedCategories();
+		long userId = this.userRepository.findByUserAccount(userAccount.get()).getId();
+		
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
 		model.addAttribute("editArticle", articleRepo.findOne(id));
+		model.addAttribute("userId", userId);
+		model.addAttribute("user", this.userRepository.findOne(userId));
+
+		
 		model=this.getCurrent_cat(model);
 		
 	    return "editArticle";

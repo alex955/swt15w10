@@ -12,30 +12,19 @@
 	<nav th:include="topbar :: topbar"></nav>
 
 	<div class="row">
-		<div class="large-12 columns">
+		<div class="large-12 columns" th:if="${userId} == ${editArticle.creator.id}">
 			<p>&nbsp;</p>
-			<h4 class="header">Angebot einstellen</h4>
-			<form action="#" th:action="@{/editArticle/{id}(id=$(editArticle.id))}" th:object="${NewArticleForm}" method="post" enctype="multipart/form-data">
+			<h4 class="header">Angebot bearbeiten</h4>
+			<form action="#" th:action="@{/editArticle/{id}(id=${editArticle.id})}" th:object="${NewArticleForm}" method="post" enctype="multipart/form-data">
 				<div class="panel">
-					<div class="row">
-						<div class="small-12 columns">
-							<p>Möchten Sie eine Aktivität (z.b. Sprachkurs, Stadtausflug, Bowlingspiel) oder einen Artikel erstellen?</p>
-							<div class="chooseRole">
-								<input id="activity" type="radio" name="kind"/>
-								<label	for="activity"><a> Aktivität</a></label>
-								<input id="article" type="radio" name="kind"/>
-								<label for="article"><a> Artikel</a></label>
-								<br />
-							</div>
-						</div>
-					</div>
+
 					<div class="row">
 						<div class="small-4 columns">
 							<p>Kategorie*: </p>
 						</div>
 						<div class="small-8 columns">
 							<select name="categoryId">
-								<option th:each="categoryForm : ${categoriesForm}" th:value="${categoryForm.id}"><span th:text="${categoryForm.name}"></span></option>		
+								<option th:each="categoryForm : ${categoriesForm}" th:value="${categoryForm.id}" th:selected="${categoryForm.id} == ${editArticle.category}"><span th:text="${categoryForm.name}"></span></option>		
 							</select>
 						</div>
 					</div>
@@ -45,7 +34,7 @@
 							<p>Titel der Anzeige*</p>
 						</div>
 						<div class="small-8 columns">
-							<input type="text" name="title" placeholder="" />
+							<input type="text" name="title" placeholder="" th:value="${editArticle.title}"/>
 						</div>
 					</div>
 					<div class="row">
@@ -53,7 +42,7 @@
 							<p>Beschreibung*</p>
 						</div>
 						<div class="small-8 columns">
-							<textarea name="description" rows="4"></textarea>
+							<textarea name="description" rows="4" th:text="${editArticle.description}"></textarea>
 						</div>
 					</div>
 					<div class="row">
@@ -68,20 +57,20 @@
 					<div class="row">
 						<div class="small-4 columns">Stadt</div>
 						<div class="small-8 columns">										
-							<input type="text" name="city" placeholder="Stadt" />
+							<input type="text" name="city" placeholder="Stadt" th:value="${editArticle.location}"/>
 						</div>
 					</div>
 					<div class="row">
 						<div class="small-4 columns">PLZ</div>
 						<div class="small-8 columns">										
-							<input type="text" name="zip" placeholder="PLZ" />
+							<input type="text" name="zip" placeholder="PLZ" th:value="${editArticle.zip}"/>
 						</div>
 					</div>
 					<div class="row">
 						<div class="small-4 columns">Straße, Hausnummer, Addresszusatz</div>
 						<div class="small-8 columns">
-							<input type="text" name="streetName" placeholder="Straßenname" />
-                            <input type="text" name="houseNumber" placeholder="Hausnummmer" />                            						
+							<input type="text" name="streetName" placeholder="Straßenname" th:value="${editArticle.street}"/>
+                            <input type="text" name="houseNumber" placeholder="Hausnummmer" th:value="${editArticle.number}"/>                            						
 							<input type="text" name="addressAddition" placeholder="(optional)" />
 						</div>
 					</div>	
