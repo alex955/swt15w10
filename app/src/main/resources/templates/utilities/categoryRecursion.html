@@ -1,0 +1,24 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>Refugee</title>
+<link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
+<script>
+
+	function required() {
+		var empt = document.forms["form1"]["name"].value;
+		if (empt == "" || empt == null) {
+			alert("Name der Kategorie darf nicht leer sein");
+			return false;
+		} else {
+			return true;
+		}
+	}
+</script>
+</head>
+<body>
+
+</body>
+</html>

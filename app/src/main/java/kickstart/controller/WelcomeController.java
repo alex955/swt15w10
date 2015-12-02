@@ -16,6 +16,8 @@
 package kickstart.controller;
 
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -99,6 +101,18 @@ public class WelcomeController extends CommonVariables {
 		
 		return "chat";
 	}
+	
+	@RequestMapping("/test")
+	public String testShit(Model model){
+		//initiate categories
+		Map<String, List<Category>> test = this.getCategoryMap();
+		
+		model.addAttribute("map", test);
+		model.addAttribute("testVar", new String("test123"));
+		
+		return "utilities/testShit";
+	}
+
 	
 	//Mappings end
 }

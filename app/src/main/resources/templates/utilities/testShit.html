@@ -1,0 +1,56 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<title>Refugee</title>
+<link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
+<script>
+
+	function required() {
+		var empt = document.forms["form1"]["name"].value;
+		if (empt == "" || empt == null) {
+			alert("Name der Kategorie darf nicht leer sein");
+			return false;
+		} else {
+			return true;
+		}
+	}
+</script>
+</head>
+<body>
+	<div th:fragment="frag1" th:text="${testVar}"><span th:text="${testVar}"></span>
+	</div>
+	
+		<div th:fragment="frag2" th:text="${testVar}">
+	</div>
+	
+							<li th:each="category : ${map}" class="has-dropdown" th:fragment="subcatRecursion" th:remove="tag">
+								<ul>
+								
+									<span th:text="${category.key}"></span> <br/>
+									<div>
+									<span th:each="subcategory : ${category.value}" >
+										-<span th:text="${subcategory}">Rekursion</span> <br/>
+										
+									</span> 
+									</div>
+								</ul>
+							</li>
+							<hr></hr>
+							
+							<div id="nuevo" th:include="::frag1" th:with="testVar='neuerInhalt'">123</div>
+		<!--				
+        <div th:fragment="submenu" th:remove="tag">
+            <ul>
+                <li th:each="option : ${menu.options}" >
+                    <span th:text="${option.label}">Town hall</span>
+                    <div th:with="menu = ${option}"
+                           th:include="includes/sidebar.html :: submenu" th:remove="tag" />
+                </li>
+            </ul>
+        </div>
+        !-->
+
+</body>
+</html>

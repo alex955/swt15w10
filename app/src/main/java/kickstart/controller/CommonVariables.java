@@ -1,6 +1,9 @@
 package kickstart.controller;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,6 +54,19 @@ public class CommonVariables {
 			else{
 			}
 		}
+		return toReturn;
+	}
+	
+	public Map<String, List<Category>> getCategoryMap(){
+		Map<String, List<Category>> toReturn = new HashMap<String, List<Category>>();
+		Iterable<Category> allCategories = this.categories.findAll();
+		
+		for(Category s : this.categories.findAll()){
+			long currCat = s.getId();
+			LinkedList<Category> putList = getChildren(currCat);
+			toReturn.put(s.getName(), putList);
+		}
+		
 		return toReturn;
 	}
 	
