@@ -52,36 +52,36 @@
 									<div class="large-5 small-3 columns">Sprache 1</div>
 									<div class="large-7 small-9 columns">
 										<select name="newLanguage1">
-											<option value="" selected="selected"> - </option>
-											<option value="german">Deutsch</option>
-											<option value="english">Englisch</option>
-											<option value="arab">Arabisch</option>
-											<option value="spanish">Spanisch</option>
+											<option value="null"> - </option>
+											<option value="german" th:selected="${user.language1 == 'german'}">Deutsch</option>
+											<option value="english" th:selected="${user.language1 == 'english'}">Englisch</option>
+											<option value="arab" th:selected="${user.language1 == 'arab'}">Arabisch</option>
+											<option value="spanish" th:selected="${user.language1 == 'spanish'}">Spanisch</option>
 										</select>
 									</div>
 							</div>
 							<div class="row">
-									<div class="large-5 small-3 columns">Sprache 2</div>
-									<div class="large-7 small-9 columns">
-										<select name="newLanguage2">
-											<option value="" selected="selected"> - </option>
-											<option value="german">Deutsch</option>
-											<option value="english">Englisch</option>
-											<option value="arab">Arabisch</option>
-											<option value="spanish">Spanisch</option>
-										</select>
-									</div>
+								<div class="large-5 small-3 columns">Sprache 2</div>
+								<div class="large-7 small-9 columns">
+									<select name="newLanguage2">
+										<option value="null" th:selected="${user.language2 == ''}"> - </option>
+										<option value="german" th:selected="${user.language2 == 'german'}">Deutsch</option>
+										<option value="english" th:selected="${user.language2 == 'english'}">Englisch</option>
+										<option value="arab" th:selected="${user.language2 == 'arab'}">Arabisch</option>
+										<option value="spanish" th:selected="${user.language2 == 'spanish'}">Spanisch</option>
+									</select>
+								</div>
 							</div>
 							<div class="row">
-									<div class="large-5 small-3 columns">Sprache 3</div>
-									<div class="large-7 small-9 columns">
-										<select name="newLanguage3">
-                                            <option value="" selected="selected"> - </option>
-											<option value="german">Deutsch</option>
-											<option value="english">Englisch</option>
-											<option value="arab">Arabisch</option>
-											<option value="spanish">Spanisch</option>
-										</select>
+								<div class="large-5 small-3 columns">Sprache 3</div>
+								<div class="large-7 small-9 columns">
+									<select name="newLanguage3">
+										<option value="null" th:selected="${user.language3 == ''}"> - </option>
+										<option value="german" th:selected="${user.language3 == 'german'}">Deutsch</option>
+										<option value="english" th:selected="${user.language3 == 'english'}">Englisch</option>
+										<option value="arab" th:selected="${user.language3 == 'arab'}">Arabisch</option>
+										<option value="spanish" th:selected="${user.language3 == 'spanish'}">Spanisch</option>
+									</select>
 									</div>
 							</div>
 						</div>	
@@ -119,23 +119,23 @@
 							<div class="row">
 								<div class="large-5 small-3 columns">Stadt</div>
 								<div class="large-7 small-9 columns">
-									<input type="text" name="newCity" placeholder="Stadt"/>
+									<input type="text" name="newCity" placeholder="Stadt" th:value="${user.city}"/>
 								</div>
 							</div>
 							<div class="row">
 								<div class="large-5 small-3 columns">PLZ</div>
 								<div class="large-7 small-9 columns">
 									<font color="red" th:if="${#fields.hasErrors('newZip')}" th:errors="*{newZip}"> ERROR MESSAGE </font>
-									<input type="text" name="newZip" placeholder="PLZ"/>
+									<input type="text" name="newZip" placeholder="PLZ" th:value="${user.zip}"/>
 								</div>
 							</div>
 							<div class="row">
 								<div class="large-5 small-3 columns">Straße, Hausnummer, Addresszusatz</div>
 								<div class="large-7 small-9 columns">
 									<font color="red" th:if="${#fields.hasErrors('newStreetName')}" th:errors="*{newStreetName}"> ERROR MESSAGE </font>
-									<input type="text" name="newStreetName" placeholder="Straßenname"/>
+									<input type="text" name="newStreetName" placeholder="Straßenname" th:value="${user.streetName}"/>
 									<font color="red" th:if="${#fields.hasErrors('newHouseNumber')}" th:errors="*{newHouseNumber}"> ERROR MESSAGE </font>
-									<input type="text" name="newHouseNumber" placeholder="Hausnummmer"/>
+									<input type="text" name="newHouseNumber" placeholder="Hausnummmer" th:value="${user.houseNumber}"/>
 									<input type="text" name="newAddressAddition" placeholder="(optional)"/>
 
 								</div>

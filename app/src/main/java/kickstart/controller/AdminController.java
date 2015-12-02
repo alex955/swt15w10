@@ -217,17 +217,25 @@ public class AdminController extends CommonVariables {
 		if(!userSettings.getNewPassword().isEmpty() && userSettings.getNewPassword().equals(userSettings.getConfirmPW()) ){
 			userAccountManager.changePassword(user.getUserAccount(), userSettings.getNewPassword());
 		}
-			
 
 		//Sprachenänderung
-		if(!userSettings.getNewLanguage1().isEmpty())
+		if(userSettings.getNewLanguage1().equals("null")){
+			user.setLanguage1(null);
+		} else {
 			user.setLanguage1(userSettings.getNewLanguage1());
+		}
 
-		if(!userSettings.getNewLanguage2().isEmpty())
+		if(userSettings.getNewLanguage2().equals("null")){
+			user.setLanguage2(null);
+		} else {
 			user.setLanguage2(userSettings.getNewLanguage2());
+		}
 
-		if(!userSettings.getNewLanguage3().isEmpty())
+		if(userSettings.getNewLanguage3().equals("null")){
+			user.setLanguage3(null);
+		} else {
 			user.setLanguage3(userSettings.getNewLanguage3());
+		}
 
 		userAccountManager.save(user.getUserAccount());
 		userRepository.save(user);
