@@ -11,10 +11,13 @@ import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import kickstart.model.Category;
+import kickstart.model.SearchQuery;
 import kickstart.model.User;
 import kickstart.model.Article;
 
@@ -46,20 +49,25 @@ public class SearchController extends CommonVariables {
 		return this.articleRepo.findByCategory(subcatID);
 	}
 	
-	//@RequestMapping(value = "/search?{name}?{plz}?{distance}?{search}?{category}")
-	
-			@RequestMapping(value = "/search/{text}/{category}")
-			public String suche_via_name_category(@PathVariable("text") String text, @PathVariable("category") Long catID, Model model)
-			{  System.out.println("Es wird nach "+text+" in der Kategorie "+catID+" gesucht");
-			//initiate categories
+	   //@PreAuthorize("isAuthenticated()")
+		@RequestMapping(value = "/search", method = RequestMethod.POST)
+	    public String searcharticle(@ModelAttribute("SearchQuery") SearchQuery SearchQuery, Model model ) {
+		
+			
 			this.processedCategories = this.getProcessedCategories();
 			model.addAttribute("categories", this.processedCategories);
 			model.addAttribute("categoriesForm", this.categories.findAll());
-				
-				List<Article> catGoods = articleRepo.findByCategory(catID);
-				System.out.println("Length of list: " + catGoods.size());
+			model=this.getCurrent_cat(model);
+			SearchQuery.setCategory(this.getCurrent_cat());
+			
+			System.out.println("Gesucht "+ SearchQuery.getQuery() +" in "+SearchQuery.getCategory());
+			List<Article> catGoods = new LinkedList<Article>();
+			
+			if (SearchQuery.getCategory()==0) { catGoods = this.articleRepo.findAll() ;}
+					else { catGoods = articleRepo.findByCategory(SearchQuery.getCategory()); }
+			System.out.println("Length of list: " + catGoods.size());
 			 
-			   List<Article> output = new LinkedList<Article>();
+			List<Article> output = new LinkedList<Article>();
 	 		   
 			   int count = 1;
 			   for (Article good : catGoods) 
@@ -67,19 +75,18 @@ public class SearchController extends CommonVariables {
 			     System.out.println(good.getTitle()+"    "+good.getCategory());
 			  
 			     	// Überprüfung ob Name gleich
-			     	if (good.getTitle().toLowerCase().contains(text.toLowerCase())) { System.out.println("match"); output.add(good);} else System.out.println("dismatch"); 
+			     	if (good.getTitle().toLowerCase().contains(SearchQuery.getQuery().toLowerCase())) { System.out.println("match"); output.add(good);} else System.out.println("dismatch"); 
 			     	// Überprüfung ob Suchtext in Description
-			     	if (good.getDescription().toLowerCase().contains(text.toLowerCase()) && !output.contains(good)) output.add(good);
-			     
+			     	if (good.getDescription().toLowerCase().contains(SearchQuery.getQuery().toLowerCase()) && !output.contains(good)) output.add(good);
 			     }
 			 
 			  
 			   
-			   model.addAttribute("anzeigen", output);
-
-			    return "search";
-			}
-			
+			   model.addAttribute("anzeigen", output);	
+			   
+			   return "search";
+			   
+		}
 			
 			
 			@RequestMapping(value = "/search/{category}")

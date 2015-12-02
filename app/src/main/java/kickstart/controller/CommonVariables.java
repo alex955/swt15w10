@@ -100,6 +100,9 @@ public class CommonVariables {
 		
 	}
 	
+	public Long getCurrent_cat(){
+			return current_cat;	
+			}
 	
 	
 }
