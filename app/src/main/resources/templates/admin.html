@@ -99,7 +99,7 @@
 				<td>Email</td>
 				<td>Adresse</td>
 				<td>Sprachen</td>
-				<td></td>
+				<td>Useraccount aktiviert?</td>
 				<td></td>
 				
 			</tr>
@@ -111,8 +111,11 @@
 				<td th:text="${user.email}">platzhalter</td>
 				<td><span th:text="${user.streetName}"></span> <span th:text="${user.houseNumber}"></span>, <span th:text="${user.zip}"></span> <span th:text="${user.city}"></span></td>
 				<td><span th:text="${user.language1}"></span>, <span th:text="${user.language2}"></span>, <span th:text="${user.language3}"></span></td>
-				<td> <a th:href="@{/admin/deleteUser/{id}(id=${user.id})}"><span>User löschen</span></a></td>
-				<td> <a th:href="@{/admin/editUser/{id}(id=${user.id})}"><span>User bearbeiten</span></a></td>
+				<td th:text="${user.userAccount.enabled}">Aktivierungsstatus</td>
+				<td>
+					<a th:href="${user.userAccount.enabled} ? @{/admin/deactivateUser/{id}(id=${user.id})} : @{/admin/activateUser/{id}(id=${user.id})}" th:text="${user.userAccount.enabled} ? 'User deaktivieren' : 'User aktivieren'">
+					</a>
+				</td>
 			</tr>
 		</table>
 	</p>

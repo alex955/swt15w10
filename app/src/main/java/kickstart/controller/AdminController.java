@@ -162,9 +162,15 @@ public class AdminController extends CommonVariables {
 		return "adminSubcategory";
 	}
 	
-	@RequestMapping(value = "/admin/deleteUser/{id}")
-	public String deleteUser(@PathVariable Long id) {
-		this.userRepository.delete(id);
+	@RequestMapping(value = "/admin/deactivateUser/{id}")
+	public String deactivateUser(@PathVariable Long id) {
+		this.userAccountManager.disable(this.userRepository.findOne(id).getUserAccount().getIdentifier());
+		return "redirect:/admin";
+	}
+	
+	@RequestMapping(value = "/admin/activateUser/{id}")
+	public String activateUser(@PathVariable Long id) {
+		this.userAccountManager.enable(this.userRepository.findOne(id).getUserAccount().getIdentifier());
 		return "redirect:/admin";
 	}
 	
