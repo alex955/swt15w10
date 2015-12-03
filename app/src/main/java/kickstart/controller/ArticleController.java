@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 
 import java.util.Optional;
 
+import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class ArticleController extends CommonVariables {
 	
 	
 	@RequestMapping(value = "/showArticle/{id}")
-	public String showArticle(@PathVariable("id") long id,Model model) {
+	public String showArticle(@PathVariable("id") long id,Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		//initiate categories
 		this.processedCategories = this.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
@@ -48,6 +49,8 @@ public class ArticleController extends CommonVariables {
 	    model.addAttribute("Article", articleRepo.findOne(id));
 	    model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 	    model.addAttribute("Useraccount", articleRepo.findOne(id).getCreator().getUserAccount());
+	    
+	    model.addAttribute("currentUserId", userRepository.findByUserAccount(userAccount.get()).getId());
 	    
 	    model=this.getCurrent_cat(model);
 	    return "article";
@@ -63,6 +66,11 @@ public class ArticleController extends CommonVariables {
 		model.addAttribute("editArticle", articleRepo.findOne(id));
 		model.addAttribute("userId", userId);
 		model.addAttribute("user", this.userRepository.findOne(userId));
+		
+		boolean isAdminLoggedIn = false;
+		if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))) isAdminLoggedIn = true;
+		
+		model.addAttribute("isAdminLoggedIn", isAdminLoggedIn);
 
 		
 		model=this.getCurrent_cat(model);
@@ -77,7 +85,7 @@ public class ArticleController extends CommonVariables {
 		long currentUserId = this.userRepository.findByUserAccount(userAccount.get()).getId();
 		
 		//case: current user didnt create article -> end
-		if(originalArticle.getCreator().getId() != currentUserId){
+		if(originalArticle.getCreator().getId() != currentUserId && originalArticle.getCreator().getUserAccount().hasRole(new Role("ROLE_ADMIN"))){
 			return null;
 		}
 		
