@@ -20,6 +20,7 @@ public class Article {
 	private long category;
 	private String number;
 	private String zip;
+	private String addressAddition;
 	@OneToOne
 	private User creator;	
 	private LocalDateTime creationdate;
@@ -198,6 +199,14 @@ public class Article {
 
 	public void setZip(String zip) {
 		this.zip = zip;
+	}
+
+	public String getAddressAddition() {
+		return addressAddition;
+	}
+
+	public void setAddressAddition(String addressAddition) {
+		this.addressAddition = addressAddition;
 	}
 
 

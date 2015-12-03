@@ -72,8 +72,31 @@ public class ArticleController extends CommonVariables {
 
 	
 	@RequestMapping(value = "/editArticle/{id}", method = RequestMethod.POST)
-	public String processEditedArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, @LoggedIn Optional<UserAccount> userAccount){
-		return "redirect:showArticle/{id}";
+	public String processEditedArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, @PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount){
+		Article originalArticle = this.articleRepo.findOne(id);
+		long currentUserId = this.userRepository.findByUserAccount(userAccount.get()).getId();
+		
+		//case: current user didnt create article -> end
+		if(originalArticle.getCreator().getId() != currentUserId){
+			return null;
+		}
+		
+		//todo: validation
+		
+		
+		originalArticle.setCategory(newArticleForm.getCategoryId());
+		originalArticle.setTitle(newArticleForm.getTitle());
+		originalArticle.setDescription(newArticleForm.getDescription());
+		
+		originalArticle.setZip(newArticleForm.getZip());
+		originalArticle.setLocation(newArticleForm.getCity());
+		originalArticle.setStreet(newArticleForm.getStreetName());
+		originalArticle.setNumber(newArticleForm.getHouseNumber());
+		originalArticle.setAddressAddition(newArticleForm.getAdressAddition());
+		
+		this.articleRepo.save(originalArticle);
+		
+		return "redirect:/editArticle/{id}";
 	}
 	
 //	@RequestMapping(value = "/inspectcategory/{categoryId}")
