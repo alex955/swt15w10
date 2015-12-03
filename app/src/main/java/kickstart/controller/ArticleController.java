@@ -52,6 +52,11 @@ public class ArticleController extends CommonVariables {
 	    
 	    model.addAttribute("currentUserId", userRepository.findByUserAccount(userAccount.get()).getId());
 	    
+		boolean isAdminLoggedIn = false;
+		if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))) isAdminLoggedIn = true;
+		
+		model.addAttribute("isAdminLoggedIn", isAdminLoggedIn);
+	    
 	    model=this.getCurrent_cat(model);
 	    return "article";
 	}
@@ -66,6 +71,7 @@ public class ArticleController extends CommonVariables {
 		model.addAttribute("editArticle", articleRepo.findOne(id));
 		model.addAttribute("userId", userId);
 		model.addAttribute("user", this.userRepository.findOne(userId));
+		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 		
 		boolean isAdminLoggedIn = false;
 		if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))) isAdminLoggedIn = true;
@@ -84,8 +90,8 @@ public class ArticleController extends CommonVariables {
 		Article originalArticle = this.articleRepo.findOne(id);
 		long currentUserId = this.userRepository.findByUserAccount(userAccount.get()).getId();
 		
-		//case: current user didnt create article -> end
-		if(originalArticle.getCreator().getId() != currentUserId && originalArticle.getCreator().getUserAccount().hasRole(new Role("ROLE_ADMIN"))){
+		//case: current user didnt create article || logged in user no admin -> end
+		if(originalArticle.getCreator().getId() != currentUserId || !userAccount.get().hasRole(new Role("ROLE_ADMIN"))){
 			return null;
 		}
 		
@@ -133,6 +139,23 @@ public class ArticleController extends CommonVariables {
 		
 		model=this.getCurrent_cat(model);
 		return "newArticle";
+	}
+	
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(value = "/deleteArticle/{id}")
+	public String deleteArticle(@PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount){
+		long userId = userRepository.findByUserAccount(userAccount.get()).getId();
+		Article toDelete = articleRepo.findOne(id);
+		
+		if(toDelete.getCreator().getId() != userId && !userAccount.get().hasRole(new Role("ROLE_ADMIN"))) {
+			System.out.println("ids: " + userId + "," + toDelete.getCreator().getId());
+			return "redirect:/frontpage";
+		}
+		
+		articleRepo.delete(toDelete);
+		
+		
+		return "redirect:/search/myArticles";
 	}
 	
 	
