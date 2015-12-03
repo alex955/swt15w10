@@ -69,6 +69,12 @@ public class ArticleController extends CommonVariables {
 		
 	    return "editArticle";
 	}
+
+	
+	@RequestMapping(value = "/editArticle/{id}", method = RequestMethod.POST)
+	public String processEditedArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, @LoggedIn Optional<UserAccount> userAccount){
+		return "redirect:showArticle/{id}";
+	}
 	
 //	@RequestMapping(value = "/inspectcategory/{categoryId}")
 //	public String showSubcategories(@PathVariable Long categoryId, Model model, @ModelAttribute Category category) {

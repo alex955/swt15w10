@@ -19,24 +19,31 @@
 </script>
 </head>
 <body>
-	<div th:fragment="frag1" th:text="${testVar}"><span th:text="${testVar}"></span>
-	</div>
+
+<script th:inline="javascript">
+
+    var message = [[${map}]];
+    console.log(message);
+    
+    alert(message);
+
+
+</script>
 	
-		<div th:fragment="frag2" th:text="${testVar}">
-	</div>
+	<span th:each="mapEntry : ${map}"> 
+		<span th:text="${mapEntry.key}"></span><br/>
+		<span th:each="listEntry : ${mapEntry.value}" th:text="'-'+${listEntry} + ''"></span><br/>
+	</span>
 	
-							<li th:each="category : ${map}" class="has-dropdown" th:fragment="subcatRecursion" th:remove="tag">
-								<ul>
-								
-									<span th:text="${category.key}"></span> <br/>
-									<div>
-									<span th:each="subcategory : ${category.value}" >
-										-<span th:text="${subcategory}">Rekursion</span> <br/>
-										
-									</span> 
-									</div>
+	<hr/>
+	
+								<ul class="has-dropdown">
+									<ul th:each="category : ${map}"	>
+										<span th:text="${category.key}"></span>
+										<li th:each="listElem : ${category.value}" th:text="${listElem}">
+										</li>
+									</ul>
 								</ul>
-							</li>
 							<hr></hr>
 							
 							<div id="nuevo" th:include="::frag1" th:with="testVar='neuerInhalt'">123</div>
