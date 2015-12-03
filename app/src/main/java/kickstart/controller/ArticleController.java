@@ -4,9 +4,8 @@ import java.io.BufferedOutputStream;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.time.format.DateTimeFormatter;
+
 import java.util.Optional;
-import java.time.LocalDate;
 
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -123,15 +122,13 @@ public class ArticleController extends CommonVariables {
                         + serverFile.getAbsolutePath());
  
                 // aktuelles Datum in String umgewandelt
-                LocalDate date = LocalDate.now();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-                String currentDate = date.format(formatter);
+               
                 
                 //get the logged in user
                 User creator = userRepository.findByUserAccount(userAccount.get());
                 Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename(), creator);
 				pictureRepo.save(picture);
-                Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), picture, newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getHouseNumber(), newArticleForm.getZip(), currentDate, creator);
+                Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), picture, newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getHouseNumber(), newArticleForm.getZip(), creator);
         		articleRepo.save(article);
         		System.out.println(article);
         		
@@ -141,14 +138,11 @@ public class ArticleController extends CommonVariables {
                 return "You failed to upload " + newArticleForm.getTitle() + " => " + e.getMessage();
             }
         } else {
-        	// aktuelles Datum in String umgewandelt
-        	LocalDate date = LocalDate.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-            String currentDate = date.format(formatter);
+        	
             //get the logged in user
             User creator = userRepository.findByUserAccount(userAccount.get());
             //save article without Picture
-        	Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getHouseNumber(), newArticleForm.getZip(), currentDate, creator);
+        	Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getHouseNumber(), newArticleForm.getZip(),creator);
     		articleRepo.save(article);
     		System.out.println(article);
             return ("redirect:/search");

@@ -1,14 +1,12 @@
 package kickstart.model;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
@@ -24,11 +22,27 @@ public class Article {
 	private String zip;
 	@OneToOne
 	private User creator;	
-	private String creationDate;
+	private LocalDateTime creationdate;
 	@OneToOne
 	private Picture picture;
-	@DateTimeFormat(pattern = "HH:mm dd-MM-yyyy")
 	private LocalDateTime activitydate;
+	
+
+	public LocalDateTime getCreationdate() {
+		return creationdate;
+	}
+
+	public void setCreationdate(LocalDateTime creationdate) {
+		this.creationdate = creationdate;
+	}
+
+	public LocalDateTime getActivitydate() {
+		return activitydate;
+	}
+
+	public void setActivitydate(LocalDateTime activitydate) {
+		this.activitydate = activitydate;
+	}
 		
 	public User getCreator() {
 		return creator;
@@ -46,21 +60,8 @@ public class Article {
 		this.creator = creator;
 	}
 	
-	public LocalDateTime getActivitydate() {
-		return activitydate;
-	}
-
-	public void setActivitydate(LocalDateTime activitydate) {
-		this.activitydate = activitydate;
-	}
-
-	public String getCreationdate() {
-		return creationDate;
-	}
-
-	public void setCreationdate(String creationdate) {
-		this.creationDate = creationdate;
-	}
+	
+	
 
 	public Article() {
 		super();
@@ -68,7 +69,7 @@ public class Article {
 
 	//constructor with creationdate
 	public Article(String title, String description, Picture picture, String location, String street,
-			long category, String number, String zip, String creationdate, User creator) {
+			long category, String number, String zip, User creator) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -78,13 +79,13 @@ public class Article {
 		this.category = category;
 		this.number = number;
 		this.zip = zip;
-		this.creationDate = creationdate;
+		this.creationdate = LocalDateTime.now();
 		this.creator = creator;
 	}
 	
 	//constructor without Picture
 		public Article(String title, String description, String location, String street,
-				long category, String number, String zip, String creationdate, User creator) {
+				long category, String number, String zip, User creator) {
 			super();
 			this.title = title;
 			this.description = description;
@@ -93,13 +94,13 @@ public class Article {
 			this.category = category;
 			this.number = number;
 			this.zip = zip;
-			this.creationDate = creationdate;
+			this.creationdate = LocalDateTime.now();
 			this.creator = creator;
 		}
 		
 	//constructor without Picture, User
 			public Article(String title, String description, String location, String street,
-					long category, String number, String zip, String creationdate) {
+					long category, String number, String zip) {
 				super();
 				this.title = title;
 				this.description = description;
@@ -108,13 +109,13 @@ public class Article {
 				this.category = category;
 				this.number = number;
 				this.zip = zip;
-				this.creationDate = creationdate;
+				this.creationdate = LocalDateTime.now();
 			}
 	
 	
 	//constructor with creationdate and activitydate
 	public Article(String title, String description, Picture picture, String location, String street,
-			long category, String number, String zip, String creationdate, String activitydate) {
+			long category, String number, String zip, LocalDateTime activitydate) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -124,16 +125,15 @@ public class Article {
 		this.category = category;
 		this.number = number;
 		this.zip = zip;
-		this.creationDate = creationdate;
-		this.activitydate.parse(activitydate,DateTimeFormatter.ofPattern("HH:mm dd-MM-yyyy"));
+		this.creationdate = LocalDateTime.now();
+		this.activitydate = activitydate;
 	}
 
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", description=" + description + ", location=" + location
 				+ ", street=" + street + ", category=" + category + ", number=" + number + ", zip=" + zip + ", creator="
-				+ creator + ", creationDate=" + creationDate + ", picture=" + picture + ", activitydate=" + activitydate
-				+ "]";
+				+ creator + ", creationdate=" + creationdate.toString() + ", picture=" + picture ;
 	}
 
 	public long getId() {
@@ -200,11 +200,5 @@ public class Article {
 		this.zip = zip;
 	}
 
-	public String getCreationDate() {
-		return creationDate;
-	}
 
-	public void setCreationDate(String creationDate) {
-		this.creationDate = creationDate;
-	}
 }
