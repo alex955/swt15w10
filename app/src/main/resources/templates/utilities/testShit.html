@@ -5,25 +5,12 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <title>Refugee</title>
 <link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
-<script>
-
-	function required() {
-		var empt = document.forms["form1"]["name"].value;
-		if (empt == "" || empt == null) {
-			alert("Name der Kategorie darf nicht leer sein");
-			return false;
-		} else {
-			return true;
-		}
-	}
-</script>
 </head>
 <body>
 
 <script th:inline="javascript">
 
     var message = [[${map}]];
-    console.log(message);
     
     alert(message);
 
