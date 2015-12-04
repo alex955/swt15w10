@@ -84,8 +84,7 @@
 									<div class="large-5 small-3 columns">Passwort wiederholen</div>
 									<div class="large-7 small-9 columns">
 										<label>
-											<font color="red" th:if="${#fields.hasErrors('confirmPW')}" th:errors="*{confirmPW}"> ERROR MESSAGE </font>
-	                                        <font color="red" th:if="${#fields.hasErrors('global')}" th:errors="*{global}"> ERROR MESSAGE </font>
+											<font color="red" th:text="${confirmError}"> ERROR MESSAGE </font>
 	                                        <input type="password" name="confirmPW" placeholder="Passwort" th:field ="*{confirmPW}"/>
 	                                    </label>
 									</div>
