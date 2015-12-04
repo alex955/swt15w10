@@ -22,7 +22,9 @@ import kickstart.model.UserRepository;
 
 @Controller
 public class EMailController extends CommonVariables{
-		private static UserAccountManager userAccountManager;
+	
+		@Autowired
+		private UserAccountManager userAccountManager;
     @Autowired
     public EMailController(UserRepository userRepository){
         //this.userAccountManager = userAccountManager;
@@ -75,7 +77,7 @@ public class EMailController extends CommonVariables{
 	     * @author Lukas Klose
 	     */
 	  @RequestMapping(value = "/validate")
-	  public static String validation(@RequestParam String id){
+	  public String validation(@RequestParam String id){
 
 		  int realID = 0;
 		  try {
@@ -85,7 +87,7 @@ public class EMailController extends CommonVariables{
 			  System.out.println("NaN");
 		  }
 		  //User foundUser = userRepository.findByHashcode(realID);
-		  User foundUser = userRepository.findById(Long.parseLong(id));
+		  User foundUser = userRepository.findOne(Long.parseLong(id));
 		  if(foundUser == null){
 
 			  return "frontpage";
@@ -94,6 +96,7 @@ public class EMailController extends CommonVariables{
 		  else{
 			  System.out.println(foundUser.toString());
 			  foundUser.setValidated(true);
+			  System.out.println(foundUser.getUserAccount());
 			  userAccountManager.enable(foundUser.getUserAccount().getIdentifier());
 			  System.out.println("enabled nach email= " + foundUser.getUserAccount().isEnabled());
 
