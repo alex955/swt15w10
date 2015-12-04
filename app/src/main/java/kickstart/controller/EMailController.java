@@ -72,18 +72,19 @@ public class EMailController extends CommonVariables{
 	     * @author Lukas Klose
 	     */
 	  @RequestMapping(value = "/validate")
-	  public void validation(@RequestParam String id){
+	  public String validation(@RequestParam(value = "id", required = false) String id){
+		  System.out.println("In Funktion");
 		  int realID = 0;
 		  try {
 			  realID = Integer.parseInt(id);
 		  }
 		  catch(Exception e){
-			  
+			  System.out.println("NaN");
 		  }
 		  User foundUser = userRepository.findByHashcode(realID);
 		  
 		  if(foundUser == null){
-			  return ;
+			  return "frontpage";
 		  }
 		  else{
 			  foundUser.setValidated(true);
@@ -94,6 +95,8 @@ public class EMailController extends CommonVariables{
 		  }
 		  
 		  System.out.println(id);
+		  return "frontpage";
+		  
 		  
 		  
 		  
