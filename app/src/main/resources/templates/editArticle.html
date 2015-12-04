@@ -12,9 +12,10 @@
 	<nav th:include="topbar :: topbar"></nav>
 
 	<div class="row">
-		<div class="large-12 columns" th:if="${userId} == ${editArticle.creator.id}">
+		<div class="large-12 columns" th:if="${userId} == ${editArticle.creator.id} or ${isAdminLoggedIn} == true">
 			<p>&nbsp;</p>
 			<h4 class="header">Angebot bearbeiten</h4>
+			
 			<form action="#" th:action="@{/editArticle/{id}(id=${editArticle.id})}" th:object="${NewArticleForm}" method="post" enctype="multipart/form-data">
 				<div class="panel">
 

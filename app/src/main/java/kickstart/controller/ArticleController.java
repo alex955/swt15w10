@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 
 import java.util.Optional;
 
+import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class ArticleController extends CommonVariables {
 	
 	
 	@RequestMapping(value = "/showArticle/{id}")
-	public String showArticle(@PathVariable("id") long id,Model model) {
+	public String showArticle(@PathVariable("id") long id,Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		//initiate categories
 		this.processedCategories = this.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
@@ -48,6 +49,13 @@ public class ArticleController extends CommonVariables {
 	    model.addAttribute("Article", articleRepo.findOne(id));
 	    model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 	    model.addAttribute("Useraccount", articleRepo.findOne(id).getCreator().getUserAccount());
+	    
+	    model.addAttribute("currentUserId", userRepository.findByUserAccount(userAccount.get()).getId());
+	    
+		boolean isAdminLoggedIn = false;
+		if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))) isAdminLoggedIn = true;
+		
+		model.addAttribute("isAdminLoggedIn", isAdminLoggedIn);
 	    
 	    model=this.getCurrent_cat(model);
 	    return "article";
@@ -63,11 +71,46 @@ public class ArticleController extends CommonVariables {
 		model.addAttribute("editArticle", articleRepo.findOne(id));
 		model.addAttribute("userId", userId);
 		model.addAttribute("user", this.userRepository.findOne(userId));
+		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
+		
+		boolean isAdminLoggedIn = false;
+		if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))) isAdminLoggedIn = true;
+		
+		model.addAttribute("isAdminLoggedIn", isAdminLoggedIn);
 
 		
 		model=this.getCurrent_cat(model);
 		
 	    return "editArticle";
+	}
+
+	
+	@RequestMapping(value = "/editArticle/{id}", method = RequestMethod.POST)
+	public String processEditedArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, @PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount){
+		Article originalArticle = this.articleRepo.findOne(id);
+		long currentUserId = this.userRepository.findByUserAccount(userAccount.get()).getId();
+		
+		//case: current user didnt create article || logged in user no admin -> end
+		if(originalArticle.getCreator().getId() != currentUserId || !userAccount.get().hasRole(new Role("ROLE_ADMIN"))){
+			return null;
+		}
+		
+		//todo: validation
+		
+		
+		originalArticle.setCategory(newArticleForm.getCategoryId());
+		originalArticle.setTitle(newArticleForm.getTitle());
+		originalArticle.setDescription(newArticleForm.getDescription());
+		
+		originalArticle.setZip(newArticleForm.getZip());
+		originalArticle.setLocation(newArticleForm.getCity());
+		originalArticle.setStreet(newArticleForm.getStreetName());
+		originalArticle.setNumber(newArticleForm.getHouseNumber());
+		originalArticle.setAddressAddition(newArticleForm.getAdressAddition());
+		
+		this.articleRepo.save(originalArticle);
+		
+		return "redirect:/editArticle/{id}";
 	}
 	
 //	@RequestMapping(value = "/inspectcategory/{categoryId}")
@@ -96,6 +139,23 @@ public class ArticleController extends CommonVariables {
 		
 		model=this.getCurrent_cat(model);
 		return "newArticle";
+	}
+	
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(value = "/deleteArticle/{id}")
+	public String deleteArticle(@PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount){
+		long userId = userRepository.findByUserAccount(userAccount.get()).getId();
+		Article toDelete = articleRepo.findOne(id);
+		
+		if(toDelete.getCreator().getId() != userId && !userAccount.get().hasRole(new Role("ROLE_ADMIN"))) {
+			System.out.println("ids: " + userId + "," + toDelete.getCreator().getId());
+			return "redirect:/frontpage";
+		}
+		
+		articleRepo.delete(toDelete);
+		
+		
+		return "redirect:/search/myArticles";
 	}
 	
 	

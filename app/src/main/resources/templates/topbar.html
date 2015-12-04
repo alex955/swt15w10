@@ -12,6 +12,8 @@
 
 <body>
 	<nav th:fragment="topbar">
+	
+					<form th:action="@{/search}" method="post">
 		<nav class="top-bar" data-topbar="true" role="navigation">
 			<ul class="title-area">
 				<li class="name">
@@ -45,7 +47,6 @@
 
 				<!-- Left Nav Section -->
 					<ul class="left">		
-					<form th:action="@{/search}" method="post">
 					<li class="has-form"><input type="text" id="query" name="query" placeholder="Suchbegriff"/></li>
 					<li class="divider"></li>
 					<li class="has-dropdown"><a href="#" th:text="${current_category.name}">alle Kategorien</a> 
@@ -81,7 +82,7 @@
       				<button id="search" value ="Suchen" type="submit" >Suchen</button>
     				</li>
 					
-				</form>
+
 				</ul>
 			</section>
 		</nav>
@@ -94,7 +95,7 @@
 			$(document).foundation();
 		</script>
 
-		
+						</form>
 	</nav>
 </body>
 </html>
