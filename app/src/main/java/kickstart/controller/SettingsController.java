@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -152,4 +153,12 @@ public class SettingsController extends CommonVariables {
 
         return "redirect:/search";
     }
+    
+    @RequestMapping(value = "/deleteuser")
+    public String deleteUser(@LoggedIn Optional<UserAccount> userAccount) {
+        userRepository.delete(userRepository.findByUserAccount(userAccount.get()));
+        return "redirect:/logout";
+    }
+
+
 }

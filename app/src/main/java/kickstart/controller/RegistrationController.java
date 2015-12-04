@@ -38,19 +38,31 @@ public class RegistrationController extends CommonVariables {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String newRegistration(@ModelAttribute("RegistrationForm") @Valid RegistrationForm registrationForm, BindingResult result, Model model) throws AddressException, MessagingException {
+    public String newRegistration(@ModelAttribute("RegistrationForm") @Valid RegistrationForm registrationForm, BindingResult result,ModelMap modelMap, Model model) throws AddressException, MessagingException {
 
-        if(result.hasErrors()) { model=this.getCurrent_cat(model);
-            return "registration";}
+        if(result.hasErrors()) {
+            model=this.getCurrent_cat(model);
+            if(!registrationForm.getPassword().equals(registrationForm.getConfirmPW())){
+                final String confirmError = "Die Passwörter stimmen nicht überein.";
+                modelMap.addAttribute("confirmError", confirmError);
+            }
+            return "registration";
+        }
+
+        if(!registrationForm.getPassword().equals(registrationForm.getConfirmPW())){
+            model = this.getCurrent_cat(model);
+            final String confirmError = "Die Passwörter stimmen nicht überein.";
+            System.out.println(confirmError);
+            modelMap.addAttribute("confirmError", confirmError);
+            return "registration";
+        }
 
         UserAccount userAccount = userAccountManager.create(registrationForm.getUsername(), registrationForm.getPassword(), registrationForm.getRole());
         userAccountManager.save(userAccount);
         
         User user = new User(registrationForm.getId(), userAccount, registrationForm.getLastName(), registrationForm.getFirstName(), registrationForm.getEmail(), registrationForm.getCity(), registrationForm.getZip(), registrationForm.getStreetName(), registrationForm.getHouseNumber(),registrationForm.getAddressAddition(), registrationForm.getLanguage1(), registrationForm.getLanguage2(), registrationForm.getLanguage3());
         userRepository.save(user);
-        System.out.println(user);
-        System.out.println(user.getHashcode());
-        
+
         EMailController.SendEmail(user.getEmail(), user.getHashcode());
         
         model=this.getCurrent_cat(model);
