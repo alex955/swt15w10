@@ -39,6 +39,7 @@ public class AdminController extends CommonVariables {
 
 	@Autowired
 	private UserAccountManager userAccountManager;
+	
 	@RequestMapping(value = "/admin")
     public String initialView(Model model) {
 		

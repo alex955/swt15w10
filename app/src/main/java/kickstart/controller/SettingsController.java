@@ -171,6 +171,7 @@ public class SettingsController extends CommonVariables {
         
         return "redirect:/logout";
     }
+    
 
 
 }
