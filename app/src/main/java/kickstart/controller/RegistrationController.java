@@ -48,10 +48,11 @@ public class RegistrationController extends CommonVariables {
         
         User user = new User(registrationForm.getId(), userAccount, registrationForm.getLastName(), registrationForm.getFirstName(), registrationForm.getEmail(), registrationForm.getCity(), registrationForm.getZip(), registrationForm.getStreetName(), registrationForm.getHouseNumber(),registrationForm.getAddressAddition(), registrationForm.getLanguage1(), registrationForm.getLanguage2(), registrationForm.getLanguage3());
         userRepository.save(user);
-        System.out.println(user);
-        System.out.println(user.getHashcode());
+
         
-        EMailController.SendEmail(user.getEmail(), user.getHashcode());
+        userAccountManager.disable(userAccount.getIdentifier());
+        System.out.println("enabled= " + userAccount.isEnabled());        
+        EMailController.SendEmail(user.getEmail(), user.getId());
         
         model=this.getCurrent_cat(model);
         return ("redirect:/");

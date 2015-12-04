@@ -11,4 +11,5 @@ import org.springframework.data.repository.CrudRepository;
 public interface UserRepository extends CrudRepository<User, Long> {
     User findByUserAccount(UserAccount userAccount);
     User findByHashcode(int hashcode);
+    User findById(long id);
 }

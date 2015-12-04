@@ -10,6 +10,8 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,11 +22,12 @@ import kickstart.model.UserRepository;
 
 @Controller
 public class EMailController extends CommonVariables{
-	
+		private static UserAccountManager userAccountManager;
     @Autowired
     public EMailController(UserRepository userRepository){
         //this.userAccountManager = userAccountManager;
         this.userRepository = userRepository;
+        
     }
 	
     /**
@@ -32,7 +35,7 @@ public class EMailController extends CommonVariables{
      * 
      * @author Lukas Klose
      */
-	  public static void SendEmail(String reciever, int id) throws AddressException, MessagingException{
+	  public static void SendEmail(String reciever, long l) throws AddressException, MessagingException{
 
 		  final String username = "gandalf324687992";
 		  final String password = "324687992";
@@ -56,11 +59,11 @@ public class EMailController extends CommonVariables{
 		      message.setRecipients(Message.RecipientType.TO,
 		              InternetAddress.parse(reciever));
 		      message.setSubject("RegistrierungsID");
-		      message.setText("Ihre ID lautet " + id +".\n\n" + "http://localhost:8080/validate?id=" + id);
+		      message.setText("Ihre ID lautet " + l +".\n\n" + "http://localhost:8080/validate?id=" + l);
 
 		      Transport.send(message);
 		     System.out.println("E-Mail gesendet an " + reciever);
-		     System.out.println("Mit id"+ Long.toString(id));
+		     System.out.println("Mit id"+ Long.toString(l));
 
 	  }
 	  
@@ -72,8 +75,8 @@ public class EMailController extends CommonVariables{
 	     * @author Lukas Klose
 	     */
 	  @RequestMapping(value = "/validate")
-	  public String validation(@RequestParam(value = "id", required = false) String id){
-		  System.out.println("In Funktion");
+	  public static String validation(@RequestParam String id){
+
 		  int realID = 0;
 		  try {
 			  realID = Integer.parseInt(id);
@@ -81,23 +84,30 @@ public class EMailController extends CommonVariables{
 		  catch(Exception e){
 			  System.out.println("NaN");
 		  }
-		  User foundUser = userRepository.findByHashcode(realID);
-		  
+		  //User foundUser = userRepository.findByHashcode(realID);
+		  User foundUser = userRepository.findById(Long.parseLong(id));
 		  if(foundUser == null){
+
 			  return "frontpage";
+
 		  }
 		  else{
+			  System.out.println(foundUser.toString());
 			  foundUser.setValidated(true);
+			  userAccountManager.enable(foundUser.getUserAccount().getIdentifier());
+			  System.out.println("enabled nach email= " + foundUser.getUserAccount().isEnabled());
+
 			  
-			  userRepository.delete(foundUser.getId());
+			  //userRepository.delete(foundUser.getId());
 			  userRepository.save(foundUser);
 			  
 		  }
 		  
 		  System.out.println(id);
-		  return "frontpage";
+		  //return "frontpage";
 		  
 		  
+		  return "redirect:/";
 		  
 		  
 	  }
