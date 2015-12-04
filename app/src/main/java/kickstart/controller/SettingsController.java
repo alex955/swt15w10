@@ -1,5 +1,6 @@
 package kickstart.controller;
 
+import kickstart.model.Article;
 import kickstart.model.User;
 import kickstart.model.UserRepository;
 import kickstart.model.UserSettings;
@@ -21,6 +22,9 @@ import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.validation.Valid;
 import javax.validation.constraints.Null;
+
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -156,7 +160,15 @@ public class SettingsController extends CommonVariables {
     
     @RequestMapping(value = "/deleteuser")
     public String deleteUser(@LoggedIn Optional<UserAccount> userAccount) {
+    	long userId = this.userRepository.findByUserAccount(userAccount.get()).getId();
+    	User currentUser = this.userRepository.findOne(userId);
+        
+        List<Article> userArticles = this.articleRepo.findByCreator(currentUser);
+        this.articleRepo.delete(userArticles);
+        
+        this.userAccountManager.disable(this.userRepository.findOne(userId).getUserAccount().getIdentifier());
         userRepository.delete(userRepository.findByUserAccount(userAccount.get()));
+        
         return "redirect:/logout";
     }
 
