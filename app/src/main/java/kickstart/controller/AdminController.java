@@ -22,23 +22,41 @@ import kickstart.model.Category;
 import kickstart.model.CategoryFirstTierObject;
 import kickstart.model.CategoryRepo;
 import kickstart.model.UserRepository;
+import kickstart.utilities.CategoryMethods;
 import kickstart.model.ArticleRepo;
 import javax.validation.Valid;
 
 @Controller
 @PreAuthorize("hasRole('ROLE_ADMIN')")
-public class AdminController extends CommonVariables {
+public class AdminController {
+	
+	
+    @Autowired
+    private final UserRepository userRepository;
     
 	@Autowired
-	public AdminController(CategoryRepo categories, ArticleRepo articleRepo, UserRepository userRepository, UserAccountManager userAccountManager){
+	private final CategoryRepo categories;
+	
+	@Autowired
+	private final ArticleRepo articleRepo;
+
+	@Autowired private final CategoryMethods categoryMethods;
+	
+	protected LinkedList<CategoryFirstTierObject> processedCategories; 
+	
+	@Autowired
+	private UserAccountManager userAccountManager;
+    
+	@Autowired
+	public AdminController(CategoryRepo categories, ArticleRepo articleRepo, UserRepository userRepository, UserAccountManager userAccountManager, CategoryMethods categoryMethods){
 		this.categories = categories;
 		this.articleRepo=articleRepo;
 		this.userRepository = userRepository;
 		this.userAccountManager = userAccountManager;
+		this.categoryMethods = categoryMethods;
 	}
 
-	@Autowired
-	private UserAccountManager userAccountManager;
+
 	
 	@RequestMapping(value = "/admin")
     public String initialView(Model model) {
@@ -72,7 +90,7 @@ public class AdminController extends CommonVariables {
 		int totalCount = rootCount + subCount;
 		
 
-		this.processedCategories = this.getProcessedCategories();
+		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		
         model.addAttribute("categoriesAdmin", testList);
@@ -86,8 +104,6 @@ public class AdminController extends CommonVariables {
 //        	b.getCity();
 //        }
         
-        
-        model=this.getCurrent_cat(model);
         return "admin";
     }
     @RequestMapping(value="/admin/addSubcategory/{id}", method=RequestMethod.POST)
@@ -99,7 +115,6 @@ public class AdminController extends CommonVariables {
     	
     	this.categories.save(toSave);
     	
-    	model=this.getCurrent_cat(model);
         return "redirect:/admin/inspectCategory/{id}";
     }
 	
@@ -112,7 +127,6 @@ public class AdminController extends CommonVariables {
         System.out.println("added category");
         //model.addAttribute("categories", categories.findAll());
         
-        model=this.getCurrent_cat(model);
         return "redirect:/admin";
     }
     
@@ -150,7 +164,7 @@ public class AdminController extends CommonVariables {
 		}
 		
 
-		this.processedCategories = this.getProcessedCategories();
+		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		
 		
@@ -159,7 +173,6 @@ public class AdminController extends CommonVariables {
 
         model.addAttribute("newCategory", new Category());
 		
-        model=this.getCurrent_cat(model);
 		return "adminSubcategory";
 	}
 	
@@ -177,9 +190,8 @@ public class AdminController extends CommonVariables {
 	
 	@RequestMapping(value = "/admin/editUser/{id}")
 	public String editUser(@PathVariable Long id, Model model) {
-		this.processedCategories = this.getProcessedCategories();
+		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
-		model=this.getCurrent_cat(model);
 		
 		User user = this.userRepository.findOne(id);
         model.addAttribute("user", user);

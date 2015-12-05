@@ -21,10 +21,14 @@ import kickstart.model.UserRepository;
 
 
 @Controller
-public class EMailController extends CommonVariables{
+public class EMailController {
+
+	@Autowired
+	private UserAccountManager userAccountManager;
 	
-		@Autowired
-		private UserAccountManager userAccountManager;
+    @Autowired
+    private final UserRepository userRepository;
+	
     @Autowired
     public EMailController(UserRepository userRepository){
         //this.userAccountManager = userAccountManager;

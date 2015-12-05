@@ -6,13 +6,20 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import kickstart.model.CategoryFirstTierObject;
+import kickstart.model.CategoryRepo;
 import kickstart.model.RegistrationForm;
 import kickstart.model.User;
 import kickstart.model.UserRepository;
+import kickstart.utilities.CategoryMethods;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.LinkedList;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -20,20 +27,29 @@ import javax.validation.Valid;
 
 
 @Controller
-public class RegistrationController extends CommonVariables {
+public class RegistrationController {
+    @Autowired
+    private final UserRepository userRepository;
+    
+	@Autowired
+	private final CategoryRepo categories;
 
+	@Autowired private final CategoryMethods categoryMethods;
+
+	protected LinkedList<CategoryFirstTierObject> processedCategories; 
 
     private UserAccountManager userAccountManager;
 
     @Autowired
-    public RegistrationController(UserAccountManager userAccountManager, UserRepository userRepository){
+    public RegistrationController(UserAccountManager userAccountManager, UserRepository userRepository, CategoryMethods categoryMethods, CategoryRepo categories){
         this.userAccountManager = userAccountManager;
         this.userRepository = userRepository;
+        this.categoryMethods = categoryMethods;
+        this.categories = categories;
     }
 
     @RequestMapping(value ="/registration")
     public String firstView(@ModelAttribute("RegistrationForm") RegistrationForm registrationForm, Model model) {
-    	model=this.getCurrent_cat(model);
         return ("registration");
     }
 
@@ -41,7 +57,6 @@ public class RegistrationController extends CommonVariables {
     public String newRegistration(@ModelAttribute("RegistrationForm") @Valid RegistrationForm registrationForm, BindingResult result,ModelMap modelMap, Model model) throws AddressException, MessagingException {
 
         if(result.hasErrors()) {
-            model=this.getCurrent_cat(model);
             if(!registrationForm.getPassword().equals(registrationForm.getConfirmPW())){
                 final String confirmError = "Die Passwörter stimmen nicht überein.";
                 modelMap.addAttribute("confirmError", confirmError);
@@ -50,7 +65,6 @@ public class RegistrationController extends CommonVariables {
         }
 
         if(!registrationForm.getPassword().equals(registrationForm.getConfirmPW())){
-            model = this.getCurrent_cat(model);
             final String confirmError = "Die Passwörter stimmen nicht überein.";
             System.out.println(confirmError);
             modelMap.addAttribute("confirmError", confirmError);
@@ -66,9 +80,6 @@ public class RegistrationController extends CommonVariables {
         userAccountManager.disable(userAccount.getIdentifier());
 
         EMailController.SendEmail(user.getEmail(), user.getId());
-
-        
-        model=this.getCurrent_cat(model);
         return ("redirect:/");
     }
 

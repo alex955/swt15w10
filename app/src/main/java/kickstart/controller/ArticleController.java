@@ -4,7 +4,7 @@ import java.io.BufferedOutputStream;
 
 import java.io.File;
 import java.io.FileOutputStream;
-
+import java.util.LinkedList;
 import java.util.Optional;
 
 import org.salespointframework.useraccount.Role;
@@ -25,17 +25,35 @@ import kickstart.model.NewArticleForm;
 import kickstart.model.Picture;
 import kickstart.model.PictureRepo;
 import kickstart.model.User;
+import kickstart.model.UserRepository;
+import kickstart.utilities.CategoryMethods;
 import kickstart.model.ArticleRepo;
+import kickstart.model.CategoryFirstTierObject;
 
 @Controller
-public class ArticleController extends CommonVariables {
+public class ArticleController {
 	private PictureRepo pictureRepo;
+    
+	@Autowired
+	private final CategoryRepo categories;
 	
 	@Autowired
-	public ArticleController(CategoryRepo categories, ArticleRepo articleRepo, PictureRepo pictureRepo){
+	private final ArticleRepo articleRepo;
+
+	@Autowired private final CategoryMethods categoryMethods;
+	
+    @Autowired
+    private final UserRepository userRepository;
+
+	protected LinkedList<CategoryFirstTierObject> processedCategories; 
+	
+	@Autowired
+	public ArticleController(CategoryRepo categories, ArticleRepo articleRepo, PictureRepo pictureRepo, CategoryMethods categoryMethods, UserRepository userRepository){
 		this.categories = categories;
 		this.articleRepo=articleRepo;
 		this.pictureRepo = pictureRepo;
+		this.categoryMethods = categoryMethods;
+		this.userRepository = userRepository;
 	}
 	
 	
@@ -43,7 +61,7 @@ public class ArticleController extends CommonVariables {
 	@RequestMapping(value = "/showArticle/{id}")
 	public String showArticle(@PathVariable("id") long id,Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		//initiate categories
-		this.processedCategories = this.getProcessedCategories();
+		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
 	    model.addAttribute("Article", articleRepo.findOne(id));
@@ -68,14 +86,12 @@ public class ArticleController extends CommonVariables {
 		
 		
 		model.addAttribute("isAdminLoggedIn", isAdminLoggedIn);
-	    
-	    model=this.getCurrent_cat(model);
 	    return "article";
 	}
 	
 	@RequestMapping(value = "/editArticle/{id}")
 	public String editArticle(@PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount, Model model) {
-		this.processedCategories = this.getProcessedCategories();
+		this.processedCategories = categoryMethods.getProcessedCategories();
 		long userId = this.userRepository.findByUserAccount(userAccount.get()).getId();
 		
 		model.addAttribute("categories", this.processedCategories);
@@ -89,9 +105,6 @@ public class ArticleController extends CommonVariables {
 		if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))) isAdminLoggedIn = true;
 		
 		model.addAttribute("isAdminLoggedIn", isAdminLoggedIn);
-
-		
-		model=this.getCurrent_cat(model);
 		
 	    return "editArticle";
 	}
@@ -135,7 +148,7 @@ public class ArticleController extends CommonVariables {
 //		
 //
 //		
-//		this.processedCategories = this.getProcessedCategories();
+//		this.processedCategories = categoryMethods.getProcessedCategories();
 //		model.addAttribute("categories", this.processedCategories);
 //		model.addAttribute("anzeigen", catGoods);
 //		
@@ -145,11 +158,9 @@ public class ArticleController extends CommonVariables {
 	@RequestMapping("/newArticle")
 	public String newArticle(Model model){
 		//initiate categories
-		this.processedCategories = this.getProcessedCategories();
+		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
-		
-		model=this.getCurrent_cat(model);
 		return "newArticle";
 	}
 	

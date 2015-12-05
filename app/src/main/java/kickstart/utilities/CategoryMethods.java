@@ -18,22 +18,14 @@ import kickstart.model.UserRepository;
 
 @Component
 public class CategoryMethods {
-
-	@Autowired private final UserAccountManager userAccountManager;
-	@Autowired private final UserRepository userRepository;
+	
 	@Autowired private final CategoryRepo categories;
-	@Autowired private final ArticleRepo goodREPO;
 	
 	@Autowired
 	public CategoryMethods(UserAccountManager userAccountManager, UserRepository userRepository,
 			CategoryRepo categories, ArticleRepo goodREPO) {
-		this.userAccountManager = userAccountManager;
-		this.userRepository = userRepository;
 		this.categories = categories;
-		this.goodREPO = goodREPO;
 	}
-	
-	protected long current_cat=0;
 	
 
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
@@ -84,30 +76,6 @@ public class CategoryMethods {
 		return toReturn;
 		
 	}
-
-	public Model getCurrent_cat(Model model) {
-		if (current_cat==0) model.addAttribute("current_category",new Category("Alle Kategorien", 0));
-		else model.addAttribute("current_category",this.categories.findOne(current_cat).get());
-		
-		return model;
-	}
-
-	public void setCurrent_cat(long current_cat) {
-		if (this.categories.findOne(current_cat).get().getId()==current_cat) this.current_cat = current_cat; 
-		else throw new IllegalArgumentException("Kategorie ID existiert nicht!");
-	}
-	
-	public Model cat_exchange(Model model){
-		if (current_cat==0) model.addAttribute("current_category",new Category("Alle Kategorien", 0));
-		else model.addAttribute("current_category",this.categories.findOne(current_cat).get());
-		
-		return model;
-		
-	}
-	
-	public Long getCurrent_cat(){
-			return current_cat;	
-			}
 	
 	
 	
