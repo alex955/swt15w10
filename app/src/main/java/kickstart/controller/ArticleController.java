@@ -50,10 +50,22 @@ public class ArticleController extends CommonVariables {
 	    model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 	    model.addAttribute("Useraccount", articleRepo.findOne(id).getCreator().getUserAccount());
 	    
-	    model.addAttribute("currentUserId", userRepository.findByUserAccount(userAccount.get()).getId());
-	    
+	    long currentUserId = -1;
 		boolean isAdminLoggedIn = false;
-		if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))) isAdminLoggedIn = true;
+	    
+		//if any user is logged in, set values for vars
+	    if(userAccount.isPresent()){
+	    	currentUserId = userRepository.findByUserAccount(userAccount.get()).getId();
+	    	
+	    	if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))) {
+	    		isAdminLoggedIn = true;
+	    	}
+	    }
+	    
+	    model.addAttribute("currentUserId", currentUserId);
+	    
+
+		
 		
 		model.addAttribute("isAdminLoggedIn", isAdminLoggedIn);
 	    
