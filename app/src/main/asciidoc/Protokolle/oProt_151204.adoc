@@ -1,0 +1,38 @@
+= Protokoll Gruppe 10
+__Treffen am 04.15.2015__
+
+__Schriftführer:__ Lukas Klose
+
+__Nächstes Treffen:__ 11.12.2015
+
+__Teilnehmer:__ J. Adam, V. Herz, A. Huber, L. Klose, A. Martin
+
+== Bemerkungen
+//Verwarnungen, besondere Vorfälle, Organisatorisches
+-
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe |Status |Bemerkung
+|n.v.     |…       |…      |…
+|===
+
+
+== Aktueller Stand
+//Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den Dokumenten.
+Basisfunktionalität ist vorhanden. Arbeiten an weiteres Muss-Kriterien laufen.
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#74 |Datenbank für Textbausteine |Möglichkeit, Textbausteine zu speichern soll vorhanden sein|Gruppe 10 |in Arbeit
+|n.v.     |Weiterarbeit an Muss-Kriterien |-      |Gruppe 10  |in Arbeit
+|===
