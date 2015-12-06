@@ -1,14 +1,14 @@
-= Protokoll Gruppe 10
+Ôªø= Protokoll Gruppe 10
 __Treffen am 20.10.2015__
 
-__Schriftf¸hrer:__ Lukas Klose
+__Schriftf√ºhrer:__ Lukas Klose
 
-__N‰chstes Treffen:__ -
+__N√§chstes Treffen:__ -
 
 __Teilnehmer:__ Alexander Shulga, Vincenz Herz, Andreas Huber, Lukas Klose
 
 == Bemerkungen
-//Verwarnungen, besondere Vorf‰lle, Organisatorisches
+//Verwarnungen, besondere Vorf√§lle, Organisatorisches
 -
 
 == Retrospektive des letzten Sprints
@@ -26,7 +26,7 @@ __Teilnehmer:__ Alexander Shulga, Vincenz Herz, Andreas Huber, Lukas Klose
 //Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den Dokumenten.
 Aufgaben werden verteilt. 
 
-== Planung des n‰chsten Sprints
+== Planung des n√§chsten Sprints
 *Issue referenziert die Issue ID von GitHub*
 
 // See http://asciidoctor.org/docs/user-manual/=tables
@@ -36,7 +36,7 @@ Aufgaben werden verteilt.
 |n.v.    |Protokolle digitalisieren     |-            |L. Klose                |
 |#3|Analysediagramme erstellen|-|A.Huber, V.Herz, A.Herzog|-
 |#4|GUI-Prototyp|-|A.Shulga|-
-|#5|Akzeptanztestf‰lle|-|A.Huber, V.Herz, A.Herzog|-
+|#5|Akzeptanztestf√§lle|-|A.Huber, V.Herz, A.Herzog|-
 
 |===
 

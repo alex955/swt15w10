@@ -1,14 +1,14 @@
 ï»¿= Protokoll Gruppe 10
 __Treffen am 15.10.2015__
 
-__Schriftführer:__ Lukas Klose
+__SchriftfÃ¼hrer:__ Lukas Klose
   
-__Nächstes Treffen:__ 23.10.2015
+__NÃ¤chstes Treffen:__ 23.10.2015
 
-__Teilnehmer:__ Justus Adam, André Martin, Gruppe 9, Gruppe 10, Gruppe 36 
+__Teilnehmer:__ Justus Adam, AndrÃ© Martin, Gruppe 9, Gruppe 10, Gruppe 36 
 
 == Bemerkungen
-Spezifizierung der Aufgabe durch André Martin.
+Spezifizierung der Aufgabe durch AndrÃ© Martin.
 
 == Retrospektive des letzten Sprints
 *Issue referenziert die Issue ID von GitHub*
@@ -26,14 +26,14 @@ Spezifizierung der Aufgabe durch André Martin.
 //Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den Dokumenten.
 Grobe Aufgabe ist bekannt.
 
-== Planung des nächsten Sprints
+== Planung des nÃ¤chsten Sprints
 *Issue referenziert die Issue ID von GitHub*
 
 // See http://asciidoctor.org/docs/user-manual/=tables
 [option="headers"]
 |===
 |Issue |Titel |Beschreibung |Verantwortlicher |Status
-|n.v.     |Aufgabenverteilung OOA     |Aufgaben aus Pflichtenheft müssen verteilt werden   |Lukas Klose                |-
+|n.v.     |Aufgabenverteilung OOA     |Aufgaben aus Pflichtenheft mÃ¼ssen verteilt werden   |Lukas Klose                |-
 |===
 
       
