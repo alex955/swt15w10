@@ -20,7 +20,8 @@
 					<div class="small-12 columns">
 						<div class="small-12 large-9 columns">
 							<img th:src="@{/showPicture/}+${Article.id}" src="http://placehold.it/800x600&amp;text=Artikel" />
-							<a th:href="@{/editArticle/}+${Article.id}" class="button">Artikel bearbeiten</a>
+							<a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/editArticle/}+${Article.id}" class="button">Artikel bearbeiten</a>
+							<a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/deleteArticle/}+${Article.id}" class="button">Artikel löschen</a>
 						<p>&nbsp;</p>
 						</div>
 						<p>&nbsp;</p>

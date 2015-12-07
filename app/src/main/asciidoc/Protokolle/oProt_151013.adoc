@@ -1,9 +1,9 @@
-= Protokoll Gruppe 10
+ï»¿= Protokoll Gruppe 10
 __Treffen am 13.10.2015__
 
-__Schriftführer:__ Lukas Klose
+__SchriftfÃ¼hrer:__ Lukas Klose
 
-__Nächstes Treffen:__ 15.10.2010
+__NÃ¤chstes Treffen:__ 15.10.2010
 
 __Teilnehmer:__ Justus Adam, Paul, Gruppe 9, Gruppe 10, Gruppe 36
 
@@ -24,13 +24,13 @@ Erste Darlegung der Aufgabe. Vorstellung von Tutor und Gruppenmitgliedern.
 == Aktueller Stand
 n.v.
 
-== Planung des nächsten Sprints
+== Planung des nÃ¤chsten Sprints
 *Issue referenziert die Issue ID von GitHub*
 
 // See http://asciidoctor.org/docs/user-manual/=tables
 [option="headers"]
 |===
 |Issue |Titel |Beschreibung |Verantwortlicher |Status
-|n.v.     |Zeit für wöch. Treffen finden.     |n.v.            |Gruppe 10                |n.v.
+|n.v.     |Zeit fÃ¼r wÃ¶ch. Treffen finden.     |n.v.            |Gruppe 10                |n.v.
 |n.v.     |Scrum-Master|Finden eines Scrum Master|Gruppe 10|-|
 |===

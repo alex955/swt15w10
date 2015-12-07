@@ -1,8 +1,13 @@
 package kickstart.controller;
 
+import kickstart.model.Article;
+import kickstart.model.ArticleRepo;
+import kickstart.model.CategoryFirstTierObject;
 import kickstart.model.User;
 import kickstart.model.UserRepository;
 import kickstart.model.UserSettings;
+import kickstart.utilities.CategoryMethods;
+
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -13,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,6 +26,9 @@ import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.validation.Valid;
 import javax.validation.constraints.Null;
+
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -27,19 +36,31 @@ import java.util.Optional;
  */
 
 @Controller
-public class SettingsController extends CommonVariables {
+public class SettingsController {
+    @Autowired
+    private final UserRepository userRepository;
 
     @Autowired
     private UserAccountManager userAccountManager;
+    
+	@Autowired private final CategoryMethods categoryMethods;
+	
+	@Autowired
+	private final ArticleRepo articleRepo;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    
+
+	protected LinkedList<CategoryFirstTierObject> processedCategories; 
 
     @Autowired
-    public SettingsController(UserRepository userRepository, UserAccountManager userAccountManager, PasswordEncoder passwordEncoderkönn){
+    public SettingsController(ArticleRepo articleRepo, UserRepository userRepository, UserAccountManager userAccountManager, PasswordEncoder passwordEncoderkönn, CategoryMethods categoryMethods){
         this.userRepository = userRepository;
         this.userAccountManager= userAccountManager;
         this.passwordEncoder = passwordEncoder;
+        this.categoryMethods = categoryMethods;
+        this.articleRepo = articleRepo;
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -48,9 +69,8 @@ public class SettingsController extends CommonVariables {
 
         User user = userRepository.findByUserAccount(userAccount.get());
 
-        this.processedCategories = this.getProcessedCategories();
+        this.processedCategories = categoryMethods.getProcessedCategories();
         model.addAttribute("categories", this.processedCategories);
-        model=this.getCurrent_cat(model);
         model.addAttribute("user", user);
 
         return "usersettings";
@@ -62,9 +82,8 @@ public class SettingsController extends CommonVariables {
 
         User user = userRepository.findByUserAccount(userAccount.get());
 
-        this.processedCategories = this.getProcessedCategories();
+        this.processedCategories = categoryMethods.getProcessedCategories();
         model.addAttribute("categories", this.processedCategories);
-        model=this.getCurrent_cat(model);
         model.addAttribute("user", user);
 
         if(result.hasErrors())
@@ -152,4 +171,21 @@ public class SettingsController extends CommonVariables {
 
         return "redirect:/search";
     }
+    
+    @RequestMapping(value = "/deleteuser")
+    public String deleteUser(@LoggedIn Optional<UserAccount> userAccount) {
+    	long userId = this.userRepository.findByUserAccount(userAccount.get()).getId();
+    	User currentUser = this.userRepository.findOne(userId);
+        
+        List<Article> userArticles = this.articleRepo.findByCreator(currentUser);
+        this.articleRepo.delete(userArticles);
+        
+        this.userAccountManager.disable(this.userRepository.findOne(userId).getUserAccount().getIdentifier());
+        userRepository.delete(userRepository.findByUserAccount(userAccount.get()));
+        
+        return "redirect:/logout";
+    }
+    
+
+
 }

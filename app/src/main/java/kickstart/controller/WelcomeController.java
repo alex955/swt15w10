@@ -25,19 +25,28 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kickstart.model.CategoryRepo;
+import kickstart.utilities.CategoryMethods;
+import kickstart.model.ArticleRepo;
 import kickstart.model.Category;
 import kickstart.model.CategoryFirstTierObject;
 
 @Controller
-public class WelcomeController extends CommonVariables {
+public class WelcomeController {
 	
-	//Classvars
+	@Autowired private final CategoryRepo categories;
+	@Autowired private final CategoryMethods categoryMethods;
+	@Autowired private final ArticleRepo articleRepo;
 
+	//Classvars
+	protected LinkedList<CategoryFirstTierObject> processedCategories; 
+	
 	
 	//Constructor, insert autowired variables here (?)
 	@Autowired
-	public WelcomeController(CategoryRepo categories){
+	public WelcomeController(CategoryRepo categories, CategoryMethods categoryMethods, ArticleRepo articleRepo){
 		this.categories = categories;
+		this.categoryMethods = categoryMethods;
+		this.articleRepo = articleRepo;
 	}
 	
 	//help functions
@@ -46,24 +55,19 @@ public class WelcomeController extends CommonVariables {
 	//Mappings
 	@RequestMapping({"/", "/frontpage"})
 	public String frontPage(Model model) {
-		this.processedCategories = this.getProcessedCategories();
+		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		
-		model=this.getCurrent_cat(model);
 		return "frontpage";
 	}
 	
 	@RequestMapping("/search")
 	public String search(Model model) {
-		this.processedCategories = this.getProcessedCategories();
+		this.processedCategories = categoryMethods.getProcessedCategories();
 		//System.out.println("size of root categories: " + this.processedCategories.size());
 		model.addAttribute("categories", this.processedCategories);
 		
 		 model.addAttribute("anzeigen", articleRepo.findAll());
-
-		   // System.out.println(s"GOOD REPO WURDE AN html übergeben");
-		 
-		 model=this.getCurrent_cat(model);
 		 
 		return "search";
 	}
@@ -71,10 +75,8 @@ public class WelcomeController extends CommonVariables {
 	@RequestMapping("/article")
 	public String article(Model model){
 		//initiate categories
-		this.processedCategories = this.getProcessedCategories();
+		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
-		
-		model=this.getCurrent_cat(model);
 		
 		return "article";
 	}
@@ -82,10 +84,8 @@ public class WelcomeController extends CommonVariables {
 	@RequestMapping("/initiatecategory")
 	public String registration(Model model){
 		//initiate categories
-		this.processedCategories = this.getProcessedCategories();
+		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
-		
-		model=this.getCurrent_cat(model);
 		
 		return "initiatecategory";
 	}
@@ -94,10 +94,8 @@ public class WelcomeController extends CommonVariables {
 	@RequestMapping("/chat")
 	public String chat(Model model){
 		//initiate categories
-		this.processedCategories = this.getProcessedCategories();
+		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
-		
-		model=this.getCurrent_cat(model);
 		
 		return "chat";
 	}
@@ -105,7 +103,7 @@ public class WelcomeController extends CommonVariables {
 	@RequestMapping("/test")
 	public String testShit(Model model){
 		//initiate categories
-		Map<String, List<Category>> test = this.getCategoryMap();
+		Map<String, List<Category>> test = categoryMethods.getCategoryMap();
 		
 		model.addAttribute("map", test);
 		model.addAttribute("testVar", new String("test123"));

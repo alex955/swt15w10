@@ -4,9 +4,10 @@ import java.io.BufferedOutputStream;
 
 import java.io.File;
 import java.io.FileOutputStream;
-
+import java.util.LinkedList;
 import java.util.Optional;
 
+import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,38 +25,73 @@ import kickstart.model.NewArticleForm;
 import kickstart.model.Picture;
 import kickstart.model.PictureRepo;
 import kickstart.model.User;
+import kickstart.model.UserRepository;
+import kickstart.utilities.CategoryMethods;
 import kickstart.model.ArticleRepo;
+import kickstart.model.CategoryFirstTierObject;
 
 @Controller
-public class ArticleController extends CommonVariables {
+public class ArticleController {
 	private PictureRepo pictureRepo;
+    
+	@Autowired
+	private final CategoryRepo categories;
 	
 	@Autowired
-	public ArticleController(CategoryRepo categories, ArticleRepo articleRepo, PictureRepo pictureRepo){
+	private final ArticleRepo articleRepo;
+
+	@Autowired private final CategoryMethods categoryMethods;
+	
+    @Autowired
+    private final UserRepository userRepository;
+
+	protected LinkedList<CategoryFirstTierObject> processedCategories; 
+	
+	@Autowired
+	public ArticleController(CategoryRepo categories, ArticleRepo articleRepo, PictureRepo pictureRepo, CategoryMethods categoryMethods, UserRepository userRepository){
 		this.categories = categories;
 		this.articleRepo=articleRepo;
 		this.pictureRepo = pictureRepo;
+		this.categoryMethods = categoryMethods;
+		this.userRepository = userRepository;
 	}
 	
 	
 	
 	@RequestMapping(value = "/showArticle/{id}")
-	public String showArticle(@PathVariable("id") long id,Model model) {
+	public String showArticle(@PathVariable("id") long id,Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		//initiate categories
-		this.processedCategories = this.getProcessedCategories();
+		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
 	    model.addAttribute("Article", articleRepo.findOne(id));
 	    model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 	    model.addAttribute("Useraccount", articleRepo.findOne(id).getCreator().getUserAccount());
 	    
-	    model=this.getCurrent_cat(model);
+	    long currentUserId = -1;
+		boolean isAdminLoggedIn = false;
+	    
+		//if any user is logged in, set values for vars
+	    if(userAccount.isPresent()){
+	    	currentUserId = userRepository.findByUserAccount(userAccount.get()).getId();
+	    	
+	    	if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))) {
+	    		isAdminLoggedIn = true;
+	    	}
+	    }
+	    
+	    model.addAttribute("currentUserId", currentUserId);
+	    
+
+		
+		
+		model.addAttribute("isAdminLoggedIn", isAdminLoggedIn);
 	    return "article";
 	}
 	
 	@RequestMapping(value = "/editArticle/{id}")
 	public String editArticle(@PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount, Model model) {
-		this.processedCategories = this.getProcessedCategories();
+		this.processedCategories = categoryMethods.getProcessedCategories();
 		long userId = this.userRepository.findByUserAccount(userAccount.get()).getId();
 		
 		model.addAttribute("categories", this.processedCategories);
@@ -63,9 +99,12 @@ public class ArticleController extends CommonVariables {
 		model.addAttribute("editArticle", articleRepo.findOne(id));
 		model.addAttribute("userId", userId);
 		model.addAttribute("user", this.userRepository.findOne(userId));
-
+		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 		
-		model=this.getCurrent_cat(model);
+		boolean isAdminLoggedIn = false;
+		if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))) isAdminLoggedIn = true;
+		
+		model.addAttribute("isAdminLoggedIn", isAdminLoggedIn);
 		
 	    return "editArticle";
 	}
@@ -76,8 +115,8 @@ public class ArticleController extends CommonVariables {
 		Article originalArticle = this.articleRepo.findOne(id);
 		long currentUserId = this.userRepository.findByUserAccount(userAccount.get()).getId();
 		
-		//case: current user didnt create article -> end
-		if(originalArticle.getCreator().getId() != currentUserId){
+		//case: current user didnt create article || logged in user no admin -> end
+		if(originalArticle.getCreator().getId() != currentUserId || !userAccount.get().hasRole(new Role("ROLE_ADMIN"))){
 			return null;
 		}
 		
@@ -109,7 +148,7 @@ public class ArticleController extends CommonVariables {
 //		
 //
 //		
-//		this.processedCategories = this.getProcessedCategories();
+//		this.processedCategories = categoryMethods.getProcessedCategories();
 //		model.addAttribute("categories", this.processedCategories);
 //		model.addAttribute("anzeigen", catGoods);
 //		
@@ -119,12 +158,27 @@ public class ArticleController extends CommonVariables {
 	@RequestMapping("/newArticle")
 	public String newArticle(Model model){
 		//initiate categories
-		this.processedCategories = this.getProcessedCategories();
+		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
-		
-		model=this.getCurrent_cat(model);
 		return "newArticle";
+	}
+	
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(value = "/deleteArticle/{id}")
+	public String deleteArticle(@PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount){
+		long userId = userRepository.findByUserAccount(userAccount.get()).getId();
+		Article toDelete = articleRepo.findOne(id);
+		
+		if(toDelete.getCreator().getId() != userId && !userAccount.get().hasRole(new Role("ROLE_ADMIN"))) {
+			System.out.println("ids: " + userId + "," + toDelete.getCreator().getId());
+			return "redirect:/frontpage";
+		}
+		
+		articleRepo.delete(toDelete);
+		
+		
+		return "redirect:/search/myArticles";
 	}
 	
 	

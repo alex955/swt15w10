@@ -1,15 +1,15 @@
 ﻿= Protokoll Gruppe 10
-__Treffen am 20.10.2015__
+__Treffen am 27.11.2015__
 
 __Schriftführer:__ Lukas Klose
 
-__Nächstes Treffen:__ -
+__Nächstes Treffen:__ 04.12.2015
 
-__Teilnehmer:__ Alexander Shulga, Vincenz Herz, Andreas Huber, Lukas Klose
+__Teilnehmer:__ J. Adam, A. Martin, Gruppe 9, Gruppe 10, Gruppe 36
 
 == Bemerkungen
 //Verwarnungen, besondere Vorfälle, Organisatorisches
--
+Zwischenpräsentationen von allen Gruppen wurden gehalten.
 
 == Retrospektive des letzten Sprints
 *Issue referenziert die Issue ID von GitHub*
@@ -18,13 +18,13 @@ __Teilnehmer:__ Alexander Shulga, Vincenz Herz, Andreas Huber, Lukas Klose
 [option="headers"]
 |===
 |Issue |Aufgabe |Status |Bemerkung
-|n.v.    |Aufgaben Verteilen       |Erledigt     |
+|#54     |Basisfuntkionalität     |Erledigt  |Detaillierung der Basisfunktionalität in letztem Protokoll und im Issue in GitHub.
 |===
 
 
 == Aktueller Stand
 //Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den Dokumenten.
-Aufgaben werden verteilt. 
+Basisfunktionalität ist vorhanden. Arbeiten an weiteres Muss-Kriterien laufen.
 
 == Planung des nächsten Sprints
 *Issue referenziert die Issue ID von GitHub*
@@ -33,11 +33,5 @@ Aufgaben werden verteilt.
 [option="headers"]
 |===
 |Issue |Titel |Beschreibung |Verantwortlicher |Status
-|n.v.    |Protokolle digitalisieren     |-            |L. Klose                |
-|#3|Analysediagramme erstellen|-|A.Huber, V.Herz, A.Herzog|-
-|#4|GUI-Prototyp|-|A.Shulga|-
-|#5|Akzeptanztestfälle|-|A.Huber, V.Herz, A.Herzog|-
-
+|n.v.     |Weiterarbeit an Funktionalität |-      |Gruppe 10  |in Arbeit
 |===
-
-

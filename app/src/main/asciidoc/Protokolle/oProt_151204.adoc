@@ -1,11 +1,11 @@
 ﻿= Protokoll Gruppe 10
-__Treffen am 20.10.2015__
+__Treffen am 04.15.2015__
 
 __Schriftführer:__ Lukas Klose
 
-__Nächstes Treffen:__ -
+__Nächstes Treffen:__ 11.12.2015
 
-__Teilnehmer:__ Alexander Shulga, Vincenz Herz, Andreas Huber, Lukas Klose
+__Teilnehmer:__ J. Adam, V. Herz, A. Huber, L. Klose, A. Martin
 
 == Bemerkungen
 //Verwarnungen, besondere Vorfälle, Organisatorisches
@@ -18,13 +18,13 @@ __Teilnehmer:__ Alexander Shulga, Vincenz Herz, Andreas Huber, Lukas Klose
 [option="headers"]
 |===
 |Issue |Aufgabe |Status |Bemerkung
-|n.v.    |Aufgaben Verteilen       |Erledigt     |
+|n.v.     |…       |…      |…
 |===
 
 
 == Aktueller Stand
 //Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den Dokumenten.
-Aufgaben werden verteilt. 
+Basisfunktionalität ist vorhanden. Arbeiten an weiteres Muss-Kriterien laufen.
 
 == Planung des nächsten Sprints
 *Issue referenziert die Issue ID von GitHub*
@@ -33,11 +33,6 @@ Aufgaben werden verteilt.
 [option="headers"]
 |===
 |Issue |Titel |Beschreibung |Verantwortlicher |Status
-|n.v.    |Protokolle digitalisieren     |-            |L. Klose                |
-|#3|Analysediagramme erstellen|-|A.Huber, V.Herz, A.Herzog|-
-|#4|GUI-Prototyp|-|A.Shulga|-
-|#5|Akzeptanztestfälle|-|A.Huber, V.Herz, A.Herzog|-
-
+|#74 |Datenbank für Textbausteine |Möglichkeit, Textbausteine zu speichern soll vorhanden sein|Gruppe 10 |in Arbeit
+|n.v.     |Weiterarbeit an Muss-Kriterien |-      |Gruppe 10  |in Arbeit
 |===
-
-
