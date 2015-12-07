@@ -2,6 +2,7 @@ package kickstart.controller;
 
 
 import java.util.Properties;
+import java.util.Random;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -23,9 +24,10 @@ import kickstart.model.UserRepository;
 @Controller
 public class EMailController extends CommonVariables{
 	
-		@Autowired
-		private UserAccountManager userAccountManager;
-    @Autowired
+	@Autowired
+	private UserAccountManager userAccountManager;
+
+	@Autowired
     public EMailController(UserRepository userRepository){
         //this.userAccountManager = userAccountManager;
         this.userRepository = userRepository;
@@ -41,6 +43,8 @@ public class EMailController extends CommonVariables{
 
 		  final String username = "gandalf324687992";
 		  final String password = "324687992";
+		  String validationID = generateString(16);
+
 
 		  Properties props = new Properties();
 		  props.put("mail.smtp.auth", "true");
@@ -61,9 +65,9 @@ public class EMailController extends CommonVariables{
 		      message.setRecipients(Message.RecipientType.TO,
 		              InternetAddress.parse(reciever));
 		      message.setSubject("RegistrierungsID");
-		      message.setText("Ihre ID lautet " + l +".\n\n" + "http://localhost:8080/validate?id=" + l);
+		      message.setText("Ihre ID lautet " + validationID +".\n\n" + "http://localhost:8080/validate?id=" + validationID);
 
-		      Transport.send(message);
+		  	Transport.send(message);
 		     System.out.println("E-Mail gesendet an " + reciever);
 		     System.out.println("Mit id"+ Long.toString(l));
 
@@ -79,6 +83,7 @@ public class EMailController extends CommonVariables{
 	  @RequestMapping(value = "/validate")
 	  public String validation(@RequestParam String id){
 
+
 		  int realID = 0;
 		  try {
 			  realID = Integer.parseInt(id);
@@ -86,8 +91,9 @@ public class EMailController extends CommonVariables{
 		  catch(Exception e){
 			  System.out.println("NaN");
 		  }
-		  //User foundUser = userRepository.findByHashcode(realID);
+
 		  User foundUser = userRepository.findOne(Long.parseLong(id));
+
 		  if(foundUser == null){
 
 			  return "frontpage";
@@ -114,5 +120,18 @@ public class EMailController extends CommonVariables{
 		  
 		  
 	  }
+
+	public static String generateString(int length)
+	{
+		String characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		Random rng = new Random();
+
+		char[] text = new char[length];
+		for (int i = 0; i < length; i++)
+		{
+			text[i] = characters.charAt(rng.nextInt(characters.length()));
+		}
+		return new String(text);
+	}
 	  
 }
