@@ -17,8 +17,10 @@ public class Validator {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
-
+    
+    @OneToOne
     private User user;
+    
     private String token;
     private int usage;
 
