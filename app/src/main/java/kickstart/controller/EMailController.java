@@ -88,8 +88,8 @@ public class EMailController {
 	     * @author Lukas Klose
 	     */
 	  @RequestMapping(value = "/validate")
-	  public String validation(@RequestParam String token){
-
+	  public String validation(@RequestParam String id){
+		  String token = id;
 
 		  Validator validator = validatorRepository.findByToken(token);
 
