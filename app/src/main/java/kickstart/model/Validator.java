@@ -3,21 +3,25 @@ package kickstart.model;
 import kickstart.controller.EMailController;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.mail.MessageRemovedException;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.Random;
 
 /**
  * Created by Vincenz on 07.12.15.
  */
+@Entity
 public class Validator {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private long id;
 
     private User user;
     private String token;
     private int usage;
+
     private UserAccountManager userAccountManager;
 
     @Autowired
