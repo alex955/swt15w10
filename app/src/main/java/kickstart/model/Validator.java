@@ -24,8 +24,6 @@ public class Validator {
 
     private UserAccountManager userAccountManager;
 
-    @Autowired
-    private ValidatorRepository validatorRepository;
 
     @Autowired
     public Validator(User user, int usage) throws AddressException, MessagingException {
