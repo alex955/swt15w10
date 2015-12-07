@@ -12,6 +12,8 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import kickstart.model.Validator;
+import kickstart.model.ValidatorRepository;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,10 +31,14 @@ public class EMailController {
 	
     @Autowired
     private final UserRepository userRepository;
-	
-    public EMailController(UserRepository userRepository){
-        //this.userAccountManager = userAccountManager;
-        this.userRepository = userRepository;
+
+	@Autowired
+	private ValidatorRepository validatorRepository;
+
+	@Autowired
+    public EMailController(UserRepository userRepository, ValidatorRepository validatorRepository){
+		this.validatorRepository = validatorRepository;
+		this.userRepository = userRepository;
         
     }
 	
@@ -41,11 +47,10 @@ public class EMailController {
      * 
      * @author Lukas Klose
      */
-	  public static void SendEmail(String reciever, long l) throws AddressException, MessagingException{
+	  public static void SendEmail(String receiver,  String token) throws AddressException, MessagingException{
 
 		  final String username = "gandalf324687992";
 		  final String password = "324687992";
-		  String validationID = generateString(16);
 
 
 		  Properties props = new Properties();
@@ -65,13 +70,13 @@ public class EMailController {
 		      Message message = new MimeMessage(session);
 		      message.setFrom(new InternetAddress("gandalf324687992@gmail.com"));
 		      message.setRecipients(Message.RecipientType.TO,
-		              InternetAddress.parse(reciever));
+		              InternetAddress.parse(receiver));
 		      message.setSubject("RegistrierungsID");
-		      message.setText("Ihre ID lautet " + validationID +".\n\n" + "http://localhost:8080/validate?id=" + validationID);
+		      message.setText("Ihre ID lautet " + token +".\n\n" + "http://localhost:8080/validate?id=" + token);
 
 		  	Transport.send(message);
-		     System.out.println("E-Mail gesendet an " + reciever);
-		     System.out.println("Mit id"+ Long.toString(l));
+		     System.out.println("E-Mail gesendet an " + receiver);
+		     System.out.println("Mit id "+ token );
 
 	  }
 	  
@@ -83,57 +88,27 @@ public class EMailController {
 	     * @author Lukas Klose
 	     */
 	  @RequestMapping(value = "/validate")
-	  public String validation(@RequestParam String id){
+	  public String validation(@RequestParam String token){
 
 
-		  int realID = 0;
-		  try {
-			  realID = Integer.parseInt(id);
-		  }
-		  catch(Exception e){
-			  System.out.println("NaN");
-		  }
+		  Validator validator = validatorRepository.findByToken(token);
 
-		  User foundUser = userRepository.findOne(Long.parseLong(id));
-
-		  if(foundUser == null){
-
+		  if (validator == null)
 			  return "frontpage";
 
+		  else {
+			switch(validator.getUsage()) {
+				case 1:
+					userAccountManager.enable(validator.getUser().getUserAccount().getIdentifier());
+					break;
+				case 2:
+					userAccountManager.disable(validator.getUser().getUserAccount().getIdentifier());
+					break;
+			}
 		  }
-		  else{
-			  System.out.println(foundUser.toString());
-			  foundUser.setValidated(true);
-			  System.out.println(foundUser.getUserAccount());
-			  userAccountManager.enable(foundUser.getUserAccount().getIdentifier());
-			  System.out.println("enabled nach email= " + foundUser.getUserAccount().isEnabled());
-
-			  
-			  //userRepository.delete(foundUser.getId());
-			  userRepository.save(foundUser);
-			  
-		  }
-		  
-		  System.out.println(id);
-		  //return "frontpage";
-		  
-		  
 		  return "redirect:/";
-		  
-		  
-	  }
-
-	public static String generateString(int length)
-	{
-		String characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		Random rng = new Random();
-
-		char[] text = new char[length];
-		for (int i = 0; i < length; i++)
-		{
-			text[i] = characters.charAt(rng.nextInt(characters.length()));
-		}
-		return new String(text);
 	}
+
+
 	  
 }
