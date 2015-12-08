@@ -84,7 +84,7 @@ public class RegistrationController {
         EMailController.sendEmail(user.getEmail(),validator.getToken(),validator.getUsage());
 
 
-        return ("redirect:/");
+        return ("registration");
     }
 
 
