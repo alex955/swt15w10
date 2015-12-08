@@ -20,6 +20,11 @@ public class ChatConversation {
 	private long fromId, toId;
 	private boolean fromUnread, toUnread;
 	
+	public List<ChatMessage> getContent() {
+		return content;
+	}
+
+
 	private int iterationCount;
 	
 	private String title;

@@ -36,22 +36,7 @@
         
         <div class="grid-block">
           <div class="grid-block small-12 medium-9 vertical">
-            <div class="grid-content">
-          <b>Incoming Messages</b>
-          <div th:each="inMsg : ${incomingMessages}">
-          	
-          	  <u th:text="'Nachricht von User mit ID ' + ${inMsg.fromId} + ', Titel der Nachricht: ' + ${inMsg.title}"></u> 
-          </div>
-          <hr>
-          	</hr>
-          <b>Outgoing Messages</b>
-          <div th:each="outMsg : ${outgoingMessages}">
-          	<hr>
-          	  <u th:text="'Nachricht für User mit ID ' + ${inMsg.toId} + ', Titel der Nachricht: ' + ${inMsg.title}"></u> 
-          	</hr>
-          </div>
-              
-            </div>
+          zeugs
             <div class="message-input grid-content collapse shrink">
               <span class="inline-label">
                 <input type="text" placeholder="Message"/>

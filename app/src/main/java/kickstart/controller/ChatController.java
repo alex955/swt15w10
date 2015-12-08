@@ -69,6 +69,45 @@ public class ChatController {
 		return "chat/chatMain";
 	}
 	
+	
+	@RequestMapping("/chat/thread/{id}")
+	public String inspectChat(@PathVariable("id") long id, Model model, @LoggedIn Optional<UserAccount> userAccount){
+		if(userAccount.get() == null) return "login";
+		
+		long currentUserId = this.userRepository.findByUserAccount(userAccount.get()).getId();
+	
+		
+		//initiate categories
+		this.processedCategories = categoryMethods.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		
+		ChatConversation conversation = this.chatRepo.findOne(id);
+		
+		if(conversation.getFromId() != currentUserId && conversation.getToId() != currentUserId) return "error/notAuthenticated";
+		
+		List<ChatMessage> actualConversation = conversation.getContent();
+		
+		boolean currentUserStartedConversation = false;
+		if(!actualConversation.isEmpty()){
+			if(actualConversation.get(0).getFromId() == currentUserId) currentUserStartedConversation = true;
+		}
+		
+		model.addAttribute("conversation", conversation);
+		model.addAttribute("currentUserStartedConversation", currentUserStartedConversation);
+		
+		
+		//for menu
+		List<ChatConversation> incoming = this.chatRepo.findByToId(this.userRepository.findByUserAccount(userAccount.get()).getId());
+		List<ChatConversation> outgoing = this.chatRepo.findByFromId(this.userRepository.findByUserAccount(userAccount.get()).getId());
+		
+		model.addAttribute("incomingMessages", incoming);
+		model.addAttribute("outgoingMessages", outgoing);
+		//for menu end
+		
+		return "chat/chatThread";
+	}
+	
+	
 	@RequestMapping(value = "/chat/newConversation/{id}")
 	public String newMessage(@PathVariable("id") long id,Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		if(userAccount.get() == null) return "error";
