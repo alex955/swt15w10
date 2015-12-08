@@ -1,6 +1,7 @@
 package kickstart.controller;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 import org.salespointframework.useraccount.UserAccount;
@@ -19,9 +20,11 @@ import kickstart.model.CategoryFirstTierObject;
 import kickstart.model.CategoryRepo;
 import kickstart.model.ChatConversation;
 import kickstart.model.ChatConversationRepo;
+import kickstart.model.ChatMessageRepo;
 import kickstart.model.User;
 import kickstart.model.UserRepository;
 import kickstart.utilities.CategoryMethods;
+import kickstart.utilities.ChatMessage;
 import kickstart.utilities.StringInForm;
 
 @Controller
@@ -32,26 +35,38 @@ public class ChatController {
 	@Autowired private final ArticleRepo articleRepo;
 	@Autowired private final ChatConversationRepo chatRepo;
     @Autowired private final UserRepository userRepository;
+    
+    //do not use, just for persistene/transaction(?) use
+    @Autowired private final ChatMessageRepo msgRepo;
 	
 	//Classvars
 	protected LinkedList<CategoryFirstTierObject> processedCategories;
 
 	@Autowired
-	public ChatController(CategoryRepo categories, CategoryMethods categoryMethods, ArticleRepo articleRepo, ChatConversationRepo chatRepo, UserRepository userRepository) {
+	public ChatController(CategoryRepo categories, CategoryMethods categoryMethods, ArticleRepo articleRepo, ChatConversationRepo chatRepo, UserRepository userRepository, ChatMessageRepo msgRepo) {
 		this.categories = categories;
 		this.categoryMethods = categoryMethods;
 		this.articleRepo = articleRepo;
 		this.chatRepo = chatRepo;
 		this.userRepository = userRepository;
+		this.msgRepo = msgRepo;
 	} 
 	
 	@RequestMapping("/chat")
-	public String chat(Model model){
+	public String chat(Model model, @LoggedIn Optional<UserAccount> userAccount){
+		if(userAccount.get() == null) return "login";
+		
 		//initiate categories
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		
-		return "chat";
+		List<ChatConversation> incoming = this.chatRepo.findByToId(this.userRepository.findByUserAccount(userAccount.get()).getId());
+		List<ChatConversation> outgoing = this.chatRepo.findByFromId(this.userRepository.findByUserAccount(userAccount.get()).getId());
+		
+		model.addAttribute("incomingMessages", incoming);
+		model.addAttribute("outgoingMessages", outgoing);
+		
+		return "chat/chatMain";
 	}
 	
 	@RequestMapping(value = "/chat/newConversation/{id}")
@@ -81,15 +96,29 @@ public class ChatController {
 		newConversation.setFromId(currentUser.getId());
 		newConversation.setToId(currentArticle.getCreator().getId());
 		
+		System.out.println("generated new message from "+currentUser.getId() + "to " +  currentArticle.getCreator().getId());
+		
 		newConversation.setFromUnread(false);
 		newConversation.setTitle(currentArticle.getTitle() + " in " + currentArticle.getLocation() + ".");
 		newConversation.setToUnread(true);
-		//newConversation.addMessage(messageContent);
+		
+		ChatMessage newMessage = new ChatMessage();
+		newMessage.setFromId(currentUser.getId());
+		newMessage.setMessage(messageContent);
+		newMessage.setToId(currentArticle.getCreator().getId());
+		
+		this.msgRepo.save(newMessage);
+	
+		newConversation.addChatMessage(newMessage);
+		
+		
 		
 		this.chatRepo.save(newConversation);
 		
 		return "chat";
 	}
+	
+	
 	
 	
 	

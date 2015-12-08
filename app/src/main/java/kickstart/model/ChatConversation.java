@@ -2,19 +2,14 @@ package kickstart.model;
 
 
 
-import java.util.HashMap;
+
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
-import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 import kickstart.utilities.ChatMessage;
 
@@ -30,11 +25,10 @@ public class ChatConversation {
 	private String title;
 	
 	@ElementCollection
-	private List<ChatMessage> content;
+	private List<ChatMessage> content = new LinkedList<ChatMessage>();
 	
 	public ChatConversation(){
 		this.iterationCount = 0;
-		//this.content = new LinkedList<ChatMessage>();
 	}
 
 	public long getId() {
@@ -87,6 +81,10 @@ public class ChatConversation {
 
 	public void setToId(long toId) {
 		this.toId = toId;
+	}
+	
+	public void addChatMessage(ChatMessage arg){
+		this.content.add(arg);
 	}
 	
 	

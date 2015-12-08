@@ -11,7 +11,19 @@ import kickstart.model.ChatConversation;
 @Entity
 public class ChatMessage {
 	private @Id @GeneratedValue long id;
+
+	private String message;
+	private long fromId, toId;
 	
+	public ChatMessage() {
+		message = "";
+		fromId = toId = 0;
+	}
+	
+	public long getId() {
+		return id;
+	}
+
 	public String getMessage() {
 		return message;
 	}
@@ -20,34 +32,20 @@ public class ChatMessage {
 		this.message = message;
 	}
 
-	public int getIteration() {
-		return iteration;
+	public long getFromId() {
+		return fromId;
 	}
 
-	public void setIteration(int iteration) {
-		this.iteration = iteration;
+	public void setFromId(long from) {
+		this.fromId = from;
 	}
 
-	public long getFrom() {
-		return from;
+	public long getToId() {
+		return toId;
 	}
 
-	public void setFrom(long from) {
-		this.from = from;
+	public void setToId(long to) {
+		this.toId = to;
 	}
 
-	public long getTo() {
-		return to;
-	}
-
-	public void setTo(long to) {
-		this.to = to;
-	}
-
-	private String message;
-	private int iteration;
-	private long from, to;
-	
-	public ChatMessage() {
-	}
 }
