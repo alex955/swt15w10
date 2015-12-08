@@ -47,7 +47,7 @@ public class EMailController {
      * 
      * @author Lukas Klose
      */
-	  public static void SendEmail(String receiver,  String token) throws AddressException, MessagingException{
+	  public static void sendEmail(String receiver, String token, int usage) throws AddressException, MessagingException{
 
 		  final String username = "gandalf324687992";
 		  final String password = "324687992";
@@ -66,20 +66,32 @@ public class EMailController {
 		              }
 		          });
 
-		  
-		      Message message = new MimeMessage(session);
-		      message.setFrom(new InternetAddress("gandalf324687992@gmail.com"));
-		      message.setRecipients(Message.RecipientType.TO,
-		              InternetAddress.parse(receiver));
-		      message.setSubject("RegistrierungsID");
-		      message.setText("Ihre ID lautet " + token +".\n\n" + "http://localhost:8080/validate?id=" + token);
+          Message message = new MimeMessage(session);
+          message.setFrom(new InternetAddress("gandalf324687992@gmail.com"));
+          message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiver));
 
-		  	Transport.send(message);
-		     System.out.println("E-Mail gesendet an " + receiver);
-		     System.out.println("Mit id "+ token );
+          /*
+          * Cases: 1 = Registrierung
+          *        2 = Account deaktivieren
+          *  TODO  3 = Email ändern
+          */
 
-	  }
-	  
+          switch(usage) {
+
+              case 1: {
+                  message.setSubject("RefugeeApp: EMail-Verifizierung");
+                  message.setText("Zum Registrieren Ihrer Email klicken Sie auf den Link.\n\n" + "http://localhost:8080/validate?id=" + token);
+                  break;
+              }
+
+              case 2: {
+                  message.setSubject("RefugeeApp: Account deaktivieren");
+                  message.setText("Zum Deaktivieren Ihres Accounts klicken Sie auf den Link.\n\n" + "http://localhost:8080/validate?id=" + token);
+              }
+
+          }
+          Transport.send(message);
+      }
 	    /**
 	     * 
 	     * Searches for the given HashID in UserRepository and sets the validated flag to true if 
@@ -89,9 +101,8 @@ public class EMailController {
 	     */
 	  @RequestMapping(value = "/validate")
 	  public String validation(@RequestParam String id){
-		  String token = id;
 
-		  Validator validator = validatorRepository.findByToken(token);
+		  Validator validator = validatorRepository.findByToken(id);
 
 		  if (validator == null)
 			  return "frontpage";

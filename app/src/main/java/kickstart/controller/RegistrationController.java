@@ -1,7 +1,6 @@
 package kickstart.controller;
 import kickstart.model.*;
 import org.salespointframework.useraccount.UserAccount;
-import org.salespointframework.useraccount.UserAccountIdentifier;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -82,8 +81,7 @@ public class RegistrationController {
         Validator validator = new Validator(user, 1);
         validatorRepository.save(validator);
 
-        EMailController.SendEmail(user.getEmail(),validator.getToken());
-
+        EMailController.sendEmail(user.getEmail(),validator.getToken(),validator.getUsage());
 
 
         return ("redirect:/");
