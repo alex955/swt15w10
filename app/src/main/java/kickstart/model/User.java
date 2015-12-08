@@ -62,6 +62,9 @@ public class User {
     public User(long id, UserAccount userAccount, String lastName, String firstName, String email, String city, String zip, String streetName, String houseNumber, String addressAddition, String language1, String language2, String language3) {
 
         this.userAccount = userAccount;
+        
+        this.username = userAccount.getUsername();
+        
         this.lastName = lastName;
         this.firstName = firstName;
         this.email = email;

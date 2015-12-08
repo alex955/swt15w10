@@ -19,23 +19,26 @@ public class RefugeeDataInitializer implements DataInitializer {
     private final UserRepository userRepository;
     private final CategoryRepo categories;
     private final ArticleRepo goodREPO;
+    private final ChatConversationRepo chatRepo;
 
     final Role refugee = new Role("ROLE_REFUGEE");
     final Role volunteer = new Role("ROLE_VOLUNTEER");
     final Role admin = new Role("ROLE_ADMIN");
 
     @Autowired
-    public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, kickstart.model.ArticleRepo goodREPO) {
+    public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, kickstart.model.ArticleRepo goodREPO, ChatConversationRepo chatRepo) {
 
         Assert.notNull(userAccountManager, "UserManagerAccount must not be null!");
         Assert.notNull(userRepository, "UserRepository must not be null!");
         Assert.notNull(categories, "CategoryRepo must not be null!");
         Assert.notNull(goodREPO, "goodREPO must not be null!");
+        Assert.notNull(chatRepo, "ChatRepo must not be null!");
 
         this.userAccountManager = userAccountManager;
         this.userRepository = userRepository;
         this.categories = categories;
         this.goodREPO = goodREPO;
+        this.chatRepo = chatRepo;
 
     }
 
