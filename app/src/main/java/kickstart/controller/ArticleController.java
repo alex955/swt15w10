@@ -152,6 +152,9 @@ public class ArticleController {
                 
                 //get the logged in user
                 User creator = userRepository.findByUserAccount(userAccount.get());
+//                if(originalArticle.getPicture() != null){
+//                	pictureRepo.delete(originalArticle.getPicture());
+//                }
                 Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename(), creator);
 				pictureRepo.save(picture);
 				originalArticle.setPicture(picture);
@@ -167,6 +170,22 @@ public class ArticleController {
 		this.articleRepo.save(originalArticle);
 		model.addAttribute("Article", articleRepo.findOne(id));
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
+		
+		currentUserId = -1;
+		boolean isAdminLoggedIn = false;
+	    
+		//if any user is logged in, set values for vars
+	    if(userAccount.isPresent()){
+	    	currentUserId = userRepository.findByUserAccount(userAccount.get()).getId();
+	    	
+	    	if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))) {
+	    		isAdminLoggedIn = true;
+	    	}
+	    }
+	    
+	    model.addAttribute("currentUserId", currentUserId);
+	    
+		model.addAttribute("isAdminLoggedIn", isAdminLoggedIn);
 		
 		return "article";
 	}
