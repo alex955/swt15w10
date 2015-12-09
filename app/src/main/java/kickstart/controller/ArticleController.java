@@ -110,11 +110,11 @@ public class ArticleController {
 
 	
 	@RequestMapping(value = "/editArticle/{id}", method = RequestMethod.POST)
-	public String processEditedArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, @PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount){
+	public String processEditedArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, @PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount, Model model){
 		Article originalArticle = this.articleRepo.findOne(id);
 		long currentUserId = this.userRepository.findByUserAccount(userAccount.get()).getId();
 		
-		//case: current user didnt create article || logged in user no admin -> end
+		//case: current user didnt create article && logged in user no admin -> end
 		if(originalArticle.getCreator().getId() != currentUserId && !userAccount.get().hasRole(new Role("ROLE_ADMIN"))){
 			return null;
 		}
@@ -132,11 +132,43 @@ public class ArticleController {
 		originalArticle.setNumber(newArticleForm.getHouseNumber());
 		originalArticle.setAddressAddition(newArticleForm.getAdressAddition());
 		
+		if (!((newArticleForm.getFile()).isEmpty())) {
+            try {
+                byte[] bytes = (newArticleForm.getFile()).getBytes();
+ 
+                // Creating the directory to store file
+                String rootPath = System.getProperty("user.home");
+                File dir = new File(rootPath + "/" + "Pics");
+                if (!dir.exists())
+                    dir.mkdirs();
+ 
+                // Create the file local
+                File serverFile = new File(dir.getAbsolutePath() + "/" + newArticleForm.getFile().getOriginalFilename()); 
+                BufferedOutputStream stream = new BufferedOutputStream( new FileOutputStream(serverFile));
+                stream.write(bytes);
+                stream.close();
+                System.out.println("Server File Location="
+                        + serverFile.getAbsolutePath());         
+                
+                //get the logged in user
+                User creator = userRepository.findByUserAccount(userAccount.get());
+                Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename(), creator);
+				pictureRepo.save(picture);
+				originalArticle.setPicture(picture);
+        		
+        		System.out.println("You successfully uploaded file=" + newArticleForm.getTitle());
+            } catch (Exception e) {
+                return "You failed to upload " + newArticleForm.getTitle() + " => " + e.getMessage();
+            }
+        } 
+		
 		System.out.println("debug3");
 		
 		this.articleRepo.save(originalArticle);
+		model.addAttribute("Article", articleRepo.findOne(id));
+		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 		
-		return "redirect:/editArticle/{id}";
+		return "article";
 	}
 	
 //	@RequestMapping(value = "/inspectcategory/{categoryId}")
