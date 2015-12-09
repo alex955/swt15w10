@@ -84,7 +84,6 @@ public class ArticleController {
 	    
 
 		
-		
 		model.addAttribute("isAdminLoggedIn", isAdminLoggedIn);
 	    return "article";
 	}

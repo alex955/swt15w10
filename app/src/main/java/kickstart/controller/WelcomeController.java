@@ -91,14 +91,7 @@ public class WelcomeController {
 	}
 	
 	
-	@RequestMapping("/chat")
-	public String chat(Model model){
-		//initiate categories
-		this.processedCategories = categoryMethods.getProcessedCategories();
-		model.addAttribute("categories", this.processedCategories);
-		
-		return "chat";
-	}
+
 	
 	@RequestMapping("/test")
 	public String testShit(Model model){

@@ -52,13 +52,12 @@
 				</div>
 			</div>
 
-			<div class="panel">
-				<label> Nachricht schreiben</label>
+			<div class="panel" th:if="${Creator.id} != ${currentUserId}">
+				<label>Kontakt</label>
 				<hr></hr>
 				<div class="row">
 					<div class="small-12 columns">
-						<textarea rows="4"></textarea>
-						<div class="button">Nachricht senden</div>
+						<a class="button" th:href="@{/chat/newConversation/}+${Article.id}">Kontakt mit Anbieter aufnehmen</a>
 					</div>
 				</div>
 			</div>

@@ -19,23 +19,28 @@ public class RefugeeDataInitializer implements DataInitializer {
     private final UserRepository userRepository;
     private final CategoryRepo categories;
     private final ArticleRepo goodREPO;
+    private final ChatConversationRepo chatRepo;
+    private final ChatMessageRepo msgRepo;
 
     final Role refugee = new Role("ROLE_REFUGEE");
     final Role volunteer = new Role("ROLE_VOLUNTEER");
     final Role admin = new Role("ROLE_ADMIN");
 
     @Autowired
-    public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, kickstart.model.ArticleRepo goodREPO) {
+    public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, kickstart.model.ArticleRepo goodREPO, ChatConversationRepo chatRepo, ChatMessageRepo msgRepo) {
 
         Assert.notNull(userAccountManager, "UserManagerAccount must not be null!");
         Assert.notNull(userRepository, "UserRepository must not be null!");
         Assert.notNull(categories, "CategoryRepo must not be null!");
         Assert.notNull(goodREPO, "goodREPO must not be null!");
+        Assert.notNull(chatRepo, "ChatRepo must not be null!");
 
         this.userAccountManager = userAccountManager;
         this.userRepository = userRepository;
         this.categories = categories;
         this.goodREPO = goodREPO;
+        this.chatRepo = chatRepo;
+        this.msgRepo = msgRepo;
 
     }
 
@@ -51,31 +56,31 @@ public class RefugeeDataInitializer implements DataInitializer {
 
         if (userAccountManager.findByUsername("admin1").isPresent()) return;
 
-        UserAccount admin1 = userAccountManager.create("admin1", "admin1PW", admin);
+        UserAccount admin1 = userAccountManager.create("admin1", "admin1", admin);
         userAccountManager.save(admin1);
         userRepository.save(new User (1, admin1, "Admin", "Erster", "admin@test.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
 
-        UserAccount user1 = userAccountManager.create("user1", "Test1234", refugee);
+        UserAccount user1 = userAccountManager.create("user1", "user1", refugee);
         userAccountManager.save(user1);
         userRepository.save(new User (2, user1, "1", "User", "user1@test.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
 
-        UserAccount user2 = userAccountManager.create("user2", "Test1234", refugee);
+        UserAccount user2 = userAccountManager.create("user2", "user2", refugee);
         userAccountManager.save(user2);
         userRepository.save(new User (3, user2, "2", "User", "user2@test.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
 
-        UserAccount user3 = userAccountManager.create("user3", "Test1234", refugee);
+        UserAccount user3 = userAccountManager.create("user3", "user3", refugee);
         userAccountManager.save(user3);
         userRepository.save(new User (4, user3, "3", "User", "user3@test.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
 
-        UserAccount user4 = userAccountManager.create("user4", "Test1234", volunteer);
+        UserAccount user4 = userAccountManager.create("user4", "user4", volunteer);
         userAccountManager.save(user4);
         userRepository.save(new User (5, user4, "4", "User", "user4@test.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
 
-        UserAccount user5 = userAccountManager.create("user5", "Test1234", volunteer);
+        UserAccount user5 = userAccountManager.create("user5", "user5", volunteer);
         userAccountManager.save(user5);
         userRepository.save(new User (6, user5, "5", "User", "user5@test.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
 
-        UserAccount user6 = userAccountManager.create("user6", "Test1234", volunteer);
+        UserAccount user6 = userAccountManager.create("user6", "user6", volunteer);
         userAccountManager.save(user6);
         userRepository.save(new User (7, user6, "6", "User", "user6@test.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
 

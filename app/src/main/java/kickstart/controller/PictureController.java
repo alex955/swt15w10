@@ -31,7 +31,7 @@ public class PictureController{
 		if(articleRepo.findOne(id).getPicture() == null){
 			//in case some does not upload a picture
 			//this is the path on saschas computer, at the end we have to change to the picture on the server
-			String standardPicPath = "C:/Users/sasch/Documents/swt15w10/app/src/main/resources/static/resources/img/keinbild.png";
+			String standardPicPath = "C:/Dev/workspace/swt15w10/app/src/main/resources/static/resources/img/keinbild.png";
 			resource = new FileSystemResource(standardPicPath);
 		}
 		else	
