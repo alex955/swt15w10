@@ -9,16 +9,20 @@
 
 <body>
 
+	<script th:src="@{/resources/js/vendor/jquery.js}"></script>
+	<script th:src="@{/resources/js/foundation/foundation.js}"></script>
+	<script th:src="@{/resources/js/foundation/foundation.equalizer.js}"></script>
+
 	<nav th:include="topbar :: topbar"></nav>
 
-	<div class="row" >
+	<div class="row" data-equalizer="1">
 		<div class="small-12 columns">
 			<p>&nbsp;</p>
 
 			<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4" >
 				<li th:each="Article : ${anzeigen}">
-					<a th:href="@{/showArticle/}+${Article.id}"><img th:src="@{/showPicture/}+${Article.id}" src="http://placehold.it/1000x1000&amp;text=Thumbnail" style="width:230px;height:155px"/></a>
-					<div class="panel">
+					<a th:href="@{/showArticle/}+${Article.id}"><img th:src="@{/showPicture/}+${Article.id}"/></a>
+					<div class="panel" data-equalizer-watch="1">
 						<h5 th:text="${Article.title}">Item Name</h5>
 						<h5><small th:text="${Article.location}"></small></h5> 
 					</div>
@@ -43,6 +47,10 @@
 	</div>
 
 	<footer th:include="footer :: footer"></footer>
+
+	<script>
+		$(document).foundation();
+	</script>
 
 </body>
 </html>

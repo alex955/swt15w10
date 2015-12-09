@@ -18,7 +18,7 @@ import kickstart.model.ArticleRepo;
 @Controller
 public class CommonVariables {
     @Autowired
-    protected static UserRepository userRepository;
+    protected UserRepository userRepository;
     
 	@Autowired
 	protected CategoryRepo categories;
