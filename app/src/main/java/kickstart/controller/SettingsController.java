@@ -3,6 +3,7 @@ package kickstart.controller;
 import kickstart.model.*;
 import kickstart.utilities.CategoryMethods;
 
+import org.hibernate.validator.constraints.Email;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -108,11 +109,15 @@ public class SettingsController {
         user.setAddressAddition(userSettings.getNewAddressAddition());
 
         //Email-Änderung
+        if(!userSettings.getNewEmail().isEmpty()) {
+            //TODO Email Bestätigung
+           /* Validator validator = new Validator(user, 3);
+            validatorRepository.save(validator);
+            EMailController.sendEmail(user.getEmail(), validator.getToken(), 3);
+            */
 
-        //TODO: Email Confirmation
-
-        if(!userSettings.getNewEmail().isEmpty())
-        user.setEmail(userSettings.getNewEmail());
+            user.setEmail(userSettings.getNewEmail());
+        }
 
         //Passwort-Änderung
         if(!userSettings.getNewPassword().isEmpty()) {
@@ -150,7 +155,7 @@ public class SettingsController {
 
         return "redirect:/search";
     }
-    
+
     @RequestMapping(value = "/deleteuser")
     public String deleteUser(@LoggedIn Optional<UserAccount> userAccount, ModelMap modelMap) throws AddressException, MessagingException {
         User user = userRepository.findByUserAccount(userAccount.get());

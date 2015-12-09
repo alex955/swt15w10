@@ -28,47 +28,47 @@ public class EMailController {
 
 	@Autowired
 	private UserAccountManager userAccountManager;
-	
-    @Autowired
-    private final UserRepository userRepository;
+
+	@Autowired
+	private final UserRepository userRepository;
 
 	@Autowired
 	private ValidatorRepository validatorRepository;
 
 	@Autowired
-    public EMailController(UserRepository userRepository, ValidatorRepository validatorRepository){
+	public EMailController(UserRepository userRepository, ValidatorRepository validatorRepository) {
 		this.validatorRepository = validatorRepository;
 		this.userRepository = userRepository;
-        
-    }
-	
-    /**
-     * Sends E-Mail by using the MimeMessage Class with the smpt protocol.
-     * 
-     * @author Lukas Klose
-     */
-	  public static void sendEmail(String receiver, String token, int usage) throws AddressException, MessagingException{
 
-		  final String username = "gandalf324687992";
-		  final String password = "324687992";
+	}
+
+	/**
+	 * Sends E-Mail by using the MimeMessage Class with the smpt protocol.
+	 *
+	 * @author Lukas Klose
+	 */
+	public static void sendEmail(String receiver, String token, int usage) throws AddressException, MessagingException {
+
+		final String username = "gandalf324687992";
+		final String password = "324687992";
 
 
-		  Properties props = new Properties();
-		  props.put("mail.smtp.auth", "true");
-		  props.put("mail.smtp.starttls.enable", "true");
-		  props.put("mail.smtp.host", "smtp.gmail.com");
-		  props.put("mail.smtp.port", "587");
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
 
-		  Session session = Session.getInstance(props,
-		          new javax.mail.Authenticator() {
-		              protected PasswordAuthentication getPasswordAuthentication() {
-		                  return new PasswordAuthentication(username, password);
-		              }
-		          });
+		Session session = Session.getInstance(props,
+				new javax.mail.Authenticator() {
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(username, password);
+					}
+				});
 
-          Message message = new MimeMessage(session);
-          message.setFrom(new InternetAddress("gandalf324687992@gmail.com"));
-          message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiver));
+		Message message = new MimeMessage(session);
+		message.setFrom(new InternetAddress("gandalf324687992@gmail.com"));
+		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiver));
 
           /*
           * Cases: 1 = Registrierung
@@ -76,50 +76,56 @@ public class EMailController {
           *  TODO  3 = Email ändern
           */
 
-          switch(usage) {
+		switch (usage) {
 
-              case 1: {
-                  message.setSubject("RefugeeApp: EMail-Verifizierung");
-                  message.setText("Zum Registrieren Ihrer Email klicken Sie auf den Link.\n\n" + "http://localhost:8080/validate?id=" + token);
-                  break;
-              }
-
-              case 2: {
-                  message.setSubject("RefugeeApp: Account deaktivieren");
-                  message.setText("Zum Deaktivieren Ihres Accounts klicken Sie auf den Link.\n\n" + "http://localhost:8080/validate?id=" + token);
-              }
-
-          }
-          Transport.send(message);
-      }
-	    /**
-	     * 
-	     * Searches for the given HashID in UserRepository and sets the validated flag to true if 
-	     * it is found.
-	     * 
-	     * @author Lukas Klose
-	     */
-	  @RequestMapping(value = "/validate")
-	  public String validation(@RequestParam String id){
-
-		  Validator validator = validatorRepository.findByToken(id);
-
-		  if (validator == null)
-			  return "frontpage";
-
-		  else {
-			switch(validator.getUsage()) {
-				case 1:
-					userAccountManager.enable(validator.getUser().getUserAccount().getIdentifier());
-					break;
-				case 2:
-					userAccountManager.disable(validator.getUser().getUserAccount().getIdentifier());
-					break;
+			case 1: {
+				message.setSubject("RefugeeApp: EMail-Verifizierung");
+				message.setText("Zum Registrieren Ihres Accounts klicken Sie auf den Link.\n\n" + "http://localhost:8080/validate?id=" + token);
+				break;
 			}
-		  }
-		  return "redirect:/";
+
+			case 2: {
+				message.setSubject("RefugeeApp: Account deaktivieren");
+				message.setText("Zum Deaktivieren Ihres Accounts klicken Sie auf den Link.\n\n" + "http://localhost:8080/validate?id=" + token);
+			}
+
+			/*  case 3: {
+				  message.setSubject("RefugeeApp: EMail Änderung");
+				  message.setText("Zum Ändern Ihrer Mailadresse klicken Sie auf den Link.\n\n" + "http://localhost:8080/validate?id=" + token);
+			  } */
+
+		}
+		Transport.send(message);
 	}
 
+	/**
+	 * Searches for the given HashID in UserRepository and sets the validated flag to true if
+	 * it is found.
+	 *
+	 * @author Lukas Klose
+	 */
+	@RequestMapping(value = "/validate")
+	public String validation(@RequestParam String id) {
 
-	  
+		Validator validator = validatorRepository.findByToken(id);
+
+		if (validator == null)
+			return "frontpage";
+
+		else {
+			switch (validator.getUsage()) {
+				case 1: {
+					userAccountManager.enable(validator.getUser().getUserAccount().getIdentifier());
+					break;
+				}
+				case 2: {
+					userAccountManager.disable(validator.getUser().getUserAccount().getIdentifier());
+					break;
+				}
+			}
+			return "redirect:/";
+		}
+
+
+	}
 }
