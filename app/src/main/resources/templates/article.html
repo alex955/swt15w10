@@ -52,7 +52,7 @@
 				</div>
 			</div>
 
-			<div class="panel" th:if="${Creator.id} != ${currentUserId}">
+			<div class="panel" th:if="${Creator.id} != ${currentUserId}" sec:authorize="isAuthenticated()">
 				<label>Kontakt</label>
 				<hr></hr>
 				<div class="row">

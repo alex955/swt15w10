@@ -115,7 +115,7 @@ public class ArticleController {
 		long currentUserId = this.userRepository.findByUserAccount(userAccount.get()).getId();
 		
 		//case: current user didnt create article || logged in user no admin -> end
-		if(originalArticle.getCreator().getId() != currentUserId || !userAccount.get().hasRole(new Role("ROLE_ADMIN"))){
+		if(originalArticle.getCreator().getId() != currentUserId && !userAccount.get().hasRole(new Role("ROLE_ADMIN"))){
 			return null;
 		}
 		
@@ -131,6 +131,8 @@ public class ArticleController {
 		originalArticle.setStreet(newArticleForm.getStreetName());
 		originalArticle.setNumber(newArticleForm.getHouseNumber());
 		originalArticle.setAddressAddition(newArticleForm.getAdressAddition());
+		
+		System.out.println("debug3");
 		
 		this.articleRepo.save(originalArticle);
 		
