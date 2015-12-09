@@ -33,22 +33,26 @@
       </div>
 
       <div class="grid-block collapse medium-9 large-9 vertical">
-        
+ 
         <div class="grid-block">
           <div class="grid-block small-12 medium-9 vertical">
             <div class="grid-content">
           <b>Incoming Messages</b>
+          <div th:if="${incomingMessages} != null">
           <div th:each="inMsg : ${incomingMessages}">
           	
           	  <u th:text="'Nachricht von User mit ID ' + ${inMsg.fromId} + ', Titel der Nachricht: ' + ${inMsg.title}"></u> 
           </div>
+          </div>
           <hr>
           	</hr>
           <b>Outgoing Messages</b>
+          <div th:if="${outgoingMessages} != null">
           <div th:each="outMsg : ${outgoingMessages}">
           	<hr>
-          	  <u th:text="'Nachricht für User mit ID ' + ${inMsg.toId} + ', Titel der Nachricht: ' + ${inMsg.title}"></u> 
+          	  <u th:text="'Nachricht für User mit ID ' + ${outMsg.toId} + ', Titel der Nachricht: ' + ${outMsg.title}"></u> 
           	</hr>
+          </div>
           </div>
               
             </div>
@@ -60,12 +64,11 @@
             </div>
           </div>
 		  
-		  
-		  
+		 
           <div class="grid-content medium-3 show-for-medium message-side-bar">
 			 <div th:include="chat/chatRightBar ::chatRightBar"></div>
 			
-       </div>  
+       </div>
 			  
 			  
 			  

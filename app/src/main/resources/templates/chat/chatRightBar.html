@@ -25,12 +25,12 @@
 		  
 		<div th:fragment="chatRightBar"> 
             <section class="block-list">
-              <header>Incoming</header>
+              <header>bekommene Anfragen</header>
               <ul>
                 <li th:each="inMsg : ${incomingMessages}"><a th:href="@{/chat/thread/{id}(id=${inMsg.id})}">Name</a></li>
               </ul>
               
-              <header>Outgoing</header>
+              <header>gestelte Anfragen</header>
                <ul>
                 <li th:each="outMsg : ${outgoingMessages}"><a th:href="@{/chat/thread/{id}(id=${outMsg.id})}">Name</a></li>
               </ul>

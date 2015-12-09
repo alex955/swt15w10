@@ -104,7 +104,32 @@ public class ChatController {
 		model.addAttribute("outgoingMessages", outgoing);
 		//for menu end
 		
+		model.addAttribute("stringInForm", new StringInForm());
+		
 		return "chat/chatThread";
+	}
+	
+	@RequestMapping(value = "/chat/inspectChat/append/{id}", method = RequestMethod.POST)
+	public String appendConversation(@PathVariable("id") long id,Model model, @LoggedIn Optional<UserAccount> userAccount, @ModelAttribute("chatMessage") StringInForm newString) {
+		if(userAccount.get() == null) return "error";
+		
+		long currentUserId = this.userRepository.findByUserAccount(userAccount.get()).getId();
+		ChatConversation currentChat = this.chatRepo.findOne(id);
+		
+		if(currentChat.getFromId() != currentUserId && currentChat.getToId() != currentUserId) return "error/notAuthenticated";
+		
+		ChatMessage newMessage = new ChatMessage();
+		newMessage.setFromId(currentChat.getFromId());
+		newMessage.setMessage(newString.getContent());
+		newMessage.setToId(currentChat.getToId());
+		
+		this.msgRepo.save(newMessage);
+		
+		currentChat.addChatMessage(newMessage);
+		
+		this.chatRepo.save(currentChat);
+		
+		return "redirect:/chat/thread/{id}";
 	}
 	
 	
@@ -120,6 +145,8 @@ public class ChatController {
 		
 		return "chat/newMessage";
 	}
+	
+
 	
 	@RequestMapping(value = "/chat/newConversation/{id}", method = RequestMethod.POST)
 	public String processNewMessage(@PathVariable("id") long id,Model model, @LoggedIn Optional<UserAccount> userAccount, @ModelAttribute("chatMessage") StringInForm newString) {
