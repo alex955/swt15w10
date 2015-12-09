@@ -105,6 +105,7 @@ public class ChatController {
 		//for menu end
 		
 		model.addAttribute("stringInForm", new StringInForm());
+		model.addAttribute("currentUserId", currentUserId);
 		
 		return "chat/chatThread";
 	}
@@ -119,9 +120,17 @@ public class ChatController {
 		if(currentChat.getFromId() != currentUserId && currentChat.getToId() != currentUserId) return "error/notAuthenticated";
 		
 		ChatMessage newMessage = new ChatMessage();
-		newMessage.setFromId(currentChat.getFromId());
+		newMessage.setFromId(currentUserId);
 		newMessage.setMessage(newString.getContent());
-		newMessage.setToId(currentChat.getToId());
+		
+		long chatPartnerId;
+		if(currentChat.getFromId() == currentUserId) {
+			chatPartnerId = currentChat.getToId();
+		}
+		else{
+			chatPartnerId = currentChat.getFromId();
+		}
+		newMessage.setToId(chatPartnerId);
 		
 		this.msgRepo.save(newMessage);
 		
@@ -148,7 +157,7 @@ public class ChatController {
 	
 
 	
-	@RequestMapping(value = "/chat/newConversation/{id}", method = RequestMethod.POST)
+	@RequestMapping(value = "/chat/processNewConversation/{id}", method = RequestMethod.POST)
 	public String processNewMessage(@PathVariable("id") long id,Model model, @LoggedIn Optional<UserAccount> userAccount, @ModelAttribute("chatMessage") StringInForm newString) {
 		if(userAccount.get() == null) return "error";
 		
@@ -181,7 +190,7 @@ public class ChatController {
 		
 		this.chatRepo.save(newConversation);
 		
-		return "chat";
+		return "redirect:/chat";
 	}
 	
 	

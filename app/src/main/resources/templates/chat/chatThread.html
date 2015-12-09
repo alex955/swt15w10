@@ -37,11 +37,11 @@
         <div class="grid-block">
           <div class="grid-block small-12 medium-9 vertical">
       	<a th:href="@{/chat/thread/{id}(id=${conversation.id})}" class="button">Chat aktualisieren</a>
-       	 <p th:text="'Nachricht von User mit ID ' + ${conversation.fromId} + ' mit Betreff ' + ${conversation.title}"></p> 
+       	 <p th:text="'Nachrichten von und an User mit ID ' + ${conversation.fromId} + ' mit Betreff ' + ${conversation.title}"></p> 
        			<p th:each="var : ${conversation.content}">
        				<hr>
-       					<span th:text="${var.message}"></span>
-       					<span th:text="${var.message}"></span>
+       					<span th:text="(${var.fromId} == ${currentUserId}) ? 'von mir geschickt' : 'von Gesprächspartner geschickt'"></span>
+       					<span th:text="'Nachricht: ' + ${var.message}"></span>
        				</hr>
        			</p>
        
