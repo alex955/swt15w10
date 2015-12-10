@@ -26,16 +26,22 @@ public class PictureController{
 		this.articleRepo=articleRepo;
 	}
 
+	/**
+	 * @param id
+	 * @return
+	 * @throws IOException
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/showPicture/{id}", produces = "image/jpg")
 	public FileSystemResource showArticle(@PathVariable("id") long id) throws IOException{
 		if(articleRepo.findOne(id).getPicture() == null){
-			//in case some does not upload a picture
-			//this is the path on saschas computer, at the end we have to change to the picture on the server
+			//in case someone does not upload a picture
+			//this is the path in a git ignore file, at the end we have to change to the picture on the server
 			String standardPicPath = PicturePathSettings.picturePath;
 			resource = new FileSystemResource(standardPicPath);
 		}
 		else	
+			//in case there is a picture, we use the path from the model picture
 			resource = new FileSystemResource(articleRepo.findOne(id).getPicture().getPicPath());
 		return resource;
 	}

@@ -235,6 +235,11 @@ public class ArticleController {
 	
 	
 	//create a new Article
+	/**
+	 * @param newArticleForm
+	 * @param userAccount
+	 * @return
+	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/newArticle", method = RequestMethod.POST)
     public String newArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, @LoggedIn Optional<UserAccount> userAccount) {
@@ -255,10 +260,7 @@ public class ArticleController {
                 stream.close();
                 System.out.println("Server File Location="
                         + serverFile.getAbsolutePath());
- 
-                // aktuelles Datum in String umgewandelt
-               
-                
+                               
                 //get the logged in user
                 User creator = userRepository.findByUserAccount(userAccount.get());
                 Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename(), creator);
@@ -281,17 +283,6 @@ public class ArticleController {
     		articleRepo.save(article);
     		System.out.println(article);
             return ("redirect:/search");
-            
         }
 	}
-	
-	
-	
 }
-
-	
-//    public @ResponseBody
-//    String uploadFileHandler(@RequestParam("name") String name,
-//            @RequestParam("file") MultipartFile file) {
- 
-      
