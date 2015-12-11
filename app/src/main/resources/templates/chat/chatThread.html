@@ -50,7 +50,9 @@
               <span class="inline-label">
               <form action="#" th:action="@{/chat/inspectChat/append/{id}(id=${conversation.id})}" th:object="${stringInForm}" method="post" enctype="multipart/form-data">
                 <div class="small-11 columns">
-								<textarea rows="4" th:field="*{content}"></textarea>
+								<select th:field="*{content}">
+             						<option th:each="possibleMessage : ${possibleMessages}" th:value="${possibleMessage}" th:text="${possibleMessage}">.</option>
+            					</select>
 							</div>
 							<div class="small-12 columns">
                                <button type="submit">Nachricht senden</button>

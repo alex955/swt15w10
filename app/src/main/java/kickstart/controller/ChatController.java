@@ -25,6 +25,7 @@ import kickstart.model.User;
 import kickstart.model.UserRepository;
 import kickstart.utilities.CategoryMethods;
 import kickstart.utilities.ChatMessage;
+import kickstart.utilities.PossibleChatMessages;
 import kickstart.utilities.StringInForm;
 
 @Controller
@@ -35,6 +36,9 @@ public class ChatController {
 	@Autowired private final ArticleRepo articleRepo;
 	@Autowired private final ChatConversationRepo chatRepo;
     @Autowired private final UserRepository userRepository;
+    
+    //TODO - replace variable with e.g. repo for chat content
+    private List<String> possibleChatMessages = new PossibleChatMessages().getPossibleChatMessage();
     
     //do not use, just for persistene/transaction(?) use
     @Autowired private final ChatMessageRepo msgRepo;
@@ -95,6 +99,8 @@ public class ChatController {
 		model.addAttribute("conversation", conversation);
 		model.addAttribute("currentUserStartedConversation", currentUserStartedConversation);
 		
+		model.addAttribute("possibleMessages", possibleChatMessages);
+		
 		
 		//for menu
 		List<ChatConversation> incoming = this.chatRepo.findByToId(this.userRepository.findByUserAccount(userAccount.get()).getId());
@@ -151,6 +157,8 @@ public class ChatController {
 		model.addAttribute("article", this.articleRepo.findOne(id));
 
 		model.addAttribute("stringInForm", new StringInForm());
+		
+		model.addAttribute("possibleMessages", possibleChatMessages);
 		
 		return "chat/newMessage";
 	}
