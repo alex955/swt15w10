@@ -38,9 +38,11 @@ public class SettingsController {
     private final UserRepository userRepository;
 
     @Autowired
-    private ValidatorRepository validatorRepository;
+    private final SettingsRepo settingsRepo;
 
     @Autowired
+    private ValidatorRepository validatorRepository;
+
     private UserAccountManager userAccountManager;
     
 	@Autowired private final CategoryMethods categoryMethods;
@@ -55,13 +57,14 @@ public class SettingsController {
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
 
     @Autowired
-    public SettingsController(ArticleRepo articleRepo, UserRepository userRepository, UserAccountManager userAccountManager, PasswordEncoder passwordEncoder, CategoryMethods categoryMethods, ValidatorRepository validatorRepository){
+    public SettingsController(ArticleRepo articleRepo, UserRepository userRepository, UserAccountManager userAccountManager, PasswordEncoder passwordEncoder, CategoryMethods categoryMethods, ValidatorRepository validatorRepository, SettingsRepo settingsRepo){
         this.userRepository = userRepository;
         this.userAccountManager= userAccountManager;
         this.passwordEncoder = passwordEncoder;
         this.categoryMethods = categoryMethods;
         this.articleRepo = articleRepo;
         this.validatorRepository = validatorRepository;
+        this.settingsRepo = settingsRepo;
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -79,9 +82,11 @@ public class SettingsController {
 
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/usersettings", method = RequestMethod.POST)
-    public String saveSettings(@LoggedIn Optional<UserAccount> userAccount, @ModelAttribute("UserSettings") @Valid UserSettings userSettings, BindingResult result, Model model) throws AddressException, MessagingException {
+    public String saveSettings(@LoggedIn Optional<UserAccount> userAccount, @ModelAttribute("UserSettings") @Valid UserSettings userSettings, BindingResult result, Model model, SettingsRepo settingsRepo) throws AddressException, MessagingException {
 
         User user = userRepository.findByUserAccount(userAccount.get());
+
+        userSettings.setUserId(user.getId());
 
         this.processedCategories = categoryMethods.getProcessedCategories();
         model.addAttribute("categories", this.processedCategories);
@@ -110,11 +115,10 @@ public class SettingsController {
 
         //Email-Änderung
         if(!userSettings.getNewEmail().isEmpty()) {
-            //TODO Email Bestätigung
-           /* Validator validator = new Validator(user, 3);
+
+            Validator validator = new Validator(user, 3);
             validatorRepository.save(validator);
             EMailController.sendEmail(user.getEmail(), validator.getToken(), 3);
-            */
 
             user.setEmail(userSettings.getNewEmail());
         }
@@ -149,9 +153,9 @@ public class SettingsController {
             user.setLanguage3(userSettings.getNewLanguage3());
         }
 
-
         userAccountManager.save(user.getUserAccount());
         userRepository.save(user);
+        settingsRepo.save(userSettings);
 
         return "redirect:/search";
     }

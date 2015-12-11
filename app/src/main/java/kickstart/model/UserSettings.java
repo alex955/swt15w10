@@ -4,14 +4,41 @@ package kickstart.model;
 import org.hibernate.validator.constraints.Email;
 import org.salespointframework.useraccount.Role;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
  * Created by Vincenz on 25.11.15.
  */
-public class UserSettings {
-	private String newLastName;
+public class UserSettings{
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    private long userId;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+    private String newLastName;
 	private String newFirstName;
 
     @Email(message = "Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.")

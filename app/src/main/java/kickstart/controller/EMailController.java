@@ -12,15 +12,12 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import kickstart.model.Validator;
-import kickstart.model.ValidatorRepository;
+import kickstart.model.*;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import kickstart.model.User;
-import kickstart.model.UserRepository;
 
 
 @Controller
@@ -34,6 +31,9 @@ public class EMailController {
 
 	@Autowired
 	private ValidatorRepository validatorRepository;
+
+	@Autowired
+	private SettingsRepo settingsRepo;
 
 	@Autowired
 	public EMailController(UserRepository userRepository, ValidatorRepository validatorRepository) {
@@ -113,13 +113,21 @@ public class EMailController {
 			return "frontpage";
 
 		else {
+
+			User user = validator.getUser();
+			UserSettings userSettings = settingsRepo.findByUserId(user.getId());
+
 			switch (validator.getUsage()) {
 				case 1: {
-					userAccountManager.enable(validator.getUser().getUserAccount().getIdentifier());
+					userAccountManager.enable(user.getUserAccount().getIdentifier());
 					break;
 				}
 				case 2: {
-					userAccountManager.disable(validator.getUser().getUserAccount().getIdentifier());
+					userAccountManager.disable(user.getUserAccount().getIdentifier());
+					break;
+				}
+				case 3:{
+					user.setEmail(userSettings.getNewEmail());
 					break;
 				}
 			}
