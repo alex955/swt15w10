@@ -38,11 +38,12 @@
         <div class="grid-block">
           <div class="grid-block small-12 medium-9 vertical">
       	<a th:href="@{/chat/thread/{id}(id=${conversation.id})}" class="button">Chat aktualisieren</a>
-       	 <p th:text="'Nachrichten von und an User mit ID ' + ${conversation.fromId} + ' mit Betreff ' + ${conversation.title}"></p> 
+       	 <b th:text="'Nachrichten von und an User mit ID ' + ${conversation.fromId} + ' mit Betreff ' + ${conversation.title}"></b> 
        			<p th:each="var : ${conversation.content}">
        				<hr>
-       					<span th:text="(${var.fromId} == ${currentUserId}) ? 'von mir geschickt' : 'von Gesprächspartner geschickt'"></span>
-       					<span th:text="'Nachricht: ' + ${var.message}"></span>
+       					<u th:text="(${var.fromId} == ${currentUserId}) ? 'von mir geschickt' : 'von Gesprächspartner geschickt'"></u>
+       					<p th:text="'gewählter Textblock: ' + ${var.message}"></p>
+       					<p th:text="'geschriebener Freitext: ' + ${var.freeText}"></p>
        				</hr>
        			</p>
        
@@ -50,9 +51,15 @@
               <span class="inline-label">
               <form action="#" th:action="@{/chat/inspectChat/append/{id}(id=${conversation.id})}" th:object="${stringInForm}" method="post" enctype="multipart/form-data">
                 <div class="small-11 columns">
+                			<p>
 								<select th:field="*{content}">
              						<option th:each="possibleMessage : ${possibleMessages}" th:value="${possibleMessage}" th:text="${possibleMessage}">.</option>
             					</select>
+            				</p>
+            				<p>
+            					<textarea rows="4" th:field="*{content2}"></textarea>
+            				</p>	
+            				
 							</div>
 							<div class="small-12 columns">
                                <button type="submit">Nachricht senden</button>

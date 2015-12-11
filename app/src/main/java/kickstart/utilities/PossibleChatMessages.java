@@ -16,6 +16,10 @@ public class PossibleChatMessages {
 	}
 
 	public PossibleChatMessages(){
+		this.possibleChatMessage.add("Hallo! Habe Interesse an dem Artikel.");
+		this.possibleChatMessage.add("optionX");
+		this.possibleChatMessage.add("optionY");
+		
 		this.possibleChatMessage.add("option1");
 		this.possibleChatMessage.add("option2");
 		this.possibleChatMessage.add("option3");

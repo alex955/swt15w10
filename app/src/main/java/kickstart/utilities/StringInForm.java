@@ -18,4 +18,12 @@ public class StringInForm {
 	}
 
 	String content;
+	String content2;
+	public String getContent2() {
+		return content2;
+	}
+
+	public void setContent2(String content2) {
+		this.content2 = content2;
+	}
 }

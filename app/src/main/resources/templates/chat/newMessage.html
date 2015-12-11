@@ -23,9 +23,14 @@
 				<div class="row">
 					<div class="small-12 columns">
 						<form action="#" th:action="@{/chat/processNewConversation/{id}(id=${article.id})}" th:object="${stringInForm}" method="post" enctype="multipart/form-data">
+							<p>
 								<select th:field="*{content}">
              						<option th:each="possibleMessage : ${possibleMessages}" th:value="${possibleMessage}" th:text="${possibleMessage}">.</option>
             					</select>
+            				</p>
+            				<p>
+            					<textarea rows="4" th:field="*{content2}"></textarea>
+            				</p>	
                                <button type="submit">Nachricht senden</button>
 						</form>
 					</div>
