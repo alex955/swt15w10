@@ -40,8 +40,8 @@
 							<li sec:authorize="isAuthenticated()"><a th:href="@{/chat}">Nachrichten</a></li>
 							<li sec:authorize="isAuthenticated()"><a th:href="@{/search/myArticles}">Meine Angebote</a></li>
 							<li sec:authorize="isAuthenticated()"><a th:href="@{/usersettings}">Einstellungen</a></li>
-							<li sec:authorize="isAuthenticated()"><a href="/logout">Ausloggen</a></li>
-							<li sec:authorize="!isAuthenticated()"><a href="/">Einloggen</a></li>
+							<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Ausloggen</a></li>
+							<li sec:authorize="!isAuthenticated()"><a th:href="@{/}">Einloggen</a></li>
 						</ul>
 					</li>
 				</ul>
