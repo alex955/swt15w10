@@ -53,7 +53,7 @@ public class Application extends SpringBootServletInitializer  {
 	@Bean
 	public LocaleResolver localeResolver() {
 	    SessionLocaleResolver slr = new SessionLocaleResolver();
-	    slr.setDefaultLocale(Locale.UK);
+	    slr.setDefaultLocale(Locale.US);
 	    return slr;
 	}
 			
