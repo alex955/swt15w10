@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class EMailController {
 
-	@Autowired
+	
 	private UserAccountManager userAccountManager;
 
 	@Autowired
@@ -36,11 +36,13 @@ public class EMailController {
 	private SettingsRepo settingsRepo;
 
 	@Autowired
-	public EMailController(UserRepository userRepository, ValidatorRepository validatorRepository) {
+	public EMailController(UserRepository userRepository, ValidatorRepository validatorRepository, SettingsRepo settingsRepo) {
+		
 		this.validatorRepository = validatorRepository;
 		this.userRepository = userRepository;
-
+		this.settingsRepo = settingsRepo;
 	}
+
 
 	/**
 	 * Sends E-Mail by using the MimeMessage Class with the smpt protocol.
@@ -89,10 +91,10 @@ public class EMailController {
 				message.setText("Zum Deaktivieren Ihres Accounts klicken Sie auf den Link.\n\n" + "http://localhost:8080/validate?id=" + token);
 			}
 
-			/*  case 3: {
+			  case 3: {
 				  message.setSubject("RefugeeApp: EMail Änderung");
 				  message.setText("Zum Ändern Ihrer Mailadresse klicken Sie auf den Link.\n\n" + "http://localhost:8080/validate?id=" + token);
-			  } */
+			  } 
 
 		}
 		Transport.send(message);
