@@ -36,7 +36,7 @@
 								</div>
 							</div>
 							<div class="row">
-									<div class="large-5 small-3 columns">Name</div>
+									<div class="large-5 small-3 columns" th:text="#{registration.lastName}">Name</div>
 									<div class="large-7 small-9 columns">
 										<label>
 											<font color="red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"> ERROR MESSAGE</font>
@@ -45,7 +45,7 @@
 									</div>
 							</div>
 							<div class="row">
-									<div class="large-5 small-3 columns">Vorname</div>
+									<div class="large-5 small-3 columns" th:text="#{registration.firstName}">Vorname</div>
 									<div class="large-7 small-9 columns">
 										<label>
 											<font color="red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"> ERROR MESSAGE </font>
@@ -54,7 +54,7 @@
 									</div>
 							</div>
 							<div class="row">
-									<div class="large-5 small-3 columns">Username</div>
+									<div class="large-5 small-3 columns" th:text="#{registration.username}">Username</div>
 									<div class="large-7 small-9 columns">
 										<label>
 											<font color="red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"> ERROR MESSAGE </font>
@@ -63,7 +63,7 @@
 									</div>
 							</div>
 							<div class="row">
-									<div class="large-5 small-3 columns">E-Mail</div>
+									<div class="large-5 small-3 columns" th:text="#{registration.email}">E-Mail</div>
 									<div class="large-7 small-9 columns">
 										<label> 
 											<font color="red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> ERROR MESSAGE </font>
@@ -72,7 +72,7 @@
 									</div>
 							</div>
 							<div class="row">
-									<div class="large-5 small-3 columns">Passwort</div>
+									<div class="large-5 small-3 columns" th:text="#{registration.password">Passwort</div>
 									<div class="large-7 small-9 columns">
 										<label>
 											<font color="red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> ERROR MESSAGE </font>
@@ -81,7 +81,7 @@
 									</div>
 							</div>
 							<div class="row">
-									<div class="large-5 small-3 columns">Passwort wiederholen</div>
+									<div class="large-5 small-3 columns" th:text="#{registration.confirmPassword}">Passwort wiederholen</div>
 									<div class="large-7 small-9 columns">
 										<label>
 											<font color="red" th:text="${confirmError}"> ERROR MESSAGE </font>
@@ -99,7 +99,7 @@
 					<div class="small-12 large-6 columns">
 						<div class="panel" data-equalizer-watch="1">
 							<div class="row">
-									<div class="large-5 small-3 columns">Stadt</div>
+									<div class="large-5 small-3 columns" th:text="#{registration.city}">Stadt</div>
 									<div class="large-7 small-9 columns">
 										<label>
 											<font color="red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"> ERROR MESSAGE </font>
@@ -108,7 +108,7 @@
 									</div>
 							</div>
 							<div class="row">
-									<div class="large-5 small-3 columns">PLZ</div>
+									<div class="large-5 small-3 columns" th:text="#{registration.zip}">PLZ</div>
 									<div class="large-7 small-9 columns">
 										<label>
 											<font color="red" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"> ERROR MESSAGE </font>
@@ -117,7 +117,7 @@
 									</div>
 							</div>
 							<div class="row">
-									<div class="large-5 small-3 columns">Straße, Hausnummer, Addresszusatz</div>
+									<div class="large-5 small-3 columns" th:text="#{registration.address}">Straße, Hausnummer, Addresszusatz</div>
 									<div class="large-7 small-9 columns">
 										<label>
 											<font color="red" th:if="${#fields.hasErrors('streetName')}" th:errors="*{streetName}"> ERROR MESSAGE </font>
@@ -134,44 +134,44 @@
 									</div>
 							</div>
 							<div class="row">
-									<div class="large-5 small-3 columns">Sprache 1</div>
-									<div class="large-7 small-9 columns">
-										<select name="language1">
-											<option value="" selected="selected"> - </option>
-											<option value="german">Deutsch</option>
-											<option value="english">Englisch</option>
-											<option value="arab">Arabisch</option>
-											<option value="spanish">Spanisch</option>
-										</select>
+								<div class="large-5 small-3 columns" th:text="#{registration.language1}">Sprache 1</div>
+								<div class="large-7 small-9 columns">
+									<select name="language1">
+										<option value="" selected="selected"> - </option>
+										<option value="german" th:text="#{registration.german}">Deutsch</option>
+										<option value="english" th:text="#{registration.english}">Englisch</option>
+										<option value="arab" th:text="#{registration.arab}">Arabisch</option>
+										<option value="spanish" th:text="#{registration.spanish}">Spanisch</option>
+									</select>
 									</div>
 							</div>
 							<div class="row">
-									<div class="large-5 small-3 columns">Sprache 2</div>
-									<div class="large-7 small-9 columns">
-										<select name="language2">
-                                            <option value="" selected="selected"> - </option>
-											<option value="german">Deutsch</option>
-											<option value="english">Englisch</option>
-											<option value="arab">Arabisch</option>
-											<option value="spanish">Spanisch</option>
-										</select>
-									</div>
+								<div class="large-5 small-3 columns" th:text="#{registration.language2}">Sprache 2</div>
+								<div class="large-7 small-9 columns">
+									<select name="language2">
+										<option value="" selected="selected"> - </option>
+										<option value="german" th:text="#{registration.german}">Deutsch</option>
+										<option value="english" th:text="#{registration.english}">Englisch</option>
+										<option value="arab" th:text="#{registration.arab}">Arabisch</option>
+										<option value="spanish" th:text="#{registration.spanish}">Spanisch</option>
+									</select>
+								</div>
 							</div>
 							<div class="row">
-									<div class="large-5 small-3 columns">Sprache 3</div>
+									<div class="large-5 small-3 columns" th:text="#{registration.language3}">Sprache 3</div>
 									<div class="large-7 small-9 columns">
 										<select name="language3">
 											<option value="" selected="selected"> - </option>
-											<option value="german">Deutsch</option>
-											<option value="english">Englisch</option>
-											<option value="arab">Arabisch</option>
-											<option value="spanish">Spanisch</option>
+											<option value="german" th:text="#{registration.german}">Deutsch</option>
+											<option value="english" th:text="#{registration.english}">Englisch</option>
+											<option value="arab" th:text="#{registration.arab}">Arabisch</option>
+											<option value="spanish" th:text="#{registration.spanish}">Spanisch</option>
 										</select>
 									</div>
                             </div>
                             <div class="row">
                                 <div class="small-12 columns">
-                                    <button type="submit" th:href="@{/}">Registrieren</button>
+                                    <button type="submit" th:href="@{/}" th:text="#{registration.register">Registrieren</button>
                                 </div>
                             </div>
 						</div>
