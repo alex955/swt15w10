@@ -18,30 +18,30 @@
 			<ul class="title-area">
 				<li class="name">
 					<h1>
-						<a th:href="@{/search}">Appname.</a>
+						<a th:href="@{/search}" th:text="#{topbar.name}">Appname.</a>
 					</h1>
 				</li>
 				<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-				<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+				<li class="toggle-topbar menu-icon"><a href="#" th:text="#{topbar.menu}"><span>Menu</span></a></li>
 			</ul>
 			<section class="top-bar-section">
 				<!-- Right Nav Section -->
 				<ul class="right">
-					<li class="active"><a th:href="@{/newArticle}">Angebot
+					<li class="active"><a th:href="@{/newArticle}" th:text="#{topbar.listArticle}">Angebot
 							einstellen</a></li>
 					<li class="divider"></li>
-					<li class="has-dropdown"><a href="#">Account</a>
+					<li class="has-dropdown"><a href="#" th:text="#{topbar.account}">Account</a>
 						<ul class="dropdown">
-						<li class="has-dropdown"><a href="#">Sprache</a>
+						<li class="has-dropdown"><a href="#" th:text="#{topbar.language}">Sprache</a>
 							<ul class="dropdown">
 							<li><a href="/frontpage">deutsch</a></li>
 							</ul>
 							</li>
-							<li><a th:href="@{/chat}">Nachrichten</a></li>
-							<li><a th:href="@{/search/myArticles}">Meine Angebote</a></li>
-							<li><a th:href="@{/usersettings}">Einstellungen</a></li>
-							<li sec:authorize="isAuthenticated()"><a href="/logout">Ausloggen</a></li>
-							<li sec:authorize="!isAuthenticated()"><a href="/">Einloggen</a></li>
+							<li><a th:href="@{/chat}" th:text="#{topbar.messages}">Nachrichten</a></li>
+							<li><a th:href="@{/search/myArticles}" th:text="#{topbar.myArticles}">Meine Angebote</a></li>
+							<li><a th:href="@{/usersettings}" th:text="#{topbar.settings}">Einstellungen</a></li>
+							<li sec:authorize="isAuthenticated()"><a href="/logout" th:text="#{topbar.logout}">Ausloggen</a></li>
+							<li sec:authorize="!isAuthenticated()"><a href="/" th:text="#{topbar.login}">Einloggen</a></li>
 						</ul></li>
 				</ul>
 
@@ -55,11 +55,11 @@
 						<ul class="dropdown" id="dropdown">
 							<li th:each="categoryTopbar : ${categories}" class="has-dropdown">
 								<a th:href="@{/search/{id}(id=${categoryTopbar.cat.id})}"><span
-									th:text="${categoryTopbar.cat.name}">Subkategorien anschauen</span></a>
+									th:text="${categoryTopbar.cat.name} "th:text="#{topbar.viewSubs}">Subkategorien anschauen</span></a>
 								<ul class="dropdown">
 									<li th:each="subcategory : ${categoryTopbar.subcats}"><a
 										th:href="@{/search/{id}(id=${subcategory.id})}"><span
-											th:text="${subcategory.name}">Subkategorien anschauen</span></a></li>
+											th:text="${subcategory.name}" th:text="#{topbar.viewSubs}">Subkategorien anschauen</span></a></li>
 								</ul>
 							</li>
 						</ul>
@@ -79,7 +79,7 @@
 						</ul></li>
 					<li class="divider"></li>
 					<li class="has-form">
-      				<button id="search" value ="Suchen" type="submit" >Suchen</button>
+      				<button id="search" value ="Suchen" type="submit" th:text="#{topbar.search}">Suchen</button>
     				</li>
 					
 

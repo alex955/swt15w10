@@ -18,7 +18,7 @@
 			<p>&nbsp;</p>
 			<p>&nbsp;</p>
 			<p>&nbsp;</p>
-			<div class="text-center"><h1 th:text="#{field1}">Frontpage</h1></div>		
+			<div class="text-center"><h1 th:text="#{frontpage.welcome}">Frontpage</h1></div>
 			<p>&nbsp;</p>
 			<p>&nbsp;</p>
 			<p>&nbsp;</p>
@@ -31,8 +31,8 @@
 				<form action="#" th:action="@{/}" method="post">
 					<p>&nbsp;</p>
 					<p>&nbsp;</p>
-					<div th:if="${param.error}" class="alert alert-error"><font color="red"> Ungültger Username und/oder Passwort.</font></div>
-					<div th:if="${param.logout}" class="alert alert-success"> Sie wurden ausgeloggt. </div>
+					<div th:if="${param.error}" class="alert alert-error"><font color="red" th:text="#{frontpage.loginError}"> Ungültger Username und/oder Passwort.</font></div>
+					<div th:if="${param.logout}" class="alert alert-success" th:text="#{frontpage.logoutSuccess}"> Sie wurden ausgeloggt. </div>
 					<label>
 						<input type="text" name="username" placeholder="Username" />
 					</label>
@@ -46,7 +46,7 @@
 					</div>
 				</form>
 
-				<a th:href="@{/registration}" href="#">Noch keinen Account? Hier registrieren!</a>
+				<a th:href="@{/registration}" href="#" th:text="#{frontpage.registration}">Noch keinen Account? Hier registrieren!</a>
 			</div>
 		</div>
 	</div>
