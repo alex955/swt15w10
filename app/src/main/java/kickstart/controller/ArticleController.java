@@ -208,11 +208,12 @@ public class ArticleController {
 //	}
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping("/newArticle")
-	public String newArticle(Model model){
+	public String newArticle(Model model, @LoggedIn Optional<UserAccount> userAccount){
 		//initiate categories
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
+		model.addAttribute("creator", userRepository.findByUserAccount(userAccount.get()));
 		return "newArticle";
 	}
 	
