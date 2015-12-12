@@ -69,21 +69,21 @@
 					<div class="row">
 						<div class="small-4 columns">Stadt</div>
 						<div class="small-8 columns">										
-							<input type="text" name="city" placeholder="Stadt" />
+							<input type="text" name="city" placeholder="Stadt" th:value="${creator.city}"/>
 						</div>
 					</div>
 					<div class="row">
 						<div class="small-4 columns">PLZ</div>
 						<div class="small-8 columns">										
-							<input type="text" name="zip" placeholder="PLZ" />
+							<input type="text" name="zip" placeholder="PLZ" th:value="${creator.zip}"/>
 						</div>
 					</div>
 					<div class="row">
 						<div class="small-4 columns">Straße, Hausnummer, Addresszusatz</div>
 						<div class="small-8 columns">
-							<input type="text" name="streetName" placeholder="Straßenname" />
-                            <input type="text" name="houseNumber" placeholder="Hausnummmer" />                            						
-							<input type="text" name="addressAddition" placeholder="(optional)" />
+							<input type="text" name="streetName" placeholder="Straßenname" th:value="${creator.streetName}"/>
+                            <input type="text" name="houseNumber" placeholder="Hausnummmer" th:value="${creator.houseNumber}"/>                            						
+							<input type="text" name="addressAddition" placeholder="(optional)"/>
 						</div>
 					</div>	
 					<hr />
