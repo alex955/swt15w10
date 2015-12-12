@@ -41,7 +41,7 @@
        	 <b th:text="'Nachrichten von und an User mit ID ' + ${conversation.fromId} + ' mit Betreff ' + ${conversation.title}"></b> 
        			<p th:each="var : ${conversation.content}">
        				<hr>
-       					<u th:text="(${var.fromId} == ${currentUserId}) ? 'von mir geschickt' : 'von Gesprächspartner geschickt'"></u>
+       					<u th:text="(${var.fromId} == ${currentUserId}) ? 'von mir geschickt' : 'von Gesprächspartner geschickt'"></u><u th:text="'um: '+${var.time}"></u>
        					<p th:text="'gewählter Textblock: ' + ${var.message}"></p>
        					<p th:text="'geschriebener Freitext: ' + ${var.freeText}"></p>
        				</hr>

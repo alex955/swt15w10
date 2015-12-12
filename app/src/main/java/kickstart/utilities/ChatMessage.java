@@ -1,5 +1,7 @@
 package kickstart.utilities;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,11 +17,14 @@ public class ChatMessage {
 	private String message;
 	private String freeText;
 	
+	private LocalDateTime time;
+	
 	private long fromId, toId;
 	
 	public ChatMessage() {
 		message = "";
 		fromId = toId = 0;
+		this.setTime(LocalDateTime.now());
 	}
 	
 	public long getId() {
@@ -56,6 +61,14 @@ public class ChatMessage {
 
 	public void setFreeText(String freeText) {
 		this.freeText = freeText;
+	}
+
+	public LocalDateTime getTime() {
+		return time;
+	}
+
+	public void setTime(LocalDateTime time) {
+		this.time = time;
 	}
 
 }
