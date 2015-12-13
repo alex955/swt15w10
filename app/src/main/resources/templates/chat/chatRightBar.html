@@ -28,12 +28,12 @@
             <section class="block-list">
               <header>erhaltene Anfragen</header>
               <ul>
-                <li th:each="inMsg : ${incomingMessages}"><a th:href="@{/chat/thread/{id}(id=${inMsg.id})}" th:text="'von UserId  ' + ${inMsg.fromId}+ ', über: '+${inMsg.title}">Name</a></li>
+                <li th:each="inMsg : ${incomingMessages}"><a th:href="@{/chat/thread/{id}(id=${inMsg.id})}" th:text="'von ' + ${inMsg.fromUserName}+ ', über: '+${inMsg.title}">Name</a></li>
               </ul>
               
               <header>gestellte Anfragen</header>
                <ul>
-                <li th:each="outMsg : ${outgoingMessages}"><a th:href="@{/chat/thread/{id}(id=${outMsg.id})}" th:text="'an UserId  ' + ${outMsg.fromId}+ ', über: '+${outMsg.title}">Name</a></li>
+                <li th:each="outMsg : ${outgoingMessages}"><a th:href="@{/chat/thread/{id}(id=${outMsg.id})}" th:text="'an  ' + ${outMsg.toUserName}+ ', über: '+${outMsg.title}">Name</a></li>
               </ul>
             </section>
           </div>

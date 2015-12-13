@@ -148,17 +148,23 @@ public class ChatController {
 		
 		ChatMessage newMessage = new ChatMessage();
 		newMessage.setFromId(currentUserId);
+		newMessage.setFromUserName(this.userRepository.findOne(currentUserId).getUsername());
 		newMessage.setMessage(newString.getContent());
 		newMessage.setFreeText(newString.getContent2());
 		
 		long chatPartnerId;
+		String chatPartnerName;
+		
 		if(currentChat.getFromId() == currentUserId) {
 			chatPartnerId = currentChat.getToId();
+			chatPartnerName = this.userRepository.findOne(chatPartnerId).getUsername();
 		}
 		else{
 			chatPartnerId = currentChat.getFromId();
+			chatPartnerName = this.userRepository.findOne(chatPartnerId).getUsername();
 		}
 		newMessage.setToId(chatPartnerId);
+		newMessage.setToUserName(chatPartnerName);
 		
 		this.msgRepo.save(newMessage);
 		
@@ -187,7 +193,9 @@ public class ChatController {
 		ChatConversation newConversation = new ChatConversation();
 		
 		newConversation.setFromId(currentUser.getId());
+		newConversation.setFromUserName(this.userRepository.findOne(currentUser.getId()).getUsername());
 		newConversation.setToId(currentArticle.getCreator().getId());
+		newConversation.setToUserName(this.userRepository.findOne(currentArticle.getCreator().getId()).getUsername());
 		
 		newConversation.setFromUnread(false);
 		newConversation.setTitle(currentArticle.getTitle() + " in " + currentArticle.getLocation() + ".");
@@ -195,6 +203,8 @@ public class ChatController {
 		
 		ChatMessage newMessage = new ChatMessage();
 		newMessage.setFromId(currentUser.getId());
+		newMessage.setFromUserName(this.userRepository.findOne(currentUser.getId()).getUsername());
+		newMessage.setToUserName(this.userRepository.findOne(currentArticle.getCreator().getId()).getUsername());
 		newMessage.setMessage(newString.getContent());
 		newMessage.setFreeText(newString.getContent2());
 		newMessage.setToId(currentArticle.getCreator().getId());

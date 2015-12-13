@@ -20,6 +20,7 @@ public class ChatMessage {
 	private LocalDateTime time;
 	
 	private long fromId, toId;
+	private String fromUserName, toUserName;
 	
 	public ChatMessage() {
 		message = "";
@@ -69,6 +70,22 @@ public class ChatMessage {
 
 	public void setTime(LocalDateTime time) {
 		this.time = time;
+	}
+
+	public String getFromUserName() {
+		return fromUserName;
+	}
+
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
+	}
+
+	public String getToUserName() {
+		return toUserName;
+	}
+
+	public void setToUserName(String toUserName) {
+		this.toUserName = toUserName;
 	}
 
 }

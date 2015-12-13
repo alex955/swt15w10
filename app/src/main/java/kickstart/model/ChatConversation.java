@@ -18,6 +18,8 @@ public class ChatConversation {
 	private @Id @GeneratedValue long id;
 	
 	private long fromId, toId;
+	private String fromUserName, toUserName;
+	
 	private boolean fromUnread, toUnread;
 	
 	public List<ChatMessage> getContent() {
@@ -90,6 +92,22 @@ public class ChatConversation {
 	
 	public void addChatMessage(ChatMessage arg){
 		this.content.add(arg);
+	}
+
+	public String getFromUserName() {
+		return fromUserName;
+	}
+
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
+	}
+
+	public String getToUserName() {
+		return toUserName;
+	}
+
+	public void setToUserName(String toUserName) {
+		this.toUserName = toUserName;
 	}
 	
 	
