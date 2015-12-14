@@ -2,7 +2,6 @@ package kickstart.controller;
 
 
 import java.util.Properties;
-import java.util.Random;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;

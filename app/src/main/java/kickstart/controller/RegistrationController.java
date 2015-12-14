@@ -63,12 +63,6 @@ public class RegistrationController {
             return "registration";
         }
 
-        if(!registrationForm.getPassword().equals(registrationForm.getConfirmPW())){
-            final String confirmError = "Die Passwörter stimmen nicht überein.";
-            System.out.println(confirmError);
-            modelMap.addAttribute("confirmError", confirmError);
-            return "registration";
-        }
 
         UserAccount userAccount = userAccountManager.create(registrationForm.getUsername(), registrationForm.getPassword(), registrationForm.getRole());
         userAccountManager.save(userAccount);

@@ -3,7 +3,6 @@ package kickstart.controller;
 import kickstart.model.*;
 import kickstart.utilities.CategoryMethods;
 
-import org.hibernate.validator.constraints.Email;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -15,17 +14,14 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.validation.Valid;
-import javax.validation.constraints.Null;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -70,95 +66,119 @@ public class SettingsController {
 
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value ="/usersettings")
-    public String changeSettings(@ModelAttribute("UserSettings") @Valid UserSettings userSettings, @LoggedIn Optional<UserAccount> userAccount, Model model){
+    public String changeSettings(@ModelAttribute("UserSettingsForm") UserSettingsForm userSettingsForm, @LoggedIn Optional<UserAccount> userAccount, Model model){
 
         User user = userRepository.findByUserAccount(userAccount.get());
+        UserSettings userSettings = new UserSettings();
 
         this.processedCategories = categoryMethods.getProcessedCategories();
         model.addAttribute("categories", this.processedCategories);
         model.addAttribute("user", user);
+        model.addAttribute("userSettings", new UserSettings());
 
         return "usersettings";
     }
 
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/usersettings", method = RequestMethod.POST)
-    public String saveSettings(@LoggedIn Optional<UserAccount> userAccount, @ModelAttribute("UserSettings") @Valid UserSettings userSettings, BindingResult result, Model model) throws AddressException, MessagingException {
+    public String saveSettings(@ModelAttribute("UserSettingsForm") @Valid UserSettingsForm userSettingsForm, BindingResult result, @LoggedIn Optional<UserAccount> userAccount,  Model model) throws AddressException, MessagingException {
 
         User user = userRepository.findByUserAccount(userAccount.get());
+        UserSettings userSettings = new UserSettings();
 
-        if(settingsRepo.findByUserId(user.getId()) != null){
-            settingsRepo.delete(settingsRepo.findByUserId(user.getId()));
-        }
-
-        userSettings.setUserId(user.getId());
+        model.addAttribute("userSettings", new UserSettings());
+        model.addAttribute("user", user);
 
         this.processedCategories = categoryMethods.getProcessedCategories();
         model.addAttribute("categories", this.processedCategories);
-        model.addAttribute("user", user);
+
+        if(settingsRepo.findByUserId(user.getId()) != null){
+            settingsRepo.delete(settingsRepo.findByUserId(user.getId()).getId());
+        }
 
         if(result.hasErrors())
             return "usersettings";
 
-        // System.out.println(user);
+        userSettings.setUserId(user.getId());
 
         //Adressänderung
-        if(!userSettings.getNewCity().isEmpty())
-        user.setCity(userSettings.getNewCity());
+        if(!userSettingsForm.getNewCity().isEmpty())
+        user.setCity(userSettingsForm.getNewCity());
 
-        if(!userSettings.getNewZip().isEmpty())
-        user.setZip(userSettings.getNewZip());
+        userSettings.setNewCity(user.getCity());
 
-        if(!userSettings.getNewStreetName().isEmpty())
-        user.setStreetName(userSettings.getNewStreetName());
+        if(!userSettingsForm.getNewZip().isEmpty())
+        user.setZip(userSettingsForm.getNewZip());
 
-        if(!userSettings.getNewHouseNumber().isEmpty())
-        user.setHouseNumber(userSettings.getNewHouseNumber());
+        userSettings.setNewZip(user.getZip());
 
-        if(!userSettings.getNewAddressAddition().isEmpty())
-        user.setAddressAddition(userSettings.getNewAddressAddition());
+        if(!userSettingsForm.getNewStreetName().isEmpty())
+        user.setStreetName(userSettingsForm.getNewStreetName());
+
+        userSettings.setNewStreetName(user.getStreetName());
+
+        if(!userSettingsForm.getNewHouseNumber().isEmpty())
+        user.setHouseNumber(userSettingsForm.getNewHouseNumber());
+
+        userSettings.setNewHouseNumber(user.getHouseNumber());
+
+        if(!userSettingsForm.getNewAddressAddition().isEmpty())
+        user.setAddressAddition(userSettingsForm.getNewAddressAddition());
+
+        userSettings.setNewAddressAddition(user.getAddressAddition());
 
         //Email-Änderung
-        if(!userSettings.getNewEmail().isEmpty()) {
+        if(!userSettingsForm.getNewEmail().isEmpty()) {
 
             Validator validator = new Validator(user, 3);
             validatorRepository.save(validator);
             EMailController.sendEmail(user.getEmail(), validator.getToken(), validator.getUsage());
         }
 
-        //Passwort-Änderung
-        if(!userSettings.getNewPassword().isEmpty()) {
+        userSettings.setNewEmail(user.getEmail());
 
-            if (passwordEncoder.matches(userSettings.getOldPassword(), userAccount.get().getPassword().toString()) && userSettings.getNewPassword().equals(userSettings.getConfirmPW())) {
-                userAccountManager.changePassword(userAccount.get(), userSettings.getNewPassword());
+        //Passwort-Änderung
+        if(!userSettingsForm.getNewPassword().isEmpty()) {
+
+            if (passwordEncoder.matches(userSettingsForm.getOldPassword(), userAccount.get().getPassword().toString()) && userSettingsForm.getNewPassword().equals(userSettingsForm.getConfirmPW())) {
+                userAccountManager.changePassword(userAccount.get(), userSettingsForm.getNewPassword());
 
             } else {
                 return "usersettings";
             }
         }
 
+        userSettings.setNewPassword(user.getUserAccount().getPassword().toString());
+
         //Sprachenänderung
-        if(userSettings.getNewLanguage1().equals("null")){
+        if(userSettingsForm.getNewLanguage1().equals("null")){
             user.setLanguage1(null);
         } else {
-            user.setLanguage1(userSettings.getNewLanguage1());
+            user.setLanguage1(userSettingsForm.getNewLanguage1());
         }
 
-        if(userSettings.getNewLanguage2().equals("null")){
+        userSettings.setNewLanguage1(user.getLanguage1());
+
+        if(userSettingsForm.getNewLanguage2().equals("null")){
             user.setLanguage2(null);
         } else {
-            user.setLanguage2(userSettings.getNewLanguage2());
+            user.setLanguage2(userSettingsForm.getNewLanguage2());
         }
 
-        if(userSettings.getNewLanguage3().equals("null")){
+        userSettings.setNewLanguage2(user.getLanguage2());
+
+        if(userSettingsForm.getNewLanguage3().equals("null")){
             user.setLanguage3(null);
         } else {
-            user.setLanguage3(userSettings.getNewLanguage3());
+            user.setLanguage3(userSettingsForm.getNewLanguage3());
         }
 
+        userSettings.setNewLanguage3(user.getLanguage3());
+
         userAccountManager.save(user.getUserAccount());
-        userRepository.save(user);
         settingsRepo.save(userSettings);
+        userRepository.save(user);
+
 
         return "redirect:/search";
     }
