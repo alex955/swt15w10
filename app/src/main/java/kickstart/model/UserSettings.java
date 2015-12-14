@@ -4,23 +4,14 @@ package kickstart.model;
 import org.hibernate.validator.constraints.Email;
 import org.salespointframework.useraccount.Role;
 
-import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
  * Created by Vincenz on 25.11.15.
  */
-@Entity
-public class UserSettings{
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-
-    private long userId;
-
-    private String newLastName;
+public class UserSettings {
+	private String newLastName;
 	private String newFirstName;
 
     @Email(message = "Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.")
@@ -44,40 +35,6 @@ public class UserSettings{
     private String newLanguage1;
     private String newLanguage2;
     private String newLanguage3;
-
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public String getNewLastName() {
-        return this.newLastName;
-    }
-
-    public void setNewLastName(String newLastName) {
-        this.newLastName = newLastName;
-    }
-
-
-    public String getNewFirstName() {
-        return this.newFirstName;
-    }
-
-    public void setNewFirstName(String newFirstName) {
-        this.newFirstName = newFirstName;
-    }
 
     public String getNewEmail() {
         return newEmail;
@@ -176,5 +133,20 @@ public class UserSettings{
     }
 
 
+	public String getNewLastName() {
+		return this.newLastName;
+	}
 
+	public void setNewLastName(String newLastName) {
+		this.newLastName = newLastName;
+	}
+
+
+	public String getNewFirstName() {
+		return this.newFirstName;
+	}
+
+	public void setNewFirstName(String newFirstName) {
+		this.newFirstName = newFirstName;
+	}
 }

@@ -1,12 +1,17 @@
 package kickstart.controller;
-import kickstart.model.*;
 import org.salespointframework.useraccount.UserAccount;
+import org.salespointframework.useraccount.UserAccountIdentifier;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kickstart.model.CategoryFirstTierObject;
+import kickstart.model.CategoryRepo;
+import kickstart.model.RegistrationForm;
+import kickstart.model.User;
+import kickstart.model.UserRepository;
 import kickstart.utilities.CategoryMethods;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +34,6 @@ public class RegistrationController {
 	@Autowired
 	private final CategoryRepo categories;
 
-    @Autowired
-    private ValidatorRepository validatorRepository;
-
 	@Autowired private final CategoryMethods categoryMethods;
 
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
@@ -39,12 +41,11 @@ public class RegistrationController {
     private UserAccountManager userAccountManager;
 
     @Autowired
-    public RegistrationController(UserAccountManager userAccountManager, UserRepository userRepository, CategoryMethods categoryMethods, CategoryRepo categories, ValidatorRepository validatorRepository){
+    public RegistrationController(UserAccountManager userAccountManager, UserRepository userRepository, CategoryMethods categoryMethods, CategoryRepo categories){
         this.userAccountManager = userAccountManager;
         this.userRepository = userRepository;
         this.categoryMethods = categoryMethods;
         this.categories = categories;
-        this.validatorRepository = validatorRepository;
     }
 
     @RequestMapping(value ="/registration")
@@ -78,13 +79,8 @@ public class RegistrationController {
 
         userAccountManager.disable(userAccount.getIdentifier());
 
-        Validator validator = new Validator(user, 1);
-        validatorRepository.save(validator);
-
-        EMailController.sendEmail(user.getEmail(),validator.getToken(),validator.getUsage());
-
-
-        return ("registration");
+        EMailController.SendEmail(user.getEmail(), user.getId());
+        return ("redirect:/");
     }
 
 

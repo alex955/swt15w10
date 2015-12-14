@@ -21,24 +21,19 @@ public class RefugeeDataInitializer implements DataInitializer {
     private final ArticleRepo goodREPO;
     private final ChatConversationRepo chatRepo;
     private final ChatMessageRepo msgRepo;
-    private final ValidatorRepository validatorRepository;
-    private final SettingsRepo settingsRepo;
-
 
     final Role refugee = new Role("ROLE_REFUGEE");
     final Role volunteer = new Role("ROLE_VOLUNTEER");
     final Role admin = new Role("ROLE_ADMIN");
 
     @Autowired
-
-    public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, kickstart.model.ArticleRepo goodREPO, ValidatorRepository validatorRepository, SettingsRepo settingsRepo, ChatConversationRepo chatRepo, ChatMessageRepo msgRepo) {
+    public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, kickstart.model.ArticleRepo goodREPO, ChatConversationRepo chatRepo, ChatMessageRepo msgRepo) {
 
         Assert.notNull(userAccountManager, "UserManagerAccount must not be null!");
         Assert.notNull(userRepository, "UserRepository must not be null!");
         Assert.notNull(categories, "CategoryRepo must not be null!");
-        Assert.notNull(goodREPO, "ArticleRepo must not be null!");
+        Assert.notNull(goodREPO, "goodREPO must not be null!");
         Assert.notNull(chatRepo, "ChatRepo must not be null!");
-        Assert.notNull(settingsRepo, "SettingsRepo must not be null!");
 
         this.userAccountManager = userAccountManager;
         this.userRepository = userRepository;
@@ -46,8 +41,6 @@ public class RefugeeDataInitializer implements DataInitializer {
         this.goodREPO = goodREPO;
         this.chatRepo = chatRepo;
         this.msgRepo = msgRepo;
-        this.validatorRepository = validatorRepository;
-        this.settingsRepo = settingsRepo;
 
     }
 
@@ -90,10 +83,6 @@ public class RefugeeDataInitializer implements DataInitializer {
         UserAccount user6 = userAccountManager.create("user6", "user6", volunteer);
         userAccountManager.save(user6);
         userRepository.save(new User (7, user6, "6", "User", "user6@test.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
-
-        UserAccount user7 = userAccountManager.create("user7", "Test1234", volunteer);
-        userAccountManager.save(user7);
-        userRepository.save(new User (8, user7, "7", "User", "vinherz@gmx.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
 
     }
 
