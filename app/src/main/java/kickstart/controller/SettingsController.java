@@ -38,20 +38,21 @@ public class SettingsController {
     private final UserRepository userRepository;
 
     @Autowired
-    private final SettingsRepo settingsRepo;
-
-    @Autowired
-    private ValidatorRepository validatorRepository;
+    private final ValidatorRepository validatorRepository;
 
     private UserAccountManager userAccountManager;
     
-	@Autowired private final CategoryMethods categoryMethods;
+	@Autowired
+    private final CategoryMethods categoryMethods;
 	
 	@Autowired
 	private final ArticleRepo articleRepo;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private final SettingsRepo settingsRepo;
     
 
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
@@ -82,9 +83,13 @@ public class SettingsController {
 
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/usersettings", method = RequestMethod.POST)
-    public String saveSettings(@LoggedIn Optional<UserAccount> userAccount, @ModelAttribute("UserSettings") @Valid UserSettings userSettings, BindingResult result, Model model, SettingsRepo settingsRepo) throws AddressException, MessagingException {
+    public String saveSettings(@LoggedIn Optional<UserAccount> userAccount, @ModelAttribute("UserSettings") @Valid UserSettings userSettings, BindingResult result, Model model) throws AddressException, MessagingException {
 
         User user = userRepository.findByUserAccount(userAccount.get());
+
+        if(settingsRepo.findByUserId(user.getId()) != null){
+            settingsRepo.delete(settingsRepo.findByUserId(user.getId()));
+        }
 
         userSettings.setUserId(user.getId());
 
@@ -118,9 +123,7 @@ public class SettingsController {
 
             Validator validator = new Validator(user, 3);
             validatorRepository.save(validator);
-            EMailController.sendEmail(user.getEmail(), validator.getToken(), 3);
-
-            user.setEmail(userSettings.getNewEmail());
+            EMailController.sendEmail(user.getEmail(), validator.getToken(), validator.getUsage());
         }
 
         //Passwort-Änderung

@@ -30,10 +30,10 @@ public class EMailController {
 	private final UserRepository userRepository;
 
 	@Autowired
-	private ValidatorRepository validatorRepository;
+	private final ValidatorRepository validatorRepository;
 
 	@Autowired
-	private SettingsRepo settingsRepo;
+	private final SettingsRepo settingsRepo;
 
 	@Autowired
 	public EMailController(UserRepository userRepository, ValidatorRepository validatorRepository, SettingsRepo settingsRepo) {
@@ -75,25 +75,25 @@ public class EMailController {
           /*
           * Cases: 1 = Registrierung
           *        2 = Account deaktivieren
-          *  TODO  3 = Email ändern
+          *  	   3 = Email ändern
           */
 
 		switch (usage) {
 
 			case 1: {
 				message.setSubject("RefugeeApp: EMail-Verifizierung");
-				message.setText("Zum Registrieren Ihres Accounts klicken Sie auf den Link.\n\n" + "http://localhost:8080/validate?id=" + token);
+				message.setText("Zum Registrieren Ihres Accounts klicken Sie auf den Link.\n\n" + "http://refugee-app.tk/swt15w10/validate?id=" + token);
 				break;
 			}
 
 			case 2: {
 				message.setSubject("RefugeeApp: Account deaktivieren");
-				message.setText("Zum Deaktivieren Ihres Accounts klicken Sie auf den Link.\n\n" + "http://localhost:8080/validate?id=" + token);
+				message.setText("Zum Deaktivieren Ihres Accounts klicken Sie auf den Link.\n\n" + "http://refugee-app.tk/swt15w10/validate?id=" + token);
 			}
 
 			  case 3: {
 				  message.setSubject("RefugeeApp: EMail Änderung");
-				  message.setText("Zum Ändern Ihrer Mailadresse klicken Sie auf den Link.\n\n" + "http://localhost:8080/validate?id=" + token);
+				  message.setText("Zum Ändern Ihrer Mailadresse klicken Sie auf den Link.\n\n" + "http://refugee-app.tk/swt15w10/validate?id=" + token);
 			  } 
 
 		}
@@ -130,7 +130,8 @@ public class EMailController {
 				}
 				case 3:{
 					user.setEmail(userSettings.getNewEmail());
-					break;
+					userRepository.save(user);
+					return "usersettings";
 				}
 			}
 			return "redirect:/";

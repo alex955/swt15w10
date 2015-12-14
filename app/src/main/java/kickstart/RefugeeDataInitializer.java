@@ -83,6 +83,10 @@ public class RefugeeDataInitializer implements DataInitializer {
         userAccountManager.save(user6);
         userRepository.save(new User (7, user6, "6", "User", "user6@test.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
 
+        UserAccount user7 = userAccountManager.create("user7", "Test1234", volunteer);
+        userAccountManager.save(user7);
+        userRepository.save(new User (8, user7, "7", "User", "vinherz@gmx.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
+
     }
 
     public void initializeCategories(){ 
