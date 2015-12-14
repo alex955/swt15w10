@@ -21,11 +21,15 @@ import java.util.LinkedList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kickstart.utilities.CategoryMethods;
 import kickstart.model.ArticleRepo;
 import kickstart.model.CategoryFirstTierObject;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class WelcomeController {
@@ -46,13 +50,13 @@ public class WelcomeController {
 		
 	//Mappings
 	@RequestMapping({"/", "/frontpage"})
-	public String frontPage(Model model) {
-		this.processedCategories = categoryMethods.getProcessedCategories();
-		model.addAttribute("categories", this.processedCategories);
-		
-		return "frontpage";
-	}
-	
+    public String frontPage(Model model, ModelMap modelMap) {
+        this.processedCategories = categoryMethods.getProcessedCategories();
+        model.addAttribute("categories", this.processedCategories);
+
+        return "frontpage";
+    }
+
 	@RequestMapping("/search")
 	public String search(Model model) {
 		this.processedCategories = categoryMethods.getProcessedCategories();

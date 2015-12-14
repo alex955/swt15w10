@@ -95,12 +95,9 @@
 						<div class="panel" data-equalizer-watch="2">
 							<div class="row">							                                                      
 								<div class="small-12 columns">
-		                            Um Ihre E-Mail-Adresse zu ändern, sind zwei Schritte nötig: 
-		                            <br></br>
-		                            <ol>
-			                            <li>Wir verschicken eine E-Mail an Ihre bisherige E-Mail Adresse. Bitte bestätigen Sie zu Ihrer Sicherheit durch Auswahl des Links in der E-Mail, dass Sie der Besitzer dieses E-Mail-Kontos sind.</li>
-			                            <li>Anschließend erhalten Sie eine weitere E-Mail an die neue E-Mail-Adresse und können die Änderung dann abschließen.</li>
-			                        </ol>              
+									Zum Ändern Ihrer Emailadresse wird eine Bestätigungs-Mail an Ihre alte Adresse geschickt.
+									<p>&nbsp;</p>
+
 								</div>
 							</div>
 							<div class="row">							                                                      
@@ -144,16 +141,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="show-for-medium-up">
-					<button class="button left" type="submit" th:href="@{/usersettings}">Änderungen speichern</button>
-					<a th:href="@{/deleteuser}"><button class="alert button right" type="button">User löschen</button></a>
-				</div>
-				<div class="show-for-small-only">
-					<ul class="button-group">
-					  <li><button class="small button" type="submit" th:href="@{/usersettings}">Änderungen speichern</button></li>
-					  <li><a th:href="@{/deleteuser}"><button class="small alert button">User löschen</button></a></li>
-					</ul>
-				</div>
+
+				<button class="button left" type="submit" th:href="@{/usersettings}">Änderungen speichern</button>
+				<a th:href="@{/deleteuser}"><button style="background-color: red" class="button right" type="button" onclick="alert('Zur Bestätigung der Deaktivierung wird Ihnen eine Email geschickt.')">Account deaktivieren</button></a>
 			</form>
 		</div>
 	</div>

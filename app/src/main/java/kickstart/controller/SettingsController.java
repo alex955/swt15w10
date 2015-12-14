@@ -1,13 +1,9 @@
 package kickstart.controller;
 
-import kickstart.model.Article;
-import kickstart.model.ArticleRepo;
-import kickstart.model.CategoryFirstTierObject;
-import kickstart.model.User;
-import kickstart.model.UserRepository;
-import kickstart.model.UserSettings;
+import kickstart.model.*;
 import kickstart.utilities.CategoryMethods;
 
+import org.hibernate.validator.constraints.Email;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -16,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,26 +38,34 @@ public class SettingsController {
     private final UserRepository userRepository;
 
     @Autowired
+    private final ValidatorRepository validatorRepository;
+
     private UserAccountManager userAccountManager;
     
-	@Autowired private final CategoryMethods categoryMethods;
+	@Autowired
+    private final CategoryMethods categoryMethods;
 	
 	@Autowired
 	private final ArticleRepo articleRepo;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private final SettingsRepo settingsRepo;
     
 
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
 
     @Autowired
-    public SettingsController(ArticleRepo articleRepo, UserRepository userRepository, UserAccountManager userAccountManager, PasswordEncoder passwordEncoderkönn, CategoryMethods categoryMethods){
+    public SettingsController(ArticleRepo articleRepo, UserRepository userRepository, UserAccountManager userAccountManager, PasswordEncoder passwordEncoder, CategoryMethods categoryMethods, ValidatorRepository validatorRepository, SettingsRepo settingsRepo){
         this.userRepository = userRepository;
         this.userAccountManager= userAccountManager;
         this.passwordEncoder = passwordEncoder;
         this.categoryMethods = categoryMethods;
         this.articleRepo = articleRepo;
+        this.validatorRepository = validatorRepository;
+        this.settingsRepo = settingsRepo;
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -81,6 +86,12 @@ public class SettingsController {
     public String saveSettings(@LoggedIn Optional<UserAccount> userAccount, @ModelAttribute("UserSettings") @Valid UserSettings userSettings, BindingResult result, Model model) throws AddressException, MessagingException {
 
         User user = userRepository.findByUserAccount(userAccount.get());
+
+        if(settingsRepo.findByUserId(user.getId()) != null){
+            settingsRepo.delete(settingsRepo.findByUserId(user.getId()));
+        }
+
+        userSettings.setUserId(user.getId());
 
         this.processedCategories = categoryMethods.getProcessedCategories();
         model.addAttribute("categories", this.processedCategories);
@@ -108,38 +119,20 @@ public class SettingsController {
         user.setAddressAddition(userSettings.getNewAddressAddition());
 
         //Email-Änderung
+        if(!userSettings.getNewEmail().isEmpty()) {
 
-        //TODO: Email Confirmation
-
-        if(!userSettings.getNewEmail().isEmpty())
-        user.setEmail(userSettings.getNewEmail());
+            Validator validator = new Validator(user, 3);
+            validatorRepository.save(validator);
+            EMailController.sendEmail(user.getEmail(), validator.getToken(), validator.getUsage());
+        }
 
         //Passwort-Änderung
         if(!userSettings.getNewPassword().isEmpty()) {
 
-            /* CONTROL OUTPUT
-            System.out.println();
-            System.out.println("Altes PW Eingabe: " + userSettings.getOldPassword());
-            System.out.println("Altes PW verschlüsselt: " + passwordEncoder.encode(userSettings.getOldPassword()));
-            System.out.println("Altes PW von UserAccount:  " + user.getUserAccount().getPassword().toString());
-            System.out.println("Altes PW = UserAccount altes PW? " + passwordEncoder.matches(userSettings.getOldPassword(), user.getUserAccount().getPassword().toString()));
-            System.out.println();
-            System.out.println("Neues PW: " + userSettings.getNewPassword());
-            System.out.println("ConfirmPW: " + userSettings.getConfirmPW());
-            System.out.println("Neues PW = confirmPW? " + userSettings.getNewPassword().equals(userSettings.getConfirmPW()));
-            System.out.println();
-            */
-
             if (passwordEncoder.matches(userSettings.getOldPassword(), userAccount.get().getPassword().toString()) && userSettings.getNewPassword().equals(userSettings.getConfirmPW())) {
                 userAccountManager.changePassword(userAccount.get(), userSettings.getNewPassword());
-                //System.out.println("PW geändert");
-                //System.out.println();
 
             } else {
-
-               // System.out.println("PW nicht geändert");
-               // System.out.println();
-
                 return "usersettings";
             }
         }
@@ -163,26 +156,21 @@ public class SettingsController {
             user.setLanguage3(userSettings.getNewLanguage3());
         }
 
-
         userAccountManager.save(user.getUserAccount());
         userRepository.save(user);
-
-        // System.out.println(user);
+        settingsRepo.save(userSettings);
 
         return "redirect:/search";
     }
-    
+
     @RequestMapping(value = "/deleteuser")
-    public String deleteUser(@LoggedIn Optional<UserAccount> userAccount) {
-    	long userId = this.userRepository.findByUserAccount(userAccount.get()).getId();
-    	User currentUser = this.userRepository.findOne(userId);
-        
-        List<Article> userArticles = this.articleRepo.findByCreator(currentUser);
-        this.articleRepo.delete(userArticles);
-        
-        this.userAccountManager.disable(this.userRepository.findOne(userId).getUserAccount().getIdentifier());
-        userRepository.delete(userRepository.findByUserAccount(userAccount.get()));
-        
+    public String deleteUser(@LoggedIn Optional<UserAccount> userAccount, ModelMap modelMap) throws AddressException, MessagingException {
+        User user = userRepository.findByUserAccount(userAccount.get());
+
+        Validator validator = new Validator(user, 2);
+        validatorRepository.save(validator);
+
+        EMailController.sendEmail(user.getEmail(), validator.getToken(), validator.getUsage());
         return "redirect:/logout";
     }
     
