@@ -12,6 +12,18 @@ import kickstart.model.ChatConversation;
 
 @Entity
 public class ChatMessage {
+	public ChatMessage(String message, String freeText, long fromId, long toId, String fromUserName,
+			String toUserName) {
+		this.message = message;
+		this.freeText = freeText;
+		this.fromId = fromId;
+		this.toId = toId;
+		this.fromUserName = fromUserName;
+		this.toUserName = toUserName;
+		
+		this.setTime(LocalDateTime.now());
+	}
+
 	private @Id @GeneratedValue long id;
 
 	private String message;
