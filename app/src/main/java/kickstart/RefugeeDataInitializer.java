@@ -1,7 +1,8 @@
 package kickstart;
 
 import kickstart.model.*;
-import kickstart.utilities.Settings;
+import kickstart.utilities.Setting;
+import kickstart.utilities.SettingsRepository;
 
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Role;
@@ -21,24 +22,26 @@ public class RefugeeDataInitializer implements DataInitializer {
     private final UserRepository userRepository;
     private final CategoryRepo categories;
     private final ArticleRepo goodREPO;
+    private final SettingsRepository settingsRepo;
 
     final Role refugee = new Role("ROLE_REFUGEE");
     final Role volunteer = new Role("ROLE_VOLUNTEER");
     final Role admin = new Role("ROLE_ADMIN");
 
     @Autowired
-    public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, kickstart.model.ArticleRepo goodREPO, ChatConversationRepo chatRepo, ChatMessageRepo msgRepo) {
+    public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, kickstart.model.ArticleRepo goodREPO, ChatConversationRepo chatRepo, ChatMessageRepo msgRepo, SettingsRepository settingsRepo) {
 
         Assert.notNull(userAccountManager, "UserManagerAccount must not be null!");
         Assert.notNull(userRepository, "UserRepository must not be null!");
         Assert.notNull(categories, "CategoryRepo must not be null!");
         Assert.notNull(goodREPO, "goodREPO must not be null!");
-        Assert.notNull(chatRepo, "ChatRepo must not be null!");
+        Assert.notNull(settingsRepo, "SettingsRepo must not be null!");
 
         this.userAccountManager = userAccountManager;
         this.userRepository = userRepository;
         this.categories = categories;
         this.goodREPO = goodREPO;
+        this.settingsRepo = settingsRepo;
 
     }
 
@@ -53,8 +56,8 @@ public class RefugeeDataInitializer implements DataInitializer {
     
     //configure the right Paths for the Server
     public void Settings(){
-    	Settings.setNoPicturePath("C:/Users/sasch/Documents/swt15w10/app/src/main/resources/static/resources/img/keinbild.png");
-    	Settings.setUploadedPicturesPath("D:/");
+    	settingsRepo.save(new Setting("noUploadedPicturePath", "C:/Users/sasch/Documents/swt15w10/app/src/main/resources/static/resources/img/keinbild.png", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded articles without one"));
+    	//settingsRepo.save(new Setting("UploadedPicturePath", "C:/", "The Path, where the uploaded Pictures are saved"));
     }
     
     public void initializeUsers(UserAccountManager userAccountManager, UserRepository userRepository){
