@@ -22,7 +22,7 @@ public class CommonVariables {
 	protected ArticleRepo articleRepo;
 
 	@Autowired
-	protected SettingsRepo settingsRepo;
+	protected UserSettingsRepository userSettingsRepository;
 
 	
 	

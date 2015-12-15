@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class EMailController {
 
-	
+	@Autowired
 	private UserAccountManager userAccountManager;
 
 	@Autowired
@@ -32,14 +32,14 @@ public class EMailController {
 	private final ValidatorRepository validatorRepository;
 
 	@Autowired
-	private final SettingsRepo settingsRepo;
+	private final UserSettingsRepository userSettingsRepository;
 
 	@Autowired
-	public EMailController(UserRepository userRepository, ValidatorRepository validatorRepository, SettingsRepo settingsRepo) {
+	public EMailController(UserRepository userRepository, ValidatorRepository validatorRepository, UserSettingsRepository userSettingsRepository) {
 		
 		this.validatorRepository = validatorRepository;
 		this.userRepository = userRepository;
-		this.settingsRepo = settingsRepo;
+		this.userSettingsRepository = userSettingsRepository;
 	}
 
 
@@ -81,7 +81,7 @@ public class EMailController {
 
 			case 1: {
 				message.setSubject("RefugeeApp: EMail-Verifizierung");
-				message.setText("Zum Registrieren Ihres Accounts klicken Sie auf den Link.\n\n" + "http://refugee-app.tk/swt15w10/validate?id=" + token);
+				message.setText("Zum Registrieren Ihres Accounts klicken Sie auf den Link.\n\n" + "localhost:8080/validate?id=" + token);
 				break;
 			}
 
@@ -114,26 +114,24 @@ public class EMailController {
 			return "frontpage";
 
 		else {
-
 			User user = validator.getUser();
-			UserSettings userSettings = settingsRepo.findByUserId(user.getId());
 
 			switch (validator.getUsage()) {
 				case 1: {
 					userAccountManager.enable(user.getUserAccount().getIdentifier());
-					break;
+					return "redirect:/";
 				}
 				case 2: {
 					userAccountManager.disable(user.getUserAccount().getIdentifier());
-					break;
+					return "redirect:/";
 				}
 				case 3:{
+					UserSettings userSettings = userSettingsRepository.findByUserId(user.getId());
 					user.setEmail(userSettings.getNewEmail());
 					userRepository.save(user);
 					return "usersettings";
 				}
 			}
-			return "redirect:/";
 		}
 
 

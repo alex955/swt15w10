@@ -48,20 +48,20 @@ public class SettingsController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private final SettingsRepo settingsRepo;
+    private final UserSettingsRepository userSettingsRepository;
     
 
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
 
     @Autowired
-    public SettingsController(ArticleRepo articleRepo, UserRepository userRepository, UserAccountManager userAccountManager, PasswordEncoder passwordEncoder, CategoryMethods categoryMethods, ValidatorRepository validatorRepository, SettingsRepo settingsRepo){
+    public SettingsController(ArticleRepo articleRepo, UserRepository userRepository, UserAccountManager userAccountManager, PasswordEncoder passwordEncoder, CategoryMethods categoryMethods, ValidatorRepository validatorRepository, UserSettingsRepository userSettingsRepository){
         this.userRepository = userRepository;
         this.userAccountManager= userAccountManager;
         this.passwordEncoder = passwordEncoder;
         this.categoryMethods = categoryMethods;
         this.articleRepo = articleRepo;
         this.validatorRepository = validatorRepository;
-        this.settingsRepo = settingsRepo;
+        this.userSettingsRepository = userSettingsRepository;
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -74,7 +74,7 @@ public class SettingsController {
         this.processedCategories = categoryMethods.getProcessedCategories();
         model.addAttribute("categories", this.processedCategories);
         model.addAttribute("user", user);
-        model.addAttribute("userSettings", new UserSettings());
+        model.addAttribute("userSettingsForm", userSettingsForm);
 
         return "usersettings";
     }
@@ -92,8 +92,8 @@ public class SettingsController {
         this.processedCategories = categoryMethods.getProcessedCategories();
         model.addAttribute("categories", this.processedCategories);
 
-        if(settingsRepo.findByUserId(user.getId()) != null){
-            settingsRepo.delete(settingsRepo.findByUserId(user.getId()).getId());
+        if(userSettingsRepository.findByUserId(user.getId()) != null){
+            userSettingsRepository.delete(userSettingsRepository.findByUserId(user.getId()).getId());
         }
 
         if(result.hasErrors())
@@ -176,7 +176,7 @@ public class SettingsController {
         userSettings.setNewLanguage3(user.getLanguage3());
 
         userAccountManager.save(user.getUserAccount());
-        settingsRepo.save(userSettings);
+        userSettingsRepository.save(userSettings);
         userRepository.save(user);
 
 
