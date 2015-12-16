@@ -111,7 +111,7 @@ public class EMailController {
 		Validator validator = validatorRepository.findByToken(id);
 
 		if (validator == null)
-			return "frontpage";
+			return "redirect:/frontpage";
 
 		else {
 			User user = validator.getUser();
@@ -125,7 +125,7 @@ public class EMailController {
 					userAccountManager.disable(user.getUserAccount().getIdentifier());
 					return "redirect:/";
 				}
-				case 3:{
+				case 3: {
 					UserSettings userSettings = userSettingsRepository.findByUserId(user.getId());
 					user.setEmail(userSettings.getNewEmail());
 					userRepository.save(user);
@@ -133,7 +133,7 @@ public class EMailController {
 				}
 			}
 		}
-
-
+		return "redirect:/";
 	}
+
 }
