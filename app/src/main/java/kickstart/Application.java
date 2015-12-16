@@ -50,12 +50,6 @@ public class Application extends SpringBootServletInitializer  {
      * 
      * @author Lukas Klose
      */
-	@Bean
-	public LocaleResolver localeResolver() {
-	    SessionLocaleResolver slr = new SessionLocaleResolver();
-	    slr.setDefaultLocale(Locale.US);
-	    return slr;
-	}
 			
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
