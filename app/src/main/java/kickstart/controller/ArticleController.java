@@ -27,7 +27,6 @@ import kickstart.model.PictureRepo;
 import kickstart.model.User;
 import kickstart.model.UserRepository;
 import kickstart.utilities.CategoryMethods;
-import kickstart.utilities.Settings;
 import kickstart.model.ArticleRepo;
 import kickstart.model.CategoryFirstTierObject;
 
@@ -250,12 +249,7 @@ public class ArticleController {
                 byte[] bytes = (newArticleForm.getFile()).getBytes();
  
                 // Creating the directory to store file
-                String rootPath;
-                if(Settings.getUploadedPicturesPath() == null){
-                	rootPath = System.getProperty("user.home");
-                }
-                else rootPath = Settings.getUploadedPicturesPath();
-                
+                String rootPath = System.getProperty("user.home");
                 File dir = new File(rootPath + "/" + "Pics");
                 if (!dir.exists())
                     dir.mkdirs();

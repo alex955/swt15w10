@@ -1,8 +1,6 @@
 package kickstart;
 
 import kickstart.model.*;
-import kickstart.utilities.Settings;
-
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
@@ -21,6 +19,8 @@ public class RefugeeDataInitializer implements DataInitializer {
     private final UserRepository userRepository;
     private final CategoryRepo categories;
     private final ArticleRepo goodREPO;
+    private final ChatConversationRepo chatRepo;
+    private final ChatMessageRepo msgRepo;
 
     final Role refugee = new Role("ROLE_REFUGEE");
     final Role volunteer = new Role("ROLE_VOLUNTEER");
@@ -39,26 +39,21 @@ public class RefugeeDataInitializer implements DataInitializer {
         this.userRepository = userRepository;
         this.categories = categories;
         this.goodREPO = goodREPO;
+        this.chatRepo = chatRepo;
+        this.msgRepo = msgRepo;
 
     }
 
     @Override
     public void initialize() {
-    	Settings();
     	initializeUsers(userAccountManager, userRepository);
         initializeCategories();
         initializeGoods(userAccountManager, userRepository);
         initializeActivities();
     }
     
-    //configure the right Paths for the Server
-    public void Settings(){
-    	Settings.setNoPicturePath("C:/Users/sasch/Documents/swt15w10/app/src/main/resources/static/resources/img/keinbild.png");
-    	Settings.setUploadedPicturesPath("D:/");
-    }
-    
     public void initializeUsers(UserAccountManager userAccountManager, UserRepository userRepository){
-    	
+
         if (userAccountManager.findByUsername("admin1").isPresent()) return;
 
         UserAccount admin1 = userAccountManager.create("admin1", "admin1", admin);
