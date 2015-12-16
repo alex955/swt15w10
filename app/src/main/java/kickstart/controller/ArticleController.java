@@ -27,7 +27,7 @@ import kickstart.model.PictureRepo;
 import kickstart.model.User;
 import kickstart.model.UserRepository;
 import kickstart.utilities.CategoryMethods;
-import kickstart.utilities.SettingsRepository;
+import kickstart.utilities.Settings;
 import kickstart.model.ArticleRepo;
 import kickstart.model.CategoryFirstTierObject;
 
@@ -41,25 +41,20 @@ public class ArticleController {
 	@Autowired
 	private final ArticleRepo articleRepo;
 
-	@Autowired 
-	private final CategoryMethods categoryMethods;
+	@Autowired private final CategoryMethods categoryMethods;
 	
     @Autowired
     private final UserRepository userRepository;
-    
-    @Autowired 
-    private final SettingsRepository settingsRepo;
 
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
 	
 	@Autowired
-	public ArticleController(CategoryRepo categories, ArticleRepo articleRepo, PictureRepo pictureRepo, CategoryMethods categoryMethods, UserRepository userRepository, SettingsRepository settingsRepo){
+	public ArticleController(CategoryRepo categories, ArticleRepo articleRepo, PictureRepo pictureRepo, CategoryMethods categoryMethods, UserRepository userRepository){
 		this.categories = categories;
 		this.articleRepo=articleRepo;
 		this.pictureRepo = pictureRepo;
 		this.categoryMethods = categoryMethods;
 		this.userRepository = userRepository;
-		this.settingsRepo = settingsRepo;
 	}
 	
 	
@@ -256,11 +251,10 @@ public class ArticleController {
  
                 // Creating the directory to store file
                 String rootPath;
-                if(settingsRepo.findOne("UploadedPicturesPath") == null){
-                	System.out.println("null");
+                if(Settings.getUploadedPicturesPath() == null){
                 	rootPath = System.getProperty("user.home");
                 }
-                else rootPath = settingsRepo.findOne("UploadedPicturesPath").getValue();
+                else rootPath = Settings.getUploadedPicturesPath();
                 
                 File dir = new File(rootPath + "/" + "Pics");
                 if (!dir.exists())
