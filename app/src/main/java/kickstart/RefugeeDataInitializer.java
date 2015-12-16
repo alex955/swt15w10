@@ -1,6 +1,9 @@
 package kickstart;
 
 import kickstart.model.*;
+import kickstart.utilities.Setting;
+import kickstart.utilities.SettingsRepository;
+
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
@@ -19,41 +22,46 @@ public class RefugeeDataInitializer implements DataInitializer {
     private final UserRepository userRepository;
     private final CategoryRepo categories;
     private final ArticleRepo goodREPO;
-    private final ChatConversationRepo chatRepo;
-    private final ChatMessageRepo msgRepo;
+    private final SettingsRepository settingsRepo;
 
     final Role refugee = new Role("ROLE_REFUGEE");
     final Role volunteer = new Role("ROLE_VOLUNTEER");
     final Role admin = new Role("ROLE_ADMIN");
 
     @Autowired
-    public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, kickstart.model.ArticleRepo goodREPO, ChatConversationRepo chatRepo, ChatMessageRepo msgRepo) {
+    public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, kickstart.model.ArticleRepo goodREPO, ChatConversationRepo chatRepo, ChatMessageRepo msgRepo, SettingsRepository settingsRepo) {
 
         Assert.notNull(userAccountManager, "UserManagerAccount must not be null!");
         Assert.notNull(userRepository, "UserRepository must not be null!");
         Assert.notNull(categories, "CategoryRepo must not be null!");
         Assert.notNull(goodREPO, "goodREPO must not be null!");
-        Assert.notNull(chatRepo, "ChatRepo must not be null!");
+        Assert.notNull(settingsRepo, "SettingsRepo must not be null!");
 
         this.userAccountManager = userAccountManager;
         this.userRepository = userRepository;
         this.categories = categories;
         this.goodREPO = goodREPO;
-        this.chatRepo = chatRepo;
-        this.msgRepo = msgRepo;
+        this.settingsRepo = settingsRepo;
 
     }
 
     @Override
     public void initialize() {
+    	Settings();
     	initializeUsers(userAccountManager, userRepository);
         initializeCategories();
         initializeGoods(userAccountManager, userRepository);
         initializeActivities();
     }
     
+    //configure the right Paths for the Server
+    public void Settings(){
+    	settingsRepo.save(new Setting("noUploadedPicturePath", "C:/Users/sasch/Documents/swt15w10/app/src/main/resources/static/resources/img/keinbild.png", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded articles without one"));
+    	//settingsRepo.save(new Setting("UploadedPicturePath", "C:/", "The Path, where the uploaded Pictures are saved"));
+    }
+    
     public void initializeUsers(UserAccountManager userAccountManager, UserRepository userRepository){
-
+    	
         if (userAccountManager.findByUsername("admin1").isPresent()) return;
 
         UserAccount admin1 = userAccountManager.create("admin1", "admin1", admin);
@@ -104,16 +112,16 @@ public class RefugeeDataInitializer implements DataInitializer {
 
     public void initializeGoods(UserAccountManager userAccountManager, UserRepository userRepository){
     	Article g1 = new Article("Spiegelschrank", "Dieser Spiegelschrank ist 60 cm breit", "Dresden - Zschernitz", "Bergstraße 5", 2, "17", "01217", userRepository.findOne((long) 1));
-        Article g2 = new Article("Sofa", "Einladender Blickfang! Das stylishe Schlafsofa mit dem zweifarbigen Look lädt zum Entspannen und Träumen ein.", "Dresden - Südvorstadt", "straße", 1, "number", "01067", userRepository.findOne((long) 1));
-        Article g3 = new Article("Stuhl", "Schöner Bürostuhl mit einem Bezug aus hochwertigem Kunstleder, kombiniert mit atmungsaktivem Netzstoff im Rückenausschnitt in Schwarz", "Pirna", "straße", 1, "number", "01067", userRepository.findOne((long) 1));
-        Article g4 = new Article("Spiegel", "Aus Metall mit aufwendigen Verzierungen", "Dresden - Seidnitz", "straße", 2, "number", "01067", userRepository.findOne((long) 1));
+        Article g2 = new Article("Sofa", "Einladender Blickfang! Das stylishe Schlafsofa mit dem zweifarbigen Look lädt zum Entspannen und Träumen ein.", "Dresden - Südvorstadt", "straße", 1, "number", "01067", userRepository.findOne((long) 2));
+        Article g3 = new Article("Stuhl", "Schöner Bürostuhl mit einem Bezug aus hochwertigem Kunstleder, kombiniert mit atmungsaktivem Netzstoff im Rückenausschnitt in Schwarz", "Pirna", "straße", 1, "number", "01067", userRepository.findOne((long) 2));
+        Article g4 = new Article("Spiegel", "Aus Metall mit aufwendigen Verzierungen", "Dresden - Seidnitz", "straße", 2, "number", "01067", userRepository.findOne((long) 3));
         Article g5 = new Article("Messerblock", "EINFACH GUT! Eine rundum gute Entscheidung wenn es etwas preiswerter sein soll und trotzdem zuverlässig und praktisch. TWIN Point überzeugt durch eine scharfe Klinge.", "Ottendorf Orkrilla", "straße", 3, "number", "01067", userRepository.findOne((long) 1));
         Article g6 = new Article("Buch", "bestens erhalten ohne Eselsohren", "Leipzig", "straße", 4, "number", "01067", userRepository.findOne((long) 1));
         Article g7 = new Article("Deutsch für Anfänger", "Gutes Buch zum lernen", "ort", "straße", 5, "number", "01067", userRepository.findOne((long) 1));
-        Article g8 = new Article("Harry Potter", "Harry Potter (* 24.12.0 um 12:30 Uhr) ist ein kleiner Zauberer aus England. Harry lernte in Hogwarts das Zauberstabwedeln", "Hoyerswerda", "straße", 6, "number", "01067", userRepository.findOne((long) 1));
+        Article g8 = new Article("Harry Potter", "Harry Potter (* 24.12.0 um 12:30 Uhr) ist ein kleiner Zauberer aus England. Harry lernte in Hogwarts das Zauberstabwedeln", "Hoyerswerda", "straße", 6, "number", "01067", userRepository.findOne((long) 2));
         Article g9 = new Article("Das Survival Duo", "Survival-Duo (Mehrzahl: Survival-Quartett) ist eine satirische und oscarprämierte TV-Sendung auf DMAX.", "Dresden - Prohlis", "straße", 7, "number", "01067", userRepository.findOne((long) 1));
         Article g10 = new Article("Motorola Razor", "Perfektes Handy. Wirkt sogar als Boomerang", "Dresden - Gorbitz", "straße", 9, "number", "01067", userRepository.findOne((long) 1));
-        Article g11 = new Article("Jeans", "Beschreibung", "ort", "straße",11, "number", "01067", userRepository.findOne((long) 1));
+        Article g11 = new Article("Jeans", "Beschreibung", "ort", "straße",11, "number", "01067", userRepository.findOne((long) 3));
         Article g12 = new Article("Deutschkurs", "Beschreibung", "ort", "straße", 12, "number", "01067", userRepository.findOne((long) 1));
 
         goodREPO.save(g1);

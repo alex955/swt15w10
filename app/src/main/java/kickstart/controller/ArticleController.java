@@ -27,6 +27,7 @@ import kickstart.model.PictureRepo;
 import kickstart.model.User;
 import kickstart.model.UserRepository;
 import kickstart.utilities.CategoryMethods;
+import kickstart.utilities.SettingsRepository;
 import kickstart.model.ArticleRepo;
 import kickstart.model.CategoryFirstTierObject;
 
@@ -40,20 +41,25 @@ public class ArticleController {
 	@Autowired
 	private final ArticleRepo articleRepo;
 
-	@Autowired private final CategoryMethods categoryMethods;
+	@Autowired 
+	private final CategoryMethods categoryMethods;
 	
     @Autowired
     private final UserRepository userRepository;
+    
+    @Autowired 
+    private final SettingsRepository settingsRepo;
 
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
 	
 	@Autowired
-	public ArticleController(CategoryRepo categories, ArticleRepo articleRepo, PictureRepo pictureRepo, CategoryMethods categoryMethods, UserRepository userRepository){
+	public ArticleController(CategoryRepo categories, ArticleRepo articleRepo, PictureRepo pictureRepo, CategoryMethods categoryMethods, UserRepository userRepository, SettingsRepository settingsRepo){
 		this.categories = categories;
 		this.articleRepo=articleRepo;
 		this.pictureRepo = pictureRepo;
 		this.categoryMethods = categoryMethods;
 		this.userRepository = userRepository;
+		this.settingsRepo = settingsRepo;
 	}
 	
 	
@@ -249,7 +255,13 @@ public class ArticleController {
                 byte[] bytes = (newArticleForm.getFile()).getBytes();
  
                 // Creating the directory to store file
-                String rootPath = System.getProperty("user.home");
+                String rootPath;
+                if(settingsRepo.findOne("UploadedPicturesPath") == null){
+                	System.out.println("null");
+                	rootPath = System.getProperty("user.home");
+                }
+                else rootPath = settingsRepo.findOne("UploadedPicturesPath").getValue();
+                
                 File dir = new File(rootPath + "/" + "Pics");
                 if (!dir.exists())
                     dir.mkdirs();
