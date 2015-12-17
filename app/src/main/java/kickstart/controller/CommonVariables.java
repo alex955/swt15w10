@@ -5,10 +5,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import kickstart.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
+import kickstart.model.Category;
+import kickstart.model.CategoryFirstTierObject;
+import kickstart.model.CategoryRepo;
+import kickstart.model.UserRepository;
+import kickstart.model.ArticleRepo;
 
 @Controller
 public class CommonVariables {
@@ -21,11 +26,6 @@ public class CommonVariables {
 	@Autowired
 	protected ArticleRepo articleRepo;
 
-	@Autowired
-	protected UserSettingsRepository userSettingsRepository;
-
-	@Autowired
-	protected ValidatorRepository validatorRepository;
 	
 	
 	protected long current_cat=0;

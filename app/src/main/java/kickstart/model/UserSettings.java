@@ -1,100 +1,40 @@
 package kickstart.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
-@Entity
+import org.hibernate.validator.constraints.Email;
+import org.salespointframework.useraccount.Role;
+
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+/**
+ * Created by Vincenz on 25.11.15.
+ */
 public class UserSettings {
+	private String newLastName;
+	private String newFirstName;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    private long userId;
-    private String newLastName;
-    private String newFirstName;
+    @Email(message = "Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.")
     private String newEmail;
+
+    @Pattern(regexp="(^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$|^$|)", message ="Das Passwort muss mindestens 8 Zeichen lang sein und muss mindestens eine Zahl, einen Klein- und einen Großbuchstaben beinhalten.")
     private String newPassword;
+
     private String oldPassword;
     private String confirmPW;
     private String newCity;
+
+    @Pattern(regexp="(^$| |^(\\d{5})$)", message="Die Postleitzahl muss aus exakt 5 Ziffern bestehen.")
     private String newZip;
+
     private String newStreetName;
+
+    @Pattern(regexp = "(^$|^(\\d+[a-zA-Z]*)$)", message="Geben Sie eine gültige Hausnummer ein.")
     private String newHouseNumber;
     private String newAddressAddition;
     private String newLanguage1;
     private String newLanguage2;
     private String newLanguage3;
-
-    public UserSettings(long id, long userId, String newLastName, String newFirstName, String newEmail, String newPassword, String oldPassword, String confirmPW, String newCity, String newZip, String newStreetName, String newHouseNumber, String newAddressAddition, String newLanguage1, String newLanguage2, String newLanguage3) {
-        this.userId = userId;
-        this.newLastName = newLastName;
-        this.newFirstName = newFirstName;
-        this.newEmail = newEmail;
-        this.newPassword = newPassword;
-        this.oldPassword = oldPassword;
-        this.confirmPW = confirmPW;
-        this.newCity = newCity;
-        this.newZip = newZip;
-        this.newStreetName = newStreetName;
-        this.newHouseNumber = newHouseNumber;
-        this.newAddressAddition = newAddressAddition;
-        this.newLanguage1 = newLanguage1;
-        this.newLanguage2 = newLanguage2;
-        this.newLanguage3 = newLanguage3;
-    }
-
-    public UserSettings(long id, long userId, String newEmail, String newPassword, String confirmPW, String oldPassword, String newCity, String newZip, String newHouseNumber, String newAddressAddition, String newStreetName, String newLanguage1, String newLanguage2, String newLanguage3) {
-        this.userId = userId;
-        this.newEmail = newEmail;
-        this.newPassword = newPassword;
-        this.confirmPW = confirmPW;
-        this.oldPassword = oldPassword;
-        this.newCity = newCity;
-        this.newZip = newZip;
-        this.newHouseNumber = newHouseNumber;
-        this.newAddressAddition = newAddressAddition;
-        this.newStreetName = newStreetName;
-        this.newLanguage1 = newLanguage1;
-        this.newLanguage2 = newLanguage2;
-        this.newLanguage3 = newLanguage3;
-    }
-
-    public UserSettings() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public String getNewLastName() {
-        return newLastName;
-    }
-
-    public void setNewLastName(String newLastName) {
-        this.newLastName = newLastName;
-    }
-
-    public String getNewFirstName() {
-        return newFirstName;
-    }
-
-    public void setNewFirstName(String newFirstName) {
-        this.newFirstName = newFirstName;
-    }
 
     public String getNewEmail() {
         return newEmail;
@@ -192,4 +132,21 @@ public class UserSettings {
         this.newLanguage3 = newLanguage3;
     }
 
+
+	public String getNewLastName() {
+		return this.newLastName;
+	}
+
+	public void setNewLastName(String newLastName) {
+		this.newLastName = newLastName;
+	}
+
+
+	public String getNewFirstName() {
+		return this.newFirstName;
+	}
+
+	public void setNewFirstName(String newFirstName) {
+		this.newFirstName = newFirstName;
+	}
 }
