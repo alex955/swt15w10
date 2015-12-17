@@ -10,13 +10,11 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import javax.validation.Valid;
 
 import kickstart.model.*;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -113,6 +111,8 @@ public class EMailController {
 
 		Validator validator = validatorRepository.findByToken(id);
 
+		
+
 		if (validator == null)
 			return "redirect:/frontpage";
 
@@ -122,10 +122,12 @@ public class EMailController {
 			switch (validator.getUsage()) {
 				case 1: {
 					userAccountManager.enable(user.getUserAccount().getIdentifier());
+					validatorRepository.delete(validator);
 					return "redirect:/";
 				}
 				case 2: {
 					userAccountManager.disable(user.getUserAccount().getIdentifier());
+					validatorRepository.delete(validator);
 					return "redirect:/";
 				}
 				case 3: {
@@ -153,6 +155,8 @@ public class EMailController {
 		user.setEmail(userSettings.getNewEmail());
 
 		userRepository.save(user);
+		validatorRepository.delete(validatorRepository.findByToken(token));
+
 		return "redirect:/usersettings";
 	}
 
