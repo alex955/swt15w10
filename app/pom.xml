@@ -80,6 +80,13 @@
 		<artifactId>spring-security-test</artifactId>
 		<scope>test</scope>
 	</dependency>
+        
+        <dependency>
+	<groupId>org.apache.commons</groupId>
+	<artifactId>commons-lang3</artifactId>
+	<version>3.0</version>
+</dependency>
+
 	</dependencies>
 
 	<build>
@@ -121,4 +128,9 @@
 
 	</pluginRepositories>
 
+    <properties>
+    <!-- The main class to start by executing java -jar -->
+    <start-class>kickstart.Application</start-class>
+</properties>
+    
 </project>
