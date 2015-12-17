@@ -74,7 +74,6 @@ public class SettingsController {
         this.processedCategories = categoryMethods.getProcessedCategories();
         model.addAttribute("categories", this.processedCategories);
         model.addAttribute("user", user);
-        model.addAttribute("userSettingsForm", userSettingsForm);
 
         return "usersettings";
     }
@@ -105,37 +104,28 @@ public class SettingsController {
         if(!userSettingsForm.getNewCity().isEmpty())
         user.setCity(userSettingsForm.getNewCity());
 
-        userSettings.setNewCity(user.getCity());
-
         if(!userSettingsForm.getNewZip().isEmpty())
         user.setZip(userSettingsForm.getNewZip());
-
-        userSettings.setNewZip(user.getZip());
 
         if(!userSettingsForm.getNewStreetName().isEmpty())
         user.setStreetName(userSettingsForm.getNewStreetName());
 
-        userSettings.setNewStreetName(user.getStreetName());
-
         if(!userSettingsForm.getNewHouseNumber().isEmpty())
         user.setHouseNumber(userSettingsForm.getNewHouseNumber());
 
-        userSettings.setNewHouseNumber(user.getHouseNumber());
-
         if(!userSettingsForm.getNewAddressAddition().isEmpty())
         user.setAddressAddition(userSettingsForm.getNewAddressAddition());
-
-        userSettings.setNewAddressAddition(user.getAddressAddition());
 
         //Email-Änderung
         if(!userSettingsForm.getNewEmail().isEmpty()) {
 
             Validator validator = new Validator(user, 3);
             validatorRepository.save(validator);
+            userSettings.setNewEmail(userSettingsForm.getNewEmail());
+            
             EMailController.sendEmail(user.getEmail(), validator.getToken(), validator.getUsage());
-        }
 
-        userSettings.setNewEmail(user.getEmail());
+        }
 
         //Passwort-Änderung
         if(!userSettingsForm.getNewPassword().isEmpty()) {
@@ -148,8 +138,6 @@ public class SettingsController {
             }
         }
 
-        userSettings.setNewPassword(user.getUserAccount().getPassword().toString());
-
         //Sprachenänderung
         if(userSettingsForm.getNewLanguage1().equals("null")){
             user.setLanguage1(null);
@@ -157,15 +145,11 @@ public class SettingsController {
             user.setLanguage1(userSettingsForm.getNewLanguage1());
         }
 
-        userSettings.setNewLanguage1(user.getLanguage1());
-
         if(userSettingsForm.getNewLanguage2().equals("null")){
             user.setLanguage2(null);
         } else {
             user.setLanguage2(userSettingsForm.getNewLanguage2());
         }
-
-        userSettings.setNewLanguage2(user.getLanguage2());
 
         if(userSettingsForm.getNewLanguage3().equals("null")){
             user.setLanguage3(null);
@@ -173,14 +157,12 @@ public class SettingsController {
             user.setLanguage3(userSettingsForm.getNewLanguage3());
         }
 
-        userSettings.setNewLanguage3(user.getLanguage3());
 
         userAccountManager.save(user.getUserAccount());
         userSettingsRepository.save(userSettings);
         userRepository.save(user);
 
-
-        return "redirect:/search";
+        return "usersettings";
     }
 
     @RequestMapping(value = "/deleteuser")

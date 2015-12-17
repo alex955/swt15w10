@@ -132,15 +132,13 @@
 									<font color="red" th:if="${#fields.hasErrors('newHouseNumber')}" th:errors="*{newHouseNumber}"> ERROR MESSAGE </font>
 									<input type="text" name="newHouseNumber" placeholder="Hausnummmer" th:value="${user.houseNumber}"/>
 									<input type="text" name="newAddressAddition" placeholder="(optional)"/>
-
+									<button class="button left" type="submit" th:href="@{/usersettings}">Änderungen speichern</button>
+									<a th:href="@{/deleteuser}"><button style="background-color: red" class="button right" type="button" onclick="alert('Zur Bestätigung der Deaktivierung wird Ihnen eine Email geschickt.')">Account deaktivieren</button></a>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<button class="button left" type="submit" th:href="@{/usersettings}">Änderungen speichern</button>
-				<a th:href="@{/deleteuser}"><button style="background-color: red" class="button right" type="button" onclick="alert('Zur Bestätigung der Deaktivierung wird Ihnen eine Email geschickt.')">Account deaktivieren</button></a>
-
 			</form>
 		</div>
 	</div>

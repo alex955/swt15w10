@@ -10,11 +10,14 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.validation.Valid;
 
 import kickstart.model.*;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -126,14 +129,31 @@ public class EMailController {
 					return "redirect:/";
 				}
 				case 3: {
-					UserSettings userSettings = userSettingsRepository.findByUserId(user.getId());
-					user.setEmail(userSettings.getNewEmail());
-					userRepository.save(user);
-					return "usersettings";
+					return "redirect:/changeemail?token=" + id;
 				}
 			}
 		}
 		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/changeemail")
+	public String changeEmail(@ModelAttribute("userSettingsForm") UserSettingsForm userSettingsForm, @RequestParam String token){
+
+		if (validatorRepository.findByToken(token) == null){
+			System.out.println("Kein dude da");
+			return "redirect:/";
+		}
+
+		User user = validatorRepository.findByToken(token).getUser();
+		UserSettings userSettings = userSettingsRepository.findByUserId(user.getId());
+
+		System.out.println(userSettings.getNewEmail());
+		System.out.println(user.getEmail());
+
+		user.setEmail(userSettings.getNewEmail());
+
+		userRepository.save(user);
+		return "redirect:/usersettings";
 	}
 
 }
