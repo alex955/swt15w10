@@ -11,13 +11,13 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import kickstart.model.*;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import kickstart.model.User;
-import kickstart.model.UserRepository;
 
 
 @Controller
@@ -25,98 +25,139 @@ public class EMailController {
 
 	@Autowired
 	private UserAccountManager userAccountManager;
-	
-    @Autowired
-    private final UserRepository userRepository;
-	
-    @Autowired
-    public EMailController(UserRepository userRepository){
-        //this.userAccountManager = userAccountManager;
-        this.userRepository = userRepository;
-        
-    }
-	
-    /**
-     * Sends E-Mail by using the MimeMessage Class with the smpt protocol.
-     * 
-     * @author Lukas Klose
-     */
-	  public static void SendEmail(String reciever, long l) throws AddressException, MessagingException{
 
-		  final String username = "gandalf324687992";
-		  final String password = "324687992";
+	@Autowired
+	private final UserRepository userRepository;
 
-		  Properties props = new Properties();
-		  props.put("mail.smtp.auth", "true");
-		  props.put("mail.smtp.starttls.enable", "true");
-		  props.put("mail.smtp.host", "smtp.gmail.com");
-		  props.put("mail.smtp.port", "587");
+	@Autowired
+	private final ValidatorRepository validatorRepository;
 
-		  Session session = Session.getInstance(props,
-		          new javax.mail.Authenticator() {
-		              protected PasswordAuthentication getPasswordAuthentication() {
-		                  return new PasswordAuthentication(username, password);
-		              }
-		          });
+	@Autowired
+	private final UserSettingsRepository userSettingsRepository;
 
-		  
-		      Message message = new MimeMessage(session);
-		      message.setFrom(new InternetAddress("gandalf324687992@gmail.com"));
-		      message.setRecipients(Message.RecipientType.TO,
-		              InternetAddress.parse(reciever));
-		      message.setSubject("Registrierung");
-		      message.setText("Herzlich Wilkommen. Bitte öffnen sie die folgende Seite um ihren Account zu aktivieren!" +".\n\n" + "/http://refugee-app.tk/swt15w10/validate?id=" + l);
+	@Autowired
+	public EMailController(UserRepository userRepository, ValidatorRepository validatorRepository, UserSettingsRepository userSettingsRepository) {
+		
+		this.validatorRepository = validatorRepository;
+		this.userRepository = userRepository;
+		this.userSettingsRepository = userSettingsRepository;
+	}
 
-		      Transport.send(message);
-		     System.out.println("E-Mail gesendet an " + reciever);
-		     System.out.println("Mit id"+ Long.toString(l));
 
-	  }
-	  
-	    /**
-	     * 
-	     * Searches for the given HashID in UserRepository and sets the validated flag to true if 
-	     * it is found.
-	     * 
-	     * @author Lukas Klose
-	     */
-	  @RequestMapping(value = "/validate")
-	  public String validation(@RequestParam String id){
+	/**
+	 * Sends E-Mail by using the MimeMessage Class with the smpt protocol.
+	 *
+	 * @author Lukas Klose
+	 */
+	public static void sendEmail(String receiver, String token, int usage) throws AddressException, MessagingException {
 
-		  int realID = 0;
-		  try {
-			  realID = Integer.parseInt(id);
-		  }
-		  catch(Exception e){
-			  System.out.println("NaN");
-		  }
-		  //User foundUser = userRepository.findByHashcode(realID);
-		  User foundUser = userRepository.findOne(Long.parseLong(id));
-		  if(foundUser == null){
+		final String username = "gandalf324687992";
+		final String password = "324687992";
 
-			  return "frontpage";
 
-		  }
-		  else{
-			  System.out.println(foundUser.toString());
-			  foundUser.setValidated(true);
-			  System.out.println(foundUser.getUserAccount());
-			  userAccountManager.enable(foundUser.getUserAccount().getIdentifier());
-			  System.out.println("enabled nach email= " + foundUser.getUserAccount().isEnabled());
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
 
-			  
-			  //userRepository.delete(foundUser.getId());
-			  userRepository.save(foundUser);
-			  
-		  }
-		  
-		  System.out.println(id);
-		  //return "frontpage";
-		  
-		  
-		  return "redirect:/";
-		  
-		  
-	  }
-	  
+		Session session = Session.getInstance(props,
+				new javax.mail.Authenticator() {
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(username, password);
+					}
+				});
+
+		Message message = new MimeMessage(session);
+		message.setFrom(new InternetAddress("gandalf324687992@gmail.com"));
+		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiver));
+
+          /*
+          * Cases: 1 = Registrierung
+          *        2 = Account deaktivieren
+          *  	   3 = Email ändern
+          */
+
+		switch (usage) {
+			case 1: {
+				message.setSubject("RefugeeApp: EMail-Verifizierung");
+				message.setText("Zum Registrieren Ihres Accounts klicken Sie auf den Link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=" + token + "\n\n Lokal: localhost:8080/validate?id=" + token);
+				break;
+			}
+
+			case 2: {
+				message.setSubject("RefugeeApp: Account deaktivieren");
+				message.setText("Zum Deaktivieren Ihres Accounts klicken Sie auf den Link.\n\n" +"Testserver: http://refugee-app.tk/swt15w10/validate?id=" + token + "\n\n Lokal: localhost:8080/validate?id=" + token);
+				break;
+			}
+
+			case 3: {
+				message.setSubject("RefugeeApp: EMail-Änderung");
+				message.setText("Zum Ändern Ihrer Mailadresse klicken Sie auf den Link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=" + token + "\n\n Lokal: localhost:8080/validate?id=" + token);
+				break;
+			}
+		}
+		Transport.send(message);
+	}
+
+	/**
+	 * Searches for the given HashID in UserRepository and sets the validated flag to true if
+	 * it is found.
+	 *
+	 * @author Lukas Klose
+	 */
+	@RequestMapping(value = "/validate")
+	public String validation(@RequestParam String id) {
+
+		Validator validator = validatorRepository.findByToken(id);
+
+		
+
+		if (validator == null)
+			return "redirect:/frontpage";
+
+		else {
+			User user = validator.getUser();
+
+			switch (validator.getUsage()) {
+				case 1: {
+					userAccountManager.enable(user.getUserAccount().getIdentifier());
+					validatorRepository.delete(validator);
+					return "redirect:/";
+				}
+				case 2: {
+					userAccountManager.disable(user.getUserAccount().getIdentifier());
+					validatorRepository.delete(validator);
+					return "redirect:/";
+				}
+				case 3: {
+					return "redirect:/changeemail?token=" + id;
+				}
+			}
+		}
+		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/changeemail")
+	public String changeEmail(@ModelAttribute("userSettingsForm") UserSettingsForm userSettingsForm, @RequestParam String token){
+
+		if (validatorRepository.findByToken(token) == null){
+			System.out.println("Kein dude da");
+			return "redirect:/";
+		}
+
+		User user = validatorRepository.findByToken(token).getUser();
+		UserSettings userSettings = userSettingsRepository.findByUserId(user.getId());
+
+		System.out.println(userSettings.getNewEmail());
+		System.out.println(user.getEmail());
+
+		user.setEmail(userSettings.getNewEmail());
+
+		userRepository.save(user);
+		validatorRepository.delete(validatorRepository.findByToken(token));
+
+		return "redirect:/usersettings";
+	}
+
 }

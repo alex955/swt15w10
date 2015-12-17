@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import kickstart.model.*;
 
-import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -254,60 +253,60 @@ public class AdminController {
 	 * @return redirect to admin overview
 	 */
 	@RequestMapping(value="/admin/editUser/{id}",method=RequestMethod.POST)
-	public String processEditUser(@PathVariable Long id, @Valid UserSettings userSettings, BindingResult result) {
+	public String processEditUser(@PathVariable Long id, @Valid UserSettingsForm userSettingsForm, BindingResult result) {
 		User user = this.userRepository.findOne(id);
 
 		System.out.println(user.toString());
 		
 		
-		if(!userSettings.getNewFirstName().isEmpty())
-			user.setFirstName(userSettings.getNewFirstName());
+		if(!userSettingsForm.getNewFirstName().isEmpty())
+			user.setFirstName(userSettingsForm.getNewFirstName());
 		
-		if(!userSettings.getNewLastName().isEmpty())
-			user.setLastName(userSettings.getNewLastName());
+		if(!userSettingsForm.getNewLastName().isEmpty())
+			user.setLastName(userSettingsForm.getNewLastName());
 
-		if(!userSettings.getNewCity().isEmpty())
-			user.setCity(userSettings.getNewCity());
+		if(!userSettingsForm.getNewCity().isEmpty())
+			user.setCity(userSettingsForm.getNewCity());
 
-		if(!userSettings.getNewZip().isEmpty())
-			user.setZip(userSettings.getNewZip());
+		if(!userSettingsForm.getNewZip().isEmpty())
+			user.setZip(userSettingsForm.getNewZip());
 
-		if(!userSettings.getNewStreetName().isEmpty())
-			user.setStreetName(userSettings.getNewStreetName());
+		if(!userSettingsForm.getNewStreetName().isEmpty())
+			user.setStreetName(userSettingsForm.getNewStreetName());
 
-		if(!userSettings.getNewHouseNumber().isEmpty())
-			user.setHouseNumber(userSettings.getNewHouseNumber());
+		if(!userSettingsForm.getNewHouseNumber().isEmpty())
+			user.setHouseNumber(userSettingsForm.getNewHouseNumber());
 
-		if(!userSettings.getNewAddressAddition().isEmpty())
-			user.setAddressAddition(userSettings.getNewAddressAddition());
+		if(!userSettingsForm.getNewAddressAddition().isEmpty())
+			user.setAddressAddition(userSettingsForm.getNewAddressAddition());
 
 		//Email-Änderung
 
-		if(!userSettings.getNewEmail().isEmpty())
-			user.setEmail(userSettings.getNewEmail());
+		if(!userSettingsForm.getNewEmail().isEmpty())
+			user.setEmail(userSettingsForm.getNewEmail());
 
 		//Passwort-Änderung
-		if(!userSettings.getNewPassword().isEmpty() && userSettings.getNewPassword().equals(userSettings.getConfirmPW()) ){
-			userAccountManager.changePassword(user.getUserAccount(), userSettings.getNewPassword());
+		if(!userSettingsForm.getNewPassword().isEmpty() && userSettingsForm.getNewPassword().equals(userSettingsForm.getConfirmPW()) ){
+			userAccountManager.changePassword(user.getUserAccount(), userSettingsForm.getNewPassword());
 		}
 
 		//Sprachenänderung
-		if(userSettings.getNewLanguage1().equals("null")){
+		if(userSettingsForm.getNewLanguage1().equals("null")){
 			user.setLanguage1(null);
 		} else {
-			user.setLanguage1(userSettings.getNewLanguage1());
+			user.setLanguage1(userSettingsForm.getNewLanguage1());
 		}
 
-		if(userSettings.getNewLanguage2().equals("null")){
+		if(userSettingsForm.getNewLanguage2().equals("null")){
 			user.setLanguage2(null);
 		} else {
-			user.setLanguage2(userSettings.getNewLanguage2());
+			user.setLanguage2(userSettingsForm.getNewLanguage2());
 		}
 
-		if(userSettings.getNewLanguage3().equals("null")){
+		if(userSettingsForm.getNewLanguage3().equals("null")){
 			user.setLanguage3(null);
 		} else {
-			user.setLanguage3(userSettings.getNewLanguage3());
+			user.setLanguage3(userSettingsForm.getNewLanguage3());
 		}
 
 		userAccountManager.save(user.getUserAccount());

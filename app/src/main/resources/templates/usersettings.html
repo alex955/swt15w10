@@ -24,15 +24,20 @@
 					<h4 class="header">Einstellungen</h4>
 				</div>
 			</div>
-			<form action="#" th:action="@{/usersettings}" th:object="${UserSettings}" method="post">
+			<form action="#" th:action="@{/usersettings}" th:object="${UserSettingsForm}" method="post">
 			<div class="row" data-equalizer="1">
 				<div class="large-6 small-12 columns">
 					<h5>Passwort ändern</h5>
 					<div class="panel" data-equalizer-watch="1">
 						<div class="row">
+<<<<<<< HEAD
 								<div class="large-5 small-3 columns"><p class="show-for-medium-up">Altes Passwort</p></div>
 								<font color="red" th:if="${#fields.hasErrors('oldPassword')}" th:errors="*{oldPassword}"> ERROR MESSAGE </font>
 								<div class="large-7 small-12 columns"><input type="password" name="oldPassword" placeholder="altes Passwort"/></div>
+=======
+								<div class="large-5 small-3 columns">Altes Passwort</div>
+								<div class="large-7 small-9 columns"><input type="password" name="oldPassword" /></div>
+>>>>>>> EMail
 						</div>
 						<div class="row">
 								<div class="large-5 small-3 columns"><p class="show-for-medium-up">Neues Passwort</p></div>
@@ -40,9 +45,14 @@
 								<div class="large-7 small-12 columns"><input type="password" name="newPassword" placeholder="neues Passwort"/></div>
 						</div>
 						<div class="row">
+<<<<<<< HEAD
 								<div class="large-5 small-3 columns"><p class="show-for-medium-up">Neues Passwort wiederholen</p></div>
 							<font color="red" th:if="${#fields.hasErrors('confirmPW')}" th:errors="*{confirmPW}"> ERROR MESSAGE </font>
 							<div class="large-7 small-12 columns"><input type="password" name="confirmPW" placeholder="neues Passwort wiederholen"/></div>
+=======
+								<div class="large-5 small-3 columns">Neues Passwort wiederholen</div>
+							<div class="large-7 small-9 columns"><input type="password" name="confirmPW" /></div>
+>>>>>>> EMail
 						</div>
 					</div>
 				</div>
@@ -138,12 +148,14 @@
 									<font color="red" th:if="${#fields.hasErrors('newHouseNumber')}" th:errors="*{newHouseNumber}"> ERROR MESSAGE </font>
 									<input type="text" name="newHouseNumber" placeholder="Hausnummmer" th:value="${user.houseNumber}"/>
 									<input type="text" name="newAddressAddition" placeholder="(optional)"/>
-
+									<button class="button left" type="submit" th:href="@{/usersettings}">Änderungen speichern</button>
+									<a th:href="@{/deleteuser}"><button style="background-color: red" class="button right" type="button" onclick="alert('Zur Bestätigung der Deaktivierung wird Ihnen eine Email geschickt.')">Account deaktivieren</button></a>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+<<<<<<< HEAD
 				<div class="show-for-medium-up">
 					<button class="button left" type="submit" th:href="@{/usersettings}">Änderungen speichern</button>
 					<a th:href="@{/deleteuser}"><button class="alert button right" type="button">User löschen</button></a>
@@ -154,6 +166,8 @@
 					  <li><a th:href="@{/deleteuser}"><button class="small alert button">User löschen</button></a></li>
 					</ul>
 				</div>
+=======
+>>>>>>> EMail
 			</form>
 		</div>
 	</div>
