@@ -122,7 +122,7 @@ public class SettingsController {
             Validator validator = new Validator(user, 3);
             validatorRepository.save(validator);
             userSettings.setNewEmail(userSettingsForm.getNewEmail());
-            
+
             EMailController.sendEmail(user.getEmail(), validator.getToken(), validator.getUsage());
 
         }
@@ -172,7 +172,7 @@ public class SettingsController {
         Validator validator = new Validator(user, 2);
         validatorRepository.save(validator);
 
-        EMailController.sendEmail(user.getEmail(), validator.getToken(), validator.getUsage());
+        EMailController.sendEmail(user.getEmail(), validator.getToken(), 2);
         return "redirect:/logout";
     }
     

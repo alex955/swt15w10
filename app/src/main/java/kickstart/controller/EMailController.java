@@ -81,23 +81,23 @@ public class EMailController {
           */
 
 		switch (usage) {
-
 			case 1: {
 				message.setSubject("RefugeeApp: EMail-Verifizierung");
-				message.setText("Zum Registrieren Ihres Accounts klicken Sie auf den Link.\n\n" + "localhost:8080/validate?id=" + token);
+				message.setText("Zum Registrieren Ihres Accounts klicken Sie auf den Link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=" + token + "\n\n Lokal: localhost:8080/validate?id=" + token);
 				break;
 			}
 
 			case 2: {
 				message.setSubject("RefugeeApp: Account deaktivieren");
-				message.setText("Zum Deaktivieren Ihres Accounts klicken Sie auf den Link.\n\n" + "http://refugee-app.tk/swt15w10/validate?id=" + token);
+				message.setText("Zum Deaktivieren Ihres Accounts klicken Sie auf den Link.\n\n" +"Testserver: http://refugee-app.tk/swt15w10/validate?id=" + token + "\n\n Lokal: localhost:8080/validate?id=" + token);
+				break;
 			}
 
-			  case 3: {
-				  message.setSubject("RefugeeApp: EMail Änderung");
-				  message.setText("Zum Ändern Ihrer Mailadresse klicken Sie auf den Link.\n\n" + "http://refugee-app.tk/swt15w10/validate?id=" + token);
-			  } 
-
+			case 3: {
+				message.setSubject("RefugeeApp: EMail-Änderung");
+				message.setText("Zum Ändern Ihrer Mailadresse klicken Sie auf den Link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=" + token + "\n\n Lokal: localhost:8080/validate?id=" + token);
+				break;
+			}
 		}
 		Transport.send(message);
 	}
