@@ -6,9 +6,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class PossibleChatMessages {
 	
 	private int[] startMessages = { 1, 2 };
+	private int[] possibleMessagesFromStarter = { 5, 7, 8, 9 };
+	
 	private Map<Integer, LinkedList<Integer>> possibleAnswersToMessage = new HashMap<Integer, LinkedList<Integer>>();
 	
 	private Map<Integer,String> possibleChatMessage = new HashMap<Integer, String>();
@@ -20,6 +25,20 @@ public class PossibleChatMessages {
 			for(Map.Entry<Integer, String> s : possibleChatMessage.entrySet()){
 				if(s.getKey() == startMessages[i]) {
 					toReturn.put(startMessages[i], s.getValue());
+				}
+			}
+		}
+		
+		return toReturn;
+	}
+	
+	public Map<Integer, String> getPossibleMessagesFromStarter(){
+		Map<Integer,String> toReturn = new HashMap<Integer,String>();
+		
+		for(int i = 0; i < possibleMessagesFromStarter.length; i++){
+			for(Map.Entry<Integer, String> s : possibleChatMessage.entrySet()){
+				if(s.getKey() == possibleMessagesFromStarter[i]) {
+					toReturn.put(possibleMessagesFromStarter[i], s.getValue());
 				}
 			}
 		}

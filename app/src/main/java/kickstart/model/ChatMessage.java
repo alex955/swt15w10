@@ -1,4 +1,4 @@
-package kickstart.utilities;
+package kickstart.model;
 
 import java.time.LocalDateTime;
 
@@ -7,8 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
-import kickstart.model.ChatConversation;
 
 @Entity
 public class ChatMessage {

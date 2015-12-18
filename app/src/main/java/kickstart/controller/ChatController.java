@@ -22,11 +22,11 @@ import kickstart.model.CategoryFirstTierObject;
 import kickstart.model.CategoryRepo;
 import kickstart.model.ChatConversation;
 import kickstart.model.ChatConversationRepo;
+import kickstart.model.ChatMessage;
 import kickstart.model.ChatMessageRepo;
 import kickstart.model.User;
 import kickstart.model.UserRepository;
 import kickstart.utilities.CategoryMethods;
-import kickstart.utilities.ChatMessage;
 import kickstart.utilities.PossibleChatMessages;
 import kickstart.utilities.StringInForm;
 
