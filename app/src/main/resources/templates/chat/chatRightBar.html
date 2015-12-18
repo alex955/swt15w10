@@ -6,39 +6,55 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Refugee</title>
 <link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
-<link th:href="@{/resources/css/app.css}" rel="stylesheet" type="text/css"/>
-    <script th:src="@{/resources/js/app.js}"></script>
-    <script th:src="@{/resources/js/routes.js}"></script>
-    <script th:src="@{/resources/js/angular.js}"></script>
+<link th:href="@{/resources/css/app.css}" rel="stylesheet"
+	type="text/css" />
+<script th:src="@{/resources/js/app.js}"></script>
+<script th:src="@{/resources/js/routes.js}"></script>
+<script th:src="@{/resources/js/angular.js}"></script>
 </head>
 
-  <style>
-    .message-input, .message-input .inline-label, .menu-bar {margin-bottom: 0;}
-    #sidebar, .messages {border-right: 1px solid #eee;}
-    .message-side-bar {border-left: 1px solid #eee;}
-    .avatar-section {border-top: 1px solid #eee;}
-  </style>
+<style>
+.message-input, .message-input .inline-label, .menu-bar {
+	margin-bottom: 0;
+}
 
-  <body>
-		  
-		  
-		  
-		  
-		<div th:fragment="chatRightBar"> 
-            <section class="block-list">
-              <header>bekommene Anfragen</header>
-              <ul>
-                <li th:each="inMsg : ${incomingMessages}"><a th:href="@{/chat/thread/{id}(id=${inMsg.id})}" th:text="'von UserId  ' + ${inMsg.fromId}+ ', über: '+${inMsg.title}">Name</a></li>
-              </ul>
-              
-              <header>gestelte Anfragen</header>
-               <ul>
-                <li th:each="outMsg : ${outgoingMessages}"><a th:href="@{/chat/thread/{id}(id=${outMsg.id})}" th:text="'an UserId  ' + ${outMsg.fromId}+ ', über: '+${outMsg.title}">Name</a></li>
-              </ul>
-            </section>
-          </div>
-  
-  </body>
+#sidebar, .messages {
+	border-right: 1px solid #eee;
+}
+
+.message-side-bar {
+	border-left: 1px solid #eee;
+}
+
+.avatar-section {
+	border-top: 1px solid #eee;
+}
+</style>
+
+<body>
+
+
+
+
+	<div th:fragment="chatRightBar">
+		<section class="block-list">
+			<header>erhaltene Anfragen</header>
+			<ul>
+				<li th:each="inMsg : ${incomingMessages}"><a
+					th:href="@{/chat/thread/{id}(id=${inMsg.id})}"
+					th:text="'von ' + ${inMsg.fromUserName}+ ', über: '+${inMsg.title}">Name</a></li>
+			</ul>
+
+			<header>gestellte Anfragen</header>
+			<ul>
+				<li th:each="outMsg : ${outgoingMessages}"><a
+					th:href="@{/chat/thread/{id}(id=${outMsg.id})}"
+					th:text="'an  ' + ${outMsg.toUserName}+ ', über: '+${outMsg.title}">Name</a></li>
+			</ul>
+		</section>
+	</div>
+
+</body>
 </html>
 
 <!-- ui-view  -->

@@ -3,6 +3,7 @@ package kickstart.model;
 
 
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -11,13 +12,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import kickstart.utilities.ChatMessage;
-
 @Entity
 public class ChatConversation {
 	private @Id @GeneratedValue long id;
 	
 	private long fromId, toId;
+	private String fromUserName, toUserName;
+	
 	private boolean fromUnread, toUnread;
 	
 	public List<ChatMessage> getContent() {
@@ -30,7 +31,7 @@ public class ChatConversation {
 	private String title;
 	
 	@ElementCollection
-	private List<ChatMessage> content = new LinkedList<ChatMessage>();
+	private List<ChatMessage> content = new ArrayList<ChatMessage>();
 	
 	public ChatConversation(){
 		this.iterationCount = 0;
@@ -89,7 +90,23 @@ public class ChatConversation {
 	}
 	
 	public void addChatMessage(ChatMessage arg){
-		this.content.add(arg);
+		this.content.add(0,arg);
+	}
+
+	public String getFromUserName() {
+		return fromUserName;
+	}
+
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
+	}
+
+	public String getToUserName() {
+		return toUserName;
+	}
+
+	public void setToUserName(String toUserName) {
+		this.toUserName = toUserName;
 	}
 	
 	
