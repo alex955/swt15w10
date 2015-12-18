@@ -56,8 +56,11 @@ public class AdminController {
 		this.categoryMethods = categoryMethods;
 	}
 
-
-	
+	/**
+	 * Generates an overview (Categories, Users) for an admin with the option to add/delete Categories and deactivate users
+	 * @param model
+	 * @return admin-Overview template (/templates/admin.html)
+	 */
 	@RequestMapping(value = "/admin")
     public String initialView(Model model) {
 		
@@ -106,6 +109,14 @@ public class AdminController {
         
         return "admin";
     }
+	
+	/**
+	 *  Processes data of a category
+	 * @param newCategory new Category which is to be saved in the Category Repository
+	 * @param model
+	 * @param id ID of the predecessor of the new category
+	 * @return redirect to inspection of new category
+	 */
     @RequestMapping(value="/admin/addSubcategory/{id}", method=RequestMethod.POST)
     public String addSubcategory(@ModelAttribute Category newCategory, Model model, @PathVariable Long id) {
     	Category toSave = new Category();
@@ -118,7 +129,12 @@ public class AdminController {
         return "redirect:/admin/inspectCategory/{id}";
     }
 	
-	
+	/**
+	 * Generation of a new Category which has no predecessors -> new root Category
+	 * @param category new Category which is to be saved in the Category Repository
+	 * @param model
+	 * @return redirect to admin overwiew
+	 */
     @RequestMapping(value="/admin/addRootCat", method=RequestMethod.POST)
     public String addRootCategory(@ModelAttribute Category category, Model model) {
     	category.setPredecessor(-1);
@@ -131,7 +147,11 @@ public class AdminController {
     }
     
 
-    
+    /**
+     * processes delete request of a certain category
+     * @param id ID of the category which is to be deleted
+     * @return redirect to admin overwiew
+     */
 	@RequestMapping(value = "/admin/deleteCategory/{id}")
 	public String deleteCategory(@PathVariable Long id) {
 		System.out.println("delete category with id " + id);
@@ -140,6 +160,10 @@ public class AdminController {
 		return "redirect:/admin";
 	}
 	
+	/**
+	 * helper function for deletion of subcategories , called in deleteCategory(Long id)
+	 * @param id ID of category whose subcategories should be deleted to
+	 */
 	public void deleteSubcategories(long id){
 		for(Category s : categories.findAll()){
 			if(s.getPredecessor() == id){
@@ -151,6 +175,13 @@ public class AdminController {
 		}
 	}
 	
+	/**
+	 * Generates an overview over a certain category. Shows subcategories
+	 * @param id ID of the category
+	 * @param model
+	 * @param category
+	 * @return
+	 */
 	@RequestMapping(value = "/admin/inspectCategory/{id}")
 	public String showSubcategories(@PathVariable Long id, Model model, @ModelAttribute Category category) {
 		
@@ -176,18 +207,34 @@ public class AdminController {
 		return "adminSubcategory";
 	}
 	
+	/**
+	 * deactivates certain user without deleting it's account
+	 * @param id User ID
+	 * @return
+	 */
 	@RequestMapping(value = "/admin/deactivateUser/{id}")
 	public String deactivateUser(@PathVariable Long id) {
 		this.userAccountManager.disable(this.userRepository.findOne(id).getUserAccount().getIdentifier());
 		return "redirect:/admin";
 	}
 	
+	/**
+	 * activates a certain deactivated user account
+	 * @param id User ID
+	 * @return
+	 */
 	@RequestMapping(value = "/admin/activateUser/{id}")
 	public String activateUser(@PathVariable Long id) {
 		this.userAccountManager.enable(this.userRepository.findOne(id).getUserAccount().getIdentifier());
 		return "redirect:/admin";
 	}
 	
+	/**
+	 * Generates a view which let's the admin edit a user's data and profile
+	 * @param id User ID
+	 * @param model
+	 * @return admin/adminEditUser template
+	 */
 	@RequestMapping(value = "/admin/editUser/{id}")
 	public String editUser(@PathVariable Long id, Model model) {
 		this.processedCategories = categoryMethods.getProcessedCategories();
@@ -199,6 +246,13 @@ public class AdminController {
 		return "admin/adminEditUser";
 	}
 
+	/**
+	 * Processes changes made to a user by an admin
+	 * @param id User ID
+	 * @param userSettings User's new/changed data
+	 * @param result verification result of user's data
+	 * @return redirect to admin overview
+	 */
 	@RequestMapping(value="/admin/editUser/{id}",method=RequestMethod.POST)
 	public String processEditUser(@PathVariable Long id, @Valid UserSettings userSettings, BindingResult result) {
 		User user = this.userRepository.findOne(id);

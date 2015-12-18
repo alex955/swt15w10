@@ -64,8 +64,8 @@ public class EMailController {
 		      message.setFrom(new InternetAddress("gandalf324687992@gmail.com"));
 		      message.setRecipients(Message.RecipientType.TO,
 		              InternetAddress.parse(reciever));
-		      message.setSubject("RegistrierungsID");
-		      message.setText("Ihre ID lautet " + l +".\n\n" + "http://localhost:8080/validate?id=" + l);
+		      message.setSubject("Registrierung");
+		      message.setText("Herzlich Wilkommen. Bitte öffnen sie die folgende Seite um ihren Account zu aktivieren!" +".\n\n" + "/http://refugee-app.tk/swt15w10/validate?id=" + l);
 
 		      Transport.send(message);
 		     System.out.println("E-Mail gesendet an " + reciever);

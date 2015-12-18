@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Refugee</title>
 <link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
 </head>
@@ -29,19 +30,19 @@
 					<h5>Passwort ändern</h5>
 					<div class="panel" data-equalizer-watch="1">
 						<div class="row">
-								<div class="large-5 small-3 columns">Altes Passwort</div>
+								<div class="large-5 small-3 columns"><p class="show-for-medium-up">Altes Passwort</p></div>
 								<font color="red" th:if="${#fields.hasErrors('oldPassword')}" th:errors="*{oldPassword}"> ERROR MESSAGE </font>
-								<div class="large-7 small-9 columns"><input type="password" name="oldPassword" /></div>
+								<div class="large-7 small-12 columns"><input type="password" name="oldPassword" placeholder="altes Passwort"/></div>
 						</div>
 						<div class="row">
-								<div class="large-5 small-3 columns">Neues Passwort</div>
+								<div class="large-5 small-3 columns"><p class="show-for-medium-up">Neues Passwort</p></div>
 								<font color="red" th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}"> ERROR MESSAGE </font>
-								<div class="large-7 small-9 columns"><input type="password" name="newPassword" /></div>
+								<div class="large-7 small-12 columns"><input type="password" name="newPassword" placeholder="neues Passwort"/></div>
 						</div>
 						<div class="row">
-								<div class="large-5 small-3 columns">Neues Passwort wiederholen</div>
+								<div class="large-5 small-3 columns"><p class="show-for-medium-up">Neues Passwort wiederholen</p></div>
 							<font color="red" th:if="${#fields.hasErrors('confirmPW')}" th:errors="*{confirmPW}"> ERROR MESSAGE </font>
-							<div class="large-7 small-9 columns"><input type="password" name="confirmPW" /></div>
+							<div class="large-7 small-12 columns"><input type="password" name="confirmPW" placeholder="neues Passwort wiederholen"/></div>
 						</div>
 					</div>
 				</div>
@@ -103,13 +104,13 @@
 								</div>
 							</div>
 							<div class="row">							                                                      
-								<div class="large-5 small-3 columns">Registrierte E-Mail-Adresse</div>
-								<div class="large-7 small-9 columns"><input type="text" disabled="" th:value="${user.email}" /></div>
+								<div class="large-5 small-4 columns">Registrierte E-Mail-Adresse</div>
+								<div class="large-7 small-8 columns"><input type="text" disabled="" th:value="${user.email}" /></div>
 							</div>
 							<div class="row">							                                                      
-								<div class="large-5 small-3 columns">Neue E-Mail-Adresse</div>
+								<div class="large-5 small-3 columns"><p class="show-for-medium-up">Neue E-Mail-Adresse</p></div>
 								<font color="red" th:if="${#fields.hasErrors('newEmail')}" th:errors="*{newEmail}"> ERROR MESSAGE </font>
-								<div class="large-7 small-9 columns"><input type="text" name ="newEmail" placeholder="Neue Email-Adresse" /></div>
+								<div class="large-7 small-12 columns"><input type="text" name ="newEmail" placeholder="Neue Email-Adresse" /></div>
 							</div>
 						</div>
 					</div>
@@ -117,21 +118,21 @@
 						<h5>Wohnort ändern</h5>
 						<div class="panel" data-equalizer-watch="2">
 							<div class="row">
-								<div class="large-5 small-3 columns">Stadt</div>
-								<div class="large-7 small-9 columns">
+								<div class="large-5 small-3 columns"><p class="show-for-medium-up">Stadt</p></div>
+								<div class="large-7 small-12 columns">
 									<input type="text" name="newCity" placeholder="Stadt" th:value="${user.city}"/>
 								</div>
 							</div>
 							<div class="row">
-								<div class="large-5 small-3 columns">PLZ</div>
-								<div class="large-7 small-9 columns">
+								<div class="large-5 small-3 columns"><p class="show-for-medium-up">PLZ</p></div>
+								<div class="large-7 small-12 columns">
 									<font color="red" th:if="${#fields.hasErrors('newZip')}" th:errors="*{newZip}"> ERROR MESSAGE </font>
 									<input type="text" name="newZip" placeholder="PLZ" th:value="${user.zip}"/>
 								</div>
 							</div>
 							<div class="row">
-								<div class="large-5 small-3 columns">Straße, Hausnummer, Addresszusatz</div>
-								<div class="large-7 small-9 columns">
+								<div class="large-5 small-3 columns"><p class="show-for-medium-up">Straße, Hausnummer, Addresszusatz</p></div>
+								<div class="large-7 small-12 columns">
 									<font color="red" th:if="${#fields.hasErrors('newStreetName')}" th:errors="*{newStreetName}"> ERROR MESSAGE </font>
 									<input type="text" name="newStreetName" placeholder="Straßenname" th:value="${user.streetName}"/>
 									<font color="red" th:if="${#fields.hasErrors('newHouseNumber')}" th:errors="*{newHouseNumber}"> ERROR MESSAGE </font>
@@ -143,8 +144,16 @@
 						</div>
 					</div>
 				</div>
-				<button class="button left" type="submit" th:href="@{/usersettings}">Änderungen speichern</button>
-				<a th:href="@{/deleteuser}"><button style="background-color: red" class="button right" type="button">User löschen</button></a>
+				<div class="show-for-medium-up">
+					<button class="button left" type="submit" th:href="@{/usersettings}">Änderungen speichern</button>
+					<a th:href="@{/deleteuser}"><button class="alert button right" type="button">User löschen</button></a>
+				</div>
+				<div class="show-for-small-only">
+					<ul class="button-group">
+					  <li><button class="small button" type="submit" th:href="@{/usersettings}">Änderungen speichern</button></li>
+					  <li><a th:href="@{/deleteuser}"><button class="small alert button">User löschen</button></a></li>
+					</ul>
+				</div>
 			</form>
 		</div>
 	</div>

@@ -13,28 +13,37 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 import kickstart.model.ArticleRepo;
+import kickstart.utilities.SettingsRepository;
+
 
 @Controller
 public class PictureController{
 	
-	private ArticleRepo articleRepo;
+	private final ArticleRepo articleRepo;
+	private final SettingsRepository settingsRepo;
 	private FileSystemResource resource;
 	
 	@Autowired
-	public PictureController(ArticleRepo articleRepo){
+	public PictureController(ArticleRepo articleRepo, SettingsRepository settingsRepo){
 		this.articleRepo=articleRepo;
+		this.settingsRepo = settingsRepo;
 	}
 
+	/**
+	 * @param id
+	 * @return
+	 * @throws IOException
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/showPicture/{id}", produces = "image/jpg")
 	public FileSystemResource showArticle(@PathVariable("id") long id) throws IOException{
 		if(articleRepo.findOne(id).getPicture() == null){
-			//in case some does not upload a picture
-			//this is the path on saschas computer, at the end we have to change to the picture on the server
-			String standardPicPath = "C:/Users/sasch/Documents/swt15w10/app/src/main/resources/static/resources/img/keinbild.png";
-			resource = new FileSystemResource(standardPicPath);
+			//in case someone does not upload a picture
+			//this is the path in a git ignore file, at the end we have to change to the picture on the server
+			resource = new FileSystemResource(settingsRepo.findOne("noUploadedPicturePath").getValue());
 		}
 		else	
+			//in case there is a picture, we use the path from the model picture
 			resource = new FileSystemResource(articleRepo.findOne(id).getPicture().getPicPath());
 		return resource;
 	}

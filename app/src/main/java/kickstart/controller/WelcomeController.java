@@ -16,24 +16,20 @@
 package kickstart.controller;
 
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import kickstart.model.CategoryRepo;
 import kickstart.utilities.CategoryMethods;
 import kickstart.model.ArticleRepo;
-import kickstart.model.Category;
 import kickstart.model.CategoryFirstTierObject;
 
 @Controller
 public class WelcomeController {
 	
-	@Autowired private final CategoryRepo categories;
 	@Autowired private final CategoryMethods categoryMethods;
 	@Autowired private final ArticleRepo articleRepo;
 
@@ -43,15 +39,11 @@ public class WelcomeController {
 	
 	//Constructor, insert autowired variables here (?)
 	@Autowired
-	public WelcomeController(CategoryRepo categories, CategoryMethods categoryMethods, ArticleRepo articleRepo){
-		this.categories = categories;
+	public WelcomeController(CategoryMethods categoryMethods, ArticleRepo articleRepo){
 		this.categoryMethods = categoryMethods;
 		this.articleRepo = articleRepo;
 	}
-	
-	//help functions
-
-	
+		
 	//Mappings
 	@RequestMapping({"/", "/frontpage"})
 	public String frontPage(Model model) {
@@ -89,28 +81,6 @@ public class WelcomeController {
 		
 		return "initiatecategory";
 	}
-	
-	
-	@RequestMapping("/chat")
-	public String chat(Model model){
-		//initiate categories
-		this.processedCategories = categoryMethods.getProcessedCategories();
-		model.addAttribute("categories", this.processedCategories);
-		
-		return "chat";
-	}
-	
-	@RequestMapping("/test")
-	public String testShit(Model model){
-		//initiate categories
-		Map<String, List<Category>> test = categoryMethods.getCategoryMap();
-		
-		model.addAttribute("map", test);
-		model.addAttribute("testVar", new String("test123"));
-		
-		return "utilities/testShit";
-	}
-
 	
 	//Mappings end
 }

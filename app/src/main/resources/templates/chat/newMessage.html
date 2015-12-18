@@ -1,0 +1,51 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Refugee</title>
+<link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
+</head>
+
+<body>
+
+	<nav th:include="topbar :: topbar"></nav>
+
+	<div class="row">
+		<div class="large-12 columns">
+			<p>&nbsp;</p>
+			<h4 class="header">Neue Nachricht</h4>
+
+			<div class="panel">
+				<label
+					th:text="'Mit User ' + ${article.creator.username} + ' wegen ' + ${article.title} + ' in ' + ${article.zip} + ',' + ${article.location} + ' Kontakt aufnehmen'">Kontakt</label>
+				<hr></hr>
+				<div class="row">
+					<div class="small-12 columns">
+						<form action="#"
+							th:action="@{/chat/processNewConversation/{id}(id=${article.id})}"
+							th:object="${stringInForm}" method="post"
+							enctype="multipart/form-data">
+							<p>
+								<select th:field="*{content}">
+									<option th:each="possibleMessage : ${possibleMessages}"
+										th:value="${possibleMessage.key}" th:text="${possibleMessage.value}">.</option>
+								</select>
+							</p>
+							<p>
+								<textarea rows="4" th:field="*{content2}"></textarea>
+							</p>
+							<button type="submit">Nachricht senden</button>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<footer th:include="footer :: footer"></footer>
+
+</body>
+</html>

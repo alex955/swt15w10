@@ -68,7 +68,6 @@ public class Article {
 		super();
 	}
 
-	//constructor with creationdate
 	public Article(String title, String description, Picture picture, String location, String street,
 			long category, String number, String zip, User creator) {
 		super();
@@ -98,23 +97,8 @@ public class Article {
 			this.creationdate = LocalDateTime.now();
 			this.creator = creator;
 		}
-		
-	//constructor without Picture, User
-			public Article(String title, String description, String location, String street,
-					long category, String number, String zip) {
-				super();
-				this.title = title;
-				this.description = description;
-				this.location = location;
-				this.street = street;
-				this.category = category;
-				this.number = number;
-				this.zip = zip;
-				this.creationdate = LocalDateTime.now();
-			}
 	
-	
-	//constructor with creationdate and activitydate
+	//constructor with and activitydate
 	public Article(String title, String description, Picture picture, String location, String street,
 			long category, String number, String zip, LocalDateTime activitydate) {
 		super();

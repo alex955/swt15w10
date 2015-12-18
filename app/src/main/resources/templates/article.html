@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Refugee</title>
 <link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
 </head>
@@ -14,51 +15,72 @@
 	<div class="row">
 		<div class="large-12 columns">
 			<p>&nbsp;</p>
-			<h4 class="header" th:text="${Article.title}">Name des Artikels</h4>
+			<h4 class="header" th:text="${Article.title}"></h4>
 			<div class="panel">
 				<div class="row">
-					<div class="small-12 columns">
-						<div class="small-12 large-9 columns">
-							<img th:src="@{/showPicture/}+${Article.id}" src="http://placehold.it/800x600&amp;text=Artikel" />
-							<a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/editArticle/}+${Article.id}" class="button">Artikel bearbeiten</a>
-							<a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/deleteArticle/}+${Article.id}" class="button">Artikel löschen</a>
-						<p>&nbsp;</p>
-						</div>
-						<p>&nbsp;</p>
-						<p>&nbsp;</p>
-						<div class="row">
-							<div class="small-12 columns">
-								<h5 class="subheader">Details</h5>
-								<hr></hr>
-								<div class="small-6 large-3 columns">
-									<p>Ort:</p>
-									<p>PLZ:</p>
-									<p>Erstellungsdatum:</p>
-									<p>Anbieter:</p>
-								</div>
-								<div class="small-6 large-9 columns">
-									<p th:text="${Article.location}"></p>
-									<p th:text="${Article.zip}"></p>
-									<p th:text="${#temporals.format(Article.creationdate, 'dd. MMMM yyyy')}">Datum</p>
-									<p th:text="${Creator.firstName} + ' ' + ${Creator.lastName}"></p>
-								</div>
-								<p>&nbsp;</p>
-								<h5 class="subheader">Beschreibung</h5>
-								<hr></hr>
-								<font th:text="${Article.description}"></font>
-							</div>
-						</div>
+					<div class="small-12 large-7 columns">
+						<img th:src="@{/showPicture/}+${Article.id}"/>
+					</div>
+					
+					<div class="small-12 large-5 columns">
+						<ul class="stack-for-small round secondary button-group">
+						  <li><hr th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/editArticle/}+${Article.id}" class="show-for-small-only"></hr></li>
+						  <li><a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/editArticle/}+${Article.id}" class="small button">Artikel bearbeiten</a></li>
+						  <li><a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/deleteArticle/}+${Article.id}" class="small alert button">Artikel löschen</a></li>
+						</ul>
 					</div>
 				</div>
+				<p>&nbsp;</p>
+				<div class="row">
+					<div class="small-12 columns">
+						<h5 class="subheader">Details</h5>
+					</div>
+					<hr></hr>
+				</div>
+				<div class="row">
+					<div class="small-6 large-3 columns">
+						<p>Ort:</p>
+					</div>
+					<div class="small-6 large-9 columns">
+						<p th:text="${Article.location}"></p>
+					</div>
+				</div>	
+				<div class="row">
+					<div class="small-6 large-3 columns">
+						<p>PLZ:</p>
+					</div>
+					<div class="small-6 large-9 columns">
+						<p th:text="${Article.zip}"></p>
+					</div>
+				</div>	
+				<div class="row">
+					<div class="small-6 large-3 columns">
+						<p>Erstellungsdatum:</p>
+					</div>
+					<div class="small-6 large-9 columns">
+						<p th:text="${#temporals.format(Article.creationdate, 'dd. MMMM yyyy')}">Datum</p>
+					</div>
+				</div>	
+				<div class="row">
+					<div class="small-6 large-3 columns">
+						<p>Anbieter:</p>
+					</div>
+					<div class="small-6 large-9 columns">
+						<p th:text="${Creator.username}"></p>
+					</div>
+				</div>													
+				<p>&nbsp;</p>
+				<h5 class="subheader">Beschreibung</h5>
+				<hr></hr>
+				<font th:text="${Article.description}"></font>
 			</div>
 
-			<div class="panel">
-				<label> Nachricht schreiben</label>
+			<div class="panel" th:if="${Creator.id} != ${currentUserId}" sec:authorize="isAuthenticated()">
+				<label>Kontakt</label>
 				<hr></hr>
 				<div class="row">
 					<div class="small-12 columns">
-						<textarea rows="4"></textarea>
-						<div class="button">Nachricht senden</div>
+						<a class="button" th:href="@{/chat/newConversation/}+${Article.id}">Kontakt mit Anbieter aufnehmen</a>
 					</div>
 				</div>
 			</div>

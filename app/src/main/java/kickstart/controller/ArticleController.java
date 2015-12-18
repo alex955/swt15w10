@@ -27,6 +27,7 @@ import kickstart.model.PictureRepo;
 import kickstart.model.User;
 import kickstart.model.UserRepository;
 import kickstart.utilities.CategoryMethods;
+import kickstart.utilities.SettingsRepository;
 import kickstart.model.ArticleRepo;
 import kickstart.model.CategoryFirstTierObject;
 
@@ -40,20 +41,25 @@ public class ArticleController {
 	@Autowired
 	private final ArticleRepo articleRepo;
 
-	@Autowired private final CategoryMethods categoryMethods;
+	@Autowired 
+	private final CategoryMethods categoryMethods;
 	
     @Autowired
     private final UserRepository userRepository;
+    
+    @Autowired 
+    private final SettingsRepository settingsRepo;
 
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
 	
 	@Autowired
-	public ArticleController(CategoryRepo categories, ArticleRepo articleRepo, PictureRepo pictureRepo, CategoryMethods categoryMethods, UserRepository userRepository){
+	public ArticleController(CategoryRepo categories, ArticleRepo articleRepo, PictureRepo pictureRepo, CategoryMethods categoryMethods, UserRepository userRepository, SettingsRepository settingsRepo){
 		this.categories = categories;
 		this.articleRepo=articleRepo;
 		this.pictureRepo = pictureRepo;
 		this.categoryMethods = categoryMethods;
 		this.userRepository = userRepository;
+		this.settingsRepo = settingsRepo;
 	}
 	
 	
@@ -84,7 +90,6 @@ public class ArticleController {
 	    
 
 		
-		
 		model.addAttribute("isAdminLoggedIn", isAdminLoggedIn);
 	    return "article";
 	}
@@ -111,12 +116,12 @@ public class ArticleController {
 
 	
 	@RequestMapping(value = "/editArticle/{id}", method = RequestMethod.POST)
-	public String processEditedArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, @PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount){
+	public String processEditedArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, @PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount, Model model){
 		Article originalArticle = this.articleRepo.findOne(id);
 		long currentUserId = this.userRepository.findByUserAccount(userAccount.get()).getId();
 		
-		//case: current user didnt create article || logged in user no admin -> end
-		if(originalArticle.getCreator().getId() != currentUserId || !userAccount.get().hasRole(new Role("ROLE_ADMIN"))){
+		//case: current user didnt create article && logged in user no admin -> end
+		if(originalArticle.getCreator().getId() != currentUserId && !userAccount.get().hasRole(new Role("ROLE_ADMIN"))){
 			return null;
 		}
 		
@@ -133,9 +138,62 @@ public class ArticleController {
 		originalArticle.setNumber(newArticleForm.getHouseNumber());
 		originalArticle.setAddressAddition(newArticleForm.getAdressAddition());
 		
-		this.articleRepo.save(originalArticle);
+		if (!((newArticleForm.getFile()).isEmpty())) {
+            try {
+                byte[] bytes = (newArticleForm.getFile()).getBytes();
+ 
+                // Creating the directory to store file
+                String rootPath = System.getProperty("user.home");
+                File dir = new File(rootPath + "/" + "Pics");
+                if (!dir.exists())
+                    dir.mkdirs();
+ 
+                // Create the file local
+                File serverFile = new File(dir.getAbsolutePath() + "/" + newArticleForm.getFile().getOriginalFilename()); 
+                BufferedOutputStream stream = new BufferedOutputStream( new FileOutputStream(serverFile));
+                stream.write(bytes);
+                stream.close();
+                System.out.println("Server File Location="
+                        + serverFile.getAbsolutePath());         
+                
+                //get the logged in user
+                User creator = userRepository.findByUserAccount(userAccount.get());
+//                if(originalArticle.getPicture() != null){
+//                	pictureRepo.delete(originalArticle.getPicture());
+//                }
+                Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename(), creator);
+				pictureRepo.save(picture);
+				originalArticle.setPicture(picture);
+        		
+        		System.out.println("You successfully uploaded file=" + newArticleForm.getTitle());
+            } catch (Exception e) {
+                return "You failed to upload " + newArticleForm.getTitle() + " => " + e.getMessage();
+            }
+        } 
 		
-		return "redirect:/editArticle/{id}";
+		System.out.println("debug3");
+		
+		this.articleRepo.save(originalArticle);
+		model.addAttribute("Article", articleRepo.findOne(id));
+		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
+		
+		currentUserId = -1;
+		boolean isAdminLoggedIn = false;
+	    
+		//if any user is logged in, set values for vars
+	    if(userAccount.isPresent()){
+	    	currentUserId = userRepository.findByUserAccount(userAccount.get()).getId();
+	    	
+	    	if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))) {
+	    		isAdminLoggedIn = true;
+	    	}
+	    }
+	    
+	    model.addAttribute("currentUserId", currentUserId);
+	    
+		model.addAttribute("isAdminLoggedIn", isAdminLoggedIn);
+		
+		return "article";
 	}
 	
 //	@RequestMapping(value = "/inspectcategory/{categoryId}")
@@ -156,11 +214,12 @@ public class ArticleController {
 //	}
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping("/newArticle")
-	public String newArticle(Model model){
+	public String newArticle(Model model, @LoggedIn Optional<UserAccount> userAccount){
 		//initiate categories
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
+		model.addAttribute("creator", userRepository.findByUserAccount(userAccount.get()));
 		return "newArticle";
 	}
 	
@@ -183,6 +242,11 @@ public class ArticleController {
 	
 	
 	//create a new Article
+	/**
+	 * @param newArticleForm
+	 * @param userAccount
+	 * @return
+	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/newArticle", method = RequestMethod.POST)
     public String newArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, @LoggedIn Optional<UserAccount> userAccount) {
@@ -191,7 +255,13 @@ public class ArticleController {
                 byte[] bytes = (newArticleForm.getFile()).getBytes();
  
                 // Creating the directory to store file
-                String rootPath = System.getProperty("user.home");
+                String rootPath;
+                if(settingsRepo.findOne("UploadedPicturesPath") == null){
+                	System.out.println("null");
+                	rootPath = System.getProperty("user.home");
+                }
+                else rootPath = settingsRepo.findOne("UploadedPicturesPath").getValue();
+                
                 File dir = new File(rootPath + "/" + "Pics");
                 if (!dir.exists())
                     dir.mkdirs();
@@ -203,10 +273,7 @@ public class ArticleController {
                 stream.close();
                 System.out.println("Server File Location="
                         + serverFile.getAbsolutePath());
- 
-                // aktuelles Datum in String umgewandelt
-               
-                
+                               
                 //get the logged in user
                 User creator = userRepository.findByUserAccount(userAccount.get());
                 Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename(), creator);
@@ -229,17 +296,6 @@ public class ArticleController {
     		articleRepo.save(article);
     		System.out.println(article);
             return ("redirect:/search");
-            
         }
 	}
-	
-	
-	
 }
-
-	
-//    public @ResponseBody
-//    String uploadFileHandler(@RequestParam("name") String name,
-//            @RequestParam("file") MultipartFile file) {
- 
-      

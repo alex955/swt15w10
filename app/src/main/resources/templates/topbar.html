@@ -3,7 +3,8 @@
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
 <link rel="stylesheet" th:href="@{/resources/css/style_button.css}" />
 <script th:src="@{/resources/js/vendor/modernizr.js}"></script>
@@ -13,7 +14,7 @@
 <body>
 	<nav th:fragment="topbar">
 	
-					<form th:action="@{/search}" method="post">
+	<form th:action="@{/search}" method="post">
 		<nav class="top-bar" data-topbar="true" role="navigation">
 			<ul class="title-area">
 				<li class="name">
@@ -34,7 +35,7 @@
 						<ul class="dropdown">
 						<li class="has-dropdown"><a href="#" th:text="#{topbar.language}">Sprache</a>
 							<ul class="dropdown">
-							<li><a href="/frontpage">deutsch</a></li>
+								<li><a href="/frontpage">deutsch</a></li>
 							</ul>
 							</li>
 							<li><a th:href="@{/chat}" th:text="#{topbar.messages}">Nachrichten</a></li>
@@ -51,7 +52,7 @@
 					<li class="divider"></li>
 					<li class="has-dropdown"><a href="#">alle Kategorien</a> 
 					
-					<!--  actual list -->
+						<!--  actual list -->
 						<ul class="dropdown" id="dropdown">
 							<li th:each="categoryTopbar : ${categories}" class="has-dropdown">
 								<a th:href="@{/search/{id}(id=${categoryTopbar.cat.id})}"><span
@@ -63,7 +64,7 @@
 								</ul>
 							</li>
 						</ul>
-					<!--  actual list end -->
+						<!--  actual list end -->
 					
 					</li>
 					<li class="divider"></li>
@@ -76,7 +77,8 @@
 							<li><a href="#"><input type="radio" name="distance" value="20"/> 20 Km</a></li>
 							<li><a href="#"><input type="radio" name="distance" value="30"/> 30 Km</a></li>
 							<li><a href="#"><input type="radio" name="distance" value="0"/> mehr als 30 Km</a></li>
-						</ul></li>
+						</ul>
+					</li>
 					<li class="divider"></li>
 					<li class="has-form">
       				<button id="search" value ="Suchen" type="submit" th:text="#{topbar.search}">Suchen</button>
@@ -90,12 +92,10 @@
 
 		<script th:src="@{/resources/js/vendor/jquery.js}"></script>
 		<script th:src="@{/resources/js/foundation.min.js}"></script>
-		<script th:src="@{/resources/js/foundation/foundation.topbar.js}"></script>
 		<script>
 			$(document).foundation();
 		</script>
-
-						</form>
+	</form>
 	</nav>
 </body>
 </html>

@@ -15,6 +15,9 @@ public class NewArticleForm {
     private String streetName;
     private String houseNumber;
     private String adressAddition;
+    private MultipartFile file;
+    private String kind;
+    
     public String getStreetName() {
 		return streetName;
 	}
@@ -45,9 +48,6 @@ public class NewArticleForm {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	private MultipartFile file;
-    private String kind;
-    
 	public String getKind() {
 		return kind;
 	}

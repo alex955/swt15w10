@@ -1,0 +1,71 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Refugee</title>
+<link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
+<link th:href="@{/resources/css/app.css}" rel="stylesheet"
+	type="text/css" />
+<script th:src="@{/resources/js/app.js}"></script>
+<script th:src="@{/resources/js/routes.js}"></script>
+<script th:src="@{/resources/js/angular.js}"></script>
+</head>
+
+<style>
+.message-input, .message-input .inline-label, .menu-bar {
+	margin-bottom: 0;
+}
+
+#sidebar, .messages {
+	border-right: 1px solid #eee;
+}
+
+.message-side-bar {
+	border-left: 1px solid #eee;
+}
+
+.avatar-section {
+	border-top: 1px solid #eee;
+}
+</style>
+
+<body>
+
+	<nav th:include="topbar :: topbar"></nav>
+
+	<div class="grid-frame">
+		<div zf-panel="true" position="left" id="sidebar"
+			class="medium-grid-block collapse medium-3 large-3 vertical">
+			<div class="grid-content collapse shrink hide-for-medium">
+				<a href="" class="secondary button expand" zf-close="true">Close</a>
+			</div>
+			<div class="grid-content collapse shrink"></div>
+		</div>
+
+		<div class="grid-block collapse medium-9 large-9 vertical">
+
+			<div class="grid-block">
+				<div class="grid-block small-12 medium-9 vertical">Bitte
+					rechts den Chat-Thread wählen!</div>
+
+
+				<div class="grid-content medium-3 show-for-medium message-side-bar">
+					<div th:include="chat/chatRightBar ::chatRightBar"></div>
+
+				</div>
+
+
+
+			</div>
+		</div>
+
+	</div>
+
+	<footer th:include="footer :: footer"></footer>
+
+</body>
+</html>
+
+<!-- ui-view  -->
