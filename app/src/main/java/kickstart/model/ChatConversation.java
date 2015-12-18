@@ -21,6 +21,8 @@ public class ChatConversation {
 	
 	private boolean fromUnread, toUnread;
 	
+	private int lastQuestion;
+	
 	public List<ChatMessage> getContent() {
 		return content;
 	}
@@ -107,6 +109,14 @@ public class ChatConversation {
 
 	public void setToUserName(String toUserName) {
 		this.toUserName = toUserName;
+	}
+
+	public int getLastQuestion() {
+		return lastQuestion;
+	}
+
+	public void setLastQuestion(int lastQuestion) {
+		this.lastQuestion = lastQuestion;
 	}
 	
 	
