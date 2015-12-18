@@ -56,7 +56,7 @@ public class RefugeeDataInitializer implements DataInitializer {
     
     //configure the right Paths for the Server
     public void Settings(){
-    	settingsRepo.save(new Setting("noUploadedPicturePath", "C:/Users/sasch/Documents/swt15w10/app/src/main/resources/static/resources/img/keinbild.png", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded articles without one"));
+    	settingsRepo.save(new Setting("noUploadedPicturePath", "C:/Dev/workspace/swt15w10/app/src/main/resources/static/resources/img/keinbild.png", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded articles without one"));
     	//settingsRepo.save(new Setting("UploadedPicturePath", "C:/", "The Path, where the uploaded Pictures are saved"));
     }
     

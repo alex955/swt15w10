@@ -2,11 +2,13 @@ package kickstart.controller;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,6 +31,7 @@ import kickstart.utilities.PossibleChatMessages;
 import kickstart.utilities.StringInForm;
 
 @Controller
+@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_VOLUNTEER', 'ROLE_VOLUNTEER')")
 public class ChatController {
 	
 	@Autowired private final CategoryRepo categories;
@@ -38,7 +41,8 @@ public class ChatController {
     @Autowired private final UserRepository userRepository;
     
     //TODO - replace variable with e.g. repo for chat content
-    private List<String> possibleChatMessages = new PossibleChatMessages().getPossibleChatMessage();
+    private PossibleChatMessages possibleMessagesObject = new PossibleChatMessages();
+    private Map<Integer, String> possibleChatMessages = new PossibleChatMessages().getPossibleChatMessages();
     
     //just for persistent/transaction(?) use so no to be saved variables are "flushed in transient state"
     @Autowired private final ChatMessageRepo msgRepo;
@@ -149,7 +153,12 @@ public class ChatController {
 		ChatMessage newMessage = new ChatMessage();
 		newMessage.setFromId(currentUserId);
 		newMessage.setFromUserName(this.userRepository.findOne(currentUserId).getUsername());
-		newMessage.setMessage(newString.getContent());
+		
+		int messageBlockId = Integer.parseInt(newString.getContent());
+		String messageBlockContent = this.possibleMessagesObject.getCertainTextBlock(messageBlockId).get(messageBlockId);
+		newMessage.setMessage(messageBlockContent);
+		newMessage.setContentId(messageBlockId);
+		
 		newMessage.setFreeText(newString.getContent2());
 		
 		long chatPartnerId;
@@ -173,6 +182,31 @@ public class ChatController {
 		this.chatRepo.save(currentChat);
 		
 		return "redirect:/chat/thread/{id}";
+	}
+	
+
+	
+	
+	/**
+	 * creates a view for a new message about an article
+	 * @param id Article which the message is about
+	 * @param model
+	 * @param userAccount UserAccount of the logged in user
+	 * @return chat/newMessage.html template
+	 */
+	@RequestMapping(value = "/chat/newConversation/{id}")
+	public String newMessage(@PathVariable("id") long id,Model model, @LoggedIn Optional<UserAccount> userAccount) {
+		if(userAccount.get() == null) return "error";
+		
+		this.processedCategories = categoryMethods.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		model.addAttribute("article", this.articleRepo.findOne(id));
+
+		model.addAttribute("stringInForm", new StringInForm());
+		
+		model.addAttribute("possibleMessages", possibleMessagesObject.getPossibleStartMessages());
+		
+ 		return "chat/newMessage";
 	}
 	
 	/**
@@ -205,7 +239,12 @@ public class ChatController {
 		newMessage.setFromId(currentUser.getId());
 		newMessage.setFromUserName(this.userRepository.findOne(currentUser.getId()).getUsername());
 		newMessage.setToUserName(this.userRepository.findOne(currentArticle.getCreator().getId()).getUsername());
-		newMessage.setMessage(newString.getContent());
+		
+		int messageBlockId = Integer.parseInt(newString.getContent());
+		String messageBlockContent = this.possibleMessagesObject.getCertainTextBlock(messageBlockId).get(messageBlockId);
+		newMessage.setContentId(messageBlockId);
+		
+		newMessage.setMessage(messageBlockContent);
 		newMessage.setFreeText(newString.getContent2());
 		newMessage.setToId(currentArticle.getCreator().getId());
 		
@@ -218,29 +257,6 @@ public class ChatController {
 		this.chatRepo.save(newConversation);
 		
 		return "redirect:/chat";
-	}
-	
-	
-	/**
-	 * creates a view for a new message about an article
-	 * @param id Article which the message is about
-	 * @param model
-	 * @param userAccount UserAccount of the logged in user
-	 * @return chat/newMessage.html template
-	 */
-	@RequestMapping(value = "/chat/newConversation/{id}")
-	public String newMessage(@PathVariable("id") long id,Model model, @LoggedIn Optional<UserAccount> userAccount) {
-		if(userAccount.get() == null) return "error";
-		
-		this.processedCategories = categoryMethods.getProcessedCategories();
-		model.addAttribute("categories", this.processedCategories);
-		model.addAttribute("article", this.articleRepo.findOne(id));
-
-		model.addAttribute("stringInForm", new StringInForm());
-		
-		model.addAttribute("possibleMessages", possibleChatMessages);
-		
-		return "chat/newMessage";
 	}
 	
 	

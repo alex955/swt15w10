@@ -34,6 +34,8 @@ public class ChatMessage {
 	private long fromId, toId;
 	private String fromUserName, toUserName;
 	
+	private int contentId;
+	
 	public ChatMessage() {
 		message = "";
 		fromId = toId = 0;
@@ -98,6 +100,14 @@ public class ChatMessage {
 
 	public void setToUserName(String toUserName) {
 		this.toUserName = toUserName;
+	}
+
+	public int getContentId() {
+		return contentId;
+	}
+
+	public void setContentId(int contentId) {
+		this.contentId = contentId;
 	}
 
 }

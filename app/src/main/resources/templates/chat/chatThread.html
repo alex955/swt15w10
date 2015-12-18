@@ -70,7 +70,8 @@
 									<p>
 										<select th:field="*{content}">
 											<option th:each="possibleMessage : ${possibleMessages}"
-												th:value="${possibleMessage}" th:text="${possibleMessage}">.</option>
+												th:value="${possibleMessage.key}"
+												th:text="${possibleMessage.value}">.</option>
 										</select>
 									</p>
 									<p>

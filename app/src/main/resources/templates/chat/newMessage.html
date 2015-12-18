@@ -16,22 +16,27 @@
 		<div class="large-12 columns">
 			<p>&nbsp;</p>
 			<h4 class="header">Neue Nachricht</h4>
-			
-			<div class="panel" >
-				<label th:text="'Mit User ' + ${article.creator.username} + ' wegen ' + ${article.title} + ' in ' + ${article.zip} + ',' + ${article.location} + ' Kontakt aufnehmen'">Kontakt</label>
+
+			<div class="panel">
+				<label
+					th:text="'Mit User ' + ${article.creator.username} + ' wegen ' + ${article.title} + ' in ' + ${article.zip} + ',' + ${article.location} + ' Kontakt aufnehmen'">Kontakt</label>
 				<hr></hr>
 				<div class="row">
 					<div class="small-12 columns">
-						<form action="#" th:action="@{/chat/processNewConversation/{id}(id=${article.id})}" th:object="${stringInForm}" method="post" enctype="multipart/form-data">
+						<form action="#"
+							th:action="@{/chat/processNewConversation/{id}(id=${article.id})}"
+							th:object="${stringInForm}" method="post"
+							enctype="multipart/form-data">
 							<p>
 								<select th:field="*{content}">
-             						<option th:each="possibleMessage : ${possibleMessages}" th:value="${possibleMessage}" th:text="${possibleMessage}">.</option>
-            					</select>
-            				</p>
-            				<p>
-            					<textarea rows="4" th:field="*{content2}"></textarea>
-            				</p>	
-                               <button type="submit">Nachricht senden</button>
+									<option th:each="possibleMessage : ${possibleMessages}"
+										th:value="${possibleMessage.key}" th:text="${possibleMessage.value}">.</option>
+								</select>
+							</p>
+							<p>
+								<textarea rows="4" th:field="*{content2}"></textarea>
+							</p>
+							<button type="submit">Nachricht senden</button>
 						</form>
 					</div>
 				</div>

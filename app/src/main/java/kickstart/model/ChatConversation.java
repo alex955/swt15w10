@@ -3,6 +3,7 @@ package kickstart.model;
 
 
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class ChatConversation {
 	private String title;
 	
 	@ElementCollection
-	private List<ChatMessage> content = new LinkedList<ChatMessage>();
+	private List<ChatMessage> content = new ArrayList<ChatMessage>();
 	
 	public ChatConversation(){
 		this.iterationCount = 0;
@@ -91,7 +92,7 @@ public class ChatConversation {
 	}
 	
 	public void addChatMessage(ChatMessage arg){
-		this.content.add(arg);
+		this.content.add(0,arg);
 	}
 
 	public String getFromUserName() {
