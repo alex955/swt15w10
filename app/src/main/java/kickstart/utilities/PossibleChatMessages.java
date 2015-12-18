@@ -18,6 +18,9 @@ public class PossibleChatMessages {
 	
 	private Map<Integer,String> possibleChatMessage = new HashMap<Integer, String>();
 	
+	/**
+	 * @return Mapped (by int id) String values for possible messages with which a conversation can be started
+	 */
 	public Map<Integer,String> getPossibleStartMessages() {
 		Map<Integer,String> toReturn = new HashMap<Integer,String>();
 		
@@ -32,6 +35,10 @@ public class PossibleChatMessages {
 		return toReturn;
 	}
 	
+	/**
+	 * 
+	 * @return Mapped (by int id) String values for possible messages with which a conversation can be appended by interested party
+	 */
 	public Map<Integer, String> getPossibleMessagesFromStarter(){
 		Map<Integer,String> toReturn = new HashMap<Integer,String>();
 		
@@ -46,6 +53,11 @@ public class PossibleChatMessages {
 		return toReturn;
 	}
 	
+	/**
+	 * 
+	 * @param key ID of message
+	 * @return Mapped (by int id) String values for possible answers to a certain message
+	 */
 	public Map<Integer, String> getPossibleAnswersToMessage(int key) {
 		Map<Integer, String> toReturn = new HashMap<Integer, String>();
 		
@@ -58,17 +70,29 @@ public class PossibleChatMessages {
 		return toReturn;
 	}
 	
+	/**
+	 * 
+	 * @return all possible chat messages, all questions and answers
+	 */
 	public Map<Integer,String> getPossibleChatMessages() {
 		return possibleChatMessage;
 	}
 	
+	/**
+	 * Gets a certain text block by id
+	 * @param id Textblock ID
+	 * @return Map with one text block - mapped by it's id. Map needed for further computational magic.
+	 */
 	public Map<Integer, String> getCertainTextBlock(int id){
 		Map<Integer, String> toReturn = new HashMap<Integer, String>();
 		toReturn.put(id, this.possibleChatMessage.get(id));
 		
 		return toReturn;
 	}
-
+	/**
+	 * Constructor, contains hardcoded chat flow
+	 */
+	//wasn't supposed to be so heavily hardcoded,.. 
 	public PossibleChatMessages(){
 		this.possibleChatMessage.put(0, "Freitext/Chat, z.B. Fragen/Antworten oder andere Anliegen");
 		LinkedList<Integer> answersToZero = new LinkedList<Integer>();
@@ -196,6 +220,10 @@ public class PossibleChatMessages {
 		
 	}
 	
+	/**
+	 * returns the "free chat" texblock
+	 * @return single text block for free chat, mapped by it's id ( = 0)
+	 */
 	public Map<Integer, String >getFreeTextAnswer(){
 		return this.getCertainTextBlock(0);
 	}
