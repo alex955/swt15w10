@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class PossibleChatMessages {
 	
 	private int[] startMessages = { 1, 2 };
-	private int[] possibleMessagesFromStarter = { 5, 7, 8, 9 };
+	private int[] possibleMessagesFromStarter = { 1,2,5,7,9,10, 0};
 	
 	private Map<Integer, LinkedList<Integer>> possibleAnswersToMessage = new HashMap<Integer, LinkedList<Integer>>();
 	
@@ -49,9 +49,9 @@ public class PossibleChatMessages {
 	public Map<Integer, String> getPossibleAnswersToMessage(int key) {
 		Map<Integer, String> toReturn = new HashMap<Integer, String>();
 		
-		List<Integer> possibleAnswerKeys = this.possibleAnswersToMessage.get(key);
+		LinkedList<Integer> possibleAnswerKeys = this.possibleAnswersToMessage.get(key);
 		
-		for(Integer s : possibleAnswerKeys){
+		for(int s : possibleAnswerKeys){
 			toReturn.put(s, this.possibleChatMessage.get(s));
 		}
 		
@@ -70,32 +70,83 @@ public class PossibleChatMessages {
 	}
 
 	public PossibleChatMessages(){
-		this.possibleChatMessage.put(0, "Freitext, z.B. Fragen oder andere Anliegen");
+		this.possibleChatMessage.put(0, "Freitext/Chat, z.B. Fragen/Antworten oder andere Anliegen");
+		LinkedList<Integer> answersToZero = new LinkedList<Integer>();
 		
 		this.possibleChatMessage.put(1, "Hallo! Habe Interesse an dem Artikel! Ist er noch verfügbar?");
+		LinkedList<Integer> answersToOne = new LinkedList<Integer>();
+		
 		this.possibleChatMessage.put(2, "Hallo! Habe Interesse an der Aktivität! Sind noch Plätze frei?");
+		LinkedList<Integer> answersToTwo = new LinkedList<Integer>();
 		
 		this.possibleChatMessage.put(3,"Ja");
+		LinkedList<Integer> answersToThree = new LinkedList<Integer>();
+		
 		this.possibleChatMessage.put(4,"Nein");
-		
-		ArrayList<Integer> answersToOne = new ArrayList<Integer>();
-		answersToOne.add(0);
-		answersToOne.add(3);
-		answersToOne.add(4);
-		
-		ArrayList<Integer> answersToTwo = new ArrayList<Integer>();
-		answersToOne.add(0);
-		answersToTwo.add(3);
-		answersToTwo.add(4);
+		LinkedList<Integer> answersToFour = new LinkedList<Integer>();
 		
 		this.possibleChatMessage.put(5,"Soll ich etwas zur Aktivität mitbringen?");
+		LinkedList<Integer> answersToFive = new LinkedList<Integer>();
+		
 		this.possibleChatMessage.put(6,"Ja, du sollst bitte folgendes mitbringen: ");
+		LinkedList<Integer> answersToSix = new LinkedList<Integer>();
 		
 		this.possibleChatMessage.put(7,"Kann ich den Artikel zu folgenden Zeiten abholen: ");
+		LinkedList<Integer> answersToSeven = new LinkedList<Integer>();
+		
+		this.possibleChatMessage.put(8,"Ja, du kannst ihn zu den genannten Zeiten abholen.");
+		LinkedList<Integer> answersToEight = new LinkedList<Integer>();
+		
+		this.possibleChatMessage.put(9,"Ich kann den Artikel doch nicht holen, Entschuldigung.");
+		LinkedList<Integer> answersToNine = new LinkedList<Integer>();
+		
+		this.possibleChatMessage.put(10,"Ich kann an der Aktivität trotzdem nicht teilnehmen, Entschuldigung.");
+		LinkedList<Integer> answersToTen = new LinkedList<Integer>();
+		
+		answersToZero.add(0);
+		possibleAnswersToMessage.put(0, answersToZero);
 		
 		
-		this.possibleChatMessage.put(8,"Ich kann den Artikel nicht abholen, Entschuldigung.");
-		this.possibleChatMessage.put(9,"Ich kann an der Aktivität nicht teilnehmen, Entschuldigung");
+		answersToOne.add(3);
+		answersToOne.add(4);
+		answersToOne.add(0);
+		possibleAnswersToMessage.put(1, answersToOne);
+		
+		
+		answersToTwo.add(3);
+		answersToTwo.add(4);
+		answersToTwo.add(0);
+		possibleAnswersToMessage.put(2, answersToTwo);
+		
+		answersToThree.add(0);
+		possibleAnswersToMessage.put(3, answersToThree);
+		
+		answersToFour.add(0);
+		possibleAnswersToMessage.put(4, answersToFour);
+		
+		answersToFive.add(4);
+		answersToFive.add(6);
+		answersToFive.add(0);
+		possibleAnswersToMessage.put(5, answersToFive);
+
+		answersToSix.add(0);
+		possibleAnswersToMessage.put(6, answersToSix);
+		
+		
+		answersToSeven.add(8);
+		answersToSeven.add(0);
+		possibleAnswersToMessage.put(7, answersToSeven);
+		
+		answersToEight.add(0);
+		possibleAnswersToMessage.put(8, answersToEight);
+		
+		answersToNine.add(0);
+		possibleAnswersToMessage.put(9, answersToNine);
+		
+		answersToTen.add(0);
+		possibleAnswersToMessage.put(10, answersToTen);
+		
+
 //		this.possibleChatMessage.put(10,"option7");
 //		this.possibleChatMessage.put(11,"option8");
 //		this.possibleChatMessage.put(12,"ja");

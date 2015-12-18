@@ -55,8 +55,8 @@
 					<u
 						th:text="(${var.fromId} == ${currentUserId}) ? 'von mir geschickt' : 'von '+ ${var.fromUserName} +' geschickt'"></u><u
 						th:text="'um: '+${var.time}"></u>
-					<p th:text="'gewählter Textblock: ' + ${var.message}"></p>
-					<p th:text="'geschriebener Freitext: ' + ${var.freeText}"></p>
+					<p th:text="${var.message}"></p>
+					<p th:text="${var.freeText}"></p>
 					</hr>
 					</p>
 

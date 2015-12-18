@@ -31,7 +31,7 @@ import kickstart.utilities.PossibleChatMessages;
 import kickstart.utilities.StringInForm;
 
 @Controller
-@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_VOLUNTEER', 'ROLE_VOLUNTEER')")
+@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_VOLUNTEER', 'ROLE_REFUGEE')")
 public class ChatController {
 	
 	@Autowired private final CategoryRepo categories;
@@ -106,17 +106,23 @@ public class ChatController {
 		
 		if(conversation.getFromId() != currentUserId && conversation.getToId() != currentUserId) return "error/notAuthenticated";
 		
-		List<ChatMessage> actualConversation = conversation.getContent();
-		
 		boolean currentUserStartedConversation = false;
-		if(!actualConversation.isEmpty()){
-			if(actualConversation.get(0).getFromId() == currentUserId) currentUserStartedConversation = true;
+		if(conversation.getFromId() == currentUserId){
+			currentUserStartedConversation = true;
 		}
 		
 		model.addAttribute("conversation", conversation);
 		model.addAttribute("currentUserStartedConversation", currentUserStartedConversation);
 		
-		model.addAttribute("possibleMessages", possibleChatMessages);
+		Map<Integer, String> possibleAppendedChatMessages;
+		//case: current user started conversation, has to ask new questions
+		if(currentUserStartedConversation){
+			possibleAppendedChatMessages = this.possibleMessagesObject.getPossibleMessagesFromStarter();
+		} else{
+			//case: current user is owner of article which is talked about, has to answes questions
+			possibleAppendedChatMessages = this.possibleMessagesObject.getPossibleAnswersToMessage(conversation.getLastQuestion());
+		}
+		model.addAttribute("possibleMessages", possibleAppendedChatMessages);
 		
 		
 		//for menu
@@ -178,6 +184,7 @@ public class ChatController {
 		this.msgRepo.save(newMessage);
 		
 		currentChat.addChatMessage(newMessage);
+		currentChat.setLastQuestion(messageBlockId);
 		
 		this.chatRepo.save(currentChat);
 		
@@ -251,7 +258,7 @@ public class ChatController {
 		this.msgRepo.save(newMessage);
 	
 		newConversation.addChatMessage(newMessage);
-		
+		newConversation.setLastQuestion(messageBlockId);
 		
 		
 		this.chatRepo.save(newConversation);
