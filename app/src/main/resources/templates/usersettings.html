@@ -2,9 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	  xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-	<title>Refugee</title>
-	<link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Refugee</title>
+<link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
 </head>
 
 <body>
@@ -132,11 +133,17 @@
 								<font color="red" th:if="${#fields.hasErrors('newHouseNumber')}" th:errors="*{newHouseNumber}"> ERROR MESSAGE </font>
 								<input type="text" name="newHouseNumber" placeholder="Hausnummmer" th:value="${user.houseNumber}"/>
 								<input type="text" name="newAddressAddition" placeholder="(optional)"/>
-								<button class="button left" type="submit" th:href="@{/usersettings}">Änderungen speichern</button>
-								<a th:href="@{/deleteuser}"><button style="background-color: red" class="button right" type="button" onclick="alert('Zur Bestätigung der Deaktivierung wird Ihnen eine Email geschickt.')">Account deaktivieren</button></a>
 							</div>
 						</div>
 					</div>
+				<strong class="show-for-medium-up">
+				<button class="button left" type="submit" th:href="@{/usersettings}">Änderungen speichern</button>
+				<button th:href="@{/deleteuser}" style="background-color: red" class="button right" type="button" onclick="alert('Zur Bestätigung der Deaktivierung wird Ihnen eine Email geschickt.')">Account deaktivieren</button>
+				</strong>
+				<strong class="show-for-small-only">
+				<a class="button" type="submit" th:href="@{/usersettings}">Änderungen speichern</a>
+				<a th:href="@{/deleteuser}" style="background-color: red" class="button" type="button" onclick="alert('Zur Bestätigung der Deaktivierung wird Ihnen eine Email geschickt.')">Account deaktivieren</a>
+				</strong>
 				</div>
 			</div>
 		</form>
