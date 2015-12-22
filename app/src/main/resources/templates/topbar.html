@@ -23,7 +23,7 @@
 					</h1>
 				</li>
 				<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-				<li class="toggle-topbar menu-icon"><a href="#" th:text="#{topbar.menu}"><span>Menu</span></a></li>
+				<li class="toggle-topbar menu-icon"><a href="#" ><span th:text="#{topbar.menu}">Menu</span></a></li>
 			</ul>
 			<section class="top-bar-section">
 				<!-- Right Nav Section -->
@@ -67,18 +67,18 @@
 						<!--  actual list end -->
 					
 					</li>
-					<li class="divider"></li>
-					<li class="has-form"><input type="text" id="location" placeholder="Ort oder Postleitzahl"/></li>
-					<li class="divider"></li>
-					<li class="has-dropdown"><a href="#">Suche im Umkreis von</a>
-						<ul class="dropdown">
-							<li><a href="#"><input type="radio" name="distance" value="5" /> 5 Km</a></li>
-							<li><a href="#"><input type="radio" name="distance" value="10"/> 10 Km</a></li>
-							<li><a href="#"><input type="radio" name="distance" value="20"/> 20 Km</a></li>
-							<li><a href="#"><input type="radio" name="distance" value="30"/> 30 Km</a></li>
-							<li><a href="#"><input type="radio" name="distance" value="0"/> mehr als 30 Km</a></li>
-						</ul>
-					</li>
+<!-- 					<li class="divider"></li> -->
+<!-- 					<li class="has-form"><input type="text" id="location" placeholder="Ort oder Postleitzahl"/></li> -->
+<!-- 					<li class="divider"></li> -->
+<!-- 					<li class="has-dropdown"><a href="#">Suche im Umkreis von</a> -->
+<!-- 						<ul class="dropdown"> -->
+<!-- 							<li><a href="#"><input type="radio" name="distance" value="5" /> 5 Km</a></li> -->
+<!-- 							<li><a href="#"><input type="radio" name="distance" value="10"/> 10 Km</a></li> -->
+<!-- 							<li><a href="#"><input type="radio" name="distance" value="20"/> 20 Km</a></li> -->
+<!-- 							<li><a href="#"><input type="radio" name="distance" value="30"/> 30 Km</a></li> -->
+<!-- 							<li><a href="#"><input type="radio" name="distance" value="0"/> mehr als 30 Km</a></li> -->
+<!-- 						</ul> -->
+<!-- 					</li> -->
 					<li class="divider"></li>
 					<li class="has-form">
       				<button id="search" value ="Suchen" type="submit" th:text="#{topbar.search}">Suchen</button>
