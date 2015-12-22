@@ -23,8 +23,8 @@
 					</div>
 					
 					<div class="small-12 large-5 columns">
-						<ul class="stack-for-small round secondary button-group">
-						  <li><hr th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/editArticle/}+${Article.id}" class="show-for-small-only"></hr></li>
+						<hr th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/editArticle/}+${Article.id}" class="show-for-small-only"></hr>
+						<ul class="stack-for-small round button-group">
 						  <li><a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/editArticle/}+${Article.id}" class="small button">Artikel bearbeiten</a></li>
 						  <li><a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/deleteArticle/}+${Article.id}" class="small alert button">Artikel löschen</a></li>
 						</ul>
