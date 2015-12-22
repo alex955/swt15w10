@@ -6,99 +6,62 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Refugee</title>
 <link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
-<link th:href="@{/resources/css/app.css}" rel="stylesheet"
-	type="text/css" />
-<script th:src="@{/resources/js/app.js}"></script>
-<script th:src="@{/resources/js/routes.js}"></script>
-<script th:src="@{/resources/js/angular.js}"></script>
 </head>
-
-<style>
-.message-input, .message-input .inline-label, .menu-bar {
-	margin-bottom: 0;
-}
-
-#sidebar, .messages {
-	border-right: 1px solid #eee;
-}
-
-.message-side-bar {
-	border-left: 1px solid #eee;
-}
-
-.avatar-section {
-	border-top: 1px solid #eee;
-}
-</style>
 
 <body>
 
 	<nav th:include="topbar :: topbar"></nav>
-
-	<div class="grid-frame">
-		<div zf-panel="true" position="left" id="sidebar"
-			class="medium-grid-block collapse medium-3 large-3 vertical">
-			<div class="grid-content collapse shrink hide-for-medium">
-				<a href="" class="secondary button expand" zf-close="true">Close</a>
-			</div>
-			<div class="grid-content collapse shrink"></div>
+	<div class="show-for-medium-up">
+		<p>&nbsp;</p>
+	</div>
+	
+	<div class="row">
+		<div class="large-4 small-12 columns">
+			<strong>Erhaltene Anfragen:</strong>
+			<ul class="stack button-group" th:each="inMsg : ${incomingMessages}">	
+			  <li><a  class="small button" th:href="@{/chat/thread/{id}(id=${inMsg.id})}" th:text="'von ' + ${inMsg.fromUserName}+ ', über: '+${inMsg.title}"></a></li>
+			  <hr></hr>	
+			</ul>
+	
+			<strong>Gestellte Anfragen:</strong>
+			<ul class="stack button-group" th:each="outMsg : ${outgoingMessages}">	
+				  <li><a  class="small button" th:href="@{/chat/thread/{id}(id=${outMsg.id})}" th:text="'an  ' + ${outMsg.toUserName}+ ', über: '+${outMsg.title}"></a></li>
+				  <hr></hr>	
+			</ul>
+			<ul>
+				<li class="alert-box info radius">Mit Nachrichten aus dem Auswahlmenü kann nur direkt auf die <b>zuletzt</b> gestellte Frage geantwortet werden! Wenn ihr direkt chatten wollt, nutzt bitte die Option <b>"Freitext/Chat"</b>, darunter leidet aber gegebenenfalls die Qualität der Übersetzung, da diese automatisch stattfindet. <p></p> Wartet am besten bevor ihr neue Fragen stellt bis die vorhergehende beantwortet ist, um möglichst effizient zu kommunizieren.</li>
+			</ul>
 		</div>
-
-		<div class="grid-block collapse medium-9 large-9 vertical">
-
-			<div class="grid-block">
-				<div class="grid-block small-12 medium-9 vertical">
-					<a th:href="@{/chat/thread/{id}(id=${conversation.id})}"
-						class="button">Chat aktualisieren</a>
-					<p th:each="var : ${conversation.content}">
-					<hr>
-					<u
-						th:text="(${var.fromId} == ${currentUserId}) ? 'von mir geschickt' : 'von '+ ${var.fromUserName} +' geschickt'"></u><u
-						th:text="'um: '+${var.time}"></u>
-					<p th:text="${var.message}"></p>
-					<p th:text="${var.freeText}"></p>
-					</hr>
-					</p>
-
-					<div class="message-input grid-content collapse shrink">
-						<span class="inline-label">
-							<form action="#"
-								th:action="@{/chat/inspectChat/append/{id}(id=${conversation.id})}"
-								th:object="${stringInForm}" method="post"
-								enctype="multipart/form-data">
-								<div class="small-11 columns">
-									<p>
+		
+		<div class="large-8 small-12 columns">		
+			<h4 class="header">Nachrichten</h4>
+				<div class="row">
+					<div class="small-12 columns">
+<!-- 						<a th:href="@{/chat/thread/{id}(id=${conversation.id})}" class="button">Chat aktualisieren</a> -->
+						<div th:each="var : ${conversation.content}">
+						<hr></hr>
+						<strong th:text="(${var.fromId} == ${currentUserId}) ? 'von mir geschickt' : 'von '+ ${var.fromUserName} +' geschickt'"></strong>
+						<strong th:text="'um: '+${var.time}"></strong>
+						<p th:text="${var.message}"></p>
+						<p th:text="${var.freeText}"></p>
+						</div>
+						<hr></hr>
+						<form action="#" th:action="@{/chat/inspectChat/append/{id}(id=${conversation.id})}" th:object="${stringInForm}" method="post" enctype="multipart/form-data">
+									<div class="small-12 columns">
 										<select th:field="*{content}">
 											<option th:each="possibleMessage : ${possibleMessages}"
 												th:value="${possibleMessage.key}"
 												th:text="${possibleMessage.value}">.</option>
 										</select>
-									</p>
-									<p>
 										<textarea rows="4" th:field="*{content2}"></textarea>
-									</p>
-
-								</div>
-								<div class="small-12 columns">
-									<button type="submit">Nachricht senden</button>
-								</div>
-							</form>
-						</span>
+									</div>
+									<div class="small-12 columns">
+										<button type="submit">Nachricht senden</button>
+									</div>
+						</form>
 					</div>
-				</div>
-
-
-
-				<div class="grid-content medium-3 show-for-medium message-side-bar">
-					<div th:include="chat/chatRightBar ::chatRightBar"></div>
-
-				</div>
-
-
-
 			</div>
 		</div>
-
 	</div>
 
 	<footer th:include="footer :: footer"></footer>
