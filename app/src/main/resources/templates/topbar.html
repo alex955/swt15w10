@@ -23,7 +23,7 @@
 					</h1>
 				</li>
 				<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-				<li class="toggle-topbar menu-icon"><a href="#" ><span th:text="#{topbar.menu}">Menu</span></a></li>
+				<li class="toggle-topbar menu-icon"><a href="#" ><span>Menu</span></a></li>
 			</ul>
 			<section class="top-bar-section">
 				<!-- Right Nav Section -->
@@ -33,7 +33,7 @@
 					<li class="divider"></li>
 					<li class="has-dropdown"><a href="#" th:text="#{topbar.account}">Account</a>
 						<ul class="dropdown">
-						<li class="has-dropdown"><a href="#" th:text="#{topbar.language}">Sprache</a>
+							<li class="has-dropdown"><a href="#" th:text="#{topbar.language}">Sprache</a>
 							<ul class="dropdown">
 								<li><a href="/frontpage">deutsch</a></li>
 							</ul>
@@ -43,7 +43,9 @@
 							<li><a th:href="@{/usersettings}" th:text="#{topbar.settings}">Einstellungen</a></li>
 							<li sec:authorize="isAuthenticated()"><a href="/logout" th:text="#{topbar.logout}">Ausloggen</a></li>
 							<li sec:authorize="!isAuthenticated()"><a href="/" th:text="#{topbar.login}">Einloggen</a></li>
-						</ul></li>
+						</ul>
+					</li>
+					<li class="divider"></li>
 				</ul>
 
 				<!-- Left Nav Section -->

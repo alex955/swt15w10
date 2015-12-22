@@ -30,17 +30,23 @@
 					<h5>Passwort ändern</h5>
 					<div class="panel" data-equalizer-watch="1">
 						<div class="row">
-							<div class="large-5 small-3 columns">Altes Passwort</div>
-							<div class="large-7 small-9 columns"><input type="password" name="oldPassword" /></div>
+							<div class="show-for-medium-up">
+								<div class="large-5 small-3 columns">Altes Passwort</div>
+							</div>
+							<div class="large-7 small-12 columns"><input type="password" name="oldPassword" placeholder="Altes Passwort"/></div>
 						</div>
 						<div class="row">
-							<div class="large-5 small-3 columns">Neues Passwort</div>
+							<div class="show-for-medium-up">
+								<div class="large-5 small-3 columns">Neues Passwort</div>
+							</div>
 							<font color="red" th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}"> ERROR MESSAGE </font>
-							<div class="large-7 small-9 columns"><input type="password" name="newPassword" /></div>
+							<div class="large-7 small-12 columns"><input type="password" name="newPassword" placeholder="Neues Passwort"/></div>
 						</div>
 						<div class="row">
-							<div class="large-5 small-3 columns">Neues Passwort wiederholen</div>
-							<div class="large-7 small-9 columns"><input type="password" name="confirmPW" /></div>
+							<div class="show-for-medium-up">
+								<div class="large-5 small-3 columns">Neues Passwort wiederholen</div>
+							</div>
+							<div class="large-7 small-12 columns"><input type="password" name="confirmPW" placeholder="Neues Passwort wiederholen"/></div>
 						</div>
 					</div>
 				</div>
@@ -99,13 +105,17 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="large-5 small-3 columns">Registrierte E-Mail-Adresse</div>
-							<div class="large-7 small-9 columns"><input type="text" disabled="" th:value="${user.email}" /></div>
+							<div class="show-for-medium-up">
+								<div class="large-5 small-3 columns">Registrierte E-Mail-Adresse</div>
+							</div>
+							<div class="large-7 small-12 columns"><input type="text" disabled="" th:value="${user.email}" /></div>
 						</div>
 						<div class="row">
-							<div class="large-5 small-3 columns">Neue E-Mail-Adresse</div>
+							<div class="show-for-medium-up">
+								<div class="large-5 small-3 columns">Neue E-Mail-Adresse</div>
+							</div>
 							<font color="red" th:if="${#fields.hasErrors('newEmail')}" th:errors="*{newEmail}"> ERROR MESSAGE </font>
-							<div class="large-7 small-9 columns"><input type="text" name ="newEmail" placeholder="Neue Email-Adresse" /></div>
+							<div class="large-7 small-12 columns"><input type="text" name ="newEmail" placeholder="Neue Email-Adresse" /></div>
 						</div>
 					</div>
 				</div>
@@ -113,21 +123,27 @@
 					<h5>Wohnort ändern</h5>
 					<div class="panel" data-equalizer-watch="2">
 						<div class="row">
-							<div class="large-5 small-3 columns">Stadt</div>
-							<div class="large-7 small-9 columns">
+							<div class="show-for-medium-up">
+								<div class="large-5 small-3 columns">Stadt</div>
+							</div>
+							<div class="large-7 small-12 columns">
 								<input type="text" name="newCity" placeholder="Stadt" th:value="${user.city}"/>
 							</div>
 						</div>
 						<div class="row">
-							<div class="large-5 small-3 columns">PLZ</div>
-							<div class="large-7 small-9 columns">
+							<div class="show-for-medium-up">
+								<div class="large-5 small-3 columns">PLZ</div>
+							</div>
+							<div class="large-7 small-12 columns">
 								<font color="red" th:if="${#fields.hasErrors('newZip')}" th:errors="*{newZip}"> ERROR MESSAGE </font>
 								<input type="text" name="newZip" placeholder="PLZ" th:value="${user.zip}"/>
 							</div>
 						</div>
 						<div class="row">
-							<div class="large-5 small-3 columns">Straße, Hausnummer, Addresszusatz</div>
-							<div class="large-7 small-9 columns">
+							<div class="show-for-medium-up">
+								<div class="large-5 small-3 columns">Straße, Hausnummer, Addresszusatz</div>
+							</div>
+							<div class="large-7 small-12 columns">
 								<font color="red" th:if="${#fields.hasErrors('newStreetName')}" th:errors="*{newStreetName}"> ERROR MESSAGE </font>
 								<input type="text" name="newStreetName" placeholder="Straßenname" th:value="${user.streetName}"/>
 								<font color="red" th:if="${#fields.hasErrors('newHouseNumber')}" th:errors="*{newHouseNumber}"> ERROR MESSAGE </font>
