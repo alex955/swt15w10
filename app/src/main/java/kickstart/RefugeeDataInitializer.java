@@ -72,31 +72,31 @@ public class RefugeeDataInitializer implements DataInitializer {
 
         UserAccount admin1 = userAccountManager.create("admin1", "admin1", admin);
         userAccountManager.save(admin1);
-        userRepository.save(new User (1, admin1, "Admin", "Erster", "ref@gmx.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
+        userRepository.save(new User (1, admin1, "Admin", "Erster", "DataInitializer", "ref@gmx.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
 
         UserAccount user1 = userAccountManager.create("user1", "user1", refugee);
         userAccountManager.save(user1);
-        userRepository.save(new User (2, user1, "1", "User", "ref@gmx.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
+        userRepository.save(new User (2, user1, "1", "User", "DataInitializer", "ref@gmx.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
 
         UserAccount user2 = userAccountManager.create("user2", "user2", refugee);
         userAccountManager.save(user2);
-        userRepository.save(new User (3, user2, "2", "User", "ref@gmx.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
+        userRepository.save(new User (3, user2, "2", "User", "DataInitializer", "ref@gmx.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
 
         UserAccount user3 = userAccountManager.create("user3", "user3", refugee);
         userAccountManager.save(user3);
-        userRepository.save(new User (4, user3, "3", "User", "ref@gmx.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
+        userRepository.save(new User (4, user3, "3", "User", "DataInitializer", "ref@gmx.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
 
         UserAccount user4 = userAccountManager.create("user4", "user4", volunteer);
         userAccountManager.save(user4);
-        userRepository.save(new User (5, user4, "4", "User", "ref@gmx.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
+        userRepository.save(new User (5, user4, "4", "User", "DataInitializer", "ref@gmx.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
 
         UserAccount user5 = userAccountManager.create("user5", "user5", volunteer);
         userAccountManager.save(user5);
-        userRepository.save(new User (6, user5, "5", "User", "ref@gmx.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
+        userRepository.save(new User (6, user5, "5", "User", "DataInitializer", "ref@gmx.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
 
         UserAccount user6 = userAccountManager.create("user6", "user6", volunteer);
         userAccountManager.save(user6);
-        userRepository.save(new User (7, user6, "6", "User", "ref@gmx.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
+        userRepository.save(new User (7, user6, "6", "User", "DataInitializer", "ref@gmx.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab"));
 
     }
 
