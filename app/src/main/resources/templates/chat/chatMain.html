@@ -16,29 +16,7 @@
 	</div>
 	
 	<div class="row">
-		<div class="large-4 small-12 columns">
-			<div class="panel">									
-				<div class="row">
-					<div class="small-12 columns">
-					<strong>Erhaltene Anfragen:</strong>
-					<ul class="stack button-group" th:each="inMsg : ${incomingMessages}">	
-					  <li><a  class="small button" th:href="@{/chat/thread/{id}(id=${inMsg.id})}" th:text="'von ' + ${inMsg.fromUserName}+ ', über: '+${inMsg.title}"></a></li>
-					  <hr></hr>	
-					</ul>
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-12 columns">
-					<strong>Gestellte Anfragen:</strong>
-					<ul class="stack button-group" th:each="outMsg : ${outgoingMessages}">	
-						  <li><a  class="small button" th:href="@{/chat/thread/{id}(id=${outMsg.id})}" th:text="'an  ' + ${outMsg.toUserName}+ ', über: '+${outMsg.title}"></a></li>
-						  <hr></hr>	
-					</ul>
-					</div>
-				</div>				
-				<div  class="alert-box info radius">Mit Nachrichten aus dem Auswahlmenü kann nur direkt auf die <b>zuletzt</b> gestellte Frage geantwortet werden! Wenn ihr direkt chatten wollt, nutzt bitte die Option <b>"Freitext/Chat"</b>, darunter leidet aber gegebenenfalls die Qualität der Übersetzung, da diese automatisch stattfindet. <p></p> Wartet am besten bevor ihr neue Fragen stellt bis die vorhergehende beantwortet ist, um möglichst effizient zu kommunizieren.	</div>
-			</div>
-		</div>
+		<div th:include="chatSideBar :: chatSideBar"></div>
 		<div class="large-8 small-12 columns">
 			<p>&nbsp;</p>
 			<p>Bitte links den Chat-Thread wählen!</p>

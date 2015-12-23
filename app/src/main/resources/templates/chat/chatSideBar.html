@@ -1,0 +1,36 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Refugee</title>
+<link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
+</head>
+
+<body>
+	<div th:fragment="chatSideBar">
+		<div class="large-4 small-12 columns">
+			<div class="panel">									
+				<div class="row">
+					<div class="small-12 columns">
+						<strong>Erhaltene Anfragen:</strong>
+						<div class="stack button-group" th:each="inMsg : ${incomingMessages}">	
+							<a  class="small button" th:href="@{/chat/thread/{id}(id=${inMsg.id})}" th:text="'von ' + ${inMsg.fromUserName}+ ', über: '+${inMsg.title}"></a>						  
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						<strong>Gestellte Anfragen:</strong>
+						<div th:each="outMsg : ${outgoingMessages}">	
+							<a  class="small button" th:href="@{/chat/thread/{id}(id=${outMsg.id})}" th:text="'an  ' + ${outMsg.toUserName}+ ', über: '+${outMsg.title}"></a>						
+						</div>
+					</div>
+				</div>				
+				<div  class="alert-box info radius">Mit Nachrichten aus dem Auswahlmenü kann nur direkt auf die <b>zuletzt</b> gestellte Frage geantwortet werden! Wenn ihr direkt chatten wollt, nutzt bitte die Option <b>"Freitext/Chat"</b>, darunter leidet aber gegebenenfalls die Qualität der Übersetzung, da diese automatisch stattfindet. <p></p> Wartet am besten bevor ihr neue Fragen stellt bis die vorhergehende beantwortet ist, um möglichst effizient zu kommunizieren.	</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
