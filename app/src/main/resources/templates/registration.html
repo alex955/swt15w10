@@ -47,9 +47,9 @@
 							</div>
 							<div class="row">
 									<div class="show-for-medium-up">
-										<div class="large-5 columns" th:text="#{registration.lastName}">Name</div>
+										<div class="large-5 medium-3 columns" th:text="#{registration.lastName}">Name</div>
 									</div>
-									<div class="large-7 small-12 columns">
+									<div class="large-7 medium-9 small-12 columns">
 										<label>											
 											<input type="text" name="lastName" placeholder="Name" th:field ="*{lastName}"/>
 											<font color="red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"> ERROR MESSAGE </font>
@@ -58,9 +58,9 @@
 							</div>
 							<div class="row">
 									<div class="show-for-medium-up">
-										<div class="large-5 small-3 columns" th:text="#{registration.firstName}">Vorname</div>
+										<div class="large-5 medium-3 columns" th:text="#{registration.firstName}">Vorname</div>
 									</div>
-									<div class="large-7 small-12 columns">
+									<div class="large-7 medium-9 small-12 columns">
 										<label>				
 											<input type="text" name="firstName" placeholder="Vorname" th:field ="*{firstName}"/>
 	                                    </label>
@@ -320,9 +320,9 @@
 							</div>
 							<div class="row">
 									<div class="show-for-medium-up">	
-										<div class="large-5 small-3 columns" th:text="#{registration.username}">Username</div>
+										<div class="large-5 medium-3 columns" th:text="#{registration.username}">Username</div>
 									</div>
-									<div class="large-7 small-12 columns">
+									<div class="large-7 medium-9 small-12 columns">
 										<label>
 											<input type="text" name="username" placeholder="Username" th:field ="*{username}"/>
 	                                   		<font color="red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> ERROR MESSAGE </font>
@@ -331,9 +331,9 @@
 							</div>
 							<div class="row">
 									<div class="show-for-medium-up">
-										<div class="large-5 small-3 columns" th:text="#{registration.email}">E-Mail</div>
+										<div class="large-5 medium-3 columns" th:text="#{registration.email}">E-Mail</div>
 									</div>
-									<div class="large-7 small-12 columns">
+									<div class="large-7 medium-9 small-12 columns">
 										<label> 						
 											<input type="email" name="email" placeholder="E-Mail" th:field ="*{email}"/>
 	                                   		<font color="red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> ERROR MESSAGE </font>
@@ -342,9 +342,9 @@
 							</div>
 							<div class="row">
 									<div class="show-for-medium-up">
-										<div class="large-5 small-3 columns" th:text="#{registration.password}">Passwort</div>
+										<div class="large-5 medium-3 columns" th:text="#{registration.password}">Passwort</div>
 									</div>
-									<div class="large-7 small-12 columns">
+									<div class="large-7 medium-9 small-12 columns">
 										<label>										
 											<input type="password" id="password" name="password" placeholder="Passwort" th:field ="*{password}"/>
 	                                    	<font color="red" th:text="${confirmError}"> ERROR MESSAGE </font>
@@ -353,9 +353,9 @@
 							</div>
 							<div class="row">
 									<div class="show-for-medium-up">
-										<div class="large-5 small-3 columns" th:text="#{registration.confirmPassword}">Passwort wiederholen</div>
+										<div class="large-5 medium-3 columns" th:text="#{registration.confirmPassword}">Passwort wiederholen</div>
 									</div>
-									<div class="large-7 small-12 columns">
+									<div class="large-7 medium-9 small-12 columns">
 										<label>										                                        
 	                                        <input type="password" name="confirmPW" placeholder="Passwort wiederholen" th:field ="*{confirmPW}"/>
 	                                    </label>
@@ -372,7 +372,7 @@
 						<div class="panel" data-equalizer-watch="1">
 							<div class="row">
 							<div class="large-5 small-3 columns"></div>
-									<div class="large-7 small-12 columns">
+									<div class="large-7 medium-9 small-12 columns">
 										<label>										
 											<font color="red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"> ERROR MESSAGE </font>
 	                                    </label>
@@ -381,9 +381,9 @@
 							<div class="row">
 									
 									<div class="show-for-medium-up">
-										<div class="large-5 small-3 columns" th:text="#{registration.city}">Stadt</div>
+										<div class="large-5 medium-3 columns" th:text="#{registration.city}">Stadt</div>
 									</div>
-									<div class="large-7 small-12 columns">
+									<div class="large-7 medium-9 small-12 columns">
 										<label>										
 											<input type="text" name="city" placeholder="Stadt" th:field ="*{city}"/>
 	                                    	<font color="red" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"> ERROR MESSAGE </font>
@@ -392,9 +392,9 @@
 							</div>
 							<div class="row">
 									<div class="show-for-medium-up">
-										<div class="large-5 small-3 columns" th:text="#{registration.zip}">PLZ</div>
+										<div class="large-5 medium-3 columns" th:text="#{registration.zip}">PLZ</div>
 									</div>
-									<div class="large-7 small-12 columns">
+									<div class="large-7 medium-9 small-12 columns">
 										<label>										
 											<input type="text" name="zip" placeholder="PLZ" th:field ="*{zip}"/>
 	                                   		<font color="red" th:if="${#fields.hasErrors('streetName')}" th:errors="*{streetName}"> ERROR MESSAGE </font>
@@ -403,9 +403,9 @@
 							</div>
 							<div class="row">
 									<div class="show-for-medium-up">
-										<div class="large-5 small-3 columns" th:text="#{registration.address}">Straße, Hausnummer, Addresszusatz</div>
+										<div class="large-5 medium-3 columns" th:text="#{registration.address}">Straße, Hausnummer, Addresszusatz</div>
 									</div>
-									<div class="large-7 small-12 columns">
+									<div class="large-7 medium-9 small-12 columns">
 										<label>
 											
 											<input type="text" name="streetName" placeholder="Straßenname" th:field ="*{streetName}"/>
