@@ -20,150 +20,152 @@
 </div>
 
 <div class="row">
-	<div class="row">
-		<div class="large-6 small-12 columns">
-			<h4 class="header">Einstellungen</h4>
+	<div class="large-12 columns">
+		<div class="row">
+			<div class="large-6 small-12 columns">
+				<h4 class="header">Einstellungen</h4>
+			</div>
 		</div>
+		<form action="#" th:action="@{/usersettings}" th:object="${UserSettingsForm}" method="post">
+			<div class="row" data-equalizer="1">
+				<div class="large-6 small-12 columns">
+					<h5>Passwort ändern</h5>
+					<div class="panel" data-equalizer-watch="1">
+						<div class="row">
+							<div class="show-for-medium-up">
+								<div class="large-5 small-3 columns">Altes Passwort</div>
+							</div>
+							<div class="large-7 small-12 columns"><input type="password" name="oldPassword" placeholder="Altes Passwort"/></div>
+						</div>
+						<div class="row">
+							<div class="show-for-medium-up">
+								<div class="large-5 small-3 columns">Neues Passwort</div>
+							</div>
+							<font color="red" th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}"> ERROR MESSAGE </font>
+							<div class="large-7 small-12 columns"><input type="password" name="newPassword" placeholder="Neues Passwort"/></div>
+						</div>
+						<div class="row">
+							<div class="show-for-medium-up">
+								<div class="large-5 small-3 columns">Neues Passwort wiederholen</div>
+							</div>
+							<div class="large-7 small-12 columns"><input type="password" name="confirmPW" placeholder="Neues Passwort wiederholen"/></div>
+						</div>
+					</div>
+				</div>
+				<div class="large-6 small-12 columns">
+					<h5>Sprache ändern</h5>
+					<div class="panel" data-equalizer-watch="1">
+						<div class="row">
+							<div class="large-5 small-3 columns">Sprache 1</div>
+							<div class="large-7 small-9 columns">
+								<select name="newLanguage1">
+									<option value="null"> - </option>
+									<option value="german" th:selected="${user.language1 == 'german'}">Deutsch</option>
+									<option value="english" th:selected="${user.language1 == 'english'}">Englisch</option>
+									<option value="arab" th:selected="${user.language1 == 'arab'}">Arabisch</option>
+									<option value="spanish" th:selected="${user.language1 == 'spanish'}">Spanisch</option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="large-5 small-3 columns">Sprache 2</div>
+							<div class="large-7 small-9 columns">
+								<select name="newLanguage2">
+									<option value="null" th:selected="${user.language2 == ''}"> - </option>
+									<option value="german" th:selected="${user.language2 == 'german'}">Deutsch</option>
+									<option value="english" th:selected="${user.language2 == 'english'}">Englisch</option>
+									<option value="arab" th:selected="${user.language2 == 'arab'}">Arabisch</option>
+									<option value="spanish" th:selected="${user.language2 == 'spanish'}">Spanisch</option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="large-5 small-3 columns">Sprache 3</div>
+							<div class="large-7 small-9 columns">
+								<select name="newLanguage3">
+									<option value="null" th:selected="${user.language3 == ''}"> - </option>
+									<option value="german" th:selected="${user.language3 == 'german'}">Deutsch</option>
+									<option value="english" th:selected="${user.language3 == 'english'}">Englisch</option>
+									<option value="arab" th:selected="${user.language3 == 'arab'}">Arabisch</option>
+									<option value="spanish" th:selected="${user.language3 == 'spanish'}">Spanisch</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row" data-equalizer="2">
+				<div class="large-6 small-12 columns">
+					<h5>E-Mail-Adresse ändern</h5>
+					<div class="panel" data-equalizer-watch="2">
+						<div class="row">
+							<div class="small-12 columns">
+								Zum Ändern Ihrer Emailadresse wird eine Bestätigungs-Mail an Ihre alte Adresse geschickt.
+								<p>&nbsp;</p>
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="show-for-medium-up">
+								<div class="large-5 small-3 columns">Registrierte E-Mail-Adresse</div>
+							</div>
+							<div class="large-7 small-12 columns"><input type="text" disabled="" th:value="${user.email}" /></div>
+						</div>
+						<div class="row">
+							<div class="show-for-medium-up">
+								<div class="large-5 small-3 columns">Neue E-Mail-Adresse</div>
+							</div>
+							<font color="red" th:if="${#fields.hasErrors('newEmail')}" th:errors="*{newEmail}"> ERROR MESSAGE </font>
+							<div class="large-7 small-12 columns"><input type="text" name ="newEmail" placeholder="Neue Email-Adresse" /></div>
+						</div>
+					</div>
+				</div>
+				<div class="large-6 small-12 columns">
+					<h5>Wohnort ändern</h5>
+					<div class="panel" data-equalizer-watch="2">
+						<div class="row">
+							<div class="show-for-medium-up">
+								<div class="large-5 small-3 columns">Stadt</div>
+							</div>
+							<div class="large-7 small-12 columns">
+								<input type="text" name="newCity" placeholder="Stadt" th:value="${user.city}"/>
+							</div>
+						</div>
+						<div class="row">
+							<div class="show-for-medium-up">
+								<div class="large-5 small-3 columns">PLZ</div>
+							</div>
+							<div class="large-7 small-12 columns">
+								<font color="red" th:if="${#fields.hasErrors('newZip')}" th:errors="*{newZip}"> ERROR MESSAGE </font>
+								<input type="text" name="newZip" placeholder="PLZ" th:value="${user.zip}"/>
+							</div>
+						</div>
+						<div class="row">
+							<div class="show-for-medium-up">
+								<div class="large-5 small-3 columns">Straße, Hausnummer, Addresszusatz</div>
+							</div>
+							<div class="large-7 small-12 columns">
+								<font color="red" th:if="${#fields.hasErrors('newStreetName')}" th:errors="*{newStreetName}"> ERROR MESSAGE </font>
+								<input type="text" name="newStreetName" placeholder="Straßenname" th:value="${user.streetName}"/>
+								<font color="red" th:if="${#fields.hasErrors('newHouseNumber')}" th:errors="*{newHouseNumber}"> ERROR MESSAGE </font>
+								<input type="text" name="newHouseNumber" placeholder="Hausnummmer" th:value="${user.houseNumber}"/>
+								<input type="text" name="newAddressAddition" placeholder="(optional)"/>
+							</div>
+						</div>
+					</div>
+				<strong class="show-for-medium-up">
+				<button class="button left" type="submit" th:href="@{/usersettings}">Änderungen speichern</button>
+				<button th:href="@{/deleteuser}" style="background-color: red" class="button right" type="button" onclick="alert('Zur Bestätigung der Deaktivierung wird Ihnen eine Email geschickt.')">Account deaktivieren</button>
+				</strong>
+				<strong class="show-for-small-only">
+				<a class="button" type="submit" th:href="@{/usersettings}">Änderungen speichern</a>
+				<a th:href="@{/deleteuser}" style="background-color: red" class="button" type="button" onclick="alert('Zur Bestätigung der Deaktivierung wird Ihnen eine Email geschickt.')">Account deaktivieren</a>
+				</strong>
+				</div>
+			</div>
+		</form>
 	</div>
-	<form action="#" th:action="@{/usersettings}" th:object="${UserSettingsForm}" method="post">
-		<div class="row" data-equalizer="1">
-			<div class="large-6 small-12 columns">
-				<h5>Passwort ändern</h5>
-				<div class="panel" data-equalizer-watch="1">
-					<div class="row">
-						<div class="show-for-medium-up">
-							<div class="large-5 small-3 columns">Altes Passwort</div>
-						</div>
-						<div class="large-7 small-12 columns"><input type="password" name="oldPassword" placeholder="Altes Passwort"/></div>
-					</div>
-					<div class="row">
-						<div class="show-for-medium-up">
-							<div class="large-5 small-3 columns">Neues Passwort</div>
-						</div>
-						<font color="red" th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}"> ERROR MESSAGE </font>
-						<div class="large-7 small-12 columns"><input type="password" name="newPassword" placeholder="Neues Passwort"/></div>
-					</div>
-					<div class="row">
-						<div class="show-for-medium-up">
-							<div class="large-5 small-3 columns">Neues Passwort wiederholen</div>
-						</div>
-						<div class="large-7 small-12 columns"><input type="password" name="confirmPW" placeholder="Neues Passwort wiederholen"/></div>
-					</div>
-				</div>
-			</div>
-			<div class="large-6 small-12 columns">
-				<h5>Sprache ändern</h5>
-				<div class="panel" data-equalizer-watch="1">
-					<div class="row">
-						<div class="large-5 small-3 columns">Sprache 1</div>
-						<div class="large-7 small-9 columns">
-							<select name="newLanguage1">
-								<option value="null"> - </option>
-								<option value="german" th:selected="${user.language1 == 'german'}">Deutsch</option>
-								<option value="english" th:selected="${user.language1 == 'english'}">Englisch</option>
-								<option value="arab" th:selected="${user.language1 == 'arab'}">Arabisch</option>
-								<option value="spanish" th:selected="${user.language1 == 'spanish'}">Spanisch</option>
-							</select>
-						</div>
-					</div>
-					<div class="row">
-						<div class="large-5 small-3 columns">Sprache 2</div>
-						<div class="large-7 small-9 columns">
-							<select name="newLanguage2">
-								<option value="null" th:selected="${user.language2 == ''}"> - </option>
-								<option value="german" th:selected="${user.language2 == 'german'}">Deutsch</option>
-								<option value="english" th:selected="${user.language2 == 'english'}">Englisch</option>
-								<option value="arab" th:selected="${user.language2 == 'arab'}">Arabisch</option>
-								<option value="spanish" th:selected="${user.language2 == 'spanish'}">Spanisch</option>
-							</select>
-						</div>
-					</div>
-					<div class="row">
-						<div class="large-5 small-3 columns">Sprache 3</div>
-						<div class="large-7 small-9 columns">
-							<select name="newLanguage3">
-								<option value="null" th:selected="${user.language3 == ''}"> - </option>
-								<option value="german" th:selected="${user.language3 == 'german'}">Deutsch</option>
-								<option value="english" th:selected="${user.language3 == 'english'}">Englisch</option>
-								<option value="arab" th:selected="${user.language3 == 'arab'}">Arabisch</option>
-								<option value="spanish" th:selected="${user.language3 == 'spanish'}">Spanisch</option>
-							</select>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row" data-equalizer="2">
-			<div class="large-6 small-12 columns">
-				<h5>E-Mail-Adresse ändern</h5>
-				<div class="panel" data-equalizer-watch="2">
-					<div class="row">
-						<div class="small-12 columns">
-							Zum Ändern Ihrer Emailadresse wird eine Bestätigungs-Mail an Ihre alte Adresse geschickt.
-							<p>&nbsp;</p>
-
-						</div>
-					</div>
-					<div class="row">
-						<div class="show-for-medium-up">
-							<div class="large-5 small-3 columns">Registrierte E-Mail-Adresse</div>
-						</div>
-						<div class="large-7 small-12 columns"><input type="text" disabled="" th:value="${user.email}" /></div>
-					</div>
-					<div class="row">
-						<div class="show-for-medium-up">
-							<div class="large-5 small-3 columns">Neue E-Mail-Adresse</div>
-						</div>
-						<font color="red" th:if="${#fields.hasErrors('newEmail')}" th:errors="*{newEmail}"> ERROR MESSAGE </font>
-						<div class="large-7 small-12 columns"><input type="text" name ="newEmail" placeholder="Neue Email-Adresse" /></div>
-					</div>
-				</div>
-			</div>
-			<div class="large-6 small-12 columns">
-				<h5>Wohnort ändern</h5>
-				<div class="panel" data-equalizer-watch="2">
-					<div class="row">
-						<div class="show-for-medium-up">
-							<div class="large-5 small-3 columns">Stadt</div>
-						</div>
-						<div class="large-7 small-12 columns">
-							<input type="text" name="newCity" placeholder="Stadt" th:value="${user.city}"/>
-						</div>
-					</div>
-					<div class="row">
-						<div class="show-for-medium-up">
-							<div class="large-5 small-3 columns">PLZ</div>
-						</div>
-						<div class="large-7 small-12 columns">
-							<font color="red" th:if="${#fields.hasErrors('newZip')}" th:errors="*{newZip}"> ERROR MESSAGE </font>
-							<input type="text" name="newZip" placeholder="PLZ" th:value="${user.zip}"/>
-						</div>
-					</div>
-					<div class="row">
-						<div class="show-for-medium-up">
-							<div class="large-5 small-3 columns">Straße, Hausnummer, Addresszusatz</div>
-						</div>
-						<div class="large-7 small-12 columns">
-							<font color="red" th:if="${#fields.hasErrors('newStreetName')}" th:errors="*{newStreetName}"> ERROR MESSAGE </font>
-							<input type="text" name="newStreetName" placeholder="Straßenname" th:value="${user.streetName}"/>
-							<font color="red" th:if="${#fields.hasErrors('newHouseNumber')}" th:errors="*{newHouseNumber}"> ERROR MESSAGE </font>
-							<input type="text" name="newHouseNumber" placeholder="Hausnummmer" th:value="${user.houseNumber}"/>
-							<input type="text" name="newAddressAddition" placeholder="(optional)"/>
-						</div>
-					</div>
-				</div>
-			<strong class="show-for-medium-up">
-			<button class="button left" type="submit" th:href="@{/usersettings}">Änderungen speichern</button>
-			<button th:href="@{/deleteuser}" style="background-color: red" class="button right" type="button" onclick="alert('Zur Bestätigung der Deaktivierung wird Ihnen eine Email geschickt.')">Account deaktivieren</button>
-			</strong>
-			<strong class="show-for-small-only">
-			<a class="button" type="submit" th:href="@{/usersettings}">Änderungen speichern</a>
-			<a th:href="@{/deleteuser}" style="background-color: red" class="button" type="button" onclick="alert('Zur Bestätigung der Deaktivierung wird Ihnen eine Email geschickt.')">Account deaktivieren</a>
-			</strong>
-			</div>
-		</div>
-	</form>
 </div>
 
 
