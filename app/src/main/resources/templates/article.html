@@ -12,80 +12,82 @@
 
 	<nav th:include="topbar :: topbar"></nav>
 
+	<p>&nbsp;</p>
 	<div class="row">
-		<div class="large-12 columns">
-			<p>&nbsp;</p>
-			<h4 class="header" th:text="${Article.title}"></h4>
-			<div class="panel">
-				<div class="row">
-					<div class="small-12 large-7 columns">
-						<img th:src="@{/showPicture/}+${Article.id}"/>
-					</div>
-					
-					<div class="small-12 large-5 columns">
-						<hr th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/editArticle/}+${Article.id}" class="show-for-small-only"></hr>
-						<ul class="stack-for-small round button-group">
-						  <li><a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/editArticle/}+${Article.id}" class="small button">Artikel bearbeiten</a></li>
-						  <li><a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/deleteArticle/}+${Article.id}" class="small alert button">Artikel löschen</a></li>
-						</ul>
-					</div>
+		<h5 class="header" th:text="${Article.title}"></h5>
+		<div class="panel">
+			<div class="row">
+				<div class="medium-6 small-12 columns">
+					<img th:src="@{/showPicture/}+${Article.id}"/>
 				</div>
-				<p>&nbsp;</p>
-				<div class="row">
-					<div class="small-12 columns">
-						<h5 class="subheader">Details</h5>
+<!-- 				<hr></hr> -->
+<!-- 				<div class="small-12 columns"> -->
+<!-- 					<hr th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/editArticle/}+${Article.id}" class="show-for-small-only"></hr> -->
+<!-- 					<ul class="stack-for-small round button-group"> -->
+<!-- 					  <li><a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/editArticle/}+${Article.id}" class="small button">Artikel bearbeiten</a></li> -->
+<!-- 					  <li><a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/deleteArticle/}+${Article.id}" class="small alert button">Artikel löschen</a></li> -->
+<!-- 					</ul> -->
+<!-- 				</div> -->
+				<div class="medium-6 small-12 columns">
+					<div class="row">
+						<div class="small-12 columns">
+							<h5 class="subheader">Details</h5>
+						</div>
+						<hr></hr>
 					</div>
-					<hr></hr>
+					<div class="row">
+						<div class="small-6 large-4 columns">
+							<p>Ort:</p>
+						</div>
+						<div class="small-6 large-8 columns">
+							<p th:text="${Article.location}"></p>
+						</div>
+					</div>	
+					<div class="row">
+						<div class="small-6 large-4 columns">
+							<p>PLZ:</p>
+						</div>
+						<div class="small-6 large-8 columns">
+							<p th:text="${Article.zip}"></p>
+						</div>
+					</div>	
+					<div class="row">
+						<div class="small-6 large-4 columns">
+							<p>Erstellungsdatum:</p>
+						</div>
+						<div class="small-6 large-8 columns">
+							<p th:text="${#temporals.format(Article.creationdate, 'dd. MMMM yyyy')}">Datum</p>
+						</div>
+					</div>	
+					<div class="row">
+						<div class="small-6 large-4 columns">
+							<p>Anbieter:</p>
+						</div>
+						<div class="small-6 large-8 columns">
+							<p th:text="${Creator.username}"></p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="small-12 columns">
+							<a class="button" th:href="@{/chat/newConversation/}+${Article.id}">Kontakt mit Anbieter aufnehmen</a>
+						</div>
+					</div>	
+				</div>	
+				<div class="small-12 columns">
+					<div class="row">
+						<div class="small-12 columns">
+							<h5 class="subheader">Beschreibung</h5>
+						</div>
+						<hr></hr>
+					</div>
+					<font th:text="${Article.description}"></font>
 				</div>
-				<div class="row">
-					<div class="small-6 large-3 columns">
-						<p>Ort:</p>
-					</div>
-					<div class="small-6 large-9 columns">
-						<p th:text="${Article.location}"></p>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="small-6 large-3 columns">
-						<p>PLZ:</p>
-					</div>
-					<div class="small-6 large-9 columns">
-						<p th:text="${Article.zip}"></p>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="small-6 large-3 columns">
-						<p>Erstellungsdatum:</p>
-					</div>
-					<div class="small-6 large-9 columns">
-						<p th:text="${#temporals.format(Article.creationdate, 'dd. MMMM yyyy')}">Datum</p>
-					</div>
-				</div>	
-				<div class="row">
-					<div class="small-6 large-3 columns">
-						<p>Anbieter:</p>
-					</div>
-					<div class="small-6 large-9 columns">
-						<p th:text="${Creator.username}"></p>
-					</div>
-				</div>													
-				<p>&nbsp;</p>
-				<h5 class="subheader">Beschreibung</h5>
-				<hr></hr>
-				<font th:text="${Article.description}"></font>
-			</div>
-
-			<div class="panel" th:if="${Creator.id} != ${currentUserId}" sec:authorize="isAuthenticated()">
-				<label>Kontakt</label>
-				<hr></hr>
-				<div class="row">
-					<div class="small-12 columns">
-						<a class="button" th:href="@{/chat/newConversation/}+${Article.id}">Kontakt mit Anbieter aufnehmen</a>
-					</div>
-				</div>
-			</div>
-
+			</div>				
 		</div>
+
+<!-- 		<div class="panel" th:if="${Creator.id} != ${currentUserId}" sec:authorize="isAuthenticated()"> -->
+			
+<!-- 		</div> -->
 	</div>
 
 	<footer th:include="footer :: footer"></footer>
