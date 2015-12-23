@@ -335,7 +335,7 @@
 									</div>
 									<div class="large-7 medium-9 small-12 columns">
 										<label> 						
-											<input type="email" name="email" placeholder="E-Mail" th:field ="*{email}"/>
+											<input name="email" placeholder="E-Mail" th:field ="*{email}"/>
 	                                   		<font color="red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> ERROR MESSAGE </font>
 	                                    </label> 
 									</div>
