@@ -19,17 +19,18 @@
 			<form action="#" th:action="@{/newArticle}" th:object="${NewArticleForm}" method="post" enctype="multipart/form-data">
 				<div class="panel">
 					<div class="row">
-						<div class="small-12 columns">
-							<p>Möchten Sie eine Aktivität (z.b. Sprachkurs, Stadtausflug, Bowlingspiel) oder einen Artikel erstellen?</p>
+						<div class="medium-4 mall-12 columns">Möchten Sie eine Aktivität (z.b. Sprachkurs, Stadtausflug, Bowlingspiel) oder einen Artikel erstellen?</div>
+						<div class="medium-8 small-12 columns">
 							<div class="chooseRole">
 								<input id="activity" type="radio" name="kind"/>
-								<label	for="activity"><a> Aktivität</a></label>
+								<font for="activity"><a> Aktivität</a></font>
 								<input id="article" type="radio" name="kind"/>
-								<label for="article"><a> Artikel</a></label>
-								<br />
-							</div>
+								<font for="article"><a> Artikel</a></font>
+								<br/>
+							</div>	
 						</div>
 					</div>
+					<br></br>
 					<div class="row">
 						<div class="show-for-medium-up">
 							<div class="small-4 columns">Kategorie:</div>

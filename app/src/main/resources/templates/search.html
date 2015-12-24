@@ -22,11 +22,13 @@
 
 			<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4" >
 				<li th:each="Article : ${anzeigen}">
-					<a th:href="@{/showArticle/}+${Article.id}"><img th:src="@{/showPicture/}+${Article.id}"/></a>
-					<div class="panel" data-equalizer-watch="1">
-						<h5 th:text="${Article.title}">Item Name</h5>
-						<h5><small th:text="${Article.location}"></small></h5> 
-					</div>
+					<a th:href="@{/showArticle/}+${Article.id}">
+						<img th:src="@{/showPicture/}+${Article.id}"/>
+						<div class="panel" data-equalizer-watch="1">
+							<h5 th:text="${Article.title}">Item Name</h5>
+							<h5><small th:text="${Article.location}"></small></h5> 
+						</div>
+					</a>
 				</li>				
 			</ul>
 			</div>
