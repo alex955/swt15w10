@@ -80,7 +80,7 @@ public class SettingsController {
 
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/usersettings", method = RequestMethod.POST)
-    public String saveSettings(@ModelAttribute("UserSettingsForm") @Valid UserSettingsForm userSettingsForm, BindingResult result, @LoggedIn Optional<UserAccount> userAccount,  Model model) throws AddressException, MessagingException {
+    public String saveSettings(@ModelAttribute("UserSettingsForm") @Valid UserSettingsForm userSettingsForm, BindingResult result, @LoggedIn Optional<UserAccount> userAccount,  Model model, ModelMap modelMap) throws AddressException, MessagingException {
 
         User user = userRepository.findByUserAccount(userAccount.get());
         UserSettings userSettings = new UserSettings();
@@ -95,8 +95,27 @@ public class SettingsController {
             userSettingsRepository.delete(userSettingsRepository.findByUserId(user.getId()).getId());
         }
 
+        boolean errors = false;
+
+        if (!userSettingsForm.getOldPassword().isEmpty()) {
+            if (!passwordEncoder.matches(userSettingsForm.getOldPassword(), user.getUserAccount().getPassword().toString()))
+                errors = true;
+        }
+
         if(result.hasErrors())
+            errors = true;
+
+        if(errors) {
+            if(!userSettingsForm.getNewPassword().equals(userSettingsForm.getConfirmPW())) {
+                final String confirmError = "Die Passwörter stimmen nicht überein.";
+                modelMap.addAttribute("confirmError", confirmError);
+            }
+            if(!passwordEncoder.matches(userSettingsForm.getOldPassword(), user.getUserAccount().getPassword().toString())) {
+                final String oldPwError = "Das alte Passwort wurde falsch eingegeben.";
+                modelMap.addAttribute("oldPwError", oldPwError);
+            }
             return "usersettings";
+        }
 
         userSettings.setUserId(user.getId());
 

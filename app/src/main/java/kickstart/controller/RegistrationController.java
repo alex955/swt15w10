@@ -55,11 +55,24 @@ public class RegistrationController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String newRegistration(@ModelAttribute("RegistrationForm") @Valid RegistrationForm registrationForm, BindingResult result,ModelMap modelMap, Model model) throws AddressException, MessagingException {
 
-        if(result.hasErrors()) {
+        boolean errors = false;
+
+        if(result.hasErrors())
+            errors = true;
+
+        if(userRepository.findByUsername(registrationForm.getUsername()) != null)
+            errors = true;
+
+        if(errors) {
             if(!registrationForm.getPassword().equals(registrationForm.getConfirmPW())){
                 final String confirmError = "Die Passwörter stimmen nicht überein.";
                 modelMap.addAttribute("confirmError", confirmError);
             }
+            if(userRepository.findByUsername(registrationForm.getUsername()) != null){
+                final String usernameUsed = "Der Username ist bereits vergeben.";
+                modelMap.addAttribute("usernameUsed", usernameUsed);
+            }
+
             return "registration";
         }
 

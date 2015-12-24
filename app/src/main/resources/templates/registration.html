@@ -315,7 +315,10 @@
 										<option value="ZM">Zambia</option>
 										<option value="ZW">Zimbabwe</option>
 									</select>
-									<label><font color="red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"> ERROR MESSAGE </font></label>
+									<label>
+										<font color="red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"> ERROR MESSAGE </font>
+										<font color="red" th:text="${usernameUsed}"> ERROR MESSAGE </font>
+									</label>
 								</div>
 							</div>
 							<div class="row">

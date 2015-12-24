@@ -2,6 +2,10 @@ package kickstart.model;
 
 
 import org.hibernate.validator.constraints.Email;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Pattern;
 
 /**
@@ -24,7 +28,15 @@ public class UserSettingsForm {
     private String newPassword;
 
     private String oldPassword;
+
     private String confirmPW;
+
+    //newPW == confirmPW?
+    @AssertTrue(message = "Die Passwörter stimmen nicht überein.")
+    private boolean isValid(){
+        return this.newPassword.equals(this.confirmPW);
+    }
+
     private String newCity;
 
     @Pattern(regexp="(^$| |^(\\d{5})$)", message="Die Postleitzahl muss aus exakt 5 Ziffern bestehen.")
