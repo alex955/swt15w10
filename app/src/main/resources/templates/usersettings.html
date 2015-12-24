@@ -32,11 +32,21 @@
 					<h5>Passwort ändern</h5>
 					<div class="panel" data-equalizer-watch="1">
 						<div class="row">
+							<div class="medium-5 small-3 columns"></div>
+							<div class="medium-7 small-12 columns">
+								<label>
+									<font color="red" th:text="${oldPwError}"> ERROR MESSAGE </font>
+								</label>
+							</div>
+						</div>
+						<div class="row">
 							<div class="show-for-medium-up">
 								<div class="large-5 small-3 columns">Altes Passwort</div>
 							</div>
-							<div class="large-7 small-12 columns"><input type="password" name="oldPassword" placeholder="Altes Passwort"/></div>
-							<font color="red" th:text="${oldPwError}"> ERROR MESSAGE </font>
+							<div class="large-7 small-12 columns">
+								<input type="password" name="oldPassword" placeholder="Altes Passwort"/>
+								<label><font color="red" th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}"> ERROR MESSAGE </font></label>
+							</div>
 						</div>
 						<div class="row">
 							<div class="show-for-medium-up">
@@ -44,15 +54,16 @@
 							</div>
 							<div class="large-7 small-12 columns">
 								<input type="password" name="newPassword" placeholder="Neues Passwort"/>
-								<font color="red" th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}"> ERROR MESSAGE </font>
+								<label><font color="red" th:text="${confirmError}"> ERROR MESSAGE </font></label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="show-for-medium-up">
 								<div class="large-5 small-3 columns">Neues Passwort wiederholen</div>
 							</div>
-							<div class="large-7 small-12 columns"><input type="password" name="confirmPW" placeholder="Neues Passwort wiederholen"/></div>
-							<font color="red" th:text="${confirmError}"> ERROR MESSAGE </font>
+							<div class="large-7 small-12 columns">
+								<input type="password" name="confirmPW" placeholder="Neues Passwort wiederholen"/>
+							</div>
 						</div>
 					</div>
 				</div>

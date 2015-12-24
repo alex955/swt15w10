@@ -31,7 +31,7 @@ import kickstart.utilities.PossibleChatMessages;
 import kickstart.utilities.StringInForm;
 
 @Controller
-@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_VOLUNTEER', 'ROLE_REFUGEE')")
+@PreAuthorize("isAuthenticated()")
 public class ChatController {
 	
 	@Autowired private final CategoryRepo categories;
