@@ -144,6 +144,9 @@ public class SettingsController {
 
             EMailController.sendEmail(user.getEmail(), validator.getToken(), validator.getUsage());
 
+            final String emailConfirm = "Zum Bestätigen der Änderung Ihrer EMailadresse wird eine EMail an Ihre alte Adresse geschickt.";
+            modelMap.addAttribute("emailConfirm", emailConfirm);
+
         }
 
         //Passwort-Änderung
@@ -180,6 +183,7 @@ public class SettingsController {
         userAccountManager.save(user.getUserAccount());
         userSettingsRepository.save(userSettings);
         userRepository.save(user);
+
 
         return "usersettings";
     }

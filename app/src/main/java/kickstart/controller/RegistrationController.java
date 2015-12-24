@@ -92,6 +92,10 @@ public class RegistrationController {
         EMailController.sendEmail(user.getEmail(),validator.getToken(),validator.getUsage());
 
 
+        final String emailConfirm = "Registrierung erfolgreich. Zur Bestätigung der Registrierung wurde Ihnen eine EMail geschickt.";
+        modelMap.addAttribute("emailConfirm", emailConfirm);
+
+
         return ("registration");
     }
 

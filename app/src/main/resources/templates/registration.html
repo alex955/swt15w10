@@ -19,6 +19,7 @@
 	<div class="row" >
 		<p>&nbsp;</p>
 		<div class="small-12 columns">
+			<font color="#0099CC" th:text="${emailConfirm}"> CONFIRMATION MESSAGE </font>
 			<h4 class="header">Registrieren</h4>
 			<form action="#" th:action="@{/registration}" th:object="${RegistrationForm}" method="post">
 				<div class="row" data-equalizer="1">
@@ -461,7 +462,7 @@
                             </div>
                             <div class="row">
                                 <div class="small-12 columns">
-                                    <button type="submit" th:href="@{/}" th:text="#{registration.register}">Registrieren</button>
+									<button type="submit" th:href="@{/}" th:text="#{registration.register}">Registrieren</button>
                                 </div>
                             </div>
 						</div>

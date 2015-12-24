@@ -25,15 +25,6 @@ public class User {
     private String lastName;
     private String firstName;
     private String username;
-    private String country;
-    public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
 	private String email;
     private String password;
     private String confirmPW;
@@ -42,6 +33,7 @@ public class User {
     private String streetName;
     private String houseNumber;
     private String addressAddition;
+    private String country;
     private String language1;
     private String language2;
     private String language3;
@@ -204,6 +196,14 @@ public class User {
 
     public void setAddressAddition(String addressAddition) {
         this.addressAddition = addressAddition;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getLanguage1() {
