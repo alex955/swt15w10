@@ -179,11 +179,9 @@ public class SettingsController {
             user.setLanguage3(userSettingsForm.getNewLanguage3());
         }
 
-
         userAccountManager.save(user.getUserAccount());
         userSettingsRepository.save(userSettings);
         userRepository.save(user);
-
 
         return "usersettings";
     }
@@ -196,6 +194,7 @@ public class SettingsController {
         validatorRepository.save(validator);
 
         EMailController.sendEmail(user.getEmail(), validator.getToken(), 2);
+
         return "redirect:/logout";
     }
 

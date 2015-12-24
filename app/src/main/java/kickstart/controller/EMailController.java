@@ -111,8 +111,6 @@ public class EMailController {
 
 		Validator validator = validatorRepository.findByToken(id);
 
-
-
 		if (validator == null)
 			return "redirect:/frontpage";
 
@@ -147,9 +145,6 @@ public class EMailController {
 
 		User user = validatorRepository.findByToken(token).getUser();
 		UserSettings userSettings = userSettingsRepository.findByUserId(user.getId());
-
-		System.out.println(userSettings.getNewEmail());
-		System.out.println(user.getEmail());
 
 		user.setEmail(userSettings.getNewEmail());
 

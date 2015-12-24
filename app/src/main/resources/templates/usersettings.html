@@ -21,6 +21,7 @@
 
 <div class="row">
 	<div class="large-12 columns">
+		<font color="#0099CC" th:text="${emailConfirm}"> CONFIRMATION MESSAGE </font>
 		<div class="row">
 			<div class="large-6 small-12 columns">
 				<h4 class="header">Einstellungen</h4>
@@ -175,11 +176,11 @@
 					</div>
 				<strong class="show-for-medium-up">
 				<button class="button left" type="submit" th:href="@{/usersettings}">Änderungen speichern</button>
-				<button th:href="@{/deleteuser}" style="background-color: red" class="button right" type="button" onclick="alert('Zur Bestätigung der Deaktivierung wird Ihnen eine Email geschickt.')">Account deaktivieren</button>
+				<a th:href="@{/deleteuser}"><button style="background-color: red" class="button right" type="button" onclick="alert('ACCOUNT DEAKTIVIEREN \n\nZur Deaktivierung Ihres Accounts wurde Ihnen eine EMail gesendet')">Account deaktivieren</button></a>
 				</strong>
 				<strong class="show-for-small-only">
 				<a class="button" type="submit" th:href="@{/usersettings}">Änderungen speichern</a>
-				<a th:href="@{/deleteuser}" style="background-color: red" class="button" type="button" onclick="alert('Zur Bestätigung der Deaktivierung wird Ihnen eine Email geschickt.')">Account deaktivieren</a>
+				<a th:href="@{/deleteuser}"><button style="background-color: red" class="button" type="button" onclick="alert('ACCOUNT DEAKTIVIEREN \n\nZur Deaktivierung Ihres Accounts wurde Ihnen eine EMail gesendet')">Account deaktivieren</button></a>
 				</strong>
 				</div>
 			</div>
