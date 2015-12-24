@@ -31,68 +31,67 @@
 						</div>
 					</div>
 					<div class="row">
-						<div class="small-4 columns">
-							<p>Kategorie*: </p>
+						<div class="show-for-medium-up">
+							<div class="small-4 columns">Kategorie:</div>
 						</div>
-						<div class="small-8 columns">
+						<div class="medium-8 small-12 columns">
 							<select name="categoryId">
-								<option th:each="categoryForm : ${categoriesForm}" th:value="${categoryForm.id}"><span th:text="${categoryForm.name}"></span></option>		
+								<option th:each="categoryForm : ${categoriesForm}" th:value="${categoryForm.id}"><div th:text="${categoryForm.name}"></div></option>		
 							</select>
 						</div>
 					</div>
 					<hr />
 					<div class="row">
-						<div class="small-4 columns">
-							<p>Titel der Anzeige*</p>
+						<div class="show-for-medium-up">
+							<div class="small-4 columns">Titel der Anzeige</div>
 						</div>
-						<div class="small-8 columns">
-							<input type="text" name="title" placeholder="" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="small-4 columns">
-							<p>Beschreibung*</p>
-						</div>
-						<div class="small-8 columns">
-							<textarea name="description" rows="4"></textarea>
+						<div class="medium-8 small-12 columns">
+							<input type="text" name="title" placeholder="Titel" />
 						</div>
 					</div>
 					<div class="row">
-						<div class="small-4 columns">
-							<p>Bilder</p>
+						<div class="show-for-medium-up">
+							<div class="small-4 columns">Beschreibung</div>
 						</div>
-						<div class="small-8 columns">
+						<div class="medium-8 small-12 columns">
+							<textarea name="description" rows="4" placeholder="Beschreibung"></textarea>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-4 small-2 columns">Bilder</div>
+						<div class="medium-8 small-10 columns">
 							<a><input type="file" name="file"/></a>
 						</div>
 					</div>
 					<hr />
 					<div class="row">
-						<div class="small-4 columns">Stadt</div>
-						<div class="small-8 columns">										
+						<div class="show-for-medium-up">
+							<div class="small-4 columns">Stadt</div>
+						</div>
+						<div class="medium-8 small-12 columns">										
 							<input type="text" name="city" placeholder="Stadt" th:value="${creator.city}"/>
 						</div>
 					</div>
 					<div class="row">
-						<div class="small-4 columns">PLZ</div>
-						<div class="small-8 columns">										
+						<div class="show-for-medium-up">
+							<div class="small-4 columns">PLZ</div>
+						</div>
+						<div class="medium-8 small-12 columns">										
 							<input type="text" name="zip" placeholder="PLZ" th:value="${creator.zip}"/>
 						</div>
 					</div>
 					<div class="row">
-						<div class="small-4 columns">Straße, Hausnummer, Addresszusatz</div>
-						<div class="small-8 columns">
+						<div class="show-for-medium-up">
+							<div class="small-4 columns">Straße, Hausnummer, Addresszusatz</div>
+						</div>
+						<div class="medium-8 small-12 columns">
 							<input type="text" name="streetName" placeholder="Straßenname" th:value="${creator.streetName}"/>
                             <input type="text" name="houseNumber" placeholder="Hausnummmer" th:value="${creator.houseNumber}"/>                            						
 							<input type="text" name="addressAddition" placeholder="(optional)" />
 						</div>
-					</div>	
-					<hr />
-					<div class="row">
-	                   <div class="small-12 columns">
-	                   		<button type="submit" th:href="@{/}">Angebot erstellen</button>
-	                   </div>
-                    </div>						
+					</div>					
 				</div>
+				<button class="right button" type="submit" th:href="@{/}">Angebot erstellen</button>
 			</form>
 		</div>
 	</div>
