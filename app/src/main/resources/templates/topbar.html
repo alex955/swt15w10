@@ -50,9 +50,9 @@
 
 				<!-- Left Nav Section -->
 					<ul class="left">		
-					<li class="has-form"><input type="text" id="query" name="query" placeholder="Suchbegriff"/></li>
+					<li class="has-form"><input type="text" id="query" name="query" th:placeholder="#{topbar.searchPlaceholder}"/></li>
 					<li class="divider"></li>
-					<li class="has-dropdown"><a href="#">alle Kategorien</a> 
+					<li class="has-dropdown"><a href="#" th:text="#{topbar.allCategories}">alle Kategorien</a> 
 					
 						<!--  actual list -->
 						<ul class="dropdown" id="dropdown">

@@ -37,10 +37,10 @@
 					<div th:if="${param.error}" class="alert alert-error"><font color="red" th:text="#{frontpage.loginError}"> Ungültger Username und/oder Passwort.</font></div>
 					<div th:if="${param.logout}" class="alert alert-success" th:text="#{frontpage.logoutSuccess}"> Sie wurden ausgeloggt. </div>
 					<label>
-						<input type="text" name="username" placeholder="Username" th:placeholder="#{frontpage.username}"/>
+						<input type="text" name="username" th:placeholder="#{frontpage.username}"/>
 					</label>
 					<label>
-						<input type="password" name="password" placeholder="Passwort" th:placeholder="#{frontpage.password}"/>
+						<input type="password" name="password" th:placeholder="#{frontpage.password}"/>
 					</label>
 					<div class="row">
 						<div class="small-12 columns">
