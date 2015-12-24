@@ -375,53 +375,52 @@
 						<div class="panel" data-equalizer-watch="1">
 							<div class="row">
 							<div class="large-5 small-3 columns"></div>
-									<div class="large-7 medium-9 small-12 columns">
-										<label>										
-											<font color="red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"> ERROR MESSAGE </font>
-	                                    </label>
-									</div>
+								<div class="large-7 medium-9 small-12 columns">
+									<label>										
+										<font color="red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"> ERROR MESSAGE </font>
+                                    </label>
+								</div>
 							</div>
 							<div class="row">
-									
-									<div class="show-for-medium-up">
-										<div class="large-5 medium-3 columns" th:text="#{registration.city}">Stadt</div>
-									</div>
-									<div class="large-7 medium-9 small-12 columns">
-										<label>										
-											<input type="text" name="city" placeholder="Stadt" th:field ="*{city}"/>
-	                                    	<font color="red" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"> ERROR MESSAGE </font>
-	                                    </label>
-									</div>
+								<div class="show-for-medium-up">
+									<div class="large-5 medium-3 columns" th:text="#{registration.city}">Stadt</div>
+								</div>
+								<div class="large-7 medium-9 small-12 columns">
+									<label>										
+										<input type="text" name="city" placeholder="Stadt" th:field ="*{city}"/>
+                                    	<font color="red" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}"> ERROR MESSAGE </font>
+                                    </label>
+								</div>
 							</div>
 							<div class="row">
-									<div class="show-for-medium-up">
-										<div class="large-5 medium-3 columns" th:text="#{registration.zip}">PLZ</div>
-									</div>
-									<div class="large-7 medium-9 small-12 columns">
-										<label>										
-											<input type="text" name="zip" placeholder="PLZ" th:field ="*{zip}"/>
-	                                   		<font color="red" th:if="${#fields.hasErrors('streetName')}" th:errors="*{streetName}"> ERROR MESSAGE </font>
-	                                    </label>  
-									</div>
+								<div class="show-for-medium-up">
+									<div class="large-5 medium-3 columns" th:text="#{registration.zip}">PLZ</div>
+								</div>
+								<div class="large-7 medium-9 small-12 columns">
+									<label>										
+										<input type="text" name="zip" placeholder="PLZ" th:field ="*{zip}"/>
+                                   		<font color="red" th:if="${#fields.hasErrors('streetName')}" th:errors="*{streetName}"> ERROR MESSAGE </font>
+                                    </label>  
+								</div>
 							</div>
 							<div class="row">
-									<div class="show-for-medium-up">
-										<div class="large-5 medium-3 columns" th:text="#{registration.address}">Straße, Hausnummer, Addresszusatz</div>
-									</div>
-									<div class="large-7 medium-9 small-12 columns">
-										<label>
-											
-											<input type="text" name="streetName" placeholder="Straßenname" th:field ="*{streetName}"/>
-										</label>
-										<label>
-											<font color="red" th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}"> ERROR MESSAGE </font>
-                                            <input type="text" name="houseNumber" placeholder="Hausnummmer" th:field ="*{houseNumber}"/>                                        
-                                        </label>
-										<label>
-											<font color="red" th:if="${#fields.hasErrors('addressAddition')}" th:errors="*{addressAddition}"> ERROR MESSAGE </font>
-											<input type="text" name="addressAddition" placeholder="(optional)" th:field ="*{addressAddition}"/>
-										</label>
-									</div>
+								<div class="show-for-medium-up">
+									<div class="large-5 medium-3 columns" th:text="#{registration.address}">Straße, Hausnummer, Addresszusatz</div>
+								</div>
+								<div class="large-7 medium-9 small-12 columns">
+									<label>
+										
+										<input type="text" name="streetName" placeholder="Straßenname" th:field ="*{streetName}"/>
+									</label>
+									<label>
+										<font color="red" th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}"> ERROR MESSAGE </font>
+                                           <input type="text" name="houseNumber" placeholder="Hausnummmer" th:field ="*{houseNumber}"/>                                        
+                                       </label>
+									<label>
+										<font color="red" th:if="${#fields.hasErrors('addressAddition')}" th:errors="*{addressAddition}"> ERROR MESSAGE </font>
+										<input type="text" name="addressAddition" placeholder="(optional)" th:field ="*{addressAddition}"/>
+									</label>
+								</div>
 							</div>
 							<div class="row">
 								<div class="large-5 small-3 columns" th:text="#{registration.language1}">Sprache 1</div>
@@ -448,16 +447,16 @@
 								</div>
 							</div>
 							<div class="row">
-									<div class="large-5 small-3 columns" th:text="#{registration.language3}">Sprache 3</div>
-									<div class="large-7 small-9 columns">
-										<select name="language3">
-											<option value="" selected="selected"> - </option>
-											<option value="german" th:text="#{registration.german}">Deutsch</option>
-											<option value="english" th:text="#{registration.english}">Englisch</option>
-											<option value="arab" th:text="#{registration.arab}">Arabisch</option>
-											<option value="spanish" th:text="#{registration.spanish}">Spanisch</option>
-										</select>
-									</div>
+								<div class="large-5 small-3 columns" th:text="#{registration.language3}">Sprache 3</div>
+								<div class="large-7 small-9 columns">
+									<select name="language3">
+										<option value="" selected="selected"> - </option>
+										<option value="german" th:text="#{registration.german}">Deutsch</option>
+										<option value="english" th:text="#{registration.english}">Englisch</option>
+										<option value="arab" th:text="#{registration.arab}">Arabisch</option>
+										<option value="spanish" th:text="#{registration.spanish}">Spanisch</option>
+									</select>
+								</div>
                             </div>
                             <div class="row">
                                 <div class="small-12 columns">
