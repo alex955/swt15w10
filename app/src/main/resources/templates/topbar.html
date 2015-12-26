@@ -19,68 +19,71 @@
 			<ul class="title-area">
 				<li class="name">
 					<h1>
-						<a th:href="@{/search}">Appname.</a>
+						<a th:href="@{/search}" th:text="#{topbar.name}">Appname.</a>
 					</h1>
 				</li>
 				<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-				<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+				<li class="toggle-topbar menu-icon"><a href="#" ><span>Menu</span></a></li>
 			</ul>
 			<section class="top-bar-section">
 				<!-- Right Nav Section -->
 				<ul class="right">
-					<li class="active"><a th:href="@{/newArticle}">Angebot einstellen</a></li>
+					<li class="active"><a th:href="@{/newArticle}" th:text="#{topbar.listArticle}">Angebot
+							einstellen</a></li>
 					<li class="divider"></li>
-					<li class="has-dropdown"><a href="#">Account</a>
+					<li class="has-dropdown"><a href="#" th:text="#{topbar.account}">Account</a>
 						<ul class="dropdown">
-							<li class="has-dropdown"><a href="#">Sprache</a>
+							<li class="has-dropdown"><a href="#" th:text="#{topbar.language}">Sprache</a>
 							<ul class="dropdown">
 								<li><a href="/frontpage">deutsch</a></li>
 							</ul>
 							</li>
-							<li sec:authorize="isAuthenticated()"><a th:href="@{/chat}">Nachrichten</a></li>
-							<li sec:authorize="isAuthenticated()"><a th:href="@{/search/myArticles}">Meine Angebote</a></li>
-							<li sec:authorize="isAuthenticated()"><a th:href="@{/usersettings}">Einstellungen</a></li>
-							<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Ausloggen</a></li>
-							<li sec:authorize="!isAuthenticated()"><a th:href="@{/}">Einloggen</a></li>
+							<li><a sec:authorize="isAuthenticated()" th:href="@{/chat}" th:text="#{topbar.messages}">Nachrichten</a></li>
+							<li><a sec:authorize="isAuthenticated()" th:href="@{/search/myArticles}" th:text="#{topbar.myArticles}">Meine Angebote</a></li>
+							<li><a sec:authorize="isAuthenticated()" th:href="@{/usersettings}" th:text="#{topbar.settings}">Einstellungen</a></li>
+							<li sec:authorize="isAuthenticated()"><a href="/logout" th:text="#{topbar.logout}">Ausloggen</a></li>
+							<li sec:authorize="!isAuthenticated()"><a href="/" th:text="#{topbar.login}">Einloggen</a></li>
 						</ul>
 					</li>
+					<li class="divider"></li>
 				</ul>
 
 				<!-- Left Nav Section -->
 					<ul class="left">		
-					<li class="has-form"><input type="text" id="query" name="query" placeholder="Suchbegriff"/></li>
+					<li class="has-form"><input type="text" id="query" name="query" th:placeholder="#{topbar.searchPlaceholder}"/></li>
 					<li class="divider"></li>
-					<li class="has-dropdown"><a href="#">alle Kategorien</a> 
+					<li class="has-dropdown"><a href="#" th:text="#{topbar.allCategories}">alle Kategorien</a> 
 					
 						<!--  actual list -->
 						<ul class="dropdown" id="dropdown">
 							<li th:each="categoryTopbar : ${categories}" class="has-dropdown">
-								<a th:href="@{/search/{id}(id=${categoryTopbar.cat.id})}"><span th:text="${categoryTopbar.cat.name}">Subkategorien anschauen</span></a>
+								<a th:href="@{/search/{id}(id=${categoryTopbar.cat.id})}"><span
+									th:text="${categoryTopbar.cat.name}" >Subkategorien anschauen</span></a>
 								<ul class="dropdown">
-									<li th:each="subcategory : ${categoryTopbar.subcats}">
-										<a th:href="@{/search/{id}(id=${subcategory.id})}"><span th:text="${subcategory.name}">Subkategorien anschauen</span></a>
-									</li>
+									<li th:each="subcategory : ${categoryTopbar.subcats}"><a
+										th:href="@{/search/{id}(id=${subcategory.id})}"><span
+											th:text="${subcategory.name}" >Subkategorien anschauen</span></a></li>
 								</ul>
 							</li>
 						</ul>
 						<!--  actual list end -->
 					
 					</li>
-					<li class="divider"></li>
-					<li class="has-form"><input type="text" id="location" placeholder="Ort oder Postleitzahl"/></li>
-					<li class="divider"></li>
-					<li class="has-dropdown"><a href="#">Suche im Umkreis von</a>
-						<ul class="dropdown">
-							<li><a href="#"><input type="radio" name="distance" value="5" /> 5 Km</a></li>
-							<li><a href="#"><input type="radio" name="distance" value="10"/> 10 Km</a></li>
-							<li><a href="#"><input type="radio" name="distance" value="20"/> 20 Km</a></li>
-							<li><a href="#"><input type="radio" name="distance" value="30"/> 30 Km</a></li>
-							<li><a href="#"><input type="radio" name="distance" value="0"/> mehr als 30 Km</a></li>
-						</ul>
-					</li>
+<!-- 					<li class="divider"></li> -->
+<!-- 					<li class="has-form"><input type="text" id="location" placeholder="Ort oder Postleitzahl"/></li> -->
+<!-- 					<li class="divider"></li> -->
+<!-- 					<li class="has-dropdown"><a href="#">Suche im Umkreis von</a> -->
+<!-- 						<ul class="dropdown"> -->
+<!-- 							<li><a href="#"><input type="radio" name="distance" value="5" /> 5 Km</a></li> -->
+<!-- 							<li><a href="#"><input type="radio" name="distance" value="10"/> 10 Km</a></li> -->
+<!-- 							<li><a href="#"><input type="radio" name="distance" value="20"/> 20 Km</a></li> -->
+<!-- 							<li><a href="#"><input type="radio" name="distance" value="30"/> 30 Km</a></li> -->
+<!-- 							<li><a href="#"><input type="radio" name="distance" value="0"/> mehr als 30 Km</a></li> -->
+<!-- 						</ul> -->
+<!-- 					</li> -->
 					<li class="divider"></li>
 					<li class="has-form">
-      					<button id="search" value ="Suchen" type="submit" >Suchen</button>
+      				<button id="search" value ="Suchen" type="submit" th:text="#{topbar.search}">Suchen</button>
     				</li>
 					
 

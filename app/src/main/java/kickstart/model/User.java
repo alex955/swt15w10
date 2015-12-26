@@ -25,7 +25,7 @@ public class User {
     private String lastName;
     private String firstName;
     private String username;
-    private String email;
+	private String email;
     private String password;
     private String confirmPW;
     private String city;
@@ -33,6 +33,7 @@ public class User {
     private String streetName;
     private String houseNumber;
     private String addressAddition;
+    private String country;
     private String language1;
     private String language2;
     private String language3;
@@ -59,7 +60,7 @@ public class User {
 
 	public User() {}
 
-    public User(long id, UserAccount userAccount, String lastName, String firstName, String email, String city, String zip, String streetName, String houseNumber, String addressAddition, String language1, String language2, String language3) {
+    public User(long id, UserAccount userAccount, String lastName, String firstName, String country, String email, String city, String zip, String streetName, String houseNumber, String addressAddition, String language1, String language2, String language3) {
 
         this.userAccount = userAccount;
         
@@ -67,6 +68,7 @@ public class User {
         
         this.lastName = lastName;
         this.firstName = firstName;
+        this.country = country;
         this.email = email;
         this.city = city;
         this.zip = zip;
@@ -85,11 +87,11 @@ public class User {
     @Override
 	public String toString() {
 		return "User [id=" + id + ", userAccount=" + userAccount + ", role=" + role + ", lastName=" + lastName
-				+ ", firstName=" + firstName + ", username=" + username + ", email=" + email + ", password=" + password
-				+ ", confirmPW=" + confirmPW + ", city=" + city + ", zip=" + zip + ", streetName=" + streetName
-				+ ", houseNumber=" + houseNumber + ", addressAddition=" + addressAddition + ", language1=" + language1
-				+ ", language2=" + language2 + ", language3=" + language3 + ", validated=" + validated + ", hashcode="
-				+ hashcode + "]";
+				+ ", firstName=" + firstName + ", username=" + username + ", country=" + country + ", email=" + email
+				+ ", password=" + password + ", confirmPW=" + confirmPW + ", city=" + city + ", zip=" + zip
+				+ ", streetName=" + streetName + ", houseNumber=" + houseNumber + ", addressAddition=" + addressAddition
+				+ ", language1=" + language1 + ", language2=" + language2 + ", language3=" + language3 + ", validated="
+				+ validated + ", hashcode=" + hashcode + "]";
 	}
 
     public void setId(long id) {
@@ -194,6 +196,14 @@ public class User {
 
     public void setAddressAddition(String addressAddition) {
         this.addressAddition = addressAddition;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getLanguage1() {

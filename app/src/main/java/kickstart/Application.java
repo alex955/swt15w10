@@ -15,6 +15,8 @@
  */
 package kickstart;
 
+import java.util.Locale;
+
 import org.salespointframework.EnableSalespoint;
 import org.salespointframework.SalespointSecurityConfiguration;
 import org.salespointframework.SalespointWebConfiguration;
@@ -26,7 +28,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 @EnableSalespoint
@@ -40,6 +44,12 @@ public class Application extends SpringBootServletInitializer  {
 	public Java8TimeDialect java8TimeDialect() {
 		return new Java8TimeDialect();
 	} 
+	
+    /**
+     * Sets the location of the user, to change language default settings.
+     * 
+     * @author Lukas Klose
+     */
 			
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {

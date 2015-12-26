@@ -15,15 +15,19 @@ public class RegistrationForm {
     @NotNull(message = "Es wurde keine Rolle ausgewählt.")
     private Role role;
 
-    @Size(min=2, max=30, message = "Der Name muss zwischen 2 und 30 Zeichen lang sein.")
+    @Size(min=2, max=30, message = "Der Nachname muss zwischen 2 und 30 Zeichen lang sein.")
     private String lastName;
 
-    @Size(min=2, max=30, message = "Der Name muss zwischen 2 und 30 Zeichen lang sein.")
+    @Size(min=2, max=30, message = "Der Vorname muss zwischen 2 und 30 Zeichen lang sein.")
     private String firstName;
 
-    @Size(min=6, max=30, message = "Der Name muss zwischen 6 und 30 Zeichen lang sein.")
-    private String username;
+    @NotNull(message = "Es wurde keine Herkunft gewählt")
+    private String country;
 
+	@Size(min=6, max=30, message = "Der Benutzername muss zwischen 6 und 30 Zeichen lang sein.")
+    private String username;
+    
+    @NotNull(message = "Sie müssen eine Email Adresse angeben")
     @Email(message = "Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.")
     private String email;
 
@@ -124,6 +128,14 @@ public class RegistrationForm {
         return confirmPW;
     }
 
+    public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+    
     public void setConfirmPW(String confirmPW) {
         this.confirmPW = confirmPW;
     }

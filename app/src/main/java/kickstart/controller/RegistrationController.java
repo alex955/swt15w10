@@ -1,17 +1,12 @@
 package kickstart.controller;
+import kickstart.model.*;
 import org.salespointframework.useraccount.UserAccount;
-import org.salespointframework.useraccount.UserAccountIdentifier;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import kickstart.model.CategoryFirstTierObject;
-import kickstart.model.CategoryRepo;
-import kickstart.model.RegistrationForm;
-import kickstart.model.User;
-import kickstart.model.UserRepository;
 import kickstart.utilities.CategoryMethods;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,22 +25,26 @@ import javax.validation.Valid;
 public class RegistrationController {
     @Autowired
     private final UserRepository userRepository;
-    
-	@Autowired
-	private final CategoryRepo categories;
 
-	@Autowired private final CategoryMethods categoryMethods;
+    @Autowired
+    private final CategoryRepo categories;
 
-	protected LinkedList<CategoryFirstTierObject> processedCategories; 
+    @Autowired
+    private ValidatorRepository validatorRepository;
+
+    @Autowired private final CategoryMethods categoryMethods;
+
+    protected LinkedList<CategoryFirstTierObject> processedCategories;
 
     private UserAccountManager userAccountManager;
 
     @Autowired
-    public RegistrationController(UserAccountManager userAccountManager, UserRepository userRepository, CategoryMethods categoryMethods, CategoryRepo categories){
+    public RegistrationController(UserAccountManager userAccountManager, UserRepository userRepository, CategoryMethods categoryMethods, CategoryRepo categories, ValidatorRepository validatorRepository){
         this.userAccountManager = userAccountManager;
         this.userRepository = userRepository;
         this.categoryMethods = categoryMethods;
         this.categories = categories;
+        this.validatorRepository = validatorRepository;
     }
 
     @RequestMapping(value ="/registration")
@@ -56,31 +55,48 @@ public class RegistrationController {
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String newRegistration(@ModelAttribute("RegistrationForm") @Valid RegistrationForm registrationForm, BindingResult result,ModelMap modelMap, Model model) throws AddressException, MessagingException {
 
-        if(result.hasErrors()) {
+        boolean errors = false;
+
+        if(result.hasErrors())
+            errors = true;
+
+        if(userRepository.findByUsername(registrationForm.getUsername()) != null)
+            errors = true;
+
+        if(errors) {
             if(!registrationForm.getPassword().equals(registrationForm.getConfirmPW())){
                 final String confirmError = "Die Passwörter stimmen nicht überein.";
                 modelMap.addAttribute("confirmError", confirmError);
             }
+            if(userRepository.findByUsername(registrationForm.getUsername()) != null){
+                final String usernameUsed = "Der Username ist bereits vergeben.";
+                modelMap.addAttribute("usernameUsed", usernameUsed);
+            }
+
             return "registration";
         }
 
-        if(!registrationForm.getPassword().equals(registrationForm.getConfirmPW())){
-            final String confirmError = "Die Passwörter stimmen nicht überein.";
-            System.out.println(confirmError);
-            modelMap.addAttribute("confirmError", confirmError);
-            return "registration";
-        }
 
         UserAccount userAccount = userAccountManager.create(registrationForm.getUsername(), registrationForm.getPassword(), registrationForm.getRole());
         userAccountManager.save(userAccount);
-        
-        User user = new User(registrationForm.getId(), userAccount, registrationForm.getLastName(), registrationForm.getFirstName(), registrationForm.getEmail(), registrationForm.getCity(), registrationForm.getZip(), registrationForm.getStreetName(), registrationForm.getHouseNumber(),registrationForm.getAddressAddition(), registrationForm.getLanguage1(), registrationForm.getLanguage2(), registrationForm.getLanguage3());
+
+        User user = new User(registrationForm.getId(), userAccount, registrationForm.getLastName(), registrationForm.getFirstName(), registrationForm.getCountry(), registrationForm.getEmail(), registrationForm.getCity(), registrationForm.getZip(), registrationForm.getStreetName(), registrationForm.getHouseNumber(),registrationForm.getAddressAddition(), registrationForm.getLanguage1(), registrationForm.getLanguage2(), registrationForm.getLanguage3());
         userRepository.save(user);
+        System.out.println(user);
 
         userAccountManager.disable(userAccount.getIdentifier());
 
-        EMailController.SendEmail(user.getEmail(), user.getId());
-        return ("redirect:/");
+        Validator validator = new Validator(user, 1);
+        validatorRepository.save(validator);
+
+        EMailController.sendEmail(user.getEmail(),validator.getToken(),validator.getUsage());
+
+
+        final String emailConfirm = "Registrierung erfolgreich. Zur Bestätigung der Registrierung wurde Ihnen eine EMail geschickt.";
+        modelMap.addAttribute("emailConfirm", emailConfirm);
+
+
+        return ("registration");
     }
 
 

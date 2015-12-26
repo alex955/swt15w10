@@ -9,7 +9,6 @@ public class Setting {
    
 	@Id
     private String key;
-    @Lob // Falls du große Werte zulassen willst
     private String value;
 
     private String description;
