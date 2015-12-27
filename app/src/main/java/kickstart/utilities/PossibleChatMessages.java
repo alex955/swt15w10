@@ -19,7 +19,7 @@ public class PossibleChatMessages {
 	private Map<Integer,String> possibleChatMessage = new HashMap<Integer, String>();
 	
 	/**
-	 * @return Mapped (by int id) String values for possible messages with which a conversation can be started
+	 * @return Mapped (by int id) String values for possible messages with which a conversation can be started out of an article view
 	 */
 	public Map<Integer,String> getPossibleStartMessages() {
 		Map<Integer,String> toReturn = new HashMap<Integer,String>();
@@ -37,7 +37,7 @@ public class PossibleChatMessages {
 	
 	/**
 	 * 
-	 * @return Mapped (by int id) String values for possible messages with which a conversation can be appended by interested party
+	 * @return Mapped (by int id) String values for possible messages with which a conversation can be appended by interested party, conversation already exists
 	 */
 	public Map<Integer, String> getPossibleMessagesFromStarter(){
 		Map<Integer,String> toReturn = new HashMap<Integer,String>();
