@@ -8,12 +8,11 @@
 <link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
 
 <script>
-//dropdown for possible messages has id "content"
-
-
 function showInputField(){
+	//dropdown for possible messages has id "content"
 	var selectContent = document.getElementById('content');
 	
+	//hardcoded chat messages which trigger some change
 	var triggerTimePicker = "7";
 	var triggerFreetext = "0"
 
@@ -21,15 +20,24 @@ function showInputField(){
 	var timePickerElement = document.getElementById("datetimepicker");
 
 	if(selectContent.value==triggerTimePicker){
-		timePickerElement.style.visibility = 'inherit';
+		timePickerElement.name = 'content2';
+		timePickerElement.style.visibility = 'visible';
+		
+		freetextElement.name = 'deactivated';
 		freetextElement.style.visibility = 'hidden';
 	}
 	else if(selectContent.value==triggerFreetext){
+		timePickerElement.name = 'deactivated';
 		timePickerElement.style.visibility = 'hidden';
-		freetextElement.style.visibility = 'inherit';
+		
+		freetextElement.name = 'content2';
+		freetextElement.style.visibility = 'visible';
 	}
 	else {
+		timePickerElement.name = 'deactivated';
 		timePickerElement.style.visibility = 'hidden';
+		
+		freetextElement.name = 'deactivated';
 		freetextElement.style.visibility = 'hidden';
 	}
 }
@@ -102,8 +110,13 @@ function showInputField(){
 <link rel="stylesheet" type="text/css" th:href="@{/resources/css/jquery.datetimepicker.css}" />
 <!-- end  datetime picker -->
 <script>
-var timePickerElement = document.getElementById("datetimepicker");
-timePickerElement.style.visibility = 'hidden';
+
+var onStartUpTimePickerElement = document.getElementById("datetimepicker");
+onStartUpTimePickerElement.style.visibility = 'hidden';
+
+
+showInputField();
+jQuery('#datetimepicker').datetimepicker();
 </script>
 </html>
 
