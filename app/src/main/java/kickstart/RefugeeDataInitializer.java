@@ -4,6 +4,8 @@ import kickstart.model.*;
 import kickstart.utilities.Setting;
 import kickstart.utilities.SettingsRepository;
 
+import java.util.LinkedList;
+
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
@@ -117,8 +119,18 @@ public class RefugeeDataInitializer implements DataInitializer {
     }
 
     public void initializeGoods(UserAccountManager userAccountManager, UserRepository userRepository){
+    	LinkedList<String> tags1 = new LinkedList<String>();
+        tags1.add("XXL");
+    	Attribute att = new Attribute("Größe",tags1);
+    	LinkedList<String> tags2 = new LinkedList<String>();
+    	tags2.add("Männlich");
+    	Attribute att2 = new Attribute("Geschlecht",tags2);
+    	
+    	
     	Article g1 = new Article("Spiegelschrank", "Dieser Spiegelschrank ist 60 cm breit", "Dresden - Zschernitz", "Bergstraße 5", 2, "17", "01217", userRepository.findOne((long) 1));
-        Article g2 = new Article("Sofa", "Einladender Blickfang! Das stylishe Schlafsofa mit dem zweifarbigen Look lädt zum Entspannen und Träumen ein.", "Dresden - Südvorstadt", "straße", 1, "number", "01067", userRepository.findOne((long) 2));
+    	 g1.addAttribute(att);
+         g1.addAttribute(att2);
+    	Article g2 = new Article("Sofa", "Einladender Blickfang! Das stylishe Schlafsofa mit dem zweifarbigen Look lädt zum Entspannen und Träumen ein.", "Dresden - Südvorstadt", "straße", 1, "number", "01067", userRepository.findOne((long) 2));
         Article g3 = new Article("Stuhl", "Schöner Bürostuhl mit einem Bezug aus hochwertigem Kunstleder, kombiniert mit atmungsaktivem Netzstoff im Rückenausschnitt in Schwarz", "Pirna", "straße", 1, "number", "01067", userRepository.findOne((long) 2));
         Article g4 = new Article("Spiegel", "Aus Metall mit aufwendigen Verzierungen", "Dresden - Seidnitz", "straße", 2, "number", "01067", userRepository.findOne((long) 3));
         Article g5 = new Article("Messerblock", "EINFACH GUT! Eine rundum gute Entscheidung wenn es etwas preiswerter sein soll und trotzdem zuverlässig und praktisch. TWIN Point überzeugt durch eine scharfe Klinge.", "Ottendorf Orkrilla", "straße", 3, "number", "01067", userRepository.findOne((long) 1));

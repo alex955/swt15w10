@@ -1,10 +1,15 @@
 package kickstart.model;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.LinkedList;
 
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 
@@ -27,6 +32,23 @@ public class Article {
 	@OneToOne
 	private Picture picture;
 	private LocalDateTime activitydate;
+	@OneToMany
+	(cascade=CascadeType.ALL)
+	private List<Attribute> attributes=new LinkedList<Attribute>();
+	 	
+	 
+	public List<Attribute> getAttributes() {
+	 		return attributes;
+	}
+	 
+	public void setAttributes(List<Attribute> attributes) {
+	 	this.attributes = attributes;
+	}
+	
+	public void addAttribute(Attribute attribute){
+				this.attributes.add(attribute);
+		 		System.out.println(attribute.toString());
+	}
 	
 
 	public LocalDateTime getCreationdate() {

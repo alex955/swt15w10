@@ -73,6 +73,7 @@ public class ArticleController {
 	    model.addAttribute("Article", articleRepo.findOne(id));
 	    model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 	    model.addAttribute("Useraccount", articleRepo.findOne(id).getCreator().getUserAccount());
+	    model.addAttribute("tags",articleRepo.findOne(id).getAttributes());
 	    
 	    long currentUserId = -1;
 		boolean isAdminLoggedIn = false;
