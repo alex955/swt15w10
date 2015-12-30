@@ -36,13 +36,13 @@
 			
 		<div class="pagination-centered">
 			<ul class="pagination">
-				<li th:if="${currentPage} > 0" class="arrow"><a th:href="@{/search/{page}(page=${currentPage-1})}">&laquo;</a></li>
-				<li th:if="${currentPage} > 1" ><a th:href="@{/search/{page}(page=${0})}" th:text="${1}"></a></li>
+				<li th:if="${currentPage} > 0" class="arrow"><a th:href="@{/{whereAmI}/{page}(page=${currentPage-1}, whereAmI=${whereAmI})}">&laquo;</a></li>
+				<li th:if="${currentPage} > 1" ><a th:href="@{/{whereAmI}/{page}(page=${0}, whereAmI=${whereAmI})}" th:text="${1}"></a></li>
 				<li th:if="${currentPage} > 2" class="unavailable"><a href="">&hellip;</a></li>
-				<li th:if="${currentPage} > 0" ><a th:href="@{/search/{page}(page=${currentPage-1})}" th:text="${currentPage}"></a></li>
+				<li th:if="${currentPage} > 0" ><a th:href="@{/{whereAmI}/{page}(page=${currentPage-1}, whereAmI=${whereAmI})}" th:text="${currentPage}"></a></li>
 				<li class="current"><a href="" th:text="${currentPage+1}">1</a></li>
-				<li><a th:href="@{/search/{page}(page=${currentPage+1})}" th:text="${currentPage+2}">2</a></li>
-				<li class="arrow"><a th:href="@{/search/{page}(page=${currentPage+1})}">&raquo;</a></li>
+				<li><a th:href="@{/{whereAmI}/{page}(page=${currentPage+1}, whereAmI=${whereAmI})}" th:text="${currentPage+2}">2</a></li>
+				<li class="arrow"><a th:href="@{/{whereAmI}/{page}(page=${currentPage+1}, whereAmI=${whereAmI})}">&raquo;</a></li>
 			</ul>
 		</div>
 	</div>

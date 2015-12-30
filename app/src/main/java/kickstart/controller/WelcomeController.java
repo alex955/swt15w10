@@ -64,6 +64,12 @@ public class WelcomeController {
 		Pageable pageRequest = new PageRequest(page, 5);
 		model.addAttribute("anzeigen", articleRepo.findAll(pageRequest));
 		model.addAttribute("currentPage", page);
+		//whereAmI is part of the page mapping to distinguish whether the url looks like
+		//search/0
+		//or search/myOffers/0
+		//it builds the url for the mapping + page number
+		String whereAmI = "search";
+		model.addAttribute("whereAmI", whereAmI);
 		return "search";
 	}
 	
