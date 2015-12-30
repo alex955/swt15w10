@@ -19,7 +19,7 @@
 			<ul class="title-area">
 				<li class="name">
 					<h1>
-						<a th:href="@{/search}" th:text="#{topbar.name}">Appname.</a>
+						<a th:href="@{/search/{page}(page=${0})}" th:text="#{topbar.name}">Appname.</a>
 					</h1>
 				</li>
 				<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
@@ -39,7 +39,7 @@
 							</ul>
 							</li>
 							<li><a sec:authorize="isAuthenticated()" th:href="@{/chat}" th:text="#{topbar.messages}">Nachrichten</a></li>
-							<li><a sec:authorize="isAuthenticated()" th:href="@{/search/myArticles}" th:text="#{topbar.myArticles}">Meine Angebote</a></li>
+							<li><a sec:authorize="isAuthenticated()" th:href="@{/search/myOffers/{page}(page=${0})}" th:text="#{topbar.myArticles}">Meine Angebote</a></li>
 							<li><a sec:authorize="isAuthenticated()" th:href="@{/usersettings}" th:text="#{topbar.settings}">Einstellungen</a></li>
 							<li sec:authorize="isAuthenticated()"><a href="/logout" th:text="#{topbar.logout}">Ausloggen</a></li>
 							<li sec:authorize="!isAuthenticated()"><a href="/" th:text="#{topbar.login}">Einloggen</a></li>

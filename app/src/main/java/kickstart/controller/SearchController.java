@@ -8,6 +8,9 @@ import java.util.Optional;
 
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -89,7 +92,7 @@ public class SearchController extends CommonVariables {
 		}
 			
 			
-			@RequestMapping(value = "/search/{category}")
+			@RequestMapping(value = "/search/{page}/{category}")
 			public String searchByCategory(@PathVariable("category") Long catID, Model model)
 			{  System.out.println("Es wird in der Kategorie "+catID+" gesucht");
 			
@@ -115,15 +118,17 @@ public class SearchController extends CommonVariables {
 			
 			
 			@PreAuthorize("isAuthenticated()")
-			@RequestMapping(value = "/search/myArticles")
-			public String searchByUser(Model model, @LoggedIn Optional<UserAccount> userAccount){  
+			@RequestMapping(value = "/search/myOffers/{page}")
+			public String searchByUser(@PathVariable("page") int page, Model model, @LoggedIn Optional<UserAccount> userAccount){  
 			
 			User creator = userRepository.findByUserAccount(userAccount.get());
-			List<Article> articles = articleRepo.findByCreator(creator);
+			Pageable pageRequest = new PageRequest(page, 5);
+			Page<List<Article>> articles = articleRepo.findByCreator(creator, pageRequest);
 					
 			this.processedCategories = this.getProcessedCategories();
 			model.addAttribute("categories", this.processedCategories);
 			model.addAttribute("anzeigen", articles);
+			model.addAttribute("currentPage", page);
 			
 			model=this.getCurrent_cat(model);
 			

@@ -19,8 +19,11 @@ import java.util.LinkedList;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kickstart.utilities.CategoryMethods;
@@ -53,14 +56,14 @@ public class WelcomeController {
 		return "frontpage";
 	}
 	
-	@RequestMapping("/search")
-	public String search(Model model) {
+	@RequestMapping("/search/{page}")
+	public String search(@PathVariable("page") int page, Model model) {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		//System.out.println("size of root categories: " + this.processedCategories.size());
 		model.addAttribute("categories", this.processedCategories);
-		
-		 model.addAttribute("anzeigen", articleRepo.findAll());
-		 
+		Pageable pageRequest = new PageRequest(page, 5);
+		model.addAttribute("anzeigen", articleRepo.findAll(pageRequest));
+		model.addAttribute("currentPage", page);
 		return "search";
 	}
 	

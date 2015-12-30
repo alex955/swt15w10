@@ -75,7 +75,7 @@ public class Application extends SpringBootServletInitializer  {
 
 			http.csrf().disable();
 
-			http.authorizeRequests().antMatchers("/resources/**").permitAll().and().formLogin().loginPage(LOGIN_ROUTE).loginProcessingUrl(LOGIN_ROUTE).defaultSuccessUrl("/search").and()
+			http.authorizeRequests().antMatchers("/resources/**").permitAll().and().formLogin().loginPage(LOGIN_ROUTE).loginProcessingUrl(LOGIN_ROUTE).defaultSuccessUrl("/search/0").and()
 					.logout().logoutUrl("/logout").logoutSuccessUrl("/");
 		}
 	}
