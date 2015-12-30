@@ -66,7 +66,9 @@
 							</div>
 						</div>	
 					</div>	
-					<div class="small-12 columns">
+					
+					
+					<div class="small-8 columns">
 						<div class="row">
 							<div class="small-12 columns">
 								<h5 class="subheader">Beschreibung</h5>
@@ -74,6 +76,21 @@
 							<hr></hr>
 						</div>
 						<font th:text="${Article.description}"></font>
+					</div>
+					<div class="small-4 columns">
+						<div class="row">
+							<div class="small-12 columns">
+								<h5 class="subheader">Tags</h5>
+							</div>
+							<hr></hr>
+						</div>
+						<div th:each="Attribute : ${tags}">
+							<font th:text="${Attribute.name}"></font>
+							<div  th:each="String : ${Attribute.tags}">
+								<span class="label" th:text="${String}">Tag</span>
+							</div>
+						</div>
+						<p>&nbsp;</p>
 					</div>
 				</div>				
 			</div>
