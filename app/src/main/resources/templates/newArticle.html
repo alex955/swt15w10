@@ -37,7 +37,7 @@ function checkedArticle(){
 					<div class="row">
 						<div class="medium-4 mall-12 columns">Möchten Sie eine Aktivität (z.b. Sprachkurs, Stadtausflug, Bowlingspiel) oder einen Artikel erstellen?</div>
 						<div class="medium-8 small-12 columns">
-							<font color="red" th:if="${#fields.hasErrors('kind')}" th:errors="*{kind}"> ERROR MESSAGE</font>
+							<label><font color="red" th:if="${#fields.hasErrors('kind')}" th:errors="*{kind}"> ERROR MESSAGE</font></label>
 							<div class="chooseRole">
 								<input id="activity" type="radio" name="kind" onclick="checkedActivity()"/>
 								<a for="activity" th:text="Aktivität"></a>
@@ -69,7 +69,7 @@ function checkedArticle(){
 							<div class="small-4 columns">Titel der Anzeige</div>
 						</div>
 						<div class="medium-8 small-12 columns">
-							<font color="red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"> ERROR MESSAGE</font>
+							<label ><font color="red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"> ERROR MESSAGE</font></label>
 							<input type="text" name="title" placeholder="Titel" />
 						</div>
 					</div>
