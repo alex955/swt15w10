@@ -19,18 +19,21 @@
 			<form action="#" th:action="@{/editArticle/{id}(id=${Article.id})}" th:object="${NewArticleForm}" method="post" enctype="multipart/form-data">
 				<div class="panel">
 					<div class="row">
-					<div class="medium-8 small-12 columns">
-						<font color="red" th:if="${#fields.hasErrors('kind')}" th:errors="*{kind}"> ERROR MESSAGE</font>
-						<div class="chooseRole">
-							<input id="activity" type="radio" name="kind" onclick="checkedActivity()"/>
-							<a for="activity" th:text="Aktivität"></a>
-							<input id="article" type="radio" name="kind" onclick="checkedArticle()" />
-							<a for="article" th:text="Artikel"></a>
-							<br/>
+						<div class="medium-4 mall-12 columns">Art:</div>
+						<div class="medium-8 small-12 columns">
+							<font color="red" th:if="${#fields.hasErrors('kind')}" th:errors="*{kind}"> ERROR MESSAGE</font>
+							<div class="chooseRole">
+								<input th:if="${Article.kind} == 'activity'" id="activity" th:checked="a" type="radio" name="kind" value="activity" onclick="checkedActivity()"/>
+								<input th:if="${Article.kind} != 'activity'" id="activity" type="radio" name="kind" value="activity" onclick="checkedActivity()"/>
+								<font color="#2ba6cb" for="activity" th:text="Aktivität"></font>
+								<input th:if="${Article.kind} == 'article'" id="article" th:checked="a" type="radio" name="kind" value="article" onclick="checkedArticle()" />
+								<input th:if="${Article.kind} != 'article'" id="article" type="radio" name="kind" value="article" onclick="checkedArticle()" />
+								<font color="#2ba6cb" for="article" th:text="Artikel"></font>
+								<br/>
+							</div>
 						</div>
-						</div>
-						</div>
-						<div class="row">
+					</div>
+					<div class="row">
 						<div class="show-for-medium-up">
 							<div class="small-4 columns">Kategorie:</div>
 						</div>

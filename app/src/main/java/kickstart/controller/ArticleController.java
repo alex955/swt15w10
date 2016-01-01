@@ -185,9 +185,8 @@ public class ArticleController {
             }
         } 
 		
-		System.out.println("debug3");
-		
 		this.articleRepo.save(originalArticle);
+		System.out.println(originalArticle);
 		model.addAttribute("Article", articleRepo.findOne(id));
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 		

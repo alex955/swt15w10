@@ -39,12 +39,12 @@ function checkedArticle(){
 						<div class="medium-8 small-12 columns">
 							<label><font color="red" th:if="${#fields.hasErrors('kind')}" th:errors="*{kind}"> ERROR MESSAGE</font></label>
 							<div class="chooseRole">
-								<input id="activity" type="radio" name="kind" onclick="checkedActivity()"/>
-								<a for="activity" th:text="Aktivität"></a>
-								<input id="article" type="radio" name="kind" onclick="checkedArticle()" />
-								<a for="article" th:text="Artikel"></a>
+								<input id="activity" type="radio" name="kind" value="activity" onclick="checkedActivity()"/>
+								<font color="#2ba6cb" for="activity" th:text="Aktivität"></font>
+								<input id="article" type="radio" name="kind" value="article" onclick="checkedArticle()" />
+								<font color="#2ba6cb" for="article" th:text="Artikel"></font>
 								<br/>
-							</div>	
+							</div>
 						</div>
 					</div>
 					<br></br>
@@ -66,8 +66,6 @@ function checkedArticle(){
 					<hr />
 					<div class="row">
 						<div class="show-for-medium-up">
-							<font color="red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"> ERROR MESSAGE</font>
-
 							<div class="small-4 columns">Titel der Anzeige</div>
 						</div>
 						<div class="medium-8 small-12 columns">
