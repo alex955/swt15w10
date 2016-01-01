@@ -65,11 +65,10 @@
 								<p>Anbieter spricht folgende Sprachen:</p>
 							</div>
 							<div class="small-6 large-8 columns">
-								<p>
-									<span th:if="${Creator.language1 != null}" th:text="${Creator.language1}"></span>
-									<span th:if="${Creator.language2 != null}" th:text="', ' + ${Creator.language2}"></span>
-									<span th:if="${Creator.language2 != null}" th:text="', ' + ${Creator.language2}"></span>
-								</p>
+								<div>
+									<p></p>
+									<p th:if="${Creator.language1 != null}" th:text="${Creator.language1}+', ' +${Creator.language2}+', ' +${Creator.language3}"></p>
+								</div>
 							</div>
 						</div>
 						<div class="row">
