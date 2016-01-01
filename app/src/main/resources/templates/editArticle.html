@@ -49,6 +49,7 @@
 							<div class="small-4 columns">Titel der Anzeige</div>
 						</div>
 						<div class="medium-8 small-12 columns">
+							<label ><font color="red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"> ERROR MESSAGE</font></label>
 							<input type="text" name="title" placeholder="" th:value="${Article.title}"/>
 						</div>
 					</div>
