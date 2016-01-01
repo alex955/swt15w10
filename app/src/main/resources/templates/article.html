@@ -73,8 +73,8 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="small-12 columns">
-								<a class="button" th:href="@{/chat/newConversation/}+${Article.id}">Kontakt mit Anbieter aufnehmen</a>
+							<div class="small-12 columns"> 
+								<a th:if="${Creator.id} != ${currentUserId}" class="button" th:href="@{/chat/newConversation/}+${Article.id}">Kontakt mit Anbieter aufnehmen</a>
 							</div>
 						</div>	
 					</div>	
