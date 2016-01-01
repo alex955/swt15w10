@@ -66,6 +66,8 @@ function checkedArticle(){
 					<hr />
 					<div class="row">
 						<div class="show-for-medium-up">
+							<font color="red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"> ERROR MESSAGE</font>
+
 							<div class="small-4 columns">Titel der Anzeige</div>
 						</div>
 						<div class="medium-8 small-12 columns">
