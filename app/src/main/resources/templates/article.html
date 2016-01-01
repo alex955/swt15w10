@@ -61,6 +61,18 @@
 							</div>
 						</div>
 						<div class="row">
+							<div class="small-6 large-4 columns">
+								<p>Anbieter spricht folgende Sprachen:</p>
+							</div>
+							<div class="small-6 large-8 columns">
+								<p>
+									<span th:if="${Creator.language1 != null}" th:text="${Creator.language1}"></span>
+									<span th:if="${Creator.language2 != null}" th:text="', ' + ${Creator.language2}"></span>
+									<span th:if="${Creator.language2 != null}" th:text="', ' + ${Creator.language2}"></span>
+								</p>
+							</div>
+						</div>
+						<div class="row">
 							<div class="small-12 columns">
 								<a class="button" th:href="@{/chat/newConversation/}+${Article.id}">Kontakt mit Anbieter aufnehmen</a>
 							</div>

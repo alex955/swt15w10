@@ -17,7 +17,7 @@ function showInputField(){
 	var triggerFreetext = "0"
 
 	var freetextElement = document.getElementById("freetextArea");
-	var timePickerElement = document.getElementById("datetimepicker");
+	var timePickerElement = document.getElementById("datetimepicker_mask");
 
 	if(selectContent.value==triggerTimePicker){
 		timePickerElement.name = 'content2';
@@ -85,7 +85,7 @@ function showInputField(){
 											th:value="${possibleMessage.key}"
 											th:text="${possibleMessage.value}">.</option>
 									</select>
-									<input type="text" value="" id="datetimepicker" th:field="*{content2}" />
+									<input type="text" value="click here!" id="datetimepicker_mask" th:field="*{content2}" />
 									<textarea id="freetextArea" rows="4" th:field="*{content2}"></textarea>
 								</div>
 								<div class="small-12 columns">
@@ -111,7 +111,7 @@ function showInputField(){
 <!-- end  datetime picker -->
 <script>
 
-var onStartUpTimePickerElement = document.getElementById("datetimepicker");
+var onStartUpTimePickerElement = document.getElementById("datetimepicker_mask");
 onStartUpTimePickerElement.style.visibility = 'hidden';
 
 
