@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.util.LinkedList;
 import java.util.Optional;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +32,8 @@ import kickstart.utilities.CategoryMethods;
 import kickstart.utilities.SettingsRepository;
 import kickstart.model.ArticleRepo;
 import kickstart.model.CategoryFirstTierObject;
+
+import javax.validation.Valid;
 
 @Controller
 public class ArticleController {
@@ -96,13 +100,14 @@ public class ArticleController {
 	}
 	
 	@RequestMapping(value = "/editArticle/{id}")
-	public String editArticle(@PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount, Model model) {
+	public String editArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, @PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount, Model model) {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		long userId = this.userRepository.findByUserAccount(userAccount.get()).getId();
-		
+		Article originalArticle = this.articleRepo.findOne(id);
+
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
-		model.addAttribute("editArticle", articleRepo.findOne(id));
+		model.addAttribute("Article", originalArticle);
 		model.addAttribute("userId", userId);
 		model.addAttribute("user", this.userRepository.findOne(userId));
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
@@ -117,27 +122,35 @@ public class ArticleController {
 
 	
 	@RequestMapping(value = "/editArticle/{id}", method = RequestMethod.POST)
-	public String processEditedArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, @PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount, Model model){
+	public String processEditedArticle(@ModelAttribute("NewArticleForm") @Valid NewArticleForm newArticleForm, BindingResult result, @PathVariable("id")long id, @LoggedIn Optional<UserAccount> userAccount, Model model){
 		Article originalArticle = this.articleRepo.findOne(id);
 		long currentUserId = this.userRepository.findByUserAccount(userAccount.get()).getId();
-		
+
+		model.addAttribute("categories", this.processedCategories);
+		model.addAttribute("categoriesForm", this.categories.findAll());
+		model.addAttribute("userId", currentUserId);
+		model.addAttribute("user", this.userRepository.findOne(currentUserId));
+		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
+		model.addAttribute("Article", originalArticle);
+
 		//case: current user didnt create article && logged in user no admin -> end
 		if(originalArticle.getCreator().getId() != currentUserId && !userAccount.get().hasRole(new Role("ROLE_ADMIN"))){
 			return null;
 		}
 		
 		//todo: validation
-		
+		if(result.hasErrors())
+			return "editArticle";
 		
 		originalArticle.setCategory(newArticleForm.getCategoryId());
 		originalArticle.setTitle(newArticleForm.getTitle());
 		originalArticle.setDescription(newArticleForm.getDescription());
-		
 		originalArticle.setZip(newArticleForm.getZip());
 		originalArticle.setLocation(newArticleForm.getCity());
 		originalArticle.setStreet(newArticleForm.getStreetName());
 		originalArticle.setNumber(newArticleForm.getHouseNumber());
 		originalArticle.setAddressAddition(newArticleForm.getAdressAddition());
+		originalArticle.setKind(newArticleForm.getKind());
 		
 		if (!((newArticleForm.getFile()).isEmpty())) {
             try {
@@ -172,9 +185,8 @@ public class ArticleController {
             }
         } 
 		
-		System.out.println("debug3");
-		
 		this.articleRepo.save(originalArticle);
+		System.out.println(originalArticle);
 		model.addAttribute("Article", articleRepo.findOne(id));
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 		
@@ -189,9 +201,7 @@ public class ArticleController {
 	    		isAdminLoggedIn = true;
 	    	}
 	    }
-	    
-	    model.addAttribute("currentUserId", currentUserId);
-	    
+
 		model.addAttribute("isAdminLoggedIn", isAdminLoggedIn);
 		
 		return "article";
@@ -213,36 +223,25 @@ public class ArticleController {
 //		
 //		return "search";
 //	}
+
+	//create a new Article
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping("/newArticle")
-	public String newArticle(Model model, @LoggedIn Optional<UserAccount> userAccount){
+	public String createArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, Model model, @LoggedIn Optional<UserAccount> userAccount){
 		//initiate categories
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
-		model.addAttribute("creator", userRepository.findByUserAccount(userAccount.get()));
+
+		Article article = new Article();
+		model.addAttribute("article", new Article());
+
+		User creator = userRepository.findByUserAccount(userAccount.get());
+		model.addAttribute("creator", creator);
+
 		return "newArticle";
 	}
-	
-	@PreAuthorize("isAuthenticated()")
-	@RequestMapping(value = "/deleteArticle/{id}")
-	public String deleteArticle(@PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount){
-		long userId = userRepository.findByUserAccount(userAccount.get()).getId();
-		Article toDelete = articleRepo.findOne(id);
-		
-		if(toDelete.getCreator().getId() != userId && !userAccount.get().hasRole(new Role("ROLE_ADMIN"))) {
-			System.out.println("ids: " + userId + "," + toDelete.getCreator().getId());
-			return "redirect:/frontpage";
-		}
-		
-		articleRepo.delete(toDelete);
-		
-		
-		return "redirect:/search/myArticles";
-	}
-	
-	
-	//create a new Article
+
 	/**
 	 * @param newArticleForm
 	 * @param userAccount
@@ -250,7 +249,14 @@ public class ArticleController {
 	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/newArticle", method = RequestMethod.POST)
-    public String newArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, @LoggedIn Optional<UserAccount> userAccount) {
+    public String saveArticle(@ModelAttribute("NewArticleForm") @Valid NewArticleForm newArticleForm, BindingResult result, Model model, @LoggedIn Optional<UserAccount> userAccount) {
+
+		User creator = userRepository.findByUserAccount(userAccount.get());
+		model.addAttribute("creator", creator);
+
+		if(result.hasErrors())
+			return "newArticle";
+
 		if (!((newArticleForm.getFile()).isEmpty())) {
             try {
                 byte[] bytes = (newArticleForm.getFile()).getBytes();
@@ -276,27 +282,44 @@ public class ArticleController {
                         + serverFile.getAbsolutePath());
                                
                 //get the logged in user
-                User creator = userRepository.findByUserAccount(userAccount.get());
-                Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename(), creator);
+
+				Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename(), creator);
 				pictureRepo.save(picture);
-                Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), picture, newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getHouseNumber(), newArticleForm.getZip(), creator);
+				Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), picture, newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getHouseNumber(), newArticleForm.getZip(), creator, newArticleForm.getKind());
         		articleRepo.save(article);
         		System.out.println(article);
         		
         		System.out.println("You successfully uploaded file=" + newArticleForm.getTitle());
-            	return ("redirect:/search");
+
+
+				return ("redirect:/search");
             } catch (Exception e) {
                 return "You failed to upload " + newArticleForm.getTitle() + " => " + e.getMessage();
             }
         } else {
-        	
-            //get the logged in user
-            User creator = userRepository.findByUserAccount(userAccount.get());
-            //save article without Picture
-        	Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getHouseNumber(), newArticleForm.getZip(),creator);
+
+			//save article without Picture
+			Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getHouseNumber(), newArticleForm.getZip(),creator, newArticleForm.getKind());
     		articleRepo.save(article);
     		System.out.println(article);
             return ("redirect:/search");
         }
+	}
+
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(value = "/deleteArticle/{id}")
+	public String deleteArticle(@PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount){
+		long userId = userRepository.findByUserAccount(userAccount.get()).getId();
+		Article toDelete = articleRepo.findOne(id);
+
+		if(toDelete.getCreator().getId() != userId && !userAccount.get().hasRole(new Role("ROLE_ADMIN"))) {
+			System.out.println("ids: " + userId + "," + toDelete.getCreator().getId());
+			return "redirect:/frontpage";
+		}
+
+		articleRepo.delete(toDelete);
+
+
+		return "redirect:/search/myArticles";
 	}
 }

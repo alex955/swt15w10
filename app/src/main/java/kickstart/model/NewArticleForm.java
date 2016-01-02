@@ -3,11 +3,16 @@
 
 package kickstart.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.validation.constraints.NotNull;
 
 public class NewArticleForm {
 	
 	private long categoryId;
+
+	@NotEmpty(message = "Geben Sie ihrem Angebot einen Titel.")
     private String title;
     private String description;
     private String zip;
@@ -16,6 +21,8 @@ public class NewArticleForm {
     private String houseNumber;
     private String adressAddition;
     private MultipartFile file;
+
+	@NotEmpty(message = "Wählen Sie die Art des Angebots.")
     private String kind;
     
     public String getStreetName() {
