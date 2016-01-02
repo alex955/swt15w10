@@ -177,6 +177,7 @@ public class PossibleChatMessages {
 		
 		answersToSeven.add(8);
 		answersToSeven.add(0);
+		answersToSeven.add(4);
 		possibleAnswersToMessage.put(7, answersToSeven);
 		
 		answersToEight.add(0);
