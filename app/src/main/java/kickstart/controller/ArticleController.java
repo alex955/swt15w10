@@ -359,7 +359,7 @@ public class ArticleController {
 		if(originalArticle.getCreator().getId() != currentUserId && !userAccount.get().hasRole(new Role("ROLE_ADMIN"))){
 			return null;
 		}
-		
+		originalArticle.setAttributes(new LinkedList<Attribute>());
 		LinkedList<String> providedAttributes = newAttributes.getChoosenTags();
 		int count=0;
 		for(String e:providedAttributes){
