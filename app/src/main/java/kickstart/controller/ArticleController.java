@@ -127,6 +127,7 @@ public class ArticleController {
 	@RequestMapping(value = "/editArticle/{id}", method = RequestMethod.POST)
 	public String processEditedArticle(@ModelAttribute("NewArticleForm") @Valid NewArticleForm newArticleForm, BindingResult result, @PathVariable("id")long id, @LoggedIn Optional<UserAccount> userAccount, Model model){
 		Article originalArticle = this.articleRepo.findOne(id);
+		
 		long currentUserId = this.userRepository.findByUserAccount(userAccount.get()).getId();
 
 		model.addAttribute("categories", this.processedCategories);
@@ -135,6 +136,7 @@ public class ArticleController {
 		model.addAttribute("user", this.userRepository.findOne(currentUserId));
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 		model.addAttribute("Article", originalArticle);
+		model.addAttribute("tags",articleRepo.findOne(id).getAttributes());
 
 		//case: current user didnt create article && logged in user no admin -> end
 		if(originalArticle.getCreator().getId() != currentUserId && !userAccount.get().hasRole(new Role("ROLE_ADMIN"))){
@@ -154,6 +156,7 @@ public class ArticleController {
 		originalArticle.setNumber(newArticleForm.getHouseNumber());
 		originalArticle.setAddressAddition(newArticleForm.getAdressAddition());
 		originalArticle.setKind(newArticleForm.getKind());
+	 
 		
 		if (!((newArticleForm.getFile()).isEmpty())) {
             try {
