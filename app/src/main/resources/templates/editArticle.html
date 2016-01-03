@@ -13,18 +13,33 @@
 	<nav th:include="topbar :: topbar"></nav>
 
 	<div class="row">
-		<div class="large-12 columns" th:if="${userId} == ${editArticle.creator.id} or ${isAdminLoggedIn} == true">
+		<div class="large-12 columns" th:if="${userId} == ${Article.creator.id} or ${isAdminLoggedIn} == true">
 			<p>&nbsp;</p>
 			<h4 class="header">Angebot bearbeiten</h4>
-			<form action="#" th:action="@{/editArticle/{id}(id=${editArticle.id})}" th:object="${NewArticleForm}" method="post" enctype="multipart/form-data">
+			<form action="#" th:action="@{/editArticle/{id}(id=${Article.id})}" th:object="${NewArticleForm}" method="post" enctype="multipart/form-data">
 				<div class="panel">
+					<div class="row">
+						<div class="medium-4 mall-12 columns">Art:</div>
+						<div class="medium-8 small-12 columns">
+							<font color="red" th:if="${#fields.hasErrors('kind')}" th:errors="*{kind}"> ERROR MESSAGE</font>
+							<div class="chooseRole">
+								<input th:if="${Article.kind} == 'activity'" id="activity" th:checked="a" type="radio" name="kind" value="activity" onclick="checkedActivity()"/>
+								<input th:if="${Article.kind} != 'activity'" id="activity" type="radio" name="kind" value="activity" onclick="checkedActivity()"/>
+								<font color="#2ba6cb" for="activity" th:text="Aktivität"></font>
+								<input th:if="${Article.kind} == 'article'" id="article" th:checked="a" type="radio" name="kind" value="article" onclick="checkedArticle()" />
+								<input th:if="${Article.kind} != 'article'" id="article" type="radio" name="kind" value="article" onclick="checkedArticle()" />
+								<font color="#2ba6cb" for="article" th:text="Artikel"></font>
+								<br/>
+							</div>
+						</div>
+					</div>
 					<div class="row">
 						<div class="show-for-medium-up">
 							<div class="small-4 columns">Kategorie:</div>
 						</div>
 						<div class="medium-8 small-12 columns">
 							<select name="categoryId">
-								<option th:each="categoryForm : ${categoriesForm}" th:value="${categoryForm.id}" th:selected="${categoryForm.id} == ${editArticle.category}"><span th:text="${categoryForm.name}"></span></option>		
+								<option th:each="categoryForm : ${categoriesForm}" th:value="${categoryForm.id}" th:selected="${categoryForm.id} == ${Article.category}"><span th:text="${categoryForm.name}"></span></option>
 							</select>
 						</div>
 					</div>
@@ -34,7 +49,8 @@
 							<div class="small-4 columns">Titel der Anzeige</div>
 						</div>
 						<div class="medium-8 small-12 columns">
-							<input type="text" name="title" placeholder="" th:value="${editArticle.title}"/>
+							<label ><font color="red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"> ERROR MESSAGE</font></label>
+							<input type="text" name="title" placeholder="" th:value="${Article.title}"/>
 						</div>
 					</div>
 					<div class="row">
@@ -42,7 +58,7 @@
 							<div class="small-4 columns">Beschreibung</div>
 						</div>
 						<div class="medium-8 small-12 columns">
-							<textarea name="description" rows="4" th:text="${editArticle.description}"></textarea>
+							<textarea name="description" rows="4" th:text="${Article.description}"></textarea>
 						</div>
 					</div>
 					<div class="row">
@@ -57,7 +73,7 @@
 							<div class="small-4 columns">Stadt</div>
 						</div>
 						<div class="small-8 columns">										
-							<input type="text" name="city" placeholder="Stadt" th:value="${editArticle.location}"/>
+							<input type="text" name="city" placeholder="Stadt" th:value="${Article.location}"/>
 						</div>
 					</div>
 					<div class="row">
@@ -65,7 +81,7 @@
 							<div class="small-4 columns">PLZ</div>
 						</div>
 						<div class="medium-8 small-12 columns">											
-							<input type="text" name="zip" placeholder="PLZ" th:value="${editArticle.zip}"/>
+							<input type="text" name="zip" placeholder="PLZ" th:value="${Article.zip}"/>
 						</div>
 					</div>
 					<div class="row">
@@ -73,8 +89,8 @@
 							<div class="small-4 columns">Straße, Hausnummer, Addresszusatz</div>
 						</div>
 						<div class="medium-8 small-12 columns">
-							<input type="text" name="streetName" placeholder="Straßenname" th:value="${editArticle.street}"/>
-                            <input type="text" name="houseNumber" placeholder="Hausnummmer" th:value="${editArticle.number}"/>                            						
+							<input type="text" name="streetName" placeholder="Straßenname" th:value="${Article.street}"/>
+                            <input type="text" name="houseNumber" placeholder="Hausnummmer" th:value="${Article.number}"/>
 							<input type="text" name="addressAddition" placeholder="(optional)" />
 						</div>
 					</div>						

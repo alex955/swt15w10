@@ -92,7 +92,7 @@ public class SettingsController {
         model.addAttribute("categories", this.processedCategories);
 
         if(userSettingsRepository.findByUserId(user.getId()) != null){
-            userSettingsRepository.delete(userSettingsRepository.findByUserId(user.getId()).getId());
+            userSettingsRepository.delete(userSettingsRepository.findByUserId(user.getId()));
         }
 
         boolean errors = false;

@@ -6,6 +6,47 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Refugee</title>
 <link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
+
+<script>
+function showInputField(){
+	//dropdown for possible messages has id "content"
+	var selectContent = document.getElementById('content');
+	
+	//hardcoded chat messages which trigger some change
+	var triggerTimePicker = "7";
+	var triggerFreetext = "0"
+
+	var freetextElement = document.getElementById("freetextArea");
+	var timePickerElement = document.getElementById("datetimepicker_mask");
+
+	if(selectContent.value==triggerTimePicker){
+		timePickerElement.name = 'content2';
+		timePickerElement.style.visibility = 'visible';
+		
+		freetextElement.name = 'deactivated';
+		freetextElement.style.visibility = 'hidden';
+	}
+	else if(selectContent.value==triggerFreetext){
+		timePickerElement.name = 'deactivated';
+		timePickerElement.style.visibility = 'hidden';
+		
+		freetextElement.name = 'content2';
+		freetextElement.style.visibility = 'visible';
+	}
+	else {
+		timePickerElement.name = 'deactivated';
+		timePickerElement.style.visibility = 'hidden';
+		
+		freetextElement.name = 'deactivated';
+		freetextElement.style.visibility = 'hidden';
+	}
+}
+
+
+
+</script>
+
+
 </head>
 
 <body>
@@ -39,12 +80,13 @@
 						<div class="row">
 							<form action="#" th:action="@{/chat/inspectChat/append/{id}(id=${conversation.id})}" th:object="${stringInForm}" method="post" enctype="multipart/form-data">
 								<div class="small-12 columns">
-									<select th:field="*{content}">
+									<select th:field="*{content}" onchange="showInputField()">
 										<option th:each="possibleMessage : ${possibleMessages}"
 											th:value="${possibleMessage.key}"
 											th:text="${possibleMessage.value}">.</option>
 									</select>
-									<textarea rows="4" th:field="*{content2}"></textarea>
+									<input type="text" value="click here!" id="datetimepicker_mask" th:field="*{content2}" />
+									<textarea id="freetextArea" rows="4" th:field="*{content2}"></textarea>
 								</div>
 								<div class="small-12 columns">
 									<button class="right button" type="submit">Nachricht senden</button>
@@ -60,6 +102,22 @@
 	<footer th:include="footer :: footer"></footer>
 	
 </body>
+
+<!--  datetime picker -->
+<script th:src="@{/resources/js/jquery.js}"></script>
+<script th:src="@{/resources/js/build/jquery.datetimepicker.full.js}"></script>
+<script th:src="@{/resources/js/dateTimePicker.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/jquery.datetimepicker.css}" />
+<!-- end  datetime picker -->
+<script>
+
+var onStartUpTimePickerElement = document.getElementById("datetimepicker_mask");
+onStartUpTimePickerElement.style.visibility = 'hidden';
+
+
+showInputField();
+jQuery('#datetimepicker').datetimepicker();
+</script>
 </html>
 
 <!-- ui-view  -->

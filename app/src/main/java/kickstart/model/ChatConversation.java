@@ -92,7 +92,7 @@ public class ChatConversation {
 	}
 	
 	public void addChatMessage(ChatMessage arg){
-		this.content.add(0,arg);
+		this.content.add(arg);
 	}
 
 	public String getFromUserName() {

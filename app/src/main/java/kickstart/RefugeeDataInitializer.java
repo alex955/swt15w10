@@ -32,6 +32,8 @@ public class RefugeeDataInitializer implements DataInitializer {
     final Role volunteer = new Role("ROLE_VOLUNTEER");
     final Role admin = new Role("ROLE_ADMIN");
 
+
+
     @Autowired
     public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, kickstart.model.ArticleRepo goodREPO, ChatConversationRepo chatRepo, ChatMessageRepo msgRepo, SettingsRepository settingsRepo, UserSettingsRepository userSettingsRepository, ValidatorRepository validatorRepository) {
 
@@ -136,20 +138,20 @@ public class RefugeeDataInitializer implements DataInitializer {
     	Attribute att2 = new Attribute("Geschlecht",tags2);
     	
     	
-    	Article g1 = new Article("Spiegelschrank", "Dieser Spiegelschrank ist 60 cm breit", "Dresden - Zschernitz", "Bergstraße 5", 2, "17", "01217", userRepository.findOne((long) 1));
+    	Article g1 = new Article("Spiegelschrank", "Dieser Spiegelschrank ist 60 cm breit", "Dresden - Zschernitz", "Bergstraße 5", 2, "17", "01217", userRepository.findOne((long) 1), "article");
     	 g1.addAttribute(att);
          g1.addAttribute(att2);
-    	Article g2 = new Article("Sofa", "Einladender Blickfang! Das stylishe Schlafsofa mit dem zweifarbigen Look lädt zum Entspannen und Träumen ein.", "Dresden - Südvorstadt", "straße", 1, "number", "01067", userRepository.findOne((long) 2));
-        Article g3 = new Article("Stuhl", "Schöner Bürostuhl mit einem Bezug aus hochwertigem Kunstleder, kombiniert mit atmungsaktivem Netzstoff im Rückenausschnitt in Schwarz", "Pirna", "straße", 1, "number", "01067", userRepository.findOne((long) 2));
-        Article g4 = new Article("Spiegel", "Aus Metall mit aufwendigen Verzierungen", "Dresden - Seidnitz", "straße", 2, "number", "01067", userRepository.findOne((long) 3));
-        Article g5 = new Article("Messerblock", "EINFACH GUT! Eine rundum gute Entscheidung wenn es etwas preiswerter sein soll und trotzdem zuverlässig und praktisch. TWIN Point überzeugt durch eine scharfe Klinge.", "Ottendorf Orkrilla", "straße", 3, "number", "01067", userRepository.findOne((long) 1));
-        Article g6 = new Article("Buch", "bestens erhalten ohne Eselsohren", "Leipzig", "straße", 4, "number", "01067", userRepository.findOne((long) 1));
-        Article g7 = new Article("Deutsch für Anfänger", "Gutes Buch zum lernen", "ort", "straße", 5, "number", "01067", userRepository.findOne((long) 1));
-        Article g8 = new Article("Harry Potter", "Harry Potter (* 24.12.0 um 12:30 Uhr) ist ein kleiner Zauberer aus England. Harry lernte in Hogwarts das Zauberstabwedeln", "Hoyerswerda", "straße", 6, "number", "01067", userRepository.findOne((long) 2));
-        Article g9 = new Article("Das Survival Duo", "Survival-Duo (Mehrzahl: Survival-Quartett) ist eine satirische und oscarprämierte TV-Sendung auf DMAX.", "Dresden - Prohlis", "straße", 7, "number", "01067", userRepository.findOne((long) 1));
-        Article g10 = new Article("Motorola Razor", "Perfektes Handy. Wirkt sogar als Boomerang", "Dresden - Gorbitz", "straße", 9, "number", "01067", userRepository.findOne((long) 1));
-        Article g11 = new Article("Jeans", "Beschreibung", "ort", "straße",11, "number", "01067", userRepository.findOne((long) 3));
-        Article g12 = new Article("Deutschkurs", "Beschreibung", "ort", "straße", 12, "number", "01067", userRepository.findOne((long) 1));
+    	Article g2 = new Article("Sofa", "Einladender Blickfang! Das stylishe Schlafsofa mit dem zweifarbigen Look lädt zum Entspannen und Träumen ein.", "Dresden - Südvorstadt", "straße", 1, "number", "01067", userRepository.findOne((long) 2), "article");
+        Article g3 = new Article("Stuhl", "Schöner Bürostuhl mit einem Bezug aus hochwertigem Kunstleder, kombiniert mit atmungsaktivem Netzstoff im Rückenausschnitt in Schwarz", "Pirna", "straße", 1, "number", "01067", userRepository.findOne((long) 2), "article");
+        Article g4 = new Article("Spiegel", "Aus Metall mit aufwendigen Verzierungen", "Dresden - Seidnitz", "straße", 2, "number", "01067", userRepository.findOne((long) 3), "article");
+        Article g5 = new Article("Messerblock", "EINFACH GUT! Eine rundum gute Entscheidung wenn es etwas preiswerter sein soll und trotzdem zuverlässig und praktisch. TWIN Point überzeugt durch eine scharfe Klinge.", "Ottendorf Orkrilla", "straße", 3, "number", "01067", userRepository.findOne((long) 1), "article");
+        Article g6 = new Article("Buch", "bestens erhalten ohne Eselsohren", "Leipzig", "straße", 4, "number", "01067", userRepository.findOne((long) 1), "article");
+        Article g7 = new Article("Deutsch für Anfänger", "Gutes Buch zum lernen", "ort", "straße", 5, "number", "01067", userRepository.findOne((long) 1), "article");
+        Article g8 = new Article("Harry Potter", "Harry Potter (* 24.12.0 um 12:30 Uhr) ist ein kleiner Zauberer aus England. Harry lernte in Hogwarts das Zauberstabwedeln", "Hoyerswerda", "straße", 6, "number", "01067", userRepository.findOne((long) 2), "article");
+        Article g9 = new Article("Das Survival Duo", "Survival-Duo (Mehrzahl: Survival-Quartett) ist eine satirische und oscarprämierte TV-Sendung auf DMAX.", "Dresden - Prohlis", "straße", 7, "number", "01067", userRepository.findOne((long) 1), "article");
+        Article g10 = new Article("Motorola Razor", "Perfektes Handy. Wirkt sogar als Boomerang", "Dresden - Gorbitz", "straße", 9, "number", "01067", userRepository.findOne((long) 1), "article");
+        Article g11 = new Article("Jeans", "Beschreibung", "ort", "straße",11, "number", "01067", userRepository.findOne((long) 3), "article");
+        Article g12 = new Article("Deutschkurs", "Beschreibung", "ort", "straße", 12, "number", "01067", userRepository.findOne((long) 1), "article");
 
         goodREPO.save(g1);
         goodREPO.save(g2);

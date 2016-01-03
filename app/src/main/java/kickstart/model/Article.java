@@ -12,8 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-
-
 @Entity
 public class Article {
 	
@@ -35,63 +33,15 @@ public class Article {
 	@OneToMany
 	(cascade=CascadeType.ALL)
 	private List<Attribute> attributes=new LinkedList<Attribute>();
-	 	
-	 
-	public List<Attribute> getAttributes() {
-	 		return attributes;
-	}
-	 
-	public void setAttributes(List<Attribute> attributes) {
-	 	this.attributes = attributes;
-	}
-	
-	public void addAttribute(Attribute attribute){
-				this.attributes.add(attribute);
-		 		System.out.println(attribute.toString());
-	}
-	
+	private String kind;
 
-	public LocalDateTime getCreationdate() {
-		return creationdate;
-	}
-
-	public void setCreationdate(LocalDateTime creationdate) {
-		this.creationdate = creationdate;
-	}
-
-	public LocalDateTime getActivitydate() {
-		return activitydate;
-	}
-
-	public void setActivitydate(LocalDateTime activitydate) {
-		this.activitydate = activitydate;
-	}
-		
-	public User getCreator() {
-		return creator;
-	}
-
-	public Picture getPicture() {
-		return picture;
-	}
-
-	public void setPicture(Picture picture) {
-		this.picture = picture;
-	}
-	
-	public void setCreator(User creator) {
-		this.creator = creator;
-	}
-	
-	
-	
 
 	public Article() {
 		super();
 	}
 
 	public Article(String title, String description, Picture picture, String location, String street,
-			long category, String number, String zip, User creator) {
+			long category, String number, String zip, User creator, String kind) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -103,11 +53,12 @@ public class Article {
 		this.zip = zip;
 		this.creationdate = LocalDateTime.now();
 		this.creator = creator;
+		this.kind = kind;
 	}
 	
 	//constructor without Picture
 		public Article(String title, String description, String location, String street,
-				long category, String number, String zip, User creator) {
+				long category, String number, String zip, User creator, String kind) {
 			super();
 			this.title = title;
 			this.description = description;
@@ -118,11 +69,12 @@ public class Article {
 			this.zip = zip;
 			this.creationdate = LocalDateTime.now();
 			this.creator = creator;
+			this.kind = kind;
 		}
 	
 	//constructor with and activitydate
 	public Article(String title, String description, Picture picture, String location, String street,
-			long category, String number, String zip, LocalDateTime activitydate) {
+			long category, String number, String zip, LocalDateTime activitydate, String kind) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -134,13 +86,16 @@ public class Article {
 		this.zip = zip;
 		this.creationdate = LocalDateTime.now();
 		this.activitydate = activitydate;
+		this.kind = kind;
 	}
+
+
 
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", description=" + description + ", location=" + location
 				+ ", street=" + street + ", category=" + category + ", number=" + number + ", zip=" + zip + ", creator="
-				+ creator + ", creationdate=" + creationdate.toString() + ", picture=" + picture ;
+				+ creator + ", creationdate=" + creationdate.toString() + ", picture=" + picture + " , kind=" + kind ;
 	}
 
 	public long getId() {
@@ -214,6 +169,61 @@ public class Article {
 	public void setAddressAddition(String addressAddition) {
 		this.addressAddition = addressAddition;
 	}
+
+
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+
+	public List<Attribute> getAttributes() {
+		return attributes;
+	}
+
+	public void setAttributes(List<Attribute> attributes) {
+		this.attributes = attributes;
+	}
+
+	public void addAttribute(Attribute attribute){
+		this.attributes.add(attribute);
+		System.out.println(attribute.toString());
+	}
+
+	public LocalDateTime getCreationdate() {
+		return creationdate;
+	}
+
+	public void setCreationdate(LocalDateTime creationdate) {
+		this.creationdate = creationdate;
+	}
+
+	public LocalDateTime getActivitydate() {
+		return activitydate;
+	}
+
+	public void setActivitydate(LocalDateTime activitydate) {
+		this.activitydate = activitydate;
+	}
+
+	public User getCreator() {
+		return creator;
+	}
+
+	public Picture getPicture() {
+		return picture;
+	}
+
+	public void setPicture(Picture picture) {
+		this.picture = picture;
+	}
+
+	public void setCreator(User creator) {
+		this.creator = creator;
+	}
+
 
 
 }
