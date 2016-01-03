@@ -126,6 +126,10 @@ public class ArticleController {
 	
 	@RequestMapping(value = "/editArticle/{id}", method = RequestMethod.POST)
 	public String processEditedArticle(@ModelAttribute("NewArticleForm") @Valid NewArticleForm newArticleForm, BindingResult result, @PathVariable("id")long id, @LoggedIn Optional<UserAccount> userAccount, Model model){
+
+		if(result.hasErrors())
+			return "editArticle";
+
 		Article originalArticle = this.articleRepo.findOne(id);
 		
 		long currentUserId = this.userRepository.findByUserAccount(userAccount.get()).getId();
@@ -142,10 +146,6 @@ public class ArticleController {
 		if(originalArticle.getCreator().getId() != currentUserId && !userAccount.get().hasRole(new Role("ROLE_ADMIN"))){
 			return null;
 		}
-		
-		//todo: validation
-		if(result.hasErrors())
-			return "editArticle";
 		
 		originalArticle.setCategory(newArticleForm.getCategoryId());
 		originalArticle.setTitle(newArticleForm.getTitle());
@@ -259,7 +259,10 @@ public class ArticleController {
 
 		User creator = userRepository.findByUserAccount(userAccount.get());
 		model.addAttribute("creator", creator);
-
+		this.processedCategories = categoryMethods.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		model.addAttribute("categoriesForm", this.categories.findAll());
+		
 		if(result.hasErrors())
 			return "newArticle";
 
