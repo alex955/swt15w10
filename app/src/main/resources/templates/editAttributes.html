@@ -17,14 +17,13 @@
 			<p>&nbsp;</p>
 			<h4 class="header">Tags bearbeiten</h4>
 			<form action="#" th:action="@{/editAttributes/{id}(id=${editArticle.id})}" th:object="${NewAttributes}" method="post">
-			
-			<label> 
-			<select th:each="Attribute : ${FormAttributes}" th:field="*{choosenTags}">
-  				<option th:each="String : ${Attribute.tags}" th:value="${String}" th:text="${String}"></option>
-			</select>
-			</label>
-			
-			<button class="right button" type="submit" th:href="@{/}">Tags speichern</button>
+				<div th:each="Attribute : ${FormAttributes}" th:field="*{choosenTags}"> 
+					<label th:text="${Attribute.name}"></label>
+					<select>
+		  				<option th:each="String : ${Attribute.tags}" th:value="${String}" th:text="${String}"></option>
+					</select>
+				</div>
+				<button class="right button" type="submit" th:href="@{/}">Tags speichern</button>
 			</form>
 		</div>
 	</div>
