@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kickstart.model.Article;
 import kickstart.model.CategoryRepo;
 import kickstart.model.NewArticleForm;
+import kickstart.model.NewAttributes;
 import kickstart.model.Picture;
 import kickstart.model.PictureRepo;
 import kickstart.model.User;
@@ -29,7 +30,9 @@ import kickstart.model.UserRepository;
 import kickstart.utilities.CategoryMethods;
 import kickstart.utilities.SettingsRepository;
 import kickstart.model.ArticleRepo;
+import kickstart.model.Category;
 import kickstart.model.CategoryFirstTierObject;
+import kickstart.model.Attribute;
 
 @Controller
 public class ArticleController {
@@ -296,7 +299,91 @@ public class ArticleController {
         	Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getHouseNumber(), newArticleForm.getZip(),creator);
     		articleRepo.save(article);
     		System.out.println(article);
-            return ("redirect:/search");
+            return ("redirect:/editAttributes/"+article.getId());
         }
+	}
+	
+	
+	
+	
+	/**
+	 * Provide article, tags, user for editAttributes template.
+	 * @author herzoga
+	 * @param id
+	 * @param userAccount
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value = "/editAttributes/{id}")
+	public String editTags(@PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount, Model model) {
+		this.processedCategories = categoryMethods.getProcessedCategories();
+		long userId = this.userRepository.findByUserAccount(userAccount.get()).getId();
+		
+		model.addAttribute("categories", this.processedCategories);
+		model.addAttribute("categoriesForm", this.categories.findAll());
+		model.addAttribute("editArticle", articleRepo.findOne(id));
+		model.addAttribute("userId", userId);
+		model.addAttribute("user", this.userRepository.findOne(userId));
+		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
+		model.addAttribute("FormAttributes",this.categories.findOne(articleRepo.findOne(id).getCategory()).get().getAttributes());
+		model.addAttribute("NewAttributes",new NewAttributes());
+		
+		boolean isAdminLoggedIn = false;
+		if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))) isAdminLoggedIn = true;
+		
+		model.addAttribute("isAdminLoggedIn", isAdminLoggedIn);
+		
+	    return "editAttributes";
+	}
+	
+	/**
+	 * Change Tags of an article
+	 * @author herzoga
+	 * @param newAttributes
+	 * @param userAccount
+	 * @param artikelid
+	 * @return
+	 */
+	@PreAuthorize("isAuthenticated()")
+	@RequestMapping(value = "/editAttributes/{id}", method = RequestMethod.POST)
+	public String processEditTags(@ModelAttribute("NewAttributes") NewAttributes newAttributes, @PathVariable("id") long id , @LoggedIn Optional<UserAccount> userAccount, Model model) {
+		Article originalArticle = this.articleRepo.findOne(id);
+		long currentUserId = this.userRepository.findByUserAccount(userAccount.get()).getId();
+		
+		//case: current user didnt create article && logged in user no admin -> end
+		if(originalArticle.getCreator().getId() != currentUserId && !userAccount.get().hasRole(new Role("ROLE_ADMIN"))){
+			return null;
+		}
+		
+		LinkedList<String> providedAttributes = newAttributes.getChoosenTags();
+		int count=0;
+		for(String e:providedAttributes){
+			if (e.isEmpty()==true) {
+			count++;	
+			} 
+			else
+			{ System.out.println(e);
+			LinkedList<String> tag = new LinkedList<String>();
+			tag.add(e);
+			// fügt das Attribut der Attribute Liste hinzu
+			Attribute att = new Attribute();
+			att.setName(this.categories.findOne(articleRepo.findOne(id).getCategory()).get().getAttributes().get(count).getName());
+			att.setTags(tag);
+			originalArticle.addAttribute(att);
+			count++;
+			}
+		}
+		
+		for(Attribute a:originalArticle.getAttributes()){
+			System.out.println(a.getName());
+			for(String s:a.getTags()){
+				System.out.println(s);
+			}
+			
+		}
+		
+		articleRepo.save(originalArticle);
+		
+		return ("redirect:/showArticle/"+id);
 	}
 }

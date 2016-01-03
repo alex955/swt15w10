@@ -103,8 +103,17 @@ public class RefugeeDataInitializer implements DataInitializer {
     }
 
     public void initializeCategories(){ 
-    
-        categories.save(new Category("Möbel", -1));
+    	Category cat = new Category("Möbel", -1);
+    	LinkedList<String> tags1 = new LinkedList<String>();
+        tags1.add("");  tags1.add("Gebraucht");  tags1.add("Neu");  
+    	Attribute att = new Attribute("Zustand",tags1);
+    	LinkedList<String> tags2 = new LinkedList<String>();
+    	tags2.add(""); tags2.add("Blau"); tags2.add("Gelb"); tags2.add("Rot");
+    	Attribute att2 = new Attribute("Farbe",tags2);
+    	cat.addAttribute(att);
+    	cat.addAttribute(att2);
+        categories.save(cat);
+
         categories.save(new Category("Badmöbel", 1));
         categories.save(new Category("Küchenmöbel", 1));
         categories.save(new Category("Bücher", -1));

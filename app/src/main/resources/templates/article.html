@@ -95,6 +95,7 @@
 				</div>				
 			</div>
 			<ul class="right button-group">
+			<li><a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/editAttributes/}+${Article.id}" class="small button">Tags bearbeiten</a></li>
 				<li><a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/editArticle/}+${Article.id}" class="small button">Artikel bearbeiten</a></li>
 				<li><a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/deleteArticle/}+${Article.id}" class="small alert button">Artikel löschen</a></li>
 			</ul>
