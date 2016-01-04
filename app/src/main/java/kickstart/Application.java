@@ -73,7 +73,7 @@ public class Application extends SpringBootServletInitializer  {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 
-			http.csrf().disable();
+			//http.csrf().disable();
 
 			http.authorizeRequests().antMatchers("/resources/**").permitAll().and().formLogin().loginPage(LOGIN_ROUTE).loginProcessingUrl(LOGIN_ROUTE).defaultSuccessUrl("/search").and()
 					.logout().logoutUrl("/logout").logoutSuccessUrl("/");
