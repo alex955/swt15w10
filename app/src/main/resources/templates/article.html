@@ -24,13 +24,13 @@
 					<div class="medium-6 small-12 columns">
 						<div class="row">
 							<div class="small-12 columns">
-								<h5 class="subheader">Details</h5>
+								<h5 class="subheader" th:text="#{article.details}">Details</h5>
 							</div>
 							<hr></hr>
 						</div>
 						<div class="row">
 							<div class="small-6 large-4 columns">
-								<p>Ort:</p>
+								<p th:text="#{article.location}">Ort:</p>
 							</div>
 							<div class="small-6 large-8 columns">
 								<p th:text="${Article.location}"></p>
@@ -38,7 +38,7 @@
 						</div>	
 						<div class="row">
 							<div class="small-6 large-4 columns">
-								<p>PLZ:</p>
+								<p th:text="#{newarticle.zipcode}">PLZ:</p>
 							</div>
 							<div class="small-6 large-8 columns">
 								<p th:text="${Article.zip}"></p>
@@ -46,7 +46,7 @@
 						</div>	
 						<div class="row">
 							<div class="small-6 large-4 columns">
-								<p>Erstellungsdatum:</p>
+								<p th:text="#{article.creationdate}">Erstellungsdatum:</p>
 							</div>
 							<div class="small-6 large-8 columns">
 								<p th:text="${#temporals.format(Article.creationdate, 'dd. MMMM yyyy')}">Datum</p>
@@ -54,7 +54,7 @@
 						</div>	
 						<div class="row">
 							<div class="small-6 large-4 columns">
-								<p>Anbieter:</p>
+								<p th:text="#{article.creator}">Anbieter:</p>
 							</div>
 							<div class="small-6 large-8 columns">
 								<p th:text="${Creator.username}"></p>
@@ -62,7 +62,7 @@
 						</div>
 						<div class="row">
 							<div class="small-6 large-4 columns">
-								<p>Anbieter spricht folgende Sprachen:</p>
+								<p th:text="#{article.creatorisspeaking}">Anbieter spricht folgende Sprachen:</p>
 							</div>
 							<div class="small-6 large-8 columns">
 								<div>
@@ -73,7 +73,7 @@
 						</div>
 						<div class="row">
 							<div class="small-12 columns"> 
-								<a th:if="${Creator.id} != ${currentUserId}" class="button" th:href="@{/chat/newConversation/}+${Article.id}">Kontakt mit Anbieter aufnehmen</a>
+								<a th:if="${Creator.id} != ${currentUserId}" class="button" th:href="@{/chat/newConversation/}+${Article.id}" th:text="#{article.takecontact}">Kontakt mit Anbieter aufnehmen</a>
 							</div>
 						</div>	
 					</div>	
