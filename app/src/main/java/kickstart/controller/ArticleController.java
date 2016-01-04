@@ -301,7 +301,7 @@ public class ArticleController {
         		System.out.println("You successfully uploaded file=" + newArticleForm.getTitle());
 
 
-				return ("redirect:/search");
+        		 return ("redirect:/editAttributes/"+article.getId());
             } catch (Exception e) {
                 return "You failed to upload " + newArticleForm.getTitle() + " => " + e.getMessage();
             }
