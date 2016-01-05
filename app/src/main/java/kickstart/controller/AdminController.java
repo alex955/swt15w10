@@ -275,8 +275,6 @@ public class AdminController {
 		if(!userSettings.getNewStreetName().isEmpty())
 			user.setStreetName(userSettings.getNewStreetName());
 
-		if(!userSettings.getNewHouseNumber().isEmpty())
-			user.setHouseNumber(userSettings.getNewHouseNumber());
 
 		if(!userSettings.getNewAddressAddition().isEmpty())
 			user.setAddressAddition(userSettings.getNewAddressAddition());

@@ -24,13 +24,12 @@ public class UserSettings {
     private String newCity;
     private String newZip;
     private String newStreetName;
-    private String newHouseNumber;
     private String newAddressAddition;
     private String newLanguage1;
     private String newLanguage2;
     private String newLanguage3;
 
-    public UserSettings(long id, long userId, String newLastName, String newFirstName, String newEmail, String newPassword, String oldPassword, String confirmPW, String newCity, String newZip, String newStreetName, String newHouseNumber, String newAddressAddition, String newLanguage1, String newLanguage2, String newLanguage3) {
+    public UserSettings(long id, long userId, String newLastName, String newFirstName, String newEmail, String newPassword, String oldPassword, String confirmPW, String newCity, String newZip, String newStreetName, String newAddressAddition, String newLanguage1, String newLanguage2, String newLanguage3) {
 
         this.userId = userId;
         this.newLastName = newLastName;
@@ -42,14 +41,13 @@ public class UserSettings {
         this.newCity = newCity;
         this.newZip = newZip;
         this.newStreetName = newStreetName;
-        this.newHouseNumber = newHouseNumber;
         this.newAddressAddition = newAddressAddition;
         this.newLanguage1 = newLanguage1;
         this.newLanguage2 = newLanguage2;
         this.newLanguage3 = newLanguage3;
     }
 
-    public UserSettings(long id, long userId, String newEmail, String newPassword, String confirmPW, String oldPassword, String newCity, String newZip, String newHouseNumber, String newAddressAddition, String newStreetName, String newLanguage1, String newLanguage2, String newLanguage3) {
+    public UserSettings(long id, long userId, String newEmail, String newPassword, String confirmPW, String oldPassword, String newCity, String newZip,  String newAddressAddition, String newStreetName, String newLanguage1, String newLanguage2, String newLanguage3) {
 
         this.userId = userId;
         this.newEmail = newEmail;
@@ -58,7 +56,6 @@ public class UserSettings {
         this.oldPassword = oldPassword;
         this.newCity = newCity;
         this.newZip = newZip;
-        this.newHouseNumber = newHouseNumber;
         this.newAddressAddition = newAddressAddition;
         this.newStreetName = newStreetName;
         this.newLanguage1 = newLanguage1;
@@ -154,14 +151,6 @@ public class UserSettings {
 
     public void setNewStreetName(String newStreetName) {
         this.newStreetName = newStreetName;
-    }
-
-    public String getNewHouseNumber() {
-        return newHouseNumber;
-    }
-
-    public void setNewHouseNumber(String newHouseNumber) {
-        this.newHouseNumber = newHouseNumber;
     }
 
     public String getNewAddressAddition() {

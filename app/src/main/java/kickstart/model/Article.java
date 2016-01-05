@@ -43,7 +43,7 @@ public class Article {
 	}
 
 	public Article(String title, String description, Picture picture, String location, String street,
-			long category, String number, String zip, User creator, String kind) {
+			long category, String zip, User creator, String kind) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -51,7 +51,6 @@ public class Article {
 		this.location = location;
 		this.street = street;
 		this.category = category;
-		this.number = number;
 		this.zip = zip;
 		this.creationdate = LocalDateTime.now();
 		this.creator = creator;
@@ -60,14 +59,13 @@ public class Article {
 	
 	//constructor without Picture
 		public Article(String title, String description, String location, String street,
-				long category, String number, String zip, User creator, String kind) {
+				long category, String zip, User creator, String kind) {
 			super();
 			this.title = title;
 			this.description = description;
 			this.location = location;
 			this.street = street;
 			this.category = category;
-			this.number = number;
 			this.zip = zip;
 			this.creationdate = LocalDateTime.now();
 			this.creator = creator;
@@ -76,7 +74,7 @@ public class Article {
 	
 	//constructor with and activitydate
 	public Article(String title, String description, Picture picture, String location, String street,
-			long category, String number, String zip, LocalDateTime activitydate, String kind) {
+			long category, String zip, LocalDateTime activitydate, String kind) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -84,7 +82,6 @@ public class Article {
 		this.location = location;
 		this.street = street;
 		this.category = category;
-		this.number = number;
 		this.zip = zip;
 		this.creationdate = LocalDateTime.now();
 		this.activitydate = activitydate;
@@ -96,7 +93,7 @@ public class Article {
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", description=" + description + ", location=" + location
-				+ ", street=" + street + ", category=" + category + ", number=" + number + ", zip=" + zip + ", creator="
+				+ ", street=" + street + ", category=" + category + ", zip=" + zip + ", creator="
 				+ creator + ", creationdate=" + creationdate.toString() + ", picture=" + picture + " , kind=" + kind ;
 	}
 

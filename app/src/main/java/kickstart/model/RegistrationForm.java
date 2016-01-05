@@ -51,15 +51,10 @@ public class RegistrationForm {
     @Pattern(regexp="^\\d{5}$", message="Die Postleitzahl muss aus exakt 5 Ziffern bestehen.")
     private String zip;
 
-    @Size(min=5, max=50, message = "Geben Sie einen Straßennamen ein.")
+    @Pattern(regexp = "^([A-ZÄÖÜ][a-zäöüß]+(([.] )|( )|([-])))+[1-9][0-9]{0,3}[a-z]?$", message = "Geben Sie einen Straßennamen ein. \n (Bsp.: Teststr. 1b, Baumweg 12, etc.)")
     private String streetName;
 
-    //Must start with at least one digit. "1a", "12b", etc. possible
-    @Pattern(regexp = "^\\d+[a-zA-Z]*$", message="Geben Sie eine gültige Hausnummer ein.")
-    private String houseNumber;
-
     private String addressAddition;
-
 
     private String language1;
 
@@ -162,14 +157,6 @@ public class RegistrationForm {
 
     public void setStreetName(String streetName) {
         this.streetName = streetName;
-    }
-
-    public String getHouseNumber() {
-        return houseNumber;
-    }
-
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
     }
 
     public String getUsername() {

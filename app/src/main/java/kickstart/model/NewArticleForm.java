@@ -18,7 +18,6 @@ public class NewArticleForm {
     private String zip;
     private String city;
     private String streetName;
-    private String houseNumber;
     private String adressAddition;
     private MultipartFile file;
     private double longitude;
@@ -32,12 +31,6 @@ public class NewArticleForm {
 	}
 	public void setStreetName(String streetName) {
 		this.streetName = streetName;
-	}
-	public String getHouseNumber() {
-		return houseNumber;
-	}
-	public void setHouseNumber(String houseNumber) {
-		this.houseNumber = houseNumber;
 	}
 	public String getAdressAddition() {
 		return adressAddition;

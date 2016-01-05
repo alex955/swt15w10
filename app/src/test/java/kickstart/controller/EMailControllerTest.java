@@ -29,7 +29,7 @@ public class EMailControllerTest {
 	public void testValidation(UserAccountManager userAccountManager, UserRepository userRepository){
         UserAccount admin1 = userAccountManager.create("admin1", "admin1PW", admin);
         userAccountManager.save(admin1);
-        User user = new User (1, admin1, "Admin", "Erster", "DataInitializer", "admin@test.de", "Stadt", "01234", "Straße", "1", "", "german", "english", "arab");
+        User user = new User (1, admin1, "Admin", "Erster", "DataInitializer", "admin@test.de", "Stadt", "01234", "Straße 1", "", "german", "english", "arab");
 
         //EMailController.validation(Integer.toString(user.getHashcode()));
 		

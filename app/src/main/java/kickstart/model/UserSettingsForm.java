@@ -42,10 +42,9 @@ public class UserSettingsForm {
     @Pattern(regexp="(^$| |^(\\d{5})$)", message="Die Postleitzahl muss aus exakt 5 Ziffern bestehen.")
     private String newZip;
 
+    @Pattern(regexp = "^([A-ZÄÖÜ][a-zäöüß]+(([.] )|( )|([-])))+[1-9][0-9]{0,3}[a-z]?$", message = "Geben Sie einen Straßennamen ein. \n (Bsp.: Teststr. 1b, Baumweg 12, etc.)")
     private String newStreetName;
 
-    @Pattern(regexp = "(^$|^(\\d+[a-zA-Z]*)$)", message="Geben Sie eine gültige Hausnummer ein.")
-    private String newHouseNumber;
     private String newAddressAddition;
     private String newLanguage1;
     private String newLanguage2;
@@ -138,14 +137,6 @@ public class UserSettingsForm {
 
     public void setNewStreetName(String newStreetName) {
         this.newStreetName = newStreetName;
-    }
-
-    public String getNewHouseNumber() {
-        return newHouseNumber;
-    }
-
-    public void setNewHouseNumber(String newHouseNumber) {
-        this.newHouseNumber = newHouseNumber;
     }
 
     public String getNewAddressAddition() {

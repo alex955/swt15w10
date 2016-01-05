@@ -106,11 +106,10 @@ function checkedArticle(){
 					</div>
 					<div class="row">
 						<div class="show-for-medium-up">
-							<div class="small-4 columns" th:text="#{usersettings.address}">Straße, Hausnummer, Addresszusatz</div>
+							<div class="small-4 columns" th:text="#{usersettings.address}">Straße, Addresszusatz</div>
 						</div>
 						<div class="medium-8 small-12 columns">
 							<input type="text" name="streetName" id="street" placeholder="Straßenname" th:value="${creator.streetName}" onchange="getCoords()"/>
-                            <input type="text" name="houseNumber" id="number" placeholder="Hausnummmer" th:value="${creator.houseNumber}" onchange="getCoords()"/>                            						
 							<input type="text" name="addressAddition" id="addition" placeholder="(optional)" onchange="getCoords()" />
 						</div>
 					</div>					

@@ -153,7 +153,6 @@ public class ArticleController {
 		originalArticle.setZip(newArticleForm.getZip());
 		originalArticle.setLocation(newArticleForm.getCity());
 		originalArticle.setStreet(newArticleForm.getStreetName());
-		originalArticle.setNumber(newArticleForm.getHouseNumber());
 		originalArticle.setAddressAddition(newArticleForm.getAdressAddition());
 		originalArticle.setKind(newArticleForm.getKind());
 	 
@@ -294,7 +293,7 @@ public class ArticleController {
 
 				Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename(), creator);
 				pictureRepo.save(picture);
-				Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), picture, newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getHouseNumber(), newArticleForm.getZip(), creator, newArticleForm.getKind());
+				Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), picture, newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getZip(), creator, newArticleForm.getKind());
 				article.setLatitude(newArticleForm.getLatitude()); 
 	    		article.setLongitude(newArticleForm.getLongitude());
 				articleRepo.save(article);
@@ -310,7 +309,7 @@ public class ArticleController {
         } else {
 
 			//save article without Picture
-			Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getHouseNumber(), newArticleForm.getZip(),creator, newArticleForm.getKind());
+			Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(),  newArticleForm.getZip(),creator, newArticleForm.getKind());
     		article.setLatitude(newArticleForm.getLatitude()); 
     		article.setLongitude(newArticleForm.getLongitude());
 			articleRepo.save(article);
