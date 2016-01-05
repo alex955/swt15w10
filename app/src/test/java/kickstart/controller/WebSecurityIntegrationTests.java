@@ -16,7 +16,6 @@
 package kickstart.controller;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -24,16 +23,9 @@ import org.junit.Test;
 
 import kickstart.AbstractWebIntegrationTests;
 
-/**
- * Integration tests for security setup.
- * 
- * @author Oliver Gierke
- */
 public class WebSecurityIntegrationTests extends AbstractWebIntegrationTests {
 
-	/**
-	 * @see #19
-	 */
+
 	@Test
 	public void redirectsToLoginPageForSecuredResource() throws Exception {
 
@@ -41,22 +33,28 @@ public class WebSecurityIntegrationTests extends AbstractWebIntegrationTests {
 		andExpect(status().isFound()).//
 		andExpect(header().string("Location", endsWith("/")));
 		
-		//legacy?
-//		mvc.perform(get("/admin/addRootCat")).//
-//		andExpect(status().isFound()).//
-//		andExpect(header().string("Location", endsWith("/")));
+		mvc.perform(get("/admin/addRootCat")).//
+		andExpect(status().isFound()).//
+		andExpect(header().string("Location", endsWith("/")));
 		
-	}
-
-	/**
-	 * @see #35
-	 */
-	@Test
-	public void returnsModelAndViewForSecuredUriAfterAuthentication() throws Exception {
-
-		mvc.perform(get("/admin").with(user("admin1").roles("ADMIN"))).//
-				andExpect(status().isOk()).//
-				andExpect(view().name("admin")).//
-				andExpect(model().attributeExists("categories", "categoriesAdmin", "newCategory", "rootCount", "subCount", "totalCount", "registeredUsers"));
+		mvc.perform(get("/admin/addSubcategory/0")).//
+		andExpect(status().isFound()).//
+		andExpect(header().string("Location", endsWith("/")));
+		
+		mvc.perform(get("/admin/inspectCategory/0")).//
+		andExpect(status().isFound()).//
+		andExpect(header().string("Location", endsWith("/")));
+		
+		mvc.perform(get("/admin/deactivateUser/0")).//
+		andExpect(status().isFound()).//
+		andExpect(header().string("Location", endsWith("/")));
+		
+		mvc.perform(get("/admin/activateUser/0")).//
+		andExpect(status().isFound()).//
+		andExpect(header().string("Location", endsWith("/")));
+		
+		mvc.perform(get("/admin/editUser/0")).//
+		andExpect(status().isFound()).//
+		andExpect(header().string("Location", endsWith("/")));
 	}
 }

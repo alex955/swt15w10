@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import kickstart.model.*;
 
-import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,7 +22,6 @@ import kickstart.model.CategoryFirstTierObject;
 import kickstart.model.CategoryRepo;
 import kickstart.model.UserRepository;
 import kickstart.utilities.CategoryMethods;
-import kickstart.model.ArticleRepo;
 import javax.validation.Valid;
 
 @Controller
@@ -36,9 +34,6 @@ public class AdminController {
     
 	@Autowired
 	private final CategoryRepo categories;
-	
-	@Autowired
-	private final ArticleRepo articleRepo;
 
 	@Autowired private final CategoryMethods categoryMethods;
 	
@@ -48,9 +43,8 @@ public class AdminController {
 	private UserAccountManager userAccountManager;
     
 	@Autowired
-	public AdminController(CategoryRepo categories, ArticleRepo articleRepo, UserRepository userRepository, UserAccountManager userAccountManager, CategoryMethods categoryMethods){
+	public AdminController(CategoryRepo categories, UserRepository userRepository, UserAccountManager userAccountManager, CategoryMethods categoryMethods){
 		this.categories = categories;
-		this.articleRepo=articleRepo;
 		this.userRepository = userRepository;
 		this.userAccountManager = userAccountManager;
 		this.categoryMethods = categoryMethods;
@@ -107,7 +101,7 @@ public class AdminController {
 //        	b.getCity();
 //        }
         
-        return "admin";
+    return "admin";
     }
 	
 	/**
@@ -128,12 +122,16 @@ public class AdminController {
     	
         return "redirect:/admin/inspectCategory/{id}";
     }
+    
+    //redirect to frontpage if user has no admin role (because @Preauthorize)
+    @RequestMapping(value="/admin/addSubcategory/{id}")
+    public String addSubcategory(){return null;}
 	
 	/**
 	 * Generation of a new Category which has no predecessors -> new root Category
 	 * @param category new Category which is to be saved in the Category Repository
 	 * @param model
-	 * @return redirect to admin overwiew
+	 * @return redirect to admin overview
 	 */
     @RequestMapping(value="/admin/addRootCat", method=RequestMethod.POST)
     public String addRootCategory(@ModelAttribute Category category, Model model) {
@@ -146,6 +144,9 @@ public class AdminController {
         return "redirect:/admin";
     }
     
+    //redirect to frontpage if user has no admin role (because @Preauthorize)
+    @RequestMapping(value="/admin/addRootCat")
+    public String addRootCategory(){return null;}
 
     /**
      * processes delete request of a certain category
@@ -280,7 +281,6 @@ public class AdminController {
 			user.setAddressAddition(userSettings.getNewAddressAddition());
 
 		//Email-Änderung
-
 		if(!userSettings.getNewEmail().isEmpty())
 			user.setEmail(userSettings.getNewEmail());
 
@@ -310,9 +310,7 @@ public class AdminController {
 
 		userAccountManager.save(user.getUserAccount());
 		userRepository.save(user);
-
-
+		
 		return "redirect:/admin";
-	}
-	
+	}	
 }
