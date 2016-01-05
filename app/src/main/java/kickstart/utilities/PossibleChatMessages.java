@@ -94,55 +94,55 @@ public class PossibleChatMessages {
 	 */
 	//wasn't supposed to be so heavily hardcoded,.. 
 	public PossibleChatMessages(){
-		this.possibleChatMessage.put(0, "Freitext/Chat, z.B. Fragen/Antworten oder andere Anliegen");
+		this.possibleChatMessage.put(0, "textblock.freeChat");
 		LinkedList<Integer> answersToZero = new LinkedList<Integer>();
 		
-		this.possibleChatMessage.put(1, "Hallo! Ich habe Interesse an dem Artikel! Ist er noch verfügbar?");
+		this.possibleChatMessage.put(1, "textblock.helloArticle");
 		LinkedList<Integer> answersToOne = new LinkedList<Integer>();
 		
-		this.possibleChatMessage.put(2, "Hallo! Ich habe Interesse an der Aktivität! Sind noch Plätze frei?");
+		this.possibleChatMessage.put(2, "textblock.helloActivity");
 		LinkedList<Integer> answersToTwo = new LinkedList<Integer>();
 		
-		this.possibleChatMessage.put(3,"Ja");
+		this.possibleChatMessage.put(3,"textblock.yes");
 		LinkedList<Integer> answersToThree = new LinkedList<Integer>();
 		
-		this.possibleChatMessage.put(4,"Nein");
+		this.possibleChatMessage.put(4,"textblock.no");
 		LinkedList<Integer> answersToFour = new LinkedList<Integer>();
 		
-		this.possibleChatMessage.put(5,"Soll ich etwas zur Aktivität mitbringen?");
+		this.possibleChatMessage.put(5,"textblock.bringToActivityQuestion");
 		LinkedList<Integer> answersToFive = new LinkedList<Integer>();
 		
-		this.possibleChatMessage.put(6,"Ja, du sollst bitte folgendes mitbringen: ");
+		this.possibleChatMessage.put(6,"textblock.bringToActivityAnswer");
 		LinkedList<Integer> answersToSix = new LinkedList<Integer>();
 		
-		this.possibleChatMessage.put(7,"Kann ich den Artikel zu folgenden Zeiten abholen: ");
+		this.possibleChatMessage.put(7,"textblock.fetchArticleAtTimeQuestion");
 		LinkedList<Integer> answersToSeven = new LinkedList<Integer>();
 		
-		this.possibleChatMessage.put(8,"Ja, du kannst ihn zu den genannten Zeiten abholen.");
+		this.possibleChatMessage.put(8,"textblock.fetchArticleAtTimeAnswer");
 		LinkedList<Integer> answersToEight = new LinkedList<Integer>();
 		
-		this.possibleChatMessage.put(9,"Ich kann den Artikel doch nicht holen, Entschuldigung.");
+		this.possibleChatMessage.put(9,"textblock.cantFetchArticle");
 		LinkedList<Integer> answersToNine = new LinkedList<Integer>();
 		
-		this.possibleChatMessage.put(10,"Ich kann an der Aktivität trotzdem nicht teilnehmen, Entschuldigung.");
+		this.possibleChatMessage.put(10,"textblock.cantParticipateActivity");
 		LinkedList<Integer> answersToTen = new LinkedList<Integer>();
 		
-		this.possibleChatMessage.put(11,"Bei welcher Adresse kann man den Artikel abholen?");
+		this.possibleChatMessage.put(11,"textblock.whichAdressIsArticle");
 		LinkedList<Integer> answersToEleven = new LinkedList<Integer>();
 		
-		this.possibleChatMessage.put(12,"Der Artikel kann bei folgender Adresse abgeholt werden:");
+		this.possibleChatMessage.put(12,"textblock.ArticleHasThisAdress");
 		LinkedList<Integer> answersToTwelve = new LinkedList<Integer>();
 		
-		this.possibleChatMessage.put(13,"Wo genau findet die Aktivität statt?");
+		this.possibleChatMessage.put(13,"textblock.whereExactlyIsActivity");
 		LinkedList<Integer> answersToThirteen = new LinkedList<Integer>();
 		
-		this.possibleChatMessage.put(14,"Die Aktivität findet bei folgender Adresse/bei folgendem Ort statt:");
+		this.possibleChatMessage.put(14,"textblock.whereExactlyIsActivityAnswer");
 		LinkedList<Integer> answersToFourteen = new LinkedList<Integer>();
 		
-		this.possibleChatMessage.put(15 ,"Der Artikel ist leider nicht mehr verfügbar.");
+		this.possibleChatMessage.put(15 ,"textblock.articleNotAvailableAnymore");
 		LinkedList<Integer> answersToFifteen = new LinkedList<Integer>();
 		
-		this.possibleChatMessage.put(16 ,"Die Aktivität ist leider abgesagt.");
+		this.possibleChatMessage.put(16 ,"textblock.activityWontTakePlace");
 		LinkedList<Integer> answersToSixteen = new LinkedList<Integer>();
 		
 		answersToZero.add(0);
