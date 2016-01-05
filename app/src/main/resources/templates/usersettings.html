@@ -161,12 +161,12 @@
 						</div>
 						<div class="row">
 							<div class="show-for-medium-up">
-								<div class="large-5 small-3 columns" th:text="#{registration.streetHousnumber}">Straße, Hausnummer</div>
+								<div class="large-5 small-3 columns" th:text="#{registration.streetHousenumber}">Straße, Hausnummer</div>
 							</div>
 							<div class="large-7 small-12 columns">
 								<label>
 									<font color="red" th:if="${#fields.hasErrors('newStreetName')}" th:errors="*{newStreetName}"> ERROR MESSAGE </font>
-									<input type="text" name="newStreetName" th:placeholder="#{usersettings.street}" th:value="${user.streetName}"/>
+									<input type="text" name="newStreetName" th:placeholder="#{usersettings.streetHousenumber}" th:value="${user.streetName}"/>
 								</label>
 							</div>
 						</div>

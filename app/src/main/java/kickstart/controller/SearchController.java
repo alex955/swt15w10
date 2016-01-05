@@ -213,8 +213,6 @@ public class SearchController {
 		this.processedCategories = this.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("anzeigen", articles);
-		model.addAttribute("FormAttributes",this.categories.findOne(articleRepo.findOne(this.getCurrent_cat()).getCategory()).get().getAttributes());
-		model.addAttribute("NewAttributes",new NewAttributes());
 		model=this.getCurrent_cat(model);
 		
 		return "search";
