@@ -2,13 +2,11 @@ package kickstart.utilities;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 
 @Entity
 public class Setting {
    
-	@Id
-    private String key;
+	@Id private String key;
     private String value;
 
     private String description;
@@ -20,9 +18,9 @@ public class Setting {
 		this.description = description;
 	}
 	
-	 public Setting() {
-			super();
-		}
+	public Setting() {
+		super();
+	}
 
 	public String getKey() {
 		return key;
