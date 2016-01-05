@@ -31,7 +31,7 @@ public class PictureController{
 
 	/**
 	 * @param id
-	 * @return
+	 * @return 
 	 * @throws IOException
 	 */
 	@ResponseBody
@@ -39,7 +39,6 @@ public class PictureController{
 	public FileSystemResource showArticle(@PathVariable("id") long id) throws IOException{
 		if(articleRepo.findOne(id).getPicture() == null){
 			//in case someone does not upload a picture
-			//this is the path in a git ignore file, at the end we have to change to the picture on the server
 			resource = new FileSystemResource(settingsRepo.findOne("noUploadedPicturePath").getValue());
 		}
 		else	

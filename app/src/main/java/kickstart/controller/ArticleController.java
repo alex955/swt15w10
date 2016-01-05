@@ -81,7 +81,7 @@ public class ArticleController {
 	    model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 	    model.addAttribute("Useraccount", articleRepo.findOne(id).getCreator().getUserAccount());
 	    model.addAttribute("tags",articleRepo.findOne(id).getAttributes());
-	    
+	   
 	    long currentUserId = -1;
 		boolean isAdminLoggedIn = false;
 	    
@@ -95,9 +95,6 @@ public class ArticleController {
 	    }
 	    
 	    model.addAttribute("currentUserId", currentUserId);
-	    
-
-		
 		model.addAttribute("isAdminLoggedIn", isAdminLoggedIn);
 	    return "article";
 	}
@@ -237,8 +234,6 @@ public class ArticleController {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
-
-		Article article = new Article();
 		model.addAttribute("article", new Article());
 
 		User creator = userRepository.findByUserAccount(userAccount.get());
