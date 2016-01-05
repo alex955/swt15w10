@@ -115,15 +115,13 @@ function checkedArticle(){
 					</div>					
 				</div>
 
-		 		<input type="hidden" name="latitude" id="latitude" />
-				<input type="hidden" name="longitude" id="longitude" />  
+		 		<input type="hidden" name="latitude" id="latitude" value="0"/>
+				<input type="hidden" name="longitude" id="longitude" value="0" />
 				
 
 				<button class="right button" type="submit" th:href="@{/}" th:text="#{newarticle.createoffer}">Angebot erstellen</button>
 
 			</form>
-			
-				
 		</div>
 	</div>
 
@@ -133,7 +131,7 @@ function checkedArticle(){
 <script type="text/javascript">
  function getCoords() {
 	//Abfrage der eingegeben Adresse
-	var address = document.getElementById("zip").value+" "+document.getElementById("city").value+" "+document.getElementById("street").value+" "+document.getElementById("number").value;
+	var address = document.getElementById("zip").value+" "+document.getElementById("city").value+" "+document.getElementById("street").value;
 	var geocoder = new google.maps.Geocoder(); 
 	geocoder.geocode({'address': address}, function(results, status) {
 		if (status === google.maps.GeocoderStatus.OK) {

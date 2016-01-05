@@ -21,7 +21,6 @@ public class Article {
 	private String location;	
 	private String street;	
 	private long category;
-	private String number;
 	private String zip;
 	private String addressAddition;
 	@OneToOne
@@ -143,14 +142,6 @@ public class Article {
 
 	public void setCategory(long category) {
 		this.category = category;
-	}
-
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
 	}
 
 	public String getZip() {

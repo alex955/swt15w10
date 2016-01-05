@@ -262,8 +262,12 @@ public class ArticleController {
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
 		
-		if(result.hasErrors())
+		if(result.hasErrors()){
+			System.out.println("FEHLER");
+			System.out.println(result.toString());
 			return "newArticle";
+		}
+
 
 		if (!((newArticleForm.getFile()).isEmpty())) {
             try {
