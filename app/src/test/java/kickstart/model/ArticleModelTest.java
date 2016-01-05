@@ -2,6 +2,8 @@ package kickstart.model;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDateTime;
+
 import org.junit.Test;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
@@ -19,22 +21,68 @@ public class ArticleModelTest extends AbstractIntegrationTests {
 	@Autowired ArticleRepo goodREPO;
 
     final Article article = new Article();
-	
+    final Article article2 = new Article("article2", "desc", "Testort", "Straße", -1, "01011", null, "kind");
+    final Article article3 = new Article("article3", "desc", null, "Testort", "Straße", 564, "212322", LocalDateTime.now(), "kind");
+    
+    @Test
+	public void constructorTest() {
+		assertFalse("Error", article == null);
+		assertFalse("Error", article2 == null);
+		assertFalse("Error", article3 == null);
+	}
+    
 	@Test
 	public void initialisationTest() {
-		assertEquals("Error", article.getActivitydate(), null);
-	}
-
-	@Test
-	public void addArticle() {
-		goodREPO.save(article);
-		assertEquals("Error", goodREPO.count(), 13);
+		assertEquals("Error", null, article.getActivitydate());
+		assertEquals("Error","kind" , article2.getKind());
+		assertEquals("Error", "kind", article3.getKind());
 	}
 	
 	@Test
-	public void deleteArticle() {
+	public void findArticle() {
+		Article newArticle = new Article();
+		
+		goodREPO.save(newArticle);
+		Article result = goodREPO.findOne(newArticle.getId());
+		assertEquals("Error", result.getId(), newArticle.getId());
+		goodREPO.delete(newArticle);
+	}
+	
+	@Test
+	public void findArticlesByLocation() {
+		this.goodREPO.save(article2);
+		this.goodREPO.save(article3);
+		assertEquals("Error", 2, goodREPO.findByLocation("Testort").size());
+		this.goodREPO.delete(article2);
+		this.goodREPO.delete(article3);
+	}
+	
+	@Test
+	public void findArticlesByCreator() {
+		this.goodREPO.save(article2);
+		this.goodREPO.save(article3);
+		assertEquals("Error", 2, goodREPO.findByCreator(null).size());
+		this.goodREPO.delete(article2);
+		this.goodREPO.delete(article3);
+	}
+	
+	@Test
+	public void findArticlesByCategory() {
+		this.goodREPO.save(article2);
+		this.goodREPO.save(article3);
+		assertEquals("Error", 1, goodREPO.findByCategory(564).size());
+		this.goodREPO.delete(article2);
+		this.goodREPO.delete(article3);
+	}
+	
+	@Test
+	public void addAndDeleteArticle() {
+		long count = goodREPO.count();
+		goodREPO.save(article);
+		assertEquals("Error", goodREPO.count(), count+1);
+		
 		goodREPO.delete(article);
-		assertEquals("Error", goodREPO.count(), 12);
+		assertEquals("Error", goodREPO.count(), count);
 	}
 	
 	@Test
