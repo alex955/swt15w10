@@ -23,7 +23,7 @@
 	
 		
 	
-	<div class="row" name="Search">			
+	<div th:if="${FormAttributes} != null" class="row" name="Search">			
 		<div class="small-12 columns">
 			<p>&nbsp;</p>
 			<h4 class="header">Welche Tags sollen gesucht werden?</h4>
@@ -52,7 +52,7 @@
 			<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4" >
 				<li th:each="Article : ${anzeigen}">
 					<a th:href="@{/showArticle/}+${Article.id}">
-						<img th:src="@{/showPicture/}+${Article.id}"/>
+						<img th:src="@{/showPicture/}+${Article.id}" th:height="200" th:width="300"/>
 						<div class="panel" data-equalizer-watch="1">
 							<h5 th:text="${Article.title}">Item Name</h5>
 							<h5><small th:text="${Article.location}"></small></h5> 
