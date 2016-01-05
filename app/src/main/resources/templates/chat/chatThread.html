@@ -59,7 +59,7 @@ function showInputField(){
 	<div class="row">
 		<div th:include="chat/chatSideBar :: chatSideBar"></div>
 		<div class="large-8 small-12 columns">		
-			<h4 class="header">Nachrichten</h4>
+			<h4 class="header" th:text="#{chat.messages}">Nachrichten</h4>
 			<div class="row">
 				<div class="small-12 columns"> 					
 					<div th:each="var : ${conversation.content}">
@@ -88,8 +88,8 @@ function showInputField(){
 									<input type="text" value="click here!" id="datetimepicker_mask" th:field="*{content2}" />
 									<textarea id="freetextArea" rows="4" th:field="*{content2}"></textarea>
 								</div>
-								<div class="small-12 columns">
-									<button class="right button" type="submit">Nachricht senden</button>
+								<div class="small-12 columns" >
+									<button class="right button" type="submit" th:text="#{chat.send}">Nachricht senden</button>
 								</div>
 							</form>
 						</div>

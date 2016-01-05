@@ -31,12 +31,14 @@ public class User {
     private String city;
     private String zip;
     private String streetName;
-    private String houseNumber;
     private String addressAddition;
     private String country;
     private String language1;
     private String language2;
     private String language3;
+    private double  latitude;
+    private double longitude;
+   
     
     private boolean validated;
     private int hashcode;
@@ -60,7 +62,7 @@ public class User {
 
 	public User() {}
 
-    public User(long id, UserAccount userAccount, String lastName, String firstName, String country, String email, String city, String zip, String streetName, String houseNumber, String addressAddition, String language1, String language2, String language3) {
+    public User(long id, UserAccount userAccount, String lastName, String firstName, String country, String email, String city, String zip, String streetName, String addressAddition, String language1, String language2, String language3) {
 
         this.userAccount = userAccount;
         
@@ -73,7 +75,6 @@ public class User {
         this.city = city;
         this.zip = zip;
         this.streetName = streetName;
-        this.houseNumber = houseNumber;
         this.addressAddition = addressAddition;
         this.language1 = language1;
         this.language2 = language2;
@@ -89,7 +90,7 @@ public class User {
 		return "User [id=" + id + ", userAccount=" + userAccount + ", role=" + role + ", lastName=" + lastName
 				+ ", firstName=" + firstName + ", username=" + username + ", country=" + country + ", email=" + email
 				+ ", password=" + password + ", confirmPW=" + confirmPW + ", city=" + city + ", zip=" + zip
-				+ ", streetName=" + streetName + ", houseNumber=" + houseNumber + ", addressAddition=" + addressAddition
+				+ ", streetName=" + streetName + ", addressAddition=" + addressAddition
 				+ ", language1=" + language1 + ", language2=" + language2 + ", language3=" + language3 + ", validated="
 				+ validated + ", hashcode=" + hashcode + "]";
 	}
@@ -182,14 +183,6 @@ public class User {
         this.streetName = streetName;
     }
 
-    public String getHouseNumber() {
-        return houseNumber;
-    }
-
-    public void setHouseNumber(String houseNumber) {
-        this.houseNumber = houseNumber;
-    }
-
     public String getAddressAddition() {
         return addressAddition;
     }
@@ -237,6 +230,22 @@ public class User {
     public void setUserAccount(UserAccount userAccount) {
         this.userAccount = userAccount;
     }
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
 
 
 }

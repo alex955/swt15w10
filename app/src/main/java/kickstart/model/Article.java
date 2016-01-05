@@ -21,7 +21,6 @@ public class Article {
 	private String location;	
 	private String street;	
 	private long category;
-	private String number;
 	private String zip;
 	private String addressAddition;
 	@OneToOne
@@ -34,6 +33,8 @@ public class Article {
 	(cascade=CascadeType.ALL)
 	private List<Attribute> attributes=new LinkedList<Attribute>();
 	private String kind;
+	private double longitude;
+	private double latitude;
 
 
 	public Article() {
@@ -41,7 +42,7 @@ public class Article {
 	}
 
 	public Article(String title, String description, Picture picture, String location, String street,
-			long category, String number, String zip, User creator, String kind) {
+			long category, String zip, User creator, String kind) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -49,7 +50,6 @@ public class Article {
 		this.location = location;
 		this.street = street;
 		this.category = category;
-		this.number = number;
 		this.zip = zip;
 		this.creationdate = LocalDateTime.now();
 		this.creator = creator;
@@ -58,14 +58,13 @@ public class Article {
 	
 	//constructor without Picture
 		public Article(String title, String description, String location, String street,
-				long category, String number, String zip, User creator, String kind) {
+				long category, String zip, User creator, String kind) {
 			super();
 			this.title = title;
 			this.description = description;
 			this.location = location;
 			this.street = street;
 			this.category = category;
-			this.number = number;
 			this.zip = zip;
 			this.creationdate = LocalDateTime.now();
 			this.creator = creator;
@@ -74,7 +73,7 @@ public class Article {
 	
 	//constructor with and activitydate
 	public Article(String title, String description, Picture picture, String location, String street,
-			long category, String number, String zip, LocalDateTime activitydate, String kind) {
+			long category, String zip, LocalDateTime activitydate, String kind) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -82,7 +81,6 @@ public class Article {
 		this.location = location;
 		this.street = street;
 		this.category = category;
-		this.number = number;
 		this.zip = zip;
 		this.creationdate = LocalDateTime.now();
 		this.activitydate = activitydate;
@@ -94,7 +92,7 @@ public class Article {
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", title=" + title + ", description=" + description + ", location=" + location
-				+ ", street=" + street + ", category=" + category + ", number=" + number + ", zip=" + zip + ", creator="
+				+ ", street=" + street + ", category=" + category + ", zip=" + zip + ", creator="
 				+ creator + ", creationdate=" + creationdate.toString() + ", picture=" + picture + " , kind=" + kind ;
 	}
 
@@ -144,14 +142,6 @@ public class Article {
 
 	public void setCategory(long category) {
 		this.category = category;
-	}
-
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
 	}
 
 	public String getZip() {
@@ -222,6 +212,22 @@ public class Article {
 
 	public void setCreator(User creator) {
 		this.creator = creator;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+	public double getLatitude() {
+		return  latitude;
+	}
+
+	public void setLatitude(double  latitude) {
+		this. latitude =  latitude;
 	}
 
 

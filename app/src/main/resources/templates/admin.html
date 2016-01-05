@@ -31,7 +31,46 @@
 	<nav th:include="topbar :: topbar"></nav>
 
 	<div class="row">
-			<p>
+	
+		<p>
+		<h1>User-Management</h1>
+		<table border="1">
+			<tr>
+				<td>User ID</td>
+				<td>Role</td>
+				<td>Name</td>
+				<td>Username</td>
+				<td>Email</td>
+				<td>Adresse</td>
+				<td>Sprachen</td>
+				<td>Useraccount aktiviert?</td>
+				<td></td>
+				<td>Useraccount bearbeiten</td>
+				
+			</tr>
+			<tr th:each="user : ${registeredUsers}">
+				<td th:text="${user.id}">platzhalter</td>
+				<td th:text="${user.userAccount.roles}">platzhalter</td>
+				<td><span th:text="${user.lastName}"></span>,<span th:text="${user.firstName}"></span></td>
+				<td th:text="${user.userAccount.username}">platzhalter</td>
+				<td th:text="${user.email}">platzhalter</td>
+				<td><span th:text="${user.streetName}"></span></span>, <span th:text="${user.zip}"></span> <span th:text="${user.city}"></span></td>
+				<td><span th:text="${user.language1}"></span>, <span th:text="${user.language2}"></span>, <span th:text="${user.language3}"></span></td>
+				<td th:text="${user.userAccount.enabled} ? 'ja' : 'nein'">Aktivierungsstatus</td>
+				<td>
+					<a th:href="${user.userAccount.enabled} ? @{/admin/deactivateUser/{id}(id=${user.id})} : @{/admin/activateUser/{id}(id=${user.id})}" th:text="${user.userAccount.enabled} ? 'User deaktivieren' : 'User aktivieren'">
+					</a>
+				</td>
+								<td>
+					<a th:href="@{/admin/editUser/{id}(id=${user.id})}">User bearbeiten
+					</a>
+				</td>
+			</tr>
+		</table>
+	</p>
+	
+	
+	<p>
 	<h1>Root-Kategorien:</h1>
 	<table border="1">
 		<tr>
@@ -57,6 +96,8 @@
 	</table>
 	</p> 
 
+
+<!-- 
 	<p>
 	<h1>Root-Kategorie hinzufügen:</h1>
 
@@ -71,7 +112,7 @@
 		</p>
 	</form>
 	</p>
-	
+ -->	
 	
 	<p>
 	<h1>Statistik über Kategorien</h1>
@@ -89,42 +130,7 @@
 		</table>
 	</p>
 	
-	<p>
-		<h1>User-Management</h1>
-		<table border="1">
-			<tr>
-				<td>User ID</td>
-				<td>Role</td>
-				<td>Name</td>
-				<td>Username</td>
-				<td>Email</td>
-				<td>Adresse</td>
-				<td>Sprachen</td>
-				<td>Useraccount aktiviert?</td>
-				<td></td>
-				<td>Useraccount bearbeiten</td>
-				
-			</tr>
-			<tr th:each="user : ${registeredUsers}">
-				<td th:text="${user.id}">platzhalter</td>
-				<td th:text="${user.userAccount.roles}">platzhalter</td>
-				<td><span th:text="${user.lastName}"></span>,<span th:text="${user.firstName}"></span></td>
-				<td th:text="${user.userAccount.username}">platzhalter</td>
-				<td th:text="${user.email}">platzhalter</td>
-				<td><span th:text="${user.streetName}"></span> <span th:text="${user.houseNumber}"></span>, <span th:text="${user.zip}"></span> <span th:text="${user.city}"></span></td>
-				<td><span th:text="${user.language1}"></span>, <span th:text="${user.language2}"></span>, <span th:text="${user.language3}"></span></td>
-				<td th:text="${user.userAccount.enabled} ? 'ja' : 'nein'">Aktivierungsstatus</td>
-				<td>
-					<a th:href="${user.userAccount.enabled} ? @{/admin/deactivateUser/{id}(id=${user.id})} : @{/admin/activateUser/{id}(id=${user.id})}" th:text="${user.userAccount.enabled} ? 'User deaktivieren' : 'User aktivieren'">
-					</a>
-				</td>
-								<td>
-					<a th:href="@{/admin/editUser/{id}(id=${user.id})}">User bearbeiten
-					</a>
-				</td>
-			</tr>
-		</table>
-	</p>
+
 	</div>
 
 	<footer th:include="footer :: footer"></footer>

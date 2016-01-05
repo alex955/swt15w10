@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,11 @@ public class Category {
     private String name;
     private boolean root;
     private long predecessor;
+    /* attributes which a category has */
+    @OneToMany
+    (cascade=CascadeType.ALL)
+    private List<Attribute> attributes=new LinkedList<Attribute>();
+       
     
 
     public Category() {
@@ -35,6 +41,21 @@ public class Category {
         	this.setPredecessor(pre);
         }
     }
+    
+    public Category(String name, long pre,LinkedList<Attribute> attributes) {
+   	 this.name = name;
+        
+        if(pre == -1){
+        	this.setRoot(true);
+        }else{
+        	this.setRoot(false);
+        	this.setPredecessor(pre);
+        }
+        
+        this.attributes=attributes;
+   	
+   	
+   } 
     
     public String getName(){
     	return this.name;
@@ -71,6 +92,19 @@ public class Category {
 
 	public void setRoot(boolean root) {
 		this.root = root;
+	}
+	
+	public List<Attribute> getAttributes() {
+		return attributes;
+	}
+		 
+	public void setAttributes(List<Attribute> attributes) {
+		this.attributes = attributes;
+	}
+	
+	public void addAttribute(Attribute attribute){
+		this.attributes.add(attribute);
+		System.out.println(attribute.toString());
 	}
 
 }

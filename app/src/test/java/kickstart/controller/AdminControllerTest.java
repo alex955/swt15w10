@@ -1,25 +1,23 @@
 package kickstart.controller;
 
 import static org.junit.Assert.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import org.junit.Test;
-import org.salespointframework.useraccount.Role;
-import org.salespointframework.useraccount.UserAccount;
-import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import kickstart.model.ArticleRepo;
-import kickstart.model.CategoryRepo;
-import kickstart.model.User;
 import kickstart.model.UserRepository;
+import kickstart.AbstractWebIntegrationTests;
+import kickstart.controller.AdminController;
 
-public class AdminControllerTest {
+public class AdminControllerTest extends AbstractWebIntegrationTests{
 
 	@Autowired UserRepository userRepository;
-
-    final Role refugee = new Role("ROLE_REFUGEE");
-    final Role volunteer = new Role("ROLE_VOLUNTEER");
-    final Role admin = new Role("ROLE_ADMIN");
+	@Autowired AdminController controller;
 	
 	@Test
 	public void test() {
@@ -35,6 +33,33 @@ public class AdminControllerTest {
         //EMailController.validation(Integer.toString(user.getHashcode()));
 		
         assertEquals("Error",true,true);
+	}
+	
+	@Test
+	public void returnsModelAndViewForSecuredUriAfterAuthentication() throws Exception {
+
+		mvc.perform(get("/admin").with(user("admin1").roles("ADMIN"))).//
+				andExpect(status().isOk()).//
+				andExpect(view().name("admin")).//
+				andExpect(model().attributeExists("categories", "categoriesAdmin", "newCategory", "rootCount", "subCount", "totalCount", "registeredUsers"));
+	}
+	
+	@Test
+	public void returnsModelAndViewForSecuredUriAfterAuthentication2() throws Exception {
+
+		mvc.perform(get("/admin/inspectCategory/2").with(user("admin1").roles("ADMIN"))).//
+				andExpect(status().isOk()).//
+				andExpect(view().name("adminSubcategory")).//
+				andExpect(model().attributeExists("categories", "category", "subcategories", "newCategory"));
+	}
+	
+	@Test
+	public void returnsModelAndViewForSecuredUriAfterAuthentication3() throws Exception {
+
+		mvc.perform(get("/admin/editUser/2").with(user("admin1").roles("ADMIN"))).//
+				andExpect(status().isOk()).//
+				andExpect(view().name("admin/adminEditUser")).//
+				andExpect(model().attributeExists("categories", "user"));
 	}
 	
 	

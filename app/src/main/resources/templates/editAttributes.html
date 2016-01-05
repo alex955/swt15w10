@@ -1,0 +1,34 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Refugee</title>
+<link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
+</head>
+
+<body>
+
+	<nav th:include="topbar :: topbar"></nav>
+
+	<div class="row">
+		<div class="large-12 columns" th:if="${userId} == ${editArticle.creator.id} or ${isAdminLoggedIn} == true">
+			<p>&nbsp;</p>
+			<h4 class="header">Tags bearbeiten</h4>
+			<form action="#" th:action="@{/editAttributes/{id}(id=${editArticle.id})}" th:object="${NewAttributes}" method="post">
+				<div th:each="Attribute : ${FormAttributes}" > 
+					<label th:text="${Attribute.name}"></label>
+					<select th:field="*{choosenTags}">
+		  				<option th:each="String : ${Attribute.tags}" th:value="${String}" th:text="${String}"></option>
+					</select>
+				</div>
+				<button class="right button" type="submit" th:href="@{/}">Tags speichern</button>
+			</form>
+		</div>
+	</div>
+
+	<footer th:include="footer :: footer"></footer>
+
+</body>
+</html>

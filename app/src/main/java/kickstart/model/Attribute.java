@@ -62,5 +62,18 @@ public class Attribute {
 		return id+" "+name+" "+text;
 	}
 
+
+	@Override
+	public boolean equals(Object obj) {
+		 Attribute att = (Attribute) obj;
+		if (att.getName().equals(this.name) && att.getTags().equals(this.tags)) return true; else return false;
+	}
+
+
+	
+	
+	
+	
+
 	
 }

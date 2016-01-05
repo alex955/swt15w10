@@ -129,9 +129,6 @@ public class SettingsController {
         if(!userSettingsForm.getNewStreetName().isEmpty())
             user.setStreetName(userSettingsForm.getNewStreetName());
 
-        if(!userSettingsForm.getNewHouseNumber().isEmpty())
-            user.setHouseNumber(userSettingsForm.getNewHouseNumber());
-
         if(!userSettingsForm.getNewAddressAddition().isEmpty())
             user.setAddressAddition(userSettingsForm.getNewAddressAddition());
 

@@ -15,7 +15,7 @@
 	<div class="row">
 		<div class="large-12 columns">
 			<p>&nbsp;</p>
-			<h5 class="header">Neue Nachricht</h5>
+			<h5 class="header" th:text="#{chat.newmessage}">Neue Nachricht</h5>
 			<form action="#" th:action="@{/chat/processNewConversation/{id}(id=${article.id})}" th:object="${stringInForm}" method="post" enctype="multipart/form-data">
 				<div class="panel">
 					<label th:text="'Mit User ' + ${article.creator.username} + ' wegen ' + ${article.title} + ' in ' + ${article.zip} + ',' + ${article.location} + ' Kontakt aufnehmen'">Kontakt</label>
@@ -25,7 +25,7 @@
 							<p>
 								<select th:field="*{content}">
 									<option th:each="possibleMessage : ${possibleMessages}"
-										th:value="${possibleMessage.key}" th:text="${possibleMessage.value}">.</option>
+										th:value="${possibleMessage.key}" th:text="'#' + ${possibleMessage.value}">.</option>
 								</select>
 							</p>
 							<p>
@@ -34,7 +34,7 @@
 						</div>
 					</div>
 				</div>
-				<button class="right button" type="submit">Nachricht senden</button>
+				<button class="right button" type="submit" th:text="#{chat.send}">Nachricht senden</button>
 			</form>
 		</div>
 	</div>

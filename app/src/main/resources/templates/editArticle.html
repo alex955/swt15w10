@@ -15,7 +15,7 @@
 	<div class="row">
 		<div class="large-12 columns" th:if="${userId} == ${Article.creator.id} or ${isAdminLoggedIn} == true">
 			<p>&nbsp;</p>
-			<h4 class="header">Angebot bearbeiten</h4>
+			<h4 class="header" th:text="#{editarticle.editarticle}">Angebot bearbeiten</h4>
 			<form action="#" th:action="@{/editArticle/{id}(id=${Article.id})}" th:object="${NewArticleForm}" method="post" enctype="multipart/form-data">
 				<div class="panel">
 					<div class="row">
@@ -35,7 +35,7 @@
 					</div>
 					<div class="row">
 						<div class="show-for-medium-up">
-							<div class="small-4 columns">Kategorie:</div>
+							<div class="small-4 columns" th:text="#{newarticle.category}">Kategorie:</div>
 						</div>
 						<div class="medium-8 small-12 columns">
 							<select name="categoryId">
@@ -46,7 +46,7 @@
 					<hr />
 					<div class="row">
 						<div class="show-for-medium-up">
-							<div class="small-4 columns">Titel der Anzeige</div>
+							<div class="small-4 columns" th:text="#{newarticle.offertitle}">Titel der Anzeige</div>
 						</div>
 						<div class="medium-8 small-12 columns">
 							<label ><font color="red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"> ERROR MESSAGE</font></label>
@@ -55,14 +55,14 @@
 					</div>
 					<div class="row">
 						<div class="show-for-medium-up">
-							<div class="small-4 columns">Beschreibung</div>
+							<div class="small-4 columns" th:text="#{newarticle.description}">Beschreibung</div>
 						</div>
 						<div class="medium-8 small-12 columns">
 							<textarea name="description" rows="4" th:text="${Article.description}"></textarea>
 						</div>
 					</div>
 					<div class="row">
-						<div class="medium-4 small-2 columns">Bilder</div>
+						<div class="medium-4 small-2 columns" th:text="#{newarticle.pictures}">Bilder</div>
 						<div class="medium-8 small-10 columns">
 							<a><input type="file" name="file"/></a>
 						</div>
@@ -70,7 +70,7 @@
 					<hr />
 					<div class="row">
 						<div class="show-for-medium-up">
-							<div class="small-4 columns">Stadt</div>
+							<div class="small-4 columns" th:text="#{newarticle.city}">Stadt</div>
 						</div>
 						<div class="small-8 columns">										
 							<input type="text" name="city" placeholder="Stadt" th:value="${Article.location}"/>
@@ -78,7 +78,7 @@
 					</div>
 					<div class="row">
 						<div class="show-for-medium-up">
-							<div class="small-4 columns">PLZ</div>
+							<div class="small-4 columns" th:text="#{newarticle.zipcode}">PLZ</div>
 						</div>
 						<div class="medium-8 small-12 columns">											
 							<input type="text" name="zip" placeholder="PLZ" th:value="${Article.zip}"/>
@@ -86,16 +86,15 @@
 					</div>
 					<div class="row">
 						<div class="show-for-medium-up">
-							<div class="small-4 columns">Straße, Hausnummer, Addresszusatz</div>
+							<div class="small-4 columns" th:text="#{usersettings.address}">Straße, Addresszusatz</div>
 						</div>
 						<div class="medium-8 small-12 columns">
 							<input type="text" name="streetName" placeholder="Straßenname" th:value="${Article.street}"/>
-                            <input type="text" name="houseNumber" placeholder="Hausnummmer" th:value="${Article.number}"/>
 							<input type="text" name="addressAddition" placeholder="(optional)" />
 						</div>
 					</div>						
 				</div>
-				<button class="right button" type="submit" th:href="@{/}">Angebot erstellen</button>
+				<button class="right button" type="submit" th:href="@{/}" th:text="#{editarticle.editarticle}">Angebot bearbeiten</button>
 			</form>
 		</div>
 	</div>
