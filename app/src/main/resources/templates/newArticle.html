@@ -31,11 +31,11 @@ function checkedArticle(){
 	<div class="row">
 		<div class="large-12 columns">
 			<p>&nbsp;</p>
-			<h4 class="header">Angebot einstellen</h4>
+			<h4 class="header" th:text="#{newarticle.createarticle}">Angebot einstellen</h4>
 			<form action="#" th:action="@{/newArticle}" th:object="${NewArticleForm}" method="post" enctype="multipart/form-data">
 				<div class="panel">
 					<div class="row">
-						<div class="medium-4 mall-12 columns">Möchten Sie eine Aktivität (z.b. Sprachkurs, Stadtausflug, Bowlingspiel) oder einen Artikel erstellen?</div>
+						<div class="medium-4 mall-12 columns" th:text="#{newarticle.newarticlequestion}">Möchten Sie eine Aktivität (z.b. Sprachkurs, Stadtausflug, Bowlingspiel) oder einen Artikel erstellen?</div>
 						<div class="medium-8 small-12 columns">
 							<label><font color="red" th:if="${#fields.hasErrors('kind')}" th:errors="*{kind}"> ERROR MESSAGE</font></label>
 							<div class="chooseRole">
@@ -50,7 +50,7 @@ function checkedArticle(){
 					<br></br>
 					<div class="row" id="chooseCategory">
 						<div class="show-for-medium-up">
-							<div class="small-4 columns">Kategorie:</div>
+							<div class="small-4 columns" th:text="#{newarticle.category}">Kategorie:</div>
 						</div>
 						<div class="medium-8 small-12 columns">
 							<select name="categoryId" id="categoryId">
@@ -66,7 +66,7 @@ function checkedArticle(){
 					<hr />
 					<div class="row">
 						<div class="show-for-medium-up">
-							<div class="small-4 columns">Titel der Anzeige</div>
+							<div class="small-4 columns" th:text="#{newarticle.offertitle}">Titel der Anzeige</div>
 						</div>
 						<div class="medium-8 small-12 columns">
 							<label ><font color="red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"> ERROR MESSAGE</font></label>
@@ -75,14 +75,14 @@ function checkedArticle(){
 					</div>
 					<div class="row">
 						<div class="show-for-medium-up">
-							<div class="small-4 columns">Beschreibung</div>
+							<div class="small-4 columns" th:text="#{newarticle.description}">Beschreibung</div>
 						</div>
 						<div class="medium-8 small-12 columns">
 							<textarea name="description" rows="4" placeholder="Beschreibung"></textarea>
 						</div>
 					</div>
 					<div class="row">
-						<div class="medium-4 small-2 columns">Bilder</div>
+						<div class="medium-4 small-2 columns" th:text="#{newarticle.pictures}">Bilder</div>
 						<div class="medium-8 small-10 columns">
 							<a><input type="file" name="file"/></a>
 						</div>
@@ -90,7 +90,7 @@ function checkedArticle(){
 					<hr />
 					<div class="row">
 						<div class="show-for-medium-up">
-							<div class="small-4 columns">Stadt</div>
+							<div class="small-4 columns" th:text="#{newarticle.city}">Stadt</div>
 						</div>
 						<div class="medium-8 small-12 columns">										
 							<input type="text" name="city" id="city" placeholder="Stadt" th:value="${creator.city}" onchange="getCoords()"/>
@@ -98,7 +98,7 @@ function checkedArticle(){
 					</div>
 					<div class="row">
 						<div class="show-for-medium-up">
-							<div class="small-4 columns">PLZ</div>
+							<div class="small-4 columns" th:text="#{newarticle.zipcode}">PLZ</div>
 						</div>
 						<div class="medium-8 small-12 columns">										
 							<input type="text" name="zip" id="zip" placeholder="PLZ" th:value="${creator.zip}" onchange="getCoords()"/>
@@ -106,7 +106,7 @@ function checkedArticle(){
 					</div>
 					<div class="row">
 						<div class="show-for-medium-up">
-							<div class="small-4 columns">Straße, Hausnummer, Addresszusatz</div>
+							<div class="small-4 columns" th:text="#{usersettings.address}">Straße, Hausnummer, Addresszusatz</div>
 						</div>
 						<div class="medium-8 small-12 columns">
 							<input type="text" name="streetName" id="street" placeholder="Straßenname" th:value="${creator.streetName}" onchange="getCoords()"/>
@@ -115,9 +115,13 @@ function checkedArticle(){
 						</div>
 					</div>					
 				</div>
-		 	<input type="hidden" name="latitude" id="latitude" />
+
+		 		<input type="hidden" name="latitude" id="latitude" />
 				<input type="hidden" name="longitude" id="longitude" />  
-				<button class="right button" type="submit" th:href="@{/}">Angebot erstellen</button>
+				
+
+				<button class="right button" type="submit" th:href="@{/}" th:text="#{newarticle.createoffer}">Angebot erstellen</button>
+
 			</form>
 			
 				
