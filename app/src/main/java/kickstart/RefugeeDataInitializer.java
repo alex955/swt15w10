@@ -106,28 +106,121 @@ public class RefugeeDataInitializer implements DataInitializer {
     }
 
     public void initializeCategories(){ 
-    	Category cat = new Category("Möbel", -1);
-    	LinkedList<String> tags1 = new LinkedList<String>();
-        tags1.add("");  tags1.add("Gebraucht");  tags1.add("Neu");  
-    	Attribute att = new Attribute("Zustand",tags1);
-    	LinkedList<String> tags2 = new LinkedList<String>();
-    	tags2.add(""); tags2.add("Blau"); tags2.add("Gelb"); tags2.add("Rot");
-    	Attribute att2 = new Attribute("Farbe",tags2);
-    	cat.addAttribute(att);
-    	cat.addAttribute(att2);
-        categories.save(cat);
+//    	Category cat = new Category("Möbel", -1);
+//    	LinkedList<String> tags1 = new LinkedList<String>();
+//        tags1.add("");  tags1.add("Gebraucht");  tags1.add("Neu");  
+//    	Attribute att = new Attribute("Zustand",tags1);
+//    	LinkedList<String> tags2 = new LinkedList<String>();
+//    	tags2.add(""); tags2.add("Blau"); tags2.add("Gelb"); tags2.add("Rot");
+//    	Attribute att2 = new Attribute("Farbe",tags2);
+//    	cat.addAttribute(att);
+//    	cat.addAttribute(att2);
+//        categories.save(cat);
+//
+//        categories.save(new Category("Badmöbel", 1));
+//        categories.save(new Category("Küchenmöbel", 1));
+//        categories.save(new Category("Bücher", -1));
+//        categories.save(new Category("Sprachkurs", 4));
+//        categories.save(new Category("Romane", 4));
+//        categories.save(new Category("Survivalguides", 4));
+//        categories.save(new Category("Multimedia & Elektronik", -1));
+//        categories.save(new Category("Handy", 8));
+//        categories.save(new Category("Computer", 8));
+//        categories.save(new Category("Mode", -1));
+//        categories.save(new Category("Kurse", -1));
+    	
+        Category cat1 = new Category("Fahrrad", -1);
+        categories.save(cat1);
+        
+        Category cat2 = new Category("Familie, Kind & Wohnung", -1); 
+        		Category cat2_1 = new Category("Babybekleidung", 2);
+        		Category cat2_2 = new Category("Kinderwagen", 2);
+        		Category cat2_3 = new Category("Kinderbekleidung", 2);
+        		Category cat2_4 = new Category("Möbel", 2);
+        		Category cat2_5 = new Category("Spielzeug & Spiele", 2);
+        categories.save(cat2);
+        categories.save(cat2_1);	
+        categories.save(cat2_2);	
+        categories.save(cat2_3);	
+        categories.save(cat2_4);	
+        categories.save(cat2_5);	
 
-        categories.save(new Category("Badmöbel", 1));
-        categories.save(new Category("Küchenmöbel", 1));
-        categories.save(new Category("Bücher", -1));
-        categories.save(new Category("Sprachkurs", 4));
-        categories.save(new Category("Romane", 4));
-        categories.save(new Category("Survivalguides", 4));
-        categories.save(new Category("Multimedia & Elektronik", -1));
-        categories.save(new Category("Handy", 8));
-        categories.save(new Category("Computer", 8));
-        categories.save(new Category("Mode", -1));
-        categories.save(new Category("Kurse", -1));
+        Category cat3 = new Category("Hobby", -1);
+        categories.save(cat3);
+
+    	Category cat4 = new Category("Haus & Garten Accesoires", -1);
+        		Category cat4_1 = new Category("Dekoration", 9);
+        		Category cat4_2 = new Category("Garten & Pflanzen", 9);
+        		Category cat4_3 = new Category("Heimwerken", 9);
+        		Category cat4_4 = new Category("Bad, Küche & Esszimmer", 9);
+        		Category cat4_5 = new Category("Wohnzimmer", 9);
+        categories.save(cat4);
+        categories.save(cat4_1);
+        categories.save(cat4_2);
+        categories.save(cat4_3);
+        categories.save(cat4_4);
+        categories.save(cat4_5);
+        		
+        		
+        Category cat5 = new Category("Kleidung, Mode & Beauty", -1);
+        		Category cat5_1 = new Category("Damenbekleidung", 15);
+        		Category cat5_2 = new Category("Damenschuhe", 15);
+        		Category cat5_3 = new Category("Herrenbekleidung", 15);
+        		Category cat5_4 = new Category("Herrenschuhe", 15);
+        		Category cat5_5 = new Category("Schmuck & Accessoires", 15);
+        		Category cat5_6 = new Category("Taschen", 15);
+        categories.save(cat5);		
+        categories.save(cat5_1);
+        categories.save(cat5_2);
+        categories.save(cat5_3);
+        categories.save(cat5_4);
+        categories.save(cat5_5);
+        categories.save(cat5_6);
+        		
+        Category cat6 = new Category("Multimedia & Elektronik", -1);
+        		Category cat6_1 = new Category("Audio & Hifi", 22);
+        		Category cat6_2 = new Category("Telefon", 22);
+        		Category cat6_3 = new Category("Foto", 22);
+        		Category cat6_4 = new Category("TV", 22);
+        categories.save(cat6);
+        categories.save(cat6_1);
+        categories.save(cat6_2);
+        categories.save(cat6_3);
+        categories.save(cat6_4);
+        		
+        Category cat7 = new Category("Musik, Film & Bücher ", -1);
+        		Category cat7_1 = new Category("Bücher", 27);
+        		Category cat7_2 = new Category("Comics", 27);
+        		Category cat7_3 = new Category("Fachliteratur", 27);
+        		Category cat7_4 = new Category("Filme", 27);
+        		Category cat7_5 = new Category("Musik & Musikinstrumente", 27);
+        		Category cat7_6 = new Category("Zeitschriften", 27);
+        		Category cat7_7 = new Category("Verschiedenes", 27);
+        categories.save(cat7);
+        categories.save(cat7_1);
+        categories.save(cat7_2);
+        categories.save(cat7_3);
+        categories.save(cat7_4);
+        categories.save(cat7_5);
+        categories.save(cat7_6);
+        categories.save(cat7_7);
+        		
+        Category cat8 = new Category("Unterricht, Kurse & Aktivitäten", -1);
+//        		Category cat8_1 = new Category("Backen & Kochen", 35);
+//        		Category cat8_2 = new Category("Computer", 35);
+//        		Category cat8_3 = new Category("Sprachen", 35);
+//        		Category cat8_4 = new Category("Kunst & Gestalten", 35);
+//        		Category cat8_5 = new Category("Musik & Gesang", 35);
+//        		Category cat8_6 = new Category("Sport, Tanzen & Fitness", 35);
+//        		Category cat8_7 = new Category("Anderes", 35);
+        categories.save(cat8);	
+//        categories.save(cat8_1);
+//        categories.save(cat8_2);
+//        categories.save(cat8_3);
+//        categories.save(cat8_4);
+//        categories.save(cat8_5);
+//        categories.save(cat8_6);
+//        categories.save(cat8_7);
     }
 
     public void initializeGoods(UserAccountManager userAccountManager, UserRepository userRepository){

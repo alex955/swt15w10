@@ -31,65 +31,8 @@
 	<nav th:include="topbar :: topbar"></nav>
 
 	<div class="row">
-			<p>
-	<h1>Root-Kategorien:</h1>
-	<table border="1">
-		<tr>
-			<td><b>Name</b></td>
-			<td><b>ID</b></td>
-			<td><b>Subkategorien eine Ebene unter Root</b></td>
-			<td></td>
-			<td><b>Inspect</b></td>
-		</tr>
-		<tr th:each="category : ${categoriesAdmin}">
-			<td th:text="${category.cat.name}">platzhalter</td>
-			<td th:text="${category.cat.id}">platzhalter</td>
-			<td>
-				<p th:each="subcategory : ${category.subcats}"><a th:href="@{/admin/inspectCategory/{id}(id=${subcategory.id})}"><span th:text="${subcategory.name}">Subkategorien anschauen</span></a></p>
-			</td>
-			<td>
-				  <a th:href="@{/admin/deleteCategory/{id}(id=${category.cat.id})}"><span>Kategorie löschen</span></a>
-			</td>
-						<td>
-				  <a th:href="@{/admin/inspectCategory/{id}(id=${category.cat.id})}"><span>Subkategorien anschauen</span></a>
-			</td>
-		</tr>
-	</table>
-	</p> 
-
-	<p>
-	<h1>Root-Kategorie hinzufügen:</h1>
-
-	<form action="#" th:action="@{/admin/addRootCat}" th:object="${newCategory}"
-		method="post" name="form1" onsubmit="return required()">
+	
 		<p>
-			Name der neuen Kategorie: <input type="text" th:field="*{name}" />
-		</p>
-		<p>
-			<input type="submit" value="Submit" /> <input type="reset"
-				value="Reset" />
-		</p>
-	</form>
-	</p>
-	
-	
-	<p>
-	<h1>Statistik über Kategorien</h1>
-		<table border="1">
-			<tr>
-				<td>Summe aller Kategorien</td>
-				<td>davon Root-Kategorien</td>
-				<td>davon Sub-Kategorien</td>
-			</tr>
-			<tr>
-				<td><span th:text="${totalCount}">#</span></td>
-				<td><span th:text="${rootCount}">#</span></td>
-				<td><span th:text="${subCount}">#</span></td>
-			</tr>
-		</table>
-	</p>
-	
-	<p>
 		<h1>User-Management</h1>
 		<table border="1">
 			<tr>
@@ -125,6 +68,69 @@
 			</tr>
 		</table>
 	</p>
+	
+	
+	<p>
+	<h1>Root-Kategorien:</h1>
+	<table border="1">
+		<tr>
+			<td><b>Name</b></td>
+			<td><b>ID</b></td>
+			<td><b>Subkategorien eine Ebene unter Root</b></td>
+			<td></td>
+			<td><b>Inspect</b></td>
+		</tr>
+		<tr th:each="category : ${categoriesAdmin}">
+			<td th:text="${category.cat.name}">platzhalter</td>
+			<td th:text="${category.cat.id}">platzhalter</td>
+			<td>
+				<p th:each="subcategory : ${category.subcats}"><a th:href="@{/admin/inspectCategory/{id}(id=${subcategory.id})}"><span th:text="${subcategory.name}">Subkategorien anschauen</span></a></p>
+			</td>
+			<td>
+				  <a th:href="@{/admin/deleteCategory/{id}(id=${category.cat.id})}"><span>Kategorie löschen</span></a>
+			</td>
+						<td>
+				  <a th:href="@{/admin/inspectCategory/{id}(id=${category.cat.id})}"><span>Subkategorien anschauen</span></a>
+			</td>
+		</tr>
+	</table>
+	</p> 
+
+
+<!-- 
+	<p>
+	<h1>Root-Kategorie hinzufügen:</h1>
+
+	<form action="#" th:action="@{/admin/addRootCat}" th:object="${newCategory}"
+		method="post" name="form1" onsubmit="return required()">
+		<p>
+			Name der neuen Kategorie: <input type="text" th:field="*{name}" />
+		</p>
+		<p>
+			<input type="submit" value="Submit" /> <input type="reset"
+				value="Reset" />
+		</p>
+	</form>
+	</p>
+ -->	
+	
+	<p>
+	<h1>Statistik über Kategorien</h1>
+		<table border="1">
+			<tr>
+				<td>Summe aller Kategorien</td>
+				<td>davon Root-Kategorien</td>
+				<td>davon Sub-Kategorien</td>
+			</tr>
+			<tr>
+				<td><span th:text="${totalCount}">#</span></td>
+				<td><span th:text="${rootCount}">#</span></td>
+				<td><span th:text="${subCount}">#</span></td>
+			</tr>
+		</table>
+	</p>
+	
+
 	</div>
 
 	<footer th:include="footer :: footer"></footer>
