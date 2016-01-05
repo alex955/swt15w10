@@ -295,7 +295,9 @@ public class ArticleController {
 				Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename(), creator);
 				pictureRepo.save(picture);
 				Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), picture, newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getHouseNumber(), newArticleForm.getZip(), creator, newArticleForm.getKind());
-        		articleRepo.save(article);
+				article.setLatitude(newArticleForm.getLatitude()); 
+	    		article.setLongitude(newArticleForm.getLongitude());
+				articleRepo.save(article);
         		System.out.println(article);
         		
         		System.out.println("You successfully uploaded file=" + newArticleForm.getTitle());
@@ -309,7 +311,9 @@ public class ArticleController {
 
 			//save article without Picture
 			Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getHouseNumber(), newArticleForm.getZip(),creator, newArticleForm.getKind());
-    		articleRepo.save(article);
+    		article.setLatitude(newArticleForm.getLatitude()); 
+    		article.setLongitude(newArticleForm.getLongitude());
+			articleRepo.save(article);
     		System.out.println(article);
             return ("redirect:/editAttributes/"+article.getId());
         }

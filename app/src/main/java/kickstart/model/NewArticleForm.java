@@ -21,6 +21,8 @@ public class NewArticleForm {
     private String houseNumber;
     private String adressAddition;
     private MultipartFile file;
+    private double longitude;
+    private double latitude;
 
 	@NotEmpty(message = "Wählen Sie die Art des Angebots.")
     private String kind;
@@ -85,5 +87,18 @@ public class NewArticleForm {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+	public double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+	
     
 }

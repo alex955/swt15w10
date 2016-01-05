@@ -37,6 +37,9 @@ public class User {
     private String language1;
     private String language2;
     private String language3;
+    private double  latitude;
+    private double longitude;
+   
     
     private boolean validated;
     private int hashcode;
@@ -237,6 +240,24 @@ public class User {
     public void setUserAccount(UserAccount userAccount) {
         this.userAccount = userAccount;
     }
+
+	
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
 
 
 }
