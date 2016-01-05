@@ -19,7 +19,7 @@
 			<form action="#" th:action="@{/editArticle/{id}(id=${Article.id})}" th:object="${NewArticleForm}" method="post" enctype="multipart/form-data">
 				<div class="panel">
 					<div class="row">
-						<div class="medium-4 mall-12 columns">Art:</div>
+						<div class="medium-4 mall-12 columns" th:text="#{editArticle.kind}">Art:</div>
 						<div class="medium-8 small-12 columns">
 							<font color="red" th:if="${#fields.hasErrors('kind')}" th:errors="*{kind}"> ERROR MESSAGE</font>
 							<div class="chooseRole">
@@ -55,7 +55,7 @@
 					</div>
 					<div class="row">
 						<div class="show-for-medium-up">
-							<div class="small-4 columns" th:text="#{newarticle.description}">Beschreibung</div>
+							<div class="small-4 columns" th:text="#{newarticle.description}" th:placeholder="#{newarticle.description}">Beschreibung</div>
 						</div>
 						<div class="medium-8 small-12 columns">
 							<textarea name="description" rows="4" th:text="${Article.description}"></textarea>

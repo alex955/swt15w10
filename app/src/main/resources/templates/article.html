@@ -82,7 +82,7 @@
 					<div class="small-8 columns">
 						<div class="row">
 							<div class="small-12 columns">
-								<h5 class="subheader">Beschreibung</h5>
+								<h5 class="subheader" th:text="#{article.description}">Beschreibung</h5>
 							</div>
 							<hr></hr>
 						</div>
@@ -106,30 +106,29 @@
 				</div>				
 			</div>
 			<div th:if="${isAdminLoggedIn} == true" class="small-6 large-4 columns">
-								<p>Longitude:</p>
-							</div>
-							<div class="small-6 large-8 columns">
-								<div>
-									<p></p>
-									<p th:if="${isAdminLoggedIn} == true" th:text="${Article.longitude}"></p>
-								</div>
-							</div>
+				<p>Longitude:</p>
+			</div>
+			<div class="small-6 large-8 columns">
+				<div>
+					<p></p>
+					<p th:if="${isAdminLoggedIn} == true" th:text="${Article.longitude}"></p>
+				</div>
+			</div>
 								
 			<div th:if="${isAdminLoggedIn} == true" class="small-6 large-4 columns">
-								<p>Latiude</p>
-							</div>
-							<div class="small-6 large-8 columns">
-								<div>
-									<p></p>
-									<p th:if="${isAdminLoggedIn} == true" th:text="${Article.latitude}"></p>
-								</div>
-							</div>
-												
-								
+				<p>Latiude</p>
+			</div>
+			<div class="small-6 large-8 columns">
+				<div>
+					<p></p>
+					<p th:if="${isAdminLoggedIn} == true" th:text="${Article.latitude}"></p>
+				</div>
+			</div>
+																			
 			<ul class="right button-group">
-			<li><a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/editAttributes/}+${Article.id}" class="small button">Tags bearbeiten</a></li>
-				<li><a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/editArticle/}+${Article.id}" class="small button">Artikel bearbeiten</a></li>
-				<li><a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/deleteArticle/}+${Article.id}" class="small alert button">Artikel löschen</a></li>
+			<li><a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/editAttributes/}+${Article.id}" class="small button" th:text="#{article.editTags}">Tags bearbeiten</a></li>
+				<li><a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/editArticle/}+${Article.id}" class="small button" th:text="#{article.editOffer}">Artikel bearbeiten</a></li>
+				<li><a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/deleteArticle/}+${Article.id}" class="small alert button" th:text="#{article.deleteOffer}">Artikel löschen</a></li>
 			</ul>
 		</div>
 	</div>

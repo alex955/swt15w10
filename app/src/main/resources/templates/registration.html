@@ -405,15 +405,21 @@
 							</div>
 							<div class="row">
 								<div class="show-for-medium-up">
-									<div class="large-5 medium-3 columns" th:text="#{registration.address}">Straße, Adresszusatz</div>
+									<div class="large-5 medium-3 columns" th:text="#{registration.streetHousnumber}">Straße, Hausnummer</div>
 								</div>
 								<div class="large-7 medium-9 small-12 columns">
 									<label>
-										
-										<input type="text" name="streetName" th:placeholder="#{registration.street}" th:field ="*{streetName}"/>
-									</label>
-									<label>
+										<input type="text" name="streetName" th:placeholder="#{registration.streetHousnumber}" th:field ="*{streetName}"/>
 										<font color="red" th:if="${#fields.hasErrors('addressAddition')}" th:errors="*{addressAddition}"> ERROR MESSAGE </font>
+									</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="show-for-medium-up">
+									<div class="large-5 medium-3 columns" th:text="#{registration.addressAddition}">Adresszusatz</div>
+								</div>
+								<div class="large-7 medium-9 small-12 columns">
+									<label>
 										<input type="text" name="addressAddition" th:placeholder="#{registration.addressAddition}" th:field ="*{addressAddition}"/>
 									</label>
 								</div>
