@@ -41,9 +41,10 @@ public class SearchController {
 	private long current_cat=0;
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
 	
-	
+	@Autowired
 	public SearchController(CategoryMethods categoryMethods, UserRepository userRepository, CategoryRepo categories,
 			ArticleRepo articleRepo) {
+		super();
 		this.categoryMethods = categoryMethods;
 		this.userRepository = userRepository;
 		this.categories = categories;
