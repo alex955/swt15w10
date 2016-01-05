@@ -14,6 +14,10 @@ import javax.validation.constraints.Pattern;
 
 public class UserSettingsForm {
 
+    //@Autowired LanguageRepository languageRepository;
+
+    //Language language = languageRepository.findByBrowserLanguage("SPRACHE HIER EINFÜGEN");
+
     private long id;
 
     private long userId;
@@ -21,10 +25,10 @@ public class UserSettingsForm {
     private String newLastName;
     private String newFirstName;
 
-    @Email(message = "Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.")
+    @Email(message = /* language.getEmailError*/ "Die eingegebene E-Mail-Adresse hat kein zugelassenes Format." )
     private String newEmail;
 
-    @Pattern(regexp="(^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$|^$|)", message ="Das Passwort muss mindestens 8 Zeichen lang sein und muss mindestens eine Zahl, einen Klein- und einen Großbuchstaben beinhalten.")
+    @Pattern(regexp="(^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$|^$|)", message = /* language.getPasswordError*/ " Das Passwort muss mindestens 8 Zeichen lang sein und muss mindestens eine Zahl, einen Klein- und einen Großbuchstaben beinhalten.")
     private String newPassword;
 
     private String oldPassword;
@@ -32,19 +36,19 @@ public class UserSettingsForm {
     private String confirmPW;
 
     //newPW == confirmPW?
-    @AssertTrue(message = "Die Passwörter stimmen nicht überein.")
+    @AssertTrue(message = /* language.getPasswordConfirmError*/ "Die Passwörter stimmen nicht überein.")
     private boolean isValid(){
         return this.newPassword.equals(this.confirmPW);
     }
 
     private String newCity;
 
-    @Pattern(regexp="(^$| |^(\\d{5})$)", message="Die Postleitzahl muss aus exakt 5 Ziffern bestehen.")
+    @Pattern(regexp="(^$| |^(\\d{5})$)", message = /* language.getZipError*/ "Die Postleitzahl muss aus exakt 5 Ziffern bestehen.")
     private String newZip;
 
     private String newStreetName;
 
-    @Pattern(regexp = "(^$|^(\\d+[a-zA-Z]*)$)", message="Geben Sie eine gültige Hausnummer ein.")
+    @Pattern(regexp = "(^$|^(\\d+[a-zA-Z]*)$)", message = /* language.getNumberError*/ "Geben Sie eine gültige Hausnummer ein.")
     private String newHouseNumber;
     private String newAddressAddition;
     private String newLanguage1;

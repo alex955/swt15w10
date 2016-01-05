@@ -27,6 +27,7 @@ public class RefugeeDataInitializer implements DataInitializer {
     private final SettingsRepository settingsRepo;
     private final UserSettingsRepository userSettingsRepository;
     private final ValidatorRepository validatorRepository;
+    private final LanguageRepository languageRepository;
 
     final Role refugee = new Role("ROLE_REFUGEE");
     final Role volunteer = new Role("ROLE_VOLUNTEER");
@@ -35,7 +36,7 @@ public class RefugeeDataInitializer implements DataInitializer {
 
 
     @Autowired
-    public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, kickstart.model.ArticleRepo goodREPO, ChatConversationRepo chatRepo, ChatMessageRepo msgRepo, SettingsRepository settingsRepo, UserSettingsRepository userSettingsRepository, ValidatorRepository validatorRepository) {
+    public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, kickstart.model.ArticleRepo goodREPO, ChatConversationRepo chatRepo, ChatMessageRepo msgRepo, SettingsRepository settingsRepo, UserSettingsRepository userSettingsRepository, ValidatorRepository validatorRepository, LanguageRepository languageRepository) {
 
         Assert.notNull(userAccountManager, "UserManagerAccount must not be null!");
         Assert.notNull(userRepository, "UserRepository must not be null!");
@@ -44,6 +45,7 @@ public class RefugeeDataInitializer implements DataInitializer {
         Assert.notNull(settingsRepo, "SettingsRepo must not be null!");
         Assert.notNull(userSettingsRepository, "userSettingsRepository must not be null!");
         Assert.notNull(validatorRepository, "validatorRepository must not be null!");
+        Assert.notNull(languageRepository, "languageRepository must not be null");
 
         this.userAccountManager = userAccountManager;
         this.userRepository = userRepository;
@@ -52,12 +54,14 @@ public class RefugeeDataInitializer implements DataInitializer {
         this.settingsRepo = settingsRepo;
         this.userSettingsRepository = userSettingsRepository;
         this.validatorRepository = validatorRepository;
+        this.languageRepository = languageRepository;
 
     }
 
     @Override
     public void initialize() {
     	Settings();
+        // initializeLanguages();
     	initializeUsers(userAccountManager, userRepository);
         initializeCategories();
         initializeGoods(userAccountManager, userRepository);
@@ -169,4 +173,55 @@ public class RefugeeDataInitializer implements DataInitializer {
 
     public void initializeActivities(){
     }
+
+   /*
+    public void initializeLanguages(){
+
+        Language german = new Language();
+
+        german.setBrowserLanguage("german");
+        german.setRoleError("Es wurde keine Rolle ausgewählt.");
+        german.setNameError("Der Name muss zwischen 2 und 30 Zeichen lang sein.");
+        german.setCountryError("Es wurde keine Herkunft gewählt");
+        german.setUsernameError("Der Benutzername muss zwischen 6 und 30 Zeichen lang sein.");
+        german.setEmailError("Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.");
+        german.setPasswordError("Das Passwort muss mindestens 8 Zeichen lang sein und muss mindestens eine Zahl, einen Klein- und einen Großbuchstaben beinhalten.");
+        german.setPasswordConfirmError("Die Passwörter stimmen nicht überein.");
+        german.setCityError("Geben Sie einen Stadtnamen ein");
+        german.setZipError("Die Postleitzahl muss aus exakt 5 Ziffern bestehen.");
+        german.setStreetError("Geben Sie einen Straßennamen ein.");
+        german.setNumberError("Geben Sie eine gültige Hausnummer ein.");
+        german.setTitleError("Geben Sie ihrem Angebot einen Titel.");
+        german.setKindError("Wählen Sie die Art des Angebots.");
+        german.setOldPwError("Das alte Passwort wurde falsch eingegeben.");
+        german.setRegistrationConfirm("Registrierung erfolgreich. Zur Bestätigung der Registrierung wurde Ihnen eine EMail geschickt.");
+        german.setUsernameUsedError("Der Username ist bereits vergeben.");
+        german.setEmailConfirm("Zum Bestätigen der Änderung Ihrer EMailadresse wird eine EMail an Ihre alte Adresse geschickt.");
+
+        languageRepository.save(german);
+
+
+        Language english = new Language();
+
+        english.setBrowserLanguage("english");
+        english.setRoleError("You didn't chose a role.");
+        english.setNameError("Your name must be between 2 and 30 characters long.");
+        english.setCountryError("You didn't chose your country.");
+        english.setUsernameError("The username must be between 6 and 30 characters long.");
+        english.setEmailError("Your email has a wrong format.");
+        english.setPasswordError("Your password must be at least 8 characters and consist of at least one number, one capital and one lowercase letter.");
+        english.setPasswordConfirmError("Passwords did not match.");
+        english.setCityError("Enter a city");
+        english.setZipError("Your zip code must contain of exactly five digits.");
+        english.setStreetError("Enter a street.");
+        english.setNumberError("Enter a valid house number.");
+        english.setTitleError("Give your offer a title.");
+        english.setKindError("Choose your offers kind.");
+        english.setOldPwError("Your old password was incorrect.");
+        english.setRegistrationConfirm("Registration successful. An email for confirmation has been sent.");
+        english.setUsernameUsedError("The username is already taken.");
+        english.setEmailConfirm("To confirm your new email address, an email has been sent to your former email address");
+
+        languageRepository.save(english);
+    } */
 }

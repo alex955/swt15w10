@@ -12,7 +12,7 @@ public class NewArticleForm {
 	
 	private long categoryId;
 
-	@NotEmpty(message = "Geben Sie ihrem Angebot einen Titel.")
+	@NotEmpty(message = /* language.getTitleError*/ "Geben Sie ihrem Angebot einen Titel.")
     private String title;
     private String description;
     private String zip;
@@ -24,7 +24,7 @@ public class NewArticleForm {
     private double longitude;
     private double latitude;
 
-	@NotEmpty(message = "Wählen Sie die Art des Angebots.")
+	@NotEmpty(message = /* language.getKindError*/ "Wählen Sie die Art des Angebots.")
     private String kind;
     
     public String getStreetName() {

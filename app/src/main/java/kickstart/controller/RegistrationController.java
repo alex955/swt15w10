@@ -32,6 +32,9 @@ public class RegistrationController {
     @Autowired
     private ValidatorRepository validatorRepository;
 
+    @Autowired
+    private final LanguageRepository languageRepository;
+
     @Autowired private final CategoryMethods categoryMethods;
 
     protected LinkedList<CategoryFirstTierObject> processedCategories;
@@ -39,12 +42,13 @@ public class RegistrationController {
     private UserAccountManager userAccountManager;
 
     @Autowired
-    public RegistrationController(UserAccountManager userAccountManager, UserRepository userRepository, CategoryMethods categoryMethods, CategoryRepo categories, ValidatorRepository validatorRepository){
+    public RegistrationController(UserAccountManager userAccountManager, UserRepository userRepository, CategoryMethods categoryMethods, CategoryRepo categories, ValidatorRepository validatorRepository, LanguageRepository languageRepository){
         this.userAccountManager = userAccountManager;
         this.userRepository = userRepository;
         this.categoryMethods = categoryMethods;
         this.categories = categories;
         this.validatorRepository = validatorRepository;
+        this.languageRepository = languageRepository;
     }
 
     @RequestMapping(value ="/registration")
@@ -56,6 +60,7 @@ public class RegistrationController {
     public String newRegistration(@ModelAttribute("RegistrationForm") @Valid RegistrationForm registrationForm, BindingResult result,ModelMap modelMap, Model model) throws AddressException, MessagingException {
 
         boolean errors = false;
+        //Language language = languageRepository.findByBrowserLanguage("SPRACHE HIER EINFÜGEN");
 
         if(result.hasErrors())
             errors = true;
@@ -65,11 +70,11 @@ public class RegistrationController {
 
         if(errors) {
             if(!registrationForm.getPassword().equals(registrationForm.getConfirmPW())){
-                final String confirmError = "Die Passwörter stimmen nicht überein.";
+                final String confirmError = /* language.getPasswordConfirmError */ "Die Passwörter stimmen nicht überein.";
                 modelMap.addAttribute("confirmError", confirmError);
             }
             if(userRepository.findByUsername(registrationForm.getUsername()) != null){
-                final String usernameUsed = "Der Username ist bereits vergeben.";
+                final String usernameUsed = /* language.getUsernameUsedError*/ "Der Username ist bereits vergeben.";
                 modelMap.addAttribute("usernameUsed", usernameUsed);
             }
 
@@ -92,7 +97,7 @@ public class RegistrationController {
         EMailController.sendEmail(user.getEmail(),validator.getToken(),validator.getUsage());
 
 
-        final String emailConfirm = "Registrierung erfolgreich. Zur Bestätigung der Registrierung wurde Ihnen eine EMail geschickt.";
+        final String emailConfirm = /* language.getRegistrationConfirm */ "Registrierung erfolgreich. Zur Bestätigung der Registrierung wurde Ihnen eine EMail geschickt.";
         modelMap.addAttribute("emailConfirm", emailConfirm);
 
 

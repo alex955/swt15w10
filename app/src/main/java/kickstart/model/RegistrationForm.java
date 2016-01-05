@@ -10,52 +10,56 @@ import javax.validation.constraints.*;
  */
 public class RegistrationForm {
 
+    //@Autowired LanguageRepository languageRepository;
+
+    //Language language = languageRepository.findByBrowserLanguage("SPRACHE HIER EINFÜGEN");
+
     private long id;
 
-    @NotNull(message = "Es wurde keine Rolle ausgewählt.")
+    @NotNull(message = /* language.getRoleError*/ "Es wurde keine Rolle ausgewählt.")
     private Role role;
 
-    @Size(min=2, max=30, message = "Der Nachname muss zwischen 2 und 30 Zeichen lang sein.")
+    @Size(min=2, max=30, message = /* language.getNameError*/ "Der Nachname muss zwischen 2 und 30 Zeichen lang sein.")
     private String lastName;
 
-    @Size(min=2, max=30, message = "Der Vorname muss zwischen 2 und 30 Zeichen lang sein.")
+    @Size(min=2, max=30, message = /* language.getNameError*/ "Der Vorname muss zwischen 2 und 30 Zeichen lang sein.")
     private String firstName;
 
-    @NotNull(message = "Es wurde keine Herkunft gewählt")
+    @NotNull(message = /* language.getCountryError*/ "Es wurde keine Herkunft gewählt")
     private String country;
 
-	@Size(min=6, max=30, message = "Der Benutzername muss zwischen 6 und 30 Zeichen lang sein.")
+	@Size(min=6, max=30, message = /* language.getUsernameError*/ "Der Benutzername muss zwischen 6 und 30 Zeichen lang sein.")
     private String username;
     
-    @NotNull(message = "Sie müssen eine Email Adresse angeben")
-    @Email(message = "Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.")
+    @NotNull(message = /* language.getEmailError*/ "Sie müssen eine Email Adresse angeben")
+    @Email(message = /* language.getEmailError*/ "Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.")
     private String email;
 
     //Password must contain at least: 8 characters, 1 Number, 1 lowercase Letter, 1 upercase Letter, no whitespace
-    @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}", message ="Das Passwort muss mindestens 8 Zeichen lang sein und muss mindestens eine Zahl, einen Klein- und einen Großbuchstaben beinhalten.")
+    @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}", message = /* language.getPasswordError*/ "Das Passwort muss mindestens 8 Zeichen lang sein und muss mindestens eine Zahl, einen Klein- und einen Großbuchstaben beinhalten.")
     private String password;
 
     @NotEmpty
     private String confirmPW;
 
     //Check if password == confirmPW
-    @AssertTrue(message = "Die Passwörter stimmen nicht überein.")
+    @AssertTrue(message = /* language.getPasswordConfirmError*/ "Die Passwörter stimmen nicht überein.")
     private boolean isValid(){
         return this.password.equals(this.confirmPW);
     }
 
-    @NotEmpty(message = "Geben Sie einen Stadtnamen ein")
+    @NotEmpty(message = /* language.getCityError*/ "Geben Sie einen Stadtnamen ein")
     private String city;
 
     //Zipcode must be 5 characters long and contain only digits
-    @Pattern(regexp="^\\d{5}$", message="Die Postleitzahl muss aus exakt 5 Ziffern bestehen.")
+    @Pattern(regexp="^\\d{5}$", message = /* language.getZipError*/ "Die Postleitzahl muss aus exakt 5 Ziffern bestehen.")
     private String zip;
 
-    @Size(min=5, max=50, message = "Geben Sie einen Straßennamen ein.")
+    @Size(min=5, max=50, message = /* language.getStrretError*/ "Geben Sie einen Straßennamen ein.")
     private String streetName;
 
     //Must start with at least one digit. "1a", "12b", etc. possible
-    @Pattern(regexp = "^\\d+[a-zA-Z]*$", message="Geben Sie eine gültige Hausnummer ein.")
+    @Pattern(regexp = "^\\d+[a-zA-Z]*$", message = "Geben Sie eine gültige Hausnummer ein.")
     private String houseNumber;
 
     private String addressAddition;

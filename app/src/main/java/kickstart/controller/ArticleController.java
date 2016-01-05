@@ -262,7 +262,7 @@ public class ArticleController {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
-		
+
 		if(result.hasErrors())
 			return "newArticle";
 
@@ -401,6 +401,8 @@ public class ArticleController {
 		
 		return ("redirect:/showArticle/"+id);
 	}
+
+
 
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/deleteArticle/{id}")

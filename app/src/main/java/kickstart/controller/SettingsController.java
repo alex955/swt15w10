@@ -50,11 +50,14 @@ public class SettingsController {
     @Autowired
     private final UserSettingsRepository userSettingsRepository;
 
+    @Autowired
+    private final LanguageRepository languageRepository;
+
 
     protected LinkedList<CategoryFirstTierObject> processedCategories;
 
     @Autowired
-    public SettingsController(ArticleRepo articleRepo, UserRepository userRepository, UserAccountManager userAccountManager, PasswordEncoder passwordEncoder, CategoryMethods categoryMethods, ValidatorRepository validatorRepository, UserSettingsRepository userSettingsRepository){
+    public SettingsController(ArticleRepo articleRepo, UserRepository userRepository, UserAccountManager userAccountManager, PasswordEncoder passwordEncoder, CategoryMethods categoryMethods, ValidatorRepository validatorRepository, UserSettingsRepository userSettingsRepository, LanguageRepository languageRepository){
         this.userRepository = userRepository;
         this.userAccountManager= userAccountManager;
         this.passwordEncoder = passwordEncoder;
@@ -62,6 +65,7 @@ public class SettingsController {
         this.articleRepo = articleRepo;
         this.validatorRepository = validatorRepository;
         this.userSettingsRepository = userSettingsRepository;
+        this.languageRepository = languageRepository;
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -82,6 +86,7 @@ public class SettingsController {
     @RequestMapping(value = "/usersettings", method = RequestMethod.POST)
     public String saveSettings(@ModelAttribute("UserSettingsForm") @Valid UserSettingsForm userSettingsForm, BindingResult result, @LoggedIn Optional<UserAccount> userAccount,  Model model, ModelMap modelMap) throws AddressException, MessagingException {
 
+        //Language language = languageRepository.findByBrowserLanguage("SPRACHE HIER EINFÜGEN");
         User user = userRepository.findByUserAccount(userAccount.get());
         UserSettings userSettings = new UserSettings();
 
@@ -107,11 +112,11 @@ public class SettingsController {
 
         if(errors) {
             if(!userSettingsForm.getNewPassword().equals(userSettingsForm.getConfirmPW())) {
-                final String confirmError = "Die Passwörter stimmen nicht überein.";
+                final String confirmError = /* language.getPasswordConfirmError*/ "Die Passwörter stimmen nicht überein.";
                 modelMap.addAttribute("confirmError", confirmError);
             }
             if(!passwordEncoder.matches(userSettingsForm.getOldPassword(), user.getUserAccount().getPassword().toString())) {
-                final String oldPwError = "Das alte Passwort wurde falsch eingegeben.";
+                final String oldPwError = /* language.getOldPwError */ "Das alte Passwort wurde falsch eingegeben.";
                 modelMap.addAttribute("oldPwError", oldPwError);
             }
             return "usersettings";
@@ -144,7 +149,7 @@ public class SettingsController {
 
             EMailController.sendEmail(user.getEmail(), validator.getToken(), validator.getUsage());
 
-            final String emailConfirm = "Zum Bestätigen der Änderung Ihrer EMailadresse wird eine EMail an Ihre alte Adresse geschickt.";
+            final String emailConfirm = /* language.getEmailConfirm */ "Zum Bestätigen der Änderung Ihrer EMailadresse wird eine EMail an Ihre alte Adresse geschickt.";
             modelMap.addAttribute("emailConfirm", emailConfirm);
 
         }
