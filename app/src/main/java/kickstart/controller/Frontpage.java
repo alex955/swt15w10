@@ -1,9 +1,11 @@
 package kickstart.controller;
 
+import java.util.Collection;
 import java.util.LinkedList;
-
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,4 +31,17 @@ public class Frontpage {
 		model.addAttribute("categories", this.processedCategories);
 		return "frontpage";
 	}
+	
+	@RequestMapping({"/testVars"})
+	public String testVars(Model model) {
+		Locale currentLocale = LocaleContextHolder.getLocale();
+		model.addAttribute("currentLocale", currentLocale);
+		
+		Locale[] allLocales = Locale.getAvailableLocales();
+		model.addAttribute("allLocales", allLocales);
+		
+		return "testVars";
+	}
+	
+	
 }

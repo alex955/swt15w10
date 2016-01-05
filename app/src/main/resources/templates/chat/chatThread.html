@@ -72,7 +72,7 @@ function showInputField(){
 								<p class="text-right" th:text="'um '+${#temporals.format(var.time, 'hh:mm:ss, dd.MM.yyyy')}"/>
 							</div>
 						</div>
-						<p th:text="${var.message}"></p>
+						<p th:text="#{${var.message}}"></p>
 						<p th:text="${var.freeText}"></p>
 					</div>
 					<hr></hr>
@@ -83,7 +83,7 @@ function showInputField(){
 									<select th:field="*{content}" onchange="showInputField()">
 										<option th:each="possibleMessage : ${possibleMessages}"
 											th:value="${possibleMessage.key}"
-											th:text="${possibleMessage.value}">.</option>
+											th:text="#{${possibleMessage.value}}">.</option>
 									</select>
 									<input type="text" value="click here!" id="datetimepicker_mask" th:field="*{content2}" />
 									<textarea id="freetextArea" rows="4" th:field="*{content2}"></textarea>
