@@ -151,8 +151,6 @@ public class SearchController {
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
 		model=this.getCurrent_cat(model);
-		model.addAttribute("FormAttributes",this.categories.findOne(articleRepo.findOne(this.getCurrent_cat()).getCategory()).get().getAttributes());
-		model.addAttribute("NewAttributes",new NewAttributes());
 		SearchQuery.setCategory(this.getCurrent_cat());
 		
 		System.out.println("Gesucht "+ SearchQuery.getQuery() +" in "+SearchQuery.getCategory());

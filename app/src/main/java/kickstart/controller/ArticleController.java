@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.util.LinkedList;
 import java.util.Optional;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -32,7 +31,6 @@ import kickstart.model.UserRepository;
 import kickstart.utilities.CategoryMethods;
 import kickstart.utilities.SettingsRepository;
 import kickstart.model.ArticleRepo;
-import kickstart.model.Category;
 import kickstart.model.CategoryFirstTierObject;
 import kickstart.model.Attribute;
 
