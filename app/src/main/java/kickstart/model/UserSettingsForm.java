@@ -2,9 +2,6 @@ package kickstart.model;
 
 
 import org.hibernate.validator.constraints.Email;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Pattern;
 
@@ -15,20 +12,14 @@ import javax.validation.constraints.Pattern;
 public class UserSettingsForm {
 
     private long id;
-
     private long userId;
-
     private String newLastName;
     private String newFirstName;
-
     @Email(message = "Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.")
     private String newEmail;
-
     @Pattern(regexp="(^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$|^$|)", message ="Das Passwort muss mindestens 8 Zeichen lang sein und muss mindestens eine Zahl, einen Klein- und einen Großbuchstaben beinhalten.")
     private String newPassword;
-
     private String oldPassword;
-
     private String confirmPW;
 
     //newPW == confirmPW?
@@ -38,13 +29,10 @@ public class UserSettingsForm {
     }
 
     private String newCity;
-
     @Pattern(regexp="(^$| |^(\\d{5})$)", message="Die Postleitzahl muss aus exakt 5 Ziffern bestehen.")
     private String newZip;
-
     @Pattern(regexp = "^([A-ZÄÖÜ][a-zäöüß]+(([.] )|( )|([-])))+[1-9][0-9]{0,3}[a-z]?$", message = "Geben Sie einen Straßennamen ein. \n (Bsp.: Teststr. 1b, Baumweg 12, etc.)")
     private String newStreetName;
-
     private String newAddressAddition;
     private String newLanguage1;
     private String newLanguage2;
@@ -170,7 +158,4 @@ public class UserSettingsForm {
     public void setNewLanguage3(String newLanguage3) {
         this.newLanguage3 = newLanguage3;
     }
-
-
-
 }

@@ -1,12 +1,9 @@
 //Form for the informations of the submitted newArticle.html
 
-
 package kickstart.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.validation.constraints.NotNull;
 
 public class NewArticleForm {
 	
@@ -22,7 +19,6 @@ public class NewArticleForm {
     private MultipartFile file;
     private double longitude;
     private double latitude;
-
 	@NotEmpty(message = "Wählen Sie die Art des Angebots.")
     private String kind;
     
@@ -92,6 +88,4 @@ public class NewArticleForm {
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
-	
-    
 }

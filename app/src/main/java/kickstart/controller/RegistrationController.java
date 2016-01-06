@@ -23,27 +23,15 @@ import javax.validation.Valid;
 
 @Controller
 public class RegistrationController {
-    @Autowired
-    private final UserRepository userRepository;
-
-    @Autowired
-    private final CategoryRepo categories;
-
-    @Autowired
-    private ValidatorRepository validatorRepository;
-
-    @Autowired private final CategoryMethods categoryMethods;
-
+    @Autowired private final UserRepository userRepository;
+    @Autowired private ValidatorRepository validatorRepository;
     protected LinkedList<CategoryFirstTierObject> processedCategories;
-
     private UserAccountManager userAccountManager;
 
     @Autowired
     public RegistrationController(UserAccountManager userAccountManager, UserRepository userRepository, CategoryMethods categoryMethods, CategoryRepo categories, ValidatorRepository validatorRepository){
         this.userAccountManager = userAccountManager;
         this.userRepository = userRepository;
-        this.categoryMethods = categoryMethods;
-        this.categories = categories;
         this.validatorRepository = validatorRepository;
     }
 
@@ -76,7 +64,6 @@ public class RegistrationController {
             return "registration";
         }
 
-
         UserAccount userAccount = userAccountManager.create(registrationForm.getUsername(), registrationForm.getPassword(), registrationForm.getRole());
         userAccountManager.save(userAccount);
 
@@ -91,10 +78,8 @@ public class RegistrationController {
 
         EMailController.sendEmail(user.getEmail(),validator.getToken(),validator.getUsage());
 
-
         final String emailConfirm = "Registrierung erfolgreich. Zur Bestätigung der Registrierung wurde Ihnen eine EMail geschickt.";
         modelMap.addAttribute("emailConfirm", emailConfirm);
-
 
         return ("registration");
     }

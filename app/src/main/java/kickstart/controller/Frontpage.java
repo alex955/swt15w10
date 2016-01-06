@@ -1,6 +1,5 @@
 package kickstart.controller;
 
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Locale;
 

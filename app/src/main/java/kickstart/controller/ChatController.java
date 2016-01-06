@@ -34,7 +34,6 @@ import kickstart.utilities.StringInForm;
 @PreAuthorize("isAuthenticated()")
 public class ChatController {
 	
-	@Autowired private final CategoryRepo categories;
 	@Autowired private final CategoryMethods categoryMethods;
 	@Autowired private final ArticleRepo articleRepo;
 	@Autowired private final ChatConversationRepo chatRepo;
@@ -42,7 +41,6 @@ public class ChatController {
     
     //TODO - replace variable with e.g. repo for chat content
     private PossibleChatMessages possibleMessagesObject = new PossibleChatMessages();
-    private Map<Integer, String> possibleChatMessages = new PossibleChatMessages().getPossibleChatMessages();
     
     //just for persistent/transaction(?) use so no to be saved variables are "flushed in transient state"
     @Autowired private final ChatMessageRepo msgRepo;
@@ -52,7 +50,6 @@ public class ChatController {
 
 	@Autowired
 	public ChatController(CategoryRepo categories, CategoryMethods categoryMethods, ArticleRepo articleRepo, ChatConversationRepo chatRepo, UserRepository userRepository, ChatMessageRepo msgRepo) {
-		this.categories = categories;
 		this.categoryMethods = categoryMethods;
 		this.articleRepo = articleRepo;
 		this.chatRepo = chatRepo;
@@ -140,7 +137,7 @@ public class ChatController {
 	}
 	
 	/**
-	 * Appends a already existent chat thread with a new message
+	 * Appends an already existent chat thread with a new message
 	 * @param id Chat Thread id
 	 * @param model
 	 * @param userAccount UserAccount of the logged in user

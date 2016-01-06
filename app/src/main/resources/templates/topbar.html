@@ -58,11 +58,11 @@
 						<ul class="dropdown" id="dropdown">
 							<li th:each="categoryTopbar : ${categories}" class="has-dropdown">
 								<a th:href="@{/search/{id}(id=${categoryTopbar.cat.id})}"><span
-									th:text="${categoryTopbar.cat.name}" >Subkategorien anschauen</span></a>
+									th:text="#{'categories.' + ${categoryTopbar.cat.name}}" >Subkategorien anschauen</span></a>
 								<ul class="dropdown">
 									<li th:each="subcategory : ${categoryTopbar.subcats}"><a
 										th:href="@{/search/{id}(id=${subcategory.id})}"><span
-											th:text="${subcategory.name}" >Subkategorien anschauen</span></a></li>
+											th:text="#{'categories.' + ${subcategory.name}}" >Subkategorien anschauen</span></a></li>
 								</ul>
 							</li>
 						</ul>

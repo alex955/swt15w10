@@ -1,15 +1,12 @@
 package kickstart.model;
 
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -43,18 +40,15 @@ public class Category {
     }
     
     public Category(String name, long pre,LinkedList<Attribute> attributes) {
-   	 this.name = name;
-        
+   	 	this.name = name;
         if(pre == -1){
         	this.setRoot(true);
-        }else{
+        }
+        else{
         	this.setRoot(false);
         	this.setPredecessor(pre);
         }
-        
         this.attributes=attributes;
-   	
-   	
    } 
     
     public String getName(){

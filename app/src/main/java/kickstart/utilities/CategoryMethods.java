@@ -8,7 +8,6 @@ import java.util.Map;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 
 import kickstart.model.ArticleRepo;
 import kickstart.model.Category;
@@ -56,7 +55,6 @@ public class CategoryMethods {
 	
 	public Map<String, List<Category>> getCategoryMap(){
 		Map<String, List<Category>> toReturn = new HashMap<String, List<Category>>();
-		Iterable<Category> allCategories = this.categories.findAll();
 		
 		for(Category s : this.categories.findAll()){
 			long currCat = s.getId();

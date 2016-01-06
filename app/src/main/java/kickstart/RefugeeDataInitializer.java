@@ -25,17 +25,10 @@ public class RefugeeDataInitializer implements DataInitializer {
     private final CategoryRepo categories;
     private final ArticleRepo goodREPO;
     private final SettingsRepository settingsRepo;
-    private final UserSettingsRepository userSettingsRepository;
-    private final ValidatorRepository validatorRepository;
-    
-    private final ChatConversationRepo chatRepo; 
-    private final ChatMessageRepo msgRepo;
 
     final Role refugee = new Role("ROLE_REFUGEE");
     final Role volunteer = new Role("ROLE_VOLUNTEER");
     final Role admin = new Role("ROLE_ADMIN");
-
-
 
     @Autowired
     public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, kickstart.model.ArticleRepo goodREPO, ChatConversationRepo chatRepo, ChatMessageRepo msgRepo, SettingsRepository settingsRepo, UserSettingsRepository userSettingsRepository, ValidatorRepository validatorRepository) {
@@ -53,12 +46,6 @@ public class RefugeeDataInitializer implements DataInitializer {
         this.categories = categories;
         this.goodREPO = goodREPO;
         this.settingsRepo = settingsRepo;
-        this.userSettingsRepository = userSettingsRepository;
-        this.validatorRepository = validatorRepository;
-        
-        this.chatRepo = chatRepo;
-        this.msgRepo = msgRepo;
-
     }
 
     @Override
@@ -70,9 +57,12 @@ public class RefugeeDataInitializer implements DataInitializer {
         initializeActivities();
     }
     
-    //configure the right Paths for the Server
+    /**
+     * Here you have to set the Path for uploaded Pictures
+     * and the Path where the keinbild.jpg lies
+     */
     public void Settings(){
-    	settingsRepo.save(new Setting("noUploadedPicturePath", "C:/Users/sasch/Documents/swt15w10/app/src/main/resources/static/resources/img/keinbild.png", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded articles without one"));
+    	settingsRepo.save(new Setting("noUploadedPicturePath", "C:/Users/sasch/Documents/swt15w10/app/src/main/resources/static/resources/img/keinbild.png", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded offers without one"));
     	//settingsRepo.save(new Setting("UploadedPicturePath", "C:/", "The Path, where the uploaded Pictures are saved"));
     }
     
@@ -138,12 +128,12 @@ public class RefugeeDataInitializer implements DataInitializer {
         Category cat1 = new Category("Fahrrad", -1);
         categories.save(cat1);
         
-        Category cat2 = new Category("Familie, Kind & Wohnung", -1); 
+        Category cat2 = new Category("FamilieKindWohnung", -1); 
         		Category cat2_1 = new Category("Babybekleidung", 2);
         		Category cat2_2 = new Category("Kinderwagen", 2);
         		Category cat2_3 = new Category("Kinderbekleidung", 2);
         		Category cat2_4 = new Category("Möbel", 2);
-        		Category cat2_5 = new Category("Spielzeug & Spiele", 2);
+        		Category cat2_5 = new Category("SpielzeugSpiele", 2);
         categories.save(cat2);
         categories.save(cat2_1);	
         categories.save(cat2_2);	
@@ -154,11 +144,11 @@ public class RefugeeDataInitializer implements DataInitializer {
         Category cat3 = new Category("Hobby", -1);
         categories.save(cat3);
 
-    	Category cat4 = new Category("Haus & Garten Accesoires", -1);
+    	Category cat4 = new Category("HausGartenAccesoires", -1);
         		Category cat4_1 = new Category("Dekoration", 9);
-        		Category cat4_2 = new Category("Garten & Pflanzen", 9);
+        		Category cat4_2 = new Category("GartenPflanzen", 9);
         		Category cat4_3 = new Category("Heimwerken", 9);
-        		Category cat4_4 = new Category("Bad, Küche & Esszimmer", 9);
+        		Category cat4_4 = new Category("BadKücheEsszimmer", 9);
         		Category cat4_5 = new Category("Wohnzimmer", 9);
         categories.save(cat4);
         categories.save(cat4_1);
@@ -168,7 +158,7 @@ public class RefugeeDataInitializer implements DataInitializer {
         categories.save(cat4_5);
         		
         		
-        Category cat5 = new Category("Kleidung, Mode & Beauty", -1);
+        Category cat5 = new Category("KleidungModeBeauty", -1);
         		Category cat5_1 = new Category("Damenbekleidung", 15);
         		Category cat5_2 = new Category("Damenschuhe", 15);
         		Category cat5_3 = new Category("Herrenbekleidung", 15);
@@ -183,8 +173,8 @@ public class RefugeeDataInitializer implements DataInitializer {
         categories.save(cat5_5);
         categories.save(cat5_6);
         		
-        Category cat6 = new Category("Multimedia & Elektronik", -1);
-        		Category cat6_1 = new Category("Audio & Hifi", 22);
+        Category cat6 = new Category("MultimediaElektronik", -1);
+        		Category cat6_1 = new Category("AudioHifi", 22);
         		Category cat6_2 = new Category("Telefon", 22);
         		Category cat6_3 = new Category("Foto", 22);
         		Category cat6_4 = new Category("TV", 22);
@@ -194,12 +184,12 @@ public class RefugeeDataInitializer implements DataInitializer {
         categories.save(cat6_3);
         categories.save(cat6_4);
         		
-        Category cat7 = new Category("Musik, Film & Bücher ", -1);
+        Category cat7 = new Category("MusikFilmBücher", -1);
         		Category cat7_1 = new Category("Bücher", 27);
         		Category cat7_2 = new Category("Comics", 27);
         		Category cat7_3 = new Category("Fachliteratur", 27);
         		Category cat7_4 = new Category("Filme", 27);
-        		Category cat7_5 = new Category("Musik & Musikinstrumente", 27);
+        		Category cat7_5 = new Category("MusikMusikinstrumente", 27);
         		Category cat7_6 = new Category("Zeitschriften", 27);
         		Category cat7_7 = new Category("Verschiedenes", 27);
         categories.save(cat7);
@@ -211,7 +201,7 @@ public class RefugeeDataInitializer implements DataInitializer {
         categories.save(cat7_6);
         categories.save(cat7_7);
         		
-        Category cat8 = new Category("Unterricht, Kurse & Aktivitäten", -1);
+        Category cat8 = new Category("UnterrichtKurseAktivitäten", -1);
 //        		Category cat8_1 = new Category("Backen & Kochen", 35);
 //        		Category cat8_2 = new Category("Computer", 35);
 //        		Category cat8_3 = new Category("Sprachen", 35);

@@ -30,27 +30,12 @@ import java.util.Optional;
 
 @Controller
 public class SettingsController {
-    @Autowired
-    private final UserRepository userRepository;
-
-    @Autowired
-    private final ValidatorRepository validatorRepository;
-
+    @Autowired private final UserRepository userRepository;
+    @Autowired private final ValidatorRepository validatorRepository;
     private UserAccountManager userAccountManager;
-
-    @Autowired
-    private final CategoryMethods categoryMethods;
-
-    @Autowired
-    private final ArticleRepo articleRepo;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private final UserSettingsRepository userSettingsRepository;
-
-
+    @Autowired private final CategoryMethods categoryMethods;
+    @Autowired private PasswordEncoder passwordEncoder;
+    @Autowired private final UserSettingsRepository userSettingsRepository;
     protected LinkedList<CategoryFirstTierObject> processedCategories;
 
     @Autowired
@@ -59,7 +44,6 @@ public class SettingsController {
         this.userAccountManager= userAccountManager;
         this.passwordEncoder = passwordEncoder;
         this.categoryMethods = categoryMethods;
-        this.articleRepo = articleRepo;
         this.validatorRepository = validatorRepository;
         this.userSettingsRepository = userSettingsRepository;
     }
@@ -69,8 +53,7 @@ public class SettingsController {
     public String changeSettings(@ModelAttribute("UserSettingsForm") UserSettingsForm userSettingsForm, @LoggedIn Optional<UserAccount> userAccount, Model model){
 
         User user = userRepository.findByUserAccount(userAccount.get());
-        UserSettings userSettings = new UserSettings();
-
+        
         this.processedCategories = categoryMethods.getProcessedCategories();
         model.addAttribute("categories", this.processedCategories);
         model.addAttribute("user", user);

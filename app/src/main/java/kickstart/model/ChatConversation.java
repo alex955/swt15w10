@@ -1,12 +1,7 @@
 package kickstart.model;
 
-
-
-
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +21,6 @@ public class ChatConversation {
 	public List<ChatMessage> getContent() {
 		return content;
 	}
-
 
 	private int iterationCount;
 	
