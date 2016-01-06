@@ -27,6 +27,9 @@ public class RefugeeDataInitializer implements DataInitializer {
     private final SettingsRepository settingsRepo;
     private final UserSettingsRepository userSettingsRepository;
     private final ValidatorRepository validatorRepository;
+    
+    private final ChatConversationRepo chatRepo; 
+    private final ChatMessageRepo msgRepo;
 
     final Role refugee = new Role("ROLE_REFUGEE");
     final Role volunteer = new Role("ROLE_VOLUNTEER");
@@ -52,6 +55,9 @@ public class RefugeeDataInitializer implements DataInitializer {
         this.settingsRepo = settingsRepo;
         this.userSettingsRepository = userSettingsRepository;
         this.validatorRepository = validatorRepository;
+        
+        this.chatRepo = chatRepo;
+        this.msgRepo = msgRepo;
 
     }
 
