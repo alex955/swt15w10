@@ -33,11 +33,11 @@
 					<li class="divider"></li>
 					<li class="has-dropdown"><a href="#" th:text="#{topbar.account}">Account</a>
 						<ul class="dropdown">
-							<li class="has-dropdown"><a href="#" th:text="#{topbar.language}">Sprache</a>
-							<ul class="dropdown">
-								<li><a href="/frontpage">deutsch</a></li>
-							</ul>
-							</li>
+<!-- 							<li class="has-dropdown"><a href="#" th:text="#{topbar.language}">Sprache</a> -->
+<!-- 							<ul class="dropdown"> -->
+<!-- 								<li><a href="/frontpage">deutsch</a></li> -->
+<!-- 							</ul> -->
+<!-- 							</li> -->
 							<li><a sec:authorize="isAuthenticated()" th:href="@{/chat}" th:text="#{topbar.messages}">Nachrichten</a></li>
 							<li><a sec:authorize="isAuthenticated()" th:href="@{/search/myArticles}" th:text="#{topbar.myArticles}">Meine Angebote</a></li>
 							<li><a sec:authorize="isAuthenticated()" th:href="@{/usersettings}" th:text="#{topbar.settings}">Einstellungen</a></li>
