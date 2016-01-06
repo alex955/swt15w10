@@ -23,7 +23,7 @@
 	
 		
 	
-	<div th:if="${FormAttributes} != null" class="row" name="Search">			
+	<div th:if="${FormAttributes != null and not #lists.isEmpty(FormAttributes)}" class="row" name="Search">			
 		<div class="small-12 columns">
 			<p>&nbsp;</p>
 			<h4 class="header">Welche Tags sollen gesucht werden?</h4>
