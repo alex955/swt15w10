@@ -182,9 +182,9 @@ public class ArticleController {
 
                 //get the logged in user
                 User creator = userRepository.findByUserAccount(userAccount.get());
-                if(originalArticle.getPicture() != null){
-                	pictureRepo.delete(originalArticle.getPicture());
-                }
+//                if(originalArticle.getPicture() != null){
+//                	pictureRepo.delete(originalArticle.getPicture());
+//                }
                 Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename(), creator);
 				pictureRepo.save(picture);
 				originalArticle.setPicture(picture);
