@@ -361,10 +361,106 @@ public class RefugeeDataInitializer implements DataInitializer {
         
         		
         Category cat5 = new Category("KleidungModeBeauty", -1);
+        {
+        	LinkedList<String> tagsState = new LinkedList<String>();
+			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+			Attribute attState = new Attribute("att.state", tagsState);
+			                	
+			LinkedList<String> tagsColor = new LinkedList<String>();
+			tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+			Attribute attColor = new Attribute("att.color", tagsColor);
+
+			cat5.addAttribute(attColor);
+			cat5.addAttribute(attState);
+        }
         		Category cat5_1 = new Category("Damenbekleidung", 15);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+        			                	
+        			LinkedList<String> tagsColor = new LinkedList<String>();
+        			tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+        			Attribute attColor = new Attribute("att.color", tagsColor);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.size.xs");tempList.add("att.size.s");tempList.add("att.size.m");tempList.add("att.size.l");tempList.add("att.size.xl");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.size", tempList);
+        			
+        			LinkedList<String> tempList2 = new LinkedList<String>();
+        			tempList2.add("att.womenClothing.upperBody");tempList2.add("att.womenClothing.pantsSkirts");tempList2.add("att.womenClothing.underwear");
+        			tempList2.add("att.other");
+        			Attribute newAtt2= new Attribute("att.kind", tempList2);
+
+        			cat5_1.addAttribute(attColor);
+        			cat5_1.addAttribute(attState);
+        			cat5_1.addAttribute(newAtt);
+        			cat5_1.addAttribute(newAtt2);
+        		}
         		Category cat5_2 = new Category("Damenschuhe", 15);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+        			                	
+        			LinkedList<String> tagsColor = new LinkedList<String>();
+        			tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+        			Attribute attColor = new Attribute("att.color", tagsColor);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.shoeSize.30");tempList.add("att.shoeSize.31");tempList.add("att.shoeSize.32");tempList.add("att.shoeSize.33");tempList.add("att.shoeSize.34");tempList.add("att.shoeSize.35");tempList.add("att.shoeSize.36");tempList.add("att.shoeSize.37");tempList.add("att.shoeSize.38");tempList.add("att.shoeSize.39");tempList.add("att.shoeSize.40");tempList.add("att.shoeSize.41");tempList.add("att.shoeSize.42");tempList.add("att.shoeSize.43");tempList.add("att.shoeSize.44");tempList.add("att.shoeSize.45");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.shoeSize", tempList);
+
+        			cat5_2.addAttribute(attColor);
+        			cat5_2.addAttribute(attState);
+        			cat5_2.addAttribute(newAtt);
+        		}
         		Category cat5_3 = new Category("Herrenbekleidung", 15);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+        			                	
+        			LinkedList<String> tagsColor = new LinkedList<String>();
+        			tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+        			Attribute attColor = new Attribute("att.color", tagsColor);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.size.xs");tempList.add("att.size.s");tempList.add("att.size.m");tempList.add("att.size.l");tempList.add("att.size.xl");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.size", tempList);
+        			
+        			LinkedList<String> tempList2 = new LinkedList<String>();
+        			tempList2.add("att.womenClothing.upperBody");tempList2.add("att.womenClothing.pantsSkirts");tempList2.add("att.womenClothing.underwear");
+        			tempList2.add("att.other");
+        			Attribute newAtt2= new Attribute("att.kind", tempList2);
+
+        			cat5_3.addAttribute(attColor);
+        			cat5_3.addAttribute(attState);
+        			cat5_3.addAttribute(newAtt);
+        			cat5_3.addAttribute(newAtt2);
+        		}
         		Category cat5_4 = new Category("Herrenschuhe", 15);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+        			                	
+        			LinkedList<String> tagsColor = new LinkedList<String>();
+        			tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+        			Attribute attColor = new Attribute("att.color", tagsColor);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.shoeSize.30");tempList.add("att.shoeSize.31");tempList.add("att.shoeSize.32");tempList.add("att.shoeSize.33");tempList.add("att.shoeSize.34");tempList.add("att.shoeSize.35");tempList.add("att.shoeSize.36");tempList.add("att.shoeSize.37");tempList.add("att.shoeSize.38");tempList.add("att.shoeSize.39");tempList.add("att.shoeSize.40");tempList.add("att.shoeSize.41");tempList.add("att.shoeSize.42");tempList.add("att.shoeSize.43");tempList.add("att.shoeSize.44");tempList.add("att.shoeSize.45");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.shoeSize", tempList);
+
+        			cat5_4.addAttribute(attColor);
+        			cat5_4.addAttribute(attState);
+        			cat5_4.addAttribute(newAtt);
+        		}
         		Category cat5_5 = new Category("Schmuck & Accessoires", 15);
         		Category cat5_6 = new Category("Taschen", 15);
         categories.save(cat5);		
