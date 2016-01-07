@@ -55,8 +55,8 @@ function checkedArticle(){
 						<div class="medium-8 small-12 columns">
 							<select name="categoryId" id="categoryId">
 								<div th:each="entry : ${categories}">
-									<option th:value="${entry.cat.id}"><div th:text="${entry.cat.name}"></div></option>	
-									<option th:each="subEntry : ${entry.subcats}" th:value="${subEntry.id}"><div th:text="'--' +${subEntry.name}"></div></option>	
+									<option th:value="${entry.cat.id}"><div th:text="#{'categories.' + ${entry.cat.name}}"></div></option>	
+									<option th:each="subEntry : ${entry.subcats}" th:value="${subEntry.id}"><div th:text="'--' + #{'categories.' + ${subEntry.name}}"></div></option>	
 								</div>
 								<!--   <option th:each="categoryForm : ${categoriesForm}" th:value="${categoryForm.id}"><div th:text="${categoryForm.name}"></div></option>		
 								-->
