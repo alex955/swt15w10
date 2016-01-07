@@ -429,7 +429,7 @@ public class RefugeeDataInitializer implements DataInitializer {
         			Attribute newAtt= new Attribute("att.size", tempList);
         			
         			LinkedList<String> tempList2 = new LinkedList<String>();
-        			tempList2.add("att.womenClothing.upperBody");tempList2.add("att.womenClothing.pantsSkirts");tempList2.add("att.womenClothing.underwear");
+        			tempList2.add("att.menClothing.upperBody");tempList2.add("att.menClothing.pants");tempList2.add("att.menClothing.underwear");
         			tempList2.add("att.other");
         			Attribute newAtt2= new Attribute("att.kind", tempList2);
 

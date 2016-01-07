@@ -18,9 +18,9 @@
 			<h4 class="header">Tags bearbeiten</h4>
 			<form action="#" th:action="@{/editAttributes/{id}(id=${editArticle.id})}" th:object="${NewAttributes}" method="post">
 				<div th:each="Attribute : ${FormAttributes}" > 
-					<label th:text="${Attribute.name}"></label>
+					<label th:text="#{${Attribute.name}}"></label>
 					<select th:field="*{choosenTags}">
-		  				<option th:each="String : ${Attribute.tags}" th:value="${String}" th:text="${String}"></option>
+		  				<option th:each="String : ${Attribute.tags}" th:value="${String}" th:text="#{${String}}"></option>
 					</select>
 				</div>
 				<button class="right button" type="submit" th:href="@{/}">Tags speichern</button>
