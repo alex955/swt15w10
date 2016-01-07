@@ -57,7 +57,7 @@ public class SettingsController {
         this.processedCategories = categoryMethods.getProcessedCategories();
         model.addAttribute("categories", this.processedCategories);
         model.addAttribute("user", user);
-        model.addAttribute("current_category",new Category("Alle Kategorien",1));
+        model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
 
         return "usersettings";
@@ -72,7 +72,7 @@ public class SettingsController {
 
         model.addAttribute("userSettings", new UserSettings());
         model.addAttribute("user", user);
-        model.addAttribute("current_category",new Category("Alle Kategorien",1));
+        model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
 
         this.processedCategories = categoryMethods.getProcessedCategories();

@@ -1,5 +1,9 @@
 package refugeeApp.model;
 
+/**
+ * @author Alexander Shulga
+ */
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

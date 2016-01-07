@@ -27,8 +27,10 @@ public class PictureController{
 	}
 
 	/**
-	 * @param id
-	 * @return 
+	 * returns an existing picture of the article or a standard picture to the template 
+	 * @author Alexander Shulga
+	 * @param id (article id)
+	 * @return Picture (FileSystemResource)
 	 * @throws IOException
 	 */
 	@ResponseBody

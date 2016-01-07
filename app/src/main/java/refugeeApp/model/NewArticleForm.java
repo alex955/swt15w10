@@ -1,6 +1,8 @@
-//Form for the informations of the submitted newArticle.html
-
 package refugeeApp.model;
+
+/**
+ * @author Alexander Shulga
+ */
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
@@ -8,7 +10,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class NewArticleForm {
 	
 	private long categoryId;
-
 	@NotEmpty(message = "Geben Sie ihrem Angebot einen Titel.")
     private String title;
     private String description;

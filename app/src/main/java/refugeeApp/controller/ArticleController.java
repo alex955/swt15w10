@@ -46,24 +46,14 @@ import javax.validation.Valid;
 public class ArticleController {
 	private PictureRepo pictureRepo;
     
-	@Autowired
-	private final CategoryRepo categories;
-	
-	@Autowired
-	private final ArticleRepo articleRepo;
-
-	@Autowired 
-	private final CategoryMethods categoryMethods;
-	
-    @Autowired
-    private final UserRepository userRepository;
+	@Autowired private final CategoryRepo categories;	
+	@Autowired private final ArticleRepo articleRepo;
+	@Autowired private final CategoryMethods categoryMethods;	
+    @Autowired private final UserRepository userRepository;    
+    @Autowired private final SettingsRepository settingsRepo;
+    protected LinkedList<CategoryFirstTierObject> processedCategories; 	
     
-    @Autowired 
-    private final SettingsRepository settingsRepo;
-
-	protected LinkedList<CategoryFirstTierObject> processedCategories; 
-	
-	@Autowired
+	@Autowired 
 	public ArticleController(CategoryRepo categories, ArticleRepo articleRepo, PictureRepo pictureRepo, CategoryMethods categoryMethods, UserRepository userRepository, SettingsRepository settingsRepo){
 		this.categories = categories;
 		this.articleRepo=articleRepo;
@@ -72,7 +62,7 @@ public class ArticleController {
 		this.userRepository = userRepository;
 		this.settingsRepo = settingsRepo;
 	}
-	
+
 	 @Scheduled(fixedRate = 3600000)
 	 public void deleteArticlesAfterExpiration() {
 		List<Article> articles = this.articleRepo.findAll();
@@ -83,7 +73,7 @@ public class ArticleController {
 		 }
 		 
 	 }
-	
+
 	@RequestMapping(value = "/showArticle/{id}")
 	public String showArticle(@PathVariable("id") long id,Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		//initiate categories
@@ -94,7 +84,7 @@ public class ArticleController {
 	    model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 	    model.addAttribute("Useraccount", articleRepo.findOne(id).getCreator().getUserAccount());
 	    model.addAttribute("tags",articleRepo.findOne(id).getAttributes());
-	    model.addAttribute("current_category",new Category("Alle Kategorien",1));
+	    model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
 	    
 	   
@@ -128,7 +118,7 @@ public class ArticleController {
 		model.addAttribute("userId", userId);
 		model.addAttribute("user", this.userRepository.findOne(userId));
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
-		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
 		
 		boolean isAdminLoggedIn = false;
@@ -157,7 +147,7 @@ public class ArticleController {
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 		model.addAttribute("Article", originalArticle);
 		model.addAttribute("tags",articleRepo.findOne(id).getAttributes());
-		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
 
 		//case: current user didnt create article && logged in user no admin -> end
@@ -218,7 +208,7 @@ public class ArticleController {
 		System.out.println(originalArticle);
 		model.addAttribute("Article", articleRepo.findOne(id));
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
-		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
 		
 		currentUserId = -1;
@@ -256,6 +246,15 @@ public class ArticleController {
 //	}
 
 	//create a new Article
+	
+	/**
+	 * returns the newArticle template with logged in user
+	 * @author Alexander Shulga
+	 * @param newArticleForm
+	 * @param model
+	 * @param userAccount
+	 * @return newArticle template
+	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping("/newArticle")
 	public String createArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, Model model, @LoggedIn Optional<UserAccount> userAccount){
@@ -264,7 +263,7 @@ public class ArticleController {
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
 		model.addAttribute("article", new Article());
-		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
 
 		User creator = userRepository.findByUserAccount(userAccount.get());
@@ -274,9 +273,11 @@ public class ArticleController {
 	}
 
 	/**
+	 * creates and saves the new offer/article with or without a picture
+	 * @author Alexander Shulga
 	 * @param newArticleForm
 	 * @param userAccount
-	 * @return
+	 * @return editAttributes template
 	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/newArticle", method = RequestMethod.POST)
@@ -287,7 +288,7 @@ public class ArticleController {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
-		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
 		
 		if(result.hasErrors()){
@@ -295,7 +296,6 @@ public class ArticleController {
 			System.out.println(result.toString());
 			return "newArticle";
 		}
-
 
 		if (!((newArticleForm.getFile()).isEmpty())) {
             try {
@@ -317,12 +317,8 @@ public class ArticleController {
                 File serverFile = new File(dir.getAbsolutePath() + "/" + newArticleForm.getFile().getOriginalFilename()); 
                 BufferedOutputStream stream = new BufferedOutputStream( new FileOutputStream(serverFile));
                 stream.write(bytes);
-                stream.close();
-                System.out.println("Server File Location="
-                        + serverFile.getAbsolutePath());
-                               
-                //get the logged in user
-
+                stream.close();  
+                
 				Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename(), creator);
 				pictureRepo.save(picture);
 				Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), picture, newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getZip(), creator, newArticleForm.getKind());
@@ -330,21 +326,15 @@ public class ArticleController {
 				//Breitengrad und Längengradberechnung 
 				Location ort = new Location(newArticleForm.getStreetName()+" "+newArticleForm.getZip()+" "+newArticleForm.getCity());
 				ort = ort.GetCoordinates(ort);
-				 article.setLatitude(ort.getLatitude()); 
-	    		 article.setLongitude(ort.getLongitude());
-				
+				article.setLatitude(ort.getLatitude()); 
+	    		article.setLongitude(ort.getLongitude());				
 	    		articleRepo.save(article);
-        		System.out.println(article);
-        		
-        		System.out.println("You successfully uploaded file=" + newArticleForm.getTitle());
-
-
-        		 return ("redirect:/editAttributes/"+article.getId());
+	    		
+        		return ("redirect:/editAttributes/"+article.getId());
             } catch (Exception e) {
                 return "You failed to upload " + newArticleForm.getTitle() + " => " + e.getMessage();
             }
         } else {
-
 			//save article without Picture
 			Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(),  newArticleForm.getZip(),creator, newArticleForm.getKind());
 			Location ort = new Location(newArticleForm.getStreetName()+" "+newArticleForm.getZip()+" "+newArticleForm.getCity());
@@ -380,7 +370,7 @@ public class ArticleController {
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 		model.addAttribute("FormAttributes",this.categories.findOne(articleRepo.findOne(id).getCategory()).get().getAttributes());
 		model.addAttribute("NewAttributes",new NewAttributes());
-		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
 		
 		boolean isAdminLoggedIn = false;
@@ -454,7 +444,6 @@ public class ArticleController {
 		}
 
 		articleRepo.delete(toDelete);
-
 
 		return "redirect:/search/myArticles";
 

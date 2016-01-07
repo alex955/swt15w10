@@ -37,7 +37,7 @@ public class RegistrationController {
 
     @RequestMapping(value ="/registration")
     public String firstView(@ModelAttribute("RegistrationForm") RegistrationForm registrationForm, Model model) {
-    	 model.addAttribute("current_category",new Category("Alle Kategorien",1));
+    	 model.addAttribute("current_category",new Category("AlleKategorien",1));
  		model.addAttribute("current_ort",new Location(""));
     	return ("registration");
     }

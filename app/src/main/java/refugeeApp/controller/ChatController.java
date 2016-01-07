@@ -78,7 +78,7 @@ public class ChatController {
 		
 		model.addAttribute("incomingMessages", incoming);
 		model.addAttribute("outgoingMessages", outgoing);
-		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
 		
 		return "chat/chatMain";
@@ -132,7 +132,7 @@ public class ChatController {
 		
 		model.addAttribute("incomingMessages", incoming);
 		model.addAttribute("outgoingMessages", outgoing);
-		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
 		//for menu end
 		
@@ -211,7 +211,7 @@ public class ChatController {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("article", this.articleRepo.findOne(id));
-		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
 
 		model.addAttribute("stringInForm", new StringInForm());

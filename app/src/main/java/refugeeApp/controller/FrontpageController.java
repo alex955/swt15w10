@@ -16,22 +16,27 @@ import refugeeApp.model.Location;
 import refugeeApp.utilities.CategoryMethods;
 
 @Controller
-public class Frontpage {
+public class FrontpageController {
 	
 	@Autowired private final CategoryMethods categoryMethods;
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
 	
 	@Autowired
-	public Frontpage(CategoryMethods categoryMethods, ArticleRepo articleRepo){
+	public FrontpageController(CategoryMethods categoryMethods, ArticleRepo articleRepo){
 		this.categoryMethods = categoryMethods;
 	}
-		
+	
+	/**
+	 * returns the frontpage with categories
+	 * @param model
+	 * @return frontpage template
+	 */
 	@RequestMapping({"/", "/frontpage"})
 	public String frontPage(Model model) {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
-		 model.addAttribute("current_category",new Category("AlleKategorien", 0));
-		 model.addAttribute("current_ort",new Location());
+		model.addAttribute("current_category",new Category("AlleKategorien", 0));
+		model.addAttribute("current_ort",new Location());
 		return "frontpage";
 	}
 	
