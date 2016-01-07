@@ -22,6 +22,7 @@ import kickstart.model.Category;
 import kickstart.model.CategoryFirstTierObject;
 import kickstart.model.CategoryRepo;
 import kickstart.model.NewAttributes;
+import kickstart.model.Ort;
 import kickstart.model.SearchQuery;
 import kickstart.model.User;
 import kickstart.model.UserRepository;
@@ -39,6 +40,7 @@ public class SearchController {
 	@Autowired private final CategoryRepo categories;	
 	@Autowired private final ArticleRepo articleRepo;	
 	private long current_cat=0;
+	private Ort ort=new Ort();
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
 	
 	@Autowired
@@ -49,6 +51,41 @@ public class SearchController {
 		this.userRepository = userRepository;
 		this.categories = categories;
 		this.articleRepo = articleRepo;
+	}
+	
+	public LinkedList<Article> sortOutArticlesWithDistance(List<Article> articles){
+		LinkedList<Article> output= new LinkedList<Article>();
+		
+		
+		
+		for(Article article:articles){
+			System.out.print("Distance: "+distance(article.getLatitude(),article.getLongitude(),ort.getLatitude(),ort.getLongitude()));
+			if (this.ort.getDistance()==0 || this.ort.getAddress().isEmpty() || this.ort.getLatitude()==0 || this.ort.getLongitude()==0) output.add(article); 
+			else {
+				if (distance(article.getLatitude(),article.getLongitude(),this.ort.getLatitude(),this.ort.getLongitude()) <= this.ort.getDistance()) 
+					{output.add(article); 
+					System.out.println(ort.toString()); 
+					System.out.println("Wird vergleicht mit");
+					System.out.println(article.getLatitude()); 
+					System.out.println(article.getLongitude());
+					}		
+			}
+		}
+		
+		
+		return output;
+	}
+	
+	private static double distance(double lat1, double lon1, double lat2, double lon2) {
+		double delta = lon1 - lon2;
+		double dist = Math.sin(lat1* Math.PI / 180.0) * Math.sin(lat2* Math.PI / 180.0) + Math.cos(lat1* Math.PI / 180.0) * Math.cos(lat2* Math.PI / 180.0) * Math.cos(delta * Math.PI / 180.0);
+		dist = Math.acos(dist);
+		dist = dist * 180 / Math.PI;
+		dist = dist * 60 * 1.1515;
+		dist = dist * 1.609344;
+		
+
+		return dist;
 	}
 
 	protected LinkedList<CategoryFirstTierObject> getProcessedCategories(){
@@ -94,6 +131,7 @@ public class SearchController {
 	public Model getCurrent_cat(Model model) {
 		if (current_cat==0) model.addAttribute("current_category",new Category("Alle Kategorien", 0));
 		else model.addAttribute("current_category",this.categories.findOne(current_cat).get());
+		model.addAttribute("current_ort",this.ort);
 		return model;
 	}
 
@@ -140,7 +178,8 @@ public class SearchController {
 	public String search(Model model) {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
-		model.addAttribute("anzeigen", articleRepo.findAll());
+		model.addAttribute("anzeigen", this.sortOutArticlesWithDistance(articleRepo.findAll()));
+		model=this.getCurrent_cat(model);
 		return "search";
 	}
 	
@@ -173,7 +212,7 @@ public class SearchController {
 		     	if (good.getDescription().toLowerCase().contains(SearchQuery.getQuery().toLowerCase()) && !output.contains(good)) output.add(good);
 		     }
 		  
-		   model.addAttribute("anzeigen", output);	
+		   model.addAttribute("anzeigen", this.sortOutArticlesWithDistance(output));	
 		   
 		   return "search";
 		   
@@ -193,7 +232,7 @@ public class SearchController {
 	
 	this.processedCategories = this.getProcessedCategories();
 	model.addAttribute("categories", this.processedCategories);
-	model.addAttribute("anzeigen", catGoods);
+	model.addAttribute("anzeigen",this.sortOutArticlesWithDistance(catGoods));
 	model.addAttribute("NewAttributes",new NewAttributes());
 	model.addAttribute("FormAttributes",this.categories.findOne(catID).get().getAttributes());
 	model=this.getCurrent_cat(model);
@@ -210,7 +249,7 @@ public class SearchController {
 				
 		this.processedCategories = this.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
-		model.addAttribute("anzeigen", articles);
+		model.addAttribute("anzeigen", this.sortOutArticlesWithDistance(articles));
 		model=this.getCurrent_cat(model);
 		
 		return "search";
@@ -267,13 +306,52 @@ public class SearchController {
 				System.out.println(good.getAttributes().containsAll(searchattributes));
 				if (good.getAttributes().containsAll(searchattributes)) output.add(good);
 		} 
-		model.addAttribute("anzeigen", output);			   
+		model.addAttribute("anzeigen", this.sortOutArticlesWithDistance(output));			   
 		return "search";
 	}
+	
+
+	@RequestMapping(value = "/setsearchaddress", method = RequestMethod.POST)
+    public String setsearchaddress(@ModelAttribute("Ort") Ort ort, Model model ) 
+    {	this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		model.addAttribute("categoriesForm", this.categories.findAll());
+		model=this.getCurrent_cat(model);
+	//	model.addAttribute("FormAttributes",this.categories.findOne(articleRepo.findOne(this.getCurrent_cat()).getCategory()).get().getAttributes());
+	//	model.addAttribute("NewAttributes",new NewAttributes());
+		
+		
+		
+		List<Article> catGoods = this.getAllSubcategoryItems(this.getCurrent_cat());
+		LinkedList<Article> catGoods2 = new LinkedList<Article>();
+		
+		if (ort.getDistance()==0 || ort.getAddress().isEmpty()) {}
+		else ort = ort.GetCoordinates(ort);
+		this.ort=ort;
+		
+		//umwandlung in linkedlist
+		for(Article a:catGoods) {
+			catGoods2.add(a);
+		}
+		
+		
+		//System.out.println(ort);
+		
+		model.addAttribute("anzeigen",this.sortOutArticlesWithDistance(catGoods2));
+		model.addAttribute("Ort",new Ort());
+		return "redirect:/search";
+		
+    }
+	
+	
+	
+
+}
+
 			 
 			
 			
 			 
 			
 	
-}
+

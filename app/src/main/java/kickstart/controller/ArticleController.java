@@ -1,5 +1,6 @@
 package kickstart.controller;
 
+import kickstart.controller.SearchController;
 import java.io.BufferedOutputStream;
 
 import java.io.File;
@@ -34,6 +35,7 @@ import kickstart.utilities.SettingsRepository;
 import kickstart.model.ArticleRepo;
 import kickstart.model.CategoryFirstTierObject;
 import kickstart.model.Attribute;
+import kickstart.model.Category;
 
 import javax.validation.Valid;
 
@@ -95,6 +97,7 @@ public class ArticleController {
 	    
 	    model.addAttribute("currentUserId", currentUserId);
 		model.addAttribute("isAdminLoggedIn", isAdminLoggedIn);
+		
 	    return "article";
 	}
 	
@@ -110,6 +113,8 @@ public class ArticleController {
 		model.addAttribute("userId", userId);
 		model.addAttribute("user", this.userRepository.findOne(userId));
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
+		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_ort",new Ort(""));
 		
 		boolean isAdminLoggedIn = false;
 		if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))) isAdminLoggedIn = true;
@@ -137,6 +142,8 @@ public class ArticleController {
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 		model.addAttribute("Article", originalArticle);
 		model.addAttribute("tags",articleRepo.findOne(id).getAttributes());
+		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_ort",new Ort(""));
 
 		//case: current user didnt create article && logged in user no admin -> end
 		if(originalArticle.getCreator().getId() != currentUserId && !userAccount.get().hasRole(new Role("ROLE_ADMIN"))){
@@ -190,6 +197,8 @@ public class ArticleController {
 		System.out.println(originalArticle);
 		model.addAttribute("Article", articleRepo.findOne(id));
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
+		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_ort",new Ort(""));
 		
 		currentUserId = -1;
 		boolean isAdminLoggedIn = false;
@@ -234,6 +243,8 @@ public class ArticleController {
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
 		model.addAttribute("article", new Article());
+		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_ort",new Ort(""));
 
 		User creator = userRepository.findByUserAccount(userAccount.get());
 		model.addAttribute("creator", creator);
@@ -255,6 +266,8 @@ public class ArticleController {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
+		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_ort",new Ort(""));
 		
 		if(result.hasErrors()){
 			System.out.println("FEHLER");
@@ -294,8 +307,8 @@ public class ArticleController {
 				Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), picture, newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getZip(), creator, newArticleForm.getKind());
 				
 				//to do 
-				Ort ort = new Ort();
-				ort = ort.GetCoordinates(newArticleForm.getStreetName()+" "+newArticleForm.getZip()+" "+newArticleForm.getCity());
+				Ort ort = new Ort(newArticleForm.getStreetName()+" "+newArticleForm.getZip()+" "+newArticleForm.getCity());
+				ort = ort.GetCoordinates(ort);
 				 article.setLatitude(ort.getLatitude()); 
 	    		 article.setLongitude(ort.getLongitude());
 				
@@ -313,8 +326,8 @@ public class ArticleController {
 
 			//save article without Picture
 			Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(),  newArticleForm.getZip(),creator, newArticleForm.getKind());
-			Ort ort = new Ort();
-			ort = ort.GetCoordinates(newArticleForm.getStreetName()+" "+newArticleForm.getZip()+" "+newArticleForm.getCity());
+			Ort ort = new Ort(newArticleForm.getStreetName()+" "+newArticleForm.getZip()+" "+newArticleForm.getCity());
+			ort = ort.GetCoordinates(ort);
 			article.setLatitude(ort.getLatitude()); 
     		article.setLongitude(ort.getLongitude());
 			articleRepo.save(article);
@@ -346,6 +359,8 @@ public class ArticleController {
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 		model.addAttribute("FormAttributes",this.categories.findOne(articleRepo.findOne(id).getCategory()).get().getAttributes());
 		model.addAttribute("NewAttributes",new NewAttributes());
+		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_ort",new Ort(""));
 		
 		boolean isAdminLoggedIn = false;
 		if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))) isAdminLoggedIn = true;

@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kickstart.model.Article;
 import kickstart.model.ArticleRepo;
+import kickstart.model.Category;
 import kickstart.model.CategoryFirstTierObject;
 import kickstart.model.CategoryRepo;
 import kickstart.model.ChatConversation;
 import kickstart.model.ChatConversationRepo;
 import kickstart.model.ChatMessage;
 import kickstart.model.ChatMessageRepo;
+import kickstart.model.Ort;
 import kickstart.model.User;
 import kickstart.model.UserRepository;
 import kickstart.utilities.CategoryMethods;
@@ -76,6 +78,8 @@ public class ChatController {
 		
 		model.addAttribute("incomingMessages", incoming);
 		model.addAttribute("outgoingMessages", outgoing);
+		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_ort",new Ort(""));
 		
 		return "chat/chatMain";
 	}
@@ -128,6 +132,8 @@ public class ChatController {
 		
 		model.addAttribute("incomingMessages", incoming);
 		model.addAttribute("outgoingMessages", outgoing);
+		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_ort",new Ort(""));
 		//for menu end
 		
 		model.addAttribute("stringInForm", new StringInForm());
@@ -205,6 +211,8 @@ public class ChatController {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("article", this.articleRepo.findOne(id));
+		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_ort",new Ort(""));
 
 		model.addAttribute("stringInForm", new StringInForm());
 		
