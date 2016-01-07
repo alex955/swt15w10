@@ -123,15 +123,126 @@ public class RefugeeDataInitializer implements DataInitializer {
 //        categories.save(new Category("Mode", -1));
 //        categories.save(new Category("Kurse", -1));
     	  	
-        Category cat1 = new Category("Fahrrad", -1);
+    	Category cat1 = new Category("Fahrrad", -1);
+    	{
+    	LinkedList<String> tagsState = new LinkedList<String>();
+    	tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+    	Attribute attState = new Attribute("att.state", tagsState);
+    	
+    	LinkedList<String> tagsColor = new LinkedList<String>();
+    	tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+    	Attribute attColor = new Attribute("att.color", tagsColor);
+        
+        cat1.addAttribute(attState);
+        cat1.addAttribute(attColor);
+    	}
         categories.save(cat1);
         
         Category cat2 = new Category("FamilieKindWohnung", -1); 
+        {
+        	LinkedList<String> tagsState = new LinkedList<String>();
+        	tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        	Attribute attState = new Attribute("att.state", tagsState);
+        	
+        	LinkedList<String> tagsColor = new LinkedList<String>();
+        	tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+        	Attribute attColor = new Attribute("att.color", tagsColor);
+        	
+        	cat2.addAttribute(attColor);
+            cat2.addAttribute(attState);
+        }
+        
         		Category cat2_1 = new Category("Babybekleidung", 2);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+                	tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+                	Attribute attState = new Attribute("att.state", tagsState);
+                	
+                	LinkedList<String> tagsColor = new LinkedList<String>();
+                	tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+                	Attribute attColor = new Attribute("att.color", tagsColor);
+        			
+        			cat2_1.addAttribute(attColor);
+            		cat2_1.addAttribute(attState);
+        		}
+        		
+        		
         		Category cat2_2 = new Category("Kinderwagen", 2);
+        		{
+        			LinkedList<String> tempList = new LinkedList<String>();
+            		tempList.add("att.stroller.for.1child");tempList.add("att.stroller.for.2childs");tempList.add("att.other");
+                	Attribute attStroller = new Attribute("att.stroller.for", tempList);
+                	
+                	LinkedList<String> tagsState = new LinkedList<String>();
+                	tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+                	Attribute attState = new Attribute("att.state", tagsState);
+                	
+                	LinkedList<String> tagsColor = new LinkedList<String>();
+                	tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+                	Attribute attColor = new Attribute("att.color", tagsColor);
+                	
+                	cat2_2.addAttribute(attColor);
+                	cat2_2.addAttribute(attState);
+                	cat2_2.addAttribute(attStroller);
+        		}
+        		
+         	
         		Category cat2_3 = new Category("Kinderbekleidung", 2);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+        			                	
+        			LinkedList<String> tagsColor = new LinkedList<String>();
+        			tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+        			Attribute attColor = new Attribute("att.color", tagsColor);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.childrenClothing.for.baby");tempList.add("att.childrenClothing.for.toddler");tempList.add("att.childrenClothing.for.schoolchild");
+        			Attribute newAtt = new Attribute("att.childrenClothing.for", tempList);
+
+        			cat2_3.addAttribute(attColor);
+        			cat2_3.addAttribute(attState);
+        			cat2_3.addAttribute(newAtt);
+        		}
+            	
         		Category cat2_4 = new Category("Möbel", 2);
-        		Category cat2_5 = new Category("SpielzeugSpiele", 2);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+        			                	
+        			LinkedList<String> tagsColor = new LinkedList<String>();
+        			tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+        			Attribute attColor = new Attribute("att.color", tagsColor);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.furniture.for.bath");tempList.add("att.furniture.for.kitchen");tempList.add("att.furniture.for.livingRoom");tempList.add("att.furniture.for.diningRoom");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.furniture.for", tempList);
+
+        			cat2_4.addAttribute(attColor);
+        			cat2_4.addAttribute(attState);
+        			cat2_4.addAttribute(newAtt);
+        		}
+        		Category cat2_5 = new Category("SpielzeugSpiele", 2);{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+        			                	
+        			LinkedList<String> tagsColor = new LinkedList<String>();
+        			tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+        			Attribute attColor = new Attribute("att.color", tagsColor);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.baby");tempList.add("att.children");tempList.add("att.adult");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.games.for", tempList);
+
+        			cat2_5.addAttribute(attColor);
+        			cat2_5.addAttribute(attState);
+        			cat2_5.addAttribute(newAtt);
+        		}
         categories.save(cat2);
         categories.save(cat2_1);	
         categories.save(cat2_2);	
@@ -140,29 +251,244 @@ public class RefugeeDataInitializer implements DataInitializer {
         categories.save(cat2_5);	
 
         Category cat3 = new Category("Hobby", -1);
+        {
+        	LinkedList<String> tagsState = new LinkedList<String>();
+        	tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        	Attribute attState = new Attribute("att.state", tagsState);
+
+        	LinkedList<String> tempList = new LinkedList<String>();
+        	tempList.add("att.musicArt");tempList.add("att.sports");tempList.add("att.culture");tempList.add("att.entertainment");
+        	tempList.add("att.other");
+        	Attribute newAtt= new Attribute("att.hobby", tempList);
+        	
+        	cat3.addAttribute(attState);
+        	cat3.addAttribute(newAtt);
+        }
         categories.save(cat3);
 
     	Category cat4 = new Category("HausGartenAccesoires", -1);
+    	{
+    		LinkedList<String> tagsState = new LinkedList<String>();
+    		tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+    		Attribute attState = new Attribute("att.state", tagsState);
+    		                	
+    		LinkedList<String> tagsColor = new LinkedList<String>();
+    		tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+    		Attribute attColor = new Attribute("att.color", tagsColor);
+
+    		cat4.addAttribute(attColor);
+    		cat4.addAttribute(attState);
+    	}
         		Category cat4_1 = new Category("Dekoration", 9);
+        		{
+        			LinkedList<String> tagsColor = new LinkedList<String>();
+        			tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+        			Attribute attColor = new Attribute("att.color", tagsColor);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.forLocation.inside");tempList.add("att.forLocation.outside");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.forLocation", tempList);
+
+        			cat4_1.addAttribute(attColor);
+        			cat4_1.addAttribute(newAtt);
+        		}
         		Category cat4_2 = new Category("GartenPflanzen", 9);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.kind.plant");tempList.add("att.kind.decoration");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.kind", tempList);
+
+        			cat4_2.addAttribute(attState);
+        			cat4_2.addAttribute(newAtt);
+        		}
         		Category cat4_3 = new Category("Heimwerken", 9);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.diy.tools");tempList.add("att.diy.material");tempList.add("att.diy.instructions");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.kind", tempList);
+
+        			cat4_3.addAttribute(attState);
+        			cat4_3.addAttribute(newAtt);
+        		}
         		Category cat4_4 = new Category("BadKücheEsszimmer", 9);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.bathKitchenDining.furnite");tempList.add("att.bathKitchenDining.cutlery");tempList.add("att.bathKitchenDining.toiletries");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.kind", tempList);
+
+        			cat4_4.addAttribute(attState);
+        			cat4_4.addAttribute(newAtt);
+        		}
         		Category cat4_5 = new Category("Wohnzimmer", 9);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+        			                	
+        			LinkedList<String> tagsColor = new LinkedList<String>();
+        			tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+        			Attribute attColor = new Attribute("att.color", tagsColor);
+
+        			cat4_5.addAttribute(attColor);
+        			cat4_5.addAttribute(attState);
+        		}
         categories.save(cat4);
         categories.save(cat4_1);
         categories.save(cat4_2);
         categories.save(cat4_3);
         categories.save(cat4_4);
         categories.save(cat4_5);
-        		
+        
         		
         Category cat5 = new Category("KleidungModeBeauty", -1);
+        {
+        	LinkedList<String> tagsState = new LinkedList<String>();
+			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+			Attribute attState = new Attribute("att.state", tagsState);
+			                	
+			LinkedList<String> tagsColor = new LinkedList<String>();
+			tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+			Attribute attColor = new Attribute("att.color", tagsColor);
+
+			cat5.addAttribute(attColor);
+			cat5.addAttribute(attState);
+        }
         		Category cat5_1 = new Category("Damenbekleidung", 15);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+        			                	
+        			LinkedList<String> tagsColor = new LinkedList<String>();
+        			tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+        			Attribute attColor = new Attribute("att.color", tagsColor);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.size.xs");tempList.add("att.size.s");tempList.add("att.size.m");tempList.add("att.size.l");tempList.add("att.size.xl");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.size", tempList);
+        			
+        			LinkedList<String> tempList2 = new LinkedList<String>();
+        			tempList2.add("att.womenClothing.upperBody");tempList2.add("att.womenClothing.pantsSkirts");tempList2.add("att.womenClothing.underwear");
+        			tempList2.add("att.other");
+        			Attribute newAtt2= new Attribute("att.kind", tempList2);
+
+        			cat5_1.addAttribute(attColor);
+        			cat5_1.addAttribute(attState);
+        			cat5_1.addAttribute(newAtt);
+        			cat5_1.addAttribute(newAtt2);
+        		}
         		Category cat5_2 = new Category("Damenschuhe", 15);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+        			                	
+        			LinkedList<String> tagsColor = new LinkedList<String>();
+        			tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+        			Attribute attColor = new Attribute("att.color", tagsColor);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.shoeSize.30");tempList.add("att.shoeSize.31");tempList.add("att.shoeSize.32");tempList.add("att.shoeSize.33");tempList.add("att.shoeSize.34");tempList.add("att.shoeSize.35");tempList.add("att.shoeSize.36");tempList.add("att.shoeSize.37");tempList.add("att.shoeSize.38");tempList.add("att.shoeSize.39");tempList.add("att.shoeSize.40");tempList.add("att.shoeSize.41");tempList.add("att.shoeSize.42");tempList.add("att.shoeSize.43");tempList.add("att.shoeSize.44");tempList.add("att.shoeSize.45");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.shoeSize", tempList);
+
+        			cat5_2.addAttribute(attColor);
+        			cat5_2.addAttribute(attState);
+        			cat5_2.addAttribute(newAtt);
+        		}
         		Category cat5_3 = new Category("Herrenbekleidung", 15);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+        			                	
+        			LinkedList<String> tagsColor = new LinkedList<String>();
+        			tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+        			Attribute attColor = new Attribute("att.color", tagsColor);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.size.xs");tempList.add("att.size.s");tempList.add("att.size.m");tempList.add("att.size.l");tempList.add("att.size.xl");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.size", tempList);
+        			
+        			LinkedList<String> tempList2 = new LinkedList<String>();
+        			tempList2.add("att.womenClothing.upperBody");tempList2.add("att.womenClothing.pantsSkirts");tempList2.add("att.womenClothing.underwear");
+        			tempList2.add("att.other");
+        			Attribute newAtt2= new Attribute("att.kind", tempList2);
+
+        			cat5_3.addAttribute(attColor);
+        			cat5_3.addAttribute(attState);
+        			cat5_3.addAttribute(newAtt);
+        			cat5_3.addAttribute(newAtt2);
+        		}
         		Category cat5_4 = new Category("Herrenschuhe", 15);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+        			                	
+        			LinkedList<String> tagsColor = new LinkedList<String>();
+        			tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+        			Attribute attColor = new Attribute("att.color", tagsColor);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.shoeSize.30");tempList.add("att.shoeSize.31");tempList.add("att.shoeSize.32");tempList.add("att.shoeSize.33");tempList.add("att.shoeSize.34");tempList.add("att.shoeSize.35");tempList.add("att.shoeSize.36");tempList.add("att.shoeSize.37");tempList.add("att.shoeSize.38");tempList.add("att.shoeSize.39");tempList.add("att.shoeSize.40");tempList.add("att.shoeSize.41");tempList.add("att.shoeSize.42");tempList.add("att.shoeSize.43");tempList.add("att.shoeSize.44");tempList.add("att.shoeSize.45");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.shoeSize", tempList);
+
+        			cat5_4.addAttribute(attColor);
+        			cat5_4.addAttribute(attState);
+        			cat5_4.addAttribute(newAtt);
+        		}
         		Category cat5_5 = new Category("SchmuckAccessoires", 15);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+        			                	
+        			LinkedList<String> tagsColor = new LinkedList<String>();
+        			tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+        			Attribute attColor = new Attribute("att.color", tagsColor);
+
+        			cat5_5.addAttribute(attColor);
+        			cat5_5.addAttribute(attState);
+        		}
         		Category cat5_6 = new Category("Taschen", 15);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+        			                	
+        			LinkedList<String> tagsColor = new LinkedList<String>();
+        			tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+        			Attribute attColor = new Attribute("att.color", tagsColor);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.forGender.men");tempList.add("att.forGender.women");tempList.add("att.forGender.both");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.forGender", tempList);
+
+        			cat5_6.addAttribute(attColor);
+        			cat5_6.addAttribute(attState);
+        			cat5_6.addAttribute(newAtt);
+        		}
         categories.save(cat5);		
         categories.save(cat5_1);
         categories.save(cat5_2);
@@ -172,10 +498,69 @@ public class RefugeeDataInitializer implements DataInitializer {
         categories.save(cat5_6);
         		
         Category cat6 = new Category("MultimediaElektronik", -1);
+        {
+        	LinkedList<String> tagsState = new LinkedList<String>();
+        	tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        	Attribute attState = new Attribute("att.state", tagsState);
+        	
+        	cat6.addAttribute(attState);
+        }
         		Category cat6_1 = new Category("AudioHifi", 22);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.audioHifi.device");tempList.add("att.audioHifi.cdDvd");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.kind", tempList);
+
+        			cat6_1.addAttribute(attState);
+        			cat6_1.addAttribute(newAtt);
+        		}
         		Category cat6_2 = new Category("Telefon", 22);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.phone.cellphone");tempList.add("att.phone.tablet");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.kind", tempList);
+
+        			cat6_2.addAttribute(attState);
+        			cat6_2.addAttribute(newAtt);
+        		}
         		Category cat6_3 = new Category("Foto", 22);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.photo.device");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.kind", tempList);
+
+        			cat6_3.addAttribute(attState);
+        			cat6_3.addAttribute(newAtt);
+        		}
         		Category cat6_4 = new Category("TV", 22);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.tv.device");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.kind", tempList);
+
+        			cat6_4.addAttribute(attState);
+        			cat6_4.addAttribute(newAtt);
+        		}
         categories.save(cat6);
         categories.save(cat6_1);
         categories.save(cat6_2);
@@ -183,13 +568,103 @@ public class RefugeeDataInitializer implements DataInitializer {
         categories.save(cat6_4);
         		
         Category cat7 = new Category("MusikFilmBücher", -1);
+        {
+        	LinkedList<String> tagsState = new LinkedList<String>();
+			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+			Attribute attState = new Attribute("att.state", tagsState);
+
+			cat6_2.addAttribute(attState);
+        }
         		Category cat7_1 = new Category("Bücher", 27);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.book.book");tempList.add("att.book.lexicon");tempList.add("att.book.dictionary");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.kind", tempList);
+        			
+        			LinkedList<String> tempList2 = new LinkedList<String>();
+        			tempList2.add("att.book.content.education");tempList2.add("att.book.content.entertainment");tempList2.add("att.book.content.thriller");tempList2.add("att.book.content.novel");
+        			tempList2.add("att.other");
+        			Attribute newAtt2= new Attribute("att.book.content", tempList2);
+        			
+        			LinkedList<String> tempList3 = new LinkedList<String>();
+        			tempList3.add("att.forAge.adults");tempList3.add("att.forAge.children");tempList3.add("att.forAge.both");
+        			tempList3.add("att.other");
+        			Attribute newAtt3= new Attribute("att.forAge", tempList3);
+
+        			cat7_1.addAttribute(attState);
+        			cat7_1.addAttribute(newAtt);
+        			cat7_1.addAttribute(newAtt2);
+        			cat7_1.addAttribute(newAtt3);
+        		}
         		Category cat7_2 = new Category("Comics", 27);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+        			
+        			LinkedList<String> tempList3 = new LinkedList<String>();
+        			tempList3.add("att.forAge.adults");tempList3.add("att.forAge.children");tempList3.add("att.forAge.both");
+        			tempList3.add("att.other");
+        			Attribute newAtt= new Attribute("att.forAge", tempList3);
+        			
+        			cat7_1.addAttribute(attState);
+        			cat7_1.addAttribute(newAtt);
+        		}
         		Category cat7_3 = new Category("Fachliteratur", 27);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+
+        			cat7_3.addAttribute(attState);
+        		}
         		Category cat7_4 = new Category("Filme", 27);
+        		{
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.movies.medium.vhs");tempList.add("att.movies.medium.dvd");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.movies.medium", tempList);
+        			
+        			LinkedList<String> tempList2 = new LinkedList<String>();
+        			tempList2.add("att.movies.content.drama");tempList2.add("att.movies.content.thriller");tempList2.add("att.movies.content.action");tempList2.add("att.movies.content.childrenMovie");
+        			tempList2.add("att.other");
+        			Attribute newAtt2= new Attribute("att.movies.content", tempList2);
+        			
+        			LinkedList<String> tempList3 = new LinkedList<String>();
+        			tempList3.add("att.forAge.adults");tempList3.add("att.forAge.children");tempList3.add("att.forAge.both");
+
+        			cat7_4.addAttribute(newAtt);
+        			cat7_4.addAttribute(newAtt2);
+        		}
         		Category cat7_5 = new Category("MusikMusikinstrumente", 27);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+
+        			cat7_5.addAttribute(attState);
+        		}
         		Category cat7_6 = new Category("Zeitschriften", 27);
+        		{
+        			LinkedList<String> tags = new LinkedList<String>();
+        			tags.add("att.magazine.education");tags.add("att.magazine.journal");tags.add("att.magazine.entertainment");
+        			Attribute attState = new Attribute("att.kind", tags);
+
+        			cat7_5.addAttribute(attState);
+        		}
         		Category cat7_7 = new Category("Verschiedenes", 27);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+
+        			cat7_7.addAttribute(attState);
+        		}
         categories.save(cat7);
         categories.save(cat7_1);
         categories.save(cat7_2);
@@ -200,6 +675,14 @@ public class RefugeeDataInitializer implements DataInitializer {
         categories.save(cat7_7);
         		
         Category cat8 = new Category("UnterrichtKurseAktivitäten", -1);
+        {
+        	LinkedList<String> tempList = new LinkedList<String>();
+        	tempList.add("att.activity.education");tempList.add("att.activity.languageLearning");tempList.add("att.activity.cooking");tempList.add("att.activity.culture");tempList.add("att.activity.dancing");tempList.add("att.activity.music");tempList.add("att.activity.cityTour");
+        	tempList.add("att.other");
+        	Attribute newAtt= new Attribute("att.kind", tempList);
+        	
+        	cat8.addAttribute(newAtt);
+        }
 //        		Category cat8_1 = new Category("Backen & Kochen", 35);
 //        		Category cat8_2 = new Category("Computer", 35);
 //        		Category cat8_3 = new Category("Sprachen", 35);
