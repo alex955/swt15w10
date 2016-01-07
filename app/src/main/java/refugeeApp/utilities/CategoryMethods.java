@@ -26,7 +26,6 @@ public class CategoryMethods {
 		this.categories = categories;
 	}
 	
-
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
 	
 	public LinkedList<CategoryFirstTierObject> getProcessedCategories(){
@@ -73,8 +72,5 @@ public class CategoryMethods {
 		
 		return toReturn;
 		
-	}
-	
-	
-	
+	}	
 }

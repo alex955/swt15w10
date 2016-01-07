@@ -179,7 +179,6 @@ public class Article {
 
 	public void addAttribute(Attribute attribute){
 		this.attributes.add(attribute);
-		System.out.println(attribute.toString());
 	}
 
 	public LocalDateTime getCreationdate() {

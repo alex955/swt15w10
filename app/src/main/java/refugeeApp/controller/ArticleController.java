@@ -136,8 +136,7 @@ public class ArticleController {
 		if(result.hasErrors())
 			return "editArticle";
 
-		Article originalArticle = this.articleRepo.findOne(id);
-		
+		Article originalArticle = this.articleRepo.findOne(id);		
 		long currentUserId = this.userRepository.findByUserAccount(userAccount.get()).getId();
 
 		model.addAttribute("categories", this.processedCategories);
@@ -180,19 +179,16 @@ public class ArticleController {
                 BufferedOutputStream stream = new BufferedOutputStream( new FileOutputStream(serverFile));
                 stream.write(bytes);
                 stream.close();
-                System.out.println("Server File Location="
-                        + serverFile.getAbsolutePath());         
-                
+
                 //get the logged in user
                 User creator = userRepository.findByUserAccount(userAccount.get());
-//                if(originalArticle.getPicture() != null){
-//                	pictureRepo.delete(originalArticle.getPicture());
-//                }
+                if(originalArticle.getPicture() != null){
+                	pictureRepo.delete(originalArticle.getPicture());
+                }
                 Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename(), creator);
 				pictureRepo.save(picture);
 				originalArticle.setPicture(picture);
-        		
-        		System.out.println("You successfully uploaded file=" + newArticleForm.getTitle());
+				
             } catch (Exception e) {
                 return "You failed to upload " + newArticleForm.getTitle() + " => " + e.getMessage();
             }
@@ -201,11 +197,10 @@ public class ArticleController {
 		//Breitengrad und Längengradberechnung 
 		Location ort = new Location(newArticleForm.getStreetName()+" "+newArticleForm.getZip()+" "+newArticleForm.getCity());
 		ort = ort.GetCoordinates(ort);
-		 originalArticle.setLatitude(ort.getLatitude()); 
-		 originalArticle.setLongitude(ort.getLongitude());
+		originalArticle.setLatitude(ort.getLatitude()); 
+		originalArticle.setLongitude(ort.getLongitude());
 		
 		this.articleRepo.save(originalArticle);
-		System.out.println(originalArticle);
 		model.addAttribute("Article", articleRepo.findOne(id));
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 		model.addAttribute("current_category",new Category("AlleKategorien",1));
@@ -224,6 +219,7 @@ public class ArticleController {
 	    }
 
 		model.addAttribute("isAdminLoggedIn", isAdminLoggedIn);
+		model.addAttribute("category", categories.findOne(articleRepo.findOne(id).getCategory()).get());
 		
 		return "article";
 	}
@@ -292,8 +288,6 @@ public class ArticleController {
 		model.addAttribute("current_ort",new Location(""));
 		
 		if(result.hasErrors()){
-			System.out.println("FEHLER");
-			System.out.println(result.toString());
 			return "newArticle";
 		}
 
@@ -304,7 +298,6 @@ public class ArticleController {
                 // Creating the directory to store file
                 String rootPath;
                 if(settingsRepo.findOne("UploadedPicturesPath") == null){
-                	System.out.println("null");
                 	rootPath = System.getProperty("user.home");
                 }
                 else rootPath = settingsRepo.findOne("UploadedPicturesPath").getValue();
@@ -342,7 +335,6 @@ public class ArticleController {
 			article.setLatitude(ort.getLatitude()); 
     		article.setLongitude(ort.getLongitude());
 			articleRepo.save(article);
-    		System.out.println(article);
             return ("redirect:/editAttributes/"+article.getId());
         }
 	}
@@ -408,22 +400,20 @@ public class ArticleController {
 			count++;	
 			} 
 			else
-			{ System.out.println(e);
-			LinkedList<String> tag = new LinkedList<String>();
-			tag.add(e);
-			// fügt das Attribut der Attribute Liste hinzu
-			Attribute att = new Attribute();
-			att.setName(this.categories.findOne(articleRepo.findOne(id).getCategory()).get().getAttributes().get(count).getName());
-			att.setTags(tag);
-			originalArticle.addAttribute(att);
-			count++;
+			{
+				LinkedList<String> tag = new LinkedList<String>();
+				tag.add(e);
+				// fügt das Attribut der Attribute Liste hinzu
+				Attribute att = new Attribute();
+				att.setName(this.categories.findOne(articleRepo.findOne(id).getCategory()).get().getAttributes().get(count).getName());
+				att.setTags(tag);
+				originalArticle.addAttribute(att);
+				count++;
 			}
 		}
 		
 		for(Attribute a:originalArticle.getAttributes()){
-			System.out.println(a.getName());
 			for(String s:a.getTags()){
-				System.out.println(s);
 			}
 			
 		}

@@ -135,7 +135,6 @@ public class AdminController {
     	category.setPredecessor(-1);
     	category.setRoot(true);
         this.categories.save(category);
-        System.out.println("added category");
         //model.addAttribute("categories", categories.findAll());
         
         return "redirect:/admin";
@@ -152,7 +151,6 @@ public class AdminController {
      */
 	@RequestMapping(value = "/admin/deleteCategory/{id}")
 	public String deleteCategory(@PathVariable Long id) {
-		System.out.println("delete category with id " + id);
 		categories.delete(id);
 		deleteSubcategories(id);
 		return "redirect:/admin";
@@ -166,7 +164,6 @@ public class AdminController {
 		for(Category s : categories.findAll()){
 			if(s.getPredecessor() == id){
 				long idToDelete = s.getId();
-				System.out.println("delete subcategory with id " + idToDelete);
 				categories.delete(idToDelete);
 				deleteSubcategories(idToDelete);
 			}
@@ -257,10 +254,7 @@ public class AdminController {
 	@RequestMapping(value="/admin/editUser/{id}",method=RequestMethod.POST)
 	public String processEditUser(@PathVariable Long id, @Valid UserSettings userSettings, BindingResult result) {
 		User user = this.userRepository.findOne(id);
-
-		System.out.println(user.toString());
-		
-		
+	
 		if(!userSettings.getNewFirstName().isEmpty())
 			user.setFirstName(userSettings.getNewFirstName());
 		

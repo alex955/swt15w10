@@ -68,12 +68,9 @@ public class Location {
 		GeocodingResult[] results;
 		try {
 			results = GeocodingApi.geocode(context,ort.getAddress()).await();
-			System.out.println(results[0].formattedAddress);
 				
 	    	ort.latitude=results[0].geometry.location.lat;
 	    	ort.longitude=results[0].geometry.location.lng;
-	    	System.out.println(ort.longitude);
-	    	System.out.println(ort.latitude);
 			
 		
 		} catch (Exception e) {

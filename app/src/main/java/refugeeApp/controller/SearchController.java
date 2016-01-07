@@ -149,7 +149,6 @@ public class SearchController {
 		for(Category s : categories.findAll()){
 			if(s.getPredecessor() == subcatId){
 				subcategories.add(s.getId());
-				//System.out.println("\tsubcategory zum durchschauen: "+s.getName());
 			}
 		}
 		
@@ -219,23 +218,22 @@ public class SearchController {
 			
 	@RequestMapping(value = "/search/{category}")
 	public String searchByCategory(@PathVariable("category") Long catID, Model model)
-	{  System.out.println("Es wird in der Kategorie "+catID+" gesucht");
+	{ 	
+		//setzt aktuelle kategorie auf catID
+		this.setCurrent_cat(catID);
+		
+		List<Article> catGoods = this.getAllSubcategoryItems(catID);
 	
-	//setzt aktuelle kategorie auf catID
-	this.setCurrent_cat(catID);
-	
-	List<Article> catGoods = this.getAllSubcategoryItems(catID);
-
-	System.out.println("Anzahl an Artikeln: " + catGoods.size());
-	
-	this.processedCategories = this.getProcessedCategories();
-	model.addAttribute("categories", this.processedCategories);
-	model.addAttribute("anzeigen",this.sortOutArticlesWithDistance(catGoods));
-	model.addAttribute("NewAttributes",new NewAttributes());
-	model.addAttribute("FormAttributes",this.categories.findOne(catID).get().getAttributes());
-	model=this.getCurrent_cat(model);
-	
-	return "search";
+		System.out.println("Anzahl an Artikeln: " + catGoods.size());
+		
+		this.processedCategories = this.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		model.addAttribute("anzeigen",this.sortOutArticlesWithDistance(catGoods));
+		model.addAttribute("NewAttributes",new NewAttributes());
+		model.addAttribute("FormAttributes",this.categories.findOne(catID).get().getAttributes());
+		model=this.getCurrent_cat(model);
+		
+		return "search";
 	}
 			
 	/**
@@ -274,12 +272,10 @@ public class SearchController {
 		model=this.getCurrent_cat(model);
 		SearchQuery.setCategory(this.getCurrent_cat());
 		
-		System.out.println("Gesucht "+ SearchQuery.getQuery() +" in "+SearchQuery.getCategory());
 		List<Article> catGoods = new LinkedList<Article>();
 		
 		if (SearchQuery.getCategory()==0) { catGoods = this.articleRepo.findAll() ;}
 				else { catGoods = articleRepo.findByCategory(SearchQuery.getCategory()); }
-		System.out.println("Length of list: " + catGoods.size());
 		 
 		List<Article> output = new LinkedList<Article>();
 		List<String> providedtags =  SearchTag.getChoosenTags();
@@ -303,13 +299,9 @@ public class SearchController {
 			count++;
 			}
 		 } 
-				
-		System.out.println(searchattributes);
 		
 		//Attribute mit Artikeln vergleichen
 		for(Article good:catGoods) {
-				System.out.println(good.getAttributes());
-				System.out.println(good.getAttributes().containsAll(searchattributes));
 				if (good.getAttributes().containsAll(searchattributes)) output.add(good);
 		} 
 		model.addAttribute("anzeigen", this.sortOutArticlesWithDistance(output));			   

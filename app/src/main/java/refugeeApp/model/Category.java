@@ -98,7 +98,6 @@ public class Category {
 	
 	public void addAttribute(Attribute attribute){
 		this.attributes.add(attribute);
-		System.out.println(attribute.toString());
 	}
 
 }

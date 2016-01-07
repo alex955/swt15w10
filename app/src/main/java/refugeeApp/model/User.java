@@ -15,12 +15,8 @@ public class User {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-
     private long id;
-
-    @OneToOne
-    private UserAccount userAccount;
-
+    @OneToOne private UserAccount userAccount;
     private Role role;
     private String lastName;
     private String firstName;
@@ -37,9 +33,7 @@ public class User {
     private String language2;
     private String language3;
     private double  latitude;
-    private double longitude;
-   
-    
+    private double longitude;    
     private boolean validated;
     private int hashcode;
 
@@ -63,11 +57,8 @@ public class User {
 	public User() {}
 
     public User(long id, UserAccount userAccount, String lastName, String firstName, String country, String email, String city, String zip, String streetName, String addressAddition, String language1, String language2, String language3) {
-
-        this.userAccount = userAccount;
-        
-        this.username = userAccount.getUsername();
-        
+        this.userAccount = userAccount;        
+        this.username = userAccount.getUsername();       
         this.lastName = lastName;
         this.firstName = firstName;
         this.country = country;
@@ -78,11 +69,9 @@ public class User {
         this.addressAddition = addressAddition;
         this.language1 = language1;
         this.language2 = language2;
-        this.language3 = language3;
-        
+        this.language3 = language3;        
         this.validated = false;
-        this.hashcode = (lastName + firstName + Long.toString(id)).hashCode();
-        
+        this.hashcode = (lastName + firstName + Long.toString(id)).hashCode();       
     }
 
     @Override
@@ -246,7 +235,4 @@ public class User {
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
-
-
 }
-
