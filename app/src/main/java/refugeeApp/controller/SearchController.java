@@ -171,12 +171,18 @@ public class SearchController {
 		
 	//Controller
 	
+	/**
+	 * returns the search template with all existing offers
+	 * @param model
+	 * @return search template
+	 */
 	@RequestMapping("/search")
 	public String search(Model model) {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("anzeigen", this.sortOutArticlesWithDistance(articleRepo.findAll()));
-		model=this.getCurrent_cat(model);
+		model.addAttribute("current_category",new Category("AlleKategorien", 0));
+		model.addAttribute("current_ort",new Location());
 		return "search";
 	}
 	
@@ -237,7 +243,13 @@ public class SearchController {
 	return "search";
 	}
 			
-			
+	/**
+	 * searches for the offers created by the logged in user and sends them to the template		
+	 * @author Alexander Shulga
+	 * @param model
+	 * @param userAccount
+	 * @return search template
+	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/search/myArticles")
 	public String searchByUser(Model model, @LoggedIn Optional<UserAccount> userAccount){  
