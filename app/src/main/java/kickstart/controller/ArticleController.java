@@ -1,6 +1,6 @@
 package kickstart.controller;
 
-import kickstart.controller.SearchController;
+
 import java.io.BufferedOutputStream;
 
 import java.io.File;
@@ -82,6 +82,9 @@ public class ArticleController {
 	    model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 	    model.addAttribute("Useraccount", articleRepo.findOne(id).getCreator().getUserAccount());
 	    model.addAttribute("tags",articleRepo.findOne(id).getAttributes());
+	    model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_ort",new Ort(""));
+	    
 	   
 	    long currentUserId = -1;
 		boolean isAdminLoggedIn = false;
