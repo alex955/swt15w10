@@ -39,7 +39,11 @@
 						</div>
 						<div class="medium-8 small-12 columns">
 							<select name="categoryId">
-								<option th:each="categoryForm : ${categoriesForm}" th:value="${categoryForm.id}" th:selected="${categoryForm.id} == ${Article.category}"><span th:text="#{'categories.' + ${categoryForm.name}}"></span></option>
+								<div th:each="entry : ${categories}">
+									<option th:value="${entry.cat.id}"><div th:text="#{'categories.' + ${entry.cat.name}}"></div></option>	
+									<option th:each="subEntry : ${entry.subcats}" th:value="${subEntry.id}"><div th:text="'--' + #{'categories.' + ${subEntry.name}}" ></div></option>	
+								</div>
+							
 							</select>
 						</div>
 					</div>
