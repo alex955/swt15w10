@@ -7,6 +7,7 @@ import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import javax.mail.internet.AddressException;
 import javax.validation.Valid;
 
 import java.util.LinkedList;
+import java.util.Locale;
 import java.util.Optional;
 
 /**
@@ -86,7 +88,15 @@ public class SettingsController {
     @RequestMapping(value = "/usersettings", method = RequestMethod.POST)
     public String saveSettings(@ModelAttribute("UserSettingsForm") @Valid UserSettingsForm userSettingsForm, BindingResult result, @LoggedIn Optional<UserAccount> userAccount,  Model model, ModelMap modelMap) throws AddressException, MessagingException {
 
-        //Language language = languageRepository.findByBrowserLanguage("SPRACHE HIER EINFÜGEN");
+        Locale locale = LocaleContextHolder.getLocale();
+        String browserLanguage = locale.toString().substring(0, 2);
+
+        if(languageRepository.findByBrowserLanguage(browserLanguage) == null){
+            browserLanguage = "de";
+        }
+
+        Language language = languageRepository.findByBrowserLanguage(browserLanguage);
+
         User user = userRepository.findByUserAccount(userAccount.get());
         UserSettings userSettings = new UserSettings();
 
@@ -115,8 +125,29 @@ public class SettingsController {
                 final String confirmError = /* language.getPasswordConfirmError*/ "Die Passwörter stimmen nicht überein.";
                 modelMap.addAttribute("confirmError", confirmError);
             }
+
+            if(result.hasFieldErrors("newEmail")){
+                final String emailError = language.getEmailError();
+                modelMap.addAttribute("emailError", emailError);
+            }
+
+            if(result.hasFieldErrors("newPassword")){
+                final String passwordError = language.getPasswordError();
+                modelMap.addAttribute("passwordError", passwordError);
+            }
+
+            if(result.hasFieldErrors("newZip")){
+                final String zipError = language.getZipError();
+                modelMap.addAttribute("zipError", zipError);
+            }
+
+            if(result.hasFieldErrors("newStreetName")){
+                final String streetError = language.getStreetError();
+                modelMap.addAttribute("streetError", streetError);
+            }
+
             if(!passwordEncoder.matches(userSettingsForm.getOldPassword(), user.getUserAccount().getPassword().toString())) {
-                final String oldPwError = /* language.getOldPwError */ "Das alte Passwort wurde falsch eingegeben.";
+                final String oldPwError =language.getOldPwError();
                 modelMap.addAttribute("oldPwError", oldPwError);
             }
             return "usersettings";

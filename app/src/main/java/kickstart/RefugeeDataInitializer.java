@@ -61,7 +61,7 @@ public class RefugeeDataInitializer implements DataInitializer {
     @Override
     public void initialize() {
     	Settings();
-        // initializeLanguages();
+        initializeLanguages();
     	initializeUsers(userAccountManager, userRepository);
         initializeCategories();
         initializeGoods(userAccountManager, userRepository);
@@ -174,12 +174,12 @@ public class RefugeeDataInitializer implements DataInitializer {
     public void initializeActivities(){
     }
 
-   /*
+
     public void initializeLanguages(){
 
-        Language german = new Language();
+        final Language german = new Language();
 
-        german.setBrowserLanguage("german");
+        german.setBrowserLanguage("de");
         german.setRoleError("Es wurde keine Rolle ausgewählt.");
         german.setNameError("Der Name muss zwischen 2 und 30 Zeichen lang sein.");
         german.setCountryError("Es wurde keine Herkunft gewählt");
@@ -190,7 +190,6 @@ public class RefugeeDataInitializer implements DataInitializer {
         german.setCityError("Geben Sie einen Stadtnamen ein");
         german.setZipError("Die Postleitzahl muss aus exakt 5 Ziffern bestehen.");
         german.setStreetError("Geben Sie einen Straßennamen ein.");
-        german.setNumberError("Geben Sie eine gültige Hausnummer ein.");
         german.setTitleError("Geben Sie ihrem Angebot einen Titel.");
         german.setKindError("Wählen Sie die Art des Angebots.");
         german.setOldPwError("Das alte Passwort wurde falsch eingegeben.");
@@ -201,9 +200,9 @@ public class RefugeeDataInitializer implements DataInitializer {
         languageRepository.save(german);
 
 
-        Language english = new Language();
+        final Language english = new Language();
 
-        english.setBrowserLanguage("english");
+        english.setBrowserLanguage("en");
         english.setRoleError("You didn't chose a role.");
         english.setNameError("Your name must be between 2 and 30 characters long.");
         english.setCountryError("You didn't chose your country.");
@@ -214,7 +213,6 @@ public class RefugeeDataInitializer implements DataInitializer {
         english.setCityError("Enter a city");
         english.setZipError("Your zip code must contain of exactly five digits.");
         english.setStreetError("Enter a street.");
-        english.setNumberError("Enter a valid house number.");
         english.setTitleError("Give your offer a title.");
         english.setKindError("Choose your offers kind.");
         english.setOldPwError("Your old password was incorrect.");
@@ -223,5 +221,5 @@ public class RefugeeDataInitializer implements DataInitializer {
         english.setEmailConfirm("To confirm your new email address, an email has been sent to your former email address");
 
         languageRepository.save(english);
-    } */
+    }
 }

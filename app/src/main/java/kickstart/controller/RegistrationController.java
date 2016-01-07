@@ -2,6 +2,7 @@ package kickstart.controller;
 import kickstart.model.*;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.LinkedList;
+import java.util.Locale;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
@@ -60,7 +62,14 @@ public class RegistrationController {
     public String newRegistration(@ModelAttribute("RegistrationForm") @Valid RegistrationForm registrationForm, BindingResult result,ModelMap modelMap, Model model) throws AddressException, MessagingException {
 
         boolean errors = false;
-        //Language language = languageRepository.findByBrowserLanguage("SPRACHE HIER EINFÜGEN");
+        Locale locale = LocaleContextHolder.getLocale();
+        String browserLanguage = locale.toString().substring(0, 2);
+
+        if(languageRepository.findByBrowserLanguage(browserLanguage) == null){
+            browserLanguage = "de";
+        }
+
+        Language language = languageRepository.findByBrowserLanguage(browserLanguage);
 
         if(result.hasErrors())
             errors = true;
@@ -69,13 +78,60 @@ public class RegistrationController {
             errors = true;
 
         if(errors) {
-            if(!registrationForm.getPassword().equals(registrationForm.getConfirmPW())){
-                final String confirmError = /* language.getPasswordConfirmError */ "Die Passwörter stimmen nicht überein.";
-                modelMap.addAttribute("confirmError", confirmError);
+
+            if(result.hasFieldErrors("role")){
+                final String roleError = language.getRoleError();
+                modelMap.addAttribute("roleError", roleError);
             }
+
+            if(result.hasFieldErrors("lastName") || result.hasFieldErrors("firstName")){
+                final String nameError = language.getNameError();
+                modelMap.addAttribute("nameError", nameError);
+            }
+
+            if(result.hasFieldErrors("country")){
+                final String countryError = language.getCountryError();
+                modelMap.addAttribute("countryError", countryError);
+            }
+
+            if(result.hasFieldErrors("username")){
+                final String usernameError = language.getUsernameError();
+                modelMap.addAttribute("usernameError", usernameError);
+            }
+
             if(userRepository.findByUsername(registrationForm.getUsername()) != null){
-                final String usernameUsed = /* language.getUsernameUsedError*/ "Der Username ist bereits vergeben.";
+                final String usernameUsed = language.getUsernameUsedError();
                 modelMap.addAttribute("usernameUsed", usernameUsed);
+            }
+
+            if(result.hasFieldErrors("email")){
+                final String emailError = language.getEmailError();
+                modelMap.addAttribute("emailError", emailError);
+            }
+
+            if(result.hasFieldErrors("password")){
+                final String passwordError = language.getPasswordError();
+                modelMap.addAttribute("passwordError", passwordError);
+            }
+
+            if(result.hasFieldErrors("confirmPW") || !(registrationForm.getPassword().equals(registrationForm.getConfirmPW()))){
+                final String passwordConfirmError = language.getPasswordConfirmError();
+                modelMap.addAttribute("passwordConfirmError", passwordConfirmError);
+            }
+
+            if(result.hasFieldErrors("city")){
+                final String cityError = language.getCityError();
+                modelMap.addAttribute("cityError", cityError);
+            }
+
+            if(result.hasFieldErrors("zip")){
+                final String zipError = language.getZipError();
+                modelMap.addAttribute("zipError", zipError);
+            }
+
+            if(result.hasFieldErrors("streetName")){
+                final String streetError = language.getStreetError();
+                modelMap.addAttribute("streetError", streetError);
             }
 
             return "registration";
