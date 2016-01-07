@@ -59,15 +59,10 @@ public class SearchController {
 		
 		
 		for(Article article:articles){
-			System.out.print("Distance: "+distance(article.getLatitude(),article.getLongitude(),ort.getLatitude(),ort.getLongitude()));
 			if (this.ort.getDistance()==0 || this.ort.getAddress().isEmpty() || this.ort.getLatitude()==0 || this.ort.getLongitude()==0) output.add(article); 
 			else {
 				if (distance(article.getLatitude(),article.getLongitude(),this.ort.getLatitude(),this.ort.getLongitude()) <= this.ort.getDistance()) 
 					{output.add(article); 
-					System.out.println(ort.toString()); 
-					System.out.println("Wird vergleicht mit");
-					System.out.println(article.getLatitude()); 
-					System.out.println(article.getLongitude());
 					}		
 			}
 		}
@@ -176,6 +171,7 @@ public class SearchController {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("anzeigen", this.sortOutArticlesWithDistance(articleRepo.findAll()));
+		setCurrent_cat(0);
 		model=this.getCurrent_cat(model);
 		return "search";
 	}
