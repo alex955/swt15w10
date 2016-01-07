@@ -11,14 +11,15 @@ import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import kickstart.AbstractIntegrationTests;
-import kickstart.model.ArticleRepo;
-import kickstart.model.CategoryRepo;
-import kickstart.model.User;
-import kickstart.model.UserRepository;
+import refugeeApp.model.ArticleRepo;
+import refugeeApp.model.CategoryRepo;
+import refugeeApp.model.Location;
+import refugeeApp.model.User;
+import refugeeApp.model.UserRepository;
 
 public class OrtTest extends AbstractIntegrationTests {
 
-    final Ort ort = new Ort();
+    final Location ort = new Location();
     
     @Test
 	public void constructorTest() {

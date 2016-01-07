@@ -10,9 +10,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import kickstart.model.UserRepository;
 import kickstart.AbstractWebIntegrationTests;
-import kickstart.controller.AdminController;
+import refugeeApp.controller.AdminController;
+import refugeeApp.model.UserRepository;
 
 public class AdminControllerTest extends AbstractWebIntegrationTests{
 
