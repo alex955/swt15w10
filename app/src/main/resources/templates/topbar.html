@@ -71,13 +71,13 @@
 					<li class="divider"></li> 
 					<li class="has-form"><input type="text" name="address" th:value="${#strings.isEmpty(current_ort.address) == false} ?  ${current_ort.address} : ''" th:placeholder="${#strings.isEmpty(current_ort.address) == true} ?  'Ort oder PLZ eingeben' : ''"/></li> 
 					<li class="divider"></li>
-					<li class="has-dropdown"><a href="#" th:text="${current_ort.distance == 0} ?   'Suche im Umkreis mehr als 30 km'   : 'Suche im Umkreis von '+${current_ort.distance}+' km'">Suche im Umkreis von</a>
+					<li class="has-dropdown"><a href="#" th:text="#{${current_ort.distance == 0} ?   'topbar.searchmorethan30km'   : 'topbar.search'+${current_ort.distance}+'km'}">Suche im Umkreis von</a>
 						<ul class="dropdown">
-							<li><a href="#"><input type="radio" name="distance" id="distance" value="5" /> 5 Km</a></li>
-							<li><a href="#"><input type="radio" name="distance" id="distance" value="10"/> 10 Km</a></li>
-							<li><a href="#"><input type="radio" name="distance" id="distance" value="20"/> 20 Km</a></li>
-							<li><a href="#"><input type="radio" name="distance" id="distance" value="30"/> 30 Km</a></li>
-							<li><a href="#"><input type="radio" name="distance" id="distance" value="0"/> mehr als 30 Km</a></li>
+							<li><a href="#"><input type="radio" name="distance" id="distance" value="5" th:text="#{topbar.5km}"/></a></li>
+							<li><a href="#"><input type="radio" name="distance" id="distance" value="10" th:text="#{topbar.10km}"/></a></li>
+							<li><a href="#"><input type="radio" name="distance" id="distance" value="20" th:text="#{topbar.20km}"/></a></li>
+							<li><a href="#"><input type="radio" name="distance" id="distance" value="30" th:text="#{topbar.30km}"/></a></li>
+							<li><a href="#"><input type="radio" name="distance" id="distance" value="0" th:text="#{topbar.morethan30km}"/></a></li>
 						</ul>
 					</li>
 					<li class="divider"></li>
