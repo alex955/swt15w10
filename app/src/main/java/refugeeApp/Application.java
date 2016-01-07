@@ -25,10 +25,12 @@ import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
+@EnableScheduling
 @EnableSalespoint
 @EntityScan(basePackageClasses = { Application.class, Jsr310JpaConverters.class })
 public class Application extends SpringBootServletInitializer  {
