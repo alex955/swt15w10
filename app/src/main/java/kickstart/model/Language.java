@@ -38,6 +38,15 @@ public class Language {
     private String titleError;
     private String kindError;
 
+    //EMails
+    private String registrationEmail;
+    private String registrationEmailTopic;
+    private String deleteEmail;
+    private String deleteEmailTopic;
+    private String changeEmail;
+    private String changeEmailTopic;
+
+
     public Language() {}
 
     public String getBrowserLanguage() {
@@ -190,5 +199,53 @@ public class Language {
 
     public void setRegistrationConfirm(String registrationConfirm) {
         this.registrationConfirm = registrationConfirm;
+    }
+
+    public String getRegistrationEmail() {
+        return registrationEmail;
+    }
+
+    public void setRegistrationEmail(String registrationEmail) {
+        this.registrationEmail = registrationEmail;
+    }
+
+    public String getDeleteEmail() {
+        return deleteEmail;
+    }
+
+    public void setDeleteEmail(String deleteEmail) {
+        this.deleteEmail = deleteEmail;
+    }
+
+    public String getChangeEmail() {
+        return changeEmail;
+    }
+
+    public void setChangeEmail(String changeEmail) {
+        this.changeEmail = changeEmail;
+    }
+
+    public String getRegistrationEmailTopic() {
+        return registrationEmailTopic;
+    }
+
+    public void setRegistrationEmailTopic(String registrationEmailTopic) {
+        this.registrationEmailTopic = registrationEmailTopic;
+    }
+
+    public String getDeleteEmailTopic() {
+        return deleteEmailTopic;
+    }
+
+    public void setDeleteEmailTopic(String deleteEmailTopic) {
+        this.deleteEmailTopic = deleteEmailTopic;
+    }
+
+    public String getChangeEmailTopic() {
+        return changeEmailTopic;
+    }
+
+    public void setChangeEmailTopic(String changeEmailTopic) {
+        this.changeEmailTopic = changeEmailTopic;
     }
 }

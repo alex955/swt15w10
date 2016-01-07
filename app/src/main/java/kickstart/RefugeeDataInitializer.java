@@ -196,6 +196,12 @@ public class RefugeeDataInitializer implements DataInitializer {
         german.setRegistrationConfirm("Registrierung erfolgreich. Zur Bestätigung der Registrierung wurde Ihnen eine EMail geschickt.");
         german.setUsernameUsedError("Der Username ist bereits vergeben.");
         german.setEmailConfirm("Zum Bestätigen der Änderung Ihrer EMailadresse wird eine EMail an Ihre alte Adresse geschickt.");
+        german.setRegistrationEmailTopic("Refugee-App: Registrierung");
+        german.setRegistrationEmail("Zum Registrieren Ihres Accounts klicken Sie auf den Link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=%s \n\n Lokal: localhost:8080/validate?id=%s");
+        german.setDeleteEmailTopic("Refugee-App: Account deaktivieren");
+        german.setDeleteEmail("Zum Deaktivieren Ihres Accounts klicken Sie auf den Link.\n\n" +"Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
+        german.setChangeEmailTopic("Refugee-App: EMail ändern");
+        german.setChangeEmail("Zum Ändern Ihrer Mailadresse klicken Sie auf den Link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
 
         languageRepository.save(german);
 
@@ -209,7 +215,7 @@ public class RefugeeDataInitializer implements DataInitializer {
         english.setUsernameError("The username must be between 6 and 30 characters long.");
         english.setEmailError("Your email has a wrong format.");
         english.setPasswordError("Your password must be at least 8 characters and consist of at least one number, one capital and one lowercase letter.");
-        english.setPasswordConfirmError("Passwords did not match.");
+        english.setPasswordConfirmError("Passwords do not match.");
         english.setCityError("Enter a city");
         english.setZipError("Your zip code must contain of exactly five digits.");
         english.setStreetError("Enter a street.");
