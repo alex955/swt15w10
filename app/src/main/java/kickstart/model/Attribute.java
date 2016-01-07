@@ -14,7 +14,7 @@ import javax.persistence.Id;
 public class Attribute {
 	
 	 
-	private @Id @GeneratedValue Long id;
+	private @Id @GeneratedValue long id;
 	private String name;
 	
 	@ElementCollection
@@ -48,7 +48,7 @@ public class Attribute {
 		this.tags = tags;
 	}
 
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 

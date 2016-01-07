@@ -1,3 +1,4 @@
+____BEIDE
 LinkedList<String> tagsState = new LinkedList<String>();
 tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
 Attribute attState = new Attribute("att.state", tagsState);
@@ -11,6 +12,47 @@ tempList.add("att.newAtt.val");
 tempList.add("att.other");
 Attribute newAtt= new Attribute("att.newAtt.val", tempList);
 
-cat2_2.addAttribute(attColor);
-cat2_2.addAttribute(attState);
-cat2_2.addAttribute(newAtt);
+catx.addAttribute(attColor);
+catx.addAttribute(attState);
+catx.addAttribute(newAtt);
+
+______ZUSTAND+NEUER
+LinkedList<String> tagsState = new LinkedList<String>();
+tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+Attribute attState = new Attribute("att.state", tagsState);
+
+LinkedList<String> tempList = new LinkedList<String>();
+tempList.add("att.newAtt.val");
+tempList.add("att.other");
+Attribute newAtt= new Attribute("att.newAtt.val", tempList);
+
+catx.addAttribute(attState);
+catx.addAttribute(newAtt);
+
+______NUR NEUER
+LinkedList<String> tempList = new LinkedList<String>();
+tempList.add("att.newAtt.val");
+tempList.add("att.other");
+Attribute newAtt= new Attribute("att.newAtt.val", tempList);
+
+catx.addAttribute(newAtt);
+
+_____FARBE+NEUER	
+LinkedList<String> tagsColor = new LinkedList<String>();
+tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+Attribute attColor = new Attribute("att.color", tagsColor);
+
+LinkedList<String> tempList = new LinkedList<String>();
+tempList.add("att.newAtt.val");
+tempList.add("att.other");
+Attribute newAtt= new Attribute("att.newAtt.val", tempList);
+
+catx.addAttribute(attColor);
+catx.addAttribute(newAtt);
+
+_____NUR FARBE
+LinkedList<String> tagsColor = new LinkedList<String>();
+tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+Attribute attColor = new Attribute("att.color", tagsColor);
+
+catx.addAttribute(attColor);

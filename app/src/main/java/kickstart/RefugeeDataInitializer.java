@@ -284,10 +284,74 @@ public class RefugeeDataInitializer implements DataInitializer {
     		cat4.addAttribute(attState);
     	}
         		Category cat4_1 = new Category("Dekoration", 9);
+        		{
+        			LinkedList<String> tagsColor = new LinkedList<String>();
+        			tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+        			Attribute attColor = new Attribute("att.color", tagsColor);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.forLocation.inside");tempList.add("att.forLocation.outside");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.forLocation", tempList);
+
+        			cat4_1.addAttribute(attColor);
+        			cat4_1.addAttribute(newAtt);
+        		}
         		Category cat4_2 = new Category("GartenPflanzen", 9);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.kind.plant");tempList.add("att.kind.decoration");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.kind", tempList);
+
+        			cat4_2.addAttribute(attState);
+        			cat4_2.addAttribute(newAtt);
+        		}
         		Category cat4_3 = new Category("Heimwerken", 9);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.diy.tools");tempList.add("att.diy.material");tempList.add("att.diy.instructions");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.kind", tempList);
+
+        			cat4_3.addAttribute(attState);
+        			cat4_3.addAttribute(newAtt);
+        		}
         		Category cat4_4 = new Category("BadKücheEsszimmer", 9);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+
+        			LinkedList<String> tempList = new LinkedList<String>();
+        			tempList.add("att.bathKitchenDining.furnite");tempList.add("att.bathKitchenDining.cutlery");tempList.add("att.bathKitchenDining.toiletries");
+        			tempList.add("att.other");
+        			Attribute newAtt= new Attribute("att.kind", tempList);
+
+        			cat4_4.addAttribute(attState);
+        			cat4_4.addAttribute(newAtt);
+        		}
         		Category cat4_5 = new Category("Wohnzimmer", 9);
+        		{
+        			LinkedList<String> tagsState = new LinkedList<String>();
+        			tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+        			Attribute attState = new Attribute("att.state", tagsState);
+        			                	
+        			LinkedList<String> tagsColor = new LinkedList<String>();
+        			tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+        			Attribute attColor = new Attribute("att.color", tagsColor);
+
+        			cat4_5.addAttribute(attColor);
+        			cat4_5.addAttribute(attState);
+        		}
         categories.save(cat4);
         categories.save(cat4_1);
         categories.save(cat4_2);
