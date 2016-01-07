@@ -48,6 +48,11 @@
 				</li>				
 			</ul>
 			</div>
+			
+		<div th:if="${#lists.isEmpty(anzeigen)} == true" class="row">
+		
+		<h5>Leider keine Ergebnisse</h5>
+		</div>
 
 		<!-- <div class="pagination-centered">
 			<ul class="pagination">

@@ -16,11 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
-import kickstart.model.Category;
-import kickstart.model.CategoryFirstTierObject;
-import kickstart.model.CategoryRepo;
-import kickstart.model.UserRepository;
 import kickstart.utilities.CategoryMethods;
 import javax.validation.Valid;
 
@@ -96,6 +91,8 @@ public class AdminController {
         model.addAttribute("subCount", subCount);
         model.addAttribute("totalCount", totalCount);
         model.addAttribute("registeredUsers", this.userRepository.findAll());
+        model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_ort",new Ort(""));
         
 //        for(User b : this.userRepository.findAll()){
 //        	b.getCity();
@@ -202,7 +199,8 @@ public class AdminController {
 		
 		model.addAttribute("category", currCat);
 		model.addAttribute("subcategories", subcategories);
-
+		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_ort",new Ort(""));
         model.addAttribute("newCategory", new Category());
 		
 		return "adminSubcategory";
@@ -240,6 +238,8 @@ public class AdminController {
 	public String editUser(@PathVariable Long id, Model model) {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
+		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_ort",new Ort(""));
 		
 		User user = this.userRepository.findOne(id);
         model.addAttribute("user", user);

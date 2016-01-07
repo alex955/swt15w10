@@ -62,7 +62,7 @@ public class RefugeeDataInitializer implements DataInitializer {
      * and the Path where the keinbild.jpg lies
      */
     public void Settings(){
-    	settingsRepo.save(new Setting("noUploadedPicturePath", "C:/Users/sasch/Documents/swt15w10/app/src/main/resources/static/resources/img/keinbild.png", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded offers without one"));
+    	settingsRepo.save(new Setting("noUploadedPicturePath", "/Users/Alexander/Documents/Studium/swt15w10/app/src/main/resources/static/resources/img/keinbild.png", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded offers without one"));
     	//settingsRepo.save(new Setting("UploadedPicturePath", "C:/", "The Path, where the uploaded Pictures are saved"));
     }
     
@@ -365,25 +365,50 @@ public class RefugeeDataInitializer implements DataInitializer {
     	tags2.add("Männlich");
     	Attribute att2 = new Attribute("Geschlecht",tags2);
     	
-    	Ort ort = new Ort();
-    	ort = ort.GetCoordinates("Michelangelostraße 11 01217 Dresden");
+    	Ort ort = new Ort("Michelangelostraße 11 01217 Dresden");
+    	ort = ort.GetCoordinates(ort);
     	
     	
     	Article g1 = new Article("Spiegelschrank", "Dieser Spiegelschrank ist 60 cm breit", "Dresden - Zschernitz", "Bergstraße 5", 2, "01217", userRepository.findOne((long) 1), "article");
     	 g1.addAttribute(att);
          g1.addAttribute(att2);
+         g1.setLatitude(ort.getLatitude());
+         g1.setLongitude(ort.getLongitude());
     	Article g2 = new Article("Sofa", "Einladender Blickfang! Das stylishe Schlafsofa mit dem zweifarbigen Look lädt zum Entspannen und Träumen ein.", "Dresden - Südvorstadt", "straße", 1,  "01067", userRepository.findOne((long) 2), "article");
-        Article g3 = new Article("Stuhl", "Schöner Bürostuhl mit einem Bezug aus hochwertigem Kunstleder, kombiniert mit atmungsaktivem Netzstoff im Rückenausschnitt in Schwarz", "Pirna", "straße", 1,  "01067", userRepository.findOne((long) 2), "article");
-        Article g4 = new Article("Spiegel", "Aus Metall mit aufwendigen Verzierungen", "Dresden - Seidnitz", "straße", 2, "01067", userRepository.findOne((long) 3), "article");
-        Article g5 = new Article("Messerblock", "EINFACH GUT! Eine rundum gute Entscheidung wenn es etwas preiswerter sein soll und trotzdem zuverlässig und praktisch. TWIN Point überzeugt durch eine scharfe Klinge.", "Ottendorf Orkrilla", "straße", 3, "01067", userRepository.findOne((long) 1), "article");
-        Article g6 = new Article("Buch", "bestens erhalten ohne Eselsohren", "Leipzig", "straße", 4, "01067", userRepository.findOne((long) 1), "article");
-        Article g7 = new Article("Deutsch für Anfänger", "Gutes Buch zum lernen", "ort", "straße", 5, "01067", userRepository.findOne((long) 1), "article");
-        Article g8 = new Article("Harry Potter", "Harry Potter (* 24.12.0 um 12:30 Uhr) ist ein kleiner Zauberer aus England. Harry lernte in Hogwarts das Zauberstabwedeln", "Hoyerswerda", "straße", 6, "01067", userRepository.findOne((long) 2), "article");
-        Article g9 = new Article("Das Survival Duo", "Survival-Duo (Mehrzahl: Survival-Quartett) ist eine satirische und oscarprämierte TV-Sendung auf DMAX.", "Dresden - Prohlis", "straße", 7, "01067", userRepository.findOne((long) 1), "article");
-        Article g10 = new Article("Motorola Razor", "Perfektes Handy. Wirkt sogar als Boomerang", "Dresden - Gorbitz", "straße", 9,  "01067", userRepository.findOne((long) 1), "article");
-        Article g11 = new Article("Jeans", "Beschreibung", "ort", "straße",11,  "01067", userRepository.findOne((long) 3), "article");
-        Article g12 = new Article("Deutschkurs", "Beschreibung", "ort", "straße", 12, "01067", userRepository.findOne((long) 1), "article");
-
+    	g2.setLatitude(ort.getLatitude());
+        g2.setLongitude(ort.getLongitude());
+    	Article g3 = new Article("Stuhl", "Schöner Bürostuhl mit einem Bezug aus hochwertigem Kunstleder, kombiniert mit atmungsaktivem Netzstoff im Rückenausschnitt in Schwarz", "Pirna", "straße", 1,  "01067", userRepository.findOne((long) 2), "article");
+    	g3.setLatitude(ort.getLatitude());
+        g3.setLongitude(ort.getLongitude());
+    	Article g4 = new Article("Spiegel", "Aus Metall mit aufwendigen Verzierungen", "Dresden - Seidnitz", "straße", 2, "01067", userRepository.findOne((long) 3), "article");
+    	g4.setLatitude(ort.getLatitude());
+        g4.setLongitude(ort.getLongitude());
+    	Article g5 = new Article("Messerblock", "EINFACH GUT! Eine rundum gute Entscheidung wenn es etwas preiswerter sein soll und trotzdem zuverlässig und praktisch. TWIN Point überzeugt durch eine scharfe Klinge.", "Ottendorf Orkrilla", "straße", 3, "01067", userRepository.findOne((long) 1), "article");
+    	g5.setLatitude(ort.getLatitude());
+        g5.setLongitude(ort.getLongitude());
+    	Article g6 = new Article("Buch", "bestens erhalten ohne Eselsohren", "Leipzig", "straße", 4, "01067", userRepository.findOne((long) 1), "article");
+    	g6.setLatitude(ort.getLatitude());
+        g6.setLongitude(ort.getLongitude());
+    	Article g7 = new Article("Deutsch für Anfänger", "Gutes Buch zum lernen", "ort", "straße", 5, "01067", userRepository.findOne((long) 1), "article");
+    	g7.setLatitude(ort.getLatitude());
+        g7.setLongitude(ort.getLongitude());
+    	Article g8 = new Article("Harry Potter", "Harry Potter (* 24.12.0 um 12:30 Uhr) ist ein kleiner Zauberer aus England. Harry lernte in Hogwarts das Zauberstabwedeln", "Hoyerswerda", "straße", 6, "01067", userRepository.findOne((long) 2), "article");
+    	g8.setLatitude(ort.getLatitude());
+        g8.setLongitude(ort.getLongitude());
+    	Article g9 = new Article("Das Survival Duo", "Survival-Duo (Mehrzahl: Survival-Quartett) ist eine satirische und oscarprämierte TV-Sendung auf DMAX.", "Dresden - Prohlis", "straße", 7, "01067", userRepository.findOne((long) 1), "article");
+    	g9.setLatitude(ort.getLatitude());
+    	g9.setLatitude(ort.getLatitude());
+      
+       
+    	Article g10 = new Article("Motorola Razor", "Perfektes Handy. Wirkt sogar als Boomerang", "Dresden - Gorbitz", "straße", 9,  "01067", userRepository.findOne((long) 1), "article");
+    	 g10.setLongitude(ort.getLongitude());
+         g10.setLongitude(ort.getLongitude());
+    	Article g11 = new Article("Jeans", "Beschreibung", "ort", "straße",11,  "01067", userRepository.findOne((long) 3), "article");
+    	 g11.setLongitude(ort.getLongitude());
+         g11.setLongitude(ort.getLongitude());
+    	Article g12 = new Article("Deutschkurs", "Beschreibung", "ort", "straße", 12, "01067", userRepository.findOne((long) 1), "article");
+    	g12.setLongitude(ort.getLongitude());
+        g12.setLongitude(ort.getLongitude());
         goodREPO.save(g1);
         goodREPO.save(g2);
         goodREPO.save(g3);

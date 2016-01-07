@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kickstart.utilities.CategoryMethods;
 import kickstart.model.ArticleRepo;
+import kickstart.model.Category;
 import kickstart.model.CategoryFirstTierObject;
+import kickstart.model.Ort;
 
 @Controller
 public class Frontpage {
@@ -28,6 +30,8 @@ public class Frontpage {
 	public String frontPage(Model model) {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
+		 model.addAttribute("current_category",new Category("Alle Kategorien", 0));
+		 model.addAttribute("current_ort",new Ort());
 		return "frontpage";
 	}
 	
