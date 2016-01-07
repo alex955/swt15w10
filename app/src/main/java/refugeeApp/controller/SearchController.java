@@ -171,7 +171,7 @@ public class SearchController {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("anzeigen", this.sortOutArticlesWithDistance(articleRepo.findAll()));
-		setCurrent_cat(0);
+		this.current_cat=0;
 		model=this.getCurrent_cat(model);
 		return "search";
 	}

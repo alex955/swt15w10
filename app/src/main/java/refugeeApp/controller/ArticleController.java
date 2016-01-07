@@ -5,13 +5,16 @@ import java.io.BufferedOutputStream;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.time.LocalDateTime;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,7 +73,16 @@ public class ArticleController {
 		this.settingsRepo = settingsRepo;
 	}
 	
-	
+	 @Scheduled(fixedRate = 3600000)
+	 public void deleteArticlesAfterExpiration() {
+		List<Article> articles = this.articleRepo.findAll();
+		 for(Article article:articles){
+			 LocalDateTime now =LocalDateTime.now();
+			 LocalDateTime expiration = article.getCreationdate().plusDays(30);
+			 if(now.isAfter(expiration) == true) this.articleRepo.delete(article); 
+		 }
+		 
+	 }
 	
 	@RequestMapping(value = "/showArticle/{id}")
 	public String showArticle(@PathVariable("id") long id,Model model, @LoggedIn Optional<UserAccount> userAccount) {
