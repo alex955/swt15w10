@@ -24,6 +24,7 @@ import kickstart.model.Article;
 import kickstart.model.CategoryRepo;
 import kickstart.model.NewArticleForm;
 import kickstart.model.NewAttributes;
+import kickstart.model.Ort;
 import kickstart.model.Picture;
 import kickstart.model.PictureRepo;
 import kickstart.model.User;
@@ -291,9 +292,14 @@ public class ArticleController {
 				Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename(), creator);
 				pictureRepo.save(picture);
 				Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), picture, newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getZip(), creator, newArticleForm.getKind());
-				article.setLatitude(newArticleForm.getLatitude()); 
-	    		article.setLongitude(newArticleForm.getLongitude());
-				articleRepo.save(article);
+				
+				//to do 
+				Ort ort = new Ort();
+				ort = ort.GetCoordinates(newArticleForm.getStreetName()+" "+newArticleForm.getZip()+" "+newArticleForm.getCity());
+				 article.setLatitude(ort.getLatitude()); 
+	    		 article.setLongitude(ort.getLongitude());
+				
+	    		articleRepo.save(article);
         		System.out.println(article);
         		
         		System.out.println("You successfully uploaded file=" + newArticleForm.getTitle());
@@ -307,8 +313,10 @@ public class ArticleController {
 
 			//save article without Picture
 			Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(),  newArticleForm.getZip(),creator, newArticleForm.getKind());
-    		article.setLatitude(newArticleForm.getLatitude()); 
-    		article.setLongitude(newArticleForm.getLongitude());
+			Ort ort = new Ort();
+			ort = ort.GetCoordinates(newArticleForm.getStreetName()+" "+newArticleForm.getZip()+" "+newArticleForm.getCity());
+			article.setLatitude(ort.getLatitude()); 
+    		article.setLongitude(ort.getLongitude());
 			articleRepo.save(article);
     		System.out.println(article);
             return ("redirect:/editAttributes/"+article.getId());

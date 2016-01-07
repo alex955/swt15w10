@@ -227,6 +227,9 @@ public class RefugeeDataInitializer implements DataInitializer {
     	tags2.add("Männlich");
     	Attribute att2 = new Attribute("Geschlecht",tags2);
     	
+    	Ort ort = new Ort();
+    	ort = ort.GetCoordinates("Michelangelostraße 11 01217 Dresden");
+    	
     	
     	Article g1 = new Article("Spiegelschrank", "Dieser Spiegelschrank ist 60 cm breit", "Dresden - Zschernitz", "Bergstraße 5", 2, "01217", userRepository.findOne((long) 1), "article");
     	 g1.addAttribute(att);

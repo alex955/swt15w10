@@ -93,7 +93,7 @@ function checkedArticle(){
 							<div class="small-4 columns" th:text="#{newarticle.city}">Stadt</div>
 						</div>
 						<div class="medium-8 small-12 columns">										
-							<input type="text" name="city" id="city" placeholder="Stadt" th:value="${creator.city}" onchange="getCoords()"/>
+							<input type="text" name="city" id="city" placeholder="Stadt" th:value="${creator.city}"/>
 						</div>
 					</div>
 					<div class="row">
@@ -101,7 +101,7 @@ function checkedArticle(){
 							<div class="small-4 columns" th:text="#{newarticle.zipcode}">PLZ</div>
 						</div>
 						<div class="medium-8 small-12 columns">										
-							<input type="text" name="zip" id="zip" placeholder="PLZ" th:value="${creator.zip}" onchange="getCoords()"/>
+							<input type="text" name="zip" id="zip" placeholder="PLZ" th:value="${creator.zip}"/>
 						</div>
 					</div>
 					<div class="row">
@@ -109,7 +109,7 @@ function checkedArticle(){
 							<div class="small-4 columns" th:text="#{usersettings.streetHousenumber}">Straße Hausnummer</div>
 						</div>
 						<div class="medium-8 small-12 columns">
-							<input type="text" name="streetName" id="street" placeholder="Straßenname" th:value="${creator.streetName}" onchange="getCoords()"/>
+							<input type="text" name="streetName" id="street" placeholder="Straßenname" th:value="${creator.streetName}"/>
 						</div>
 					</div>	
 					<div class="row">
@@ -117,13 +117,12 @@ function checkedArticle(){
 							<div class="small-4 columns" th:text="#{usersettings.addressAddition}">Addresszusatz</div>
 						</div>
 						<div class="medium-8 small-12 columns">
-							<input type="text" name="addressAddition" id="addition" th:placeholder="#{usersettings.addressAddition}" onchange="getCoords()" />
+							<input type="text" name="addressAddition" id="addition" th:placeholder="#{usersettings.addressAddition}"  />
 						</div>
 					</div>				
 				</div>
 
-		 		<input type="hidden" name="latitude" id="latitude" value="0"/>
-				<input type="hidden" name="longitude" id="longitude" value="0" />
+		 		
 				
 
 				<button class="right button" type="submit" th:href="@{/}" th:text="#{newarticle.createoffer}">Angebot erstellen</button>
@@ -134,39 +133,14 @@ function checkedArticle(){
 
 	<footer th:include="footer :: footer"></footer>
 
-<!-- Ortsübergabe -->
-<script type="text/javascript">
- function getCoords() {
-	//Abfrage der eingegeben Adresse
-	var address = document.getElementById("zip").value+" "+document.getElementById("city").value+" "+document.getElementById("street").value;
-	var geocoder = new google.maps.Geocoder(); 
-	geocoder.geocode({'address': address}, function(results, status) {
-		if (status === google.maps.GeocoderStatus.OK) {
-	     var lat = results[0].geometry.location.lat();
-	     var lng = results[0].geometry.location.lng();
-	   //übergabe an die input felder
-	 	document.getElementById("latitude").value=lat;
-	 	document.getElementById("longitude").value=lng; }
-		else {
-		      alert('Bitte geben sie eine richtig Adresse ein!');
-	  	}
-	}
-	);
-
-	
-	
-}
 
 
 
 
-</script>
 
 
 
 
-<!-- Google Maps -->
-<script  th:src="@{https://maps.googleapis.com/maps/api/js?key=AIzaSyAXULGtfv96afP6mTq9W294gKRlIVr3EMk&amp;signed_in=true&amp;callback=initMap}" async="async" defer="defer"></script>
  
 
 </body>

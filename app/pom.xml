@@ -72,6 +72,17 @@
 			<artifactId>scala-library</artifactId>
 			<version>2.10.4</version>
 		</dependency>
+		<dependency>
+    <groupId>com.google.maps</groupId>
+    <artifactId>google-maps-services</artifactId>
+    <version>0.1.9</version>
+</dependency>
+		
+		<dependency>
+    <groupId>net.sourceforge.htmlunit</groupId>
+    <artifactId>htmlunit</artifactId>
+    <version>2.19</version>
+</dependency>
 		
 
 
@@ -94,7 +105,11 @@
 	</build>
 
 	<repositories>
-
+		<repository>
+		<id>gisgraphy</id>
+			<url>http://gisgraphy.free.fr/mavenrepo/</url>
+		</repository>
+		
 		<repository>
 			<id>spring-libs-milestone</id>
 			<url>https://repo.spring.io/libs-milestone</url>
