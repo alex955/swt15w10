@@ -22,8 +22,7 @@ public class Picture {
 		this.picPath = picPath;
 		this.originalFileName = originalFileName;
 		this.uploader = uploader;
-	
-		
+			
 	}
 	public Picture() {
 	super();

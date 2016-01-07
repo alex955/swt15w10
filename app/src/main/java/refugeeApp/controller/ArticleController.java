@@ -166,10 +166,17 @@ public class ArticleController {
 		
 		if (!((newArticleForm.getFile()).isEmpty())) {
             try {
+                int existingPicture = 0;
+                Picture oldPicture = null;
                 byte[] bytes = (newArticleForm.getFile()).getBytes();
- 
-                // Creating the directory to store file
-                String rootPath = System.getProperty("user.home");
+                
+                // Creating the directory to store file               
+                String rootPath;
+                if(settingsRepo.findOne("UploadedPicturesPath") == null){
+                	rootPath = System.getProperty("user.home");
+                }
+                else rootPath = settingsRepo.findOne("UploadedPicturesPath").getValue();
+                        
                 File dir = new File(rootPath + "/" + "Pics");
                 if (!dir.exists())
                     dir.mkdirs();
@@ -182,12 +189,21 @@ public class ArticleController {
 
                 //get the logged in user
                 User creator = userRepository.findByUserAccount(userAccount.get());
-//                if(originalArticle.getPicture() != null){
-//                	pictureRepo.delete(originalArticle.getPicture());
-//                }
+                
+                //check for an existing picture
+                if(originalArticle.getPicture() != null){
+                	existingPicture = 1;
+                	oldPicture = originalArticle.getPicture();
+                }
+                
                 Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename(), creator);
 				pictureRepo.save(picture);
 				originalArticle.setPicture(picture);
+				
+				//delete the old picture from the repo
+				if(existingPicture == 1){
+				pictureRepo.delete(oldPicture);
+				}
 				
             } catch (Exception e) {
                 return "You failed to upload " + newArticleForm.getTitle() + " => " + e.getMessage();
