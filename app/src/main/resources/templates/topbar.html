@@ -71,7 +71,7 @@
 					<li class="divider"></li> 
 					<li class="has-form"><input type="text" name="address" th:value="${#strings.isEmpty(current_ort.address) == false} ?  ${current_ort.address} : ''" th:placeholder="${#strings.isEmpty(current_ort.address) == true} ?  'Ort oder PLZ eingeben' : ''"/></li> 
 					<li class="divider"></li>
-					<li class="has-dropdown"><a href="#">Suche im Umkreis von</a>
+					<li class="has-dropdown"><a href="#" th:text="${current_ort.distance == 0} ?   'Suche im Umkreis mehr als 30 km'   : 'Suche im Umkreis von '+${current_ort.distance}+' km'">Suche im Umkreis von</a>
 						<ul class="dropdown">
 							<li><a href="#"><input type="radio" name="distance" id="distance" value="5" /> 5 Km</a></li>
 							<li><a href="#"><input type="radio" name="distance" id="distance" value="10"/> 10 Km</a></li>
