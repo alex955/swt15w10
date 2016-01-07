@@ -96,9 +96,9 @@
 							<hr></hr>
 						</div>
 						<div th:each="Attribute : ${tags}">
-							<font th:text="${Attribute.name}"></font>
+							<font th:text="#{${Attribute.name}}"></font>
 							<div  th:each="String : ${Attribute.tags}">
-								<span class="label" th:text="${String}">Tag</span>
+								<span class="label" th:text="#{${String}}">Tag</span>
 							</div>
 						</div>
 						<p>&nbsp;</p>
