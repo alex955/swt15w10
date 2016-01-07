@@ -259,7 +259,9 @@ public class SearchController {
 		return "search";
 	}
 			
-			
+	@RequestMapping(value = "/searchbytags")
+    public String frontpage() {return "frontpage";}
+		
 	@RequestMapping(value = "/searchbytags", method = RequestMethod.POST)
     public String searchbytags(@ModelAttribute("searchattributes") NewAttributes SearchTag, Model model ) {
 		SearchQuery SearchQuery= new SearchQuery();
@@ -314,7 +316,9 @@ public class SearchController {
 		return "search";
 	}
 	
-
+	@RequestMapping(value = "/setsearchaddress")
+    public String frontpage2() {return "frontpage";}
+	
 	@RequestMapping(value = "/setsearchaddress", method = RequestMethod.POST)
     public String setsearchaddress(@ModelAttribute("Ort") Location ort, Model model ) 
     {	this.processedCategories = this.getProcessedCategories();
@@ -346,16 +350,4 @@ public class SearchController {
 		return "redirect:/search";
 		
     }
-	
-	
-	
-
 }
-
-			 
-			
-			
-			 
-			
-	
-

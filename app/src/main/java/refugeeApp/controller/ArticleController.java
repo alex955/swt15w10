@@ -102,10 +102,10 @@ public class ArticleController {
 	    
 	    model.addAttribute("currentUserId", currentUserId);
 		model.addAttribute("isAdminLoggedIn", isAdminLoggedIn);
-		
 	    return "article";
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/editArticle/{id}")
 	public String editArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, @PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount, Model model) {
 		this.processedCategories = categoryMethods.getProcessedCategories();
@@ -129,7 +129,7 @@ public class ArticleController {
 	    return "editArticle";
 	}
 
-	
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/editArticle/{id}", method = RequestMethod.POST)
 	public String processEditedArticle(@ModelAttribute("NewArticleForm") @Valid NewArticleForm newArticleForm, BindingResult result, @PathVariable("id")long id, @LoggedIn Optional<UserAccount> userAccount, Model model){
 
@@ -357,6 +357,7 @@ public class ArticleController {
 	 * @param model
 	 * @return
 	 */
+	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/editAttributes/{id}")
 	public String editTags(@PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount, Model model) {
 		this.processedCategories = categoryMethods.getProcessedCategories();
@@ -439,7 +440,6 @@ public class ArticleController {
 		Article toDelete = articleRepo.findOne(id);
 
 		if(toDelete.getCreator().getId() != userId && !userAccount.get().hasRole(new Role("ROLE_ADMIN"))) {
-			System.out.println("ids: " + userId + "," + toDelete.getCreator().getId());
 			return "redirect:/frontpage";
 		}
 

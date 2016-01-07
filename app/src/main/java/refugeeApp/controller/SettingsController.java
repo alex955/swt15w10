@@ -170,6 +170,7 @@ public class SettingsController {
         return "usersettings";
     }
 
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/deleteuser")
     public String deleteUser(@LoggedIn Optional<UserAccount> userAccount, ModelMap modelMap) throws AddressException, MessagingException {
         User user = userRepository.findByUserAccount(userAccount.get());
