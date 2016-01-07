@@ -196,6 +196,12 @@ public class ArticleController {
             }
         } 
 		
+		//Breitengrad und Längengradberechnung 
+		Ort ort = new Ort(newArticleForm.getStreetName()+" "+newArticleForm.getZip()+" "+newArticleForm.getCity());
+		ort = ort.GetCoordinates(ort);
+		 originalArticle.setLatitude(ort.getLatitude()); 
+		 originalArticle.setLongitude(ort.getLongitude());
+		
 		this.articleRepo.save(originalArticle);
 		System.out.println(originalArticle);
 		model.addAttribute("Article", articleRepo.findOne(id));
@@ -309,7 +315,7 @@ public class ArticleController {
 				pictureRepo.save(picture);
 				Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), picture, newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getZip(), creator, newArticleForm.getKind());
 				
-				//to do 
+				//Breitengrad und Längengradberechnung 
 				Ort ort = new Ort(newArticleForm.getStreetName()+" "+newArticleForm.getZip()+" "+newArticleForm.getCity());
 				ort = ort.GetCoordinates(ort);
 				 article.setLatitude(ort.getLatitude()); 
