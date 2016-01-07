@@ -30,6 +30,14 @@
 						</div>
 						<div class="row">
 							<div class="small-6 large-4 columns">
+								<p th:text="#{newarticle.category}">Kategorie</p>
+							</div>
+							<div class="small-6 large-8 columns">
+								<p th:text="#{'categories.' + ${category.name}}"></p>
+							</div>
+						</div>	
+						<div class="row">
+							<div class="small-6 large-4 columns">
 								<p th:text="#{article.location}">Ort:</p>
 							</div>
 							<div class="small-6 large-8 columns">
@@ -38,7 +46,7 @@
 						</div>	
 						<div class="row">
 							<div class="small-6 large-4 columns">
-								<p th:text="#{newarticle.zipcode}">PLZ:</p>
+								<p th:text="#{article.zipcode}">PLZ:</p>
 							</div>
 							<div class="small-6 large-8 columns">
 								<p th:text="${Article.zip}"></p>

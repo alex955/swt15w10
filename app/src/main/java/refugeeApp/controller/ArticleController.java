@@ -86,7 +86,7 @@ public class ArticleController {
 	    model.addAttribute("tags",articleRepo.findOne(id).getAttributes());
 	    model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
-	    
+		model.addAttribute("category", categories.findOne(articleRepo.findOne(id).getCategory()).get());
 	   
 	    long currentUserId = -1;
 		boolean isAdminLoggedIn = false;
