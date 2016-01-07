@@ -1,0 +1,16 @@
+LinkedList<String> tagsState = new LinkedList<String>();
+tagsState.add("att.state.new"); tagsState.add("att.state.used"); tagsState.add("att.other");
+Attribute attState = new Attribute("att.state", tagsState);
+                	
+LinkedList<String> tagsColor = new LinkedList<String>();
+tagsColor.add("att.color.blue");tagsColor.add("att.color.red");tagsColor.add("att.color.green");tagsColor.add("att.color.black");tagsColor.add("att.color.yellow");tagsColor.add("att.other");
+Attribute attColor = new Attribute("att.color", tagsColor);
+
+LinkedList<String> tempList = new LinkedList<String>();
+tempList.add("att.newAtt.val");
+tempList.add("att.other");
+Attribute newAtt= new Attribute("att.newAtt.val", tempList);
+
+cat2_2.addAttribute(attColor);
+cat2_2.addAttribute(attState);
+cat2_2.addAttribute(newAtt);
