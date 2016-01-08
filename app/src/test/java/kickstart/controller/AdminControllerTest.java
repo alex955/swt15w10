@@ -20,11 +20,6 @@ public class AdminControllerTest extends AbstractWebIntegrationTests{
 	@Autowired AdminController controller;
 	
 	@Test
-	public void test() {
-		//fail("Not yet implemented");
-	}
-
-	@Test
 	public void testUserDeactivation(){
 //        UserAccount admin1 = userAccountManager.create("admin1", "admin1PW", admin);
 //        userAccountManager.save(admin1);
@@ -60,8 +55,5 @@ public class AdminControllerTest extends AbstractWebIntegrationTests{
 				andExpect(status().isOk()).//
 				andExpect(view().name("admin/adminEditUser")).//
 				andExpect(model().attributeExists("categories", "user"));
-	}
-	
-	
-	
+	}	
 }

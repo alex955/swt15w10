@@ -118,7 +118,10 @@ public class AdminController {
         return "redirect:/admin/inspectCategory/{id}";
     }
     
-    //redirect to frontpage if user has no admin role (because @Preauthorize)
+    /**
+     * redirect to frontpage if user has no admin role (because @Preauthorize)
+     * @return
+     */
     @RequestMapping(value="/admin/addSubcategory/{id}")
     public String addSubcategory(){return null;}
 	
@@ -138,7 +141,10 @@ public class AdminController {
         return "redirect:/admin";
     }
     
-    //redirect to frontpage if user has no admin role (because @Preauthorize)
+    /**
+     * redirect to frontpage if user has no admin role (because @Preauthorize)
+     * @return
+     */
     @RequestMapping(value="/admin/addRootCat")
     public String addRootCategory(){return null;}
 
@@ -187,11 +193,8 @@ public class AdminController {
 			if(f.getPredecessor() == id) subcategories.add(f);
 		}
 		
-
 		this.processedCategories = categoryMethods.getProcessedCategories();
-		model.addAttribute("categories", this.processedCategories);
-		
-		
+		model.addAttribute("categories", this.processedCategories);	
 		model.addAttribute("category", currCat);
 		model.addAttribute("subcategories", subcategories);
         model.addAttribute("newCategory", new Category());

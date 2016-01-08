@@ -75,7 +75,7 @@ public class ArticleController {
 	    model.addAttribute("Article", articleRepo.findOne(id));
 	    model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 	    model.addAttribute("Useraccount", articleRepo.findOne(id).getCreator().getUserAccount());
-	    model.addAttribute("tags",articleRepo.findOne(id).getAttributes());
+	    model.addAttribute("tags", articleRepo.findOne(id).getAttributes());
 		model.addAttribute("category", categories.findOne(articleRepo.findOne(id).getCategory()).get());
 	   
 	    long currentUserId = -1;
@@ -393,8 +393,8 @@ public class ArticleController {
 		model.addAttribute("userId", userId);
 		model.addAttribute("user", this.userRepository.findOne(userId));
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
-		model.addAttribute("FormAttributes",this.categories.findOne(articleRepo.findOne(id).getCategory()).get().getAttributes());
-		model.addAttribute("NewAttributes",new NewAttributes());
+		model.addAttribute("FormAttributes", this.categories.findOne(articleRepo.findOne(id).getCategory()).get().getAttributes());
+		model.addAttribute("NewAttributes", new NewAttributes());
 		
 		boolean isAdminLoggedIn = false;
 		if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))) isAdminLoggedIn = true;
