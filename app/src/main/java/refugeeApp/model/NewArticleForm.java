@@ -10,8 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class NewArticleForm {
 	
 	private long categoryId;
-
-
+	
 	@NotEmpty(message = "")
     private String title;
 

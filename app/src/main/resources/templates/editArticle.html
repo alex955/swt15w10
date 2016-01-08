@@ -21,7 +21,7 @@
 					<div class="row">
 						<div class="medium-4 mall-12 columns" th:text="#{editArticle.kind}">Art:</div>
 						<div class="medium-8 small-12 columns">
-							<font color="red" th:if="${#fields.hasErrors('kind')}" th:errors="*{kind}"> ERROR MESSAGE</font>
+							<label><font color="red" th:text="${kindError}"> ERROR MESSAGE </font></label>
 							<div class="chooseRole">
 								<input th:if="${Article.kind} == 'activity'" id="activity" th:checked="a" type="radio" name="kind" value="activity" onclick="checkedActivity()"/>
 								<input th:if="${Article.kind} != 'activity'" id="activity" type="radio" name="kind" value="activity" onclick="checkedActivity()"/>
@@ -53,7 +53,7 @@
 							<div class="small-4 columns" th:text="#{newarticle.offertitle}">Titel der Anzeige</div>
 						</div>
 						<div class="medium-8 small-12 columns">
-							<label ><font color="red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"> ERROR MESSAGE</font></label>
+							<label><font color="red" th:text="${titleError}"> ERROR MESSAGE </font></label>
 							<input type="text" name="title" placeholder="" th:value="${Article.title}"/>
 						</div>
 					</div>

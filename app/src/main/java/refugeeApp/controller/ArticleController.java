@@ -8,36 +8,26 @@ import java.io.FileOutputStream;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import refugeeApp.model.Article;
-import refugeeApp.model.ArticleRepo;
-import refugeeApp.model.Attribute;
-import refugeeApp.model.Category;
-import refugeeApp.model.CategoryFirstTierObject;
-import refugeeApp.model.CategoryRepo;
-import refugeeApp.model.Location;
-import refugeeApp.model.NewArticleForm;
-import refugeeApp.model.NewAttributes;
-import refugeeApp.model.Picture;
-import refugeeApp.model.PictureRepo;
-import refugeeApp.model.SettingsRepository;
-import refugeeApp.model.User;
-import refugeeApp.model.UserRepository;
+import refugeeApp.model.*;
 import refugeeApp.utilities.CategoryMethods;
 
 import javax.validation.Valid;
@@ -51,16 +41,18 @@ public class ArticleController {
 	@Autowired private final CategoryMethods categoryMethods;	
     @Autowired private final UserRepository userRepository;    
     @Autowired private final SettingsRepository settingsRepo;
-    protected LinkedList<CategoryFirstTierObject> processedCategories; 	
+    protected LinkedList<CategoryFirstTierObject> processedCategories;
+	@Autowired private final LanguageRepository languageRepository;
     
 	@Autowired 
-	public ArticleController(CategoryRepo categories, ArticleRepo articleRepo, PictureRepo pictureRepo, CategoryMethods categoryMethods, UserRepository userRepository, SettingsRepository settingsRepo){
+	public ArticleController(CategoryRepo categories, ArticleRepo articleRepo, PictureRepo pictureRepo, CategoryMethods categoryMethods, UserRepository userRepository, SettingsRepository settingsRepo, LanguageRepository languageRepository){
 		this.categories = categories;
 		this.articleRepo=articleRepo;
 		this.pictureRepo = pictureRepo;
 		this.categoryMethods = categoryMethods;
 		this.userRepository = userRepository;
 		this.settingsRepo = settingsRepo;
+		this.languageRepository = languageRepository;
 	}
 
 	 @Scheduled(fixedRate = 3600000)
@@ -131,10 +123,7 @@ public class ArticleController {
 
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/editArticle/{id}", method = RequestMethod.POST)
-	public String processEditedArticle(@ModelAttribute("NewArticleForm") @Valid NewArticleForm newArticleForm, BindingResult result, @PathVariable("id")long id, @LoggedIn Optional<UserAccount> userAccount, Model model){
-
-		if(result.hasErrors())
-			return "editArticle";
+	public String processEditedArticle(@ModelAttribute("NewArticleForm") @Valid NewArticleForm newArticleForm, BindingResult result, ModelMap modelMap, @PathVariable("id")long id, @LoggedIn Optional<UserAccount> userAccount, Model model){
 
 		Article originalArticle = this.articleRepo.findOne(id);		
 		long currentUserId = this.userRepository.findByUserAccount(userAccount.get()).getId();
@@ -148,6 +137,28 @@ public class ArticleController {
 		model.addAttribute("tags",articleRepo.findOne(id).getAttributes());
 		model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
+
+		Locale locale = LocaleContextHolder.getLocale();
+		String browserLanguage = locale.toString().substring(0, 2);
+		if(languageRepository.findByBrowserLanguage(browserLanguage) == null){
+			browserLanguage = "de";
+		}
+		Language language = languageRepository.findByBrowserLanguage(browserLanguage);
+
+		if(result.hasErrors()) {
+
+			if (result.hasErrors()) {
+				if (result.hasFieldErrors("kind")) {
+					final String kindError = language.getKindError();
+					modelMap.addAttribute("kindError", kindError);
+				}
+				if (result.hasFieldErrors("title")) {
+					final String titleError = language.getTitleError();
+					modelMap.addAttribute("titleError", titleError);
+				}
+			}
+			return "editArticle";
+		}
 
 		//case: current user didnt create article && logged in user no admin -> end
 		if(originalArticle.getCreator().getId() != currentUserId && !userAccount.get().hasRole(new Role("ROLE_ADMIN"))){
@@ -293,7 +304,7 @@ public class ArticleController {
 	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/newArticle", method = RequestMethod.POST)
-    public String saveArticle(@ModelAttribute("NewArticleForm") @Valid NewArticleForm newArticleForm, BindingResult result, Model model, @LoggedIn Optional<UserAccount> userAccount) {
+    public String saveArticle(@ModelAttribute("NewArticleForm") @Valid NewArticleForm newArticleForm, BindingResult result, Model model, ModelMap modelMap, @LoggedIn Optional<UserAccount> userAccount) {
 
 		User creator = userRepository.findByUserAccount(userAccount.get());
 		model.addAttribute("creator", creator);
@@ -302,8 +313,25 @@ public class ArticleController {
 		model.addAttribute("categoriesForm", this.categories.findAll());
 		model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
+		Locale locale = LocaleContextHolder.getLocale();
+		String browserLanguage = locale.toString().substring(0, 2);
+
+		if(languageRepository.findByBrowserLanguage(browserLanguage) == null){
+			browserLanguage = "de";
+		}
+
+		Language language = languageRepository.findByBrowserLanguage(browserLanguage);
 		
 		if(result.hasErrors()){
+
+			if(result.hasFieldErrors("kind")){
+				final String kindError = language.getKindError();
+				modelMap.addAttribute("kindError", kindError);
+			}
+			if(result.hasFieldErrors("title")){
+				final String titleError = language.getTitleError();
+				modelMap.addAttribute("titleError",titleError);
+			}
 			return "newArticle";
 		}
 
