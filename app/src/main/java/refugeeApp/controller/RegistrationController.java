@@ -69,7 +69,7 @@ public class RegistrationController {
         String browserLanguage = locale.toString().substring(0, 2);
 
         if(languageRepository.findByBrowserLanguage(browserLanguage) == null){
-            browserLanguage = "de";
+            browserLanguage = "en";
         }
 
         Language language = languageRepository.findByBrowserLanguage(browserLanguage);

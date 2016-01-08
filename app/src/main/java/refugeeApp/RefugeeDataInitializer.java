@@ -816,7 +816,7 @@ public class RefugeeDataInitializer implements DataInitializer {
 		english.setPasswordError("Your password must be at least 8 characters and consist of at least one number, one capital and one lowercase letter.");
 		english.setPasswordConfirmError("Passwords do not match.");
 		english.setCityError("Enter a city");
-		english.setZipError("Your zip code must contain of exactly five digits.");
+		english.setZipError("Your zip code must consist of exactly five digits.");
 		english.setStreetError("Enter a street.\n(e.g.: Teststr. 1b, Baumweg 12, etc.)");
 		english.setTitleError("Give your offer a title.");
 		english.setKindError("Choose your offers kind.");
@@ -832,5 +832,34 @@ public class RefugeeDataInitializer implements DataInitializer {
 		english.setChangeEmail("To change your email click the following link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
 
 		languageRepository.save(english);
+
+		final Language arab = new Language();
+
+		//TODO: Arabisch übersetzen
+		arab.setBrowserLanguage("ar");
+		arab.setRoleError("");
+		arab.setNameError("");
+		arab.setCountryError("");
+		arab.setUsernameError("");
+		arab.setEmailError("");
+		arab.setPasswordError("");
+		arab.setPasswordConfirmError("");
+		arab.setCityError("");
+		arab.setZipError("");
+		arab.setStreetError("");
+		arab.setTitleError("");
+		arab.setKindError("");
+		arab.setOldPwError("");
+		arab.setRegistrationConfirm("");
+		arab.setUsernameUsedError("");
+		arab.setEmailConfirm("");
+		arab.setRegistrationEmailTopic("");
+		arab.setRegistrationEmail("");
+		arab.setDeleteEmailTopic("");
+		arab.setDeleteEmail("");
+		arab.setChangeEmailTopic("");
+		arab.setChangeEmail("");
+
+		languageRepository.save(arab);
 	}
 }

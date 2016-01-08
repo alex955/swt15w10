@@ -71,7 +71,7 @@ public class EMailController {
 		String browserLanguage = locale.toString().substring(0, 2);
 
 		if(staticRepository.findByBrowserLanguage(browserLanguage) == null){
-			browserLanguage = "de";
+			browserLanguage = "en";
 		}
 
 		Language language = staticRepository.findByBrowserLanguage(browserLanguage);
