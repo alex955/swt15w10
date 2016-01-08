@@ -37,7 +37,7 @@ function checkedArticle(){
 					<div class="row">
 						<div class="medium-4 mall-12 columns" th:text="#{newarticle.newarticlequestion}">Möchten Sie eine Aktivität (z.b. Sprachkurs, Stadtausflug, Bowlingspiel) oder einen Artikel erstellen?</div>
 						<div class="medium-8 small-12 columns">
-							<label><font color="red" th:if="${#fields.hasErrors('kind')}" th:errors="*{kind}"> ERROR MESSAGE</font></label>
+							<label><font color="red" th:text="${kindError}"> ERROR MESSAGE </font></label>
 							<div class="chooseRole">
 								<input id="activity" type="radio" name="kind" value="activity" onclick="checkedActivity()"/>
 								<font color="#2ba6cb" for="activity" th:text="#{newArticle.activity}"></font>
@@ -69,7 +69,7 @@ function checkedArticle(){
 							<div class="small-4 columns" th:text="#{newarticle.offertitle}">Titel der Anzeige</div>
 						</div>
 						<div class="medium-8 small-12 columns">
-							<label ><font color="red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"> ERROR MESSAGE</font></label>
+							<label><font color="red" th:text="${titleError}"> ERROR MESSAGE </font></label>
 							<input type="text" name="title" th:placeholder="#{newArticle.title}" />
 						</div>
 					</div>
@@ -106,7 +106,7 @@ function checkedArticle(){
 					</div>
 					<div class="row">
 						<div class="show-for-medium-up">
-							<div class="small-4 columns" th:text="#{usersettings.streetHousenumber}">Straße Hausnummer</div>
+							<div class="small-4 columns" th:text="#{usersettings.streetHousenumber}">Straße, Hausnummer</div>
 						</div>
 						<div class="medium-8 small-12 columns">
 							<input type="text" name="streetName" id="street" placeholder="Straßenname" th:value="${creator.streetName}"/>

@@ -15,24 +15,29 @@ public class UserSettingsForm {
     private long userId;
     private String newLastName;
     private String newFirstName;
-    @Email(message = "Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.")
+
+    @Email(message = "")
     private String newEmail;
-    @Pattern(regexp="(^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$|^$|)", message ="Das Passwort muss mindestens 8 Zeichen lang sein und muss mindestens eine Zahl, einen Klein- und einen Großbuchstaben beinhalten.")
+
+    @Pattern(regexp="(^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}$|^$|)", message = "")
     private String newPassword;
     private String oldPassword;
     private String confirmPW;
 
     //newPW == confirmPW?
-    @AssertTrue(message = "Die Passwörter stimmen nicht überein.")
+    @AssertTrue(message = "")
     private boolean isValid(){
         return this.newPassword.equals(this.confirmPW);
     }
 
     private String newCity;
-    @Pattern(regexp="(^$| |^(\\d{5})$)", message="Die Postleitzahl muss aus exakt 5 Ziffern bestehen.")
+
+    @Pattern(regexp="(^$| |^(\\d{5})$)", message = "")
     private String newZip;
-    @Pattern(regexp = "^([A-ZÄÖÜ][a-zäöüß]+(([.] )|( )|([-])))+[1-9][0-9]{0,3}[a-z]?$", message = "Geben Sie einen Straßennamen ein. \n (Bsp.: Teststr. 1b, Baumweg 12, etc.)")
+
+    @Pattern(regexp = "^([A-ZÄÖÜ][a-zäöüß]+(([.] )|( )|([-])))+[1-9][0-9]{0,3}[a-z]?$", message = "")
     private String newStreetName;
+
     private String newAddressAddition;
     private String newLanguage1;
     private String newLanguage2;

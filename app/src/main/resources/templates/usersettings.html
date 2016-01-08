@@ -46,7 +46,7 @@
 							</div>
 							<div class="large-7 small-12 columns">
 								<input type="password" name="oldPassword" th:placeholder="#{usersettings.oldPassword}"/>
-								<label><font color="red" th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}"> ERROR MESSAGE </font></label>
+								<label><font color="red" th:text="${passwordError}"> ERROR MESSAGE </font></label>
 							</div>
 						</div>
 						<div class="row">
@@ -55,7 +55,7 @@
 							</div>
 							<div class="large-7 small-12 columns">
 								<input type="password" name="newPassword" th:placeholder="#{usersettings.newPassword}"/>
-								<label><font color="red" th:text="${confirmError}"> ERROR MESSAGE </font></label>
+								<label><font color="red" th:text="${passwordConfirmError}"> ERROR MESSAGE </font></label>
 							</div>
 						</div>
 						<div class="row">
@@ -123,8 +123,7 @@
 							<div class="large-7 small-12 columns">
 								<label>
 									<input type="text" disabled="" th:value="${user.email}" />
-									<font color="red" th:if="${#fields.hasErrors('newEmail')}" th:errors="*{newEmail}"> ERROR MESSAGE </font>
-								</label>
+									<font color="red" th:text="${emailError}"> ERROR MESSAGE </font>								</label>
 							</div>
 						</div>
 						<div class="row">
@@ -147,8 +146,7 @@
 							<div class="large-7 small-12 columns">
 								<label>
 									<input type="text" name="newCity" th:placeholder="#{usersettings.city}" th:value="${user.city}"/>
-									<font color="red" th:if="${#fields.hasErrors('newZip')}" th:errors="*{newZip}"> ERROR MESSAGE </font>
-								</label>
+									<font color="red" th:text="${zipError}"> ERROR MESSAGE </font>								</label>
 							</div>
 						</div>
 						<div class="row">

@@ -10,8 +10,11 @@ import org.springframework.web.multipart.MultipartFile;
 public class NewArticleForm {
 	
 	private long categoryId;
-	@NotEmpty(message = "Geben Sie ihrem Angebot einen Titel.")
+
+
+	@NotEmpty(message = "")
     private String title;
+
     private String description;
     private String zip;
     private String city;
@@ -20,7 +23,8 @@ public class NewArticleForm {
     private MultipartFile file;
     private double longitude;
     private double latitude;
-	@NotEmpty(message = "Wählen Sie die Art des Angebots.")
+
+	@NotEmpty(message = "")
     private String kind;
     
     public String getStreetName() {

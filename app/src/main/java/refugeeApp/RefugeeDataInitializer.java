@@ -23,13 +23,14 @@ public class RefugeeDataInitializer implements DataInitializer {
     private final CategoryRepo categories;
     private final ArticleRepo goodREPO;
     private final SettingsRepository settingsRepo;
+	private final LanguageRepository languageRepository;
 
     final Role refugee = new Role("ROLE_REFUGEE");
     final Role volunteer = new Role("ROLE_VOLUNTEER");
     final Role admin = new Role("ROLE_ADMIN");
 
     @Autowired
-    public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, refugeeApp.model.ArticleRepo goodREPO, ChatConversationRepo chatRepo, ChatMessageRepo msgRepo, SettingsRepository settingsRepo, UserSettingsRepository userSettingsRepository, ValidatorRepository validatorRepository) {
+    public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, refugeeApp.model.ArticleRepo goodREPO, ChatConversationRepo chatRepo, ChatMessageRepo msgRepo, SettingsRepository settingsRepo, UserSettingsRepository userSettingsRepository, ValidatorRepository validatorRepository, LanguageRepository languageRepository) {
 
         Assert.notNull(userAccountManager, "UserManagerAccount must not be null!");
         Assert.notNull(userRepository, "UserRepository must not be null!");
@@ -38,17 +39,21 @@ public class RefugeeDataInitializer implements DataInitializer {
         Assert.notNull(settingsRepo, "SettingsRepo must not be null!");
         Assert.notNull(userSettingsRepository, "userSettingsRepository must not be null!");
         Assert.notNull(validatorRepository, "validatorRepository must not be null!");
+		Assert.notNull(languageRepository, "languageRepository must not be null");
 
         this.userAccountManager = userAccountManager;
         this.userRepository = userRepository;
         this.categories = categories;
         this.goodREPO = goodREPO;
         this.settingsRepo = settingsRepo;
-    }
+		this.languageRepository = languageRepository;
+
+	}
 
     @Override
     public void initialize() {
     	Settings();
+		initializeLanguages();
     	initializeUsers(userAccountManager, userRepository);
         initializeCategories();
         initializeGoods(userAccountManager, userRepository);
@@ -768,4 +773,64 @@ public class RefugeeDataInitializer implements DataInitializer {
 
     public void initializeActivities(){
     }
+
+	public void initializeLanguages(){
+
+		final Language german = new Language();
+
+		german.setBrowserLanguage("de");
+		german.setRoleError("Es wurde keine Rolle ausgewählt.");
+		german.setNameError("Der Name muss zwischen 2 und 30 Zeichen lang sein.");
+		german.setCountryError("Es wurde keine Herkunft gewählt");
+		german.setUsernameError("Der Benutzername muss zwischen 6 und 30 Zeichen lang sein.");
+		german.setEmailError("Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.");
+		german.setPasswordError("Das Passwort muss mindestens 8 Zeichen lang sein und muss mindestens eine Zahl, einen Klein- und einen Großbuchstaben beinhalten.");
+		german.setPasswordConfirmError("Die Passwörter stimmen nicht überein.");
+		german.setCityError("Geben Sie einen Stadtnamen ein");
+		german.setZipError("Die Postleitzahl muss aus exakt 5 Ziffern bestehen.");
+		german.setStreetError("Geben Sie einen Straßennamen ein. \n(Bsp.: Teststr. 1b, Baumweg 12, etc.)");
+		german.setTitleError("Geben Sie ihrem Angebot einen Titel.");
+		german.setKindError("Wählen Sie die Art des Angebots.");
+		german.setOldPwError("Das alte Passwort wurde falsch eingegeben.");
+		german.setRegistrationConfirm("Registrierung erfolgreich. Zur Bestätigung der Registrierung wurde Ihnen eine EMail geschickt.");
+		german.setUsernameUsedError("Der Username ist bereits vergeben.");
+		german.setEmailConfirm("Zum Bestätigen der Änderung Ihrer EMailadresse wird eine EMail an Ihre alte Adresse geschickt.");
+		german.setRegistrationEmailTopic("Refugee-App: Registrierung");
+		german.setRegistrationEmail("Zum Registrieren Ihres Accounts klicken Sie auf den Link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=%s \n\n Lokal: localhost:8080/validate?id=%s");
+		german.setDeleteEmailTopic("Refugee-App: Account deaktivieren");
+		german.setDeleteEmail("Zum Deaktivieren Ihres Accounts klicken Sie auf den Link.\n\n" +"Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
+		german.setChangeEmailTopic("Refugee-App: EMail ändern");
+		german.setChangeEmail("Zum Ändern Ihrer Mailadresse klicken Sie auf den Link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
+
+		languageRepository.save(german);
+
+
+		final Language english = new Language();
+
+		english.setBrowserLanguage("en");
+		english.setRoleError("You didn't chose a role.");
+		english.setNameError("Your name must be between 2 and 30 characters long.");
+		english.setCountryError("You didn't chose your country.");
+		english.setUsernameError("The username must be between 6 and 30 characters long.");
+		english.setEmailError("Your email has a wrong format.");
+		english.setPasswordError("Your password must be at least 8 characters and consist of at least one number, one capital and one lowercase letter.");
+		english.setPasswordConfirmError("Passwords do not match.");
+		english.setCityError("Enter a city");
+		english.setZipError("Your zip code must contain of exactly five digits.");
+		english.setStreetError("Enter a street.\n(e.g.: Teststr. 1b, Baumweg 12, etc.)");
+		english.setTitleError("Give your offer a title.");
+		english.setKindError("Choose your offers kind.");
+		english.setOldPwError("Your old password was incorrect.");
+		english.setRegistrationConfirm("Registration successful. An email for confirmation has been sent.");
+		english.setUsernameUsedError("The username is already taken.");
+		english.setEmailConfirm("To confirm your new email address, an email has been sent to your former email address");
+		english.setRegistrationEmailTopic("Refugee-App: Registration");
+		english.setRegistrationEmail("To verify your registration click the following link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=%s \n\n Lokal: localhost:8080/validate?id=%s");
+		english.setDeleteEmailTopic("Refugee-App: Deactivate your Account");
+		english.setDeleteEmail("To deactivate your account click the following link.\n\n" +"Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
+		english.setChangeEmailTopic("Refugee-App: Email change");
+		english.setChangeEmail("To change your email click the following link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
+
+		languageRepository.save(english);
+	}
 }

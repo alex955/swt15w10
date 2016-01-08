@@ -3,6 +3,8 @@ package refugeeApp.model;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.salespointframework.useraccount.Role;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.validation.constraints.*;
 
 /**
@@ -12,46 +14,46 @@ public class RegistrationForm {
 
     private long id;
 
-    @NotNull(message = "Es wurde keine Rolle ausgewählt.")
+    @NotNull(message = "")
     private Role role;
 
-    @Size(min=2, max=30, message = "Der Nachname muss zwischen 2 und 30 Zeichen lang sein.")
+    @Size(min=2, max=30, message = "")
     private String lastName;
 
-    @Size(min=2, max=30, message = "Der Vorname muss zwischen 2 und 30 Zeichen lang sein.")
+    @Size(min=2, max=30, message = "")
     private String firstName;
 
-    @NotNull(message = "Es wurde keine Herkunft gewählt")
+    @NotNull(message = "")
     private String country;
 
-	@Size(min=6, max=30, message = "Der Benutzername muss zwischen 6 und 30 Zeichen lang sein.")
+	@Size(min=6, max=30, message = "")
     private String username;
     
-    @NotNull(message = "Sie müssen eine Email Adresse angeben")
-    @Email(message = "Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.")
+    @NotNull(message = "")
+    @Email(message = "")
     private String email;
 
     //Password must contain at least: 8 characters, 1 Number, 1 lowercase Letter, 1 upercase Letter, no whitespace
-    @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}", message ="Das Passwort muss mindestens 8 Zeichen lang sein und muss mindestens eine Zahl, einen Klein- und einen Großbuchstaben beinhalten.")
+    @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{8,}", message = "")
     private String password;
 
     @NotEmpty
     private String confirmPW;
 
     //Check if password == confirmPW
-    @AssertTrue(message = "Die Passwörter stimmen nicht überein.")
+    @AssertTrue(message = "")
     private boolean isValid(){
         return this.password.equals(this.confirmPW);
     }
 
-    @NotEmpty(message = "Geben Sie einen Stadtnamen ein")
+    @NotEmpty(message = "")
     private String city;
 
     //Zipcode must be 5 characters long and contain only digits
-    @Pattern(regexp="^\\d{5}$", message="Die Postleitzahl muss aus exakt 5 Ziffern bestehen.")
+    @Pattern(regexp="^\\d{5}$", message = "")
     private String zip;
 
-    @Pattern(regexp = "^([A-ZÄÖÜ][a-zäöüß]+(([.] )|( )|([-])))+[1-9][0-9]{0,3}[a-z]?$", message = "Geben Sie einen Straßennamen ein. \n (Bsp.: Teststr. 1b, Baumweg 12, etc.)")
+    @Pattern(regexp = "^([A-ZÄÖÜ][a-zäöüß]+(([.] )|( )|([-])))+[1-9][0-9]{0,3}[a-z]?$", message = "")
     private String streetName;
 
     private String addressAddition;
@@ -61,8 +63,7 @@ public class RegistrationForm {
     private String language2;
 
     private String language3;
-
-
+    
     public String getLanguage2() {
         return language2;
     }

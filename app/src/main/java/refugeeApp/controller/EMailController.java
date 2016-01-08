@@ -1,7 +1,9 @@
 package refugeeApp.controller;
 
 
+import java.util.Locale;
 import java.util.Properties;
+import javax.annotation.PostConstruct;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -10,9 +12,9 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,11 +39,22 @@ public class EMailController {
 	private final UserSettingsRepository userSettingsRepository;
 
 	@Autowired
-	public EMailController(UserRepository userRepository, ValidatorRepository validatorRepository, UserSettingsRepository userSettingsRepository) {
+	private final LanguageRepository languageRepository;
+
+	private static LanguageRepository staticRepository;
+
+	@PostConstruct
+	public void init(){
+		this.staticRepository = languageRepository;
+	}
+
+	@Autowired
+	public EMailController(UserRepository userRepository, ValidatorRepository validatorRepository, UserSettingsRepository userSettingsRepository, LanguageRepository languageRepository) {
 
 		this.validatorRepository = validatorRepository;
 		this.userRepository = userRepository;
 		this.userSettingsRepository = userSettingsRepository;
+		this.languageRepository = languageRepository;
 	}
 
 
@@ -54,7 +67,14 @@ public class EMailController {
 
 		final String username = "gandalf324687992";
 		final String password = "324687992";
+		Locale locale = LocaleContextHolder.getLocale();
+		String browserLanguage = locale.toString().substring(0, 2);
 
+		if(staticRepository.findByBrowserLanguage(browserLanguage) == null){
+			browserLanguage = "de";
+		}
+
+		Language language = staticRepository.findByBrowserLanguage(browserLanguage);
 
 		Properties props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -81,20 +101,20 @@ public class EMailController {
 
 		switch (usage) {
 			case 1: {
-				message.setSubject("RefugeeApp: EMail-Verifizierung");
-				message.setText("Zum Registrieren Ihres Accounts klicken Sie auf den Link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=" + token + "\n\n Lokal: localhost:8080/validate?id=" + token);
+				message.setSubject(language.getRegistrationEmailTopic());
+				message.setText(String.format(language.getRegistrationEmail(), token, token));
 				break;
 			}
 
 			case 2: {
-				message.setSubject("RefugeeApp: Account deaktivieren");
-				message.setText("Zum Deaktivieren Ihres Accounts klicken Sie auf den Link.\n\n" +"Testserver: http://refugee-app.tk/swt15w10/validate?id=" + token + "\n\n Lokal: localhost:8080/validate?id=" + token);
+				message.setSubject(language.getDeleteEmailTopic());
+				message.setText(String.format(language.getDeleteEmail(), token, token));
 				break;
 			}
 
 			case 3: {
-				message.setSubject("RefugeeApp: EMail-Änderung");
-				message.setText("Zum Ändern Ihrer Mailadresse klicken Sie auf den Link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=" + token + "\n\n Lokal: localhost:8080/validate?id=" + token);
+				message.setSubject(language.getChangeEmailTopic());
+				message.setText(String.format(language.getChangeEmail(), token, token));
 				break;
 			}
 		}

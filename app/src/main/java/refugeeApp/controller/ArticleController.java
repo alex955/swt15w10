@@ -439,6 +439,8 @@ public class ArticleController {
 		return ("redirect:/showArticle/"+id);
 	}
 
+
+
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/deleteArticle/{id}")
 	public String deleteArticle(@PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount){
