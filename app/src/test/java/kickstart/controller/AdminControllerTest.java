@@ -31,7 +31,7 @@ public class AdminControllerTest extends AbstractWebIntegrationTests{
 	}
 	
 	@Test
-	public void returnsModelForAdminRoleAdmin() throws Exception {
+	public void returnsModelAndViewForSecuredUriAfterAuthentication() throws Exception {
 
 		mvc.perform(get("/admin").with(user("admin1").roles("ADMIN"))).//
 				andExpect(status().isOk()).//
@@ -40,7 +40,7 @@ public class AdminControllerTest extends AbstractWebIntegrationTests{
 	}
 	
 	@Test
-	public void returnsModelForAdminInspectCategory() throws Exception {
+	public void returnsModelAndViewForSecuredUriAfterAuthentication2() throws Exception {
 
 		mvc.perform(get("/admin/inspectCategory/2").with(user("admin1").roles("ADMIN"))).//
 				andExpect(status().isOk()).//
@@ -49,7 +49,7 @@ public class AdminControllerTest extends AbstractWebIntegrationTests{
 	}
 	
 	@Test
-	public void returnsModelForAdminEditUser() throws Exception {
+	public void returnsModelAndViewForSecuredUriAfterAuthentication3() throws Exception {
 
 		mvc.perform(get("/admin/editUser/2").with(user("admin1").roles("ADMIN"))).//
 				andExpect(status().isOk()).//

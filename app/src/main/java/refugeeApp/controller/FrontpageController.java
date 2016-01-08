@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import refugeeApp.model.ArticleRepo;
+import refugeeApp.model.Category;
 import refugeeApp.model.CategoryFirstTierObject;
+import refugeeApp.model.Location;
 import refugeeApp.utilities.CategoryMethods;
 
 @Controller
@@ -33,6 +35,8 @@ public class FrontpageController {
 	public String frontPage(Model model) {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
+		model.addAttribute("current_category",new Category("AlleKategorien", 0));
+		model.addAttribute("current_ort",new Location());
 		return "frontpage";
 	}
 	

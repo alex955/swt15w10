@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import refugeeApp.model.Article;
 import refugeeApp.model.ArticleRepo;
+import refugeeApp.model.Category;
 import refugeeApp.model.CategoryFirstTierObject;
 import refugeeApp.model.CategoryRepo;
 import refugeeApp.model.ChatConversation;
 import refugeeApp.model.ChatConversationRepo;
 import refugeeApp.model.ChatMessage;
 import refugeeApp.model.ChatMessageRepo;
+import refugeeApp.model.Location;
 import refugeeApp.model.User;
 import refugeeApp.model.UserRepository;
 import refugeeApp.utilities.CategoryMethods;
@@ -76,6 +78,8 @@ public class ChatController {
 		
 		model.addAttribute("incomingMessages", incoming);
 		model.addAttribute("outgoingMessages", outgoing);
+		model.addAttribute("current_category",new Category("AlleKategorien",1));
+		model.addAttribute("current_ort",new Location(""));
 		
 		return "chat/chatMain";
 	}
@@ -128,6 +132,8 @@ public class ChatController {
 		
 		model.addAttribute("incomingMessages", incoming);
 		model.addAttribute("outgoingMessages", outgoing);
+		model.addAttribute("current_category",new Category("AlleKategorien",1));
+		model.addAttribute("current_ort",new Location(""));
 		//for menu end
 		
 		model.addAttribute("stringInForm", new StringInForm());
@@ -205,7 +211,11 @@ public class ChatController {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("article", this.articleRepo.findOne(id));
-		model.addAttribute("stringInForm", new StringInForm());		
+		model.addAttribute("current_category",new Category("AlleKategorien",1));
+		model.addAttribute("current_ort",new Location(""));
+
+		model.addAttribute("stringInForm", new StringInForm());
+		
 		model.addAttribute("possibleMessages", possibleMessagesObject.getPossibleStartMessages());
 		
  		return "chat/newMessage";
