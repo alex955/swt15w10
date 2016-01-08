@@ -45,6 +45,9 @@ public class Language {
     private String deleteEmailTopic;
     private String changeEmail;
     private String changeEmailTopic;
+    
+    //Adminpanel
+    private String deleteUserPopup;
 
 
     public Language() {}
@@ -248,4 +251,12 @@ public class Language {
     public void setChangeEmailTopic(String changeEmailTopic) {
         this.changeEmailTopic = changeEmailTopic;
     }
+
+	public String getDeleteUserPopup() {
+		return deleteUserPopup;
+	}
+
+	public void setDeleteUserPopup(String deleteUserPopup) {
+		this.deleteUserPopup = deleteUserPopup;
+	}
 }

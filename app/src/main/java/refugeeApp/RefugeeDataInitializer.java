@@ -801,6 +801,7 @@ public class RefugeeDataInitializer implements DataInitializer {
 		german.setDeleteEmail("Zum Deaktivieren Ihres Accounts klicken Sie auf den Link.\n\n" +"Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
 		german.setChangeEmailTopic("Refugee-App: EMail ändern");
 		german.setChangeEmail("Zum Ändern Ihrer Mailadresse klicken Sie auf den Link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
+		german.setDeleteUserPopup("Eine Email wurde an Ihr Postfach gesendet. Bitte folgen Sie den dort beschriebenen Schritten um Ihren Useraccount zu deaktivieren.");
 
 		languageRepository.save(german);
 
@@ -830,7 +831,8 @@ public class RefugeeDataInitializer implements DataInitializer {
 		english.setDeleteEmail("To deactivate your account click the following link.\n\n" +"Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
 		english.setChangeEmailTopic("Refugee-App: Email change");
 		english.setChangeEmail("To change your email click the following link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
-
+		english.setDeleteUserPopup("An email has been sent your mailbox. Please follow the instructions in there to confirm the deletion of your user account.");
+		
 		languageRepository.save(english);
 
 		final Language arab = new Language();

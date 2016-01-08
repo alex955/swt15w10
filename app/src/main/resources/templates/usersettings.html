@@ -181,11 +181,11 @@
 					</div>
 				<strong class="show-for-medium-up">
 				<button class="button left" type="submit" th:href="@{/usersettings}" th:text="#{usersettings.saveChanges}">Änderungen speichern</button>
-				<a th:href="@{/deleteuser}"><button style="background-color: red" class="button right" type="button" onclick="alert('ACCOUNT DEAKTIVIEREN \n\nZur Deaktivierung Ihres Accounts wurde Ihnen eine EMail gesendet')" th:text="#{usersettings.deactivateAcc}">Account deaktivieren</button></a>
+				<a th:href="@{/deleteuser}"><button style="background-color: red" class="button right" type="button" id="deleteUserPopup">Account deaktivieren</button></a>
 				</strong>
 				<strong class="show-for-small-only">
 				<a class="button" type="submit" th:href="@{/usersettings}" th:text="#{usersettings.saveChanges}">Änderungen speichern</a>
-				<a th:href="@{/deleteuser}"><button style="background-color: red" class="button" type="button" onclick="alert('ACCOUNT DEAKTIVIEREN \n\nZur Deaktivierung Ihres Accounts wurde Ihnen eine EMail gesendet')" th:text="#{usersettings.deactivateAcc}">Account deaktivieren</button></a>
+				<a th:href="@{/deleteuser}"><button style="background-color: red" class="button" type="button" id="deleteUserView2">Account deaktivieren</button></a>
 				</strong>
 				</div>
 			</div>
@@ -197,7 +197,25 @@
 
 <script>
 		$(document).foundation();
-	</script>
+</script>
+<script th:src="@{/resources/js/jquery.js}"></script>
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+var message = [[${deleteUserPopup}]];
+
+/*]]>*/
+
+$('#deleteUserPopup').click(function () {
+	alert(message);
+})
+$('#deleteUserView2').click(function () {
+	alert(message);
+});
+//var message = ;
+//alert(message);
+</script>
+
 
 </body>
 </html>

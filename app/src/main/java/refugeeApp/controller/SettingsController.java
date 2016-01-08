@@ -65,7 +65,15 @@ public class SettingsController {
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value ="/usersettings")
     public String changeSettings(@ModelAttribute("UserSettingsForm") UserSettingsForm userSettingsForm, @LoggedIn Optional<UserAccount> userAccount, Model model){
-
+		Locale locale = LocaleContextHolder.getLocale();
+		String browserLanguage = locale.toString().substring(0, 2);
+    	if(languageRepository.findByBrowserLanguage(browserLanguage) == null){
+			browserLanguage = "de";
+		}
+		Language language = languageRepository.findByBrowserLanguage(browserLanguage);
+		final String deleteUserPopup = language.getDeleteUserPopup();
+		model.addAttribute("deleteUserPopup", deleteUserPopup);
+    	
         User user = userRepository.findByUserAccount(userAccount.get());
         
         this.processedCategories = categoryMethods.getProcessedCategories();
