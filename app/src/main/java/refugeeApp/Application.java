@@ -75,9 +75,6 @@ public class Application extends SpringBootServletInitializer  {
 
 			http.authorizeRequests().antMatchers("/resources/**").permitAll().and().formLogin().loginPage(LOGIN_ROUTE).loginProcessingUrl(LOGIN_ROUTE).defaultSuccessUrl("/search").and()
 					.logout().logoutUrl("/logout").logoutSuccessUrl("/");
-
-			http.authorizeRequests().antMatchers("/resources/**").permitAll().and().formLogin().loginPage(LOGIN_ROUTE).loginProcessingUrl(LOGIN_ROUTE).defaultSuccessUrl("/search").and()
-					.logout().logoutUrl("/logout").logoutSuccessUrl("/");
 		}
 	}
 
