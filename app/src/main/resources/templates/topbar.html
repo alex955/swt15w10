@@ -51,7 +51,7 @@
 				<!-- Left Nav Section -->
 					<ul class="left">		
 					<li class="divider"></li>
-					<li class="has-dropdown"><a href="#" th:text="#{'categories.' + ${current_category.name}}">alle Kategorien</a> 
+					<li class="has-dropdown"><a href="#" th:text="#{${current_category == null} ?   'categories.AlleKategorien'   : 'categories.' + ${current_category.name}}">alle Kategorien</a> 
 					
 						<!--  actual list -->
 						<ul class="dropdown" id="dropdown">
@@ -69,9 +69,9 @@
 					
 					</li>
 					<li class="divider"></li> 
-					<li class="has-form"><input type="text" name="address" th:value="${#strings.isEmpty(current_ort.address) == false} ?  ${current_ort.address} : ''" th:placeholder="${#strings.isEmpty(current_ort.address) == true} ?  'Ort oder PLZ eingeben' : ''"/></li> 
+					<li class="has-form"><input type="text" name="address" th:value="${current_ort != null and #strings.isEmpty(current_ort.address) == false} ?  ${current_ort.address} : ''" th:placeholder="${current_ort == null or #strings.isEmpty(current_ort.address) == true} ?  'Ort oder PLZ eingeben' : ''"/></li> 
 					<li class="divider"></li>
-					<li class="has-dropdown"><a href="#" th:text="#{${current_ort.distance == 0} ?   'topbar.searchmorethan30km'   : 'topbar.search'+${current_ort.distance}+'km'}">Suche im Umkreis von</a>
+					<li class="has-dropdown"><a href="#" th:text="#{${current_ort == null or current_ort.distance == 0} ?   'topbar.searchmorethan30km'   : 'topbar.search'+${current_ort.distance}+'km'}">Suche im Umkreis von</a>
 						<ul class="dropdown">
 							<li><a href="#"><input type="radio" name="distance" id="distance" value="5" th:text="#{topbar.5km}"/></a></li>
 							<li><a href="#"><input type="radio" name="distance" id="distance" value="10" th:text="#{topbar.10km}"/></a></li>

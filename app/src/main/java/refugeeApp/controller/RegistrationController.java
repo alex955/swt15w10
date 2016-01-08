@@ -26,15 +26,9 @@ import javax.validation.Valid;
 @Controller
 public class RegistrationController {
 
-    @Autowired
-    private final UserRepository userRepository;
-
-    @Autowired
-    private ValidatorRepository validatorRepository;
-
-    @Autowired
-    private final LanguageRepository languageRepository;
-
+    @Autowired private final UserRepository userRepository;
+    @Autowired private ValidatorRepository validatorRepository;
+    @Autowired private final LanguageRepository languageRepository;
     protected LinkedList<CategoryFirstTierObject> processedCategories;
     private UserAccountManager userAccountManager;
 
@@ -46,13 +40,27 @@ public class RegistrationController {
         this.languageRepository = languageRepository;
     }
 
+    /**
+     * returns the registration template
+     * @param registrationForm
+     * @param model
+     * @return
+     */
     @RequestMapping(value ="/registration")
     public String firstView(@ModelAttribute("RegistrationForm") RegistrationForm registrationForm, Model model) {
-    	model.addAttribute("current_category",new Category("AlleKategorien",1));
- 		model.addAttribute("current_ort",new Location(""));
     	return ("registration");
     }
-
+   
+    /**
+     * validates and saves the user data or shows the mistakes made by user
+     * @param registrationForm
+     * @param result
+     * @param modelMap
+     * @param model
+     * @return 
+     * @throws AddressException
+     * @throws MessagingException
+     */
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String newRegistration(@ModelAttribute("RegistrationForm") @Valid RegistrationForm registrationForm, BindingResult result,ModelMap modelMap, Model model) throws AddressException, MessagingException {
 
@@ -128,9 +136,6 @@ public class RegistrationController {
                 final String streetError = language.getStreetError();
                 modelMap.addAttribute("streetError", streetError);
             }
-            model.addAttribute("current_category",new Category("AlleKategorien",1));
-            model.addAttribute("current_ort",new Location(""));
-            
             return "registration";
         }
 
@@ -148,9 +153,7 @@ public class RegistrationController {
         EMailController.sendEmail(user.getEmail(),validator.getToken(),validator.getUsage());
 
         final String emailConfirm = language.getRegistrationConfirm();
-        modelMap.addAttribute("emailConfirm", emailConfirm);
-        model.addAttribute("current_category",new Category("AlleKategorien",1));
-        model.addAttribute("current_ort",new Location(""));
+        modelMap.addAttribute("emailConfirm", emailConfirm);     
         
         return ("registration");
     }

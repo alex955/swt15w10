@@ -76,8 +76,6 @@ public class ArticleController {
 	    model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 	    model.addAttribute("Useraccount", articleRepo.findOne(id).getCreator().getUserAccount());
 	    model.addAttribute("tags",articleRepo.findOne(id).getAttributes());
-	    model.addAttribute("current_category",new Category("AlleKategorien",1));
-		model.addAttribute("current_ort",new Location(""));
 		model.addAttribute("category", categories.findOne(articleRepo.findOne(id).getCategory()).get());
 	   
 	    long currentUserId = -1;
@@ -110,8 +108,6 @@ public class ArticleController {
 		model.addAttribute("userId", userId);
 		model.addAttribute("user", this.userRepository.findOne(userId));
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
-		model.addAttribute("current_category",new Category("AlleKategorien",1));
-		model.addAttribute("current_ort",new Location(""));
 		
 		boolean isAdminLoggedIn = false;
 		if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))) isAdminLoggedIn = true;
@@ -135,8 +131,6 @@ public class ArticleController {
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 		model.addAttribute("Article", originalArticle);
 		model.addAttribute("tags",articleRepo.findOne(id).getAttributes());
-		model.addAttribute("current_category",new Category("AlleKategorien",1));
-		model.addAttribute("current_ort",new Location(""));
 
 		Locale locale = LocaleContextHolder.getLocale();
 		String browserLanguage = locale.toString().substring(0, 2);
@@ -230,8 +224,6 @@ public class ArticleController {
 		this.articleRepo.save(originalArticle);
 		model.addAttribute("Article", articleRepo.findOne(id));
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
-		model.addAttribute("current_category",new Category("AlleKategorien",1));
-		model.addAttribute("current_ort",new Location(""));
 		
 		currentUserId = -1;
 		boolean isAdminLoggedIn = false;
@@ -286,8 +278,6 @@ public class ArticleController {
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
 		model.addAttribute("article", new Article());
-		model.addAttribute("current_category",new Category("AlleKategorien",1));
-		model.addAttribute("current_ort",new Location(""));
 
 		User creator = userRepository.findByUserAccount(userAccount.get());
 		model.addAttribute("creator", creator);
@@ -311,8 +301,6 @@ public class ArticleController {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
-		model.addAttribute("current_category",new Category("AlleKategorien",1));
-		model.addAttribute("current_ort",new Location(""));
 		Locale locale = LocaleContextHolder.getLocale();
 		String browserLanguage = locale.toString().substring(0, 2);
 
@@ -407,8 +395,6 @@ public class ArticleController {
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 		model.addAttribute("FormAttributes",this.categories.findOne(articleRepo.findOne(id).getCategory()).get().getAttributes());
 		model.addAttribute("NewAttributes",new NewAttributes());
-		model.addAttribute("current_category",new Category("AlleKategorien",1));
-		model.addAttribute("current_ort",new Location(""));
 		
 		boolean isAdminLoggedIn = false;
 		if(userAccount.get().hasRole(new Role("ROLE_ADMIN"))) isAdminLoggedIn = true;
