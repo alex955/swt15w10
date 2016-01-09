@@ -17,28 +17,14 @@
 			<p>&nbsp;</p>
 			<h4 class="header" th:text="#{editarticle.editarticle}">Angebot bearbeiten</h4>
 			<form action="#" th:action="@{/editArticle/{id}(id=${Article.id})}" th:object="${NewArticleForm}" method="post" enctype="multipart/form-data">
+				<input type="hidden" id="activity" th:value="${Article.kind}"/>
 				<div class="panel">
-					<div class="row">
-						<div class="medium-4 mall-12 columns" th:text="#{editArticle.kind}">Art:</div>
-						<div class="medium-8 small-12 columns">
-							<label><font color="red" th:text="${kindError}"> ERROR MESSAGE </font></label>
-							<div class="chooseRole">
-								<input th:if="${Article.kind} == 'activity'" id="activity" th:checked="a" type="radio" name="kind" value="activity" onclick="checkedActivity()"/>
-								<input th:if="${Article.kind} != 'activity'" id="activity" type="radio" name="kind" value="activity" onclick="checkedActivity()"/>
-								<font color="#2ba6cb" for="activity" th:text="Aktivität"></font>
-								<input th:if="${Article.kind} == 'article'" id="article" th:checked="a" type="radio" name="kind" value="article" onclick="checkedArticle()" />
-								<input th:if="${Article.kind} != 'article'" id="article" type="radio" name="kind" value="article" onclick="checkedArticle()" />
-								<font color="#2ba6cb" for="article" th:text="Artikel"></font>
-								<br/>
-							</div>
-						</div>
-					</div>
-					<div class="row">
+					<div class="row" th:if="${Article.kind} == 'article'">
 						<div class="show-for-medium-up">
 							<div class="small-4 columns" th:text="#{newarticle.category}">Kategorie:</div>
 						</div>
 						<div class="medium-8 small-12 columns">
-							<select name="categoryId">
+							<select name="categoryId" id="categoryId">
 								<div th:each="entry : ${categories}">
 									<option th:value="${entry.cat.id}"><div th:text="#{'categories.' + ${entry.cat.name}}"></div></option>	
 									<option th:each="subEntry : ${entry.subcats}" th:value="${subEntry.id}"><div th:text="'--' + #{'categories.' + ${subEntry.name}}" ></div></option>	
@@ -46,8 +32,9 @@
 							
 							</select>
 						</div>
-					</div>
+						
 					<hr />
+					</div>
 					<div class="row">
 						<div class="show-for-medium-up">
 							<div class="small-4 columns" th:text="#{newarticle.offertitle}">Titel der Anzeige</div>
@@ -57,7 +44,20 @@
 							<input type="text" name="title" placeholder="" th:value="${Article.title}"/>
 						</div>
 					</div>
-					<div class="row">
+					<!--  change activity date -->
+					<div class="row" th:if="${Article.kind} == 'activity'">
+						<div class="show-for-medium-up">
+							<div class="small-4 columns" th:text="#{newarticle.date}">Titel der Anzeige</div>
+						</div>
+						<div class="medium-8 small-12 columns">
+							<label><font color="red" th:text="${titleError}"> ERROR MESSAGE </font></label>
+							<input  type="text"  placeholder="" th:value="${#temporals.format(Article.activitydate, 'dd. MMMM yyyy HH:mm')}" readonly="readonly"/>
+
+
+						</div>
+					</div>
+					<!--  change activity date end -->
+					<div class="row" >
 						<div class="show-for-medium-up">
 							<div class="small-4 columns" th:text="#{newarticle.description}" th:placeholder="#{newarticle.description}">Beschreibung</div>
 						</div>
@@ -104,6 +104,15 @@
 	</div>
 
 	<footer th:include="footer :: footer"></footer>
-
 </body>
+<script th:src="@{/resources/js/build/jquery.datetimepicker.full.js}"></script>
+<script th:src="@{/resources/js/dateTimePicker.js}"></script>
+<script th:src="@{/resources/js/jquery.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/jquery.datetimepicker.css}" />
+<script>
+$("#categoryId option[value='35']").remove();
+$("#activityDateRow").hide();
+$("#chooseCategory").hide();
+jQuery('#datetimepicker_mask').datetimepicker();
+</script>
 </html>

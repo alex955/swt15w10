@@ -420,7 +420,7 @@
 									</label>
 								</div>
 							</div>
-							<div class="row">
+							<div class="row" id="choose_lang1">
 								<div class="large-5 small-3 columns" th:text="#{registration.language1}">Sprache 1</div>
 								<div class="large-7 small-9 columns">
 									<select name="language1">
@@ -432,7 +432,7 @@
 									</select>
 									</div>
 							</div>
-							<div class="row">
+							<div class="row" id="choose_lang2">
 								<div class="large-5 small-3 columns" th:text="#{registration.language2}">Sprache 2</div>
 								<div class="large-7 small-9 columns">
 									<select name="language2">
@@ -444,7 +444,7 @@
 									</select>
 								</div>
 							</div>
-							<div class="row">
+							<div class="row" id="choose_lang3">
 								<div class="large-5 small-3 columns" th:text="#{registration.language3}">Sprache 3</div>
 								<div class="large-7 small-9 columns">
 									<select name="language3">
@@ -472,4 +472,21 @@
 	</script>
 	
 </body>
+<script th:src="@{/resources/js/jquery.js}"></script>
+<script>
+$("#choose_lang2").hide();
+$("#choose_lang3").hide();
+
+$("#choose_lang1" ).change(function() {
+	$("#choose_lang2").show();
+	});
+	
+$("#choose_lang2" ).change(function() {
+	$("#choose_lang3").show();
+	});
+
+
+
+
+</script>
 </html>

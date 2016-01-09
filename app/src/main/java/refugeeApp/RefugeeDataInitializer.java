@@ -863,6 +863,8 @@ public class RefugeeDataInitializer implements DataInitializer {
 		arab.setDeleteEmail("");
 		arab.setChangeEmailTopic("");
 		arab.setChangeEmail("");
+		arab.setDeleteUserPopup("");
+		arab.setDateError("");
 
 		languageRepository.save(arab);
 	}

@@ -12,7 +12,9 @@
 var activityCategoryId = "35";
 
 function checkedActivity(){
-	$("#categoryId").append('<option value="35">Aktivitäten</option>');
+	if($("#categoryId option[value='35']").length == 0){
+		$("#categoryId").append('<option value="35">Aktivitäten</option>');
+	}
 	$("#activityDateRow").show();
 	$("#categoryId").val(activityCategoryId);
 	$("#chooseCategory").hide();
@@ -168,6 +170,7 @@ function checkedArticle(){
 </body>
 <script th:src="@{/resources/js/build/jquery.datetimepicker.full.js}"></script>
 <script th:src="@{/resources/js/dateTimePicker.js}"></script>
+<script th:src="@{/resources/js/jquery.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/resources/css/jquery.datetimepicker.css}" />
 <script>
 $("#activityDateRow").hide();
