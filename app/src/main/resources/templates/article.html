@@ -59,7 +59,15 @@
 							<div class="small-6 large-8 columns">
 								<p th:text="${#temporals.format(Article.creationdate, 'dd. MMMM yyyy')}">Datum</p>
 							</div>
-						</div>	
+						</div>
+						<div class="row" th:if="${Article.kind} == 'activity'">
+							<div class="small-6 large-4 columns">
+								<p th:text="#{article.activityDate}">Erstellungsdatum:</p>
+							</div>
+							<div class="small-6 large-8 columns">
+								<p th:text="${#temporals.format(Article.activitydate, 'dd. MMMM yyyy HH:mm')}">Datum</p>
+							</div>
+						</div>		
 						<div class="row">
 							<div class="small-6 large-4 columns">
 								<p th:text="#{article.creator}">Anbieter:</p>

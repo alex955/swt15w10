@@ -67,8 +67,8 @@ public class ArticleController {
 				if(now.isAfter(expiration) == true) this.articleRepo.delete(article); 
 			 }
 			 if(article.getKind().equals("activity")){
-				 LocalDateTime expiration = article.getActivitydate().plusDays(30);
-				if(now.isAfter(expiration) == true) this.articleRepo.delete(article); 
+				 LocalDateTime activityDate = article.getActivitydate();
+				 if(now.isAfter(activityDate) == true) this.articleRepo.delete(article); 
 			 }
 			 
 		 }
