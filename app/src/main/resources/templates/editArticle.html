@@ -26,8 +26,8 @@
 						<div class="medium-8 small-12 columns">
 							<select name="categoryId" id="categoryId">
 								<div th:each="entry : ${categories}">
-									<option th:value="${entry.cat.id}"><div th:text="#{'categories.' + ${entry.cat.name}}"></div></option>	
-									<option th:each="subEntry : ${entry.subcats}" th:value="${subEntry.id}"><div th:text="'--' + #{'categories.' + ${subEntry.name}}" ></div></option>	
+									<option th:value="${entry.cat.id}" th:selected="${entry.cat.id} == ${Article.category}"><div th:text="#{'categories.' + ${entry.cat.name}}"></div></option>	
+									<option th:each="subEntry : ${entry.subcats}" th:value="${subEntry.id}" th:selected="${subEntry.id} == ${Article.category}"><div th:text="'--' + #{'categories.' + ${subEntry.name}}" ></div></option>	
 								</div>
 							
 							</select>
