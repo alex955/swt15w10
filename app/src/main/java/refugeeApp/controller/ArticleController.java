@@ -139,7 +139,7 @@ public class ArticleController {
 
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
-		model.addAttribute("userId", currentUserId);
+		model.addAttribute("currentUserId", currentUserId);
 		model.addAttribute("user", this.userRepository.findOne(currentUserId));
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 		model.addAttribute("Article", originalArticle);
