@@ -9,17 +9,22 @@
 
 
 <script>
+var activityCategoryId = "35";
+
 function checkedActivity(){
-	var activityCategoryId = "35";
-	var selectedCategory = document.getElementById("chooseCategory");
-	document.getElementById('categoryId').value=activityCategoryId;
-	selectedCategory.style.visibility = 'hidden';
+	$("#categoryId").append('<option value="35">Aktivitäten</option>');
+	$("#activityDateRow").show();
+	$("#categoryId").val(activityCategoryId);
+	$("#chooseCategory").hide();
 }
 
 function checkedArticle(){
-	var selectedCategory = document.getElementById("chooseCategory");
-	selectedCategory.style.visibility = 'initial';
+	$("#categoryId option[value='35']").remove();
+	$("#categoryId").val('1');
+	$("#chooseCategory").show();
+	$("#activityDateRow").hide();
 }
+
 
 </script>
 </head>
@@ -37,6 +42,9 @@ function checkedArticle(){
 					<div class="row">
 						<div class="medium-4 mall-12 columns" th:text="#{newarticle.newarticlequestion}">Möchten Sie eine Aktivität (z.b. Sprachkurs, Stadtausflug, Bowlingspiel) oder einen Artikel erstellen?</div>
 						<div class="medium-8 small-12 columns">
+							<!--  error for incorrect date -->
+							<label><font color="red" th:text="${dateError}"> ERROR MESSAGE </font></label>
+							<!--  error for incorrect date -->	
 							<label><font color="red" th:text="${kindError}"> ERROR MESSAGE </font></label>
 							<div class="chooseRole">
 								<input id="activity" type="radio" name="kind" value="activity" onclick="checkedActivity()"/>
@@ -73,6 +81,20 @@ function checkedArticle(){
 							<input type="text" name="title" th:placeholder="#{newArticle.title}" />
 						</div>
 					</div>
+					
+					<!-- datum -->
+					<div class="row" id="activityDateRow">
+						<div class="show-for-medium-up">
+							<div class="small-4 columns" th:text="#{newarticle.date}">Titel der Anzeige</div>
+						</div>
+						<div class="medium-8 small-12 columns">
+							<label><font color="red" th:text="${titleError}"> ERROR MESSAGE </font></label>
+							<input type="text" value="click here!" id="datetimepicker_mask" name="activityDate" />
+							<!--  <input type="text" name="title" th:placeholder="#{newArticle.title}" /> -->
+						</div>
+					</div>
+						<!-- datum ende -->
+	
 					<div class="row">
 						<div class="show-for-medium-up">
 							<div class="small-4 columns" th:text="#{newarticle.description}">Beschreibung</div>
@@ -144,4 +166,13 @@ function checkedArticle(){
  
 
 </body>
+<script th:src="@{/resources/js/build/jquery.datetimepicker.full.js}"></script>
+<script th:src="@{/resources/js/dateTimePicker.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/jquery.datetimepicker.css}" />
+<script>
+
+$("#activityDateRow").hide();
+$("#chooseCategory").hide();
+jQuery('#datetimepicker_mask').datetimepicker();
+</script>
 </html>

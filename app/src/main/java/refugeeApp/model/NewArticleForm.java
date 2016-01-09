@@ -19,6 +19,7 @@ public class NewArticleForm {
     private String city;
     private String streetName;
     private String adressAddition;
+    private String activityDate;
     private MultipartFile file;
     private double longitude;
     private double latitude;
@@ -91,5 +92,11 @@ public class NewArticleForm {
 	}
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
+	}
+	public String getActivityDate() {
+		return activityDate;
+	}
+	public void setActivityDate(String activityDate) {
+		this.activityDate = activityDate;
 	}
 }

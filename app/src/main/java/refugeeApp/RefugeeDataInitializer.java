@@ -802,6 +802,7 @@ public class RefugeeDataInitializer implements DataInitializer {
 		german.setChangeEmailTopic("Refugee-App: EMail ändern");
 		german.setChangeEmail("Zum Ändern Ihrer Mailadresse klicken Sie auf den Link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
 		german.setDeleteUserPopup("Eine Email wurde an Ihr Postfach gesendet. Bitte folgen Sie den dort beschriebenen Schritten um Ihren Useraccount zu deaktivieren.");
+		german.setDateError("Bitte wählen Sie Datum und Uhrzeit für die Aktivität indem Sie auf das Eingabefeld klicken.");
 
 		languageRepository.save(german);
 
@@ -832,6 +833,7 @@ public class RefugeeDataInitializer implements DataInitializer {
 		english.setChangeEmailTopic("Refugee-App: Email change");
 		english.setChangeEmail("To change your email click the following link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
 		english.setDeleteUserPopup("An email has been sent your mailbox. Please follow the instructions in there to confirm the deletion of your user account.");
+		english.setDateError("Please choose date and time for the activity by clicking the input field.");
 		
 		languageRepository.save(english);
 

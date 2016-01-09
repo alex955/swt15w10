@@ -37,6 +37,7 @@ public class Language {
     //Article
     private String titleError;
     private String kindError;
+    private String dateError;
 
     //EMails
     private String registrationEmail;
@@ -258,5 +259,13 @@ public class Language {
 
 	public void setDeleteUserPopup(String deleteUserPopup) {
 		this.deleteUserPopup = deleteUserPopup;
+	}
+
+	public String getDateError() {
+		return dateError;
+	}
+
+	public void setDateError(String dateError) {
+		this.dateError = dateError;
 	}
 }

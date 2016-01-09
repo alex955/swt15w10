@@ -6,6 +6,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -58,10 +59,18 @@ public class ArticleController {
 	 @Scheduled(fixedRate = 3600000)
 	 public void deleteArticlesAfterExpiration() {
 		List<Article> articles = this.articleRepo.findAll();
+		LocalDateTime now =LocalDateTime.now();
+		
 		 for(Article article:articles){
-			 LocalDateTime now =LocalDateTime.now();
-			 LocalDateTime expiration = article.getCreationdate().plusDays(30);
-			 if(now.isAfter(expiration) == true) this.articleRepo.delete(article); 
+			 if(article.getKind().equals("article")){
+				 LocalDateTime expiration = article.getCreationdate().plusDays(30);
+				if(now.isAfter(expiration) == true) this.articleRepo.delete(article); 
+			 }
+			 if(article.getKind().equals("activity")){
+				 LocalDateTime expiration = article.getActivitydate().plusDays(30);
+				if(now.isAfter(expiration) == true) this.articleRepo.delete(article); 
+			 }
+			 
 		 }
 		 
 	 }
@@ -305,7 +314,6 @@ public class ArticleController {
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/newArticle", method = RequestMethod.POST)
     public String saveArticle(@ModelAttribute("NewArticleForm") @Valid NewArticleForm newArticleForm, BindingResult result, Model model, ModelMap modelMap, @LoggedIn Optional<UserAccount> userAccount) {
-
 		User creator = userRepository.findByUserAccount(userAccount.get());
 		model.addAttribute("creator", creator);
 		this.processedCategories = categoryMethods.getProcessedCategories();
@@ -313,6 +321,7 @@ public class ArticleController {
 		model.addAttribute("categoriesForm", this.categories.findAll());
 		model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
+		
 		Locale locale = LocaleContextHolder.getLocale();
 		String browserLanguage = locale.toString().substring(0, 2);
 
@@ -334,6 +343,27 @@ public class ArticleController {
 			}
 			return "newArticle";
 		}
+		
+		//parse activity date
+		LocalDateTime activityDate = null;
+		if(newArticleForm.getKind().equals("article")){
+			activityDate = LocalDateTime.now();
+		}
+		
+		if(newArticleForm.getKind().equals("activity")){
+			//check validity of form of date string
+			if(newArticleForm.getActivityDate().equals("____/__/__ __:__")){
+				String dateError = language.getDateError();
+				modelMap.addAttribute("dateError", dateError);
+				return "newArticle";
+			}
+			String activityDateString = newArticleForm.getActivityDate();
+			String parsedDate = activityDateString.substring(0, 4) + "-" + activityDateString.substring(5, 7) + "-" + activityDateString.substring(8,10);
+			String parsedTime = activityDateString.substring(11, 13) + ":" +  activityDateString.substring(14, 16);
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			activityDate = LocalDateTime.parse(parsedDate + " " + parsedTime, formatter);
+		}
+		//end parsing
 
 		if (!((newArticleForm.getFile()).isEmpty())) {
             try {
@@ -359,6 +389,8 @@ public class ArticleController {
 				Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename(), creator);
 				pictureRepo.save(picture);
 				Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), picture, newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getZip(), creator, newArticleForm.getKind());
+				//set activity date
+				article.setActivitydate(activityDate);
 				
 				//Breitengrad und Längengradberechnung 
 				Location ort = new Location(newArticleForm.getStreetName()+" "+newArticleForm.getZip()+" "+newArticleForm.getCity());
@@ -367,6 +399,7 @@ public class ArticleController {
 	    		article.setLongitude(ort.getLongitude());				
 	    		articleRepo.save(article);
 	    		
+	    		System.out.println(article.getCategory());
         		return ("redirect:/editAttributes/"+article.getId());
             } catch (Exception e) {
                 return "You failed to upload " + newArticleForm.getTitle() + " => " + e.getMessage();
@@ -374,11 +407,15 @@ public class ArticleController {
         } else {
 			//save article without Picture
 			Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(),  newArticleForm.getZip(),creator, newArticleForm.getKind());
+			//set activity date
+			article.setActivitydate(activityDate);
+			
 			Location ort = new Location(newArticleForm.getStreetName()+" "+newArticleForm.getZip()+" "+newArticleForm.getCity());
 			ort = ort.GetCoordinates(ort);
 			article.setLatitude(ort.getLatitude()); 
     		article.setLongitude(ort.getLongitude());
 			articleRepo.save(article);
+			System.out.println(article.getCategory());
             return ("redirect:/editAttributes/"+article.getId());
         }
 	}
