@@ -140,6 +140,7 @@ public class ArticleController {
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
 		model.addAttribute("currentUserId", currentUserId);
+		model.addAttribute("userId", currentUserId);
 		model.addAttribute("user", this.userRepository.findOne(currentUserId));
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 		model.addAttribute("Article", originalArticle);
@@ -164,9 +165,11 @@ public class ArticleController {
 				if (result.hasFieldErrors("title")) {
 					final String titleError = language.getTitleError();
 					modelMap.addAttribute("titleError", titleError);
+					return "editArticle";
 				}
 			}
-			return "editArticle";
+			//kind errors cannot happen, because an hidden argument (initialised with prior kind) is passed, kind cannot be changed
+			//return "editArticle";
 		}
 
 		//case: current user didnt create article && logged in user no admin -> end
