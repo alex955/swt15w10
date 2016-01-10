@@ -13,11 +13,11 @@
 	<nav th:include="topbar :: topbar"></nav>
 
 	<div class="row">
-		<div class="large-12 columns" th:if="${userId} == ${Article.creator.id} or ${isAdminLoggedIn} == true">
+		<div class="large-12 columns" th:if="${currentUserId} == ${Article.creator.id} or ${isAdminLoggedIn} == true">
 			<p>&nbsp;</p>
 			<h4 class="header" th:text="#{editarticle.editarticle}">Angebot bearbeiten</h4>
 			<form action="#" th:action="@{/editArticle/{id}(id=${Article.id})}" th:object="${NewArticleForm}" method="post" enctype="multipart/form-data">
-				<input type="hidden" id="activity" th:value="${Article.kind}"/>
+				<input type="hidden" name="kind" th:value="${Article.kind}"/>
 				<div class="panel">
 					<div class="row" th:if="${Article.kind} == 'article'">
 						<div class="show-for-medium-up">
