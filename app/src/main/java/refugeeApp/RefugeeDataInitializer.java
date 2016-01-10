@@ -32,6 +32,19 @@ public class RefugeeDataInitializer implements DataInitializer {
     final Role volunteer = new Role("ROLE_VOLUNTEER");
     final Role admin = new Role("ROLE_ADMIN");
 
+    /**
+     * autowiring constructor
+     * @param userAccountManager
+     * @param userRepository
+     * @param categories
+     * @param goodREPO
+     * @param chatRepo
+     * @param msgRepo
+     * @param settingsRepo
+     * @param userSettingsRepository
+     * @param validatorRepository
+     * @param languageRepository
+     */
     @Autowired
     public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, refugeeApp.model.ArticleRepo goodREPO, ChatConversationRepo chatRepo, ChatMessageRepo msgRepo, SettingsRepository settingsRepo, UserSettingsRepository userSettingsRepository, ValidatorRepository validatorRepository, LanguageRepository languageRepository) {
 
@@ -53,6 +66,9 @@ public class RefugeeDataInitializer implements DataInitializer {
 
 	}
 
+    /**
+     * call of all subinitializations
+     */
     @Override
     public void initialize() {
     	Settings();
@@ -60,7 +76,6 @@ public class RefugeeDataInitializer implements DataInitializer {
     	initializeUsers(userAccountManager, userRepository);
         initializeCategories();
         initializeGoods(userAccountManager, userRepository);
-        initializeActivities();
     }
     
     /**
@@ -100,6 +115,11 @@ public class RefugeeDataInitializer implements DataInitializer {
        	
     }
     
+    /**
+     * initialisation of users
+     * @param userAccountManager
+     * @param userRepository
+     */
     public void initializeUsers(UserAccountManager userAccountManager, UserRepository userRepository){
     	
         if (userAccountManager.findByUsername("admin1").isPresent()) return;
@@ -135,6 +155,9 @@ public class RefugeeDataInitializer implements DataInitializer {
 
     }
 
+    /**
+     * terribly hardcoded initialisation of categories
+     */
     public void initializeCategories(){ 
 //    	Category cat = new Category("Möbel", -1);
 //    	LinkedList<String> tags1 = new LinkedList<String>();
@@ -736,6 +759,11 @@ public class RefugeeDataInitializer implements DataInitializer {
 //        categories.save(cat8_7);
     }
 
+    /**
+     * initialisation fo goods
+     * @param userAccountManager
+     * @param userRepository
+     */
     public void initializeGoods(UserAccountManager userAccountManager, UserRepository userRepository){
     	LinkedList<String> tags1 = new LinkedList<String>();
         tags1.add("XXL");
@@ -802,9 +830,9 @@ public class RefugeeDataInitializer implements DataInitializer {
         goodREPO.save(g12);
     }
 
-    public void initializeActivities(){
-    }
-
+    /**
+     * initialisation of languages
+     */
 	public void initializeLanguages(){
 
 		final Language german = new Language();
@@ -834,7 +862,8 @@ public class RefugeeDataInitializer implements DataInitializer {
 		german.setChangeEmail("Zum Ändern Ihrer Mailadresse klicken Sie auf den Link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
 		german.setDeleteUserPopup("Eine Email wurde an Ihr Postfach gesendet. Bitte folgen Sie den dort beschriebenen Schritten um Ihren Useraccount zu deaktivieren.");
 		german.setDateError("Bitte wählen Sie Datum und Uhrzeit für die Aktivität indem Sie auf das Eingabefeld klicken.");
-
+		german.setDeleteChat("Wollen Sie das gesamte Gespräch wirklich löschen? Die bisher in diesem Gespräch geschriebenen Nachrichten werden unwiderruflich für Sie und Ihren Gesprächspartner gelöscht");
+		
 		languageRepository.save(german);
 
 
@@ -865,6 +894,7 @@ public class RefugeeDataInitializer implements DataInitializer {
 		english.setChangeEmail("To change your email click the following link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
 		english.setDeleteUserPopup("An email has been sent your mailbox. Please follow the instructions in there to confirm the deletion of your user account.");
 		english.setDateError("Please choose date and time for the activity by clicking the input field.");
+		english.setDeleteChat("Do you really want to delete this chat conversation completely? All in this conversation sent and received messages will be deleted for you and your chat partner");
 		
 		languageRepository.save(english);
 
@@ -896,6 +926,7 @@ public class RefugeeDataInitializer implements DataInitializer {
 		arab.setChangeEmail("");
 		arab.setDeleteUserPopup("");
 		arab.setDateError("");
+		arab.setDeleteChat("");
 
 		languageRepository.save(arab);
 	}

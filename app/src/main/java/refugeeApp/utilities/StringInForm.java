@@ -1,5 +1,9 @@
 package refugeeApp.utilities;
 
+/**
+ * utility class for passing of strings in forms
+ *
+ */
 public class StringInForm {
 	public StringInForm(String content) {
 		this.content = content;

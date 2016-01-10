@@ -40,16 +40,16 @@ public class FrontpageController {
 		return "frontpage";
 	}
 	
-	@RequestMapping({"/testVars"})
-	public String testVars(Model model) {
-		Locale currentLocale = LocaleContextHolder.getLocale();
-		model.addAttribute("currentLocale", currentLocale);
-		
-		Locale[] allLocales = Locale.getAvailableLocales();
-		model.addAttribute("allLocales", allLocales);
-		
-		return "testVars";
-	}
+//	@RequestMapping({"/testVars"})
+//	public String testVars(Model model) {
+//		Locale currentLocale = LocaleContextHolder.getLocale();
+//		model.addAttribute("currentLocale", currentLocale);
+//		
+//		Locale[] allLocales = Locale.getAvailableLocales();
+//		model.addAttribute("allLocales", allLocales);
+//		
+//		return "testVars";
+//	}
 	
 	
 }

@@ -1,0 +1,42 @@
+﻿= Protokoll Gruppe 10
+
+
+__Treffen am 08.01.2016__
+
+__Schriftführer:__ Andreas Huber
+
+__Nächstes Treffen:__ nur bei Bedarf 13.01.2016
+
+__Teilnehmer:__ J. Adam, A. Martin, V. Herz, A. Huber, A. Herzog , A. Shulga
+
+== Bemerkungen
+//Verwarnungen, besondere Vorfälle, Organisatorisches
+-
+
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe |Status |Bemerkung
+|#61     |Muss-Kriterien    |Sammelticket für alle zu implementierenden Muss-Kriterien - Fertigstellung der letzten fehlenden Funktionalitäten (Tagging, Mehrsprachigkeit) | in Arbeit
+|===
+
+
+== Aktueller Stand
+//Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den Dokumenten.
+Muss-Kriterien sind zu 22/23 erledigt, es fehlt noch der letzte Feinschliff an der reCaptcha-Validierung. Ferner wurde festgestellt, dass eine "Echtzeitübersetzung" (im Sinne von Integration einer Sprach-API o.Ä. zur dynamischen Übersetzung von Artikelnamen, Artikelbeschreibungen,..) nicht möglich ist und dementsprechend nicht implementiert wird.
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#61     |Muss-Kriterien    |Sammelticket für alle zu implementierenden Muss-Kriterien|Gruppe 10|in Arbeit (22/23)
+|#134     |Ascii Doc Dokumentation   |Erledigung der restlichen Dokumentationsaufgaben|Gruppe 10|in Arbeit
+|#67     |Java Doc   |Java Doc für die restlichen Klassen schreiben|Gruppe 10|in Arbeit
+|===
