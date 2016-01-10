@@ -2,12 +2,14 @@ package refugeeApp.controller;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,8 @@ import refugeeApp.model.ChatConversation;
 import refugeeApp.model.ChatConversationRepo;
 import refugeeApp.model.ChatMessage;
 import refugeeApp.model.ChatMessageRepo;
+import refugeeApp.model.Language;
+import refugeeApp.model.LanguageRepository;
 import refugeeApp.model.Location;
 import refugeeApp.model.User;
 import refugeeApp.model.UserRepository;
@@ -40,6 +44,7 @@ public class ChatController {
 	@Autowired private final ArticleRepo articleRepo;
 	@Autowired private final ChatConversationRepo chatRepo;
     @Autowired private final UserRepository userRepository;
+    @Autowired private final LanguageRepository languageRepository;
     
     //TODO - replace variable with e.g. repo for chat content
     private PossibleChatMessages possibleMessagesObject = new PossibleChatMessages();
@@ -60,12 +65,13 @@ public class ChatController {
 	 * @param msgRepo
 	 */
 	@Autowired
-	public ChatController(CategoryRepo categories, CategoryMethods categoryMethods, ArticleRepo articleRepo, ChatConversationRepo chatRepo, UserRepository userRepository, ChatMessageRepo msgRepo) {
+	public ChatController(CategoryRepo categories, CategoryMethods categoryMethods, ArticleRepo articleRepo, ChatConversationRepo chatRepo, UserRepository userRepository, ChatMessageRepo msgRepo, LanguageRepository languageRepository) {
 		this.categoryMethods = categoryMethods;
 		this.articleRepo = articleRepo;
 		this.chatRepo = chatRepo;
 		this.userRepository = userRepository;
 		this.msgRepo = msgRepo;
+		this.languageRepository = languageRepository;
 	} 
 	
 	/**
@@ -147,6 +153,15 @@ public class ChatController {
 		
 		model.addAttribute("stringInForm", new StringInForm());
 		model.addAttribute("currentUserId", currentUserId);
+		
+		Locale locale = LocaleContextHolder.getLocale();
+		String browserLanguage = locale.toString().substring(0, 2);
+		if(languageRepository.findByBrowserLanguage(browserLanguage) == null){
+			browserLanguage = "en";
+		}
+		Language language = languageRepository.findByBrowserLanguage(browserLanguage);
+		final String deleteChat = language.getDeleteChat();
+		model.addAttribute("deleteChatWarning", deleteChat);
 		
 		return "chat/chatThread";
 	}
@@ -278,6 +293,26 @@ public class ChatController {
 		this.chatRepo.save(newConversation);
 		
 		return "redirect:/chat";
+	}
+	
+	/**
+	 * deletes a certain chat conversation
+	 * @param id of the chat conversation
+	 * @param userAccount Optional either containing null or user acc of logged in user
+	 * @return redirect to /chat
+	 */
+	@RequestMapping(value = "/chat/deleteConversation/{id}")
+	public String deleteChatConversation(@PathVariable Long id, @LoggedIn Optional<UserAccount> userAccount) {
+		ChatConversation cv = this.chatRepo.findOne(id);
+		if(cv == null || !userAccount.isPresent()) return "error";
+		
+		long currentUserId = userRepository.findByUserAccount(userAccount.get()).getId();
+		if(cv.getFromId() == currentUserId || cv.getToId() == currentUserId){
+			this.chatRepo.delete(id);
+			return "redirect:/chat"; 
+		}else{
+			return "error";
+		}
 	}
 	
 	

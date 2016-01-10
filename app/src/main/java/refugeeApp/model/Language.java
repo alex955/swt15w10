@@ -47,8 +47,11 @@ public class Language {
     private String changeEmail;
     private String changeEmailTopic;
     
-    //Adminpanel
+    //user deletion
     private String deleteUserPopup;
+    
+    //chat
+    private String deleteChat;
 
 
     public Language() {}
@@ -267,5 +270,13 @@ public class Language {
 
 	public void setDateError(String dateError) {
 		this.dateError = dateError;
+	}
+
+	public String getDeleteChat() {
+		return deleteChat;
+	}
+
+	public void setDeleteChat(String deleteChat) {
+		this.deleteChat = deleteChat;
 	}
 }

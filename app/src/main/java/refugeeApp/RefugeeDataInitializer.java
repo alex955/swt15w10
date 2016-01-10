@@ -831,7 +831,8 @@ public class RefugeeDataInitializer implements DataInitializer {
 		german.setChangeEmail("Zum Ändern Ihrer Mailadresse klicken Sie auf den Link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
 		german.setDeleteUserPopup("Eine Email wurde an Ihr Postfach gesendet. Bitte folgen Sie den dort beschriebenen Schritten um Ihren Useraccount zu deaktivieren.");
 		german.setDateError("Bitte wählen Sie Datum und Uhrzeit für die Aktivität indem Sie auf das Eingabefeld klicken.");
-
+		german.setDeleteChat("Wollen Sie das gesamte Gespräch wirklich löschen? Die bisher in diesem Gespräch geschriebenen Nachrichten werden unwiderruflich für Sie und Ihren Gesprächspartner gelöscht");
+		
 		languageRepository.save(german);
 
 
@@ -862,6 +863,7 @@ public class RefugeeDataInitializer implements DataInitializer {
 		english.setChangeEmail("To change your email click the following link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
 		english.setDeleteUserPopup("An email has been sent your mailbox. Please follow the instructions in there to confirm the deletion of your user account.");
 		english.setDateError("Please choose date and time for the activity by clicking the input field.");
+		english.setDeleteChat("Do you really want to delete this chat conversation completely? All in this conversation sent and received messages will be deleted for you and your chat partner");
 		
 		languageRepository.save(english);
 
@@ -893,6 +895,7 @@ public class RefugeeDataInitializer implements DataInitializer {
 		arab.setChangeEmail("");
 		arab.setDeleteUserPopup("");
 		arab.setDateError("");
+		arab.setDeleteChat("");
 
 		languageRepository.save(arab);
 	}

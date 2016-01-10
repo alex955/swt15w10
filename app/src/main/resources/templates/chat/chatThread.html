@@ -89,6 +89,7 @@ function showInputField(){
 									<textarea id="freetextArea" rows="4" th:field="*{content2}"></textarea>
 								</div>
 								<div class="small-12 columns" >
+									<a th:href="@{/chat/deleteConversation/{id}(id=${conversation.id})}" class="left alert button" id="deleteChatWarning" th:text="#{chat.delete}">Chat löschen</a>
 									<button class="right button" type="submit" th:text="#{chat.send}">Nachricht senden</button>
 								</div>
 							</form>
@@ -109,6 +110,18 @@ function showInputField(){
 <script th:src="@{/resources/js/dateTimePicker.js}"></script>
 <link rel="stylesheet" type="text/css" th:href="@{/resources/css/jquery.datetimepicker.css}" />
 <!-- end  datetime picker -->
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+    var message = [[${deleteChatWarning}]];
+    
+    $('#deleteChatWarning').on('click', function () {
+        return confirm(message);
+    }); 
+
+/*]]>*/
+</script>
+
 <script>
 
 var onStartUpTimePickerElement = document.getElementById("datetimepicker_mask");
