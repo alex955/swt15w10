@@ -51,6 +51,17 @@ public class SettingsController {
 
     protected LinkedList<CategoryFirstTierObject> processedCategories;
 
+    /**
+     * autowired constructor
+     * @param articleRepo
+     * @param userRepository
+     * @param userAccountManager
+     * @param passwordEncoder
+     * @param categoryMethods
+     * @param validatorRepository
+     * @param userSettingsRepository
+     * @param languageRepository
+     */
     @Autowired
     public SettingsController(ArticleRepo articleRepo, UserRepository userRepository, UserAccountManager userAccountManager, PasswordEncoder passwordEncoder, CategoryMethods categoryMethods, ValidatorRepository validatorRepository, UserSettingsRepository userSettingsRepository, LanguageRepository languageRepository){
         this.userRepository = userRepository;
@@ -62,6 +73,13 @@ public class SettingsController {
         this.languageRepository = languageRepository;
     }
 
+    /**
+     * changes settings of certain user
+     * @param userSettingsForm form containing change information
+     * @param userAccount Optional containnig either null or useraccount
+     * @param model MVC model
+     * @return usersettings template
+     */
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value ="/usersettings")
     public String changeSettings(@ModelAttribute("UserSettingsForm") UserSettingsForm userSettingsForm, @LoggedIn Optional<UserAccount> userAccount, Model model){
@@ -85,6 +103,17 @@ public class SettingsController {
         return "usersettings";
     }
 
+    /**
+     * processes changed information
+     * @param userSettingsForm form containing information
+     * @param result validation result
+     * @param userAccount Optional ontaining either user account or null
+     * @param model MVC model
+     * @param modelMap MVC model map
+     * @return usersettigns template, either filled with error information or not if no errors
+     * @throws AddressException
+     * @throws MessagingException
+     */
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/usersettings", method = RequestMethod.POST)
     public String saveSettings(@ModelAttribute("UserSettingsForm") @Valid UserSettingsForm userSettingsForm, BindingResult result, @LoggedIn Optional<UserAccount> userAccount,  Model model, ModelMap modelMap) throws AddressException, MessagingException {
@@ -222,6 +251,14 @@ public class SettingsController {
         return "usersettings";
     }
 
+    /**
+     * lets a user request a deletion/deactivation of him/herself
+     * @param userAccount userAccount which is to be deleted/deactivated
+     * @param modelMap MVC model map
+     * @return redirect to logout
+     * @throws AddressException
+     * @throws MessagingException
+     */
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/deleteuser")
     public String deleteUser(@LoggedIn Optional<UserAccount> userAccount, ModelMap modelMap) throws AddressException, MessagingException {

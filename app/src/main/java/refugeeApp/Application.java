@@ -58,6 +58,11 @@ public class Application extends SpringBootServletInitializer  {
 		SpringApplication.run(Application.class, args);
 	}
 
+	/**
+	 * 
+	 * @author
+	 *
+	 */
 	@Configuration
 	static class RefugeeWebConfiguration extends SalespointWebConfiguration {
 		@Override
@@ -65,6 +70,12 @@ public class Application extends SpringBootServletInitializer  {
 			registry.addViewController(LOGIN_ROUTE).setViewName("");
 		}
 	}
+	
+	/**
+	 * 
+	 * @author 
+	 *
+	 */
 	@Configuration
 	static class WebSecurityConfiguration extends SalespointSecurityConfiguration {
 

@@ -20,14 +20,26 @@ public class CategoryMethods {
 	
 	@Autowired private final CategoryRepo categories;
 	
+	/**
+	 * autowired constructor
+	 * @param userAccountManager
+	 * @param userRepository
+	 * @param categories
+	 * @param goodREPO
+	 */
 	@Autowired
 	public CategoryMethods(UserAccountManager userAccountManager, UserRepository userRepository,
 			CategoryRepo categories, ArticleRepo goodREPO) {
 		this.categories = categories;
 	}
 	
+
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
 	
+	/**
+	 * processes categories into hierarchical CategoryFirstTierObject
+	 * @return List of Hierarchical objects
+	 */
 	public LinkedList<CategoryFirstTierObject> getProcessedCategories(){
 		LinkedList<CategoryFirstTierObject> toReturn = new LinkedList<CategoryFirstTierObject>();
 		Iterable<Category> foundCategories = categories.findAll();
@@ -52,6 +64,10 @@ public class CategoryMethods {
 		return toReturn;
 	}
 	
+	/**
+	 * 
+	 * @return Mapping of subcategories by name of rootcategory
+	 */
 	public Map<String, List<Category>> getCategoryMap(){
 		Map<String, List<Category>> toReturn = new HashMap<String, List<Category>>();
 		
@@ -64,6 +80,11 @@ public class CategoryMethods {
 		return toReturn;
 	}
 	
+	/**
+	 * 
+	 * @param id category id
+	 * @return List of children of certain category
+	 */
 	public LinkedList<Category> getChildren(long id){
 		LinkedList<Category> toReturn = new LinkedList<Category>();
 		for(Category c : this.categories.findAll()){

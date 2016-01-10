@@ -43,6 +43,14 @@ public class SearchController {
 	private Location ort=new Location();
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
 	
+	
+	/**
+	 * autowired constructor
+	 * @param categoryMethods
+	 * @param userRepository
+	 * @param categories
+	 * @param articleRepo
+	 */
 	@Autowired
 	public SearchController(CategoryMethods categoryMethods, UserRepository userRepository, CategoryRepo categories,
 			ArticleRepo articleRepo) {
@@ -53,6 +61,11 @@ public class SearchController {
 		this.articleRepo = articleRepo;
 	}
 	
+	/**
+	 * sorts out articles
+	 * @param articles list of articles
+	 * @return list without sorted out articles
+	 */
 	public LinkedList<Article> sortOutArticlesWithDistance(List<Article> articles){
 		LinkedList<Article> output= new LinkedList<Article>();
 		
@@ -69,6 +82,14 @@ public class SearchController {
 		return output;
 	}
 	
+	/**
+	 * caluclates distance between two locations given by lat/long
+	 * @param lat1
+	 * @param lon1
+	 * @param lat2
+	 * @param lon2
+	 * @return distance between two locations
+	 */
 	private static double distance(double lat1, double lon1, double lat2, double lon2) {
 		double delta = lon1 - lon2;
 		double dist = Math.sin(lat1* Math.PI / 180.0) * Math.sin(lat2* Math.PI / 180.0) + Math.cos(lat1* Math.PI / 180.0) * Math.cos(lat2* Math.PI / 180.0) * Math.cos(delta * Math.PI / 180.0);
@@ -80,6 +101,10 @@ public class SearchController {
 		return dist;
 	}
 
+	/**
+	 * processes categories given by List into hierarchical CategoryFirstTierObject
+	 * @return CategoryFirstTierObject containing categories
+	 */
 	protected LinkedList<CategoryFirstTierObject> getProcessedCategories(){
 		LinkedList<CategoryFirstTierObject> toReturn = new LinkedList<CategoryFirstTierObject>();
 		Iterable<Category> foundCategories = categories.findAll();
@@ -101,6 +126,10 @@ public class SearchController {
 		return toReturn;
 	}
 		
+	/**
+	 * 
+	 * @return Category Map containing name of category and children
+	 */
 	public Map<String, List<Category>> getCategoryMap(){
 		Map<String, List<Category>> toReturn = new HashMap<String, List<Category>>();
 		
@@ -112,6 +141,11 @@ public class SearchController {
 		return toReturn;
 	}
 		
+	/**
+	 * 
+	 * @param id ID of category
+	 * @return children of certain category in list
+	 */
 	public LinkedList<Category> getChildren(long id){
 		LinkedList<Category> toReturn = new LinkedList<Category>();
 		for(Category c : this.categories.findAll()){
@@ -120,6 +154,11 @@ public class SearchController {
 		return toReturn;
 	}
 
+	/**
+	 * 
+	 * @param model mvc model to which information is added
+	 * @return adds current location or category to model
+	 */
 	public Model getCurrent_cat(Model model) {
 		if (current_cat==0) model.addAttribute("current_category",new Category("AlleKategorien", 0));
 		else model.addAttribute("current_category",this.categories.findOne(current_cat).get());
@@ -127,21 +166,39 @@ public class SearchController {
 		return model;
 	}
 
+	/**
+	 * sets current catgegory
+	 * @param current_cat
+	 */
 	public void setCurrent_cat(long current_cat) {
 		if (this.categories.findOne(current_cat).get().getId()==current_cat) this.current_cat = current_cat; 
 		else throw new IllegalArgumentException("Kategorie ID existiert nicht!");
 	}
 	
+	/**
+	 * exchanges curret category
+	 * @param model mvc model
+	 * @return new mvc model
+	 */
 	public Model cat_exchange(Model model){
 		if (current_cat==0) model.addAttribute("current_category",new Category("AlleKategorien", 0));
 		else model.addAttribute("current_category",this.categories.findOne(current_cat).get());
 		return model;
 	}
 		
+	/**
+	 * 
+	 * @return current category id
+	 */
 	public Long getCurrent_cat(){
 			return current_cat;	
 	}
-		
+	
+	/**
+	 * 
+	 * @param subcatId id of category
+	 * @return List of all items of a certain category and its subcategories
+	 */
 	public List<Article> getAllSubcategoryItems(long subcatId){
 		List<Article> toReturn = getAllCategoryItems(subcatId);
 		
@@ -159,6 +216,11 @@ public class SearchController {
 		return toReturn;
 	}
 	
+	/**
+	 * 
+	 * @param subcatID category id
+	 * @return list of all articles in certain category
+	 */
 	public List<Article> getAllCategoryItems(long subcatID){
 		return this.articleRepo.findByCategory(subcatID);
 	}
@@ -180,6 +242,12 @@ public class SearchController {
 		return "search";
 	}
 	
+	/**
+	 * processes article search
+	 * @param SearchQuery 
+	 * @param model mvc model
+	 * @return search template
+	 */
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
     public String searcharticle(@ModelAttribute("SearchQuery") SearchQuery SearchQuery, Model model ) {
 	
@@ -215,7 +283,12 @@ public class SearchController {
 		   
 	}
 			
-			
+	/**
+	 * searches through articles by category
+	 * @param catID category id
+	 * @param model mvc model
+	 * @return search template
+	 */
 	@RequestMapping(value = "/search/{category}")
 	public String searchByCategory(@PathVariable("category") Long catID, Model model)
 	{ 	
@@ -257,9 +330,19 @@ public class SearchController {
 		return "search";
 	}
 			
+	/**
+	 * 
+	 * @return frontpage template
+	 */
 	@RequestMapping(value = "/searchbytags")
     public String frontpage() {return "frontpage";}
 		
+	/**
+	 * processes search by tags 
+	 * @param SearchTag
+	 * @param model
+	 * @return search template
+	 */
 	@RequestMapping(value = "/searchbytags", method = RequestMethod.POST)
     public String searchbytags(@ModelAttribute("searchattributes") NewAttributes SearchTag, Model model ) {
 		SearchQuery SearchQuery= new SearchQuery();
@@ -308,9 +391,19 @@ public class SearchController {
 		return "search";
 	}
 	
+	/**
+	 * 
+	 * @return frontpage template
+	 */
 	@RequestMapping(value = "/setsearchaddress")
     public String frontpage2() {return "frontpage";}
 	
+	/**
+	 * sets search address
+	 * @param ort
+	 * @param model
+	 * @return redirect to search
+	 */
 	@RequestMapping(value = "/setsearchaddress", method = RequestMethod.POST)
     public String setsearchaddress(@ModelAttribute("Ort") Location ort, Model model ) 
     {	this.processedCategories = this.getProcessedCategories();

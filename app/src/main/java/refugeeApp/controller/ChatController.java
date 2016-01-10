@@ -50,6 +50,15 @@ public class ChatController {
 	//Classvars
 	protected LinkedList<CategoryFirstTierObject> processedCategories;
 
+	/**
+	 * autowired constructor, arguments are repos or object with static methods for categories
+	 * @param categories
+	 * @param categoryMethods
+	 * @param articleRepo
+	 * @param chatRepo
+	 * @param userRepository
+	 * @param msgRepo
+	 */
 	@Autowired
 	public ChatController(CategoryRepo categories, CategoryMethods categoryMethods, ArticleRepo articleRepo, ChatConversationRepo chatRepo, UserRepository userRepository, ChatMessageRepo msgRepo) {
 		this.categoryMethods = categoryMethods;

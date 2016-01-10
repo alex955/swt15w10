@@ -20,6 +20,11 @@ public class PictureController{
 	private final SettingsRepository settingsRepo;
 	private FileSystemResource resource;
 	
+	/**
+	 * autowired constructor
+	 * @param articleRepo
+	 * @param settingsRepo
+	 */
 	@Autowired
 	public PictureController(ArticleRepo articleRepo, SettingsRepository settingsRepo){
 		this.articleRepo=articleRepo;

@@ -45,6 +45,16 @@ public class ArticleController {
     protected LinkedList<CategoryFirstTierObject> processedCategories;
 	@Autowired private final LanguageRepository languageRepository;
     
+	/**
+	 * Constructor which autowires initialized repos
+	 * @param categories Repo of Categoeis
+	 * @param articleRepo Repo of Articles
+	 * @param pictureRepo Repo of Pictures
+	 * @param categoryMethods static methods for categories
+	 * @param userRepository Repo of users
+	 * @param settingsRepo Repo of Settings (picturepath for articles with no pictures)
+	 * @param languageRepository Repo of languages/language elements which are not covered in *.properties
+	 */
 	@Autowired 
 	public ArticleController(CategoryRepo categories, ArticleRepo articleRepo, PictureRepo pictureRepo, CategoryMethods categoryMethods, UserRepository userRepository, SettingsRepository settingsRepo, LanguageRepository languageRepository){
 		this.categories = categories;
@@ -56,6 +66,9 @@ public class ArticleController {
 		this.languageRepository = languageRepository;
 	}
 
+	/**
+	 * Deletes Articles in fixed intervals: Articles are deleted after creationDate+fixedRate, activities are deleted when "now > activityDate"
+	 */
 	 @Scheduled(fixedRate = 3600000)
 	 public void deleteArticlesAfterExpiration() {
 		List<Article> articles = this.articleRepo.findAll();
@@ -75,6 +88,13 @@ public class ArticleController {
 		 
 	 }
 
+	 /**
+	  * Shows certain article
+	  * @param id unique ID of the article
+	  * @param model model which is passed
+	  * @param userAccount Optional<T> either containing null or logged in user account
+	  * @return template for display of article
+	  */
 	@RequestMapping(value = "/showArticle/{id}")
 	public String showArticle(@PathVariable("id") long id,Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		//initiate categories
@@ -106,6 +126,14 @@ public class ArticleController {
 	    return "article";
 	}
 	
+	/**
+	 * shows form for editing of existing article
+	 * @param newArticleForm Validation/Form object
+	 * @param id unique ID of the article
+	 * @param userAccount Optional<T> either containing null or logged in user account
+	 * @param model MVC model
+	 * @return template for editing articles
+	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/editArticle/{id}")
 	public String editArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, @PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount, Model model) {
@@ -130,6 +158,16 @@ public class ArticleController {
 	    return "editArticle";
 	}
 
+	/**
+	 * processes data passed by edit article form
+	 * @param newArticleForm form object for new/edited article
+	 * @param result result of validity check
+	 * @param modelMap MVC model map
+	 * @param id unique article id
+	 * @param userAccount Optional<T> either containing null or logged in user account
+	 * @param model MVC model
+	 * @return either template for editing articles if errors have been diagnosed, picture upload error or article template
+	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/editArticle/{id}", method = RequestMethod.POST)
 	public String processEditedArticle(@ModelAttribute("NewArticleForm") @Valid NewArticleForm newArticleForm, BindingResult result, ModelMap modelMap, @PathVariable("id")long id, @LoggedIn Optional<UserAccount> userAccount, Model model){
@@ -505,7 +543,12 @@ public class ArticleController {
 	}
 
 
-
+	/**
+	 * deletes article with given id
+	 * @param id unique ID of the article
+	 * @param userAccount Optional<T> either containing null or logged in user account
+	 * @return redirect to own own articles
+	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/deleteArticle/{id}")
 	public String deleteArticle(@PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount){

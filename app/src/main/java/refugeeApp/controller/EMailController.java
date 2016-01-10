@@ -48,6 +48,13 @@ public class EMailController {
 		this.staticRepository = languageRepository;
 	}
 
+	/**
+	 * autowired constructor
+	 * @param userRepository
+	 * @param validatorRepository
+	 * @param userSettingsRepository
+	 * @param languageRepository
+	 */
 	@Autowired
 	public EMailController(UserRepository userRepository, ValidatorRepository validatorRepository, UserSettingsRepository userSettingsRepository, LanguageRepository languageRepository) {
 
@@ -157,6 +164,12 @@ public class EMailController {
 		return "redirect:/";
 	}
 
+	/**
+	 * changes mail
+	 * @param userSettingsForm
+	 * @param token
+	 * @return
+	 */
 	@RequestMapping(value = "/changeemail")
 	public String changeEmail(@ModelAttribute("userSettingsForm") UserSettingsForm userSettingsForm, @RequestParam String token){
 

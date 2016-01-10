@@ -29,6 +29,19 @@ public class RefugeeDataInitializer implements DataInitializer {
     final Role volunteer = new Role("ROLE_VOLUNTEER");
     final Role admin = new Role("ROLE_ADMIN");
 
+    /**
+     * autowiring constructor
+     * @param userAccountManager
+     * @param userRepository
+     * @param categories
+     * @param goodREPO
+     * @param chatRepo
+     * @param msgRepo
+     * @param settingsRepo
+     * @param userSettingsRepository
+     * @param validatorRepository
+     * @param languageRepository
+     */
     @Autowired
     public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, refugeeApp.model.ArticleRepo goodREPO, ChatConversationRepo chatRepo, ChatMessageRepo msgRepo, SettingsRepository settingsRepo, UserSettingsRepository userSettingsRepository, ValidatorRepository validatorRepository, LanguageRepository languageRepository) {
 
@@ -50,6 +63,9 @@ public class RefugeeDataInitializer implements DataInitializer {
 
 	}
 
+    /**
+     * call of all subinitializations
+     */
     @Override
     public void initialize() {
     	Settings();
@@ -57,7 +73,6 @@ public class RefugeeDataInitializer implements DataInitializer {
     	initializeUsers(userAccountManager, userRepository);
         initializeCategories();
         initializeGoods(userAccountManager, userRepository);
-        initializeActivities();
     }
     
     /**
@@ -69,6 +84,11 @@ public class RefugeeDataInitializer implements DataInitializer {
     	//settingsRepo.save(new Setting("UploadedPicturePath", "C:/", "The Path, where the uploaded Pictures are saved"));
     }
     
+    /**
+     * initialisation of users
+     * @param userAccountManager
+     * @param userRepository
+     */
     public void initializeUsers(UserAccountManager userAccountManager, UserRepository userRepository){
     	
         if (userAccountManager.findByUsername("admin1").isPresent()) return;
@@ -104,6 +124,9 @@ public class RefugeeDataInitializer implements DataInitializer {
 
     }
 
+    /**
+     * terribly hardcoded initialisation of categories
+     */
     public void initializeCategories(){ 
 //    	Category cat = new Category("Möbel", -1);
 //    	LinkedList<String> tags1 = new LinkedList<String>();
@@ -705,6 +728,11 @@ public class RefugeeDataInitializer implements DataInitializer {
 //        categories.save(cat8_7);
     }
 
+    /**
+     * initialisation fo goods
+     * @param userAccountManager
+     * @param userRepository
+     */
     public void initializeGoods(UserAccountManager userAccountManager, UserRepository userRepository){
     	LinkedList<String> tags1 = new LinkedList<String>();
         tags1.add("XXL");
@@ -771,9 +799,9 @@ public class RefugeeDataInitializer implements DataInitializer {
         goodREPO.save(g12);
     }
 
-    public void initializeActivities(){
-    }
-
+    /**
+     * initialisation of languages
+     */
 	public void initializeLanguages(){
 
 		final Language german = new Language();

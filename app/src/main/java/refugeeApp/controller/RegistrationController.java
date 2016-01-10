@@ -38,6 +38,15 @@ public class RegistrationController {
     protected LinkedList<CategoryFirstTierObject> processedCategories;
     private UserAccountManager userAccountManager;
 
+    /**
+     * autowired constructor
+     * @param userAccountManager
+     * @param userRepository
+     * @param categoryMethods
+     * @param categories
+     * @param validatorRepository
+     * @param languageRepository
+     */
     @Autowired
     public RegistrationController(UserAccountManager userAccountManager, UserRepository userRepository, CategoryMethods categoryMethods, CategoryRepo categories, ValidatorRepository validatorRepository, LanguageRepository languageRepository){
         this.userAccountManager = userAccountManager;
@@ -46,6 +55,12 @@ public class RegistrationController {
         this.languageRepository = languageRepository;
     }
 
+    /**
+     * registration form
+     * @param registrationForm form object for new registration
+     * @param model MVC model
+     * @return template for registration
+     */
     @RequestMapping(value ="/registration")
     public String firstView(@ModelAttribute("RegistrationForm") RegistrationForm registrationForm, Model model) {
     	model.addAttribute("current_category",new Category("AlleKategorien",1));
@@ -53,6 +68,16 @@ public class RegistrationController {
     	return ("registration");
     }
 
+    /**
+     * processing of data passed by new registration
+     * @param registrationForm registration form objet
+     * @param result validation result
+     * @param modelMap MVC model map
+     * @param model MVC model
+     * @return registration template
+     * @throws AddressException
+     * @throws MessagingException
+     */
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String newRegistration(@ModelAttribute("RegistrationForm") @Valid RegistrationForm registrationForm, BindingResult result,ModelMap modelMap, Model model) throws AddressException, MessagingException {
 
