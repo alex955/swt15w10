@@ -116,7 +116,7 @@ public class ArticleController {
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
 		model.addAttribute("Article", originalArticle);
-		model.addAttribute("userId", userId);
+		model.addAttribute("currentUserId", userId);
 		model.addAttribute("user", this.userRepository.findOne(userId));
 		model.addAttribute("Creator", articleRepo.findOne(id).getCreator());
 		model.addAttribute("current_category",new Category("AlleKategorien",1));
