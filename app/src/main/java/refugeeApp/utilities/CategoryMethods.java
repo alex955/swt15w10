@@ -28,6 +28,8 @@ public class CategoryMethods {
 	
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
 	
+	
+	
 	public LinkedList<CategoryFirstTierObject> getProcessedCategories(){
 		LinkedList<CategoryFirstTierObject> toReturn = new LinkedList<CategoryFirstTierObject>();
 		Iterable<Category> foundCategories = categories.findAll();

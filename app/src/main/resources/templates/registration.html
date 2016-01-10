@@ -365,8 +365,8 @@
 							</div>
 							<div class="row">
                                 <div class="small-12 columns">
-                                <div class="g-recaptcha" data-sitekey="6LdakhETAAAAAJtE5rWb3kQuTi-GcEoUiS94ULai"></div>
-                                </div>
+                                	<div class="g-recaptcha" data-sitekey="6LdakhETAAAAAJtE5rWb3kQuTi-GcEoUiS94ULai"></div>
+                            	</div>
                             </div>
 						</div>
 					</div>
@@ -468,25 +468,20 @@
 
 	<script>
 		$(document).foundation();
-		console.log("javascript loaded");
 	</script>
 	
 </body>
 <script th:src="@{/resources/js/jquery.js}"></script>
 <script>
-$("#choose_lang2").hide();
-$("#choose_lang3").hide();
-
-$("#choose_lang1" ).change(function() {
-	$("#choose_lang2").show();
-	});
+	$("#choose_lang2").hide();
+	$("#choose_lang3").hide();
 	
-$("#choose_lang2" ).change(function() {
-	$("#choose_lang3").show();
-	});
-
-
-
-
+	$("#choose_lang1" ).change(function() {
+		$("#choose_lang2").show();
+		});
+		
+	$("#choose_lang2" ).change(function() {
+		$("#choose_lang3").show();
+		});
 </script>
 </html>

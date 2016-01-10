@@ -1,6 +1,9 @@
 package refugeeApp;
 
+import java.io.IOException;
+
 import java.util.LinkedList;
+
 
 import org.salespointframework.core.DataInitializer;
 import org.salespointframework.useraccount.Role;
@@ -61,12 +64,40 @@ public class RefugeeDataInitializer implements DataInitializer {
     }
     
     /**
-     * Here you have to set the Path for uploaded Pictures
-     * and the Path where the keinbild.jpg lies
+     * general settings of the application
+     * @throws IOException 
      */
     public void Settings(){
-    	settingsRepo.save(new Setting("noUploadedPicturePath", "/Users/Alexander/Documents/Studium/swt15w10/app/src/main/resources/static/resources/img/keinbild.png", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded offers without one"));
+    	
+    	//Image settings
+    	
+    	//Image width
+    	settingsRepo.save(new Setting("imageWidth", 400, ""));
+    	//Image height
+    	settingsRepo.save(new Setting("imageHeight", 400, ""));
+    	
+    	//Alexander
+    	//settingsRepo.save(new Setting("noUploadedPicturePath", "/Users/Alexander/Documents/Studium/swt15w10/app/src/main/resources/static/resources/img/keinbild.png.png", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded offers without one"));
+    	
+    	//Sascha
+    	settingsRepo.save(new Setting("noUploadedPicturePath", "/Users/sasch/Documents/swt15w10/app/src/main/resources/static/resources/img/keinbild.png.png", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded offers without one"));    	
+    	
+    	//resizes the standard picture
+//    	if(ImageIO.read(new File(settingsRepo.findOne("noUploadedPicturePath").getStringValue()))!= null){
+//	    	BufferedImage originalImage = ImageIO.read(new File(settingsRepo.findOne("noUploadedPicturePath").getStringValue()));
+//			int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();	 	
+//			BufferedImage resizedImage = new BufferedImage(settingsRepo.findOne("imageWidth").getIntValue(), settingsRepo.findOne("imageHeight").getIntValue(), type);
+//			Graphics2D g = resizedImage.createGraphics();
+//			g.drawImage(originalImage, 0, 0, settingsRepo.findOne("imageWidth").getIntValue(), settingsRepo.findOne("imageHeight").getIntValue(), null);
+//			g.dispose();		
+//			ImageIO.write(resizedImage, "png", new File(settingsRepo.findOne("noUploadedPicturePath").getStringValue()+".png"));
+//			//delete old file
+//			Files.delete(Paths.get(settingsRepo.findOne("noUploadedPicturePath").getStringValue()));
+//			settingsRepo.findOne("noUploadedPicturePath").setStringValue(settingsRepo.findOne("noUploadedPicturePath").getStringValue()+".png");
+//    	}
+    	
     	//settingsRepo.save(new Setting("UploadedPicturePath", "C:/", "The Path, where the uploaded Pictures are saved"));
+       	
     }
     
     public void initializeUsers(UserAccountManager userAccountManager, UserRepository userRepository){

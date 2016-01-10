@@ -1,10 +1,16 @@
 package refugeeApp.controller;
 
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
@@ -27,10 +33,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 
 import refugeeApp.model.*;
 import refugeeApp.utilities.CategoryMethods;
 
+import javax.imageio.ImageIO;
 import javax.validation.Valid;
 
 @Controller
@@ -74,7 +82,44 @@ public class ArticleController {
 		 }
 		 
 	 }
-
+	 
+	 /**
+	 * resizes given image and return the path
+	 * @param originalImage
+	 * @param type
+	 * @return resizedImage
+	 * @throws IOException 
+	 */
+	public String resizedImagePath(MultipartFile file) throws IOException{	
+                       
+            // Creating the directory to store file
+            String rootPath;
+            if(settingsRepo.findOne("UploadedPicturesPath") == null){
+            	rootPath = System.getProperty("user.home");
+            }
+            else rootPath = settingsRepo.findOne("UploadedPicturesPath").getStringValue();
+            File dir = new File(rootPath + "/" + "Pics");
+                if (!dir.exists())
+                    dir.mkdirs();
+     
+            // Create the file local
+            File serverFile = new File(dir.getAbsolutePath() + "/" + file.getOriginalFilename()); 
+            BufferedOutputStream stream = new BufferedOutputStream( new FileOutputStream(serverFile));
+            byte[] bytes = file.getBytes();
+            stream.write(bytes);
+            stream.close();  
+            
+            BufferedImage originalImage = ImageIO.read(new File(serverFile.getAbsolutePath()));
+    		int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();	 	
+    		BufferedImage resizedImage = new BufferedImage(settingsRepo.findOne("imageWidth").getIntValue(), settingsRepo.findOne("imageHeight").getIntValue(), type);
+    		Graphics2D g = resizedImage.createGraphics();
+    		g.drawImage(originalImage, 0, 0, settingsRepo.findOne("imageWidth").getIntValue(), settingsRepo.findOne("imageHeight").getIntValue(), null);
+    		g.dispose();		
+    		ImageIO.write(resizedImage, "png", new File(serverFile.getAbsolutePath()+".png"));
+    		Files.delete(Paths.get(serverFile.getAbsolutePath()));
+    		return serverFile.getAbsolutePath()+".png";
+	}
+	 
 	@RequestMapping(value = "/showArticle/{id}")
 	public String showArticle(@PathVariable("id") long id,Model model, @LoggedIn Optional<UserAccount> userAccount) {
 		//initiate categories
@@ -132,7 +177,7 @@ public class ArticleController {
 
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/editArticle/{id}", method = RequestMethod.POST)
-	public String processEditedArticle(@ModelAttribute("NewArticleForm") @Valid NewArticleForm newArticleForm, BindingResult result, ModelMap modelMap, @PathVariable("id")long id, @LoggedIn Optional<UserAccount> userAccount, Model model){
+	public String processEditedArticle(@ModelAttribute("NewArticleForm") @Valid NewArticleForm newArticleForm, BindingResult result, ModelMap modelMap, @PathVariable("id")long id, @LoggedIn Optional<UserAccount> userAccount, Model model) throws IOException{
 
 		Article originalArticle = this.articleRepo.findOne(id);		
 		long currentUserId = this.userRepository.findByUserAccount(userAccount.get()).getId();
@@ -182,52 +227,29 @@ public class ArticleController {
 		originalArticle.setStreet(newArticleForm.getStreetName());
 		originalArticle.setAddressAddition(newArticleForm.getAdressAddition());
 		originalArticle.setKind(newArticleForm.getKind());
-	 
 		
-		if (!((newArticleForm.getFile()).isEmpty())) {
-            try {
-                int existingPicture = 0;
-                Picture oldPicture = null;
-                byte[] bytes = (newArticleForm.getFile()).getBytes();
-                
-                // Creating the directory to store file               
-                String rootPath;
-                if(settingsRepo.findOne("UploadedPicturesPath") == null){
-                	rootPath = System.getProperty("user.home");
-                }
-                else rootPath = settingsRepo.findOne("UploadedPicturesPath").getValue();
-                        
-                File dir = new File(rootPath + "/" + "Pics");
-                if (!dir.exists())
-                    dir.mkdirs();
- 
-                // Create the file local
-                File serverFile = new File(dir.getAbsolutePath() + "/" + newArticleForm.getFile().getOriginalFilename()); 
-                BufferedOutputStream stream = new BufferedOutputStream( new FileOutputStream(serverFile));
-                stream.write(bytes);
-                stream.close();
-
-                //get the logged in user
-                User creator = userRepository.findByUserAccount(userAccount.get());
-                
-                //check for an existing picture
-                if(originalArticle.getPicture() != null){
-                	existingPicture = 1;
-                	oldPicture = originalArticle.getPicture();
-                }
-                
-                Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename(), creator);
-				pictureRepo.save(picture);
-				originalArticle.setPicture(picture);
-				
-				//delete the old picture from the repo
-				if(existingPicture == 1){
-				pictureRepo.delete(oldPicture);
-				}
-				
-            } catch (Exception e) {
-                return "You failed to upload " + newArticleForm.getTitle() + " => " + e.getMessage();
+		//if the user uploaded a picture, delete the old one and assign the new
+		if(!(newArticleForm.getFile()).isEmpty()){		
+			
+			int existingPicture = 0;
+            Picture oldPicture = null;
+            
+            //check for an existing picture
+            if(originalArticle.getPicture() != null){
+            	existingPicture = 1;
+            	oldPicture = originalArticle.getPicture();
             }
+            
+            User creator = userRepository.findByUserAccount(userAccount.get());
+			Picture picture = new Picture(resizedImagePath(newArticleForm.getFile()), newArticleForm.getFile().getOriginalFilename(), creator);
+			pictureRepo.save(picture);
+			originalArticle.setPicture(picture);
+			
+			//delete the old picture from the repo
+			if(existingPicture == 1){
+				Files.delete(Paths.get(oldPicture.getPicPath()));
+				pictureRepo.delete(oldPicture);
+			}
         } 
 		
 		//Breitengrad und Längengradberechnung 
@@ -310,10 +332,11 @@ public class ArticleController {
 	 * @param newArticleForm
 	 * @param userAccount
 	 * @return editAttributes template
+	 * @throws IOException 
 	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/newArticle", method = RequestMethod.POST)
-    public String saveArticle(@ModelAttribute("NewArticleForm") @Valid NewArticleForm newArticleForm, BindingResult result, Model model, ModelMap modelMap, @LoggedIn Optional<UserAccount> userAccount) {
+    public String saveArticle(@ModelAttribute("NewArticleForm") @Valid NewArticleForm newArticleForm, BindingResult result, Model model, ModelMap modelMap, @LoggedIn Optional<UserAccount> userAccount) throws IOException {
 		User creator = userRepository.findByUserAccount(userAccount.get());
 		model.addAttribute("creator", creator);
 		this.processedCategories = categoryMethods.getProcessedCategories();
@@ -365,46 +388,23 @@ public class ArticleController {
 		}
 		//end parsing
 
-		if (!((newArticleForm.getFile()).isEmpty())) {
-            try {
-                byte[] bytes = (newArticleForm.getFile()).getBytes();
- 
-                // Creating the directory to store file
-                String rootPath;
-                if(settingsRepo.findOne("UploadedPicturesPath") == null){
-                	rootPath = System.getProperty("user.home");
-                }
-                else rootPath = settingsRepo.findOne("UploadedPicturesPath").getValue();
-                
-                File dir = new File(rootPath + "/" + "Pics");
-                if (!dir.exists())
-                    dir.mkdirs();
- 
-                // Create the file local
-                File serverFile = new File(dir.getAbsolutePath() + "/" + newArticleForm.getFile().getOriginalFilename()); 
-                BufferedOutputStream stream = new BufferedOutputStream( new FileOutputStream(serverFile));
-                stream.write(bytes);
-                stream.close();  
-                
-				Picture picture = new Picture(serverFile.getAbsolutePath(), newArticleForm.getFile().getOriginalFilename(), creator);
-				pictureRepo.save(picture);
-				Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), picture, newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getZip(), creator, newArticleForm.getKind());
-				//set activity date
-				article.setActivitydate(activityDate);
-				
-				//Breitengrad und Längengradberechnung 
-				Location ort = new Location(newArticleForm.getStreetName()+" "+newArticleForm.getZip()+" "+newArticleForm.getCity());
-				ort = ort.GetCoordinates(ort);
-				article.setLatitude(ort.getLatitude()); 
-	    		article.setLongitude(ort.getLongitude());				
-	    		articleRepo.save(article);
-	    		
-	    		System.out.println(article.getCategory());
-        		return ("redirect:/editAttributes/"+article.getId());
-            } catch (Exception e) {
-                return "You failed to upload " + newArticleForm.getTitle() + " => " + e.getMessage();
-            }
-        } else {
+		if(!(newArticleForm.getFile()).isEmpty()){		
+			Picture picture = new Picture(resizedImagePath(newArticleForm.getFile()), newArticleForm.getFile().getOriginalFilename(), creator);
+			pictureRepo.save(picture);
+			Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), picture, newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(), newArticleForm.getZip(), creator, newArticleForm.getKind());
+			//set activity date
+			article.setActivitydate(activityDate);
+			
+			//Breitengrad und Längengradberechnung 
+			Location ort = new Location(newArticleForm.getStreetName()+" "+newArticleForm.getZip()+" "+newArticleForm.getCity());
+			ort = ort.GetCoordinates(ort);
+			article.setLatitude(ort.getLatitude()); 
+    		article.setLongitude(ort.getLongitude());				
+    		articleRepo.save(article);
+    		
+    		return ("redirect:/editAttributes/"+article.getId());
+        } 
+		else {
 			//save article without Picture
 			Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(),  newArticleForm.getZip(),creator, newArticleForm.getKind());
 			//set activity date
@@ -415,7 +415,6 @@ public class ArticleController {
 			article.setLatitude(ort.getLatitude()); 
     		article.setLongitude(ort.getLongitude());
 			articleRepo.save(article);
-			System.out.println(article.getCategory());
             return ("redirect:/editAttributes/"+article.getId());
         }
 	}

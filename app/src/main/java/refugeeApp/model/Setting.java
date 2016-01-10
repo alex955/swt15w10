@@ -1,52 +1,40 @@
 package refugeeApp.model;
 
 /**
- * @author Alexander Shulga
+ * you can create and save settings in the dataInitializer
  */
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter@Setter
 @Entity
 public class Setting {
    
 	@Id private String key;
-    private String value;
+    private String stringValue;
+    private int intValue;
 
     private String description;
 
-	public Setting(String key, String value, String description) {
+	public Setting(String key, String stringValue, String description) {
 		super();
 		this.key = key;
-		this.value = value;
+		this.stringValue = stringValue;
+		this.description = description;
+	}
+	
+	public Setting(String key, int intValue, String description) {
+		super();
+		this.key = key;
+		this.intValue = intValue;
 		this.description = description;
 	}
 	
 	public Setting() {
 		super();
-	}
-
-	public String getKey() {
-		return key;
-	}
-
-	public void setKey(String key) {
-		this.key = key;
-	}
-
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 }
