@@ -28,7 +28,6 @@ import refugeeApp.model.*;
 
 
 @Controller
-@Scope("session")
 public class EMailController {
 
 	@Autowired
@@ -51,8 +50,7 @@ public class EMailController {
 	private String saveToken;
 
 	@PostConstruct
-	public void init(){
-		this.staticRepository = languageRepository;
+	public void init(){ this.staticRepository = languageRepository;
 	}
 
 	/**
@@ -216,8 +214,8 @@ public class EMailController {
         if (validatorRepository.findByToken(token) == null){
             return "redirect:/";
         }
-        
-        saveToken = token;
+
+        this.saveToken = token;
 		return "resetpw";
 	}
 
@@ -233,7 +231,7 @@ public class EMailController {
 		}
 		Language language = languageRepository.findByBrowserLanguage(browserLanguage);
 
-        String token = saveToken;
+        String token = this.saveToken;
 
 		if(result.hasFieldErrors("password")){
 			final String passwordError = language.getPasswordError();

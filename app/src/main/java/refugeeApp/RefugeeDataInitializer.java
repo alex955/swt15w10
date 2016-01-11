@@ -45,6 +45,7 @@ public class RefugeeDataInitializer implements DataInitializer {
      * @param validatorRepository
      * @param languageRepository
      */
+
     @Autowired
     public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, refugeeApp.model.ArticleRepo goodREPO, ChatConversationRepo chatRepo, ChatMessageRepo msgRepo, SettingsRepository settingsRepo, UserSettingsRepository userSettingsRepository, ValidatorRepository validatorRepository, LanguageRepository languageRepository) {
 
