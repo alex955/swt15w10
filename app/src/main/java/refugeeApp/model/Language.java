@@ -23,6 +23,7 @@ public class Language {
     private String countryError;
     private String usernameError;
     private String emailError;
+    private String emailUsed;
     private String passwordError;
     private String passwordConfirmError;
     private String cityError;
@@ -102,6 +103,14 @@ public class Language {
 
     public void setEmailError(String emailError) {
         this.emailError = emailError;
+    }
+
+    public String getEmailUsed() {
+        return emailUsed;
+    }
+
+    public void setEmailUsed(String emailUsed) {
+        this.emailUsed = emailUsed;
     }
 
     public String getPasswordError() {

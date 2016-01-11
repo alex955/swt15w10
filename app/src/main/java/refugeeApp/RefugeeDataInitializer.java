@@ -126,7 +126,7 @@ public class RefugeeDataInitializer implements DataInitializer {
 
         UserAccount admin1 = userAccountManager.create("admin1", "admin1", admin);
         userAccountManager.save(admin1);
-        userRepository.save(new User (1, admin1, "Admin", "Erster", "DataInitializer", "ref@gmx.de", "Stadt", "01234", "Straße 1", "", "german", "english", "arab"));
+        userRepository.save(new User (1, admin1, "Admin", "Erster", "DataInitializer", "test@test.test", "Stadt", "01234", "Straße 1", "", "german", "english", "arab"));
 
         UserAccount user1 = userAccountManager.create("user1", "user1", refugee);
         user1.setEmail("ref@gmx.de");
@@ -135,23 +135,23 @@ public class RefugeeDataInitializer implements DataInitializer {
 
         UserAccount user2 = userAccountManager.create("user2", "user2", refugee);
         userAccountManager.save(user2);
-        userRepository.save(new User (3, user2, "2", "User", "DataInitializer", "ref@gmx.de", "Stadt", "01234", "Straße 1", "", "german", "english", "arab"));
+        userRepository.save(new User (3, user2, "2", "User", "DataInitializer", "test@test.test", "Stadt", "01234", "Straße 1", "", "german", "english", "arab"));
 
         UserAccount user3 = userAccountManager.create("user3", "user3", refugee);
         userAccountManager.save(user3);
-        userRepository.save(new User (4, user3, "3", "User", "DataInitializer", "ref@gmx.de", "Stadt", "01234", "Straße 1", "", "german", "english", "arab"));
+        userRepository.save(new User (4, user3, "3", "User", "DataInitializer", "test@test.test", "Stadt", "01234", "Straße 1", "", "german", "english", "arab"));
 
         UserAccount user4 = userAccountManager.create("user4", "user4", volunteer);
         userAccountManager.save(user4);
-        userRepository.save(new User (5, user4, "4", "User", "DataInitializer", "ref@gmx.de", "Stadt", "01234", "Straße 1", "", "german", "english", "arab"));
+        userRepository.save(new User (5, user4, "4", "User", "DataInitializer", "test@test.test", "Stadt", "01234", "Straße 1", "", "german", "english", "arab"));
 
         UserAccount user5 = userAccountManager.create("user5", "user5", volunteer);
         userAccountManager.save(user5);
-        userRepository.save(new User (6, user5, "5", "User", "DataInitializer", "ref@gmx.de", "Stadt", "01234", "Straße 1",  "", "german", "english", "arab"));
+        userRepository.save(new User (6, user5, "5", "User", "DataInitializer", "test@test.test", "Stadt", "01234", "Straße 1",  "", "german", "english", "arab"));
 
         UserAccount user6 = userAccountManager.create("user6", "user6", volunteer);
         userAccountManager.save(user6);
-        userRepository.save(new User (7, user6, "6", "User", "DataInitializer", "ref@gmx.de", "Stadt", "01234", "Straße 1",  "", "german", "english", "arab"));
+        userRepository.save(new User (7, user6, "6", "User", "DataInitializer", "test@test.test", "Stadt", "01234", "Straße 1",  "", "german", "english", "arab"));
 
     }
 
@@ -843,6 +843,7 @@ public class RefugeeDataInitializer implements DataInitializer {
 		german.setCountryError("Es wurde keine Herkunft gewählt");
 		german.setUsernameError("Der Benutzername muss zwischen 6 und 30 Zeichen lang sein.");
 		german.setEmailError("Die eingegebene E-Mail-Adresse hat kein zugelassenes Format.");
+		german.setEmailUsed("Die eingegebene E-Mail-Adresse wird bereits verwendet.");
 		german.setPasswordError("Das Passwort muss mindestens 8 Zeichen lang sein und muss mindestens eine Zahl, einen Klein- und einen Großbuchstaben beinhalten.");
 		german.setPasswordConfirmError("Die Passwörter stimmen nicht überein.");
 		german.setCityError("Geben Sie einen Stadtnamen ein");
@@ -875,6 +876,7 @@ public class RefugeeDataInitializer implements DataInitializer {
 		english.setCountryError("You didn't chose your country.");
 		english.setUsernameError("The username must be between 6 and 30 characters long.");
 		english.setEmailError("Your email has a wrong format.");
+		english.setEmailUsed("The entered email has already been used");
 		english.setPasswordError("Your password must be at least 8 characters and consist of at least one number, one capital and one lowercase letter.");
 		english.setPasswordConfirmError("Passwords do not match.");
 		english.setCityError("Enter a city");
@@ -907,6 +909,7 @@ public class RefugeeDataInitializer implements DataInitializer {
 		arab.setCountryError("");
 		arab.setUsernameError("");
 		arab.setEmailError("");
+		arab.setEmailUsed("");
 		arab.setPasswordError("");
 		arab.setPasswordConfirmError("");
 		arab.setCityError("");

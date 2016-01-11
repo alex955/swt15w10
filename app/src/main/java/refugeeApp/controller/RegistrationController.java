@@ -97,6 +97,9 @@ public class RegistrationController {
         if(userRepository.findByUsername(registrationForm.getUsername()) != null)
             errors = true;
 
+        if(userRepository.findByEmail(registrationForm.getEmail()) != null)
+            errors = true;
+
         if(errors) {
 
             if(result.hasFieldErrors("role")){
@@ -127,6 +130,11 @@ public class RegistrationController {
             if(result.hasFieldErrors("email")){
                 final String emailError = language.getEmailError();
                 modelMap.addAttribute("emailError", emailError);
+            }
+
+            if(userRepository.findByEmail(registrationForm.getEmail()) != null){
+                final String emailUsed = language.getEmailUsed();
+                modelMap.addAttribute("emailUsed", emailUsed);
             }
 
             if(result.hasFieldErrors("password")){

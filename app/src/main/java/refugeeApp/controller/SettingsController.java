@@ -152,15 +152,23 @@ public class SettingsController {
         if(result.hasErrors())
             errors = true;
 
+        if(userRepository.findByEmail(userSettingsForm.getNewEmail()) != null)
+            errors = true;
+
         if(errors) {
             if(!userSettingsForm.getNewPassword().equals(userSettingsForm.getConfirmPW())) {
-                final String confirmError = /* language.getPasswordConfirmError*/ "Die Passwörter stimmen nicht überein.";
+                final String confirmError = language.getPasswordConfirmError();
                 modelMap.addAttribute("confirmError", confirmError);
             }
 
             if(result.hasFieldErrors("newEmail")){
                 final String emailError = language.getEmailError();
                 modelMap.addAttribute("emailError", emailError);
+            }
+
+            if(userRepository.findByEmail(userSettingsForm.getNewEmail()) != null){
+                final String emailUsed = language.getEmailUsed();
+                modelMap.addAttribute("emailUsed", emailUsed);
             }
 
             if(result.hasFieldErrors("newPassword")){
@@ -178,9 +186,11 @@ public class SettingsController {
                 modelMap.addAttribute("streetError", streetError);
             }
 
-            if(!passwordEncoder.matches(userSettingsForm.getOldPassword(), user.getUserAccount().getPassword().toString())) {
-                final String oldPwError =language.getOldPwError();
-                modelMap.addAttribute("oldPwError", oldPwError);
+            if (!userSettingsForm.getOldPassword().isEmpty()) {
+                if (!passwordEncoder.matches(userSettingsForm.getOldPassword(), user.getUserAccount().getPassword().toString())) {
+                    final String oldPwError = language.getOldPwError();
+                    modelMap.addAttribute("oldPwError", oldPwError);
+                }
             }
             return "usersettings";
         }
