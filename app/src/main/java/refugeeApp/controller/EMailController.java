@@ -173,7 +173,6 @@ public class EMailController {
 					return "redirect:/changeemail?token=" + id;
 				}
 				case 4:{
-					System.out.println("Validierung klappt");
 					return "redirect:/resetpw?token=" + id;
 				}
 
@@ -210,18 +209,22 @@ public class EMailController {
 	public String setPw(@ModelAttribute("NewPasswordForm") NewPasswordForm newPasswordForm, Model model, @RequestParam String token) {
 		model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
+		model.addAttribute("newPasswordform", newPasswordForm);
+		model.addAttribute("pwToken", token);
 
         if (validatorRepository.findByToken(token) == null){
             return "redirect:/";
         }
 
-        this.saveToken = token;
+		newPasswordForm.setPwToken(token);
+
 		return "resetpw";
 	}
 
 	@RequestMapping(value = "/resetpw", method = RequestMethod.POST)
 	public String changePw(@ModelAttribute("NewPasswordForm") @Valid NewPasswordForm newPasswordForm, BindingResult result, Model model, ModelMap modelMap){
 
+		model.addAttribute("newPasswordform", newPasswordForm);
 		model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
 		Locale locale = LocaleContextHolder.getLocale();
@@ -231,7 +234,7 @@ public class EMailController {
 		}
 		Language language = languageRepository.findByBrowserLanguage(browserLanguage);
 
-        String token = this.saveToken;
+        String token = newPasswordForm.getPwToken();
 
 		if(result.hasFieldErrors("password")){
 			final String passwordError = language.getPasswordError();
@@ -249,12 +252,10 @@ public class EMailController {
 			return "redirect:/";
 		}
 
-		System.out.printf("in changePw");
 		User user = validatorRepository.findByToken(token).getUser();
 
 		userAccountManager.changePassword(user.getUserAccount(), newPasswordForm.getPassword());
 		userRepository.save(user);
-
 		validatorRepository.delete(validatorRepository.findByToken(token));
 
 		return "redirect:/search";

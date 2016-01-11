@@ -96,16 +96,16 @@ public class RefugeeDataInitializer implements DataInitializer {
     	//settingsRepo.save(new Setting("noUploadedPicturePath", "/Users/Alexander/Documents/Studium/swt15w10/app/src/main/resources/static/resources/img/keinbild.png.png", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded offers without one"));
     	
     	//Sascha
-    	settingsRepo.save(new Setting("noUploadedPicturePath", "/Users/sasch/Documents/swt15w10/app/src/main/resources/static/resources/img/keinbild.png.png", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded offers without one"));    	
+    	settingsRepo.save(new Setting("noUploadedPicturePath", "/Users/Vincenz/Downloads/Child-Asthma.jpg", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded offers without one"));
     	
     	//resizes the standard picture
 //    	if(ImageIO.read(new File(settingsRepo.findOne("noUploadedPicturePath").getStringValue()))!= null){
 //	    	BufferedImage originalImage = ImageIO.read(new File(settingsRepo.findOne("noUploadedPicturePath").getStringValue()));
-//			int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();	 	
+//			int type = originalImage.getType() == 0? BufferedImage.TYPE_INT_ARGB : originalImage.getType();
 //			BufferedImage resizedImage = new BufferedImage(settingsRepo.findOne("imageWidth").getIntValue(), settingsRepo.findOne("imageHeight").getIntValue(), type);
 //			Graphics2D g = resizedImage.createGraphics();
 //			g.drawImage(originalImage, 0, 0, settingsRepo.findOne("imageWidth").getIntValue(), settingsRepo.findOne("imageHeight").getIntValue(), null);
-//			g.dispose();		
+//			g.dispose();
 //			ImageIO.write(resizedImage, "png", new File(settingsRepo.findOne("noUploadedPicturePath").getStringValue()+".png"));
 //			//delete old file
 //			Files.delete(Paths.get(settingsRepo.findOne("noUploadedPicturePath").getStringValue()));
