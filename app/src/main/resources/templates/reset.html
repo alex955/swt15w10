@@ -1,0 +1,48 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Refugee</title>
+    <link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+<body>
+
+<script th:src="@{/resources/js/vendor/jquery.js}"></script>
+<script th:src="@{/resources/js/foundation/foundation.js}"></script>
+<script th:src="@{/resources/js/foundation/foundation.equalizer.js}"></script>
+
+<nav th:include="topbar :: topbar"></nav>
+
+<div class="row" >
+    <p>&nbsp;</p>
+    <div class="small-12 columns">
+        <font color="#0099CC" th:text="${resetConfirm}"> CONFIRMATION MESSAGE </font>
+        <h4 class="header">Passwort zurücksetzen</h4>
+        <form action="#" th:action="@{/reset}" th:object="${ResetForm}" method="post">
+            <div class="row" data-equalizer="1">
+                <div class="small-12 large-6 columns">
+                    <div class="panel" data-equalizer-watch="1">
+                        <div class="row">
+                            <div class="show-for-medium-up">
+                                <div class="large-5 medium-3 columns">E-Mail</div>
+                            </div>
+                            <div class="large-7 medium-9 small-12 columns">
+                                <label>
+                                    <font color="red" th:text="${noAccountError}"> ERROR MESSAGE </font>
+                                    <font color="red" th:text="${emailError}"> ERROR MESSAGE </font>
+                                    <input name="email" placeholder="E-Mail" th:field ="*{email}"/>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="left button" type="submit">Passwort zurücksetzen</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

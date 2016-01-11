@@ -12,13 +12,16 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.validation.Valid;
+
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import refugeeApp.model.*;
 
@@ -104,6 +107,7 @@ public class EMailController {
           * Cases: 1 = Registrierung
           *        2 = Account deaktivieren
           *  	   3 = Email ändern
+          *  	   4 = Passwort zurücksetzen
           */
 
 		switch (usage) {
@@ -124,6 +128,13 @@ public class EMailController {
 				message.setText(String.format(language.getChangeEmail(), token, token));
 				break;
 			}
+
+			case 4: {
+				message.setSubject(language.getResetPwTopic());
+				message.setText(String.format(language.getResetPw(), token, token));
+				break;
+			}
+
 		}
 		Transport.send(message);
 	}
@@ -135,12 +146,12 @@ public class EMailController {
 	 * @author Lukas Klose
 	 */
 	@RequestMapping(value = "/validate")
-	public String validation(@RequestParam String id) {
+	public String validation(@RequestParam String id) throws AddressException, MessagingException {
 
 		Validator validator = validatorRepository.findByToken(id);
 
 		if (validator == null)
-			return "redirect:/frontpage";
+			return "redirect:/";
 
 		else {
 			User user = validator.getUser();
@@ -159,6 +170,11 @@ public class EMailController {
 				case 3: {
 					return "redirect:/changeemail?token=" + id;
 				}
+				case 4:{
+					System.out.println("Validierung klappt");
+					return "redirect:/resetpw?token=" + id;
+				}
+
 			}
 		}
 		return "redirect:/";
@@ -187,5 +203,57 @@ public class EMailController {
 
 		return "redirect:/usersettings";
 	}
+
+	@RequestMapping(value ="/resetpw")
+	public String setPw(@ModelAttribute("NewPasswordForm") NewPasswordForm newPasswordForm, Model model, @RequestParam String token) {
+		model.addAttribute("current_category",new Category("AlleKategorien",1));
+		model.addAttribute("current_ort",new Location(""));
+
+		if (validatorRepository.findByToken(token) == null){
+			return "redirect:/";
+		}
+
+		return "resetpw";
+	}
+
+	@RequestMapping(value = "/resetpw", method = RequestMethod.POST)
+	public String changePw(@ModelAttribute("NewPasswordForm") @Valid NewPasswordForm newPasswordForm, BindingResult result, Model model, ModelMap modelMap, @RequestParam String token){
+
+		model.addAttribute("current_category",new Category("AlleKategorien",1));
+		model.addAttribute("current_ort",new Location(""));
+		Locale locale = LocaleContextHolder.getLocale();
+		String browserLanguage = locale.toString().substring(0, 2);
+		if(languageRepository.findByBrowserLanguage(browserLanguage) == null){
+			browserLanguage = "en";
+		}
+		Language language = languageRepository.findByBrowserLanguage(browserLanguage);
+
+		if(result.hasFieldErrors("password")){
+			final String passwordError = language.getPasswordError();
+			modelMap.addAttribute("passwordError", passwordError);
+			return ("resetpw?token=" + token);
+		}
+
+		if(!newPasswordForm.getPassword().equals(newPasswordForm.getConfirmPw())){
+			final String passwordConfirmError = language.getPasswordConfirmError();
+			modelMap.addAttribute("passwordConfirmError", passwordConfirmError);
+			return "resetpw?token=" + token;
+		}
+
+		if (validatorRepository.findByToken(token) == null){
+			return "redirect:/";
+		}
+
+		System.out.printf("in changePw");
+		User user = validatorRepository.findByToken(token).getUser();
+
+		userAccountManager.changePassword(user.getUserAccount(), newPasswordForm.getPassword());
+		userRepository.save(user);
+
+		validatorRepository.delete(validatorRepository.findByToken(token));
+
+		return "redirect:/";
+	}
+
 
 }

@@ -126,7 +126,7 @@ public class RefugeeDataInitializer implements DataInitializer {
 
         UserAccount admin1 = userAccountManager.create("admin1", "admin1", admin);
         userAccountManager.save(admin1);
-        userRepository.save(new User (1, admin1, "Admin", "Erster", "DataInitializer", "test@test.test", "Stadt", "01234", "Straße 1", "", "german", "english", "arab"));
+        userRepository.save(new User (1, admin1, "Admin", "Erster", "DataInitializer", "test1@test.test", "Stadt", "01234", "Straße 1", "", "german", "english", "arab"));
 
         UserAccount user1 = userAccountManager.create("user1", "user1", refugee);
         user1.setEmail("ref@gmx.de");
@@ -135,23 +135,23 @@ public class RefugeeDataInitializer implements DataInitializer {
 
         UserAccount user2 = userAccountManager.create("user2", "user2", refugee);
         userAccountManager.save(user2);
-        userRepository.save(new User (3, user2, "2", "User", "DataInitializer", "test@test.test", "Stadt", "01234", "Straße 1", "", "german", "english", "arab"));
+        userRepository.save(new User (3, user2, "2", "User", "DataInitializer", "test2@test.test", "Stadt", "01234", "Straße 1", "", "german", "english", "arab"));
 
         UserAccount user3 = userAccountManager.create("user3", "user3", refugee);
         userAccountManager.save(user3);
-        userRepository.save(new User (4, user3, "3", "User", "DataInitializer", "test@test.test", "Stadt", "01234", "Straße 1", "", "german", "english", "arab"));
+        userRepository.save(new User (4, user3, "3", "User", "DataInitializer", "test3@test.test", "Stadt", "01234", "Straße 1", "", "german", "english", "arab"));
 
         UserAccount user4 = userAccountManager.create("user4", "user4", volunteer);
         userAccountManager.save(user4);
-        userRepository.save(new User (5, user4, "4", "User", "DataInitializer", "test@test.test", "Stadt", "01234", "Straße 1", "", "german", "english", "arab"));
+        userRepository.save(new User (5, user4, "4", "User", "DataInitializer", "test4@test.test", "Stadt", "01234", "Straße 1", "", "german", "english", "arab"));
 
         UserAccount user5 = userAccountManager.create("user5", "user5", volunteer);
         userAccountManager.save(user5);
-        userRepository.save(new User (6, user5, "5", "User", "DataInitializer", "test@test.test", "Stadt", "01234", "Straße 1",  "", "german", "english", "arab"));
+        userRepository.save(new User (6, user5, "5", "User", "DataInitializer", "test5@test.test", "Stadt", "01234", "Straße 1",  "", "german", "english", "arab"));
 
         UserAccount user6 = userAccountManager.create("user6", "user6", volunteer);
         userAccountManager.save(user6);
-        userRepository.save(new User (7, user6, "6", "User", "DataInitializer", "test@test.test", "Stadt", "01234", "Straße 1",  "", "german", "english", "arab"));
+        userRepository.save(new User (7, user6, "6", "User", "DataInitializer", "test6@test.test", "Stadt", "01234", "Straße 1",  "", "german", "english", "arab"));
 
     }
 
@@ -861,10 +861,14 @@ public class RefugeeDataInitializer implements DataInitializer {
 		german.setDeleteEmail("Zum Deaktivieren Ihres Accounts klicken Sie auf den Link.\n\n" +"Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
 		german.setChangeEmailTopic("Refugee-App: EMail ändern");
 		german.setChangeEmail("Zum Ändern Ihrer Mailadresse klicken Sie auf den Link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
+		german.setResetPwTopic("Refugee-App: Passwort zurücksetzen");
+		german.setResetPw("Zum Zurücksetzen ihres Passworts klicken Sie auf den Link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=%s \n\n Lokal: localhost:8080/validate?id=%s");
 		german.setDeleteUserPopup("Eine Email wurde an Ihr Postfach gesendet. Bitte folgen Sie den dort beschriebenen Schritten um Ihren Useraccount zu deaktivieren.");
 		german.setDateError("Bitte wählen Sie Datum und Uhrzeit für die Aktivität indem Sie auf das Eingabefeld klicken.");
 		german.setDeleteChat("Wollen Sie das gesamte Gespräch wirklich löschen? Die bisher in diesem Gespräch geschriebenen Nachrichten werden unwiderruflich für Sie und Ihren Gesprächspartner gelöscht");
-		
+		german.setResetConfirm("RESET CONFIRM");
+		german.setNoAccountError("NOACCOUNT ERROR");
+
 		languageRepository.save(german);
 
 
@@ -894,10 +898,14 @@ public class RefugeeDataInitializer implements DataInitializer {
 		english.setDeleteEmail("To deactivate your account click the following link.\n\n" +"Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
 		english.setChangeEmailTopic("Refugee-App: Email change");
 		english.setChangeEmail("To change your email click the following link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=%s\n\n Lokal: localhost:8080/validate?id=%s");
+		english.setResetPwTopic("Refugee-App: Reset password");
+		english.setResetPw("To reset your password click the following link.\n\n" + "Testserver: http://refugee-app.tk/swt15w10/validate?id=%s \n\n Lokal: localhost:8080/validate?id=%s");
 		english.setDeleteUserPopup("An email has been sent your mailbox. Please follow the instructions in there to confirm the deletion of your user account.");
 		english.setDateError("Please choose date and time for the activity by clicking the input field.");
 		english.setDeleteChat("Do you really want to delete this chat conversation completely? All in this conversation sent and received messages will be deleted for you and your chat partner");
-		
+		english.setResetConfirm("RESET CONFIRM");
+		english.setNoAccountError("NOACCOUNT ERROR");
+
 		languageRepository.save(english);
 
 		final Language arab = new Language();
