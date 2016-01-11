@@ -93,14 +93,20 @@ public class Language {
     
     /** The change email topic. */
     private String changeEmailTopic;
-    
+
+    private String resetPw;
+    private String resetPwTopic;
+
     /** The delete user popup. */
-    //user deletion
     private String deleteUserPopup;
     
     /** The delete chat. */
     //chat
     private String deleteChat;
+
+    //reset PW
+    private String noAccountError;
+    private String resetConfirm;
 
 
     /**
@@ -576,12 +582,31 @@ public class Language {
         this.changeEmailTopic = changeEmailTopic;
     }
 
-	/**
-	 * Gets the delete user popup.
-	 *
-	 * @return the delete user popup
-	 */
-	public String getDeleteUserPopup() {
+
+
+
+    public String getResetPw() {
+        return resetPw;
+    }
+
+    public void setResetPw(String resetPw) {
+        this.resetPw = resetPw;
+    }
+
+    public String getResetPwTopic() {
+        return resetPwTopic;
+    }
+
+    public void setResetPwTopic(String resetPwTopic) {
+        this.resetPwTopic = resetPwTopic;
+    }
+    /**
+     * Gets the delete user popup.
+     *
+     * @return the delete user popup
+     */
+    public String getDeleteUserPopup() {
+
 		return deleteUserPopup;
 	}
 
@@ -629,4 +654,20 @@ public class Language {
 	public void setDeleteChat(String deleteChat) {
 		this.deleteChat = deleteChat;
 	}
+
+    public String getNoAccountError() {
+        return noAccountError;
+    }
+
+    public void setNoAccountError(String noAccountError) {
+        this.noAccountError = noAccountError;
+    }
+
+    public String getResetConfirm() {
+        return resetConfirm;
+    }
+
+    public void setResetConfirm(String resetConfirm) {
+        this.resetConfirm = resetConfirm;
+    }
 }
