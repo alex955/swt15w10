@@ -17,15 +17,25 @@ import refugeeApp.model.Location;
 import refugeeApp.model.User;
 import refugeeApp.model.UserRepository;
 
+/**
+ * The Class OrtTest.
+ */
 public class OrtTest extends AbstractIntegrationTests {
 
+    /** The ort. */
     final Location ort = new Location();
     
+    /**
+     * Constructor test.
+     */
     @Test
 	public void constructorTest() {
 		assertFalse("Error", ort == null);
 	}
     
+	/**
+	 * Initialisation test.
+	 */
 	@Test
 	public void initialisationTest() {
 		assertEquals("Error", null, ort.getAddress());

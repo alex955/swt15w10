@@ -23,37 +23,50 @@ import org.springframework.web.bind.annotation.RequestParam;
 import refugeeApp.model.*;
 
 
+/**
+ * The Class EMailController.
+ */
 @Controller
 public class EMailController {
 
+	/** The user account manager. */
 	@Autowired
 	private UserAccountManager userAccountManager;
 
+	/** The user repository. */
 	@Autowired
 	private final UserRepository userRepository;
 
+	/** The validator repository. */
 	@Autowired
 	private final ValidatorRepository validatorRepository;
 
+	/** The user settings repository. */
 	@Autowired
 	private final UserSettingsRepository userSettingsRepository;
 
+	/** The language repository. */
 	@Autowired
 	private final LanguageRepository languageRepository;
 
+	/** The static repository. */
 	private static LanguageRepository staticRepository;
 
+	/**
+	 * Inits the.
+	 */
 	@PostConstruct
 	public void init(){
 		this.staticRepository = languageRepository;
 	}
 
 	/**
-	 * autowired constructor
-	 * @param userRepository
-	 * @param validatorRepository
-	 * @param userSettingsRepository
-	 * @param languageRepository
+	 * autowired constructor.
+	 *
+	 * @param userRepository the user repository
+	 * @param validatorRepository the validator repository
+	 * @param userSettingsRepository the user settings repository
+	 * @param languageRepository the language repository
 	 */
 	@Autowired
 	public EMailController(UserRepository userRepository, ValidatorRepository validatorRepository, UserSettingsRepository userSettingsRepository, LanguageRepository languageRepository) {
@@ -68,7 +81,11 @@ public class EMailController {
 	/**
 	 * Sends E-Mail by using the MimeMessage Class with the smpt protocol.
 	 *
-	 * @author Lukas Klose
+	 * @param receiver the receiver
+	 * @param token the token
+	 * @param usage the usage
+	 * @throws AddressException the address exception
+	 * @throws MessagingException the messaging exception
 	 */
 	public static void sendEmail(String receiver, String token, int usage) throws AddressException, MessagingException {
 
@@ -132,7 +149,8 @@ public class EMailController {
 	 * Searches for the given HashID in UserRepository and sets the validated flag to true if
 	 * it is found.
 	 *
-	 * @author Lukas Klose
+	 * @param id the id
+	 * @return the string
 	 */
 	@RequestMapping(value = "/validate")
 	public String validation(@RequestParam String id) {
@@ -165,10 +183,11 @@ public class EMailController {
 	}
 
 	/**
-	 * changes mail
-	 * @param userSettingsForm
-	 * @param token
-	 * @return
+	 * changes mail.
+	 *
+	 * @param userSettingsForm the user settings form
+	 * @param token the token
+	 * @return the string
 	 */
 	@RequestMapping(value = "/changeemail")
 	public String changeEmail(@ModelAttribute("userSettingsForm") UserSettingsForm userSettingsForm, @RequestParam String token){

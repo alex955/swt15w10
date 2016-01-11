@@ -14,11 +14,20 @@ import kickstart.AbstractWebIntegrationTests;
 import refugeeApp.controller.AdminController;
 import refugeeApp.model.UserRepository;
 
+/**
+ * The Class AdminControllerTest.
+ */
 public class AdminControllerTest extends AbstractWebIntegrationTests{
 
+	/** The user repository. */
 	@Autowired UserRepository userRepository;
+	
+	/** The controller. */
 	@Autowired AdminController controller;
 	
+	/**
+	 * Test user deactivation.
+	 */
 	@Test
 	public void testUserDeactivation(){
 //        UserAccount admin1 = userAccountManager.create("admin1", "admin1PW", admin);
@@ -30,6 +39,11 @@ public class AdminControllerTest extends AbstractWebIntegrationTests{
         assertEquals("Error",true,true);
 	}
 	
+	/**
+	 * Returns model and view for secured uri after authentication.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	public void returnsModelAndViewForSecuredUriAfterAuthentication() throws Exception {
 
@@ -39,6 +53,11 @@ public class AdminControllerTest extends AbstractWebIntegrationTests{
 				andExpect(model().attributeExists("categories", "categoriesAdmin", "newCategory", "rootCount", "subCount", "totalCount", "registeredUsers"));
 	}
 	
+	/**
+	 * Returns model and view for secured uri after authentication2.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	public void returnsModelAndViewForSecuredUriAfterAuthentication2() throws Exception {
 
@@ -48,6 +67,11 @@ public class AdminControllerTest extends AbstractWebIntegrationTests{
 				andExpect(model().attributeExists("categories", "category", "subcategories", "newCategory"));
 	}
 	
+	/**
+	 * Returns model and view for secured uri after authentication3.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	public void returnsModelAndViewForSecuredUriAfterAuthentication3() throws Exception {
 

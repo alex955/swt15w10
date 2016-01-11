@@ -11,9 +11,17 @@ import org.junit.Test;
 
 import kickstart.AbstractWebIntegrationTests;
 
+/**
+ * The Class ArticleControllerTest.
+ */
 public class ArticleControllerTest extends AbstractWebIntegrationTests{
 
 	
+	/**
+	 * Returns model for admin edit article.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	public void returnsModelForAdminEditArticle() throws Exception {
 
@@ -23,6 +31,11 @@ public class ArticleControllerTest extends AbstractWebIntegrationTests{
 				andExpect(model().attributeExists("categories", "categoriesForm", "Article", "userId", "user", "Creator", "isAdminLoggedIn"));
 	}
 	
+	/**
+	 * Returns model for admin new article.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	public void returnsModelForAdminNewArticle() throws Exception {
 
@@ -32,6 +45,11 @@ public class ArticleControllerTest extends AbstractWebIntegrationTests{
 				andExpect(model().attributeExists("categories", "categoriesForm", "article", "creator"));
 	}
 	
+	/**
+	 * Returns model for admin edit attributes.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	public void returnsModelForAdminEditAttributes() throws Exception {
 

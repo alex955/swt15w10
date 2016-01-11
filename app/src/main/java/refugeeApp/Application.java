@@ -30,13 +30,22 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
+/**
+ * The Class Application.
+ */
 @EnableScheduling
 @EnableSalespoint
 @EntityScan(basePackageClasses = { Application.class, Jsr310JpaConverters.class })
 public class Application extends SpringBootServletInitializer  {
 
+	/** The Constant LOGIN_ROUTE. */
 	private static final String LOGIN_ROUTE = "/";
 	
+	/**
+	 * Java8 time dialect.
+	 *
+	 * @return the java8 time dialect
+	 */
 	// Java 8 type formatting
 	@Bean
 	public Java8TimeDialect java8TimeDialect() {
@@ -45,8 +54,9 @@ public class Application extends SpringBootServletInitializer  {
 	
     /**
      * Sets the location of the user, to change language default settings.
-     * 
-     * @author Lukas Klose
+     *
+     * @param application the application
+     * @return the spring application builder
      */
 			
     @Override
@@ -54,17 +64,25 @@ public class Application extends SpringBootServletInitializer  {
         return application.sources(Application.class);
     }
 
+	/**
+	 * The main method.
+	 *
+	 * @param args the arguments
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
 
 	/**
-	 * 
-	 * @author
+	 * The Class RefugeeWebConfiguration.
 	 *
 	 */
 	@Configuration
 	static class RefugeeWebConfiguration extends SalespointWebConfiguration {
+		
+		/* (non-Javadoc)
+		 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#addViewControllers(org.springframework.web.servlet.config.annotation.ViewControllerRegistry)
+		 */
 		@Override
 		public void addViewControllers(ViewControllerRegistry registry){
 			registry.addViewController(LOGIN_ROUTE).setViewName("");
@@ -72,13 +90,15 @@ public class Application extends SpringBootServletInitializer  {
 	}
 	
 	/**
-	 * 
-	 * @author 
+	 * The Class WebSecurityConfiguration.
 	 *
 	 */
 	@Configuration
 	static class WebSecurityConfiguration extends SalespointSecurityConfiguration {
 
+		/* (non-Javadoc)
+		 * @see org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.web.builders.HttpSecurity)
+		 */
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 

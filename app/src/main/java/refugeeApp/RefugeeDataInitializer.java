@@ -15,35 +15,50 @@ import org.springframework.util.Assert;
 
 import refugeeApp.model.*;
 
-/**
- * Created by Vincenz on 24.11.15.
- */
+
 @Component
 public class RefugeeDataInitializer implements DataInitializer {
 
+    /** The user account manager. */
     private final UserAccountManager userAccountManager;
+    
+    /** The user repository. */
     private final UserRepository userRepository;
+    
+    /** The categories. */
     private final CategoryRepo categories;
+    
+    /** The good repo. */
     private final ArticleRepo goodREPO;
+    
+    /** The settings repo. */
     private final SettingsRepository settingsRepo;
+	
+	/** The language repository. */
 	private final LanguageRepository languageRepository;
 
+    /** The refugee. */
     final Role refugee = new Role("ROLE_REFUGEE");
+    
+    /** The volunteer. */
     final Role volunteer = new Role("ROLE_VOLUNTEER");
+    
+    /** The admin. */
     final Role admin = new Role("ROLE_ADMIN");
 
     /**
-     * autowiring constructor
-     * @param userAccountManager
-     * @param userRepository
-     * @param categories
-     * @param goodREPO
-     * @param chatRepo
-     * @param msgRepo
-     * @param settingsRepo
-     * @param userSettingsRepository
-     * @param validatorRepository
-     * @param languageRepository
+     * autowiring constructor.
+     *
+     * @param userAccountManager the user account manager
+     * @param userRepository the user repository
+     * @param categories the categories
+     * @param goodREPO the good repo
+     * @param chatRepo the chat repo
+     * @param msgRepo the msg repo
+     * @param settingsRepo the settings repo
+     * @param userSettingsRepository the user settings repository
+     * @param validatorRepository the validator repository
+     * @param languageRepository the language repository
      */
     @Autowired
     public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, refugeeApp.model.ArticleRepo goodREPO, ChatConversationRepo chatRepo, ChatMessageRepo msgRepo, SettingsRepository settingsRepo, UserSettingsRepository userSettingsRepository, ValidatorRepository validatorRepository, LanguageRepository languageRepository) {
@@ -67,7 +82,7 @@ public class RefugeeDataInitializer implements DataInitializer {
 	}
 
     /**
-     * call of all subinitializations
+     * call of all subinitializations.
      */
     @Override
     public void initialize() {
@@ -79,8 +94,7 @@ public class RefugeeDataInitializer implements DataInitializer {
     }
     
     /**
-     * general settings of the application
-     * @throws IOException 
+     * general settings of the application.
      */
     public void Settings(){
     	
@@ -116,9 +130,10 @@ public class RefugeeDataInitializer implements DataInitializer {
     }
     
     /**
-     * initialisation of users
-     * @param userAccountManager
-     * @param userRepository
+     * initialisation of users.
+     *
+     * @param userAccountManager the user account manager
+     * @param userRepository the user repository
      */
     public void initializeUsers(UserAccountManager userAccountManager, UserRepository userRepository){
     	
@@ -156,7 +171,7 @@ public class RefugeeDataInitializer implements DataInitializer {
     }
 
     /**
-     * terribly hardcoded initialisation of categories
+     * terribly hardcoded initialisation of categories.
      */
     public void initializeCategories(){ 
 //    	Category cat = new Category("Möbel", -1);
@@ -760,9 +775,10 @@ public class RefugeeDataInitializer implements DataInitializer {
     }
 
     /**
-     * initialisation fo goods
-     * @param userAccountManager
-     * @param userRepository
+     * initialisation fo goods.
+     *
+     * @param userAccountManager the user account manager
+     * @param userRepository the user repository
      */
     public void initializeGoods(UserAccountManager userAccountManager, UserRepository userRepository){
     	LinkedList<String> tags1 = new LinkedList<String>();
@@ -831,7 +847,7 @@ public class RefugeeDataInitializer implements DataInitializer {
     }
 
     /**
-     * initialisation of languages
+     * initialisation of languages.
      */
 	public void initializeLanguages(){
 

@@ -20,16 +20,29 @@ import refugeeApp.model.CategoryRepo;
 import refugeeApp.model.User;
 import refugeeApp.model.UserRepository;
 
+/**
+ * The Class CategoryModelTest.
+ */
 public class CategoryModelTest extends AbstractIntegrationTests {
 
+	/** The category repo. */
 	@Autowired CategoryRepo categoryRepo;
 
+    /** The cat. */
     final Category cat = new Category();
+    
+    /** The cat2. */
     final Category cat2 = new Category("newCat", -1);
 
+	/** The attributes. */
 	private LinkedList<Attribute> attributes = new LinkedList<Attribute>();
+    
+    /** The cat3. */
     final Category cat3 = new Category("newCat2", -1, attributes);
     
+    /**
+     * Constructor test.
+     */
     @Test
 	public void constructorTest() {
 		assertFalse("Error", cat == null);
@@ -37,6 +50,9 @@ public class CategoryModelTest extends AbstractIntegrationTests {
 		assertFalse("Error", cat3 == null);
 	}
     
+	/**
+	 * Initialisation test.
+	 */
 	@Test
 	public void initialisationTest() {
 		assertEquals("Error", new LinkedList<Attribute>(), cat.getAttributes());
@@ -44,6 +60,9 @@ public class CategoryModelTest extends AbstractIntegrationTests {
 		assertEquals("Error", new LinkedList<Attribute>(), cat3.getAttributes());
 	}
 	
+	/**
+	 * Adds the attribute to category.
+	 */
 	@Test
 	public void addAttributeToCategory() {
 		Attribute attr = new Attribute("Name", new LinkedList<String>());
@@ -51,6 +70,9 @@ public class CategoryModelTest extends AbstractIntegrationTests {
 		assertEquals("Error", true, cat3.getAttributes().contains(attr));
 	}
 	
+	/**
+	 * Adds the and delete category.
+	 */
 	@Test
 	public void addAndDeleteCategory() {
 		long count = categoryRepo.count();
@@ -61,6 +83,9 @@ public class CategoryModelTest extends AbstractIntegrationTests {
 		assertEquals("Error", categoryRepo.count(), count);
 	}
 	
+	/**
+	 * Find category.
+	 */
 	@Test
 	public void findCategory() {
 		categoryRepo.save(cat3);
@@ -69,6 +94,9 @@ public class CategoryModelTest extends AbstractIntegrationTests {
 		categoryRepo.delete(cat3.getId());
 	}
 	
+	/**
+	 * Find all categories.
+	 */
 	@Test
 	public void findAllCategories() {
 		long count = categoryRepo.count();

@@ -31,25 +31,42 @@ import refugeeApp.model.User;
 import refugeeApp.model.UserRepository;
 import refugeeApp.utilities.CategoryMethods;
 
+/**
+ * The Class SearchController.
+ */
 @Controller
 @Scope("session")
 public class SearchController {
 	
+	/** The category methods. */
 	@Autowired private final CategoryMethods categoryMethods;
+	
+	/** The user repository. */
 	@Autowired private final UserRepository userRepository;
+	
+	/** The categories. */
 	@Autowired private final CategoryRepo categories;	
+	
+	/** The article repo. */
 	@Autowired private final ArticleRepo articleRepo;	
+	
+	/** The current_cat. */
 	private long current_cat=0;
+	
+	/** The ort. */
 	private Location ort=new Location();
+	
+	/** The processed categories. */
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
 	
 	
 	/**
-	 * autowired constructor
-	 * @param categoryMethods
-	 * @param userRepository
-	 * @param categories
-	 * @param articleRepo
+	 * autowired constructor.
+	 *
+	 * @param categoryMethods the category methods
+	 * @param userRepository the user repository
+	 * @param categories the categories
+	 * @param articleRepo the article repo
 	 */
 	@Autowired
 	public SearchController(CategoryMethods categoryMethods, UserRepository userRepository, CategoryRepo categories,
@@ -62,7 +79,8 @@ public class SearchController {
 	}
 	
 	/**
-	 * sorts out articles
+	 * sorts out articles.
+	 *
 	 * @param articles list of articles
 	 * @return list without sorted out articles
 	 */
@@ -83,11 +101,12 @@ public class SearchController {
 	}
 	
 	/**
-	 * caluclates distance between two locations given by lat/long
-	 * @param lat1
-	 * @param lon1
-	 * @param lat2
-	 * @param lon2
+	 * caluclates distance between two locations given by lat/long.
+	 *
+	 * @param lat1 the lat1
+	 * @param lon1 the lon1
+	 * @param lat2 the lat2
+	 * @param lon2 the lon2
 	 * @return distance between two locations
 	 */
 	private static double distance(double lat1, double lon1, double lat2, double lon2) {
@@ -102,7 +121,8 @@ public class SearchController {
 	}
 
 	/**
-	 * processes categories given by List into hierarchical CategoryFirstTierObject
+	 * processes categories given by List into hierarchical CategoryFirstTierObject.
+	 *
 	 * @return CategoryFirstTierObject containing categories
 	 */
 	protected LinkedList<CategoryFirstTierObject> getProcessedCategories(){
@@ -127,7 +147,8 @@ public class SearchController {
 	}
 		
 	/**
-	 * 
+	 * Gets the category map.
+	 *
 	 * @return Category Map containing name of category and children
 	 */
 	public Map<String, List<Category>> getCategoryMap(){
@@ -142,7 +163,8 @@ public class SearchController {
 	}
 		
 	/**
-	 * 
+	 * Gets the children.
+	 *
 	 * @param id ID of category
 	 * @return children of certain category in list
 	 */
@@ -155,7 +177,8 @@ public class SearchController {
 	}
 
 	/**
-	 * 
+	 * Gets the current_cat.
+	 *
 	 * @param model mvc model to which information is added
 	 * @return adds current location or category to model
 	 */
@@ -167,8 +190,9 @@ public class SearchController {
 	}
 
 	/**
-	 * sets current catgegory
-	 * @param current_cat
+	 * sets current catgegory.
+	 *
+	 * @param current_cat the new current_cat
 	 */
 	public void setCurrent_cat(long current_cat) {
 		if (this.categories.findOne(current_cat).get().getId()==current_cat) this.current_cat = current_cat; 
@@ -176,7 +200,8 @@ public class SearchController {
 	}
 	
 	/**
-	 * exchanges curret category
+	 * exchanges curret category.
+	 *
 	 * @param model mvc model
 	 * @return new mvc model
 	 */
@@ -187,7 +212,8 @@ public class SearchController {
 	}
 		
 	/**
-	 * 
+	 * Gets the current_cat.
+	 *
 	 * @return current category id
 	 */
 	public Long getCurrent_cat(){
@@ -195,7 +221,8 @@ public class SearchController {
 	}
 	
 	/**
-	 * 
+	 * Gets the all subcategory items.
+	 *
 	 * @param subcatId id of category
 	 * @return List of all items of a certain category and its subcategories
 	 */
@@ -217,7 +244,8 @@ public class SearchController {
 	}
 	
 	/**
-	 * 
+	 * Gets the all category items.
+	 *
 	 * @param subcatID category id
 	 * @return list of all articles in certain category
 	 */
@@ -228,8 +256,9 @@ public class SearchController {
 	//Controller
 	
 	/**
-	 * returns the search template with all existing offers
-	 * @param model
+	 * returns the search template with all existing offers.
+	 *
+	 * @param model the model
 	 * @return search template
 	 */
 	@RequestMapping("/search")
@@ -243,8 +272,9 @@ public class SearchController {
 	}
 	
 	/**
-	 * processes article search
-	 * @param SearchQuery 
+	 * processes article search.
+	 *
+	 * @param SearchQuery the search query
 	 * @param model mvc model
 	 * @return search template
 	 */
@@ -284,7 +314,8 @@ public class SearchController {
 	}
 			
 	/**
-	 * searches through articles by category
+	 * searches through articles by category.
+	 *
 	 * @param catID category id
 	 * @param model mvc model
 	 * @return search template
@@ -310,10 +341,10 @@ public class SearchController {
 	}
 			
 	/**
-	 * searches for the offers created by the logged in user and sends them to the template		
-	 * @author Alexander Shulga
-	 * @param model
-	 * @param userAccount
+	 * searches for the offers created by the logged in user and sends them to the template		.
+	 *
+	 * @param model the model
+	 * @param userAccount the user account
 	 * @return search template
 	 */
 	@PreAuthorize("isAuthenticated()")
@@ -331,16 +362,18 @@ public class SearchController {
 	}
 			
 	/**
-	 * 
+	 * Frontpage.
+	 *
 	 * @return frontpage template
 	 */
 	@RequestMapping(value = "/searchbytags")
     public String frontpage() {return "frontpage";}
 		
 	/**
-	 * processes search by tags 
-	 * @param SearchTag
-	 * @param model
+	 * processes search by tags .
+	 *
+	 * @param SearchTag the search tag
+	 * @param model the model
 	 * @return search template
 	 */
 	@RequestMapping(value = "/searchbytags", method = RequestMethod.POST)
@@ -392,16 +425,18 @@ public class SearchController {
 	}
 	
 	/**
-	 * 
+	 * Frontpage2.
+	 *
 	 * @return frontpage template
 	 */
 	@RequestMapping(value = "/setsearchaddress")
     public String frontpage2() {return "frontpage";}
 	
 	/**
-	 * sets search address
-	 * @param ort
-	 * @param model
+	 * sets search address.
+	 *
+	 * @param ort the ort
+	 * @param model the model
 	 * @return redirect to search
 	 */
 	@RequestMapping(value = "/setsearchaddress", method = RequestMethod.POST)

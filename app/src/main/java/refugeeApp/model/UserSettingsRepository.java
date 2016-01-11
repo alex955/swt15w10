@@ -2,9 +2,14 @@ package refugeeApp.model;
 
 import org.springframework.data.repository.CrudRepository;
 
-/**
- * Created by Vincenz on 11.12.15.
- */
+
 public interface UserSettingsRepository extends CrudRepository <UserSettings, Long> {
+    
+    /**
+     * Find by user id.
+     *
+     * @param userId the user id
+     * @return the user settings
+     */
     UserSettings findByUserId(long userId);
 }

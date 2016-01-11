@@ -14,16 +14,26 @@ import org.springframework.web.context.WebApplicationContext;
 
 import refugeeApp.Application;
 
+/**
+ * The Class AbstractWebIntegrationTests.
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @SpringApplicationConfiguration(classes = Application.class)
 public abstract class AbstractWebIntegrationTests {
 
+	/** The context. */
 	@Autowired WebApplicationContext context;
+	
+	/** The security filter chain. */
 	@Autowired FilterChainProxy securityFilterChain;
 
+	/** The mvc. */
 	protected MockMvc mvc;
 
+	/**
+	 * Sets the test environment up
+	 */
 	@Before
 	public void setUp() {
 

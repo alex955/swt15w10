@@ -26,41 +26,50 @@ import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Optional;
 
-/**
- * Created by Vincenz on 25.11.15.
- */
+
 
 @Controller
 public class SettingsController {
+    
+    /** The user repository. */
     @Autowired private final UserRepository userRepository;
+    
+    /** The validator repository. */
     @Autowired private final ValidatorRepository validatorRepository;
 
+    /** The user account manager. */
     private UserAccountManager userAccountManager;
 
+    /** The category methods. */
     @Autowired
     private final CategoryMethods categoryMethods;
 
+    /** The password encoder. */
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    /** The user settings repository. */
     @Autowired
     private final UserSettingsRepository userSettingsRepository;
 
+    /** The language repository. */
     @Autowired
     private final LanguageRepository languageRepository;
 
+    /** The processed categories. */
     protected LinkedList<CategoryFirstTierObject> processedCategories;
 
     /**
-     * autowired constructor
-     * @param articleRepo
-     * @param userRepository
-     * @param userAccountManager
-     * @param passwordEncoder
-     * @param categoryMethods
-     * @param validatorRepository
-     * @param userSettingsRepository
-     * @param languageRepository
+     * autowired constructor.
+     *
+     * @param articleRepo the article repo
+     * @param userRepository the user repository
+     * @param userAccountManager the user account manager
+     * @param passwordEncoder the password encoder
+     * @param categoryMethods the category methods
+     * @param validatorRepository the validator repository
+     * @param userSettingsRepository the user settings repository
+     * @param languageRepository the language repository
      */
     @Autowired
     public SettingsController(ArticleRepo articleRepo, UserRepository userRepository, UserAccountManager userAccountManager, PasswordEncoder passwordEncoder, CategoryMethods categoryMethods, ValidatorRepository validatorRepository, UserSettingsRepository userSettingsRepository, LanguageRepository languageRepository){
@@ -74,7 +83,8 @@ public class SettingsController {
     }
 
     /**
-     * changes settings of certain user
+     * changes settings of certain user.
+     *
      * @param userSettingsForm form containing change information
      * @param userAccount Optional containnig either null or useraccount
      * @param model MVC model
@@ -104,15 +114,16 @@ public class SettingsController {
     }
 
     /**
-     * processes changed information
+     * processes changed information.
+     *
      * @param userSettingsForm form containing information
      * @param result validation result
      * @param userAccount Optional ontaining either user account or null
      * @param model MVC model
      * @param modelMap MVC model map
      * @return usersettigns template, either filled with error information or not if no errors
-     * @throws AddressException
-     * @throws MessagingException
+     * @throws AddressException the address exception
+     * @throws MessagingException the messaging exception
      */
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/usersettings", method = RequestMethod.POST)
@@ -262,12 +273,13 @@ public class SettingsController {
     }
 
     /**
-     * lets a user request a deletion/deactivation of him/herself
+     * lets a user request a deletion/deactivation of him/herself.
+     *
      * @param userAccount userAccount which is to be deleted/deactivated
      * @param modelMap MVC model map
      * @return redirect to logout
-     * @throws AddressException
-     * @throws MessagingException
+     * @throws AddressException the address exception
+     * @throws MessagingException the messaging exception
      */
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/deleteuser")

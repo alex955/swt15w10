@@ -15,17 +15,22 @@ import refugeeApp.model.CategoryFirstTierObject;
 import refugeeApp.model.CategoryRepo;
 import refugeeApp.model.UserRepository;
 
+/**
+ * The Class CategoryMethods.
+ */
 @Component
 public class CategoryMethods {
 	
+	/** The categories. */
 	@Autowired private final CategoryRepo categories;
 	
 	/**
-	 * autowired constructor
-	 * @param userAccountManager
-	 * @param userRepository
-	 * @param categories
-	 * @param goodREPO
+	 * autowired constructor.
+	 *
+	 * @param userAccountManager the user account manager
+	 * @param userRepository the user repository
+	 * @param categories the categories
+	 * @param goodREPO the good repo
 	 */
 	@Autowired
 	public CategoryMethods(UserAccountManager userAccountManager, UserRepository userRepository,
@@ -34,11 +39,13 @@ public class CategoryMethods {
 	}
 	
 
+	/** The processed categories. */
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
 	
 
 	/**
-	 * processes categories into hierarchical CategoryFirstTierObject
+	 * processes categories into hierarchical CategoryFirstTierObject.
+	 *
 	 * @return List of Hierarchical objects
 	 */
 	public LinkedList<CategoryFirstTierObject> getProcessedCategories(){
@@ -66,7 +73,8 @@ public class CategoryMethods {
 	}
 	
 	/**
-	 * 
+	 * Gets the category map.
+	 *
 	 * @return Mapping of subcategories by name of rootcategory
 	 */
 	public Map<String, List<Category>> getCategoryMap(){
@@ -82,7 +90,8 @@ public class CategoryMethods {
 	}
 	
 	/**
-	 * 
+	 * Gets the children.
+	 *
 	 * @param id category id
 	 * @return List of children of certain category
 	 */

@@ -6,17 +6,27 @@ import java.util.Map;
 
 import org.springframework.stereotype.Component;
 
+/**
+ * The Class PossibleChatMessages.
+ */
 @Component
 public class PossibleChatMessages {
 	
+	/** The start messages. */
 	private int[] startMessages = { 1, 2 };
+	
+	/** The possible messages from starter. */
 	private int[] possibleMessagesFromStarter = { 1,2,5,7,9,10, 11, 13, 0};
 	
+	/** The possible answers to message. */
 	private Map<Integer, LinkedList<Integer>> possibleAnswersToMessage = new HashMap<Integer, LinkedList<Integer>>();
 	
+	/** The possible chat message. */
 	private Map<Integer,String> possibleChatMessage = new HashMap<Integer, String>();
 	
 	/**
+	 * Gets the possible start messages.
+	 *
 	 * @return Mapped (by int id) String values for possible messages with which a conversation can be started out of an article view
 	 */
 	public Map<Integer,String> getPossibleStartMessages() {
@@ -34,7 +44,8 @@ public class PossibleChatMessages {
 	}
 	
 	/**
-	 * 
+	 * Gets the possible messages from starter.
+	 *
 	 * @return Mapped (by int id) String values for possible messages with which a conversation can be appended by interested party, conversation already exists
 	 */
 	public Map<Integer, String> getPossibleMessagesFromStarter(){
@@ -52,7 +63,8 @@ public class PossibleChatMessages {
 	}
 	
 	/**
-	 * 
+	 * Gets the possible answers to message.
+	 *
 	 * @param key ID of message
 	 * @return Mapped (by int id) String values for possible answers to a certain message
 	 */
@@ -69,7 +81,8 @@ public class PossibleChatMessages {
 	}
 	
 	/**
-	 * 
+	 * Gets the possible chat messages.
+	 *
 	 * @return all possible chat messages, all questions and answers
 	 */
 	public Map<Integer,String> getPossibleChatMessages() {
@@ -77,7 +90,8 @@ public class PossibleChatMessages {
 	}
 	
 	/**
-	 * Gets a certain text block by id
+	 * Gets a certain text block by id.
+	 *
 	 * @param id Textblock ID
 	 * @return Map with one text block - mapped by it's id. Map needed for further computational magic.
 	 */
@@ -87,8 +101,9 @@ public class PossibleChatMessages {
 		
 		return toReturn;
 	}
+	
 	/**
-	 * Constructor, contains hardcoded chat flow
+	 * Constructor, contains hardcoded chat flow.
 	 */
 	//wasn't supposed to be so heavily hardcoded,.. 
 	public PossibleChatMessages(){
@@ -220,7 +235,8 @@ public class PossibleChatMessages {
 	}
 	
 	/**
-	 * returns the "free chat" texblock
+	 * returns the "free chat" texblock.
+	 *
 	 * @return single text block for free chat, mapped by it's id ( = 0)
 	 */
 	public Map<Integer, String >getFreeTextAnswer(){

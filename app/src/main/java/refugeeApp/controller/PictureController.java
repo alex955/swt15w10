@@ -13,17 +13,26 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import refugeeApp.model.ArticleRepo;
 import refugeeApp.model.SettingsRepository;
 
+/**
+ * The Class PictureController.
+ */
 @Controller
 public class PictureController{
 	
+	/** The article repo. */
 	private final ArticleRepo articleRepo;
+	
+	/** The settings repo. */
 	private final SettingsRepository settingsRepo;
+	
+	/** The resource. */
 	private FileSystemResource resource;
 	
 	/**
-	 * autowired constructor
-	 * @param articleRepo
-	 * @param settingsRepo
+	 * autowired constructor.
+	 *
+	 * @param articleRepo the article repo
+	 * @param settingsRepo the settings repo
 	 */
 	@Autowired
 	public PictureController(ArticleRepo articleRepo, SettingsRepository settingsRepo){
@@ -32,11 +41,11 @@ public class PictureController{
 	}
 	
 	/**
-	 * returns an existing picture of the article or a standard picture to the template 
-	 * @author Alexander Shulga
+	 * returns an existing picture of the article or a standard picture to the template .
+	 *
 	 * @param id (article id)
 	 * @return Picture (FileSystemResource)
-	 * @throws IOException
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/showPicture/{id}", produces = "image/jpg")

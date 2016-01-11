@@ -19,24 +19,40 @@ import refugeeApp.utilities.CategoryMethods;
 
 import javax.validation.Valid;
 
+/**
+ * The Class AdminController.
+ */
 @Controller
 @PreAuthorize("hasRole('ROLE_ADMIN')")
 public class AdminController {
 	
 	
+    /** The user repository. */
     @Autowired
     private final UserRepository userRepository;
     
+	/** The categories. */
 	@Autowired
 	private final CategoryRepo categories;
 
+	/** The category methods. */
 	@Autowired private final CategoryMethods categoryMethods;
 	
+	/** The processed categories. */
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
 	
+	/** The user account manager. */
 	@Autowired
 	private UserAccountManager userAccountManager;
     
+	/**
+	 * Instantiates a new admin controller.
+	 *
+	 * @param categories the categories
+	 * @param userRepository the user repository
+	 * @param userAccountManager the user account manager
+	 * @param categoryMethods the category methods
+	 */
 	@Autowired
 	public AdminController(CategoryRepo categories, UserRepository userRepository, UserAccountManager userAccountManager, CategoryMethods categoryMethods){
 		this.categories = categories;
@@ -46,8 +62,9 @@ public class AdminController {
 	}
 
 	/**
-	 * Generates an overview (Categories, Users) for an admin with the option to add/delete Categories and deactivate users
-	 * @param model
+	 * Generates an overview (Categories, Users) for an admin with the option to add/delete Categories and deactivate users.
+	 *
+	 * @param model the model
 	 * @return admin-Overview template (/templates/admin.html)
 	 */
 	@RequestMapping(value = "/admin")
@@ -102,9 +119,10 @@ public class AdminController {
     }
 	
 	/**
-	 *  Processes data of a category
+	 *  Processes data of a category.
+	 *
 	 * @param newCategory new Category which is to be saved in the Category Repository
-	 * @param model
+	 * @param model the model
 	 * @param id ID of the predecessor of the new category
 	 * @return redirect to inspection of new category
 	 */
@@ -121,16 +139,18 @@ public class AdminController {
     }
     
     /**
-     * redirect to frontpage if user has no admin role (because @Preauthorize)
-     * @return
+     * redirect to frontpage if user has no admin role (because @Preauthorize).
+     *
+     * @return the string
      */
     @RequestMapping(value="/admin/addSubcategory/{id}")
     public String addSubcategory(){return null;}
 	
 	/**
-	 * Generation of a new Category which has no predecessors -> new root Category
+	 * Generation of a new Category which has no predecessors -> new root Category.
+	 *
 	 * @param category new Category which is to be saved in the Category Repository
-	 * @param model
+	 * @param model the model
 	 * @return redirect to admin overview
 	 */
     @RequestMapping(value="/admin/addRootCat", method=RequestMethod.POST)
@@ -144,14 +164,16 @@ public class AdminController {
     }
     
     /**
-     * redirect to frontpage if user has no admin role (because @Preauthorize)
-     * @return
+     * redirect to frontpage if user has no admin role (because @Preauthorize).
+     *
+     * @return the string
      */
     @RequestMapping(value="/admin/addRootCat")
     public String addRootCategory(){return null;}
 
     /**
-     * processes delete request of a certain category
+     * processes delete request of a certain category.
+     *
      * @param id ID of the category which is to be deleted
      * @return redirect to admin overwiew
      */
@@ -163,7 +185,8 @@ public class AdminController {
 	}
 	
 	/**
-	 * helper function for deletion of subcategories , called in deleteCategory(Long id)
+	 * helper function for deletion of subcategories , called in deleteCategory(Long id).
+	 *
 	 * @param id ID of category whose subcategories should be deleted to
 	 */
 	public void deleteSubcategories(long id){
@@ -178,10 +201,11 @@ public class AdminController {
 	
 	/**
 	 * Generates an overview over a certain category. Shows subcategories
+	 *
 	 * @param id ID of the category
-	 * @param model
-	 * @param category
-	 * @return
+	 * @param model the model
+	 * @param category the category
+	 * @return the string
 	 */
 	@RequestMapping(value = "/admin/inspectCategory/{id}")
 	public String showSubcategories(@PathVariable Long id, Model model, @ModelAttribute Category category) {
@@ -207,9 +231,10 @@ public class AdminController {
 	}
 	
 	/**
-	 * deactivates certain user without deleting it's account
+	 * deactivates certain user without deleting it's account.
+	 *
 	 * @param id User ID
-	 * @return
+	 * @return the string
 	 */
 	@RequestMapping(value = "/admin/deactivateUser/{id}")
 	public String deactivateUser(@PathVariable Long id) {
@@ -218,9 +243,10 @@ public class AdminController {
 	}
 	
 	/**
-	 * activates a certain deactivated user account
+	 * activates a certain deactivated user account.
+	 *
 	 * @param id User ID
-	 * @return
+	 * @return the string
 	 */
 	@RequestMapping(value = "/admin/activateUser/{id}")
 	public String activateUser(@PathVariable Long id) {
@@ -229,9 +255,10 @@ public class AdminController {
 	}
 	
 	/**
-	 * Generates a view which let's the admin edit a user's data and profile
+	 * Generates a view which let's the admin edit a user's data and profile.
+	 *
 	 * @param id User ID
-	 * @param model
+	 * @param model the model
 	 * @return admin/adminEditUser template
 	 */
 	@RequestMapping(value = "/admin/editUser/{id}")
@@ -248,7 +275,8 @@ public class AdminController {
 	}
 
 	/**
-	 * Processes changes made to a user by an admin
+	 * Processes changes made to a user by an admin.
+	 *
 	 * @param id User ID
 	 * @param userSettings User's new/changed data
 	 * @param result verification result of user's data

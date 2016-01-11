@@ -23,29 +23,39 @@ import javax.mail.internet.AddressException;
 import javax.validation.Valid;
 
 
+/**
+ * The Class RegistrationController.
+ */
 @Controller
 public class RegistrationController {
 
+    /** The user repository. */
     @Autowired
     private final UserRepository userRepository;
 
+    /** The validator repository. */
     @Autowired
     private ValidatorRepository validatorRepository;
 
+    /** The language repository. */
     @Autowired
     private final LanguageRepository languageRepository;
 
+    /** The processed categories. */
     protected LinkedList<CategoryFirstTierObject> processedCategories;
+    
+    /** The user account manager. */
     private UserAccountManager userAccountManager;
 
     /**
-     * autowired constructor
-     * @param userAccountManager
-     * @param userRepository
-     * @param categoryMethods
-     * @param categories
-     * @param validatorRepository
-     * @param languageRepository
+     * autowired constructor.
+     *
+     * @param userAccountManager the user account manager
+     * @param userRepository the user repository
+     * @param categoryMethods the category methods
+     * @param categories the categories
+     * @param validatorRepository the validator repository
+     * @param languageRepository the language repository
      */
     @Autowired
     public RegistrationController(UserAccountManager userAccountManager, UserRepository userRepository, CategoryMethods categoryMethods, CategoryRepo categories, ValidatorRepository validatorRepository, LanguageRepository languageRepository){
@@ -56,7 +66,8 @@ public class RegistrationController {
     }
 
     /**
-     * registration form
+     * registration form.
+     *
      * @param registrationForm form object for new registration
      * @param model MVC model
      * @return template for registration
@@ -69,14 +80,15 @@ public class RegistrationController {
     }
 
     /**
-     * processing of data passed by new registration
+     * processing of data passed by new registration.
+     *
      * @param registrationForm registration form objet
      * @param result validation result
      * @param modelMap MVC model map
      * @param model MVC model
      * @return registration template
-     * @throws AddressException
-     * @throws MessagingException
+     * @throws AddressException the address exception
+     * @throws MessagingException the messaging exception
      */
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String newRegistration(@ModelAttribute("RegistrationForm") @Valid RegistrationForm registrationForm, BindingResult result,ModelMap modelMap, Model model) throws AddressException, MessagingException {

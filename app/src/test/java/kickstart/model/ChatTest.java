@@ -21,18 +21,35 @@ import refugeeApp.model.ChatMessageRepo;
 import refugeeApp.model.User;
 import refugeeApp.model.UserRepository;
 
+/**
+ * The Class ChatTest.
+ */
 public class ChatTest extends AbstractIntegrationTests {
 
+	/** The msg repo. */
 	@Autowired ChatMessageRepo msgRepo;
+	
+	/** The chat repo. */
 	@Autowired ChatConversationRepo chatRepo;
 	
+	/** The conv. */
 	final ChatConversation conv = new ChatConversation();
 	
+	/** The message1standard. */
 	final ChatMessage message1standard = new ChatMessage();
+	
+	/** The message2standard. */
 	final ChatMessage message2standard = new ChatMessage();
+	
+	/** The message3explicit. */
 	final ChatMessage message3explicit = new ChatMessage("message1", "freetext1", 1, 2, "myName", "adress");
+	
+	/** The message4explicit. */
 	final ChatMessage message4explicit = new ChatMessage("message2", "freetext2", 2, 1, "adress", "myName");
     
+    /**
+     * Constructor test.
+     */
     @Test
 	public void constructorTest() {
 		assertFalse("Error", message1standard == null);
@@ -43,6 +60,9 @@ public class ChatTest extends AbstractIntegrationTests {
 		assertFalse("Error", conv == null);
 	}
     
+	/**
+	 * Initialisation test.
+	 */
 	@Test
 	public void initialisationTest() {
 		assertEquals("Error", null, conv.getToUserName());
@@ -52,6 +72,9 @@ public class ChatTest extends AbstractIntegrationTests {
 		assertEquals("Error", "freetext2", message4explicit.getFreeText());
 	}
 	
+	/**
+	 * Chat conversation repo test.
+	 */
 	@Test
 	public void ChatConversationRepoTest() {
 		conv.setFromId(1);
@@ -67,6 +90,9 @@ public class ChatTest extends AbstractIntegrationTests {
 		this.chatRepo.delete(conv);
 	}
 	
+	/**
+	 * Adds the chat messages.
+	 */
 	@Test
 	public void addChatMessages() {
 		conv.addChatMessage(message3explicit);

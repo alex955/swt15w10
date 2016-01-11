@@ -40,20 +40,39 @@ import refugeeApp.utilities.CategoryMethods;
 import javax.imageio.ImageIO;
 import javax.validation.Valid;
 
+/**
+ * The Class ArticleController.
+ */
 @Controller
 public class ArticleController {
+	
+	/** The picture repo. */
 	private PictureRepo pictureRepo;
     
+	/** The categories. */
 	@Autowired private final CategoryRepo categories;	
+	
+	/** The article repo. */
 	@Autowired private final ArticleRepo articleRepo;
+	
+	/** The category methods. */
 	@Autowired private final CategoryMethods categoryMethods;	
+    
+    /** The user repository. */
     @Autowired private final UserRepository userRepository;    
+    
+    /** The settings repo. */
     @Autowired private final SettingsRepository settingsRepo;
+    
+    /** The processed categories. */
     protected LinkedList<CategoryFirstTierObject> processedCategories;
+	
+	/** The language repository. */
 	@Autowired private final LanguageRepository languageRepository;
     
 	/**
-	 * Constructor which autowires initialized repos
+	 * Constructor which autowires initialized repos.
+	 *
 	 * @param categories Repo of Categoeis
 	 * @param articleRepo Repo of Articles
 	 * @param pictureRepo Repo of Pictures
@@ -74,7 +93,7 @@ public class ArticleController {
 	}
 
 	/**
-	 * Deletes Articles in fixed intervals: Articles are deleted after creationDate+fixedRate, activities are deleted when "now > activityDate"
+	 * Deletes Articles in fixed intervals: Articles are deleted after creationDate+fixedRate, activities are deleted when "now > activityDate".
 	 */
 	 @Scheduled(fixedRate = 3600000)
 	 public void deleteArticlesAfterExpiration() {
@@ -96,12 +115,12 @@ public class ArticleController {
 	 }
 
 	 /**
-	 * resizes given image and return the path
-	 * @param originalImage
-	 * @param type
-	 * @return resizedImage
-	 * @throws IOException 
-	 */
+ 	 * resizes given image and return the path.
+ 	 *
+ 	 * @param file the file
+ 	 * @return resizedImage
+ 	 * @throws IOException Signals that an I/O exception has occurred.
+ 	 */
 	public String resizedImagePath(MultipartFile file) throws IOException{	
                        
             // Creating the directory to store file
@@ -133,7 +152,8 @@ public class ArticleController {
 	}
 
 	/**
-	 * Shows certain article
+	 * Shows certain article.
+	 *
 	 * @param id unique ID of the article
 	 * @param model model which is passed
 	 * @param userAccount Optional<T> either containing null or logged in user account
@@ -171,7 +191,8 @@ public class ArticleController {
 	}
 	
 	/**
-	 * shows form for editing of existing article
+	 * shows form for editing of existing article.
+	 *
 	 * @param newArticleForm Validation/Form object
 	 * @param id unique ID of the article
 	 * @param userAccount Optional<T> either containing null or logged in user account
@@ -203,7 +224,8 @@ public class ArticleController {
 	}
 
 	/**
-	 * processes data passed by edit article form
+	 * processes data passed by edit article form.
+	 *
 	 * @param newArticleForm form object for new/edited article
 	 * @param result result of validity check
 	 * @param modelMap MVC model map
@@ -211,6 +233,7 @@ public class ArticleController {
 	 * @param userAccount Optional<T> either containing null or logged in user account
 	 * @param model MVC model
 	 * @return either template for editing articles if errors have been diagnosed, picture upload error or article template
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/editArticle/{id}", method = RequestMethod.POST)
@@ -339,13 +362,13 @@ public class ArticleController {
 	//create a new Article
 	
 	/**
-	 * returns the newArticle template with logged in user
-	 * @author Alexander Shulga
-	 * @param newArticleForm
-	 * @param model
-	 * @param userAccount
-	 * @return newArticle template
-	 */
+ * returns the newArticle template with logged in user.
+ *
+ * @param newArticleForm the new article form
+ * @param model the model
+ * @param userAccount the user account
+ * @return newArticle template
+ */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping("/newArticle")
 	public String createArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, Model model, @LoggedIn Optional<UserAccount> userAccount){
@@ -364,12 +387,15 @@ public class ArticleController {
 	}
 
 	/**
-	 * creates and saves the new offer/article with or without a picture
-	 * @author Alexander Shulga
-	 * @param newArticleForm
-	 * @param userAccount
+	 * creates and saves the new offer/article with or without a picture.
+	 *
+	 * @param newArticleForm the new article form
+	 * @param result the result
+	 * @param model the model
+	 * @param modelMap the model map
+	 * @param userAccount the user account
 	 * @return editAttributes template
-	 * @throws IOException 
+	 * @throws IOException Signals that an I/O exception has occurred.
 	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/newArticle", method = RequestMethod.POST)
@@ -460,11 +486,11 @@ public class ArticleController {
 	
 	/**
 	 * Provide article, tags, user for editAttributes template.
-	 * @author herzoga
-	 * @param id
-	 * @param userAccount
-	 * @param model
-	 * @return
+	 *
+	 * @param id the id
+	 * @param userAccount the user account
+	 * @param model the model
+	 * @return the string
 	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/editAttributes/{id}")
@@ -492,12 +518,13 @@ public class ArticleController {
 	}
 	
 	/**
-	 * Change Tags of an article
-	 * @author herzoga
-	 * @param newAttributes
-	 * @param userAccount
-	 * @param artikelid
-	 * @return
+	 * Change Tags of an article.
+	 *
+	 * @param newAttributes the new attributes
+	 * @param id the id
+	 * @param userAccount the user account
+	 * @param model the model
+	 * @return the string
 	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/editAttributes/{id}", method = RequestMethod.POST)
@@ -542,7 +569,8 @@ public class ArticleController {
 
 
 	/**
-	 * deletes article with given id
+	 * deletes article with given id.
+	 *
 	 * @param id unique ID of the article
 	 * @param userAccount Optional<T> either containing null or logged in user account
 	 * @return redirect to own own articles

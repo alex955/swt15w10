@@ -17,22 +17,36 @@ import refugeeApp.model.CategoryRepo;
 import refugeeApp.model.User;
 import refugeeApp.model.UserRepository;
 
+/**
+ * The Class TestDummy.
+ */
 public class TestDummy extends AbstractIntegrationTests {
 
+	/** The good repo. */
 	@Autowired ArticleRepo goodREPO;
 
+    /** The article. */
     final Article article = new Article();
     
+    /**
+     * Constructor test.
+     */
     @Test
 	public void constructorTest() {
 		assertFalse("Error", article == null);
 	}
     
+	/**
+	 * Initialisation test.
+	 */
 	@Test
 	public void initialisationTest() {
 		assertEquals("Error", null, article.getActivitydate());
 	}
 	
+	/**
+	 * Find article.
+	 */
 	@Test
 	public void findArticle() {
 		Article newArticle = new Article();
@@ -43,6 +57,9 @@ public class TestDummy extends AbstractIntegrationTests {
 		goodREPO.delete(newArticle);
 	}
 	
+	/**
+	 * Adds the and delete article.
+	 */
 	@Test
 	public void addAndDeleteArticle() {
 		long count = goodREPO.count();

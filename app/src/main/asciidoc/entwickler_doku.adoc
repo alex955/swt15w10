@@ -27,12 +27,12 @@
 ** Java-Class basierende Konfiguration
 ** Maven
 ** Git/GitHub
+** JQuery + JQueryDateTimePicker von xdsoft.net (http://xdsoft.net/jqplugins/datetimepicker/)
 
 //* Vorgaben zum Betrieb der Software
 
 == Kontextabgrenzung
 * Externe Schnittstellen
-** Google API (Übersetzung)
 ** Mail Server
 ** Datenbank
 ** Spring

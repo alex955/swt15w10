@@ -23,9 +23,17 @@ import org.junit.Test;
 
 import kickstart.AbstractWebIntegrationTests;
 
+/**
+ * The Class WebSecurityIntegrationTests.
+ */
 public class WebSecurityIntegrationTests extends AbstractWebIntegrationTests {
 
 
+	/**
+	 * Redirects to login page for secured resource.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Test
 	public void redirectsToLoginPageForSecuredResource() throws Exception {
 

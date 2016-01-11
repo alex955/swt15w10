@@ -15,20 +15,33 @@ import refugeeApp.model.CategoryFirstTierObject;
 import refugeeApp.model.Location;
 import refugeeApp.utilities.CategoryMethods;
 
+/**
+ * The Class FrontpageController.
+ */
 @Controller
 public class FrontpageController {
 	
+	/** The category methods. */
 	@Autowired private final CategoryMethods categoryMethods;
+	
+	/** The processed categories. */
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
 	
+	/**
+	 * Instantiates a new frontpage controller.
+	 *
+	 * @param categoryMethods the category methods
+	 * @param articleRepo the article repo
+	 */
 	@Autowired
 	public FrontpageController(CategoryMethods categoryMethods, ArticleRepo articleRepo){
 		this.categoryMethods = categoryMethods;
 	}
 	
 	/**
-	 * returns the frontpage with categories
-	 * @param model
+	 * returns the frontpage with categories.
+	 *
+	 * @param model the model
 	 * @return frontpage template
 	 */
 	@RequestMapping({"/", "/frontpage"})

@@ -19,28 +19,45 @@ import refugeeApp.model.CategoryRepo;
 import refugeeApp.model.User;
 import refugeeApp.model.UserRepository;
 
+/**
+ * The Class AttributeTest.
+ */
 public class AttributeTest extends AbstractIntegrationTests {
 
+	/** The good repo. */
 	@Autowired ArticleRepo goodREPO;
 
+    /** The att1. */
     final Attribute att1 = new Attribute();
     
+    /** The list. */
     LinkedList<String> list = new LinkedList<String>();
+    
+    /** The att2. */
     final Attribute att2 = new Attribute("att2", list);
    
     
+    /**
+     * Constructor test.
+     */
     @Test
 	public void constructorTest() {
 		assertFalse("Error", att1 == null);
 		assertFalse("Error", att2 == null);
 	}
     
+	/**
+	 * Initialisation test.
+	 */
 	@Test
 	public void initialisationTest() {
 		assertEquals("Error", new LinkedList<String>(), att1.getTags());
 		assertEquals("Error", new LinkedList<String>(), att2.getTags());
 	}
 	
+	/**
+	 * Equals test.
+	 */
 	@Test
 	public void equalsTest() {
 		List<String> newList1 = att1.getTags();
