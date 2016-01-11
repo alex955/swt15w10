@@ -866,8 +866,8 @@ public class RefugeeDataInitializer implements DataInitializer {
 		german.setDeleteUserPopup("Eine Email wurde an Ihr Postfach gesendet. Bitte folgen Sie den dort beschriebenen Schritten um Ihren Useraccount zu deaktivieren.");
 		german.setDateError("Bitte wählen Sie Datum und Uhrzeit für die Aktivität indem Sie auf das Eingabefeld klicken.");
 		german.setDeleteChat("Wollen Sie das gesamte Gespräch wirklich löschen? Die bisher in diesem Gespräch geschriebenen Nachrichten werden unwiderruflich für Sie und Ihren Gesprächspartner gelöscht");
-		german.setResetConfirm("RESET CONFIRM");
-		german.setNoAccountError("NOACCOUNT ERROR");
+		german.setResetConfirm("Bestätigen Sie das Zurücksetzen Ihres Passworts durch den Link der an die angegebene Email-Adresse gesendet wurde.");
+		german.setNoAccountError("Zu der angegeben EMail Adresse wurde kein Account gefunden.");
 
 		languageRepository.save(german);
 

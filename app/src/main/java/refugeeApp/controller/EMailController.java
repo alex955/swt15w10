@@ -16,6 +16,7 @@ import javax.validation.Valid;
 
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,7 @@ import refugeeApp.model.*;
 
 
 @Controller
+@Scope("session")
 public class EMailController {
 
 	@Autowired
@@ -45,6 +47,8 @@ public class EMailController {
 	private final LanguageRepository languageRepository;
 
 	private static LanguageRepository staticRepository;
+
+	private String saveToken;
 
 	@PostConstruct
 	public void init(){
@@ -209,15 +213,16 @@ public class EMailController {
 		model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
 
-		if (validatorRepository.findByToken(token) == null){
-			return "redirect:/";
-		}
-
+        if (validatorRepository.findByToken(token) == null){
+            return "redirect:/";
+        }
+        
+        saveToken = token;
 		return "resetpw";
 	}
 
 	@RequestMapping(value = "/resetpw", method = RequestMethod.POST)
-	public String changePw(@ModelAttribute("NewPasswordForm") @Valid NewPasswordForm newPasswordForm, BindingResult result, Model model, ModelMap modelMap, @RequestParam String token){
+	public String changePw(@ModelAttribute("NewPasswordForm") @Valid NewPasswordForm newPasswordForm, BindingResult result, Model model, ModelMap modelMap){
 
 		model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
@@ -228,16 +233,18 @@ public class EMailController {
 		}
 		Language language = languageRepository.findByBrowserLanguage(browserLanguage);
 
+        String token = saveToken;
+
 		if(result.hasFieldErrors("password")){
 			final String passwordError = language.getPasswordError();
 			modelMap.addAttribute("passwordError", passwordError);
-			return ("resetpw?token=" + token);
+			return "resetpw";
 		}
 
 		if(!newPasswordForm.getPassword().equals(newPasswordForm.getConfirmPw())){
 			final String passwordConfirmError = language.getPasswordConfirmError();
 			modelMap.addAttribute("passwordConfirmError", passwordConfirmError);
-			return "resetpw?token=" + token;
+			return "resetpw";
 		}
 
 		if (validatorRepository.findByToken(token) == null){
@@ -252,7 +259,7 @@ public class EMailController {
 
 		validatorRepository.delete(validatorRepository.findByToken(token));
 
-		return "redirect:/";
+		return "redirect:/search";
 	}
 
 
