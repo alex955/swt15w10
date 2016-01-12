@@ -1,7 +1,8 @@
-= Cross-Testing Feedback
+﻿= Cross-Testing Feedback
 
-__Durchführende Gruppe swt15w10:__
-__Anwendung von Gruppe swt15w36:__
+__Durchführende Gruppe :swt15w10__ 
+
+__Anwendung von Gruppe :swt15w36__ 
 
 Bearbeitet auf Version vom 12.01.
 
@@ -44,6 +45,10 @@ Welche Aufgabe/Problemstellung löst die Anwendung.
 |===
 |Pfad |Parameter |Beschreibung |Rückgabe
 |swt15w36/createActivity|leere Eingabe von Name und Beschreibung|ohne Eingabe von Name kommt White Label Error Page|Name must not be null or empty!
+|swt15w36/createGood|jpg Bild|Bild erscheint nicht auf der Seite des Goods|vordefiniertes Bild
+|swt15w36/startpage|captcha|captcha hat keine funktion|-
+|swt15w36/activity|-|2 Bearbeiten buttons|-
+|swt15w36/createActivity|Aktivität erstellt|obwohl ich nur eine erstellt habe gibt es 2 identische|2 Aktivitäten da
 
 
 |===
@@ -51,10 +56,10 @@ Welche Aufgabe/Problemstellung löst die Anwendung.
 Optik der Anwendung::
 
 
-*Gestaltung(Seitengestaltung):
+* Gestaltung(Seitengestaltung):
 ** Erster Eindruck des Loginscreen: positiv und intuitiv
 ** Restliche Seite: Sehr schlicht!
-** 
+
 
 * Navigation
 ** Selbst erklärend
@@ -70,3 +75,4 @@ Optik der Anwendung::
 **  Schlecht
 
 == Verbesserungsvorschläge
+* Email Bestätigung für Registrierung und Änderung der Email-Adresse
