@@ -28,7 +28,7 @@ public class ArticleControllerTest extends AbstractWebIntegrationTests{
 		mvc.perform(get("/editArticle/1").with(user("admin1").roles("ADMIN"))).//
 				andExpect(status().isOk()).//
 				andExpect(view().name("editArticle")).//
-				andExpect(model().attributeExists("categories", "categoriesForm", "Article", "userId", "user", "Creator", "isAdminLoggedIn"));
+				andExpect(model().attributeExists("categories", "categoriesForm", "Article", "currentUserId", "user", "Creator", "isAdminLoggedIn"));
 	}
 	
 	/**
