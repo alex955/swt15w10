@@ -193,7 +193,6 @@ public class ArticleController {
 	/**
 	 * shows form for editing of existing article.
 	 *
-	 * @param newArticleForm Validation/Form object
 	 * @param id unique ID of the article
 	 * @param userAccount Optional<T> either containing null or logged in user account
 	 * @param model MVC model
@@ -364,7 +363,6 @@ public class ArticleController {
 	/**
  * returns the newArticle template with logged in user.
  *
- * @param newArticleForm the new article form
  * @param model the model
  * @param userAccount the user account
  * @return newArticle template
@@ -522,7 +520,6 @@ public class ArticleController {
 	 * @param newAttributes the new attributes
 	 * @param id the id
 	 * @param userAccount the user account
-	 * @param model the model
 	 * @return the string
 	 */
 	@PreAuthorize("isAuthenticated()")

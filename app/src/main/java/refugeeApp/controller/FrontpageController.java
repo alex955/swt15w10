@@ -43,7 +43,6 @@ public class FrontpageController {
 	 * Instantiates a new frontpage controller.
 	 *
 	 * @param categoryMethods the category methods
-	 * @param articleRepo the article repo
 	 */
 	@Autowired
 	public FrontpageController(CategoryMethods categoryMethods, ValidatorRepository validatorRepository, LanguageRepository languageRepository, UserRepository userRepository){

@@ -12,8 +12,6 @@ import lombok.Setter;
 
 /**
  * Gets the description.
- *
- * @return the description
  */
 @Getter/**
  * Sets the description.

@@ -38,8 +38,6 @@ public class RefugeeDataInitializer implements DataInitializer {
      * @param userRepository
      * @param categories
      * @param goodREPO
-     * @param chatRepo
-     * @param msgRepo
      * @param settingsRepo
      * @param userSettingsRepository
      * @param validatorRepository
@@ -762,7 +760,6 @@ public class RefugeeDataInitializer implements DataInitializer {
 
     /**
      * initialisation fo goods
-     * @param userAccountManager
      * @param userRepository
      */
     public void initializeGoods(UserRepository userRepository){

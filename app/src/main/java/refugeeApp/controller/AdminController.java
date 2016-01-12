@@ -120,7 +120,6 @@ public class AdminController {
 	 *  Processes data of a category.
 	 *
 	 * @param newCategory new Category which is to be saved in the Category Repository
-	 * @param model the model
 	 * @param id ID of the predecessor of the new category
 	 * @return redirect to inspection of new category
 	 */
@@ -148,7 +147,6 @@ public class AdminController {
 	 * Generation of a new Category which has no predecessors -> new root Category.
 	 *
 	 * @param category new Category which is to be saved in the Category Repository
-	 * @param model the model
 	 * @return redirect to admin overview
 	 */
     @RequestMapping(value="/admin/addRootCat", method=RequestMethod.POST)
@@ -202,7 +200,6 @@ public class AdminController {
 	 *
 	 * @param id ID of the category
 	 * @param model the model
-	 * @param category the category
 	 * @return the string
 	 */
 	@RequestMapping(value = "/admin/inspectCategory/{id}")
@@ -277,7 +274,6 @@ public class AdminController {
 	 *
 	 * @param id User ID
 	 * @param userSettings User's new/changed data
-	 * @param result verification result of user's data
 	 * @return redirect to admin overview
 	 */
 	@RequestMapping(value="/admin/editUser/{id}",method=RequestMethod.POST)
