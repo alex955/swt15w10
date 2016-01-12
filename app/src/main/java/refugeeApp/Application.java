@@ -27,7 +27,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 /**
@@ -87,6 +91,38 @@ public class Application extends SpringBootServletInitializer  {
 		public void addViewControllers(ViewControllerRegistry registry){
 			registry.addViewController(LOGIN_ROUTE).setViewName("");
 		}
+		
+		/*
+		 * (non-Javadoc)
+		 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#addInterceptors(org.springframework.web.servlet.config.annotation.InterceptorRegistry)
+		 */
+		@Override
+	    public void addInterceptors(InterceptorRegistry registry) {
+	        registry.addInterceptor(localeChangeInterceptor());
+	    }
+
+		/**
+		 * initializes locale change interceptor which changes the language after calling url?language=LOCALE, e.g. ?language=DE
+		 * @return locale change interceptor
+		 */
+	    @Bean
+	    public LocaleChangeInterceptor localeChangeInterceptor(){
+	        LocaleChangeInterceptor localeChangeInterceptor=new LocaleChangeInterceptor();
+	        localeChangeInterceptor.setParamName("language");
+	        return localeChangeInterceptor;
+	    }
+
+	    /**
+	     * defines cookies locale resolver as locale resolver
+	     * @return Cookie Locale Resolver, cookies live 1 month
+	     */
+	    @Bean(name = "localeResolver")
+	    public LocaleResolver getLocaleResolver(){
+	    	CookieLocaleResolver resolver = new CookieLocaleResolver();
+	    	//one month
+	    	resolver.setCookieMaxAge(2678400);
+	        return resolver;
+	    }
 	}
 	
 	/**

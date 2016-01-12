@@ -28,6 +28,14 @@
 			<section class="top-bar-section">
 				<!-- Right Nav Section -->
 				<ul class="right">
+					<li class="has-dropdown"><a href="#" th:text="#{topbar.language} + ' (switch language)'">Sprache wählen</a> 
+							<ul class="dropdown">
+							<li><a href="?language=ar" th:text="#{registration.arab}">Arabisch</a></li>
+							<li><a href="?language=en" th:text="#{registration.english}">Englisch</a></li>
+							<li><a href="?language=de" th:text="#{registration.german}">Deutsch</a></li>
+							</ul>		
+					 </li>
+				
 					<li class="active"><a th:href="@{/newArticle}" th:text="#{topbar.listArticle}">Angebot
 							einstellen</a></li>
 					<li class="divider"></li>
