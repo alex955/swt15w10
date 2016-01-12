@@ -67,6 +67,15 @@ public class FrontpageController {
 		model.addAttribute("current_ort",new Location());
 		return "frontpage";
 	}
+	
+	@RequestMapping({"/imprint"})
+	public String imprint(Model model) {
+		this.processedCategories = categoryMethods.getProcessedCategories();
+		model.addAttribute("categories", this.processedCategories);
+		model.addAttribute("current_category",new Category("AlleKategorien", 0));
+		model.addAttribute("current_ort",new Location());
+		return "imprint";
+	}
 
 	@RequestMapping(value ="/reset")
 	public String firstView(@ModelAttribute("ResetForm") ResetForm resetForm, Model model) {
