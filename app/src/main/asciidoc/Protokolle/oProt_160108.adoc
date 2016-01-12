@@ -11,7 +11,8 @@ __Teilnehmer:__ J. Adam, A. Martin, V. Herz, A. Huber, A. Herzog , A. Shulga
 
 == Bemerkungen
 //Verwarnungen, besondere Vorfälle, Organisatorisches
--
+-Termin für Endpräsentation gelegt
+
 
 
 == Retrospektive des letzten Sprints
