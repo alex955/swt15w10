@@ -1,4 +1,4 @@
-﻿= Entwicklerdokumentation
+= Entwicklerdokumentation
 
 == Einführung und Ziele
 * Aufgabenstellung
@@ -41,7 +41,10 @@
 
 == Lösungsstrategie
 //Kurzer Überblick über Ihre grundlegenden Entscheidungen und Lösungsansätze, die jeder, der mit der Architektur zu tun hat, verstanden haben sollte.
-Konstruktion einer plattformübergreifenden Website.
+Unser Programm baut auf dem MVC-Entwurfsmuster auf. Wir konstruieren eine plattformübergreifende Website. Sie ist responsive und passt sich dynamisch an, jenachdem auf welchem Gerät die Seite geöffnet wird.
+Für alle Objekte die mehrfach vorkommen, seien es Benutzer, Artikel oder Textblöcke sind Repositories angelegt, welche alle Einheiten speichert.
+
+
 
 == Bausteinsicht
 * Package-Diagramme
