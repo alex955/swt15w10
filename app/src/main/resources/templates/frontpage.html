@@ -6,9 +6,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Refugee</title>
 <link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
+<link rel="stylesheet" th:href="@{/resources/css/backgroundImage.css}" />
 </head>
 
-<body>
+<body th:background="@{resources/img/keinbild.png.png}">
 
 	<nav th:include="topbar :: topbar"></nav>
 
@@ -36,21 +37,21 @@
 					<p>&nbsp;</p>
 					<div th:if="${param.error}" class="alert alert-error"><font color="red" th:text="#{frontpage.loginError}"> Ungültger Username und/oder Passwort.</font></div>
 					<div th:if="${param.logout}" class="alert alert-success" th:text="#{frontpage.logoutSuccess}"> Sie wurden ausgeloggt. </div>
-					<label>
+					<div>
 						<input type="text" name="username" th:placeholder="#{frontpage.username}"/>
-					</label>
-					<label>
+					</div>
+					<div>
 						<input type="password" name="password" th:placeholder="#{frontpage.password}"/>
-					</label>
+						<label><a th:href="@{/reset}" href="#" th:text="#{frontpage.forgotPassword}">Passwort vergessen?</a></label>
+					</div>
 					<div class="row">
 						<div class="small-12 columns">
-							<button type="submit" class="small button">Login</button>
+							<button type="submit" class="right small button">Login</button>
 						</div>
 					</div>
 				</form>
 				<a th:href="@{/registration}" href="#" th:text="#{frontpage.registration}">Noch keinen Account? Hier registrieren!</a>
 				<br></br>
-				<a th:href="@{/reset}" href="#">Passwort vergessen?</a>
 			</div>
 		</div>
 	</div>

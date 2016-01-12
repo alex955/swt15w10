@@ -287,22 +287,17 @@ public class SearchController {
 		model=this.getCurrent_cat(model);
 		SearchQuery.setCategory(this.getCurrent_cat());
 		
-		System.out.println("Gesucht "+ SearchQuery.getQuery() +" in "+SearchQuery.getCategory());
 		List<Article> catGoods = new LinkedList<Article>();
 		
 		if (SearchQuery.getCategory()==0) { catGoods = this.articleRepo.findAll() ;}
 				else { catGoods = articleRepo.findByCategory(SearchQuery.getCategory()); }
-		System.out.println("Length of list: " + catGoods.size());
 		 
 		List<Article> output = new LinkedList<Article>();
  		   
-		   int count = 1;
 		   for (Article good : catGoods) 
-		     { System.out.println(count); count++;
-		     System.out.println(good.getTitle()+"    "+good.getCategory());
-		  
+		     { 	  
 		     	// Überprüfung ob Name gleich
-		     	if (good.getTitle().toLowerCase().contains(SearchQuery.getQuery().toLowerCase())) { System.out.println("match"); output.add(good);} else System.out.println("dismatch"); 
+		     	if (good.getTitle().toLowerCase().contains(SearchQuery.getQuery().toLowerCase())) { output.add(good);} else 
 		     	// Überprüfung ob Suchtext in Description
 		     	if (good.getDescription().toLowerCase().contains(SearchQuery.getQuery().toLowerCase()) && !output.contains(good)) output.add(good);
 		     }
@@ -327,8 +322,6 @@ public class SearchController {
 		this.setCurrent_cat(catID);
 		
 		List<Article> catGoods = this.getAllSubcategoryItems(catID);
-	
-		System.out.println("Anzahl an Artikeln: " + catGoods.size());
 		
 		this.processedCategories = this.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
@@ -461,9 +454,6 @@ public class SearchController {
 		for(Article a:catGoods) {
 			catGoods2.add(a);
 		}
-		
-		
-		//System.out.println(ort);
 		
 		model.addAttribute("anzeigen",this.sortOutArticlesWithDistance(catGoods2));
 		model.addAttribute("Ort",new Location());

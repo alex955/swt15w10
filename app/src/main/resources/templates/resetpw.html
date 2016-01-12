@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Refugee</title>
     <link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
+    <link rel="stylesheet" th:href="@{/resources/css/backgroundImage.css}" />
     <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 <body>
@@ -20,7 +21,7 @@
     <p>&nbsp;</p>
     <div class="small-12 columns">
         <font color="#0099CC" th:text="${resetConfirm}"> CONFIRMATION MESSAGE </font>
-        <h4 class="header">Passwort zurücksetzen</h4>
+        <h4 class="header" th:text="#{resetPassword}">Passwort zurücksetzen</h4>
         <form action="#" th:action="@{/resetpw}" th:object="${NewPasswordForm}" method="post">
             <div class="row" data-equalizer="1">
                 <div class="small-12 large-6 columns">
@@ -49,7 +50,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="left button" type="submit">Passwort speichern</button>
+                    <button class="left button" type="submit" th:text="#{savePassword}">Passwort speichern</button>
                 </div>
             </div>
         </form>
