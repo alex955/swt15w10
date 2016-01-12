@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -90,8 +89,7 @@ public class AdminController {
 				CategoryFirstTierObject toAdd = new CategoryFirstTierObject(s, subcats);
 				testList.add(toAdd);
 				rootCount++;
-			}
-			else{
+			}else{
 				subCount++;
 			}
 		}
@@ -127,7 +125,7 @@ public class AdminController {
 	 * @return redirect to inspection of new category
 	 */
     @RequestMapping(value="/admin/addSubcategory/{id}", method=RequestMethod.POST)
-    public String addSubcategory(@ModelAttribute Category newCategory, Model model, @PathVariable Long id) {
+    public String addSubcategory(@ModelAttribute Category newCategory, @PathVariable Long id) {
     	Category toSave = new Category();
     	toSave.setName(newCategory.getName());
     	toSave.setPredecessor(id);
@@ -154,7 +152,7 @@ public class AdminController {
 	 * @return redirect to admin overview
 	 */
     @RequestMapping(value="/admin/addRootCat", method=RequestMethod.POST)
-    public String addRootCategory(@ModelAttribute Category category, Model model) {
+    public String addRootCategory(@ModelAttribute Category category) {
     	category.setPredecessor(-1);
     	category.setRoot(true);
         this.categories.save(category);
@@ -208,7 +206,7 @@ public class AdminController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/admin/inspectCategory/{id}")
-	public String showSubcategories(@PathVariable Long id, Model model, @ModelAttribute Category category) {
+	public String showSubcategories(@PathVariable Long id, Model model) {
 		
 		Optional<Category> currOpt = categories.findOne(id);
 		Category currCat = currOpt.get();
@@ -283,7 +281,7 @@ public class AdminController {
 	 * @return redirect to admin overview
 	 */
 	@RequestMapping(value="/admin/editUser/{id}",method=RequestMethod.POST)
-	public String processEditUser(@PathVariable Long id, @Valid UserSettings userSettings, BindingResult result) {
+	public String processEditUser(@PathVariable Long id, @Valid UserSettings userSettings) {
 		User user = this.userRepository.findOne(id);
 	
 		if(!userSettings.getNewFirstName().isEmpty())

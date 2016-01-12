@@ -201,7 +201,7 @@ public class ArticleController {
 	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/editArticle/{id}")
-	public String editArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, @PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount, Model model) {
+	public String editArticle(@PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount, Model model) {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		long userId = this.userRepository.findByUserAccount(userAccount.get()).getId();
 		Article originalArticle = this.articleRepo.findOne(id);
@@ -371,7 +371,7 @@ public class ArticleController {
  */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping("/newArticle")
-	public String createArticle(@ModelAttribute("NewArticleForm") NewArticleForm newArticleForm, Model model, @LoggedIn Optional<UserAccount> userAccount){
+	public String createArticle(Model model, @LoggedIn Optional<UserAccount> userAccount){
 		//initiate categories
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
@@ -466,8 +466,7 @@ public class ArticleController {
     		articleRepo.save(article);
     		
     		return ("redirect:/editAttributes/"+article.getId());
-        } 
-		else {
+        }else {
 			//save article without Picture
 			Article article = new Article(newArticleForm.getTitle(), newArticleForm.getDescription(), newArticleForm.getCity(), newArticleForm.getStreetName(), newArticleForm.getCategoryId(),  newArticleForm.getZip(),creator, newArticleForm.getKind());
 			//set activity date
@@ -528,7 +527,7 @@ public class ArticleController {
 	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/editAttributes/{id}", method = RequestMethod.POST)
-	public String processEditTags(@ModelAttribute("NewAttributes") NewAttributes newAttributes, @PathVariable("id") long id , @LoggedIn Optional<UserAccount> userAccount, Model model) {
+	public String processEditTags(@ModelAttribute("NewAttributes") NewAttributes newAttributes, @PathVariable("id") long id , @LoggedIn Optional<UserAccount> userAccount) {
 		Article originalArticle = this.articleRepo.findOne(id);
 		long currentUserId = this.userRepository.findByUserAccount(userAccount.get()).getId();
 		
@@ -542,8 +541,7 @@ public class ArticleController {
 		for(String e:providedAttributes){
 			if (e.isEmpty()==true) {
 			count++;	
-			} 
-			else
+			}else
 			{
 				LinkedList<String> tag = new LinkedList<String>();
 				tag.add(e);
@@ -554,12 +552,6 @@ public class ArticleController {
 				originalArticle.addAttribute(att);
 				count++;
 			}
-		}
-		
-		for(Attribute a:originalArticle.getAttributes()){
-			for(String s:a.getTags()){
-			}
-			
 		}
 		
 		articleRepo.save(originalArticle);

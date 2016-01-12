@@ -28,9 +28,9 @@ public class RefugeeDataInitializer implements DataInitializer {
     private final SettingsRepository settingsRepo;
 	private final LanguageRepository languageRepository;
 
-    final Role refugee = new Role("ROLE_REFUGEE");
-    final Role volunteer = new Role("ROLE_VOLUNTEER");
-    final Role admin = new Role("ROLE_ADMIN");
+    private final Role refugee = new Role("ROLE_REFUGEE");
+    private final Role volunteer = new Role("ROLE_VOLUNTEER");
+    private final Role admin = new Role("ROLE_ADMIN");
 
     /**
      * autowiring constructor
@@ -47,7 +47,7 @@ public class RefugeeDataInitializer implements DataInitializer {
      */
 
     @Autowired
-    public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, refugeeApp.model.ArticleRepo goodREPO, ChatConversationRepo chatRepo, ChatMessageRepo msgRepo, SettingsRepository settingsRepo, UserSettingsRepository userSettingsRepository, ValidatorRepository validatorRepository, LanguageRepository languageRepository) {
+    public RefugeeDataInitializer(UserAccountManager userAccountManager, UserRepository userRepository, CategoryRepo categories, refugeeApp.model.ArticleRepo goodREPO, SettingsRepository settingsRepo, UserSettingsRepository userSettingsRepository, ValidatorRepository validatorRepository, LanguageRepository languageRepository) {
 
         Assert.notNull(userAccountManager, "UserManagerAccount must not be null!");
         Assert.notNull(userRepository, "UserRepository must not be null!");
@@ -76,7 +76,7 @@ public class RefugeeDataInitializer implements DataInitializer {
 		initializeLanguages();
     	initializeUsers(userAccountManager, userRepository);
         initializeCategories();
-        initializeGoods(userAccountManager, userRepository);
+        initializeGoods(userRepository);
     }
 
     /**
@@ -765,7 +765,7 @@ public class RefugeeDataInitializer implements DataInitializer {
      * @param userAccountManager
      * @param userRepository
      */
-    public void initializeGoods(UserAccountManager userAccountManager, UserRepository userRepository){
+    public void initializeGoods(UserRepository userRepository){
     	LinkedList<String> tags1 = new LinkedList<String>();
         tags1.add("XXL");
     	Attribute att = new Attribute("Größe",tags1);
