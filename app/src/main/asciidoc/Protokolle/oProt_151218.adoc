@@ -1,0 +1,39 @@
+= Protokoll Gruppe XX
+__Treffen am 18.12.2015__
+
+__Schriftführer:__ Lukas Klose
+
+__Nächstes Treffen:__ 08.01.2016
+
+__Teilnehmer:__ J. Adam, V. Herz, A. Huber, L. Klose, A. Martin
+
+== Bemerkungen
+//Verwarnungen, besondere Vorfälle, Organisatorisches
+Letztes Gruppentreffen 2015.
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe |Status |Bemerkung
+|n.v.     |Cross-Testing|Beginnt diese Woche|…
+|#61|Muss-Kriterien|in Arbeit|…
+|===
+
+
+== Aktueller Stand
+//Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den Dokumenten.
+…
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|#84   |Lombok     |Integration von Lombok im Projekt|A. Shulga|in Arbeit
+|#125  |Ort + Umkreis Suche|Artikel nach Ort suchen|A. Herzog|in Arbeit
+|===

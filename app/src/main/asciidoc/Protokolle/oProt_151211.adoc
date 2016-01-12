@@ -1,0 +1,36 @@
+= Protokoll Gruppe 10
+__Treffen am 11.12.2015__
+
+__Schriftführer:__ Lukas Klose
+
+__Nächstes Treffen:__ 18.12.2015
+
+__Teilnehmer:__ J. Adam, V. Herz, A. Huber, L. Klose, A. Martin
+
+== Bemerkungen
+Verwarnungen, besondere Vorfälle, Organisatorisches
+
+== Retrospektive des letzten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Aufgabe |Status |Bemerkung
+|#61     |Muss-Kriterien       |in Arbeit      |…
+|===
+
+
+== Aktueller Stand
+//Anmerkungen und Kritik zum aktuellen Stand der Software, den Diagrammen und den Dokumenten.
+
+== Planung des nächsten Sprints
+*Issue referenziert die Issue ID von GitHub*
+
+// See http://asciidoctor.org/docs/user-manual/=tables
+[option="headers"]
+|===
+|Issue |Titel |Beschreibung |Verantwortlicher |Status
+|n.v.     |Cross-Testing     |Testen der App von Gruppe 36|Gruppe 10 |Beginnt nächste Woche
+|#61|Muss Kriterien||Gruppe 10|in Arbeit
+|===
