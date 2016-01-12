@@ -29,6 +29,12 @@ public class ChatConversation {
 	private int lastQuestion;
 	
 	/**
+	 * the article the conversation is about
+	 */
+	private long articleId;
+	
+	
+	/**
 	 * Gets the content.
 	 *
 	 * @return the content
@@ -230,6 +236,14 @@ public class ChatConversation {
 	 */
 	public void setLastQuestion(int lastQuestion) {
 		this.lastQuestion = lastQuestion;
+	}
+
+	public long getArticleId() {
+		return articleId;
+	}
+
+	public void setArticleId(long articleId) {
+		this.articleId = articleId;
 	}
 	
 	
