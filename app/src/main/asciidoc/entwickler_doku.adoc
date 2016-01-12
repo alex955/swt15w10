@@ -43,7 +43,10 @@
 == Lösungsstrategie
 //Kurzer Überblick über Ihre grundlegenden Entscheidungen und Lösungsansätze, die jeder, der mit der Architektur zu tun hat, verstanden haben sollte.
 Unser Programm baut auf dem MVC-Entwurfsmuster auf. Wir konstruieren eine plattformübergreifende Website. Sie ist responsive und passt sich dynamisch an, jenachdem auf welchem Gerät die Seite geöffnet wird.
-Für alle Objekte die mehrfach vorkommen, seien es Benutzer, Artikel oder Textblöcke sind Repositories angelegt, welche alle Einheiten speichert.
+Für alle Objekte die mehrfach vorkommen, seien es Benutzer, Artikel oder Textblöcke sind Repositories angelegt, welche alle Einheiten speichert. Die Sprache der Website entspricht der eingestellten Sprache im Browser des Benutzers. Die Seitennavigation, sowie die Suche erfolgen über eine Navigationsleiste, die sich bis oben befindet.
+Wir haben uns für drei Rollen entschieden, Admin-, Helfder- und Flüchtlingrolle. Der Admin hat die Möglichkeite alle Angebote zu editieren und zu löschen, und Nutzer zu deaktivieren. Die anderen beiden Rollen haben bis jetzt die selben Rechte. Eine nachträgliche Änderung ist jedoch möglich.
+
+
 
 
 
@@ -53,11 +56,11 @@ Für alle Objekte die mehrfach vorkommen, seien es Benutzer, Artikel oder Textbl
 == Entwurfsentscheidungen
 * Architektur
 * Verwendete Muster
-** Singelton
+** Singelton, MVC
 * Persistenz
 ** Durch das Benutzen der JPA sind wir variable im Hinblick auf die Wahl der konkreten Datenbank
 * Benutzeroberfläche
-** Foundation
+** Foundation, HTML5
 
 [appendix]
 == Glossar
