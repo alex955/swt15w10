@@ -1,26 +1,25 @@
 package refugeeApp.controller;
+
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import refugeeApp.model.*;
-import refugeeApp.utilities.CategoryMethods;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.LinkedList;
-import java.util.Locale;
+import org.springframework.web.bind.annotation.RequestMethod;
+import refugeeApp.model.*;
+import refugeeApp.utilities.CategoryMethods;
+import refugeeApp.utilities.email.EmailUsage;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.validation.Valid;
+import java.util.LinkedList;
+import java.util.Locale;
 
 
 /**
@@ -30,22 +29,19 @@ import javax.validation.Valid;
 public class RegistrationController {
 
     /** The user repository. */
-    @Autowired
     private final UserRepository userRepository;
-
-    /** The validator repository. */
-    @Autowired
-    private ValidatorRepository validatorRepository;
-
     /** The language repository. */
-    @Autowired
     private final LanguageRepository languageRepository;
-
+    /**
+     * The user account manager.
+     */
+    private final UserAccountManager userAccountManager;
     /** The processed categories. */
     protected LinkedList<CategoryFirstTierObject> processedCategories;
-    
-    /** The user account manager. */
-    private UserAccountManager userAccountManager;
+    /**
+     * The validator repository.
+     */
+    private ValidatorRepository validatorRepository;
 
     /**
      * autowired constructor.
@@ -91,7 +87,7 @@ public class RegistrationController {
      * @throws MessagingException the messaging exception
      */
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String newRegistration(@ModelAttribute("RegistrationForm") @Valid RegistrationForm registrationForm, BindingResult result,ModelMap modelMap, Model model) throws AddressException, MessagingException {
+    public String newRegistration(@ModelAttribute("RegistrationForm") @Valid RegistrationForm registrationForm, BindingResult result, ModelMap modelMap, Model model) throws MessagingException {
 
         boolean errors = false;
         Locale locale = LocaleContextHolder.getLocale();
@@ -187,7 +183,7 @@ public class RegistrationController {
 
         userAccountManager.disable(userAccount.getIdentifier());
 
-        Validator validator = new Validator(user, 1);
+        Validator validator = new Validator(user, EmailUsage.Registration);
         validatorRepository.save(validator);
 
         EMailController.sendEmail(user.getEmail(),validator.getToken(),validator.getUsage());

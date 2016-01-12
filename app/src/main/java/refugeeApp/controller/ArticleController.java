@@ -1,22 +1,6 @@
 package refugeeApp.controller;
 
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
-
 import org.salespointframework.useraccount.Role;
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
@@ -33,12 +17,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
-
 import refugeeApp.model.*;
 import refugeeApp.utilities.CategoryMethods;
 
 import javax.imageio.ImageIO;
 import javax.validation.Valid;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 
 /**
  * The Class ArticleController.
@@ -47,29 +44,36 @@ import javax.validation.Valid;
 public class ArticleController {
 	
 	/** The picture repo. */
-	private PictureRepo pictureRepo;
-    
+	private final PictureRepo pictureRepo;
+
 	/** The categories. */
-	@Autowired private final CategoryRepo categories;	
+	private final CategoryRepo categories;
 	
 	/** The article repo. */
-	@Autowired private final ArticleRepo articleRepo;
+	private final ArticleRepo articleRepo;
 	
 	/** The category methods. */
-	@Autowired private final CategoryMethods categoryMethods;	
-    
-    /** The user repository. */
-    @Autowired private final UserRepository userRepository;    
-    
-    /** The settings repo. */
-    @Autowired private final SettingsRepository settingsRepo;
-    
-    /** The processed categories. */
-    protected LinkedList<CategoryFirstTierObject> processedCategories;
-	
-	/** The language repository. */
-	@Autowired private final LanguageRepository languageRepository;
-    
+	private final CategoryMethods categoryMethods;
+
+	/**
+	 * The user repository.
+	 */
+	private final UserRepository userRepository;
+
+	/**
+	 * The settings repo.
+	 */
+	private final SettingsRepository settingsRepo;
+	/**
+	 * The language repository.
+	 */
+	@Autowired
+	private final LanguageRepository languageRepository;
+	/**
+	 * The processed categories.
+	 */
+	protected LinkedList<CategoryFirstTierObject> processedCategories;
+
 	/**
 	 * Constructor which autowires initialized repos.
 	 *
@@ -103,11 +107,11 @@ public class ArticleController {
 		 for(Article article:articles){
 			 if(article.getKind().equals("article")){
 				 LocalDateTime expiration = article.getCreationdate().plusDays(30);
-				if(now.isAfter(expiration) == true) this.articleRepo.delete(article); 
+				 if (now.isAfter(expiration)) this.articleRepo.delete(article);
 			 }
 			 if(article.getKind().equals("activity")){
 				 LocalDateTime activityDate = article.getActivitydate();
-				 if(now.isAfter(activityDate) == true) this.articleRepo.delete(article); 
+				 if (now.isAfter(activityDate)) this.articleRepo.delete(article);
 			 }
 			 
 		 }
@@ -534,9 +538,9 @@ public class ArticleController {
 		}
 		originalArticle.setAttributes(new LinkedList<Attribute>());
 		LinkedList<String> providedAttributes = newAttributes.getChoosenTags();
-		int count=0;
-		for(String e:providedAttributes){
-			if (e.isEmpty()==true) {
+		int count = 0;
+		for (String e : providedAttributes) {
+			if (e.isEmpty()) {
 			count++;	
 			}else
 			{

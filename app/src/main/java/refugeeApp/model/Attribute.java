@@ -1,12 +1,11 @@
 package refugeeApp.model;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.util.LinkedList;
+import java.util.List;
 
 
 
@@ -112,8 +111,9 @@ public class Attribute {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		 Attribute att = (Attribute) obj;
-		if (att.getName().equals(this.name) && att.getTags().equals(this.tags)) return true; else return false;
+		if (obj.getClass() != this.getClass()) return false;
+		Attribute att = (Attribute) obj;
+		return att.getName().equals(this.name) && att.getTags().equals(this.tags);
 	}
 
 

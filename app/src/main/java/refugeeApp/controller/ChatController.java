@@ -1,11 +1,5 @@
 package refugeeApp.controller;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Optional;
-
 import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.web.LoggedIn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,24 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import refugeeApp.model.Article;
-import refugeeApp.model.ArticleRepo;
-import refugeeApp.model.Category;
-import refugeeApp.model.CategoryFirstTierObject;
-import refugeeApp.model.CategoryRepo;
-import refugeeApp.model.ChatConversation;
-import refugeeApp.model.ChatConversationRepo;
-import refugeeApp.model.ChatMessage;
-import refugeeApp.model.ChatMessageRepo;
-import refugeeApp.model.Language;
-import refugeeApp.model.LanguageRepository;
-import refugeeApp.model.Location;
-import refugeeApp.model.User;
-import refugeeApp.model.UserRepository;
+import refugeeApp.model.*;
 import refugeeApp.utilities.CategoryMethods;
 import refugeeApp.utilities.PossibleChatMessages;
 import refugeeApp.utilities.StringInForm;
+
+import java.util.*;
 
 /**
  * The Class ChatController.
@@ -44,31 +26,36 @@ import refugeeApp.utilities.StringInForm;
 public class ChatController {
 	
 	/** The category methods. */
-	@Autowired private final CategoryMethods categoryMethods;
+	private final CategoryMethods categoryMethods;
 	
 	/** The article repo. */
-	@Autowired private final ArticleRepo articleRepo;
+	private final ArticleRepo articleRepo;
 	
 	/** The chat repo. */
-	@Autowired private final ChatConversationRepo chatRepo;
-    
-    /** The user repository. */
-    @Autowired private final UserRepository userRepository;
-    
-    /** The language repository. */
-    @Autowired private final LanguageRepository languageRepository;
-    
-    /** The possible messages object. */
-    //TODO - replace variable with e.g. repo for chat content
-    private PossibleChatMessages possibleMessagesObject = new PossibleChatMessages();
-    
-    /** The msg repo. */
-    //just for persistent/transaction(?) use so no to be saved variables are "flushed in transient state"
-    @Autowired private final ChatMessageRepo msgRepo;
-	
+	private final ChatConversationRepo chatRepo;
+
+	/**
+	 * The user repository.
+	 */
+	private final UserRepository userRepository;
+
+	/**
+	 * The language repository.
+	 */
+	private final LanguageRepository languageRepository;
+	/**
+	 * The msg repo.
+	 */
+	//just for persistent/transaction(?) use so no to be saved variables are "flushed in transient state"
+	private final ChatMessageRepo msgRepo;
 	/** The processed categories. */
 	//Classvars
 	protected LinkedList<CategoryFirstTierObject> processedCategories;
+	/**
+	 * The possible messages object.
+	 */
+	//TODO - replace variable with e.g. repo for chat content
+	private PossibleChatMessages possibleMessagesObject = new PossibleChatMessages();
 
 	/**
 	 * autowired constructor, arguments are repos or object with static methods for categories.

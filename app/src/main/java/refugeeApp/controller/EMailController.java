@@ -1,30 +1,28 @@
 package refugeeApp.controller;
 
 
-import java.util.Locale;
-import java.util.Properties;
-import javax.annotation.PostConstruct;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.validation.Valid;
-
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import refugeeApp.model.*;
+import refugeeApp.utilities.email.EmailUsage;
+
+import javax.annotation.PostConstruct;
+import javax.mail.*;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.validation.Valid;
+import java.util.Locale;
+import java.util.Properties;
 
 
 /**
@@ -33,35 +31,55 @@ import refugeeApp.model.*;
 @Controller
 public class EMailController {
 
-	/** The user account manager. */
-	@Autowired
-	private UserAccountManager userAccountManager;
-
-	/** The user repository. */
-	@Autowired
-	private final UserRepository userRepository;
-
-	/** The validator repository. */
-	@Autowired
-	private final ValidatorRepository validatorRepository;
-
-	/** The user settings repository. */
-	@Autowired
-	private final UserSettingsRepository userSettingsRepository;
-
-	/** The language repository. */
-	@Autowired
-	private final LanguageRepository languageRepository;
-
+	private static final InternetAddress emailSender;
+	private static final String emailUsername = "gandalf324687992";
+	private static final String emailPassword = "324687992";
+	private static final javax.mail.Authenticator emailAuthenticator = new javax.mail.Authenticator() {
+		protected PasswordAuthentication getPasswordAuthentication() {
+			return new PasswordAuthentication(emailUsername, emailPassword);
+		}
+	};
+	private static final Properties props = new Properties();
 	/** The static repository. */
 	private static LanguageRepository staticRepository;
 
-	/**
-	 * Inits the static Repository.
-	 */
-	@PostConstruct
-	public void init(){ this.staticRepository = languageRepository;
+	static {
+		InternetAddress emailSender1;
+		try {
+			emailSender1 = new InternetAddress("gandalf324687992@gmail.com");
+		} catch (AddressException e) {
+			emailSender1 = null;
+		}
+		emailSender = emailSender1;
 	}
+
+	static {
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+	}
+
+	/**
+	 * The user repository.
+	 */
+	private final UserRepository userRepository;
+	/**
+	 * The validator repository.
+	 */
+	private final ValidatorRepository validatorRepository;
+	/**
+	 * The user settings repository.
+	 */
+	private final UserSettingsRepository userSettingsRepository;
+	/**
+	 * The language repository.
+	 */
+	private final LanguageRepository languageRepository;
+	/**
+	 * The user account manager.
+	 */
+	private UserAccountManager userAccountManager;
 
 	/**
 	 * autowired constructor.
@@ -80,7 +98,6 @@ public class EMailController {
 		this.languageRepository = languageRepository;
 	}
 
-
 	/**
 	 * Sends E-Mail by using the MimeMessage Class with the smpt protocol.
 	 *
@@ -90,63 +107,44 @@ public class EMailController {
 	 * @throws AddressException the address exception
 	 * @throws MessagingException the messaging exception
 	 */
-	public static void sendEmail(String receiver, String token, int usage) throws AddressException, MessagingException {
+	public static void sendEmail(String receiver, String token, EmailUsage usage) throws MessagingException {
 
-		final String username = "gandalf324687992";
-		final String password = "324687992";
 		Locale locale = LocaleContextHolder.getLocale();
 		String browserLanguage = locale.toString().substring(0, 2);
 
-		if(staticRepository.findByBrowserLanguage(browserLanguage) == null){
+		if (staticRepository.findByBrowserLanguage(browserLanguage) == null) {
 			browserLanguage = "en";
 		}
 
 		Language language = staticRepository.findByBrowserLanguage(browserLanguage);
 
-		Properties props = new Properties();
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", "smtp.gmail.com");
-		props.put("mail.smtp.port", "587");
-
-		Session session = Session.getInstance(props,
-				new javax.mail.Authenticator() {
-					protected PasswordAuthentication getPasswordAuthentication() {
-						return new PasswordAuthentication(username, password);
-					}
-				});
+		Session session = Session.getInstance(props, emailAuthenticator);
 
 		Message message = new MimeMessage(session);
-		message.setFrom(new InternetAddress("gandalf324687992@gmail.com"));
+		message.setFrom();
 		message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiver));
 
-          /*
-          * Cases: 1 = Registrierung
-          *        2 = Account deaktivieren
-          *  	   3 = Email ändern
-          *  	   4 = Passwort zurücksetzen
-          */
 
 		switch (usage) {
-			case 1: {
+			case Registration: {
 				message.setSubject(language.getRegistrationEmailTopic());
 				message.setText(String.format(language.getRegistrationEmail(), token, token));
 				break;
 			}
 
-			case 2: {
+			case Deactivation: {
 				message.setSubject(language.getDeleteEmailTopic());
 				message.setText(String.format(language.getDeleteEmail(), token, token));
 				break;
 			}
 
-			case 3: {
+			case Edit: {
 				message.setSubject(language.getChangeEmailTopic());
 				message.setText(String.format(language.getChangeEmail(), token, token));
 				break;
 			}
 
-			case 4: {
+			case PasswordReset: {
 				message.setSubject(language.getResetPwTopic());
 				message.setText(String.format(language.getResetPw(), token, token));
 				break;
@@ -157,6 +155,14 @@ public class EMailController {
 	}
 
 	/**
+	 * Inits the static Repository.
+	 */
+	@PostConstruct
+	public void init() {
+		staticRepository = languageRepository;
+	}
+
+	/**
 	 * Searches for the given HashID in UserRepository and sets the validated flag to true if
 	 * it is found.
 	 *
@@ -164,7 +170,7 @@ public class EMailController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/validate")
-	public String validation(@RequestParam String id) throws AddressException, MessagingException {
+	public String validation(@RequestParam String id) throws MessagingException {
 
 		Validator validator = validatorRepository.findByToken(id);
 
@@ -175,20 +181,20 @@ public class EMailController {
 			User user = validator.getUser();
 
 			switch (validator.getUsage()) {
-				case 1: {
+				case Registration: {
 					userAccountManager.enable(user.getUserAccount().getIdentifier());
 					validatorRepository.delete(validator);
 					return "redirect:/";
 				}
-				case 2: {
+				case Deactivation: {
 					userAccountManager.disable(user.getUserAccount().getIdentifier());
 					validatorRepository.delete(validator);
 					return "redirect:/";
 				}
-				case 3: {
+				case Edit: {
 					return "redirect:/changeemail?token=" + id;
 				}
-				case 4:{
+				case PasswordReset: {
 					return "redirect:/resetpw?token=" + id;
 				}
 

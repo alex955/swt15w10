@@ -1,17 +1,16 @@
 package refugeeApp.controller;
 
 
-import java.io.IOException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import refugeeApp.model.ArticleRepo;
 import refugeeApp.model.SettingsRepository;
+
+import java.io.IOException;
 
 /**
  * The Class PictureController.
@@ -24,10 +23,7 @@ public class PictureController{
 	
 	/** The settings repo. */
 	private final SettingsRepository settingsRepo;
-	
-	/** The resource. */
-	private FileSystemResource resource;
-	
+
 	/**
 	 * autowired constructor.
 	 *
@@ -50,6 +46,8 @@ public class PictureController{
 	@ResponseBody
 	@RequestMapping(value = "/showPicture/{id}", produces = "image/jpg")
 	public FileSystemResource showArticle(@PathVariable("id") long id) throws IOException{
+		/* The resource. */
+		FileSystemResource resource;
 		if(articleRepo.findOne(id).getPicture() == null){
 			//in case someone does not upload a picture		
 			resource = new FileSystemResource(settingsRepo.findOne("noUploadedPicturePath").getStringValue());

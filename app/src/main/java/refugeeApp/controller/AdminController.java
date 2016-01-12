@@ -1,8 +1,5 @@
 package refugeeApp.controller;
 
-import java.util.LinkedList;
-import java.util.Optional;
-
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,11 +9,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import refugeeApp.model.*;
 import refugeeApp.utilities.CategoryMethods;
 
 import javax.validation.Valid;
+import java.util.LinkedList;
+import java.util.Optional;
 
 /**
  * The Class AdminController.
@@ -27,23 +25,20 @@ public class AdminController {
 	
 	
     /** The user repository. */
-    @Autowired
     private final UserRepository userRepository;
     
 	/** The categories. */
-	@Autowired
 	private final CategoryRepo categories;
 
 	/** The category methods. */
-	@Autowired private final CategoryMethods categoryMethods;
-	
-	/** The processed categories. */
-	protected LinkedList<CategoryFirstTierObject> processedCategories; 
-	
+	private final CategoryMethods categoryMethods;
 	/** The user account manager. */
-	@Autowired
-	private UserAccountManager userAccountManager;
-    
+	private final UserAccountManager userAccountManager;
+	/**
+	 * The processed categories.
+	 */
+	protected LinkedList<CategoryFirstTierObject> processedCategories;
+
 	/**
 	 * Instantiates a new admin controller.
 	 *
@@ -89,7 +84,7 @@ public class AdminController {
 				CategoryFirstTierObject toAdd = new CategoryFirstTierObject(s, subcats);
 				testList.add(toAdd);
 				rootCount++;
-			}else{
+			} else {
 				subCount++;
 			}
 		}
@@ -112,9 +107,9 @@ public class AdminController {
 //        for(User b : this.userRepository.findAll()){
 //        	b.getCity();
 //        }
-        
-    return "admin";
-    }
+
+		return "admin";
+	}
 	
 	/**
 	 *  Processes data of a category.

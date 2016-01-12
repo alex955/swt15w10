@@ -14,14 +14,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import refugeeApp.model.*;
 import refugeeApp.utilities.CategoryMethods;
+import refugeeApp.utilities.email.EmailUsage;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.validation.Valid;
-
 import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Optional;
@@ -32,32 +31,26 @@ import java.util.Optional;
 public class SettingsController {
     
     /** The user repository. */
-    @Autowired private final UserRepository userRepository;
+    private final UserRepository userRepository;
     
     /** The validator repository. */
-    @Autowired private final ValidatorRepository validatorRepository;
-
-    /** The user account manager. */
-    private UserAccountManager userAccountManager;
-
+    private final ValidatorRepository validatorRepository;
     /** The category methods. */
-    @Autowired
     private final CategoryMethods categoryMethods;
-
-    /** The password encoder. */
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     /** The user settings repository. */
-    @Autowired
     private final UserSettingsRepository userSettingsRepository;
-
     /** The language repository. */
-    @Autowired
     private final LanguageRepository languageRepository;
-
     /** The processed categories. */
     protected LinkedList<CategoryFirstTierObject> processedCategories;
+    /**
+     * The user account manager.
+     */
+    private UserAccountManager userAccountManager;
+    /**
+     * The password encoder.
+     */
+    private PasswordEncoder passwordEncoder;
 
     /**
      * autowired constructor.
@@ -127,7 +120,7 @@ public class SettingsController {
      */
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/usersettings", method = RequestMethod.POST)
-    public String saveSettings(@ModelAttribute("UserSettingsForm") @Valid UserSettingsForm userSettingsForm, BindingResult result, @LoggedIn Optional<UserAccount> userAccount,  Model model, ModelMap modelMap) throws AddressException, MessagingException {
+    public String saveSettings(@ModelAttribute("UserSettingsForm") @Valid UserSettingsForm userSettingsForm, BindingResult result, @LoggedIn Optional<UserAccount> userAccount, Model model, ModelMap modelMap) throws MessagingException {
 
         Locale locale = LocaleContextHolder.getLocale();
         String browserLanguage = locale.toString().substring(0, 2);
@@ -224,7 +217,7 @@ public class SettingsController {
         //Email-Änderung
         if(!userSettingsForm.getNewEmail().isEmpty()) {
 
-            Validator validator = new Validator(user, 3);
+            Validator validator = new Validator(user, EmailUsage.Edit);
             validatorRepository.save(validator);
             userSettings.setNewEmail(userSettingsForm.getNewEmail());
 
@@ -283,13 +276,13 @@ public class SettingsController {
      */
     @PreAuthorize("isAuthenticated()")
     @RequestMapping(value = "/deleteuser")
-    public String deleteUser(@LoggedIn Optional<UserAccount> userAccount, ModelMap modelMap) throws AddressException, MessagingException {
+    public String deleteUser(@LoggedIn Optional<UserAccount> userAccount, ModelMap modelMap) throws MessagingException {
         User user = userRepository.findByUserAccount(userAccount.get());
 
-        Validator validator = new Validator(user, 2);
+        Validator validator = new Validator(user, EmailUsage.Deactivation);
         validatorRepository.save(validator);
 
-        EMailController.sendEmail(user.getEmail(), validator.getToken(), 2);
+        EMailController.sendEmail(user.getEmail(), validator.getToken(), validator.getUsage());
 
         return "redirect:/logout";
     }

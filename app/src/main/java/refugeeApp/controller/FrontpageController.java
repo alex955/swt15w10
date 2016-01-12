@@ -1,8 +1,5 @@
 package refugeeApp.controller;
 
-import java.util.LinkedList;
-import java.util.Locale;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
@@ -11,16 +8,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.RequestMethod;
 import refugeeApp.model.*;
 import refugeeApp.utilities.CategoryMethods;
-
-
+import refugeeApp.utilities.email.EmailUsage;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
 import javax.validation.Valid;
+import java.util.LinkedList;
+import java.util.Locale;
 
 
 /**
@@ -29,12 +25,12 @@ import javax.validation.Valid;
 @Controller
 public class FrontpageController {
 
-	@Autowired private final ValidatorRepository validatorRepository;
+	private final ValidatorRepository validatorRepository;
 
-	@Autowired private final LanguageRepository languageRepository;
+	private final LanguageRepository languageRepository;
 
-	@Autowired private final UserRepository userRepository;
-	@Autowired private final CategoryMethods categoryMethods;
+	private final UserRepository userRepository;
+	private final CategoryMethods categoryMethods;
 	
 	/** The processed categories. */
 	protected LinkedList<CategoryFirstTierObject> processedCategories; 
@@ -84,7 +80,7 @@ public class FrontpageController {
 	}
 
 	@RequestMapping(value = "/reset",  method = RequestMethod.POST)
-	public String resetPw(@ModelAttribute("ResetForm") @Valid ResetForm resetForm, BindingResult result, Model model, ModelMap modelMap) throws AddressException, MessagingException {
+	public String resetPw(@ModelAttribute("ResetForm") @Valid ResetForm resetForm, BindingResult result, Model model, ModelMap modelMap) throws MessagingException {
 
 		model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
@@ -109,7 +105,7 @@ public class FrontpageController {
 
 		User user = userRepository.findByEmail(resetForm.getEmail());
 
-		Validator validator = new Validator(user, 4);
+		Validator validator = new Validator(user, EmailUsage.PasswordReset);
 		validatorRepository.save(validator);
 
 		final String resetConfirm = language.getResetConfirm();

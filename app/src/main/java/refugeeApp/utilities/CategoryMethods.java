@@ -1,19 +1,14 @@
 package refugeeApp.utilities;
 
+import org.salespointframework.useraccount.UserAccountManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import refugeeApp.model.*;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import org.salespointframework.useraccount.UserAccountManager;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import refugeeApp.model.ArticleRepo;
-import refugeeApp.model.Category;
-import refugeeApp.model.CategoryFirstTierObject;
-import refugeeApp.model.CategoryRepo;
-import refugeeApp.model.UserRepository;
 
 /**
  * The Class CategoryMethods.
@@ -22,7 +17,7 @@ import refugeeApp.model.UserRepository;
 public class CategoryMethods {
 	
 	/** The categories. */
-	@Autowired private final CategoryRepo categories;
+	private final CategoryRepo categories;
 	
 	/**
 	 * autowired constructor.
@@ -37,11 +32,6 @@ public class CategoryMethods {
 			CategoryRepo categories, ArticleRepo goodREPO) {
 		this.categories = categories;
 	}
-	
-
-	/** The processed categories. */
-	protected LinkedList<CategoryFirstTierObject> processedCategories; 
-	
 
 	/**
 	 * processes categories into hierarchical CategoryFirstTierObject.
@@ -65,8 +55,6 @@ public class CategoryMethods {
 				
 				CategoryFirstTierObject toAdd = new CategoryFirstTierObject(s, subcats);
 				toReturn.add(toAdd);
-			}
-			else{
 			}
 		}
 		return toReturn;

@@ -1,5 +1,8 @@
 package refugeeApp.model;
 
+import lombok.Data;
+import refugeeApp.utilities.email.EmailUsage;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.persistence.*;
@@ -7,6 +10,7 @@ import java.util.Random;
 
 
 @Entity
+@Data
 public class Validator {
 
     /** The id. */
@@ -22,7 +26,8 @@ public class Validator {
     private String token;
     
     /** The usage. */
-    private int usage;
+    @Enumerated(EnumType.ORDINAL)
+    private EmailUsage usage;
 
     /**
      * Instantiates a new validator.
@@ -32,7 +37,7 @@ public class Validator {
      * @throws AddressException the address exception
      * @throws MessagingException the messaging exception
      */
-    public Validator(User user, int usage) throws AddressException, MessagingException {
+    public Validator(User user, EmailUsage usage) throws MessagingException {
         super();
         this.user = user;
         this.token = generateToken(32);
@@ -64,60 +69,4 @@ public class Validator {
         }
         return new String(text);
     }
-
-    /**
-     * Gets the user.
-     *
-     * @return the user
-     */
-    public User getUser() {
-        return user;
-    }
-
-    /**
-     * Sets the user.
-     *
-     * @param user the new user
-     */
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    /**
-     * Gets the token.
-     *
-     * @return the token
-     */
-    public String getToken() {
-        return token;
-    }
-
-    /**
-     * Sets the token.
-     *
-     * @param token the new token
-     */
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    /**
-     * Gets the usage.
-     *
-     * @return the usage
-     */
-    public int getUsage() {
-        return usage;
-    }
-
-    /**
-     * Sets the usage.
-     *
-     * @param usage the new usage
-     */
-    public void setUsage(int usage) {
-        this.usage = usage;
-    }
-
-
 }
