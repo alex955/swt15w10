@@ -7,6 +7,16 @@
 <title>Refugee</title>
 <link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
 <link rel="stylesheet" th:href="@{/resources/css/backgroundImage.css}" />
+<script>
+function onSelection(element){
+	if($(element).val() == '1' || $(element).val() == '2'){
+		$('#freetextArea').hide();
+	}
+	if($(element).val() == '0'){
+		$('#freetextArea').show();
+	}
+}
+</script>
 </head>
 
 <body>
@@ -24,13 +34,13 @@
 					<div class="row">
 						<div class="small-12 columns">							
 							<p>
-								<select th:field="*{content}">
+								<select th:field="*{content}" id="startMessageSelector" onclick="onSelection(this)">
 									<option th:each="possibleMessage : ${possibleMessages}"
 										th:value="${possibleMessage.key}" th:text="#{${possibleMessage.value}} ">.</option>
 								</select>
 							</p>
 							<p>
-								<textarea rows="4" th:field="*{content2}"></textarea>
+								<textarea rows="4" th:field="*{content2}" id="freetextArea"></textarea>
 							</p>															
 						</div>
 					</div>
@@ -43,4 +53,6 @@
 	<footer th:include="footer :: footer"></footer>
 
 </body>
+<script th:src="@{/resources/js/jquery.js}"></script>
+
 </html>

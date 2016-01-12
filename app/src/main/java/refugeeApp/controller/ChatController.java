@@ -129,15 +129,23 @@ public class ChatController {
 	@RequestMapping("/chat/thread/{id}")
 	public String inspectChat(@PathVariable("id") long id, Model model, @LoggedIn Optional<UserAccount> userAccount){
 		if(userAccount.get() == null) return "login";
+		//Todo error page
+		if(chatRepo.findOne(id) == null) return "error";
 		
 		long currentUserId = this.userRepository.findByUserAccount(userAccount.get()).getId();
-	
 		
 		//initiate categories
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		
 		ChatConversation conversation = this.chatRepo.findOne(id);
+		
+		//search kind of article which is talked about
+		String kind = "";
+		if(articleRepo.findOne(conversation.getArticleId()) != null){
+			kind = articleRepo.findOne(conversation.getArticleId()).getKind();
+		}
+		
 		
 		if(conversation.getFromId() != currentUserId && conversation.getToId() != currentUserId) return "error/notAuthenticated";
 		
@@ -152,7 +160,7 @@ public class ChatController {
 		Map<Integer, String> possibleAppendedChatMessages;
 		//case: current user started conversation, has to ask new questions
 		if(currentUserStartedConversation){
-			possibleAppendedChatMessages = this.possibleMessagesObject.getPossibleMessagesFromStarter();
+			possibleAppendedChatMessages = this.possibleMessagesObject.getPossibleMessagesFromStarter(kind);
 		} else{
 			//case: current user is owner of article which is talked about, has to answes questions
 			possibleAppendedChatMessages = this.possibleMessagesObject.getPossibleAnswersToMessage(conversation.getLastQuestion());
@@ -251,7 +259,9 @@ public class ChatController {
 	 */
 	@RequestMapping(value = "/chat/newConversation/{id}")
 	public String newMessage(@PathVariable("id") long id,Model model, @LoggedIn Optional<UserAccount> userAccount) {
+		//TODO: error messages
 		if(userAccount.get() == null) return "error";
+		if(this.articleRepo.findOne(id) == null) return "error";
 		
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
@@ -261,7 +271,7 @@ public class ChatController {
 
 		model.addAttribute("stringInForm", new StringInForm());
 		
-		model.addAttribute("possibleMessages", possibleMessagesObject.getPossibleStartMessages());
+		model.addAttribute("possibleMessages", possibleMessagesObject.getPossibleStartMessages(this.articleRepo.findOne(id).getKind()));
 		
  		return "chat/newMessage";
 	}
@@ -288,6 +298,8 @@ public class ChatController {
 		newConversation.setFromUserName(this.userRepository.findOne(currentUser.getId()).getUsername());
 		newConversation.setToId(currentArticle.getCreator().getId());
 		newConversation.setToUserName(this.userRepository.findOne(currentArticle.getCreator().getId()).getUsername());
+		
+		newConversation.setArticleId(id);
 		
 		newConversation.setFromUnread(false);
 		newConversation.setTitle(currentArticle.getTitle() + " in " + currentArticle.getLocation() + ".");
