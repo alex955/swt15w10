@@ -1,4 +1,4 @@
-package kickstart.model;
+package refugeeApp.model;
 
 import static org.junit.Assert.*;
 
@@ -10,7 +10,7 @@ import org.salespointframework.useraccount.UserAccount;
 import org.salespointframework.useraccount.UserAccountManager;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import kickstart.AbstractIntegrationTests;
+import refugeeApp.AbstractIntegrationTests;
 import refugeeApp.model.ArticleRepo;
 import refugeeApp.model.CategoryRepo;
 import refugeeApp.model.Location;

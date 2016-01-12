@@ -1,4 +1,4 @@
-package kickstart.controller;
+package refugeeApp.controller;
 
 import static org.junit.Assert.*;
 

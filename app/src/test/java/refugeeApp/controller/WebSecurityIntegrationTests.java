@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package kickstart.controller;
+package refugeeApp.controller;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.junit.Test;
 
-import kickstart.AbstractWebIntegrationTests;
+import refugeeApp.AbstractWebIntegrationTests;
 
 /**
  * The Class WebSecurityIntegrationTests.

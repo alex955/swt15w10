@@ -1,4 +1,4 @@
-package kickstart.controller;
+package refugeeApp.controller;
 
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
@@ -9,7 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.junit.Test;
 
-import kickstart.AbstractWebIntegrationTests;
+import refugeeApp.AbstractWebIntegrationTests;
 
 /**
  * The Class ArticleControllerTest.

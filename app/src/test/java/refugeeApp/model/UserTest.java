@@ -1,3 +1,4 @@
+package refugeeApp.model;
 //package kickstart.model;
 //
 //import static org.junit.Assert.*;

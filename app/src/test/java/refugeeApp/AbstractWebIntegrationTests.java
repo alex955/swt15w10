@@ -1,5 +1,5 @@
 
-package kickstart;
+package refugeeApp;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
