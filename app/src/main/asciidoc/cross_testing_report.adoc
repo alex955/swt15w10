@@ -1,23 +1,72 @@
 = Cross-Testing Feedback
 
-__Durchführende Gruppe:__
-__Anwendung von Gruppe:__
+__Durchführende Gruppe swt15w10:__
+__Anwendung von Gruppe swt15w36:__
+
+Bearbeitet auf Version vom 12.01.
 
 == Getestetes System
 Welche Aufgabe/Problemstellung löst die Anwendung.
+
+* [ ] Nutzermanagement
+** [x] Erstellen 
+** [x] Löschen
+** [x] Modifizieren (Vielleicht "zurück zur Benutzerliste Button" beim Bearbeiten)
+** [x] Rollen
+* [x] Kategorien (so gut für alles eine Kategorie!)
+** [x] Tagging der Güter & Activities (Leider nicht dynamisch sondern alle gleich für alle Kategorien (hard gecoded!))
+** [x] Vordefinierte Liste an Kategorien
+* [x] Goods und Activities 
+** [x] Erstellen (Validerung lückenhaft)
+** [x] Löschen 
+** [x] Bearbeiten (leider alles gehardcoded im html) (Design des Bearbeitens hat Verbesserungsmöglichkeiten, nicht gut gelöst)
+** [ ] Bildupload
+* [ ] Diagloge
+** [ ] Tracking des Fortschritt
+** [ ] Dialogbausteine
+** [ ] Prioritiesierung
+** [ ] Dynamische Verknüpfung der Bausteine
+** [ ] Modifikationsmöglichkeiten
+* [x] Struktur
+** [x] Übersicht
+** [x] Suche über Kategorien (sehr pusselig)
+** [x] Distanzabhängikeit
+** [ ] Bilder hochladen 
+** [x] Vordefinierte Attributliste
+** [x] Mehrsprachiges Interface
+** [x] Validations
+** [x] Fehlerseiten (z.B von Eingaben)
+** [x] ReCaptcha
 
 == Fehler-Report
 // See http://asciidoctor.org/docs/user-manual/#tables
 [options="header"]
 |===
 |Pfad |Parameter |Beschreibung |Rückgabe
-| … | … | … | … |
-|===
+|swt15w36/createActivity|leere Eingabe von Name und Beschreibung|ohne Eingabe von Name kommt White Label Error Page|Name must not be null or empty!
 
+
+|===
 == Sonstiges
-* Optik der Anwendung
-* Fehlende Features
-* Interaktion mit der Anwendung (Usability)
+Optik der Anwendung::
+
+
+*Gestaltung(Seitengestaltung):
+** Erster Eindruck des Loginscreen: positiv und intuitiv
+** Restliche Seite: Sehr schlicht!
+** 
+
+* Navigation
+** Selbst erklärend
+
+* Performance
+** Schnelle Laufzeit. Keine großen Wartezeiten
+** Login Page langsam auf dem Handy
+
+* Zugänglichkeit
+** responsive
+
+* Interaktion mit Besucher
+**  Schlecht
 
 == Verbesserungsvorschläge
-* Was kann noch weiter verbessert werden?
