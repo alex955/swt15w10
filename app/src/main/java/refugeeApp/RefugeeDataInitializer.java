@@ -1038,18 +1038,25 @@ public class RefugeeDataInitializer implements DataInitializer {
         g8.setLongitude(ort.getLongitude());
         Article g9 = new Article("Das Survival Duo", "Survival-Duo (Mehrzahl: Survival-Quartett) ist eine satirische und oscarprämierte TV-Sendung auf DMAX.", "Dresden - Prohlis", "straße", 7, "01067", userRepository.findOne((long) 1), "article");
         g9.setLatitude(ort.getLatitude());
-        g9.setLatitude(ort.getLatitude());
+        g9.setLongitude(ort.getLongitude());
 
 
         Article g10 = new Article("Motorola Razor", "Perfektes Handy. Wirkt sogar als Boomerang", "Dresden - Gorbitz", "straße", 9, "01067", userRepository.findOne((long) 1), "article");
-        g10.setLongitude(ort.getLongitude());
+        g10.setLatitude(ort.getLatitude());
         g10.setLongitude(ort.getLongitude());
         Article g11 = new Article("Jeans", "Beschreibung", "ort", "straße", 11, "01067", userRepository.findOne((long) 3), "article");
-        g11.setLongitude(ort.getLongitude());
+        g11.setLatitude(ort.getLatitude());
         g11.setLongitude(ort.getLongitude());
         Article g12 = new Article("Deutschkurs", "Beschreibung", "ort", "straße", 12, "01067", userRepository.findOne((long) 1), "article");
+        g12.setLatitude(ort.getLatitude());
         g12.setLongitude(ort.getLongitude());
-        g12.setLongitude(ort.getLongitude());
+        
+        
+        Article g13 = new Article("Esstisch","Einfacher Esstisch für das gemeinsame Essen mit der Familie","Kassel","Auf der Hasenhecke",56,"34125",userRepository.findOne((long)3), "article");
+        Location ort13 = new Location(g13.getLocation()+g13.getZip()+g13.getStreet());
+        g13.setLatitude(ort13.getLatitude());
+        g13.setLongitude(ort13.getLongitude());
+        
         goodREPO.save(g1);
         goodREPO.save(g2);
         goodREPO.save(g3);
@@ -1062,6 +1069,7 @@ public class RefugeeDataInitializer implements DataInitializer {
         goodREPO.save(g10);
         goodREPO.save(g11);
         goodREPO.save(g12);
+        goodREPO.save(g13);
     }
 
     /**
