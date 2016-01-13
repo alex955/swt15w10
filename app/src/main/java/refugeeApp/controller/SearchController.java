@@ -39,11 +39,10 @@ public class SearchController {
 	 * The processed categories.
 	 */
 	protected LinkedList<CategoryFirstTierObject> processedCategories;
+	
 	/** The current_cat. */
 	private long current_cat=0;
-	/** The ort. */
-	// Das hier muss zwingend raus, bzw final werden!!! KEIN STATE IN DEN CONTROLLER
-	// Speichert den ort anders
+	/** The location */
 	private Location ort = new Location();
 	
 	
@@ -63,7 +62,7 @@ public class SearchController {
 		this.userRepository = userRepository;
 		this.categories = categories;
 		this.articleRepo = articleRepo;
-	}
+		}
 
 	/**
 	 * caluclates distance between two locations given by lat/long.
@@ -86,7 +85,7 @@ public class SearchController {
 	}
 
 	/**
-	 * sorts out articles.
+	 * sorts out articles with the distance
 	 *
 	 * @param articles list of articles
 	 * @return list without sorted out articles
@@ -146,7 +145,6 @@ public class SearchController {
 	public Model getCurrent_cat(Model model) {
 		if (current_cat==0) model.addAttribute("current_category",new Category("AlleKategorien", 0));
 		else model.addAttribute("current_category",this.categories.findOne(current_cat).get());
-		model.addAttribute("current_ort",this.ort);
 		return model;
 	}
 
@@ -228,46 +226,13 @@ public class SearchController {
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("anzeigen", this.sortOutArticlesWithDistance(articleRepo.findAll()));
 		this.current_cat=0;
+		this.ort=new Location("");
+		model.addAttribute("current_ort",this.ort);
 		model=this.getCurrent_cat(model);
 		return "search";
 	}
 	
-	/**
-	 * processes article search.
-	 *
-	 * @param SearchQuery the search query
-	 * @param model mvc model
-	 * @return search template
-	 */
-	@RequestMapping(value = "/search", method = RequestMethod.POST)
-	public String searcharticle(@ModelAttribute("SearchQuery") SearchQuery SearchQuery, Model model) {
-
-		this.processedCategories = categoryMethods.getProcessedCategories();
-		model.addAttribute("categories", this.processedCategories);
-		model.addAttribute("categoriesForm", this.categories.findAll());
-		model=this.getCurrent_cat(model);
-		SearchQuery.setCategory(this.getCurrent_cat());
-		
-		List<Article> catGoods = new LinkedList<Article>();
-		
-		if (SearchQuery.getCategory()==0) { catGoods = this.articleRepo.findAll() ;}
-				else { catGoods = articleRepo.findByCategory(SearchQuery.getCategory()); }
-		 
-		List<Article> output = new LinkedList<Article>();
- 		   
-		   for (Article good : catGoods) 
-		     { 	  
-		     	// Überprüfung ob Name gleich
-		     	if (good.getTitle().toLowerCase().contains(SearchQuery.getQuery().toLowerCase())) { output.add(good);} else 
-		     	// Überprüfung ob Suchtext in Description
-		     	if (good.getDescription().toLowerCase().contains(SearchQuery.getQuery().toLowerCase()) && !output.contains(good)) output.add(good);
-		     }
-		  
-		   model.addAttribute("anzeigen", this.sortOutArticlesWithDistance(output));	
-		   
-		   return "search";
-		   
-	}
+	
 			
 	/**
 	 * searches through articles by category.
@@ -290,6 +255,7 @@ public class SearchController {
 		model.addAttribute("NewAttributes",new NewAttributes());
 		model.addAttribute("FormAttributes",this.categories.findOne(catID).get().getAttributes());
 		model=this.getCurrent_cat(model);
+		model.addAttribute("current_ort",this.ort);
 		
 		return "search";
 	}
@@ -311,6 +277,7 @@ public class SearchController {
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("anzeigen", this.sortOutArticlesWithDistance(articles));
 		model=this.getCurrent_cat(model);
+		model.addAttribute("current_ort",this.ort);
 		
 		return "search";
 	}
@@ -340,6 +307,7 @@ public class SearchController {
 		model.addAttribute("FormAttributes",this.categories.findOne(articleRepo.findOne(this.getCurrent_cat()).getCategory()).get().getAttributes());
 		model.addAttribute("NewAttributes",new NewAttributes());
 		model=this.getCurrent_cat(model);
+		model.addAttribute("current_ort",this.ort);
 		SearchQuery.setCategory(this.getCurrent_cat());
 		
 		List<Article> catGoods = new LinkedList<Article>();
@@ -396,7 +364,7 @@ public class SearchController {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
-		model=this.getCurrent_cat(model);
+		
 	//	model.addAttribute("FormAttributes",this.categories.findOne(articleRepo.findOne(this.getCurrent_cat()).getCategory()).get().getAttributes());
 	//	model.addAttribute("NewAttributes",new NewAttributes());
 		
@@ -405,16 +373,20 @@ public class SearchController {
 		List<Article> catGoods = this.getAllSubcategoryItems(this.getCurrent_cat());
 		LinkedList<Article> catGoods2 = new LinkedList<Article>();
 
-		if (!(ort.getDistance() == 0 || ort.getAddress().isEmpty()))
-			ort = ort.GetCoordinates(ort);
+		if (ort.getDistance()==0 || ort.getAddress().isEmpty()) {}
+		 	else ort = ort.GetCoordinates(ort);
 		this.ort=ort;
 
 		//umwandlung in linkedlist
-		catGoods2.addAll(catGoods.stream().collect(Collectors.toList()));
+		for(Article a:catGoods) {
+			 			catGoods2.add(a);
+			 	}
 		
+		model=this.getCurrent_cat(model);
+		model.addAttribute("current_ort",this.ort);
 		model.addAttribute("anzeigen",this.sortOutArticlesWithDistance(catGoods2));
 		model.addAttribute("Ort",new Location());
-		return "redirect:/search";
+		return "search";
 		
     }
 }
