@@ -42,12 +42,12 @@
 					</div>
 					<div>
 						<input type="password" name="password" th:placeholder="#{frontpage.password}"/>
-						<label><a th:href="@{/reset}" href="#" th:text="#{frontpage.forgotPassword}">Passwort vergessen?</a> | <a th:href="@{/registration}" href="#" th:text="#{frontpage.registration}">Registrieren</a></label>
-					</div>
-					<div class="row">
-						<div class="small-12 columns">
-							<button type="submit" class="right small button">Login</button>
+						<div class="row">
+							<div class="small-12 columns">
+								<button type="submit" class="left small button">Login</button>
+							</div>
 						</div>
+						<label><a th:href="@{/reset}" href="#" th:text="#{frontpage.forgotPassword}">Passwort vergessen?</a> | <a th:href="@{/registration}" href="#" th:text="#{frontpage.registration}">Registrieren</a></label>
 					</div>
 				</form>
 			</div>
