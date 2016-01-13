@@ -90,12 +90,13 @@ public class EMailController {
 	 * @param languageRepository the language repository
 	 */
 	@Autowired
-	public EMailController(UserRepository userRepository, ValidatorRepository validatorRepository, UserSettingsRepository userSettingsRepository, LanguageRepository languageRepository) {
+	public EMailController(UserRepository userRepository, ValidatorRepository validatorRepository, UserSettingsRepository userSettingsRepository, LanguageRepository languageRepository, UserAccountManager userAccountManager) {
 
 		this.validatorRepository = validatorRepository;
 		this.userRepository = userRepository;
 		this.userSettingsRepository = userSettingsRepository;
 		this.languageRepository = languageRepository;
+		this.userAccountManager = userAccountManager;
 	}
 
 	/**
