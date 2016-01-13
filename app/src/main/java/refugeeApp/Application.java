@@ -123,7 +123,6 @@ public class Application extends SpringBootServletInitializer  {
 	    	CookieLocaleResolver resolver = new CookieLocaleResolver();
 	    	//one month
 	    	resolver.setCookieMaxAge(2678400);
-	    	resolver.setDefaultLocale(Locale.ENGLISH);
 	        return resolver;
 	    }
 	}

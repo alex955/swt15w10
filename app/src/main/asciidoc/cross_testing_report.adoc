@@ -1,4 +1,4 @@
-﻿= Cross-Testing Feedback
+= Cross-Testing Feedback
 
 __Durchführende Gruppe :swt15w10__ 
 
@@ -14,13 +14,13 @@ Welche Aufgabe/Problemstellung löst die Anwendung.
 ** [x] Löschen
 ** [x] Modifizieren (Vielleicht "zurück zur Benutzerliste Button" beim Bearbeiten)
 ** [x] Rollen
-* [x] Kategorien (so gut für alles eine Kategorie!)
-** [x] Tagging der Güter & Activities (Leider nicht dynamisch sondern alle gleich für alle Kategorien (hard gecoded!))
+* [x] Kategorien (Für vieles bloß eine Kategorie!)
+** [x] Tagging der Güter & Activities (nicht dynamisch sondern für alle Kategorien gleich)
 ** [x] Vordefinierte Liste an Kategorien
 * [x] Goods und Activities 
 ** [x] Erstellen (Validerung lückenhaft)
 ** [x] Löschen 
-** [x] Bearbeiten (leider alles gehardcoded im html) (Design des Bearbeitens hat Verbesserungsmöglichkeiten, nicht gut gelöst)
+** [x] Bearbeiten (Unformatierte Buttons)
 ** [ ] Bildupload
 * [ ] Diagloge
 ** [ ] Tracking des Fortschritt
@@ -30,7 +30,7 @@ Welche Aufgabe/Problemstellung löst die Anwendung.
 ** [ ] Modifikationsmöglichkeiten
 * [x] Struktur
 ** [x] Übersicht
-** [x] Suche über Kategorien (sehr pusselig)
+** [x] Suche über Kategorien
 ** [x] Distanzabhängikeit
 ** [ ] Bilder hochladen 
 ** [x] Vordefinierte Attributliste
@@ -56,20 +56,21 @@ Welche Aufgabe/Problemstellung löst die Anwendung.
 Optik der Anwendung::
 
 
-* Gestaltung(Seitengestaltung):
+* Gestaltung (Seitengestaltung):
 ** Erster Eindruck des Loginscreen: positiv und intuitiv
-** Restliche Seite: Sehr schlicht!
+** Die Qualität des Desighs variiert stark.
+** An vielen anderen Stellen sind Objekte uneinheitlich und teilweise doppelt platziert.
 
 
 * Navigation
 ** Selbst erklärend
 
 * Performance
-** Schnelle Laufzeit. Keine großen Wartezeiten
+** Schnelle Laufzeit, keine großen Wartezeiten
 ** Login Page langsam auf dem Handy
 
 * Zugänglichkeit
-** responsive
+** Responsive
 
 * Interaktion mit Besucher
 **  Schlecht
