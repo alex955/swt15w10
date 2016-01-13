@@ -101,7 +101,7 @@ public class AdminController {
         model.addAttribute("subCount", subCount);
         model.addAttribute("totalCount", totalCount);
         model.addAttribute("registeredUsers", this.userRepository.findAll());
-        model.addAttribute("current_category",new Category("Alle Kategorien",1));
+        model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
         
 //        for(User b : this.userRepository.findAll()){
@@ -213,7 +213,7 @@ public class AdminController {
 		model.addAttribute("categories", this.processedCategories);	
 		model.addAttribute("category", currCat);
 		model.addAttribute("subcategories", subcategories);
-		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
         model.addAttribute("newCategory", new Category());
 		
@@ -255,7 +255,7 @@ public class AdminController {
 	public String editUser(@PathVariable Long id, Model model) {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
-		model.addAttribute("current_category",new Category("Alle Kategorien",1));
+		model.addAttribute("current_category",new Category("AlleKategorien",1));
 		model.addAttribute("current_ort",new Location(""));
 		
 		User user = this.userRepository.findOne(id);
