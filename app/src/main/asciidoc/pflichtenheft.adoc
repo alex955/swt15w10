@@ -1,12 +1,10 @@
-﻿= Pflichtenheft
+= Pflichtenheft
 
 == Projektname
 
-__Version:__    *1.0.3*
+__Version:__    *1.0*
 
-__Status:__     *In Arbeit*
-
-__Stand:__      *22.10.2015*
+__Stand:__      *13.01.2016*
 
 == Zusammenfassung
 //Eine kurze Beschreibung des Dokuments. Wenige Absätze.
@@ -318,6 +316,3 @@ Dieser Abschnitt stellt eine Vereinigung von Glossar und der Beschreibung von Kl
 |#20|Kategorie löschen als Admin
 
 |===
-
-== Offene Punkte
-Offene Punkte werden entweder direkt in der Spezifikation notiert. Wenn das Pflichtenheft  zum finalen Review vorgelegt wird, sollte es keine offenen Punkte mehr geben.
