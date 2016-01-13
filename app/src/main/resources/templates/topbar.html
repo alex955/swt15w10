@@ -78,7 +78,7 @@
 					
 					</li>
 					<li class="divider"></li> 
-					<li class="has-form"><input type="text" name="address" th:value="${#strings.isEmpty(current_ort.address) == false} ?  ${current_ort.address} : ''" th:placeholder="${#strings.isEmpty(current_ort.address) == true} ?  'topbar.locationOrZip' : ''"/></li> 
+					<li class="has-form"><input type="text" name="address" th:value="${#strings.isEmpty(current_ort.address) == false} ?  ${current_ort.address} : ''" th:placeholder="${#strings.isEmpty(current_ort.address) == true} ?  #{topbar.locationOrZip} : ''"/></li> 
  					<li class="divider"></li>
 					<li class="has-dropdown"><a href="#" th:text="#{${current_ort.distance == 0} ?   'topbar.searchmorethan30km'   : 'topbar.search'+${current_ort.distance}+'km'}">Suche im Umkreis von</a>
 						<ul class="dropdown">
