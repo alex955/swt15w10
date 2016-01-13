@@ -386,7 +386,7 @@ public class SearchController {
 		model.addAttribute("current_ort",this.ort);
 		model.addAttribute("anzeigen",this.sortOutArticlesWithDistance(catGoods2));
 		model.addAttribute("Ort",new Location());
-		return "search";
+		if (this.getCurrent_cat()==0) return "search"; else return "redirect:search/"+this.getCurrent_cat(); 
 		
     }
 }
