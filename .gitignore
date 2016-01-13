@@ -27,3 +27,4 @@ app/.settings/org.eclipse.core.resources.prefs
 app/.settings/org.eclipse.core.resources.prefs
 app/src/main/java/kickstart/utilities/PicturePathSettings.java
 app/src/main/java/kickstart/utilities/PicturePathSettings.java
+app/.classpath
