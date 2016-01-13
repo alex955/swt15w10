@@ -12,6 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.google.maps.GeoApiContext;
+import com.google.maps.GeocodingApi;
+import com.google.maps.model.GeocodingResult;
+
+
+
 /**
  * The Class Article.
  */
@@ -131,6 +137,8 @@ public class Article {
 			this.creationdate = LocalDateTime.now();
 			this.creator = creator;
 			this.kind = kind;
+			
+			findLocation();
 		}
 	
 	/**
@@ -160,10 +168,27 @@ public class Article {
 		this.creationdate = LocalDateTime.now();
 		this.activitydate = activitydate;
 		this.kind = kind;
+		findLocation();
+		System.out.println("Hallo"); 
 	}
 
 
 
+	public void findLocation() {
+		GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyAXULGtfv96afP6mTq9W294gKRlIVr3EMk");
+		GeocodingResult[] results = null;
+			try {
+				results = GeocodingApi.geocode(context,this.street+" "+this.zip+" "+this.location).await();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
+	    	this.latitude=results[0].geometry.location.lat;
+	    	this.longitude=results[0].geometry.location.lng;
+	    	System.out.println("Hallo"); 
+		
+	}
+	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

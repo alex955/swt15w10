@@ -461,10 +461,10 @@ public class ArticleController {
 			article.setActivitydate(activityDate);
 			
 			//Breitengrad und Längengradberechnung 
-			Location ort = new Location(newArticleForm.getStreetName()+" "+newArticleForm.getZip()+" "+newArticleForm.getCity());
-			ort = ort.GetCoordinates(ort);
-			article.setLatitude(ort.getLatitude()); 
-    		article.setLongitude(ort.getLongitude());				
+//			Location ort = new Location(newArticleForm.getStreetName()+" "+newArticleForm.getZip()+" "+newArticleForm.getCity());
+//			ort = ort.GetCoordinates(ort);
+//			article.setLatitude(ort.getLatitude()); 
+//    		article.setLongitude(ort.getLongitude());				
     		articleRepo.save(article);
     		
     		return ("redirect:/editAttributes/"+article.getId());
@@ -474,10 +474,10 @@ public class ArticleController {
 			//set activity date
 			article.setActivitydate(activityDate);
 			
-			Location ort = new Location(newArticleForm.getStreetName()+" "+newArticleForm.getZip()+" "+newArticleForm.getCity());
-			ort = ort.GetCoordinates(ort);
-			article.setLatitude(ort.getLatitude()); 
-    		article.setLongitude(ort.getLongitude());
+		//	Location ort = new Location(newArticleForm.getStreetName()+" "+newArticleForm.getZip()+" "+newArticleForm.getCity());
+		//	ort = ort.GetCoordinates(ort);
+		//	article.setLatitude(ort.getLatitude()); 
+    	//	article.setLongitude(ort.getLongitude());
 			articleRepo.save(article);
             return ("redirect:/editAttributes/"+article.getId());
         }
