@@ -16,7 +16,7 @@
 					<div class="small-12 columns">
 						<strong th:text="#{chat.requestsgotten}">Erhaltene Anfragen:</strong>
 						<div class="stack button-group" th:each="inMsg : ${incomingMessages}">	
-							<a  class="small button" th:href="@{/chat/thread/{id}(id=${inMsg.id})}" th:text="'von ' + ${inMsg.fromUserName}+ ', über: '+${inMsg.title}"></a>						  
+							<a  class="small button" th:href="@{/chat/thread/{id}(id=${inMsg.id})}" th:text="${inMsg.fromUserName}+ ': '+${inMsg.title}"></a>						  
 						</div>
 					</div>
 				</div>
@@ -24,7 +24,7 @@
 					<div class="small-12 columns">
 						<strong th:text="#{chat.requestsdone}"><hr></hr>Gestellte Anfragen:</strong>
 						<div th:each="outMsg : ${outgoingMessages}">	
-							<a  class="small button" th:href="@{/chat/thread/{id}(id=${outMsg.id})}" th:text="'an  ' + ${outMsg.toUserName}+ ', über: '+${outMsg.title}"></a>						
+							<a  class="small button" th:href="@{/chat/thread/{id}(id=${outMsg.id})}" th:text="${outMsg.toUserName}+ ': '+${outMsg.title}"></a>						
 						</div>
 						<hr></hr>
 					</div>

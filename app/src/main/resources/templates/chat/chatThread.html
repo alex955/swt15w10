@@ -16,6 +16,7 @@ function showInputField(){
 	//hardcoded chat messages which trigger some change
 	var triggerTimePicker = "7";
 	var triggerFreetext = "0"
+	var triggerFreetext2 = "17"
 
 	var freetextElement = document.getElementById("freetextArea");
 	var timePickerElement = document.getElementById("datetimepicker_mask");
@@ -27,7 +28,7 @@ function showInputField(){
 		freetextElement.name = 'deactivated';
 		freetextElement.style.visibility = 'hidden';
 	}
-	else if(selectContent.value==triggerFreetext){
+	else if(selectContent.value==triggerFreetext || selectContent.value==triggerFreetext2){
 		timePickerElement.name = 'deactivated';
 		timePickerElement.style.visibility = 'hidden';
 		
@@ -67,10 +68,10 @@ function showInputField(){
 						<hr></hr>
 						<div class="row">
 							<div class="small-6 columns">
-								<p class="text-left"><strong th:text="(${var.fromId} == ${currentUserId}) ? 'von mir geschickt' : 'von '+ ${var.fromUserName} +' geschickt'"></strong></p>
+								<p class="text-left"><strong th:text="(${var.fromId} == ${currentUserId}) ? ${var.fromUserName} : ${var.fromUserName}"></strong></p>
 							</div>
 							<div class="small-6 columns">
-								<p class="text-right" th:text="'um '+${#temporals.format(var.time, 'hh:mm:ss, dd.MM.yyyy')}"/>
+								<p class="text-right" th:text="${#temporals.format(var.time, 'hh:mm, dd.MM.yyyy')}"/>
 							</div>
 						</div>
 						<p th:text="#{${var.message}}"></p>
@@ -125,12 +126,10 @@ function showInputField(){
 
 <script>
 
-var onStartUpTimePickerElement = document.getElementById("datetimepicker_mask");
-onStartUpTimePickerElement.style.visibility = 'hidden';
-
-
 showInputField();
-jQuery('#datetimepicker_mask').datetimepicker();
+jQuery('#datetimepicker_mask').datetimepicker({
+	  format:'d.m.Y H:i'
+	});
 </script>
 </html>
 

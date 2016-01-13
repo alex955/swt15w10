@@ -15,6 +15,8 @@
  */
 package refugeeApp;
 
+import java.util.Locale;
+
 import org.salespointframework.EnableSalespoint;
 import org.salespointframework.SalespointSecurityConfiguration;
 import org.salespointframework.SalespointWebConfiguration;
@@ -121,6 +123,7 @@ public class Application extends SpringBootServletInitializer  {
 	    	CookieLocaleResolver resolver = new CookieLocaleResolver();
 	    	//one month
 	    	resolver.setCookieMaxAge(2678400);
+	    	resolver.setDefaultLocale(Locale.ENGLISH);
 	        return resolver;
 	    }
 	}
