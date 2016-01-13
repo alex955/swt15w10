@@ -151,7 +151,7 @@ public class SearchController {
 	}
 
 	/**
-	 * exchanges curret category.
+	 * exchanges current category.
 	 *
 	 * @param model mvc model
 	 * @return new mvc model

@@ -20,7 +20,7 @@ Wie obig beschrieben sollen die in diesem Dokument beschriebenen Testfälle die 
 * Kommunikationsmanagement: Artikelbezogene Kommunikation in verschiedenen Sprachen, Textbausteinartige Kommunikation, Chatfunktion
 
 == Nicht zu testende Funktionalitäten
-* Google API für Übersetzung, Entferungsberechnung (im Umkreis suchen)
+* 
 
 == Herangehensweise
 Zuerst soll durch die Unit-Tests sichergestellt werden, dass alle Teilfunktionalitäten geschlossen in sich wie vorgegeben funktionieren. Ist dies gewährleistet, wird deren Integration in Integrationstests sichergestellt durch holistische Testfälle. Die Module/Units werden durch jUnit getests, die Integration händisch nach striktem Testplan durchgeführt - mit diesem Ansatz soll Bottom Up getestet werden.

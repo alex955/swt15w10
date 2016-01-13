@@ -2,7 +2,12 @@
 
 == Einführung und Ziele
 * Aufgabenstellung
-** In diesem Projekt wird ein Portal zur Unterstützung von Flüchtlingen erstellt. Hilfsbereite Menschen werden in der Lage sein, Sach- und Dienstleistungsangebote für Flüchtlinge anzubieten. Die Flüchtlinge können auf Angebote antworten. Die Kommunikation zwischen Flüchtlingen und Helfenden wird ermöglicht durch Textbausteine, die abhängig von der Sprache des Lesenden übersetzt werden. Durch diese Textblöcke können wir eine sehr gute Übersetzung gewährleisten im Vergleich zu einer eher schlechten dynamischen Übersetzung wie z.B. Google Translator. Das Portal unterstützt mehrere Sprachen. 
+** In diesem Projekt wird ein Portal zur Unterstützung von Flüchtlingen erstellt. 
+Hilfsbereite Menschen werden in der Lage sein, Sach- und Dienstleistungsangebote für Flüchtlinge anzubieten. 
+Die Flüchtlinge können auf Angebote antworten. 
+Die Kommunikation zwischen Flüchtlingen und Helfenden wird ermöglicht durch Textbausteine, die abhängig von der Sprache des Lesenden übersetzt werden. 
+Durch diese Textblöcke können wir eine sehr gute Übersetzung gewährleisten im Vergleich zu einer eher schlechten dynamischen Übersetzung wie z.B. Google Translator. 
+Das Portal unterstützt mehrere Sprachen. 
 
 * Qualitätsziele
 
@@ -11,6 +16,7 @@
 ** Das Design soll schlicht und ansprechend sein.
 ** Die Anwendung muss leicht erweiterbar sein.
 ** Es muss eine gute Kommunikation zwischen Anbieter und Interessent sichergestellt werden.
+** Mann muss die Sprache ändern können
  
 
 
@@ -42,9 +48,15 @@
 
 == Lösungsstrategie
 //Kurzer Überblick über Ihre grundlegenden Entscheidungen und Lösungsansätze, die jeder, der mit der Architektur zu tun hat, verstanden haben sollte.
-Unser Programm baut auf dem MVC-Entwurfsmuster auf. Wir konstruieren eine plattformübergreifende Website. Sie ist responsive und passt sich dynamisch an, jenachdem auf welchem Gerät die Seite geöffnet wird.
-Für alle Objekte die mehrfach vorkommen, seien es Benutzer, Artikel oder Textblöcke sind Repositories angelegt, welche alle Einheiten speichert. Die Sprache der Website entspricht der eingestellten Sprache im Browser des Benutzers. Die Seitennavigation, sowie die Suche erfolgen über eine Navigationsleiste, die sich bis oben befindet.
-Wir haben uns für drei Rollen entschieden, Admin-, Helfder- und Flüchtlingrolle. Der Admin hat die Möglichkeite alle Angebote zu editieren und zu löschen, und Nutzer zu deaktivieren. Die anderen beiden Rollen haben bis jetzt die selben Rechte. Eine nachträgliche Änderung ist jedoch möglich.
+Unser Programm baut auf dem MVC-Entwurfsmuster auf. 
+Wir konstruieren eine plattformübergreifende Website. 
+Sie ist responsive und passt sich dynamisch an, jenachdem auf welchem Gerät die Seite geöffnet wird.
+Für alle Objekte die mehrfach vorkommen, seien es Benutzer, Artikel oder Textblöcke sind Repositories angelegt, welche alle Einheiten speichert. 
+Die Sprache der Website entspricht der eingestellten Sprache im Browser des Benutzers und kann darüber hinaus in der Navigationsleiste geändert werden. 
+Die Seitennavigation, sowie die Suche erfolgen über eine Navigationsleiste, die sich bis oben befindet.
+Wir haben uns für drei Rollen entschieden, Admin-, Helfder- und Flüchtlingrolle. 
+Der Admin hat im Vergleich zu den anderen Rollen noch die Möglichkeit ALLE Angebote zu editieren und zu löschen, und Nutzer zu deaktivieren. 
+Die anderen beiden Rollen haben bis jetzt die gleichen Rechte. Eine nachträgliche Änderung ist jedoch möglich.
 
 
 
@@ -58,7 +70,7 @@ Wir haben uns für drei Rollen entschieden, Admin-, Helfder- und Flüchtlingroll
 * Verwendete Muster
 ** Singelton, MVC
 * Persistenz
-** Durch das Benutzen der JPA sind wir variable im Hinblick auf die Wahl der konkreten Datenbank
+** Durch das Benutzen der JPA sind wir flexibel im Hinblick auf die Wahl der konkreten Datenbank
 * Benutzeroberfläche
 ** Foundation, HTML5
 
