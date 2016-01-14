@@ -98,6 +98,7 @@ public class SearchController {
 			if (this.ort.getDistance() == 0 || this.ort.getAddress().isEmpty() || this.ort.getLatitude() == 0 || this.ort.getLongitude() == 0)
 				output.add(article);
 			else {
+				System.out.println(distance(article.getLatitude(), article.getLongitude(), this.ort.getLatitude(), this.ort.getLongitude()));
 				if (distance(article.getLatitude(), article.getLongitude(), this.ort.getLatitude(), this.ort.getLongitude()) <= this.ort.getDistance()) {
 					output.add(article);
 				}
@@ -372,11 +373,10 @@ public class SearchController {
 		
 		List<Article> catGoods = this.getAllSubcategoryItems(this.getCurrent_cat());
 		LinkedList<Article> catGoods2 = new LinkedList<Article>();
-
+		
 		if (ort.getDistance()==0 || ort.getAddress().isEmpty()) {}
 		 	else ort = ort.GetCoordinates(ort);
 		this.ort=ort;
-
 		//umwandlung in linkedlist
 		for(Article a:catGoods) {
 			 			catGoods2.add(a);

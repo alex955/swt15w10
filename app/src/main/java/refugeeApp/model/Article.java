@@ -169,7 +169,7 @@ public class Article {
 		this.activitydate = activitydate;
 		this.kind = kind;
 		findLocation();
-		System.out.println("Hallo"); 
+		
 	}
 
 
@@ -178,15 +178,14 @@ public class Article {
 		GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyAXULGtfv96afP6mTq9W294gKRlIVr3EMk");
 		GeocodingResult[] results = null;
 			try {
-				results = GeocodingApi.geocode(context,this.street+" "+this.zip+" "+this.location).await();
-			} catch (Exception e) {
+				results = GeocodingApi.geocode(context,this.street+" "+this.zip+" "+this.location + " Deutschland").await();
+							} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}	
 	    	this.latitude=results[0].geometry.location.lat;
 	    	this.longitude=results[0].geometry.location.lng;
-	    	System.out.println("Hallo"); 
-		
+	    
 	}
 	
 	/* (non-Javadoc)

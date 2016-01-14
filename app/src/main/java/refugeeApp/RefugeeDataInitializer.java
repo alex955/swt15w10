@@ -93,8 +93,11 @@ public class RefugeeDataInitializer implements DataInitializer {
         //settingsRepo.save(new Setting("noUploadedPicturePath", "/Users/Alexander/Documents/Studium/swt15w10/app/src/main/resources/static/resources/img/keinbild.png.png", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded offers without one"));
 
         //Sascha
-        settingsRepo.save(new Setting("noUploadedPicturePath", "/Users/sasch/Documents/swt15w10/app/src/main/resources/static/resources/img/keinbild.png.png", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded offers without one"));
+        //settingsRepo.save(new Setting("noUploadedPicturePath", "/Users/sasch/Documents/swt15w10/app/src/main/resources/static/resources/img/keinbild.png.png", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded offers without one"));
 
+        //Lukas
+        settingsRepo.save(new Setting("noUploadedPicturePath", "/Users/lukas/Desktop/homework.PNG", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded offers without one"));
+        
         //resizes the standard picture
 //    	if(ImageIO.read(new File(settingsRepo.findOne("noUploadedPicturePath").getStringValue()))!= null){
 //	    	BufferedImage originalImage = ImageIO.read(new File(settingsRepo.findOne("noUploadedPicturePath").getStringValue()));
@@ -1020,7 +1023,6 @@ public class RefugeeDataInitializer implements DataInitializer {
         Article g4 = new Article("Spiegel", "Aus Metall mit aufwendigen Verzierungen", "Dresden - Seidnitz", "straße", 2, "01067", userRepository.findOne((long) 3), "article");
 
         Article g5 = new Article("Messerblock", "EINFACH GUT! Eine rundum gute Entscheidung wenn es etwas preiswerter sein soll und trotzdem zuverlässig und praktisch. TWIN Point überzeugt durch eine scharfe Klinge.", "Ottendorf Orkrilla", "Geldroper Straße 5", 3, "01458", userRepository.findOne((long) 1), "article");
-
         Article g6 = new Article("Buch", "bestens erhalten ohne Eselsohren", "Leipzig", "Talstraße 5", 4, "04103", userRepository.findOne((long) 1), "article");
 
         Article g7 = new Article("Deutsch für Anfänger", "Gutes Buch zum lernen", "Dresden", "Nürnberger Straße 5", 5, "01187", userRepository.findOne((long) 1), "article");
@@ -1035,7 +1037,10 @@ public class RefugeeDataInitializer implements DataInitializer {
         
         
         Article g13 = new Article("Esstisch","Einfacher Esstisch für das gemeinsame Essen mit der Familie","Kassel","Auf der Hasenhecke 56",1,"34125",userRepository.findOne((long)3), "article");
-
+        
+        Article g14 = new Article("Bier","Bayrisches Bier aus Bayern (nicht zu verwechseln mit der BRD","Eschenbach in der Oberpfalz","Weidelbachstraße 34",2,"92676",userRepository.findOne((long)3), "article");
+        
+        Article g15 = new Article("Bier", "Bier nicht aus Bayern", "Frielendorf", "Rosenstraße 2", 1, "34621", userRepository.findOne((long) 1), "article");
         
         goodREPO.save(g1);
         goodREPO.save(g2);
@@ -1050,6 +1055,8 @@ public class RefugeeDataInitializer implements DataInitializer {
         goodREPO.save(g11);
         goodREPO.save(g12);
         goodREPO.save(g13);
+        goodREPO.save(g14);
+        goodREPO.save(g15);
     }
 
     /**
