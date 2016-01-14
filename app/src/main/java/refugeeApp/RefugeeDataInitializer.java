@@ -1068,8 +1068,10 @@ public class RefugeeDataInitializer implements DataInitializer {
      * initialisation of languages
      */
     public void initializeLanguages() {
-
-        final Language german = new Language();
+    	//1. browser language must me ISO 639 conform [first 2 letters of variable (e.g. german) MUST equal the two first two letters of iso]
+        //2. every attribute of Language MUST be set, otherwise null pointe exception
+    	
+    	final Language german = new Language();
 
         german.setBrowserLanguage("de");
         german.setRoleError("Es wurde keine Rolle ausgewählt.");
