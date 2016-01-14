@@ -17,7 +17,7 @@
 
 	<nav th:include="topbar :: topbar"></nav>
 
-	<div th:if="${FormAttributes != null and not #lists.isEmpty(FormAttributes)}" class="row" name="Search">			
+	<div th:if="${FormAttributes != null and not #lists.isEmpty(FormAttributes) or #lists.isEmpty(anzeigen)}" class="row" name="Search">			
 		<div class="small-12 columns">
 			<p>&nbsp;</p>
 			<h4 class="header">Welche Tags sollen gesucht werden?</h4>
