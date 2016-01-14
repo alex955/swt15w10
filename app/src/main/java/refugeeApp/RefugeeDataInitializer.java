@@ -1006,62 +1006,53 @@ public class RefugeeDataInitializer implements DataInitializer {
      * @param userRepository
      */
     public void initializeGoods(UserRepository userRepository) {
-        LinkedList<String> tags1 = new LinkedList<String>();
-        tags1.add("XXL");
-        Attribute att = new Attribute("Größe", tags1);
-        LinkedList<String> tags2 = new LinkedList<String>();
-        tags2.add("Männlich");
-        Attribute att2 = new Attribute("Geschlecht", tags2);
+    	 Location ort = new Location("Michelangelostraße 11 01217 Dresden");
+         ort = ort.GetCoordinates(ort);
 
-        Location ort = new Location("Michelangelostraße 11 01217 Dresden");
-        ort = ort.GetCoordinates(ort);
 
-        Article g1 = new Article("Spiegelschrank", "Dieser Spiegelschrank ist 60 cm breit", "Dresden - Zschernitz", "Bergstraße 5", 2, "01217", userRepository.findOne((long) 1), "article");
-        g1.addAttribute(att);
-        g1.addAttribute(att2);
-
-        Article g2 = new Article("Sofa", "Einladender Blickfang! Das stylishe Schlafsofa mit dem zweifarbigen Look lädt zum Entspannen und Träumen ein.", "Dresden - Südvorstadt", "straße", 1, "01067", userRepository.findOne((long) 2), "article");
-
-        Article g3 = new Article("Stuhl", "Schöner Bürostuhl mit einem Bezug aus hochwertigem Kunstleder, kombiniert mit atmungsaktivem Netzstoff im Rückenausschnitt in Schwarz", "Pirna", "straße", 1, "01067", userRepository.findOne((long) 2), "article");
-
-        Article g4 = new Article("Spiegel", "Aus Metall mit aufwendigen Verzierungen", "Dresden - Seidnitz", "straße", 2, "01067", userRepository.findOne((long) 3), "article");
-
-        Article g5 = new Article("Messerblock", "EINFACH GUT! Eine rundum gute Entscheidung wenn es etwas preiswerter sein soll und trotzdem zuverlässig und praktisch. TWIN Point überzeugt durch eine scharfe Klinge.", "Ottendorf Orkrilla", "Geldroper Straße 5", 3, "01458", userRepository.findOne((long) 1), "article");
-        Article g6 = new Article("Buch", "bestens erhalten ohne Eselsohren", "Leipzig", "Talstraße 5", 4, "04103", userRepository.findOne((long) 1), "article");
-
-        Article g7 = new Article("Deutsch für Anfänger", "Gutes Buch zum lernen", "Dresden", "Nürnberger Straße 5", 5, "01187", userRepository.findOne((long) 1), "article");
-
-        Article g8 = new Article("Harry Potter", "Harry Potter (* 24.12.0 um 12:30 Uhr) ist ein kleiner Zauberer aus England. Harry lernte in Hogwarts das Zauberstabwedeln", "Hoyerswerda", "Straße des Friedens", 6, "02977", userRepository.findOne((long) 2), "article");
-
-        Article g9 = new Article("Das Survival Duo", "Survival-Duo (Mehrzahl: Survival-Quartett) ist eine satirische und oscarprämierte TV-Sendung auf DMAX.", "Dresden - Prohlis", "Gamigstraße", 7, "01067", userRepository.findOne((long) 1), "article");
-
-        Article g10 = new Article("Motorola Razor", "Perfektes Handy. Wirkt sogar als Boomerang", "Dresden - Gorbitz", "Rädestraße", 9, "01067", userRepository.findOne((long) 1), "article");
-        Article g11 = new Article("Jeans", "Beschreibung", "Dresden", "Nürnberger Straße 36", 11, "01187", userRepository.findOne((long) 3), "article");
-        Article g12 = new Article("Deutschkurs", "Beschreibung", "Dresden", "Nürnberger Straße 11", 12, "01187", userRepository.findOne((long) 1), "article");
+         Article g1 = new Article("Herrenrad", "Gutes Fahrrad Radgröße 30", "Dresden", "Michelangelostraße 11", 1, "01217", userRepository.findOne((long) 1), "article");
+         g1.setLatitude(ort.getLatitude());
+         g1.setLongitude(ort.getLongitude());
         
+         Article g2 = new Article("Frauenrad", "Gutes Fahrrad Radgröße 30", "Dresden", "Michelangelostraß 11", 1, "01217", userRepository.findOne((long) 1), "article");
+         g2.setLatitude(ort.getLatitude());
+         g2.setLongitude(ort.getLongitude());
+         
+         ort = ort.GetCoordinates(new Location("Bergstraße 1 Dresden"));
+         Article g3 = new Article("Mütze", "Babymütze nur einmal getragen", "Dresden", "Bergstraße 1", 3, "01217", userRepository.findOne((long) 1), "article");
+         g3.setLatitude(ort.getLatitude());
+         g3.setLongitude(ort.getLongitude());
+         
         
-        Article g13 = new Article("Esstisch","Einfacher Esstisch für das gemeinsame Essen mit der Familie","Kassel","Auf der Hasenhecke 56",1,"34125",userRepository.findOne((long)3), "article");
+         Article g4 = new Article("Kinderwagen", "alter Kinderwagen aus der DDR", "Dresden", "Bergstraße 1", 4, "01217", userRepository.findOne((long) 1), "article");
+         g4.setLatitude(ort.getLatitude());
+         g4.setLongitude(ort.getLongitude());
+         
+         ort = ort.GetCoordinates(new Location("Berliner Straße 1 Leipzig"));
+         Article g5 = new Article("Kinderbett", "altes Kinderbett aus der DDR", "Leipzig", "Berliner Straße 1", 6, "XXXXX", userRepository.findOne((long) 1), "article");
+         g5.setLatitude(ort.getLatitude());
+         g5.setLongitude(ort.getLongitude());
+         
+         Article g6 = new Article("Angel", "Angel mit allem Zubehör", "Leipzig", "Berliner Straße 1", 8, "XXXXX", userRepository.findOne((long) 1), "article");
+         g6.setLatitude(ort.getLatitude());
+         g6.setLongitude(ort.getLongitude());
+         
+         
         
-        Article g14 = new Article("Bier","Bayrisches Bier aus Bayern (nicht zu verwechseln mit der BRD","Eschenbach in der Oberpfalz","Weidelbachstraße 34",2,"92676",userRepository.findOne((long)3), "article");
-        
-
-        Article g15 = new Article("Bier", "Bier nicht aus Bayern", "Frielendorf", "Rosenstraße 2", 1, "34621", userRepository.findOne((long) 1), "article");
-        
-        goodREPO.save(g1);
-        goodREPO.save(g2);
-        goodREPO.save(g3);
-        goodREPO.save(g4);
-        goodREPO.save(g5);
-        goodREPO.save(g6);
-        goodREPO.save(g7);
-        goodREPO.save(g8);
-        goodREPO.save(g9);
-        goodREPO.save(g10);
-        goodREPO.save(g11);
-        goodREPO.save(g12);
-        goodREPO.save(g13);
-        goodREPO.save(g14);
-        goodREPO.save(g15);
+          
+         goodREPO.save(g1);
+         goodREPO.save(g2);
+         goodREPO.save(g3);
+         goodREPO.save(g4);
+         goodREPO.save(g5);
+         goodREPO.save(g6);
+//         goodREPO.save(g7);
+//         goodREPO.save(g8);
+//         goodREPO.save(g9);
+//         goodREPO.save(g10);
+//         goodREPO.save(g11);
+//         goodREPO.save(g12);
+//         goodREPO.save(g13);
     }
 
     /**
