@@ -7,8 +7,24 @@
 <title>Refugee</title>
 <link rel="stylesheet" th:href="@{/resources/css/foundation.css}" />
 <link rel="stylesheet" th:href="@{/resources/css/backgroundImage.css}" />
-	<script src='https://www.google.com/recaptcha/api.js'></script>
+	<script src='https://www.google.com/recaptcha/api.js' async="true" />
 	<script src="jquery-1.11.3.min.js"></script>
+<script>
+function get_action(form) {
+    var v = grecaptcha.getResponse();
+    if(v.length == 0)
+    {
+        document.getElementById('captcha').innerHTML="You can't leave Captcha Code empty";
+        return false;
+    }
+    if(v.length != 0)
+    {
+        document.getElementById('captcha').innerHTML="Captcha completed";
+        return true; 
+    }
+}
+</script>
+
 </head>
 <body>
 
@@ -23,7 +39,7 @@
 		<div class="small-12 columns">
 			<font color="#0099CC" th:text="${emailConfirm}"> CONFIRMATION MESSAGE </font>
 			<h4 class="header" th:text="#{registration.header}">Registrieren</h4>
-			<form action="#" th:action="@{/registration}" th:object="${RegistrationForm}" method="post">
+			<form action="#" th:action="@{/registration}" th:object="${RegistrationForm}" method="post" onsubmit="return get_action(this)" >
 				<div class="row" data-equalizer="1">
 					<div class="small-12 large-6 columns">
 						<div class="panel" data-equalizer-watch="1">
@@ -369,7 +385,9 @@
 							</div>
 							<div class="row">
                                 <div class="small-12 columns">
-                                	<div class="g-recaptcha" data-sitekey="6LdakhETAAAAAJtE5rWb3kQuTi-GcEoUiS94ULai"></div>
+                                	<!-- <div class="g-recaptcha" data-sitekey="6LdakhETAAAAAJtE5rWb3kQuTi-GcEoUiS94ULai"></div> -->
+                            		<div class="g-recaptcha" id="rcaptcha" style="margin-left: 90px;" data-sitekey="6LdakhETAAAAAJtE5rWb3kQuTi-GcEoUiS94ULai"></div>
+									<span id="captcha" style="margin-left:100px;color:red" />
                             	</div>
                             </div>
 						</div>
@@ -606,7 +624,7 @@
 								</div>
                             </div>
 						</div>
-						<button class="right button" type="submit" th:href="@{/}" th:text="#{registration.register}">Registrieren</button>
+						<button class="right button" type="submit" th:href="@{/}" th:text="#{registration.register}" >Registrieren</button>
 					</div>
 				</div>
 			</form>
