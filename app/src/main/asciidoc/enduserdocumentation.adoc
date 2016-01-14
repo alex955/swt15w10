@@ -51,7 +51,7 @@ __Refugee App Gruppe 10 SWP TU Dresden__
 * Eigene Artikel können editiert und gelöscht werden 
 
 - Nachrichten
-* Macht der werte Herr Huber
+* Wenn über die Artikelseite mit einem User Kontakt über einen Artikel aufgenommen wurde, können bei dieser Teilfunktion des Programms Nachrichten zwischen dem anfragenden User und dem anbietenden User ausgetauscht werden. Dies geschieht nicht auf Basis von Freitextnachrichten sondern mit aus einer Menge von vorgefertigten Textblöcken auswählbaren, vorgefertigten Nachrichten, die dem User in der jeweiligen gewählten Seitensprache angezeigt werden. Bei manchen Textblöcken erscheint ein Freitextbereich, bei dem Fragen gestellt werden können (Übersetzung muss selbst z.B. durch google translator erledigt werden) bzw. ein Picker für den Zeitpunkt eines Treffens.
 
 - Admin-Modus
 * Als eingeloggter Admin befindet sich unten im Footer ein Butten für Adminfunktionen. Diese sind:
