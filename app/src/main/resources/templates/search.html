@@ -17,26 +17,24 @@
 
 	<nav th:include="topbar :: topbar"></nav>
 
-	<div th:if="${FormAttributes != null and not #lists.isEmpty(FormAttributes) and #lists.isEmpty(anzeigen) == false} " class="row" name="Search">			
-		<div class="small-12 columns">
-			<p>&nbsp;</p>
-			<h4 class="header">Welche Tags sollen gesucht werden?</h4>
-			<form action="#" th:action="@{/searchbytags}" th:object="${NewAttributes}" method="post">
-				<div th:each="Attribute : ${FormAttributes}" > 
-					<label th:text="#{${Attribute.name}}"></label>
-					<select th:field="*{choosenTags}">
-		  				<option th:each="String : ${Attribute.tags}" th:value="${String}" th:text="#{${String}}"></option>
-					</select>
-				</div>
-				<button class="right small button" type="submit" th:href="@{/}">Suchen</button>
-			</form>
-		</div>
-	</div>
+			
 	
 	<div class="row" data-equalizer="1">
 		<div class="small-12 columns">
 			<p>&nbsp;</p>
 			<ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4" >
+				<li th:if="${FormAttributes != null and not #lists.isEmpty(FormAttributes) and #lists.isEmpty(anzeigen) == false} ">
+					<h4 class="header" th:text="#{tagsearch}">Welche Tags sollen gesucht werden?</h4>
+					<form action="#" th:action="@{/searchbytags}" th:object="${NewAttributes}" method="post">
+						<div th:each="Attribute : ${FormAttributes}" > 
+							<label th:text="#{${Attribute.name}}"></label>
+							<select th:field="*{choosenTags}">
+				  				<option th:each="String : ${Attribute.tags}" th:value="${String}" th:text="#{${String}}"></option>
+							</select>
+						</div>
+						<button class="right small button" type="submit" th:href="@{/}" th:text="#{topbar.search}">Suchen</button>
+					</form>
+				</li>
 				<li th:each="Article : ${anzeigen}">
 					<a th:href="@{/showArticle/}+${Article.id}">
 						<img class="th" th:src="@{/showPicture/}+${Article.id}"/>

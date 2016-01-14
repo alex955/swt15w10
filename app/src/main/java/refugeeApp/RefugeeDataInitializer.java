@@ -93,10 +93,10 @@ public class RefugeeDataInitializer implements DataInitializer {
         //settingsRepo.save(new Setting("noUploadedPicturePath", "/Users/Alexander/Documents/Studium/swt15w10/app/src/main/resources/static/resources/img/keinbild.png.png", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded offers without one"));
 
         //Sascha
-        //settingsRepo.save(new Setting("noUploadedPicturePath", "/Users/sasch/Documents/swt15w10/app/src/main/resources/static/resources/img/keinbild.png.png", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded offers without one"));
+        settingsRepo.save(new Setting("noUploadedPicturePath", "/Users/sasch/Documents/swt15w10/app/src/main/resources/static/resources/img/keinbild.png.png", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded offers without one"));
 
         //Lukas
-        settingsRepo.save(new Setting("noUploadedPicturePath", "/Users/lukas/Desktop/homework.PNG", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded offers without one"));
+        //settingsRepo.save(new Setting("noUploadedPicturePath", "/Users/lukas/Desktop/homework.PNG", "The Path to the Application and the img folder in resources, where a standard picture is for the uploaded offers without one"));
         
         //resizes the standard picture
 //    	if(ImageIO.read(new File(settingsRepo.findOne("noUploadedPicturePath").getStringValue()))!= null){
