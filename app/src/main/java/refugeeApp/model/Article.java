@@ -176,4 +176,14 @@ public class Article {
 				+ ", street=" + street + ", category=" + category + ", zip=" + zip + ", creator="
 				+ creator + ", creationdate=" + creationdate.toString() + ", picture=" + picture + " , kind=" + kind ;
 	}
+
+	/**
+	 * Adds the attribute.
+	 *
+	 * @param attribute the attribute
+	 */
+	public void addAttribute(Attribute attribute){
+		this.attributes.add(attribute);
+	}
+
 }
