@@ -21,5 +21,8 @@ Die verwendete Zeit beinhaltet auch das Lesen von Dokumentationen, Besprechungen
 |28.12.2015   |03.01.2016   |480  |500    | 840   |450   |540    |-
 |04.01.2016   |10.01.2016   |1080 |700    |960    |910   |1560   |60
 |11.01.2016   |17.01.2016   |1500 |400    |1510   |1780  |810    |-
-|Summe:       |             |11460|9140   |11830  |
+|Summe (min): |             |11460|9140   |11830  |11175 |12870  |765
+|Summe (h):   |             |191  |152    |197    |186   |215    |13
 |===
+
+Gesamtaufwand des Teams in Stunden: 954
