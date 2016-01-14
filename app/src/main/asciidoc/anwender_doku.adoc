@@ -1,0 +1,59 @@
+= Anwenderdokumentation
+
+__Refugee App Gruppe 10 SWP TU Dresden__
+
+== Vorraussetzungen für die Nutzung
+
+- Internetfähiges Gerät (egal ob Smartphone, Tablet oder Computer)
+
+== Zielgruppe
+
+1. Flüchtlinge in Deutschland, der Hilfe von hilfsbereiten Menschen im Land beanspruchen möchte
+2. Helfende in Deutschland, der Flüchtlingen Hilfe in Form von Gütern und/oder Dienstleistungen unentgeltlich anbieten möchte
+
+== Anwendungsoberfläche
+
+- Topbar
+ Die Topbar ist auf jedem Template zu finden
+
+* Button oben links
+** Zeigt alle Artikel an
+* Kategorienauswahl
+** Auswahl der Haupt- oder Unterkategrie durch Klick engt Suchergebnisse auf jeweilige Kategorie ein
+* Suchfeld
+** Hier kann der Aktuelle Ort als PLZ, Stadt, Straße und Kombination der 3 Attribute eingegeben werden
+* Umfeldsuche
+** Bei eingegebener Ortssuche werden Suchergebnisse auf eingegebenen Umkreis eingeschränkt
+* Sprachwechsler
+** Unabhängig von der Browsersprache kann hier die Sprache der Webseite eingestellt werden
+* Angebot einstellen
+** Im eingeloggten Zustand kann hier ein neues Angebot für Hilfesuchende eingestellt werden
+* Account-Menü
+** Im nicht eingeloggten Zustand kann man sich ein loggen und sich registrieren
+** Im eingeloggten Zustand kann man hier auf seine Nachrichten zugreifen, seine eigenen Angebote anschauen, seine Benutzereinstellungen ändern und sich ausloggen
+
+- Startseite
+* Außer dem Lesen der kurzen Beschreibung der Website, kann man sich hier einloggen und des Registrierungsvorgang starten
+
+- Registrierungstemplate
+* Nach Eingabe aller Daten, kann sich über den Registrierungsbutten angemeldet werden. Beim Klicken auf den Button wird überprüft, ob alle Eingaben korrekt sind. Eventuell müssen daraufhin noch Änderungen vorgenommen werden. Danach wird eine Bestätigungs-E-Mail gesendet. Nachdem der Bestätigungs-Link der E-Mail angeklickt wurde, ist der Account aktiviert
+
+- Angebot einstellen
+* Nach Eingabe aller Eingabefelder, wird der Artikel angelegt
+* Adresse ist Standardmäßig die Adresse des aktuellen Benutzers
+* Auf der nächsten Seite können noch Eigenschaften des Artikels spezifiziert werden
+
+- Suchergebnisse
+* Nachdem in der Topbar Suchfilter eingestellt wurden (siehe Topbar), können Ergebnisse durch einen Klick aufgerufen werden
+
+- Artikelseite
+* Bei Artikeln von anderen kann Kontakt mit dem Anbieter aufgenommen werden
+* Eigene Artikel können editiert und gelöscht werden 
+
+- Nachrichten
+* Macht der werte Herr Huber
+
+- Admin-Modus
+* Als eingeloggter Admin befindet sich unten im Footer ein Butten für Adminfunktionen. Diese sind:
+** Anzeige aller registrierter Benutzer
+** Anzeige aller Kategorien mit Löschfunktion
