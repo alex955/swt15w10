@@ -317,29 +317,30 @@ public class SearchController {
 		 
 		List<Article> output = new LinkedList<Article>();
 		List<String> providedtags =  SearchTag.getChoosenTags();
-		List<Attribute> searchattributes = new LinkedList<Attribute>();
+		List<Attribute> searchAttributes = new LinkedList<Attribute>();
 		
-		// Übermittelte leere Attribute aussortieren
-		int count = 0;
-		for (String e : providedtags) {
-			if (e.isEmpty()) {
-			count++;	
-			} 
-			else
-			{ 
-			LinkedList<String> tag = new LinkedList<String>();
-			tag.add(e);
-			// fügt das Attribut der Attribute Liste hinzu
-			Attribute att = new Attribute();
-			att.setName(this.categories.findOne(this.getCurrent_cat()).get().getAttributes().get(count).getName());
-			att.setTags(tag);
-			searchattributes.add(att);
+		// Umwandlung übergebene Strings in LinkedList<Attributes>
+		int count=0;
+		for(Attribute att:categories.findOne(SearchQuery.getCategory()).get().getAttributes()){
+			LinkedList<String> tags=new LinkedList<String>();
+			tags.add(providedtags.get(count));
+			searchAttributes.add(new Attribute(att.getName(),tags));
 			count++;
-			}
-		 } 
+		}
+	
 		
-		//Attribute mit Artikeln vergleichen
-		output.addAll(catGoods.stream().filter(good -> good.getAttributes().containsAll(searchattributes)).collect(Collectors.toList()));
+		//Artikel mit einzelnen Attributen vergleichen
+		for(Article art:catGoods)	
+		{ 
+			List<Boolean> flag= new LinkedList<Boolean>();
+			for(Attribute att:art.getAttributes()){
+			if (searchAttributes.contains(att)) flag.add(true); else flag.add(false);
+		
+			}
+			if (!flag.contains(false)) output.add(art);
+		
+		}	
+			
 		model.addAttribute("anzeigen", this.sortOutArticlesWithDistance(output));			   
 		return "search";
 	}
