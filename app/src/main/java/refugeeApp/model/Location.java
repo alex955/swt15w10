@@ -69,12 +69,11 @@ public class Location {
 		GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyAXULGtfv96afP6mTq9W294gKRlIVr3EMk");
 		GeocodingResult[] results;
 		try {
-			results = GeocodingApi.geocode(context,ort.getAddress()).await();
+			results = GeocodingApi.geocode(context,ort.getAddress() + " Deutschland").await();
 				
 	    	ort.latitude=results[0].geometry.location.lat;
 	    	ort.longitude=results[0].geometry.location.lng;
-			
-		
+	    	
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

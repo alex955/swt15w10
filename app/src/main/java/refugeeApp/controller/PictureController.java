@@ -34,6 +34,7 @@ public class PictureController{
 	public PictureController(ArticleRepo articleRepo, SettingsRepository settingsRepo){
 		this.articleRepo=articleRepo;
 		this.settingsRepo = settingsRepo;
+		
 	}
 	
 	/**
