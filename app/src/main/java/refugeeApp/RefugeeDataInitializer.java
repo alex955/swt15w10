@@ -1177,9 +1177,13 @@ public class RefugeeDataInitializer implements DataInitializer {
         arab.setDeleteEmail("");
         arab.setChangeEmailTopic("");
         arab.setChangeEmail("");
+        arab.setResetPwTopic("");
+        arab.setResetPw("");
         arab.setDeleteUserPopup("");
         arab.setDateError("");
         arab.setDeleteChat("");
+        arab.setResetConfirm("RESET CONFIRM");
+        arab.setNoAccountError("NOACCOUNT ERROR");
 
         languageRepository.save(arab);
     }
