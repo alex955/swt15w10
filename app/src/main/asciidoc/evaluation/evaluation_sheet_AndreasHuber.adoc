@@ -1,0 +1,24 @@
+= Persönliches Feedback eines Teammitgliedes des Softwarepraktikums 2015/16
+
+**Von:**
+Andreas Huber
+
+**Gruppe:**
+Gruppe 10
+
+== Was habe ich gelernt?
+*Java in größeren Projekten sowie Nutzung von mehreren Frameworks
+*Teamarbeit bei größeren/längerfristigen Projekten
+
+= Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
+* nur gute, alles hat gut funktioniert - menschlich sowie fachlich
+
+== Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
+*Erlerntes Basiswissen in folgenden Frameworks/Engines: Spring, JQuery, Thymeleaf, Salespoint
+*gutes Fundament für 1)schnelles und zuverlässiges einfügen von Komponmenten in neue Projekte sowie für 2)weiteres Erlernen der Frameworks, Engines und APIs
+*nichtsdestotrotz die Erfahrung gemacht, dass Frameworks selbst bei elementaren Sachen nicht fehlerfrei und dementsprechend verlässlich sind (z.B. Salespoint Usermanagement)
+
+== Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
+*Reduktion des Zeitaufwands (15h pro Woche für 6 ECTS sind meiner Meinung nach zu viel, andere Module des gleichen Semesters leiden definitiv darunter), wobei andererseits darunter natürlich das angeeignete Wissen leiden würde. Ggf. Praktikum auf Semesterferien ausdehnen?
+
+== Sonstiges und Anmerkungen
