@@ -1,0 +1,22 @@
+= Persönliches Feedback eines Teammitgliedes des Softwarepraktikums 2015/16
+
+**Von:** Lukas Klose
+
+**Gruppe:** 10
+
+== Was habe ich gelernt?
+Mit dem Praktikum wurde ich das erste Mal mit einem gorßen Softwareprojekt in einer Gruppe, welches über eine längere Zeit andauert, konfrontiert. Bei der Zusammenarbeit eines Teams im Softwarebereich muss man auf viele Dinge achten, wie verständlicher Code und strikte Modularisierung, sodass es für jeden Mitarbeiter möglich ist, Programmiertes zu verwenden und zu erweitern. Kleine Fehler oder nicht einheitlich verwendbarer Code führen schnell zu Punkten im Projekt, wo Features nicht umgesetzt oder neu geschrieben werden müssen.
+
+Dadurch, dass ich früher nur an kleineren Softwareprojekten gearbeitet habe, war mir die Bedeutung ALTER WTF DEN REST MACH ICH WANNANDERS
+
+
+= Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
+* TODO
+
+== Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
+* TODO
+
+== Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
+* TODO
+
+== Sonstiges und Anmerkungen
