@@ -1,0 +1,27 @@
+﻿= Persönliches Feedback eines Teammitgliedes des Softwarepraktikums 2015/16
+
+**Von:Alexander Shulga**
+
+**Gruppe:10**
+
+== Was habe ich gelernt?
+* wie wichtig Tests, Javadoc und ein sauberer Code ist
+* Aneignung von Wissen über Frameworks, IDEs und APIs
+* Einteilung von Arbeit innerhalb der Gruppe
+* Arbeiten mit git
+* Noten sagen nichts aus
+
+= Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
+* manchen Leuten muss man Aufgaben zuweisen
+* man muss konkrete Termine und Ziele setzen
+* Javadoc und Kommentare sind sehr wichtig
+
+== Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
+* Foundation und SalesPoint hat die Arbeit stark vereinfacht
+
+== Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
+* bessere umfangreichere Einführung
+* Lernraum eine Woche früher 
+* zuviel Aufwand
+
+== Sonstiges und Anmerkungen
