@@ -1,5 +1,7 @@
 package refugeeApp.model;
 
+import lombok.Data;
+
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import java.util.List;
 /**
  * The Class Attribute.
  */
+@Data
 @Entity
 public class Attribute {
 	
@@ -46,53 +49,6 @@ public class Attribute {
 		this.tags = tags;
 	}
 
-
-	/**
-	 * Gets the name.
-	 *
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * Sets the name.
-	 *
-	 * @param name the new name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * Gets the tags.
-	 *
-	 * @return the tags
-	 */
-	public List<String> getTags() {
-		return tags;
-	}
-
-	/**
-	 * Sets the tags.
-	 *
-	 * @param tags the new tags
-	 */
-	public void setTags(List<String> tags) {
-		this.tags = tags;
-	}
-
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -104,7 +60,6 @@ public class Attribute {
 		}
 		return id+" "+name+" "+text;
 	}
-
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)

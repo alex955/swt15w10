@@ -2,6 +2,8 @@ package refugeeApp.model;
 
 
 
+import lombok.Data;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,6 +12,7 @@ import javax.persistence.OneToOne;
 /**
  * The Class Picture.
  */
+@Data
 @Entity
 public class Picture {
 	
@@ -56,76 +59,5 @@ public class Picture {
 		return "Picture [id=" + id + ", picPath=" + picPath + ", originalFileName=" + originalFileName + ", uploader="
 				+ uploader + "]";
 	}
-	
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
-	
-	/**
-	 * Sets the id.
-	 *
-	 * @param id the new id
-	 */
-	public void setId(long id) {
-		this.id = id;
-	}
-	
-	/**
-	 * Gets the pic path.
-	 *
-	 * @return the pic path
-	 */
-	public String getPicPath() {
-		return picPath;
-	}
-	
-	/**
-	 * Sets the pic path.
-	 *
-	 * @param picPath the new pic path
-	 */
-	public void setPicPath(String picPath) {
-		this.picPath = picPath;
-	}
-	
-	/**
-	 * Gets the original file name.
-	 *
-	 * @return the original file name
-	 */
-	public String getOriginalFileName() {
-		return originalFileName;
-	}
-	
-	/**
-	 * Sets the original file name.
-	 *
-	 * @param originalFileName the new original file name
-	 */
-	public void setOriginalFileName(String originalFileName) {
-		this.originalFileName = originalFileName;
-	}
-	
-	/**
-	 * Gets the uploader.
-	 *
-	 * @return the uploader
-	 */
-	public User getUploader() {
-		return uploader;
-	}
-	
-	/**
-	 * Sets the uploader.
-	 *
-	 * @param uploader the new uploader
-	 */
-	public void setUploader(User uploader) {
-		this.uploader = uploader;
-	}
+
 }

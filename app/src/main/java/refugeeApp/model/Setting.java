@@ -6,19 +6,9 @@ package refugeeApp.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import lombok.Data;
 
-import lombok.Getter;
-import lombok.Setter;
-
-/**
- * Gets the description.
- */
-@Getter/**
- * Sets the description.
- *
- * @param description the new description
- */
-@Setter
+@Data
 @Entity
 public class Setting {
    

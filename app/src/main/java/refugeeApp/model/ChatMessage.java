@@ -1,5 +1,7 @@
 package refugeeApp.model;
 
+import lombok.Data;
+
 import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import javax.persistence.Id;
 /**
  * The Class ChatMessage.
  */
+@Data
 @Entity
 public class ChatMessage {
 	
@@ -61,159 +64,6 @@ public class ChatMessage {
 		message = "";
 		fromId = toId = 0;
 		this.setTime(LocalDateTime.now());
-	}
-	
-	/**
-	 * Gets the id.
-	 *
-	 * @return the id
-	 */
-	public long getId() {
-		return id;
-	}
-
-	/**
-	 * Gets the message.
-	 *
-	 * @return the message
-	 */
-	public String getMessage() {
-		return message;
-	}
-
-	/**
-	 * Sets the message.
-	 *
-	 * @param message the new message
-	 */
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	/**
-	 * Gets the from id.
-	 *
-	 * @return the from id
-	 */
-	public long getFromId() {
-		return fromId;
-	}
-
-	/**
-	 * Sets the from id.
-	 *
-	 * @param from the new from id
-	 */
-	public void setFromId(long from) {
-		this.fromId = from;
-	}
-
-	/**
-	 * Gets the to id.
-	 *
-	 * @return the to id
-	 */
-	public long getToId() {
-		return toId;
-	}
-
-	/**
-	 * Sets the to id.
-	 *
-	 * @param to the new to id
-	 */
-	public void setToId(long to) {
-		this.toId = to;
-	}
-
-	/**
-	 * Gets the free text.
-	 *
-	 * @return the free text
-	 */
-	public String getFreeText() {
-		return freeText;
-	}
-
-	/**
-	 * Sets the free text.
-	 *
-	 * @param freeText the new free text
-	 */
-	public void setFreeText(String freeText) {
-		this.freeText = freeText;
-	}
-
-	/**
-	 * Gets the time.
-	 *
-	 * @return the time
-	 */
-	public LocalDateTime getTime() {
-		return time;
-	}
-
-	/**
-	 * Sets the time.
-	 *
-	 * @param time the new time
-	 */
-	public void setTime(LocalDateTime time) {
-		this.time = time;
-	}
-
-	/**
-	 * Gets the from user name.
-	 *
-	 * @return the from user name
-	 */
-	public String getFromUserName() {
-		return fromUserName;
-	}
-
-	/**
-	 * Sets the from user name.
-	 *
-	 * @param fromUserName the new from user name
-	 */
-	public void setFromUserName(String fromUserName) {
-		this.fromUserName = fromUserName;
-	}
-
-	/**
-	 * Gets the to user name.
-	 *
-	 * @return the to user name
-	 */
-	public String getToUserName() {
-		return toUserName;
-	}
-
-	/**
-	 * Sets the to user name.
-	 *
-	 * @param toUserName the new to user name
-	 */
-	public void setToUserName(String toUserName) {
-		this.toUserName = toUserName;
-	}
-
-	/**
-	 * Gets the content id.
-	 *
-	 * @return the content id
-	 */
-	public int getContentId() {
-		return contentId;
-	}
-
-	/**
-	 * Sets the content id.
-	 *
-	 * @param contentId the new content id
-	 */
-	public void setContentId(int contentId) {
-		this.contentId = contentId;
 	}
 
 }
