@@ -31,6 +31,9 @@ public class User {
     
     /** The username. */
     private String username;
+    
+    /** The username to lower case */
+    private String usernameLowercase;
 	
 	/** The email. */
 	private String email;
@@ -121,7 +124,8 @@ public class User {
         this.language2 = language2;
         this.language3 = language3;        
         this.validated = false;
-        this.hashcode = (lastName + firstName + Long.toString(id)).hashCode();       
+        this.hashcode = (lastName + firstName + Long.toString(id)).hashCode();   
+        this.usernameLowercase = username.toLowerCase();
     }
 
     /* (non-Javadoc)

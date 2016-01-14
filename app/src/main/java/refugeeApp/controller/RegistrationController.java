@@ -102,7 +102,7 @@ public class RegistrationController {
         if(result.hasErrors())
             errors = true;
 
-        if(userRepository.findByUsername(registrationForm.getUsername()) != null)
+        if(userRepository.findByUsernameLowercase(registrationForm.getUsername().toLowerCase()) != null)
             errors = true;
 
         if(userRepository.findByEmail(registrationForm.getEmail()) != null)
@@ -130,7 +130,7 @@ public class RegistrationController {
                 modelMap.addAttribute("usernameError", usernameError);
             }
 
-            if(userRepository.findByUsername(registrationForm.getUsername()) != null){
+            if(userRepository.findByUsernameLowercase(registrationForm.getUsername().toLowerCase()) != null){
                 final String usernameUsed = language.getUsernameUsedError();
                 modelMap.addAttribute("usernameUsed", usernameUsed);
             }

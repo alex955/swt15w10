@@ -31,5 +31,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
      * @return the user
      */
     User findByEmail(String email);
+    
+    User findByUsernameLowercase(String usernameLowercase);
    
 }
