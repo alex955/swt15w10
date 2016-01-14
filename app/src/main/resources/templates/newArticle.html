@@ -92,7 +92,7 @@ function checkedArticle(){
 						</div>
 						<div class="medium-8 small-12 columns">
 							<label><font color="red" th:text="${titleError}"> ERROR MESSAGE </font></label>
-							<input type="text" value="click here!" id="datetimepicker_mask" name="activityDate" />
+							<input type="text" value="____/__/__ __:__" id="datetimepicker_mask" name="activityDate" />
 							<!--  <input type="text" name="title" th:placeholder="#{newArticle.title}" /> -->
 						</div>
 					</div>
@@ -169,13 +169,14 @@ function checkedArticle(){
  
 
 </body>
-<script th:src="@{/resources/js/build/jquery.datetimepicker.full.js}"></script>
-<script th:src="@{/resources/js/dateTimePicker.js}"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/resources/css/jquery.datetimepicker.css}"/>
 <script th:src="@{/resources/js/jquery.js}"></script>
-<link rel="stylesheet" type="text/css" th:href="@{/resources/css/jquery.datetimepicker.css}" />
+<script th:src="@{/resources/js/build/jquery.datetimepicker.full.min.js}"></script>
 <script>
 $("#activityDateRow").hide();
 $("#chooseCategory").hide();
-jQuery('#datetimepicker_mask').datetimepicker();
+jQuery('#datetimepicker_mask').datetimepicker({
+	  format:'d.m.Y H:i'
+	});
 </script>
 </html>

@@ -1053,7 +1053,7 @@ public class RefugeeDataInitializer implements DataInitializer {
         
         
         Article g13 = new Article("Esstisch","Einfacher Esstisch für das gemeinsame Essen mit der Familie","Kassel","Auf der Hasenhecke",56,"34125",userRepository.findOne((long)3), "article");
-        Location ort13 = new Location(g13.getLocation()+g13.getZip()+g13.getStreet());
+        Location ort13 = new Location(g13.getStreet() + " "+g13.getZip()+ " "+ g13.getLocation());
         g13.setLatitude(ort13.getLatitude());
         g13.setLongitude(ort13.getLongitude());
         

@@ -446,9 +446,9 @@ public class ArticleController {
 				return "newArticle";
 			}
 			String activityDateString = newArticleForm.getActivityDate();
-			String parsedDate = activityDateString.substring(0, 4) + "-" + activityDateString.substring(5, 7) + "-" + activityDateString.substring(8,10);
+			String parsedDate = activityDateString.substring(0, 2) + "-" + activityDateString.substring(3, 5) + "-" + activityDateString.substring(6,10);
 			String parsedTime = activityDateString.substring(11, 13) + ":" +  activityDateString.substring(14, 16);
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
 			activityDate = LocalDateTime.parse(parsedDate + " " + parsedTime, formatter);
 		}
 		//end parsing
