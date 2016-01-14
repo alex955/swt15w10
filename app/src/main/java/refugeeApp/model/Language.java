@@ -18,6 +18,9 @@ public class Language {
 
     /** The browser language. */
     private String browserLanguage;
+    
+    /** . */
+    private String recaptchaError;
 
     /** The role error. */
     //Registration + Usersettings

@@ -58,6 +58,12 @@ public class RegistrationForm {
     private boolean isValid(){
         return this.password.equals(this.confirmPW);
     }
+    
+    @AssertTrue(message = "")
+    private boolean isRecaptchaValidated(){
+    	return this.getRecaptchaValidated().equals("true");
+    }
+
 
     /** The city. */
     @NotEmpty(message = "")
@@ -83,5 +89,8 @@ public class RegistrationForm {
 
     /** The language3. */
     private String language3;
+    
+    /** checks whether recaptcha is validated to encounter deactivated javascript */
+    private String recaptchaValidated;
 
 }

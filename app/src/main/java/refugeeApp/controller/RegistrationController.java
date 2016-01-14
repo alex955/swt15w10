@@ -107,6 +107,9 @@ public class RegistrationController {
 
         if(userRepository.findByEmail(registrationForm.getEmail()) != null)
             errors = true;
+        
+       if(!registrationForm.getRecaptchaValidated().equals("true"))
+    	   errors = true;
 
         if(errors) {
 
@@ -169,6 +172,13 @@ public class RegistrationController {
                 final String streetError = language.getStreetError();
                 modelMap.addAttribute("streetError", streetError);
             }
+            
+            if(!registrationForm.getRecaptchaValidated().equals("true")){
+            	final String recaptchaError = language.getRecaptchaError();
+            	modelMap.addAttribute("recaptchaError", recaptchaError);
+            }
+            
+            
             model.addAttribute("current_category",new Category("AlleKategorien",1));
             model.addAttribute("current_ort",new Location(""));
             

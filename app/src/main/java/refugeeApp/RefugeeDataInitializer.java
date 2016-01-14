@@ -1104,7 +1104,8 @@ public class RefugeeDataInitializer implements DataInitializer {
         german.setDeleteChat("Wollen Sie das gesamte Gespräch wirklich löschen? Die bisher in diesem Gespräch geschriebenen Nachrichten werden unwiderruflich für Sie und Ihren Gesprächspartner gelöscht");
         german.setResetConfirm("Bestätigen Sie das Zurücksetzen Ihres Passworts durch den Link der an die angegebene Email-Adresse gesendet wurde.");
         german.setNoAccountError("Zu der angegeben EMail Adresse wurde kein Account gefunden.");
-
+        german.setRecaptchaError("Bitte das recaptcha validieren bzw. JavaScript aktivieren.");
+        	
         languageRepository.save(german);
 
 
@@ -1139,8 +1140,9 @@ public class RefugeeDataInitializer implements DataInitializer {
         english.setDeleteUserPopup("An email has been sent your mailbox. Please follow the instructions in there to confirm the deletion of your user account.");
         english.setDateError("Please choose date and time for the activity by clicking the input field.");
         english.setDeleteChat("Do you really want to delete this chat conversation completely? All in this conversation sent and received messages will be deleted for you and your chat partner");
-        english.setResetConfirm("RESET CONFIRM");
-        english.setNoAccountError("NOACCOUNT ERROR");
+        english.setResetConfirm("Please confirm that you really want to reset your password.");
+        english.setNoAccountError("No account found for this email.");
+        english.setRecaptchaError("Please verify the recaptcha or activate JavaScript.");
 
         languageRepository.save(english);
 
@@ -1178,7 +1180,7 @@ public class RefugeeDataInitializer implements DataInitializer {
         arab.setDeleteChat("");
         arab.setResetConfirm("RESET CONFIRM");
         arab.setNoAccountError("NOACCOUNT ERROR");
-
+        arab.setRecaptchaError("Please verify the recaptcha or activate JavaScript.");
         languageRepository.save(arab);
     }
 }
