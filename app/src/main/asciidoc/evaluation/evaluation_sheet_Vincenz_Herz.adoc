@@ -1,0 +1,30 @@
+= Persönliches Feedback eines Teammitgliedes des Softwarepraktikums 2015/16
+
+**Von: Vincenz Herz **
+
+**Gruppe: 10**
+
+== Was habe ich gelernt?
+* Arbeit im Team
+* Java Fähigkeiten verbessert
+* Arbeiten mit Frameworks (Spring, Salespoint, Thymeleaf, etc.)
+* Dateimanagement mit Git
+* Arbeitsverteilung innerhalb einer Gruppe
+
+= Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
+* Feste Termine fördern den Fortschritt des Projekts
+* Kommunikation dringend notwendig bei Zusammenarbeit an verschiedenen Programmteilen
+* Unterschiedliche Vorkenntnisse erschweren teilweise die Zusammenarbeit
+
+== Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
+* JavaDoc gründlich lesen
+* Nicht alles wird abgedeckt (zB Mehrfache UseraccountIdentifier)
+* Nicht immer ideal durch alle IDEs unterstützt
+
+== Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
+* Realistischere Zeitvorstellung
+* Gleichmäßigerer Aufgabenumfang (Vergleich Semi-Intern und Interne Projekte anderer Gruppen)
+
+
+== Sonstiges und Anmerkungen
+-
