@@ -276,8 +276,9 @@ public class SearchController {
 
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
-		model.addAttribute("anzeigen", this.sortOutArticlesWithDistance(articles));
+		model.addAttribute("anzeigen", (articles));
 		model=this.getCurrent_cat(model);
+		this.ort.setAddress("");
 		model.addAttribute("current_ort",this.ort);
 		
 		return "search";
