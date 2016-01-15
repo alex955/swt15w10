@@ -5,18 +5,20 @@
 **Gruppe:** 10
 
 == Was habe ich gelernt?
+
 Mit dem Praktikum wurde ich das erste Mal mit einem gorßen Softwareprojekt in einer Gruppe, welches über eine längere Zeit andauert, konfrontiert. Bei der Zusammenarbeit eines Teams im Softwarebereich muss man auf viele Dinge achten, wie verständlicher Code und strikte Modularisierung, sodass es für jeden Mitarbeiter möglich ist, Programmiertes zu verwenden und zu erweitern. Kleine Fehler oder nicht einheitlich verwendbarer Code führen schnell zu Punkten im Projekt, wo Features nicht umgesetzt oder neu geschrieben werden müssen.
 
-Dadurch, dass ich früher nur an kleineren Softwareprojekten gearbeitet habe, war mir die Bedeutung ALTER WTF DEN REST MACH ICH WANNANDERS
-
+Dadurch, dass ich früher nur an kleineren Softwareprojekten gearbeitet habe, war mir die Bedeutung von Tests von wichtigen Funktionen nicht bewusst und bis zum Ende haben diese gefehlt.
 
 = Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
-* TODO
+
+Dadurch, dass wir zu fünft in einer Gruppe gearbeitet haben, ging es manchmal ziemlich schnell voran bei vielen Problemen. Auf Issues, die es von jedem immerwieder gab, konnte durch GitHub schnell geholfen werden. Es gab kaum Baustellen, bei denen niemand bescheid wusste.
 
 == Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
-* TODO
+
+Das wiederverwenden von Datenbanken ermöglicht es, häufig in der Softwareentwicklung auftretende Probleme schnell und einfach zu lösen. So kann man sich auf wesentliche Punkte in seinem Projekt konzentrieren.
 
 == Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
-* TODO
 
-== Sonstiges und Anmerkungen
+Die Vorlesung "Softwaretechnologie" im zweiten Semester sollte auf das Projekt vorbereiten. Ein großteil der Vorlesung waren allerdings Dinge, die mir für die Arbeit am Projekt nicht weitergeholfen haben. Für eine näher an der Praxis orientierte Vorlesung, die mir bei der späteren Arbeit an Projekten hilft, wäre ich dankbar gewesen.
+
