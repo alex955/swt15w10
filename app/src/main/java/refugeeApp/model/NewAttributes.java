@@ -12,5 +12,13 @@ public class NewAttributes {
 	
 	/** The choosen tags. */
 	private LinkedList<String> choosenTags= new LinkedList<String>();
+	
+	public NewAttributes() {
+		super();
+	}
+	public NewAttributes(LinkedList<String> attributes ){
+		this.choosenTags=attributes;
+		
+	}
 
 }

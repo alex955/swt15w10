@@ -306,8 +306,7 @@ public class SearchController {
 		this.processedCategories = categoryMethods.getProcessedCategories();
 		model.addAttribute("categories", this.processedCategories);
 		model.addAttribute("categoriesForm", this.categories.findAll());
-		model.addAttribute("FormAttributes",this.categories.findOne(articleRepo.findOne(this.getCurrent_cat()).getCategory()).get().getAttributes());
-		model.addAttribute("NewAttributes",new NewAttributes());
+		
 		model=this.getCurrent_cat(model);
 		model.addAttribute("current_ort",this.ort);
 		SearchQuery.setCategory(this.getCurrent_cat());
@@ -342,7 +341,10 @@ public class SearchController {
 			if (!flag.contains(false)) output.add(art);
 		
 		}	
-			
+		
+		
+		model.addAttribute("NewAttributes",new NewAttributes(SearchTag.getChoosenTags()));
+		model.addAttribute("FormAttributes",this.categories.findOne(SearchQuery.getCategory()).get().getAttributes());
 		model.addAttribute("anzeigen", this.sortOutArticlesWithDistance(output));			   
 		return "search";
 	}
