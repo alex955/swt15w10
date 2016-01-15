@@ -12,6 +12,7 @@ Gruppe 10
 
 = Welche Erfahrungen habe ich mit der Zusammenarbeit im Team gemacht?
 * nur gute, alles hat gut funktioniert - menschlich sowie fachlich
+* verschiedene Wissensstände müssen sich erst angleichen
 
 == Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
 *Erlerntes Basiswissen in folgenden Frameworks/Engines: Spring, JQuery, Thymeleaf, Salespoint

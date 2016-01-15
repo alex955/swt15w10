@@ -53,6 +53,7 @@
 							<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" th:text="#{topbar.logout}">Ausloggen</a></li>
 							<li sec:authorize="!isAuthenticated()"><a th:href="@{/registration}" th:text="#{topbar.register}">Einloggen</a></li>
 							<li sec:authorize="!isAuthenticated()"><a th:href="@{/}" th:text="#{topbar.login}">Einloggen</a></li>
+							<li><a th:href="@{/}" th:text="#{topbar.about}">Über diese Seite</a></li>
 						</ul>
 					</li>
 					<li class="divider"></li>

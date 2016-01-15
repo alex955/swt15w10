@@ -21,12 +21,11 @@
 			<p>&nbsp;</p>
 			<p>&nbsp;</p>
 			<div class="text-center"><h1 th:text="#{frontpage.welcome}">Frontpage</h1></div>
-				<p>User: admin1 (Passwort: admin1)</p>
-				<p>User: user1 (Passwort: user1)</p>
-				<p>User: user2 (Passwort: user2)</p>
-				<p>User: user3 (Passwort: user3)</p>
-				<p>Email Validierung für user1 testbar:</p>
-				<p>ref@gmx.de (Passwort: Test1234)</p>
+				<p th:text="#{frontpage.text1}">fp text 1</p>
+				<p th:text="#{frontpage.text2}">fp text 2</p>
+				<p th:text="#{frontpage.text3}">fp text 3</p>
+				<p th:text="#{frontpage.text4}">fp text 4</p>
+				<p th:text="#{frontpage.text5}">fp text 5</p>
 			</div>
 			<div class="small-12 large-4 columns" sec:authorize="!isAuthenticated()">
 				<p>&nbsp;</p>
