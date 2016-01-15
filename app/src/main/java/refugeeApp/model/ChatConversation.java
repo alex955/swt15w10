@@ -28,6 +28,8 @@ public class ChatConversation {
 	/** The to unread. */
 	private boolean fromUnread, toUnread;
 	
+	private String languagesFrom, languagesTo;
+	
 	/** The last question. */
 	private int lastQuestion;
 	

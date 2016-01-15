@@ -94,6 +94,17 @@ function showInputField(){
 									<a th:href="@{/chat/deleteConversation/{id}(id=${conversation.id})}" class="left alert button" id="deleteChatWarning" th:text="#{chat.delete}">Chat löschen</a>
 									<button class="right button" type="submit" th:text="#{chat.send}">Nachricht senden</button>
 								</div>
+								<div class="small-12 columns" >
+									<p>
+										<span th:text="#{chat.userSpeaksLanguages}"></span>: <br/>
+										<span th:if="${conversation.fromId} == ${currentUserId}" th:text="${conversation.languagesTo}"></span>
+										<span th:if="${conversation.fromId} != ${currentUserId}" th:text="${conversation.languagesFrom}"></span>
+									</p>
+									<p>
+									<span th:text="#{chat.textGoogleTranslate}"></span> 
+									<a href="https://translate.google.de/" target="_blank" th:text="#{chat.linkGoogleTranslate}"></a>
+									</p>
+								</div>
 							</form>
 						</div>
 					</div>

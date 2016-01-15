@@ -46,7 +46,8 @@ public class ChatController {
 	/**
 	 * The msg repo.
 	 */
-	//just for persistent/transaction(?) use so no to be saved variables are "flushed in transient state"
+	//for persistent/transaction(?) use so no to be saved variables are "flushed in transient state"
+	//furthermore it saves the messages regardless of the chatconversation (which can be deleted), but the messages persist
 	private final ChatMessageRepo msgRepo;
 	/** The processed categories. */
 	//Classvars
@@ -54,7 +55,6 @@ public class ChatController {
 	/**
 	 * The possible messages object.
 	 */
-	//TODO - replace variable with e.g. repo for chat content
 	private PossibleChatMessages possibleMessagesObject = new PossibleChatMessages();
 
 	/**
@@ -285,6 +285,12 @@ public class ChatController {
 		newConversation.setFromUserName(this.userRepository.findOne(currentUser.getId()).getUsername());
 		newConversation.setToId(currentArticle.getCreator().getId());
 		newConversation.setToUserName(this.userRepository.findOne(currentArticle.getCreator().getId()).getUsername());
+		
+		String languagesFrom = this.userRepository.findOne(currentUser.getId()).getLanguage1() + " " + this.userRepository.findOne(currentUser.getId()).getLanguage2() + " " +  this.userRepository.findOne(currentUser.getId()).getLanguage3();
+		String languagesTo = this.userRepository.findOne(currentArticle.getCreator().getId()).getLanguage1() + " " + this.userRepository.findOne(currentArticle.getCreator().getId()).getLanguage2() + " " + this.userRepository.findOne(currentArticle.getCreator().getId()).getLanguage3();
+		
+		newConversation.setLanguagesFrom(languagesFrom);
+		newConversation.setLanguagesTo(languagesTo);
 		
 		newConversation.setArticleId(id);
 		

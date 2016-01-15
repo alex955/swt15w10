@@ -1,0 +1,33 @@
+User
+	-registrieren + recaptcha
+	-einloggen
+	-Daten ändern (+löschen)
+	-Sprache ändern
+
+Artikel
+	-anlegen + Tags
+	-Bildupload
+	-meine Angebote
+	-bearbeiten/löschen
+
+Suche
+	-generelles Prinzip: durchsuche Kategorie mit Ortsbegrenzung, ohne Suchbegriff
+		-Ortssuche
+		-Kategoriensuche
+	-innerhalb des Suchergebnisses mit vorgegebenen Tags Suche spezifizieren
+
+Chat
+	-mit Button Kontakt aufnehmen
+	-je nach Artikel/Aktivität verschiedene Textblöcke + "popup" datetimepicker oder freitextfeld für zusätzliche Informationen
+	-Reaktion des Anbieters auf letzte Frage, vorgegeben textblöcke
+	-Gespräch löschbar
+
+Admin
+	-User deaktivieren/bearbeiten
+	-Kategorien löschen/inspizieren
+
+überragende Features
+	-Ortssuche, Tags, Chat
+
+schlechter Workflow
+	-DOkument erloschen bei zurückbutton teilweise

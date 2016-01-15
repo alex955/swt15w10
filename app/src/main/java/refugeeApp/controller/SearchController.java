@@ -354,7 +354,12 @@ public class SearchController {
 	 * @return frontpage template
 	 */
 	@RequestMapping(value = "/setsearchaddress")
-    public String frontpage2() {return "frontpage";}
+    public String frontpage2(Model model) {
+		model=this.getCurrent_cat(model);
+		model.addAttribute("current_ort",this.ort);
+		model.addAttribute("Ort",new Location());
+		return "frontpage";
+		}
 	
 	/**
 	 * sets search address.
