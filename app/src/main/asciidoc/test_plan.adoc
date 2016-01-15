@@ -1,4 +1,4 @@
-﻿= Test-Plan
+= Test-Plan
 
 Dieser Testplan stellt eine vereinfachte Version der IEEE 829-1998 Vorlage dar.
 
@@ -60,5 +60,18 @@ Die Verantwortlichkeiten der Testfälle finden sich in der untenstehenden Tabell
 |U-12|Filtern der Angebote durch Suchradius|Angemeldeter/unangemeldeter User|Auswählen des Suchradius|Berechnung der Entfernungen zu jedem Angebot und anschließendes Filtern
 |A-13|Filtern der Angeboten durch Kategorien|Angemeldeter/unangemeldeter User|Auswählen der Kategorie|Anzeige entsprechender Angebote
 |U-13|Filtern der Angeboten durch Kategorien|Angemeldeter/unangemeldeter User|Auswählen der Kategorie|Ausgabe jener Angebote mit entsprechender Kategorie
-fortsetzung folgt
+|A-14|Verfallsdatum von Angeboten mit Verfallsdatum|Verfallsdatum von erstelltem Angebot läuft ab|-|Angebote verschwinden nach 30 Tagen, ohne dass Handeln vom Nutzer notwendig ist
+|U-14|Verfallsdatum von Angeboten mit Verfallsdatum|Verfallsdatum von erstelltem Angebot läuft ab|-|1x pro Stunde wird die Datenbank der Angebote durchsucht und Artikel die älter als 30 Tage sind gelöscht
+|A-15|Schreiben einer Nachricht an Angebotersteller|Eingeloggter User auf Artikel von jemand Anderem|Klick auf "Nachricht senden"|Anzeige der gesendeten Nachricht in Nachrichtenhistorie
+|U-15|Schreiben einer Nachricht an Angebotersteller|Eingeloggter User auf Artikel von jemand Anderem|Klick auf "Nachricht senden"|Nachricht mit Tags, Absender und Empfänger wird in Datenbank gespeichert
+|A-16|Anzeige der Nachrichtenhistorie einer Konversation|Eingeloggter User|Klick auf Nachrichtenhistorie|Nachrichtenhistorie wird angezeigt
+|U-16|Anzeige der Nachrichtenhistorie einer Konversation|Eingeloggter User|Klick auf Nachrichtenhistorie|Nachrichten des jeweiligen Users werden aus Datenbank geladen und angezeigt
+|A-17|Sperren eines Benutzeraccounts als Admin|Eingeloggter Admin im "Admin-Mode"|Klick auf "User deaktivieren"|Account wird als deaktiviert angezeigt
+|U-17|Sperren eines Benutzeraccounts als Admin|Eingeloggter Admin im "Admin-Mode"|Klick auf "User deaktivieren"|Salespoint-Useraccount wird disabled
+|A-18|Kategorie hinzufügen als Admin|Nicht implementiert||
+|U-18|Kategorie hinzufügen als Admin|Nicht implementiert||
+|A-19|Kategorie bearbeiten als Admin|Nicht implementiert||
+|U-19|Kategorie bearbeiten als Admin|Nicht implementiert||
+|A-20|Kategorie löschen als Admin|Eingeloggter Admin im "Admin-Mode"|Klick auf "Kategorie löschen"|Kategorie mit evtl. Unterkategorien wird gelöscht
+|U-20|Kategorie löschen als Admin|Eingeloggter Admin im "Admin-Mode"|Klick auf "Kategorie löschen"|Kategorie mit evtl. Unterkategorien wir in Datenbank gelöscht
 |===

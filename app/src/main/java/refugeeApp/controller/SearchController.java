@@ -98,7 +98,6 @@ public class SearchController {
 			if ((int)this.ort.getDistance() == 0 || this.ort.getAddress().isEmpty() || (int)this.ort.getLatitude() == 0 || (int)this.ort.getLongitude() == 0)
 				output.add(article);
 			else {
-				System.out.println(distance(article.getLatitude(), article.getLongitude(), this.ort.getLatitude(), this.ort.getLongitude()));
 				if (distance(article.getLatitude(), article.getLongitude(), this.ort.getLatitude(), this.ort.getLongitude()) <= this.ort.getDistance()) {
 					output.add(article);
 				}

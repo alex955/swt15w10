@@ -120,25 +120,6 @@
 					</div>
 				</div>				
 			</div>
-			<div th:if="${isAdminLoggedIn} == true" class="small-6 large-4 columns">
-				<p>Longitude:</p>
-			</div>
-			<div class="small-6 large-8 columns">
-				<div>
-					<p></p>
-					<p th:if="${isAdminLoggedIn} == true" th:text="${Article.longitude}"></p>
-				</div>
-			</div>
-								
-			<div th:if="${isAdminLoggedIn} == true" class="small-6 large-4 columns">
-				<p>Latiude</p>
-			</div>
-			<div class="small-6 large-8 columns">
-				<div>
-					<p></p>
-					<p th:if="${isAdminLoggedIn} == true" th:text="${Article.latitude}"></p>
-				</div>
-			</div>
 																			
 			<ul class="right button-group">
 			<li><a th:if="${Creator.id} == ${currentUserId} or ${isAdminLoggedIn} == true" th:href="@{/editAttributes/}+${Article.id}" class="small button" th:text="#{article.editTags}">Tags bearbeiten</a></li>

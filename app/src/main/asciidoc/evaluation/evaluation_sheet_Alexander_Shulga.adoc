@@ -17,7 +17,7 @@
 * Javadoc und Kommentare sind sehr wichtig
 
 == Welche Erfahrungen habe ich bei der Wiederverwendung von Bibliotheken/Frameworks (insbesondere SalesPoint) gemacht?
-* Foundation und SalesPoint hat die Arbeit stark vereinfacht
+* Foundation und SalesPoint haben die Arbeit stark vereinfacht
 
 == Welche Vorschläge zur weiteren Verbesserung des Softwarepraktikums gibt es?
 * bessere umfangreichere Einführung

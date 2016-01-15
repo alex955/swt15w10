@@ -18,6 +18,7 @@
 
 	<div class="row">
 		<div class="small-12 columns">
+
 			<div class="small-8 columns">
 			<p>&nbsp;</p>
 			<p>&nbsp;</p>
@@ -34,14 +35,19 @@
 					</div>
 				</div>
 			</div>
+			
+				
 			<p>&nbsp;</p>
 				<p>&nbsp;</p>
 			<div class="small-12 large-4 columns" sec:authorize="!isAuthenticated()">
 				
 				
 				<form action="#" th:action="@{/}" method="post">
+
 				<div class="panel">
 					
+					<div class="show-for-medium-up">
+					</div>
 					<div th:if="${param.error}" class="alert alert-error"><font color="red" th:text="#{frontpage.loginError}"> Ungültger Username und/oder Passwort.</font></div>
 					<div th:if="${param.logout}" class="alert alert-success" th:text="#{frontpage.logoutSuccess}"> Sie wurden ausgeloggt. </div>
 					<div>
@@ -59,8 +65,8 @@
 				</div>
 				</form>
 			</div>
+			</div>
 		</div>
-	</div>
 
 	<footer th:include="footer :: footer"></footer>
 
