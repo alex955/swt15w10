@@ -38,7 +38,7 @@ function get_action(form) {
 		<div class="small-12 columns">
 			<font color="#0099CC" th:text="${emailConfirm}"> CONFIRMATION MESSAGE </font>
 			<h4 class="header" th:text="#{registration.header}">Registrieren</h4>
-			<form action="#" th:action="@{/registration}" th:object="${RegistrationForm}" method="post" onsubmit="return get_action(this)" >
+			<form action="#" th:action="@{/registration}" th:object="${RegistrationForm}" method="post" onsubmit="get_action(this)" >
 				<input id="hiddenRecaptcha" type="hidden" name="recaptchaValidated" value="false" />
 				<div class="row" data-equalizer="1">
 					<div class="small-12 large-6 columns">
@@ -47,7 +47,7 @@ function get_action(form) {
 								<div class="large-5 columns" th:text="#{registration.role}"></div>
 								<div class="large-7 columns">
 									<div class="chooseRole">
-										<label><font color="red" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"> ERROR MESSAGE </font></label>
+										<label><font color="red" th:text="${roleError}"> ERROR MESSAGE </font></label>
 										<input id="refugee" type="radio" name="role" value="refugee" th:field ="*{role}"/>
 										<a for="refugee" th:text="#{registration.refugee}"></a>
 										<input id="volunteer" type="radio" name="role"  value="volunteer" th:field ="*{role}" />
@@ -387,7 +387,7 @@ function get_action(form) {
                                 <div class="small-12 columns">
                                 	<!-- <div class="g-recaptcha" data-sitekey="6LdakhETAAAAAJtE5rWb3kQuTi-GcEoUiS94ULai"></div> -->
                                 	<label><font color="red" th:text="${recaptchaError}"> ERROR MESSAGE </font></label>
-                            		<div class="g-recaptcha" id="rcaptcha" style="margin-left: 90px;" data-sitekey="6LdakhETAAAAAJtE5rWb3kQuTi-GcEoUiS94ULai"></div>
+									<div class="g-recaptcha" id="rcaptcha" style="margin-left: 90px;" data-sitekey="6LdakhETAAAAAJtE5rWb3kQuTi-GcEoUiS94ULai"></div>
 									<span id="captcha" style="margin-left:100px;color:red" />
                             	</div>
                             </div>
