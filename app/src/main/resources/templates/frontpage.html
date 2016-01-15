@@ -9,6 +9,9 @@
 <link rel="stylesheet" th:href="@{/resources/css/backgroundImage.css}" />
 </head>
 
+<style type="text/css">
+#more{ display: none;}
+</style>
 <body th:background="@{resources/img/keinbild.png.png}">
 
 	<nav th:include="topbar :: topbar"></nav>
@@ -18,22 +21,27 @@
 			<div class="small-8 columns">
 			<p>&nbsp;</p>
 			<p>&nbsp;</p>
-			<p>&nbsp;</p>
-			<p>&nbsp;</p>
-			<div class="text-center"><h1 th:text="#{frontpage.welcome}">Frontpage</h1></div>
-				<p th:text="#{frontpage.text1}">fp text 1</p>
-				<p th:text="#{frontpage.text2}">fp text 2</p>
-				<p th:text="#{frontpage.text3}">fp text 3</p>
-				<p th:text="#{frontpage.text4}">fp text 4</p>
-				<p th:text="#{frontpage.text5}">fp text 5</p>
+			
+			<div class="panel">
+				<div class="text-center"><h1 th:text="#{frontpage.welcome}">Frontpage</h1></div>
+				<p>&nbsp;</p>
+				<p th:text="#{frontpage.text1}">fp text 1</p> <div id="showmore"><div class="text-right"><a th:text="#{frontpage.showmore}" onclick="showmore()">>weiter</a></div></div>
+					<div id="more">
+					<p th:text="#{frontpage.text2}">fp text 2</p>
+					<p th:text="#{frontpage.text3}">fp text 3</p>
+					<p th:text="#{frontpage.text4}">fp text 4</p>
+					<p th:text="#{frontpage.text5}">fp text 5</p> 
+					</div>
+				</div>
 			</div>
+			<p>&nbsp;</p>
+				<p>&nbsp;</p>
 			<div class="small-12 large-4 columns" sec:authorize="!isAuthenticated()">
-				<p>&nbsp;</p>
-				<p>&nbsp;</p>
+				
 				
 				<form action="#" th:action="@{/}" method="post">
-					<p>&nbsp;</p>
-					<p>&nbsp;</p>
+				<div class="panel">
+					
 					<div th:if="${param.error}" class="alert alert-error"><font color="red" th:text="#{frontpage.loginError}"> Ungültger Username und/oder Passwort.</font></div>
 					<div th:if="${param.logout}" class="alert alert-success" th:text="#{frontpage.logoutSuccess}"> Sie wurden ausgeloggt. </div>
 					<div>
@@ -48,6 +56,7 @@
 						</div>
 						<label><a th:href="@{/reset}" href="#" th:text="#{frontpage.forgotPassword}">Passwort vergessen?</a> | <a th:href="@{/registration}" href="#" th:text="#{frontpage.registration}">Registrieren</a></label>
 					</div>
+				</div>
 				</form>
 			</div>
 		</div>
@@ -55,5 +64,15 @@
 
 	<footer th:include="footer :: footer"></footer>
 
+<script type="text/javascript">
+function showmore() { 
+    if(document.getElementById) { 
+        var more = document.getElementById("more"); 
+        more.style.display = (more.style.display=='block'?'none':'block'); 
+        document.getElementById("showmore").style.display = (document.getElementById("showmore").style.display=='none'?'block':'none'); 
+    } 
+} 
+
+</script>
 </body>
 </html>
