@@ -95,7 +95,7 @@ public class SearchController {
 
 
 		for (Article article : articles) {
-			if (this.ort.getDistance() == 0 || this.ort.getAddress().isEmpty() || this.ort.getLatitude() == 0 || this.ort.getLongitude() == 0)
+			if ((int)this.ort.getDistance() == 0 || this.ort.getAddress().isEmpty() || (int)this.ort.getLatitude() == 0 || (int)this.ort.getLongitude() == 0)
 				output.add(article);
 			else {
 				System.out.println(distance(article.getLatitude(), article.getLongitude(), this.ort.getLatitude(), this.ort.getLongitude()));
