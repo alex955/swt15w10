@@ -64,6 +64,11 @@ Die anderen beiden Rollen haben bis jetzt die gleichen Rechte. Eine nachträglic
 
 == Bausteinsicht
 * Package-Diagramme
+** refugeeApp
+*** .controller
+*** .model
+*** .utilities
+*** .utilities.mail
 
 == Entwurfsentscheidungen
 * Architektur
