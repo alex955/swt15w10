@@ -98,20 +98,33 @@ public class ArticleController {
 
 	/**
 	 * Deletes Articles in fixed intervals: Articles are deleted after creationDate+fixedRate, activities are deleted when "now > activityDate".
+	 * @throws IOException 
 	 */
 	 @Scheduled(fixedRate = 3600000)
-	 public void deleteArticlesAfterExpiration() {
+	 public void deleteArticlesAfterExpiration() throws IOException {
 		List<Article> articles = this.articleRepo.findAll();
 		LocalDateTime now =LocalDateTime.now();
 		
 		 for(Article article:articles){
 			 if(article.getKind().equals("article")){
 				 LocalDateTime expiration = article.getCreationdate().plusDays(30);
-				 if (now.isAfter(expiration)) this.articleRepo.delete(article);
+				 if (now.isAfter(expiration)){
+					 if(article.getPicture() != null){
+							Files.delete(Paths.get(article.getPicture().getPicPath()));
+							//pictureRepo.delete(toDelete.getPicture());
+					 }
+					 this.articleRepo.delete(article);
+				 }
 			 }
 			 if(article.getKind().equals("activity")){
 				 LocalDateTime activityDate = article.getActivitydate();
-				 if (now.isAfter(activityDate)) this.articleRepo.delete(article);
+				 if (now.isAfter(activityDate)){
+					 if(article.getPicture() != null){
+							Files.delete(Paths.get(article.getPicture().getPicPath()));
+							//pictureRepo.delete(toDelete.getPicture());
+					 }
+					 this.articleRepo.delete(article);
+				 }
 			 }
 			 
 		 }
@@ -567,10 +580,11 @@ public class ArticleController {
 	 * @param id unique ID of the article
 	 * @param userAccount Optional<T> either containing null or logged in user account
 	 * @return redirect to own own articles
+	 * @throws IOException 
 	 */
 	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/deleteArticle/{id}")
-	public String deleteArticle(@PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount){
+	public String deleteArticle(@PathVariable("id") long id, @LoggedIn Optional<UserAccount> userAccount) throws IOException{
 		long userId = userRepository.findByUserAccount(userAccount.get()).getId();
 		Article toDelete = articleRepo.findOne(id);
 
@@ -578,6 +592,10 @@ public class ArticleController {
 			return "redirect:/frontpage";
 		}
 
+		if(toDelete.getPicture() != null){
+			Files.delete(Paths.get(toDelete.getPicture().getPicPath()));
+			//pictureRepo.delete(toDelete.getPicture());
+		}
 		articleRepo.delete(toDelete);
 
 		return "redirect:/search/myArticles";
